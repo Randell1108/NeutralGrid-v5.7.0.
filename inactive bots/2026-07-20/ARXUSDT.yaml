@@ -1,0 +1,9 @@
+bots:
+  - symbol: ARXUSDT
+    strategy_id: "413304174"
+    deploy_ts: "2026-07-20T09:55:59Z"
+    grid_lower: 0.1378
+    grid_upper: 0.1597
+    num_grids: 20
+    leverage: 10
+    capital_usdt: 14.43

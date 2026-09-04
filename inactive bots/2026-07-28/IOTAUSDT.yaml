@@ -1,0 +1,16 @@
+bots:
+  - symbol: IOTAUSDT
+    strategy_id: "413462709"
+    deploy_ts: "2026-07-28T14:33:48Z"
+    final_snapshot_at: "2026-07-28T21:09:48Z"
+    grid_lower: 0.03199
+    grid_upper: 0.03317
+    num_grids: 7
+    leverage: 10
+    capital_usdt: 50.00
+    candidate_id: null
+    inactive_reason: cancelled
+    archived_at: "2026-07-28T16:14:59.701-05:00"
+    archived_from: null
+    terminal_snapshot: "Live/2026-07-28/IOTAUSDT/final_live_bot_data_413462709_20260728_160948_lima.yaml"
+    archive_note: "No matching IOTAUSDT file existed under active bots at archival time."

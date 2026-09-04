@@ -1,0 +1,621 @@
+bots:
+  - symbol: MUSDT
+    strategy_id: "412879657"
+    deploy_ts: "2026-06-26T14:00:41+00:00"
+    grid_lower: 0.6490
+    grid_upper: 1.0380
+    num_grids: 58
+    leverage: 10
+    capital_usdt: 198.00
+    candidate_id: null
+    execution_telemetry:
+      source: live_bot_data_scanner
+      captured_at: "2026-06-26T14:46:41+00:00"
+      pnl:
+        total_profit_usdt: 0.26
+        total_profit_pct: 0.13
+        matched_profit_usdt: 1.21
+        matched_profit_pct: 0.61
+        realized_profit_usdt: -0.10
+        unmatched_pnl_usdt: -0.96
+        unmatched_pnl_pct: -0.48
+        funding_fee_usdt: 0.00
+        funding_fee_pct: 0.00
+        annualized_yield_pct: 1537.21
+      open_order_ladder:
+        qty_per_order_base: 32
+        last_price: 0.8225
+        buy:
+          - {level: 1, price: 0.8207, pct_to_fill: -0.21}
+          - {level: 2, price: 0.8141, pct_to_fill: -1.02}
+          - {level: 3, price: 0.8075, pct_to_fill: -1.82}
+          - {level: 4, price: 0.8010, pct_to_fill: -2.61}
+          - {level: 5, price: 0.7946, pct_to_fill: -3.39}
+          - {level: 6, price: 0.7882, pct_to_fill: -4.17}
+          - {level: 7, price: 0.7818, pct_to_fill: -4.94}
+          - {level: 8, price: 0.7755, pct_to_fill: -5.71}
+          - {level: 9, price: 0.7692, pct_to_fill: -6.48}
+          - {level: 10, price: 0.7630, pct_to_fill: -7.23}
+          - {level: 11, price: 0.7569, pct_to_fill: -7.97}
+          - {level: 12, price: 0.7508, pct_to_fill: -8.71}
+          - {level: 13, price: 0.7447, pct_to_fill: -9.45}
+          - {level: 14, price: 0.7387, pct_to_fill: -10.18}
+          - {level: 15, price: 0.7328, pct_to_fill: -10.90}
+          - {level: 16, price: 0.7268, pct_to_fill: -11.63}
+          - {level: 17, price: 0.7210, pct_to_fill: -12.34}
+          - {level: 18, price: 0.7152, pct_to_fill: -13.04}
+          - {level: 19, price: 0.7094, pct_to_fill: -13.75}
+          - {level: 20, price: 0.7037, pct_to_fill: -14.44}
+          - {level: 21, price: 0.6980, pct_to_fill: -15.13}
+          - {level: 22, price: 0.6924, pct_to_fill: -15.81}
+          - {level: 23, price: 0.6868, pct_to_fill: -16.49}
+          - {level: 24, price: 0.6813, pct_to_fill: -17.16}
+          - {level: 25, price: 0.6758, pct_to_fill: -17.83}
+          - {level: 26, price: 0.6703, pct_to_fill: -18.50}
+          - {level: 27, price: 0.6649, pct_to_fill: -19.16}
+          - {level: 28, price: 0.6595, pct_to_fill: -19.81}
+          - {level: 29, price: 0.6542, pct_to_fill: -20.46}
+          - {level: 30, price: 0.6490, pct_to_fill: -21.09}
+        sell:
+          - {level: 1, price: 0.8341, pct_to_fill: 1.41}
+          - {level: 2, price: 0.8409, pct_to_fill: 2.23}
+          - {level: 3, price: 0.8477, pct_to_fill: 3.06}
+          - {level: 4, price: 0.8546, pct_to_fill: 3.90}
+          - {level: 5, price: 0.8616, pct_to_fill: 4.75}
+          - {level: 6, price: 0.8686, pct_to_fill: 5.60}
+          - {level: 7, price: 0.8756, pct_to_fill: 6.45}
+          - {level: 8, price: 0.8828, pct_to_fill: 7.33}
+          - {level: 9, price: 0.8899, pct_to_fill: 8.19}
+          - {level: 10, price: 0.8972, pct_to_fill: 9.08}
+          - {level: 11, price: 0.9045, pct_to_fill: 9.96}
+          - {level: 12, price: 0.9118, pct_to_fill: 10.85}
+          - {level: 13, price: 0.9192, pct_to_fill: 11.75}
+          - {level: 14, price: 0.9267, pct_to_fill: 12.66}
+          - {level: 15, price: 0.9342, pct_to_fill: 13.58}
+          - {level: 16, price: 0.9418, pct_to_fill: 14.50}
+          - {level: 17, price: 0.9495, pct_to_fill: 15.44}
+          - {level: 18, price: 0.9572, pct_to_fill: 16.37}
+          - {level: 19, price: 0.9650, pct_to_fill: 17.32}
+          - {level: 20, price: 0.9728, pct_to_fill: 18.27}
+          - {level: 21, price: 0.9808, pct_to_fill: 19.24}
+          - {level: 22, price: 0.9887, pct_to_fill: 20.20}
+          - {level: 23, price: 0.9968, pct_to_fill: 21.19}
+          - {level: 24, price: 1.0049, pct_to_fill: 22.17}
+          - {level: 25, price: 1.0130, pct_to_fill: 23.16}
+          - {level: 26, price: 1.0213, pct_to_fill: 24.17}
+          - {level: 27, price: 1.0296, pct_to_fill: 25.17}
+          - {level: 28, price: 1.0380, pct_to_fill: 26.20}
+      position_inventory:
+        symbol: MUSDT
+        contract: perp
+        margin_mode: cross
+        isolated_margin_balance_usdt: null
+        cross_margin_balance_usdt: 198.2648
+        maintenance_margin_usdt: 3.9571
+        size_usdt: 79.2480000
+        size_base: 96
+        margin_usdt: 7.91
+        entry_price: 0.8206933
+        position_pnl_usdt: 0.46
+        position_roe_pct: 5.82
+        margin_ratio_pct: 2.00
+        liquidation_price: 0.5813922
+        mark_price: 0.8243838
+      risk:
+        risk_ratio: 2.5
+        risk_label: Low Risk
+        margin_ratio_pct: 2.00
+        maintenance_margin_usdt: 3.9571
+        isolated_margin_balance_usdt: null
+        cross_margin_balance_usdt: 198.2648
+        liquidation_price: 0.5813922
+        mark_price: 0.8243838
+      tp_sl:
+        stop_loss:
+          pnl_usdt: -39.60
+          roi_pct: -20.0
+          price_type: last
+        take_profit:
+          pnl_usdt: 39.60
+          roi_pct: 20.0
+          price_type: last
+        close_all_positions_on_stop: true
+        close_all_positions_on_tp_sl_stop: true
+
+# ===========================================================================
+# APPENDED 2026-06-26 — part_03 (56m) snapshot. Additive only; nothing above this
+# banner was modified, deleted, or overwritten. The `bots:` spec above remains the
+# part_02 (46m) execution_telemetry of record (the live scanner reads `bots:`);
+# this key is an append-only telemetry-training log entry the loader ignores.
+# ===========================================================================
+appended_snapshot_part_03:
+  part: 3
+  raw_file: MUSDT_part_03_live_bot_data_scanner.md
+  duration: "56m"
+  captured_at: "2026-06-26T14:56:41+00:00"
+  captured_at_local: "2026-06-26 09:56:41"
+  pnl:
+    total_profit_usdt: 1.08
+    total_profit_pct: 0.54
+    invested_margin_usdt: 198.00
+    matched_profit_usdt: 2.02
+    matched_profit_pct: 1.02
+    realized_profit_usdt: 0.72
+    unmatched_pnl_usdt: -0.95
+    unmatched_pnl_pct: -0.47
+    funding_fee_usdt: 0.00
+    funding_fee_pct: 0.00
+    annualized_yield_pct: 5143.92
+  position:
+    displayed_price_or_mark: 0.8248
+    isolated_margin_balance_usdt: null
+    cross_margin_balance_usdt: 199.1811
+    maintenance_margin_usdt: 3.9625
+    risk_ratio: 2.5
+    risk_label: Low Risk
+    size_usdt: 79.1520000
+    size_base: 96
+    margin_usdt: 7.92
+    entry_price: 0.8207311
+    position_pnl_usdt: 0.36
+    position_roe_pct: 4.57
+    margin_ratio_pct: 1.99
+    liquidation_price: 0.5805856
+    mark_price: 0.8255000
+  open_order_ladder:
+    qty_per_order_base: 32
+    last_price: 0.8231
+    buy_count: 30
+    sell_count: 28
+    buy:
+      - {level: 1, price: 0.8207, pct_to_fill: -0.29}
+      - {level: 2, price: 0.8141, pct_to_fill: -1.09}
+      - {level: 3, price: 0.8075, pct_to_fill: -1.89}
+      - {level: 4, price: 0.8010, pct_to_fill: -2.68}
+      - {level: 5, price: 0.7946, pct_to_fill: -3.46}
+      - {level: 6, price: 0.7882, pct_to_fill: -4.24}
+      - {level: 7, price: 0.7818, pct_to_fill: -5.01}
+      - {level: 8, price: 0.7755, pct_to_fill: -5.78}
+      - {level: 9, price: 0.7692, pct_to_fill: -6.54}
+      - {level: 10, price: 0.7630, pct_to_fill: -7.30}
+      - {level: 11, price: 0.7569, pct_to_fill: -8.04}
+      - {level: 12, price: 0.7508, pct_to_fill: -8.78}
+      - {level: 13, price: 0.7447, pct_to_fill: -9.52}
+      - {level: 14, price: 0.7387, pct_to_fill: -10.25}
+      - {level: 15, price: 0.7328, pct_to_fill: -10.97}
+      - {level: 16, price: 0.7268, pct_to_fill: -11.69}
+      - {level: 17, price: 0.7210, pct_to_fill: -12.40}
+      - {level: 18, price: 0.7152, pct_to_fill: -13.10}
+      - {level: 19, price: 0.7094, pct_to_fill: -13.81}
+      - {level: 20, price: 0.7037, pct_to_fill: -14.50}
+      - {level: 21, price: 0.6980, pct_to_fill: -15.19}
+      - {level: 22, price: 0.6924, pct_to_fill: -15.87}
+      - {level: 23, price: 0.6868, pct_to_fill: -16.55}
+      - {level: 24, price: 0.6813, pct_to_fill: -17.22}
+      - {level: 25, price: 0.6758, pct_to_fill: -17.89}
+      - {level: 26, price: 0.6703, pct_to_fill: -18.56}
+      - {level: 27, price: 0.6649, pct_to_fill: -19.22}
+      - {level: 28, price: 0.6595, pct_to_fill: -19.87}
+      - {level: 29, price: 0.6542, pct_to_fill: -20.51}
+      - {level: 30, price: 0.6490, pct_to_fill: -21.15}
+    sell:
+      - {level: 1, price: 0.8341, pct_to_fill: 1.33}
+      - {level: 2, price: 0.8409, pct_to_fill: 2.16}
+      - {level: 3, price: 0.8477, pct_to_fill: 2.98}
+      - {level: 4, price: 0.8546, pct_to_fill: 3.82}
+      - {level: 5, price: 0.8616, pct_to_fill: 4.67}
+      - {level: 6, price: 0.8686, pct_to_fill: 5.52}
+      - {level: 7, price: 0.8756, pct_to_fill: 6.37}
+      - {level: 8, price: 0.8828, pct_to_fill: 7.25}
+      - {level: 9, price: 0.8899, pct_to_fill: 8.11}
+      - {level: 10, price: 0.8972, pct_to_fill: 9.00}
+      - {level: 11, price: 0.9045, pct_to_fill: 9.88}
+      - {level: 12, price: 0.9118, pct_to_fill: 10.77}
+      - {level: 13, price: 0.9192, pct_to_fill: 11.67}
+      - {level: 14, price: 0.9267, pct_to_fill: 12.58}
+      - {level: 15, price: 0.9342, pct_to_fill: 13.49}
+      - {level: 16, price: 0.9418, pct_to_fill: 14.42}
+      - {level: 17, price: 0.9495, pct_to_fill: 15.35}
+      - {level: 18, price: 0.9572, pct_to_fill: 16.29}
+      - {level: 19, price: 0.9650, pct_to_fill: 17.23}
+      - {level: 20, price: 0.9728, pct_to_fill: 18.18}
+      - {level: 21, price: 0.9808, pct_to_fill: 19.15}
+      - {level: 22, price: 0.9887, pct_to_fill: 20.11}
+      - {level: 23, price: 0.9968, pct_to_fill: 21.10}
+      - {level: 24, price: 1.0049, pct_to_fill: 22.08}
+      - {level: 25, price: 1.0130, pct_to_fill: 23.07}
+      - {level: 26, price: 1.0213, pct_to_fill: 24.07}
+      - {level: 27, price: 1.0296, pct_to_fill: 25.08}
+      - {level: 28, price: 1.0380, pct_to_fill: 26.10}
+  grid:
+    realized_profit_usdt: 0.72
+    position_margin_usdt: 7.90
+    position_margin_mode: Cross
+    margin_used_by_open_orders_usdt: 70.23
+    total_current_margin_usdt: 78.14
+  history:
+    total_matched_profit_usdt: 2.02
+    matched_trades_24h: 10
+    total_matched_trades: 10
+
+# ===========================================================================
+# APPENDED 2026-06-26 — part_04 (3h50-51m) snapshot. Additive only; nothing
+# above this banner was modified, deleted, or overwritten. Source: 6 operator
+# screenshots in OneDrive\Escritorio\MUSDT, parsed by Claude (browser auto-
+# capture failed this tick: detail-panel XHR 401s under the automation profile).
+# The `bots:` spec above remains the part_02 execution_telemetry of record; this
+# key is an append-only telemetry-training log entry the loader ignores.
+# pct_to_fill values reflect minor live-price drift across the 6 screenshots.
+# ===========================================================================
+appended_snapshot_part_04:
+  part: 4
+  source: operator_screenshots_6png_escritorio_musdt
+  browser_autocapture: failed_panel_401
+  duration: "3h51m"
+  captured_at: "2026-06-26T17:51:00+00:00"
+  captured_at_local: "2026-06-26 12:51:00"
+  pnl:
+    total_profit_usdt: 4.10
+    total_profit_pct: 2.07
+    invested_margin_usdt: 198.00
+    matched_profit_usdt: 5.26
+    matched_profit_pct: 2.66
+    realized_profit_usdt: 3.55
+    unmatched_pnl_usdt: -1.16
+    unmatched_pnl_pct: -0.58
+    funding_fee_usdt: 0.00
+    funding_fee_pct: 0.00
+    annualized_yield_pct: 4734.39
+  position:
+    displayed_price_or_mark: 0.8219
+    isolated_margin_balance_usdt: null
+    cross_margin_balance_usdt: 202.0235
+    maintenance_margin_usdt: 5.2563
+    risk_ratio: 2.5
+    risk_label: Low Risk
+    size_usdt: 105.2032000
+    size_base: 128
+    margin_usdt: 10.51
+    entry_price: 0.8175801
+    position_pnl_usdt: 0.55
+    position_roe_pct: 5.25
+    margin_ratio_pct: 2.60
+    liquidation_price: 0.5857951
+    mark_price: 0.8212863
+  open_order_ladder:
+    qty_per_order_base: 32
+    last_price: 0.8230
+    buy_count: 29
+    sell_count: 29
+    buy:
+      - {level: 1, price: 0.8141, pct_to_fill: -1.08}
+      - {level: 2, price: 0.8075, pct_to_fill: -1.88}
+      - {level: 3, price: 0.8010, pct_to_fill: -2.67}
+      - {level: 4, price: 0.7946, pct_to_fill: -3.45}
+      - {level: 5, price: 0.7882, pct_to_fill: -4.22}
+      - {level: 6, price: 0.7818, pct_to_fill: -5.00}
+      - {level: 7, price: 0.7755, pct_to_fill: -5.77}
+      - {level: 8, price: 0.7692, pct_to_fill: -6.53}
+      - {level: 9, price: 0.7630, pct_to_fill: -7.29}
+      - {level: 10, price: 0.7569, pct_to_fill: -8.06}
+      - {level: 11, price: 0.7508, pct_to_fill: -8.80}
+      - {level: 12, price: 0.7447, pct_to_fill: -9.54}
+      - {level: 13, price: 0.7387, pct_to_fill: -10.27}
+      - {level: 14, price: 0.7328, pct_to_fill: -10.99}
+      - {level: 15, price: 0.7268, pct_to_fill: -11.72}
+      - {level: 16, price: 0.7210, pct_to_fill: -12.42}
+      - {level: 17, price: 0.7152, pct_to_fill: -13.13}
+      - {level: 18, price: 0.7094, pct_to_fill: -13.85}
+      - {level: 19, price: 0.7037, pct_to_fill: -14.54}
+      - {level: 20, price: 0.6980, pct_to_fill: -15.23}
+      - {level: 21, price: 0.6924, pct_to_fill: -15.91}
+      - {level: 22, price: 0.6868, pct_to_fill: -16.59}
+      - {level: 23, price: 0.6813, pct_to_fill: -17.26}
+      - {level: 24, price: 0.6758, pct_to_fill: -17.93}
+      - {level: 25, price: 0.6703, pct_to_fill: -18.60}
+      - {level: 26, price: 0.6649, pct_to_fill: -19.25}
+      - {level: 27, price: 0.6595, pct_to_fill: -19.78}
+      - {level: 28, price: 0.6542, pct_to_fill: -20.43}
+      - {level: 29, price: 0.6490, pct_to_fill: -21.06}
+    sell:
+      - {level: 1, price: 0.8274, pct_to_fill: 0.53}
+      - {level: 2, price: 0.8341, pct_to_fill: 1.34}
+      - {level: 3, price: 0.8409, pct_to_fill: 2.17}
+      - {level: 4, price: 0.8477, pct_to_fill: 3.00}
+      - {level: 5, price: 0.8546, pct_to_fill: 3.83}
+      - {level: 6, price: 0.8616, pct_to_fill: 4.69}
+      - {level: 7, price: 0.8686, pct_to_fill: 5.54}
+      - {level: 8, price: 0.8756, pct_to_fill: 6.39}
+      - {level: 9, price: 0.8828, pct_to_fill: 7.26}
+      - {level: 10, price: 0.8899, pct_to_fill: 8.08}
+      - {level: 11, price: 0.8972, pct_to_fill: 8.97}
+      - {level: 12, price: 0.9045, pct_to_fill: 9.86}
+      - {level: 13, price: 0.9118, pct_to_fill: 10.74}
+      - {level: 14, price: 0.9192, pct_to_fill: 11.64}
+      - {level: 15, price: 0.9267, pct_to_fill: 12.55}
+      - {level: 16, price: 0.9342, pct_to_fill: 13.47}
+      - {level: 17, price: 0.9418, pct_to_fill: 14.39}
+      - {level: 18, price: 0.9495, pct_to_fill: 15.30}
+      - {level: 19, price: 0.9572, pct_to_fill: 16.23}
+      - {level: 20, price: 0.9650, pct_to_fill: 17.18}
+      - {level: 21, price: 0.9728, pct_to_fill: 18.12}
+      - {level: 22, price: 0.9808, pct_to_fill: 19.10}
+      - {level: 23, price: 0.9887, pct_to_fill: 20.06}
+      - {level: 24, price: 0.9968, pct_to_fill: 21.04}
+      - {level: 25, price: 1.0049, pct_to_fill: 22.02}
+      - {level: 26, price: 1.0130, pct_to_fill: 23.01}
+      - {level: 27, price: 1.0213, pct_to_fill: 24.21}
+      - {level: 28, price: 1.0296, pct_to_fill: 25.22}
+      - {level: 29, price: 1.0380, pct_to_fill: 26.24}
+  grid:
+    realized_profit_usdt: 3.55
+    mode: Geometric
+    price_range_lower: 0.6490
+    price_range_upper: 1.0380
+    num_grids: 58
+    profit_per_grid_pct: 0.77
+    qty_per_order_base: 32
+    initial_leverage: 10
+    current_leverage: 10
+    grid_start_price: 0.8482
+    position_margin_usdt: 10.51
+    position_margin_mode: Cross
+    margin_used_by_open_orders_usdt: 67.60
+    total_current_margin_usdt: 78.11
+    strategy_number: "412879657"
+  history:
+    total_matched_profit_usdt: 5.26
+    matched_trades_24h: 26
+    total_matched_trades: 26
+
+# ===========================================================================
+# APPENDED 2026-06-26 — part_05 (9h6m) snapshot. Additive only; nothing above
+# this banner was modified. Source: operator-pasted TEXT telemetry (not
+# screenshots). The `bots:` spec above remains the part_02 record; this key is
+# an append-only telemetry-training log entry the loader ignores.
+# ===========================================================================
+appended_snapshot_part_05:
+  part: 5
+  source: operator_paste_text
+  duration: "9h6m"
+  captured_at: "2026-06-26T23:06:41+00:00"
+  captured_at_local: "2026-06-26 18:06:41"
+  pnl:
+    total_profit_usdt: -1.92
+    total_profit_pct: -0.96
+    invested_margin_usdt: 198.00
+    matched_profit_usdt: 8.97
+    matched_profit_pct: 4.53
+    realized_profit_usdt: -0.42
+    unmatched_pnl_usdt: -10.87
+    unmatched_pnl_pct: -5.48
+    funding_fee_usdt: -0.02
+    funding_fee_pct: -0.01
+    annualized_yield_pct: -932.36
+  position:
+    displayed_price_or_mark: 0.7781
+    isolated_margin_balance_usdt: null
+    cross_margin_balance_usdt: 196.3241
+    maintenance_margin_usdt: 13.6891
+    risk_ratio: 2.5
+    risk_label: Low Risk
+    size_usdt: 273.8912000
+    size_base: 352
+    margin_usdt: 27.37
+    entry_price: 0.7812875
+    position_pnl_usdt: -1.13
+    position_roe_pct: -4.09
+    margin_ratio_pct: 6.97
+    liquidation_price: 0.5808532
+    mark_price: 0.7777870
+  open_order_ladder:
+    qty_per_order_base: 32
+    last_price: 0.7782
+    buy_count: 22
+    sell_count: 36
+    buy:
+      - {level: 1, price: 0.7692, pct_to_fill: -1.15}
+      - {level: 2, price: 0.7630, pct_to_fill: -1.95}
+      - {level: 3, price: 0.7569, pct_to_fill: -2.73}
+      - {level: 4, price: 0.7508, pct_to_fill: -3.52}
+      - {level: 5, price: 0.7447, pct_to_fill: -4.30}
+      - {level: 6, price: 0.7387, pct_to_fill: -5.07}
+      - {level: 7, price: 0.7328, pct_to_fill: -5.83}
+      - {level: 8, price: 0.7268, pct_to_fill: -6.60}
+      - {level: 9, price: 0.7210, pct_to_fill: -7.35}
+      - {level: 10, price: 0.7152, pct_to_fill: -8.09}
+      - {level: 11, price: 0.7094, pct_to_fill: -8.84}
+      - {level: 12, price: 0.7037, pct_to_fill: -9.57}
+      - {level: 13, price: 0.6980, pct_to_fill: -10.30}
+      - {level: 14, price: 0.6924, pct_to_fill: -11.02}
+      - {level: 15, price: 0.6868, pct_to_fill: -11.74}
+      - {level: 16, price: 0.6813, pct_to_fill: -12.45}
+      - {level: 17, price: 0.6758, pct_to_fill: -13.15}
+      - {level: 18, price: 0.6703, pct_to_fill: -13.86}
+      - {level: 19, price: 0.6649, pct_to_fill: -14.55}
+      - {level: 20, price: 0.6595, pct_to_fill: -15.25}
+      - {level: 21, price: 0.6542, pct_to_fill: -15.93}
+      - {level: 22, price: 0.6490, pct_to_fill: -16.60}
+    sell:
+      - {level: 1, price: 0.7818, pct_to_fill: 0.46}
+      - {level: 2, price: 0.7882, pct_to_fill: 1.28}
+      - {level: 3, price: 0.7946, pct_to_fill: 2.10}
+      - {level: 4, price: 0.8010, pct_to_fill: 2.92}
+      - {level: 5, price: 0.8075, pct_to_fill: 3.76}
+      - {level: 6, price: 0.8141, pct_to_fill: 4.61}
+      - {level: 7, price: 0.8207, pct_to_fill: 5.46}
+      - {level: 8, price: 0.8274, pct_to_fill: 6.32}
+      - {level: 9, price: 0.8341, pct_to_fill: 7.18}
+      - {level: 10, price: 0.8409, pct_to_fill: 8.05}
+      - {level: 11, price: 0.8477, pct_to_fill: 8.93}
+      - {level: 12, price: 0.8546, pct_to_fill: 9.81}
+      - {level: 13, price: 0.8616, pct_to_fill: 10.71}
+      - {level: 14, price: 0.8686, pct_to_fill: 11.61}
+      - {level: 15, price: 0.8756, pct_to_fill: 12.51}
+      - {level: 16, price: 0.8828, pct_to_fill: 13.44}
+      - {level: 17, price: 0.8899, pct_to_fill: 14.35}
+      - {level: 18, price: 0.8972, pct_to_fill: 15.29}
+      - {level: 19, price: 0.9045, pct_to_fill: 16.22}
+      - {level: 20, price: 0.9118, pct_to_fill: 17.16}
+      - {level: 21, price: 0.9192, pct_to_fill: 18.11}
+      - {level: 22, price: 0.9267, pct_to_fill: 19.08}
+      - {level: 23, price: 0.9342, pct_to_fill: 20.04}
+      - {level: 24, price: 0.9418, pct_to_fill: 21.02}
+      - {level: 25, price: 0.9495, pct_to_fill: 22.01}
+      - {level: 26, price: 0.9572, pct_to_fill: 23.00}
+      - {level: 27, price: 0.9650, pct_to_fill: 24.00}
+      - {level: 28, price: 0.9728, pct_to_fill: 25.00}
+      - {level: 29, price: 0.9808, pct_to_fill: 26.03}
+      - {level: 30, price: 0.9887, pct_to_fill: 27.04}
+      - {level: 31, price: 0.9968, pct_to_fill: 28.09}
+      - {level: 32, price: 1.0049, pct_to_fill: 29.13}
+      - {level: 33, price: 1.0130, pct_to_fill: 30.17}
+      - {level: 34, price: 1.0213, pct_to_fill: 31.23}
+      - {level: 35, price: 1.0296, pct_to_fill: 32.30}
+      - {level: 36, price: 1.0380, pct_to_fill: 33.38}
+  grid:
+    realized_profit_usdt: -0.42
+    mode: Geometric
+    price_range_lower: 0.6490
+    price_range_upper: 1.0380
+    num_grids: 58
+    profit_per_grid_pct: 0.77
+    qty_per_order_base: 32
+    initial_leverage: 10
+    current_leverage: 10
+    grid_start_price: 0.8482
+    position_margin_usdt: 27.38
+    position_margin_mode: Cross
+    margin_used_by_open_orders_usdt: 49.80
+    total_current_margin_usdt: 77.18
+    strategy_number: "412879657"
+  history:
+    total_matched_profit_usdt: 8.97
+    matched_trades_24h: 45
+    total_matched_trades: 45
+
+# ===========================================================================
+# APPENDED 2026-06-26 — part_06 (9h39m) snapshot. Additive only; nothing above
+# this banner was modified, deleted, or overwritten. Source: operator-pasted
+# TEXT telemetry. The `bots:` spec above remains the part_02 record; this key is
+# an append-only telemetry-training log entry the loader ignores.
+# ===========================================================================
+appended_snapshot_part_06:
+  part: 6
+  source: operator_paste_text
+  duration: "9h39m"
+  captured_at: "2026-06-26T23:39:41+00:00"
+  captured_at_local: "2026-06-26 18:39:41"
+  pnl:
+    total_profit_usdt: -2.32
+    total_profit_pct: -1.16
+    invested_margin_usdt: 198.00
+    matched_profit_usdt: 9.35
+    matched_profit_pct: 4.72
+    realized_profit_usdt: -0.87
+    unmatched_pnl_usdt: -11.64
+    unmatched_pnl_pct: -5.87
+    funding_fee_usdt: -0.02
+    funding_fee_pct: -0.01
+    annualized_yield_pct: -1059.90
+  position:
+    displayed_price_or_mark: 0.7752
+    isolated_margin_balance_usdt: null
+    cross_margin_balance_usdt: 195.4184
+    maintenance_margin_usdt: 13.6248
+    risk_ratio: 2.5
+    risk_label: Low Risk
+    size_usdt: 272.8704000
+    size_base: 352
+    margin_usdt: 27.24
+    entry_price: 0.7789509
+    position_pnl_usdt: -1.33
+    position_roe_pct: -4.83
+    margin_ratio_pct: 6.97
+    liquidation_price: 0.5733375
+    mark_price: 0.7741338
+  open_order_ladder:
+    qty_per_order_base: 32
+    last_price: 0.7727
+    buy_count: 22
+    sell_count: 36
+    buy:
+      - {level: 1, price: 0.7692, pct_to_fill: -0.45}
+      - {level: 2, price: 0.7630, pct_to_fill: -1.25}
+      - {level: 3, price: 0.7569, pct_to_fill: -2.04}
+      - {level: 4, price: 0.7508, pct_to_fill: -2.83}
+      - {level: 5, price: 0.7447, pct_to_fill: -3.62}
+      - {level: 6, price: 0.7387, pct_to_fill: -4.40}
+      - {level: 7, price: 0.7328, pct_to_fill: -5.16}
+      - {level: 8, price: 0.7268, pct_to_fill: -5.94}
+      - {level: 9, price: 0.7210, pct_to_fill: -6.69}
+      - {level: 10, price: 0.7152, pct_to_fill: -7.44}
+      - {level: 11, price: 0.7094, pct_to_fill: -8.19}
+      - {level: 12, price: 0.7037, pct_to_fill: -8.92}
+      - {level: 13, price: 0.6980, pct_to_fill: -9.66}
+      - {level: 14, price: 0.6924, pct_to_fill: -10.39}
+      - {level: 15, price: 0.6868, pct_to_fill: -11.11}
+      - {level: 16, price: 0.6813, pct_to_fill: -11.82}
+      - {level: 17, price: 0.6758, pct_to_fill: -12.54}
+      - {level: 18, price: 0.6703, pct_to_fill: -13.25}
+      - {level: 19, price: 0.6649, pct_to_fill: -13.95}
+      - {level: 20, price: 0.6595, pct_to_fill: -14.64}
+      - {level: 21, price: 0.6542, pct_to_fill: -15.33}
+      - {level: 22, price: 0.6490, pct_to_fill: -16.00}
+    sell:
+      - {level: 1, price: 0.7818, pct_to_fill: 1.17}
+      - {level: 2, price: 0.7882, pct_to_fill: 2.00}
+      - {level: 3, price: 0.7946, pct_to_fill: 2.83}
+      - {level: 4, price: 0.8010, pct_to_fill: 3.66}
+      - {level: 5, price: 0.8075, pct_to_fill: 4.50}
+      - {level: 6, price: 0.8141, pct_to_fill: 5.35}
+      - {level: 7, price: 0.8207, pct_to_fill: 6.21}
+      - {level: 8, price: 0.8274, pct_to_fill: 7.07}
+      - {level: 9, price: 0.8341, pct_to_fill: 7.94}
+      - {level: 10, price: 0.8409, pct_to_fill: 8.82}
+      - {level: 11, price: 0.8477, pct_to_fill: 9.70}
+      - {level: 12, price: 0.8546, pct_to_fill: 10.59}
+      - {level: 13, price: 0.8616, pct_to_fill: 11.50}
+      - {level: 14, price: 0.8686, pct_to_fill: 12.41}
+      - {level: 15, price: 0.8756, pct_to_fill: 13.31}
+      - {level: 16, price: 0.8828, pct_to_fill: 14.24}
+      - {level: 17, price: 0.8899, pct_to_fill: 15.16}
+      - {level: 18, price: 0.8972, pct_to_fill: 16.11}
+      - {level: 19, price: 0.9045, pct_to_fill: 17.05}
+      - {level: 20, price: 0.9118, pct_to_fill: 18.00}
+      - {level: 21, price: 0.9192, pct_to_fill: 18.95}
+      - {level: 22, price: 0.9267, pct_to_fill: 19.93}
+      - {level: 23, price: 0.9342, pct_to_fill: 20.90}
+      - {level: 24, price: 0.9418, pct_to_fill: 21.88}
+      - {level: 25, price: 0.9495, pct_to_fill: 22.88}
+      - {level: 26, price: 0.9572, pct_to_fill: 23.87}
+      - {level: 27, price: 0.9650, pct_to_fill: 24.88}
+      - {level: 28, price: 0.9728, pct_to_fill: 25.89}
+      - {level: 29, price: 0.9808, pct_to_fill: 26.93}
+      - {level: 30, price: 0.9887, pct_to_fill: 27.95}
+      - {level: 31, price: 0.9968, pct_to_fill: 29.00}
+      - {level: 32, price: 1.0049, pct_to_fill: 30.05}
+      - {level: 33, price: 1.0130, pct_to_fill: 31.09}
+      - {level: 34, price: 1.0213, pct_to_fill: 32.17}
+      - {level: 35, price: 1.0296, pct_to_fill: 33.24}
+      - {level: 36, price: 1.0380, pct_to_fill: 34.33}
+  grid:
+    realized_profit_usdt: -0.87
+    mode: Geometric
+    price_range_lower: 0.6490
+    price_range_upper: 1.0380
+    num_grids: 58
+    profit_per_grid_pct: 0.77
+    qty_per_order_base: 32
+    initial_leverage: 10
+    current_leverage: 10
+    grid_start_price: 0.8482
+    position_margin_usdt: 29.55
+    position_margin_mode: Cross
+    margin_used_by_open_orders_usdt: 47.54
+    total_current_margin_usdt: 77.10
+    strategy_number: "412879657"
+  history:
+    total_matched_profit_usdt: 9.35
+    matched_trades_24h: 47
+    total_matched_trades: 47

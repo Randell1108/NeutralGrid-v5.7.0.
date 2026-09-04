@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"ask\",\"permissionDecisionReason\":\"Safeguard: file-mutating action requires explicit approval (feedback_no_changes_without_explicit_command). Confirm the user asked for THIS file.\"}}'"
+          }
+        ]
+      }
+    ]
+  }
+}

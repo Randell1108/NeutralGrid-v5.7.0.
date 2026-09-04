@@ -1,0 +1,95 @@
+bots:
+  - symbol: AVAXUSDT
+    strategy_id: "412770639"
+    deploy_ts: "2026-06-20T09:28:58+00:00"
+    grid_lower: 6.051
+    grid_upper: 6.460
+    num_grids: 10
+    leverage: 10
+    capital_usdt: 400.00
+    candidate_id: null
+    inactive_reason: canceled
+    archived_at: "2026-06-21T12:21:58-05:00"
+    execution_telemetry:
+      source: live_bot_data_scanner
+      captured_at: "2026-06-21T17:21:58+00:00"
+      pnl:
+        total_profit_usdt: -27.30
+        total_profit_pct: -6.82
+        matched_profit_usdt: 19.32
+        matched_profit_pct: 4.83
+        realized_profit_usdt: -20.57
+        unmatched_pnl_usdt: -46.62
+        unmatched_pnl_pct: -11.65
+        funding_fee_usdt: 0.00
+        funding_fee_pct: 0.00
+        annualized_yield_pct: -1874.50
+      open_order_ladder:
+        qty_per_order_base: 43
+        last_price: 6.170
+        buy:
+          - level: 1
+            price: 6.130
+            pct_to_fill: -0.64
+          - level: 2
+            price: 6.090
+            pct_to_fill: -1.29
+          - level: 3
+            price: 6.051
+            pct_to_fill: -1.92
+        sell:
+          - level: 1
+            price: 6.211
+            pct_to_fill: 0.66
+          - level: 2
+            price: 6.252
+            pct_to_fill: 1.32
+          - level: 3
+            price: 6.293
+            pct_to_fill: 1.99
+          - level: 4
+            price: 6.334
+            pct_to_fill: 2.65
+          - level: 5
+            price: 6.376
+            pct_to_fill: 3.33
+          - level: 6
+            price: 6.417
+            pct_to_fill: 4.00
+          - level: 7
+            price: 6.460
+            pct_to_fill: 4.70
+      position_inventory:
+        symbol: AVAXUSDT
+        contract: perp
+        margin_mode: isolated
+        isolated_margin_balance_usdt: 372.7097
+        maintenance_margin_usdt: 5.3045
+        size_usdt: 1061.2400
+        size_base: 172
+        margin_usdt: 106.08
+        entry_price: 6.2071
+        position_pnl_usdt: -6.39
+        position_roe_pct: -6.01
+        margin_ratio_pct: 1.42
+        liquidation_price: 4.9212
+        mark_price: 6.1680
+      risk:
+        risk_ratio: 2.0
+        risk_label: Low Risk
+        margin_ratio_pct: 1.42
+        maintenance_margin_usdt: 5.3045
+        isolated_margin_balance_usdt: 372.7097
+        liquidation_price: 4.9212
+        mark_price: 6.1680
+      tp_sl:
+        stop_loss:
+          pnl_usdt: -80.00
+          roi_pct: -20.0
+          price_type: last
+        take_profit:
+          pnl_usdt: 80.00
+          roi_pct: 20.0
+          price_type: last
+        close_all_positions_on_stop: true
+        close_all_positions_on_tp_sl_stop: true

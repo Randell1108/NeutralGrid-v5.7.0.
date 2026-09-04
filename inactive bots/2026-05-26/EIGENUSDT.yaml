@@ -1,0 +1,117 @@
+bots:
+  - symbol: EIGENUSDT
+    strategy_id: "412223289"
+    deploy_ts: "2026-05-25T23:38:58+00:00"
+    grid_lower: 0.2265
+    grid_upper: 0.2620
+    num_grids: 17
+    leverage: 10
+    capital_usdt: 13.00
+    candidate_id: null
+    inactive_reason: expired
+    archived_at: "2026-05-26T08:24:23.7228135-05:00"
+    execution_telemetry:
+      source: live_bot_data_scanner
+      captured_at: "2026-05-26T13:24:23.7228135+00:00"
+      pnl:
+        total_profit_usdt: 0.19
+        total_profit_pct: 1.53
+        matched_profit_usdt: 0.18
+        matched_profit_pct: 1.45
+        realized_profit_usdt: 0.11
+        unmatched_pnl_usdt: 0.01
+        unmatched_pnl_pct: 0.08
+        funding_fee_usdt: 0.00
+        funding_fee_pct: 0.00
+        annualized_yield_pct: 4269.19
+      open_order_ladder:
+        qty_per_order_base: 23.6
+        last_price: 0.2487
+        buy:
+          - level: 1
+            price: 0.2467
+            pct_to_fill: -0.80
+          - level: 2
+            price: 0.2446
+            pct_to_fill: -1.64
+          - level: 3
+            price: 0.2425
+            pct_to_fill: -2.49
+          - level: 4
+            price: 0.2404
+            pct_to_fill: -3.33
+          - level: 5
+            price: 0.2384
+            pct_to_fill: -4.14
+          - level: 6
+            price: 0.2364
+            pct_to_fill: -4.94
+          - level: 7
+            price: 0.2343
+            pct_to_fill: -5.79
+          - level: 8
+            price: 0.2323
+            pct_to_fill: -6.59
+          - level: 9
+            price: 0.2304
+            pct_to_fill: -7.35
+          - level: 10
+            price: 0.2284
+            pct_to_fill: -8.16
+          - level: 11
+            price: 0.2265
+            pct_to_fill: -8.92
+        sell:
+          - level: 1
+            price: 0.2510
+            pct_to_fill: 0.92
+          - level: 2
+            price: 0.2531
+            pct_to_fill: 1.76
+          - level: 3
+            price: 0.2553
+            pct_to_fill: 2.65
+          - level: 4
+            price: 0.2575
+            pct_to_fill: 3.53
+          - level: 5
+            price: 0.2597
+            pct_to_fill: 4.42
+          - level: 6
+            price: 0.2620
+            pct_to_fill: 5.34
+      position_inventory:
+        symbol: EIGENUSDT
+        contract: perp
+        margin_mode: isolated
+        isolated_margin_balance_usdt: 13.1885
+        maintenance_margin_usdt: 0.0588
+        size_usdt: 5.8716800
+        size_base: 23.6
+        margin_usdt: 0.59
+        entry_price: 0.2455333
+        position_pnl_usdt: 0.07
+        position_roe_pct: 13.13
+        margin_ratio_pct: 0.45
+        liquidation_price: null
+        mark_price: 0.2488325
+      risk:
+        risk_ratio: 1.9
+        risk_label: Low Risk
+        margin_ratio_pct: 0.45
+        maintenance_margin_usdt: 0.0588
+        isolated_margin_balance_usdt: 13.1885
+        liquidation_price: null
+        mark_price: 0.2488325
+        liquidation_distance_to_mark_pct: null
+      tp_sl:
+        stop_loss:
+          pnl_usdt: -1.30
+          roi_pct: -10.0
+          price_type: last
+        take_profit:
+          pnl_usdt: 1.95
+          roi_pct: 15.0
+          price_type: last
+        close_all_positions_on_stop: true
+        close_all_positions_on_tp_sl_stop: true

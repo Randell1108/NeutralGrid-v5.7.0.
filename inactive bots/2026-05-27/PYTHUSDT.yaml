@@ -1,0 +1,86 @@
+bots:
+  - symbol: PYTHUSDT
+    strategy_id: "412253286"
+    deploy_ts: "2026-05-27T13:29:53+00:00"
+    grid_lower: 0.03943
+    grid_upper: 0.04268
+    num_grids: 11
+    leverage: 10
+    capital_usdt: 8.00
+    candidate_id: null
+    inactive_reason: canceled
+    archived_at: "2026-05-27T14:26:53-05:00"
+    execution_telemetry:
+      source: live_bot_data_scanner
+      captured_at: "2026-05-27T19:26:53+00:00"
+      pnl:
+        total_profit_usdt: 0.28
+        total_profit_pct: 3.57
+        matched_profit_usdt: 0.28
+        matched_profit_pct: 3.57
+        realized_profit_usdt: 0.28
+        unmatched_pnl_usdt: 0.00
+        unmatched_pnl_pct: 0.00
+        funding_fee_usdt: 0.00
+        funding_fee_pct: 0.00
+        annualized_yield_pct: 5268.20
+      open_order_ladder:
+        qty_per_order_base: 129
+        last_price: 0.04122
+        buy:
+          - level: 1
+            price: 0.04087
+            pct_to_fill: -0.84
+          - level: 2
+            price: 0.04058
+            pct_to_fill: -1.55
+          - level: 3
+            price: 0.04029
+            pct_to_fill: -2.25
+          - level: 4
+            price: 0.04000
+            pct_to_fill: -2.95
+          - level: 5
+            price: 0.03971
+            pct_to_fill: -3.66
+          - level: 6
+            price: 0.03943
+            pct_to_fill: -4.34
+        sell:
+          - level: 1
+            price: 0.04146
+            pct_to_fill: 0.58
+          - level: 2
+            price: 0.04176
+            pct_to_fill: 1.31
+          - level: 3
+            price: 0.04206
+            pct_to_fill: 2.03
+          - level: 4
+            price: 0.04237
+            pct_to_fill: 2.78
+          - level: 5
+            price: 0.04268
+            pct_to_fill: 3.54
+      position_inventory:
+        symbol: PYTHUSDT
+        contract: perp
+        margin_mode: isolated
+        isolated_margin_balance_usdt: 8.2862
+        maintenance_margin_usdt: 0.0000
+      risk:
+        risk_ratio: 2.6
+        risk_label: Low Risk
+        maintenance_margin_usdt: 0.0000
+        isolated_margin_balance_usdt: 8.2862
+      tp_sl:
+        stop_loss:
+          pnl_usdt: -0.80
+          roi_pct: -10.0
+          price_type: last
+        take_profit:
+          pnl_usdt: 1.20
+          roi_pct: 15.0
+          price_type: last
+        close_all_positions_on_stop: true
+        close_all_positions_on_tp_sl_stop: true

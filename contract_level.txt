@@ -1,0 +1,305 @@
+================================================================================
+CONTRACT-LEVEL ALIGNMENT REPORT — enrich + meta + EV
+Report date: 2026-04-23
+Scope: audit only (no code modified); recommendations + staged integration plan.
+================================================================================
+
+PART A — FINDINGS (current contract surface)
+--------------------------------------------------------------------------------
+
+1) FIVE PARALLEL NAME-MAPPING ARTEFACTS
+   Three tables reconcile the same semantic quantities:
+     - _SCANNER_TO_FEATURE        src/neutralgrid/backtest/candidate_pipeline.py:35
+     - _SCAN_TO_FEATURE           src/neutralgrid/training/unified_training_builder.py:76
+     - _INFERENCE_FEATURE_ALIASES src/neutralgrid/models/meta_labeler.py:144
+   Plus two more places that must stay in sync:
+     - FeatureSnapshot / to_dict  src/neutralgrid/training/data_generator.py:119
+     - ACTIVE_SNAPSHOT_META_FEATURES + META_FEATURE_PROFILES
+                                  src/neutralgrid/models/meta_labeler.py:134
+   safety-invariants.md §"Feature Pipeline Update Rule" calls out three files;
+   the alias table + active-profile constant make it five.
+
+2) utility_score COLLAPSES THREE SEMANTICS
+   Writers:
+     - scan.py:225               compute_governed_provisional_utility (provisional geometry)
+     - regime_validator.py:377   same call, published as regime_utility
+     - unified_training_builder._derive_utility_score (L689)   same call
+   _SCANNER_TO_FEATURE maps utility_score, scan_utility_score, AND regime_utility
+   into a single training column utility_score. The provisional-geometry
+   assumption is invisible from the name; agreement relies on all three sites
+   calling the same helper.
+
+3) ev_score HAS DISAGREEING WRITERS
+   - scan.py:709                     percent-scaled (but ev_score is None at scan)
+   - enrich_grid_params.py:1116,1170 compute_score(...).rank_score
+                                     = ev_aligned * (1 - total_penalty)
+                                     (written to edge_medium_ev_score/edge_big_ev_score)
+   - _apply_afml_post_scoring        fills final ev_score after enrich
+   - unified_training_builder._derive_ev_score (L700)   result.ev_24h (RAW ev)
+   Production rows carry a penalized rank score; training-backfilled rows
+   carry a raw ev. Same column, different units, silently mixed.
+
+4) ACTIVE PROFILE vs EMITTED COLUMNS DRIFT
+   ACTIVE_SNAPSHOT_META_FEATURES = SNAPSHOT_META_FEATURES_V20260421_BOOTSTRAP
+   (meta_labeler.py:134) = 8 features:
+     range_prob, survival_prob, utility_score, ou_halflife,
+     profit_per_grid_pct, num_grids, grid_spacing_pct, adx_1h
+   TRAINING_OUTPUT_COLUMNS: ~50
+   EXTRA_META_FEATURES:     ~20
+   FeatureSnapshot.to_dict: ~55
+   _INFERENCE_FEATURE_ALIASES still lists aliases for 25+ features not in
+   the active profile.
+   Asymmetries:
+     - utility_score in, but trend_prob (its driver) out
+     - ev_score excluded from bootstrap
+     - survival_prob in, but its estimator source not stamped
+
+5) LEAKAGE GUARD IS SINGLE-SITED
+   _KNOWN_LABEL_COLUMNS enforced only at meta_labeler._prepare_features (L529)
+   and .train (L716). unified_training_builder backfills features in-place
+   (out.at[idx, "utility_score"], out.at[idx, "ev_score"] L983, L990) using
+   row dicts that also hold labels. Safety relies on derive helpers reading
+   a whitelist; there is no structural barrier.
+
+6) survival_prob USED UNDER THREE GENERATIVE MODELS
+   - PnLRanker.compute_ev: fill-Bernoulli AND (1-p)*|sl_pct| boundary loss
+   - UtilityScorer.compute_utility: falls back to range_prob when None (L350),
+     also drives expected_trend_breakout_loss
+   - Gate 4 (micro_osc): MC containment threshold
+   Writers (StochasticRegimeChecker vs micro_osc MC) are not stamped on the
+   snapshot, so meta sees one scalar with context-dependent meaning.
+
+7) leverage BREAKS TRAIN/SERVE EV BASIS
+   PnLRanker.compute_score(...).funding_cost_pct uses leverage
+   (pnl_ranker.py:162, 271). Enrich passes g.leverage. But:
+     - leverage is NOT in FeatureSnapshot / _SCAN_TO_FEATURE
+     - unified_training_builder._derive_ev_score calls compute_score()
+       without leverage -> defaults to 10
+   Any non-10x candidate gets train != serve EV by a funding term
+   proportional to (leverage - 10) * |funding| * H/8.
+
+8) HORIZON NOT CROSS-VALIDATED END-TO-END
+   BOT_HORIZON_HOURS is canonical, but four configs carry horizon_hours:
+     LabelConfig, BarrierConfig, RankingConfig, UtilityConfig.
+   safety-invariants cross-validates hurdle_pct but not horizon. Any drift
+   silently desynchronizes enrich EV vs training EV vs label window.
+
+9) MI SCORER STARVES AT SCAN TIME; ENRICH NEVER RE-COMBINES
+   scan.py:699-724 MI-combines {similarity_score, profile_proba, ev_score,
+   meta_prob}. ev_score is None at scan time. Final ev_score is filled post-
+   enrichment by _apply_afml_post_scoring, but scan_score is not recomputed,
+   so the frozen composite was always produced from a degraded input set.
+
+================================================================================
+PART B — PRIORITY RANKING
+--------------------------------------------------------------------------------
+P1  ev_score writer ambiguity       (finding 3) — silent unit mismatch train vs serve
+P1  leverage divergence              (finding 7) — concrete basis mismatch
+P2  five-site feature registration   (finding 1) — cuts future-bug surface
+P2  active-profile drift             (finding 4) — dead aliases; feature closure
+P3  horizon cross-validation gap     (finding 8) — mirror existing hurdle check
+P3  utility_score semantic collapse  (finding 2)
+P3  survival_prob source opacity     (finding 6)
+P3  MI scorer starvation             (finding 9)
+P4  centralized leakage guard        (finding 5) — currently benign, structural
+
+================================================================================
+PART C — STEP-BY-STEP INTEGRATION PLAN
+--------------------------------------------------------------------------------
+Each step is independently shippable, gated by an explicit invariant check,
+and leaves the repo green (pytest + pyright) at every commit boundary.
+Do NOT begin any step without explicit written go-ahead.
+
+--------------------------------------------------------------------------------
+STEP 0  — Baseline capture and invariants snapshot   (no code change)
+--------------------------------------------------------------------------------
+0.1  Run `python -m pytest tests/` and record green count.
+0.2  Run `pyright` and record pre-existing warnings (diff baseline).
+0.3  Produce a CSV of (candidate_id, scan_ev_score, edge_medium_ev_score,
+     edge_big_ev_score, training_derived_ev_score, utility_score,
+     scan_utility_score, regime_utility) over the last 30 days of
+     deployment_ready_*.csv + matched training_snapshots/*.parquet.
+     Purpose: quantify current train/serve delta BEFORE any unification, so
+     every subsequent step can be measured.
+Verify: baseline.csv produced; test count archived.
+
+--------------------------------------------------------------------------------
+STEP 1  — Fix leverage train/serve mismatch   (P1, finding 7)
+--------------------------------------------------------------------------------
+1.1  Add `leverage: Optional[int] = None` to FeatureSnapshot.
+1.2  Extend FeatureSnapshot.to_dict and scanner_integration.build_feature_snapshot
+     to write leverage (from g.leverage at enrich time).
+1.3  Extend _SCAN_TO_FEATURE with "scan_leverage" -> "leverage".
+1.4  Extend _SCANNER_TO_FEATURE with "leverage" -> "leverage".
+1.5  In unified_training_builder._derive_ev_score, pass leverage=row.get(
+     "leverage") or default.
+1.6  Add startup cross-check in backfill_training_features: if leverage
+     missing for a row, fall back to 10 AND stamp an audit flag
+     ev_score_leverage_default_used=True.
+Verify:
+  - tests/unit/test_backfill_training_features_v20260312.py still green
+  - New unit test: two candidates with leverage 5 and 20 reproduce identical
+    ev_score at train-time and serve-time (within 1e-9) when inputs match.
+  - Rerun baseline.csv diff: ev_score delta -> 0 for leverage != 10 rows.
+
+--------------------------------------------------------------------------------
+STEP 2  — Disambiguate ev_score writers   (P1, finding 3)
+--------------------------------------------------------------------------------
+2.1  Add three explicit columns at contract boundary (do NOT remove ev_score):
+       ev_raw           RankingComponents.ev_raw   (pre-alignment)
+       ev_aligned       RankingComponents.ev_aligned (empirical alignment)
+       ev_penalized     ev_aligned * (1 - total_penalty) == rank_score
+     Extend FeatureSnapshot, _SCANNER_TO_FEATURE, _SCAN_TO_FEATURE, and the
+     three writer sites (enrich_grid_params, _apply_afml_post_scoring,
+     unified_training_builder._derive_ev_score) to populate ALL THREE.
+2.2  Introduce EV_ORIGIN stamp column with enum values:
+       {"scan_pending", "enrich_tier_medium", "enrich_tier_big",
+        "post_scoring_afml", "training_backfill"}.
+2.3  Change ACTIVE_SNAPSHOT_META_FEATURES contract rule:
+     ev_score is reserved for backward compatibility only; new training runs
+     read ev_aligned OR ev_penalized based on a single MI_SCORER config knob.
+2.4  Add cross-check in unified_training_builder: if any row carries two
+     disagreeing ev_* writers (diff > 1e-6 in same candidate row), fail loud.
+Verify:
+  - pytest tests/unit/test_meta_labeler_retrain_contract_v20260408.py
+  - New unit test: rank_score = ev_aligned * (1 - total_penalty) holds on
+    random fixture.
+  - baseline.csv training-vs-serve ev_score delta -> 0 across all rows.
+
+--------------------------------------------------------------------------------
+STEP 3  — Unify five-site feature registration   (P2, finding 1)
+--------------------------------------------------------------------------------
+3.1  Introduce `src/neutralgrid/core/feature_schema.py`:
+       @dataclass(frozen=True)
+       class FeatureSpec:
+           canonical: str
+           csv_aliases: tuple[str, ...]
+           scan_aliases: tuple[str, ...]
+           snapshot_field: str
+           dtype: str
+           is_label: bool = False
+           profiles: frozenset[str] = frozenset()
+     FEATURE_REGISTRY: tuple[FeatureSpec, ...] = (...) — single source of truth.
+3.2  Derive each of the five existing artefacts as PURE PROJECTIONS of the
+     registry (at import time), e.g.:
+       _SCANNER_TO_FEATURE        = {a: s.canonical for s in REG for a in s.csv_aliases}
+       _SCAN_TO_FEATURE           = {a: s.canonical for s in REG for a in s.scan_aliases}
+       _INFERENCE_FEATURE_ALIASES = {a: s.canonical for s in REG for a in s.scan_aliases}
+       ACTIVE_SNAPSHOT_META_FEATURES = tuple(s.canonical for s in REG
+                                             if active_profile in s.profiles)
+       _KNOWN_LABEL_COLUMNS       = frozenset(s.canonical for s in REG if s.is_label)
+3.3  FeatureSnapshot becomes a typed view over the registry; to_dict is generated.
+3.4  Update safety-invariants.md §"Feature Pipeline Update Rule" to:
+     "adding a feature = editing feature_schema.py only."
+Verify:
+  - Every pre-existing mapping table equals its new projection byte-for-byte
+    (diff check in a temporary test; may be removed after one release).
+  - pytest tests/ fully green; pyright no new warnings.
+
+--------------------------------------------------------------------------------
+STEP 4  — Close active-profile drift   (P2, finding 4)
+--------------------------------------------------------------------------------
+4.1  Declare explicit profile closures in feature_schema.py — each profile
+     must either include trend_prob (when utility_score is present) or a
+     stamped attestation that the projection is intentional.
+4.2  Prune _INFERENCE_FEATURE_ALIASES entries whose canonical is not in
+     ANY profile. (Generated automatically from registry after Step 3.)
+4.3  Add a CI guard: `python scripts/check_profile_closure.py`.
+Verify:
+  - Dead-alias check reports 0.
+  - Meta-labeler retrain on snapshot_v20260421_bootstrap still produces the
+    same AUC (seeded) — the pruning is alias-only, not feature-removing.
+
+--------------------------------------------------------------------------------
+STEP 5  — Horizon cross-validation  (P3, finding 8)
+--------------------------------------------------------------------------------
+5.1  Extend the existing config._validate() (mirror of hurdle check) to
+     assert:
+       LabelConfig.horizon_hours
+         == BarrierConfig.horizon_hours
+         == RankingConfig.horizon_hours
+         == UtilityConfig.horizon_hours
+         == BOT_HORIZON_HOURS
+5.2  Any deviation raises at startup.
+Verify:
+  - pytest tests/test_afml_bugfixes.py
+  - New unit test: mutating any one horizon raises at config boot.
+
+--------------------------------------------------------------------------------
+STEP 6  — utility_score single-origin   (P3, finding 2)
+--------------------------------------------------------------------------------
+6.1  Add FeatureSpec attribute `provenance_field`. For utility_score,
+     provenance values are {"provisional", "regime_enrich", "training_backfill"}.
+6.2  Enrich emits utility_score + utility_score_origin.
+6.3  Training builder refuses to run if any row has utility_score_origin
+     NOT IN allowlist (configurable; default: {"provisional"}).
+6.4  Rename the scanner alias regime_utility -> utility_score_regime at the
+     snapshot boundary so the conflation is impossible by construction.
+Verify:
+  - Existing tests green; new test: mixed-origin training frame raises.
+
+--------------------------------------------------------------------------------
+STEP 7  — survival_prob source stamp   (P3, finding 6)
+--------------------------------------------------------------------------------
+7.1  Add survival_prob_source (enum) to FeatureSnapshot.
+7.2  StochasticRegimeChecker path writes "stochastic"; micro_osc MC writes
+     "micro_osc_mc"; fallback writes "range_prob_fallback".
+7.3  Expose as optional categorical feature in a future profile, but at
+     minimum keep it as an audit column.
+Verify:
+  - Snapshot parquet carries the new column end-to-end.
+  - Dashboard / diagnostic script can group by source.
+
+--------------------------------------------------------------------------------
+STEP 8  — Close the MI-scorer loop   (P3, finding 9)
+--------------------------------------------------------------------------------
+8.1  Rename current scan_score to scan_score_prelim.
+8.2  After _apply_afml_post_scoring fills ev_score, recompute MI-weighted
+     score using the now-complete 4-component feature set and store as
+     scan_score_final.
+8.3  Downstream consumers (ranker, deployment_ready csv) switch to
+     scan_score_final. Keep scan_score_prelim as audit column.
+Verify:
+  - Deployment candidates previously ordered by partial-MI now agree with
+    full-MI ranking on baseline.csv (some reshuffling expected; log the
+    Kendall tau for governance).
+
+--------------------------------------------------------------------------------
+STEP 9  — Structural leakage barrier   (P4, finding 5)
+--------------------------------------------------------------------------------
+9.1  Split unified_training_builder working frame into FeatureFrame /
+     OutcomeFrame before backfill. Derive helpers accept FeatureFrame only.
+9.2  Add assertion in backfill path: OutcomeFrame columns not accessible
+     via any derive helper.
+9.3  _KNOWN_LABEL_COLUMNS is generated from registry (Step 3); guard applies
+     at both meta_labeler and training-builder boundaries.
+Verify:
+  - Contrived test: inject hlabel into derive-helper input raises.
+  - No regression on meta-labeler retrain AUC/ECE.
+
+--------------------------------------------------------------------------------
+STEP 10  — Documentation + invariants refresh
+--------------------------------------------------------------------------------
+10.1  Update CLAUDE.md §"Feature Pipeline Update Rule" wording.
+10.2  Update safety-invariants.md with:
+        - ev_* triple (raw/aligned/penalized)
+        - leverage in snapshot
+        - horizon cross-validation
+        - survival_prob source stamp
+10.3  Add CHANGELOG entry covering all 10 steps.
+
+================================================================================
+EXIT CRITERIA (all must hold before closing the project)
+--------------------------------------------------------------------------------
+  [ ] pytest tests/ green, count >= pre-Step-0 baseline
+  [ ] pyright: no new warnings introduced
+  [ ] baseline.csv delta (train vs serve) for ev_score and utility_score -> 0
+  [ ] feature_schema.py is the only place edited when a new feature lands
+      (verified by: diff count when adding a sentinel "unit_test_feature")
+  [ ] Horizon cross-check active at config boot
+  [ ] safety-invariants.md reflects the new contract
+  [ ] CHANGELOG entry merged
+
+================================================================================
+END OF REPORT
+================================================================================

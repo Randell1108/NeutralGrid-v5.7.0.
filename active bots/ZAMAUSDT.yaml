@@ -1,0 +1,9 @@
+bots:
+  - symbol: ZAMAUSDT
+    strategy_id: "413346925"
+    deploy_ts: "2026-07-22T15:36:33Z"
+    grid_lower: 0.04040
+    grid_upper: 0.04570
+    num_grids: 17
+    leverage: 10
+    capital_usdt: 12.20

@@ -1,0 +1,16 @@
+bots:
+  - symbol: SKYAIUSDT
+    strategy_id: "413462579"
+    deploy_ts: "2026-07-28T14:27:47Z"
+    final_snapshot_at: "2026-07-28T21:09:47Z"
+    grid_lower: 0.02249
+    grid_upper: 0.02600
+    num_grids: 15
+    leverage: 10
+    capital_usdt: 100.00
+    candidate_id: null
+    inactive_reason: cancelled
+    archived_at: "2026-07-28T16:14:59.701-05:00"
+    archived_from: null
+    terminal_snapshot: "Live/2026-07-28/SKYAIUSDT/final_live_bot_data_413462579_20260728_160947_lima.yaml"
+    archive_note: "No matching SKYAIUSDT file existed under active bots at archival time."

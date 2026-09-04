@@ -1,0 +1,105 @@
+bots:
+  - symbol: ENAUSDT
+    strategy_id: "412730355"
+    deploy_ts: "2026-06-18T13:01:13+00:00"
+    grid_lower: 0.08988
+    grid_upper: 0.09938
+    num_grids: 14
+    leverage: 10
+    capital_usdt: 100.00
+    candidate_id: ENAUSDT_20260618_115611_25245053
+    execution_telemetry:
+      source: live_bot_data_scanner
+      captured_at: "2026-06-18T15:31:13+00:00"
+      pnl:
+        total_profit_usdt: 4.09
+        total_profit_pct: 4.09
+        matched_profit_usdt: 3.92
+        matched_profit_pct: 3.92
+        realized_profit_usdt: 3.90
+        unmatched_pnl_usdt: 0.16
+        unmatched_pnl_pct: 0.16
+        funding_fee_usdt: 0.00
+        funding_fee_pct: 0.00
+        annualized_yield_pct: 14237.12
+      open_order_ladder:
+        qty_per_order_base: 564
+        last_price: 0.09282
+        buy:
+          - level: 1
+            price: 0.09249
+            pct_to_fill: -0.35
+          - level: 2
+            price: 0.09183
+            pct_to_fill: -1.06
+          - level: 3
+            price: 0.09117
+            pct_to_fill: -1.77
+          - level: 4
+            price: 0.09052
+            pct_to_fill: -2.47
+          - level: 5
+            price: 0.08988
+            pct_to_fill: -3.16
+        sell:
+          - level: 1
+            price: 0.09383
+            pct_to_fill: 1.08
+          - level: 2
+            price: 0.09451
+            pct_to_fill: 1.82
+          - level: 3
+            price: 0.09519
+            pct_to_fill: 2.55
+          - level: 4
+            price: 0.09587
+            pct_to_fill: 3.28
+          - level: 5
+            price: 0.09656
+            pct_to_fill: 4.02
+          - level: 6
+            price: 0.09726
+            pct_to_fill: 4.78
+          - level: 7
+            price: 0.09796
+            pct_to_fill: 5.53
+          - level: 8
+            price: 0.09866
+            pct_to_fill: 6.29
+          - level: 9
+            price: 0.09938
+            pct_to_fill: 7.06
+      position_inventory:
+        symbol: ENAUSDT
+        contract: perp
+        margin_mode: isolated
+        isolated_margin_balance_usdt: 104.0762
+        maintenance_margin_usdt: 0.5238
+        size_usdt: -52.3617600
+        size_base: -564
+        margin_usdt: 5.23
+        entry_price: 0.0931600
+        position_pnl_usdt: 0.18
+        position_roe_pct: 3.44
+        margin_ratio_pct: 0.50
+        liquidation_price: 0.1115948
+        mark_price: 0.0928646
+      risk:
+        risk_ratio: 1.9
+        risk_label: Low Risk
+        margin_ratio_pct: 0.50
+        maintenance_margin_usdt: 0.5238
+        isolated_margin_balance_usdt: 104.0762
+        liquidation_price: 0.1115948
+        mark_price: 0.0928646
+      tp_sl:
+        stop_loss:
+          pnl_usdt: -20.00
+          roi_pct: -20.0
+          price_type: last
+        take_profit:
+          pnl_usdt: 20.00
+          roi_pct: 20.0
+          price_type: last
+        close_all_positions_on_stop: true
+        close_all_positions_on_tp_sl_stop: true

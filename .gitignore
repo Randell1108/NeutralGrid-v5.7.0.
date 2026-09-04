@@ -1,0 +1,101 @@
+# Trained model artifacts
+artifacts/
+models/*.pkl
+models/meta_labeler/
+
+# Data & cache
+data/cache/
+data/training_sets/
+data/training_snapshots/
+data/profile/
+data/validator.db
+data/holdout_access_log.json
+data/audit_report.json
+data/trial_log.json
+
+# Run outputs
+results/
+# Anchored to repo root so it doesn't match src/neutralgrid/live/ on
+# case-insensitive filesystems (Windows). The intended target is the
+# top-level Live/ user-data dir per CLAUDE.md.
+/Live/
+logs/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.tmp_pytest/
+.pytest_tmp_run/
+tmp_pytest_run/
+*.egg-info/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Secrets / credentials
+*.key
+*.pem
+*.p12
+*.pfx
+credentials.json
+
+# Extra tmp dirs
+.pytest_local_tmp/
+.tmp_pytest/
+.tmp_test_temp/
+.pytest_tmp/
+
+# Editor
+.vscode/
+.idea/
+.claude/worktrees/
+# Transient Claude Code session lock (runtime state, not source)
+.claude/scheduled_tasks.lock
+
+# Data dumps (regeneratable from scripts)
+/data/
+codex_manual_checks/
+codex_manual_checks_2/
+codex_test_tmp_meta/
+codex_tmp_check/
+tmp_pytest_run/
+meta-labeling/data/
+meta-labeling/live_tracking/
+meta-labeling/models/
+meta-labeling/reports/
+meta-labeling/*.csv
+
+# Model binaries
+models/**/*.pkl
+models/**/*.joblib
+models/**/*.parquet
+models/meta_labeler_backup_*
+models/meta_labeler/
+
+# Binary data files (broad safety net)
+*.parquet
+*.csv
+*.joblib
+*.xlsx
+
+# Logs
+*.log
+full_pytest.log
+
+# Backtest report outputs
+backtest/reports/
+
+# Run outputs & tool caches (heavy / regeneratable)
+outputs/
+.codegraph/
+.playwright-mcp/
+.tmp_pytest_*/
+pytest-of-cris_/
+tests/unit/utility_calibrator_tmp/
+
+# Investor presentation materials (permanently excluded per operator, 2026-07-13)
+presentation/

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEUTRAL Grid Bot Validator</title>
+    <meta name="description"
+        content="Real-time NEUTRAL Futures Grid Bot Validator for Binance USDT-M Perpetual contracts">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 3H10V10H3V3Z" stroke="currentColor" stroke-width="2" />
+                            <path d="M14 3H21V10H14V3Z" stroke="currentColor" stroke-width="2" />
+                            <path d="M3 14H10V21H3V14Z" stroke="currentColor" stroke-width="2" />
+                            <path d="M14 14H21V21H14V14Z" stroke="currentColor" stroke-width="2" />
+                            <circle cx="12" cy="12" r="3" fill="currentColor" />
+                        </svg>
+                    </div>
+                    <div class="logo-text">
+                        <h1>NEUTRAL Grid</h1>
+                        <span>Bot Validator</span>
+                    </div>
+                </div>
+                <div class="header-badge">
+                    <span class="badge">Binance Futures</span>
+                    <span class="badge accent">USDT-M</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Input Section -->
+            <section class="input-section">
+                <div class="glass-card input-card">
+                    <h2>Validate Trading Pair</h2>
+                    <p class="subtitle">Enter a Binance Futures perpetual pair to validate for NEUTRAL grid deployment
+                    </p>
+                    <div class="input-group">
+                        <div class="input-wrapper">
+                            <input type="text" id="symbol-input" placeholder="e.g., BTCUSDT" autocomplete="off"
+                                spellcheck="false">
+                            <span class="input-suffix">PERP</span>
+                        </div>
+                        <button id="validate-btn" class="btn-primary">
+                            <span class="btn-text">Validate</span>
+                            <span class="btn-loader"></span>
+                        </button>
+                    </div>
+                    <div class="quick-pairs">
+                        <span>Quick:</span>
+                        <button class="quick-btn" data-symbol="BTCUSDT">BTC</button>
+                        <button class="quick-btn" data-symbol="ETHUSDT">ETH</button>
+                        <button class="quick-btn" data-symbol="SOLUSDT">SOL</button>
+                        <button class="quick-btn" data-symbol="BNBUSDT">BNB</button>
+                        <button class="quick-btn" data-symbol="XRPUSDT">XRP</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Result Section -->
+            <section class="result-section" id="result-section" style="display: none;">
+                <!-- Status Card -->
+                <div class="glass-card status-card" id="status-card">
+                    <div class="status-header">
+                        <div class="status-symbol" id="status-symbol">BTCUSDT</div>
+                        <div class="status-badge" id="status-badge">VALID</div>
+                    </div>
+                    <div class="status-message" id="status-message"></div>
+                </div>
+
+                <!-- Grid Parameters (shown only if VALID) -->
+                <div class="glass-card params-card" id="params-card" style="display: none;">
+                    <h3>Grid Bot Parameters</h3>
+                    <div class="params-grid">
+                        <div class="param-item">
+                            <span class="param-label">Grid Range</span>
+                            <span class="param-value" id="param-range">-</span>
+                        </div>
+                        <div class="param-item">
+                            <span class="param-label">Number of Grids</span>
+                            <span class="param-value" id="param-grids">-</span>
+                        </div>
+                        <div class="param-item">
+                            <span class="param-label">Grid Spacing</span>
+                            <span class="param-value" id="param-spacing">-</span>
+                        </div>
+                        <div class="param-item">
+                            <span class="param-label">Profit Per Grid</span>
+                            <span class="param-value" id="param-profit">-</span>
+                        </div>
+                        <div class="param-item">
+                            <span class="param-label">Leverage</span>
+                            <span class="param-value" id="param-leverage">-</span>
+                        </div>
+                        <div class="param-item">
+                            <span class="param-label">Total Notional</span>
+                            <span class="param-value" id="param-notional">-</span>
+                        </div>
+                        <div class="param-item highlight">
+                            <span class="param-label">Expected Return</span>
+                            <span class="param-value" id="param-return">-</span>
+                        </div>
+                        <div class="param-item">
+                            <span class="param-label">Stop Loss / Take Profit</span>
+                            <span class="param-value" id="param-sltp">-</span>
+                        </div>
+                        <div class="param-item">
+                            <span class="param-label">Max Holding Time</span>
+                            <span class="param-value" id="param-time">-</span>
+                        </div>
+                        <div class="param-item">
+                            <span class="param-label">Maker / Taker Fee</span>
+                            <span class="param-value" id="param-fees">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Validation Details -->
+                <div class="glass-card details-card" id="details-card" style="display: none;">
+                    <h3>Validation Details</h3>
+                    <div class="timeframe-checks">
+                        <!-- 1H Check -->
+                        <div class="tf-check" id="check-1h">
+                            <div class="tf-header">
+                                <span class="tf-name">1H Structural</span>
+                                <span class="tf-status">-</span>
+                            </div>
+                            <div class="tf-details" id="details-1h"></div>
+                        </div>
+                        <!-- 15M Check -->
+                        <div class="tf-check" id="check-15m">
+                            <div class="tf-header">
+                                <span class="tf-name">15M Range</span>
+                                <span class="tf-status">-</span>
+                            </div>
+                            <div class="tf-details" id="details-15m"></div>
+                        </div>
+                        <!-- 5M Check -->
+                        <div class="tf-check" id="check-5m">
+                            <div class="tf-header">
+                                <span class="tf-name">5M Mean-Reversion</span>
+                                <span class="tf-status">-</span>
+                            </div>
+                            <div class="tf-details" id="details-5m"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Info Section -->
+            <section class="info-section">
+                <div class="glass-card info-card">
+                    <h3>Validation Rules</h3>
+                    <div class="rules-grid">
+                        <div class="rule">
+                            <div class="rule-tf">1H</div>
+                            <div class="rule-desc">
+                                <strong>Structural Regime</strong>
+                                <p>EMA 50/200 flat, ADX ≤ 22, no trending structure, BB stable</p>
+                            </div>
+                        </div>
+                        <div class="rule">
+                            <div class="rule-tf">15M</div>
+                            <div class="rule-desc">
+                                <strong>Range Integrity</strong>
+                                <p>Clear range, price in inner 70%, RSI 45-55, ADX ≤ 23</p>
+                            </div>
+                        </div>
+                        <div class="rule">
+                            <div class="rule-tf">5M</div>
+                            <div class="rule-desc">
+                                <strong>Mean-Reversion</strong>
+                                <p>EMA crosses, VWAP oscillation, ADX ≤ 30, no drift</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-note">
+                        <strong>Note:</strong> 1M timeframe is used only for grid spacing calibration, never for regime
+                        validation.
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <span>Capital: $400</span>
+                <span class="divider">|</span>
+                <span>Leverage: 5x-10x</span>
+                <span class="divider">|</span>
+                <span>SL: -10% | TP: +15%</span>
+                <span class="divider">|</span>
+                <span>Max Hold: 48h</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+
+</html>

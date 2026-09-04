@@ -1,0 +1,9 @@
+bots:
+  - symbol: NIGHTUSDT
+    strategy_id: "413322176"
+    deploy_ts: "2026-07-21T08:35:09Z"
+    grid_lower: 0.01660
+    grid_upper: 0.02088
+    num_grids: 22
+    leverage: 10
+    capital_usdt: 16.25

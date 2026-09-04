@@ -1,0 +1,9 @@
+bots:
+  - symbol: BEATUSDT
+    strategy_id: "413322149"
+    deploy_ts: "2026-07-21T08:33:33Z"
+    grid_lower: 2.166
+    grid_upper: 2.430
+    num_grids: 16
+    leverage: 10
+    capital_usdt: 14.70

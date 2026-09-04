@@ -1,0 +1,38 @@
+"""Technical indicators module (canonical location)."""
+from .technical import (
+    calc_ema,
+    calc_sma,
+    calc_bollinger_bands,
+    calc_donchian,
+    calc_vwap,
+    calc_atr,
+    calc_rsi,
+    calc_adx,
+    calc_ema_slope,
+    calc_liquidity_stability_zscore,
+    calc_parkinson_vol_ratio,
+    calc_parkinson_volatility,
+    calc_variance_ratio,
+    count_ema_crosses,
+    count_vwap_crosses,
+    detect_trend_structure,
+)
+
+__all__ = [
+    "calc_ema",
+    "calc_sma",
+    "calc_bollinger_bands",
+    "calc_donchian",
+    "calc_vwap",
+    "calc_atr",
+    "calc_rsi",
+    "calc_adx",
+    "calc_ema_slope",
+    "calc_liquidity_stability_zscore",
+    "calc_parkinson_vol_ratio",
+    "calc_parkinson_volatility",
+    "calc_variance_ratio",
+    "count_ema_crosses",
+    "count_vwap_crosses",
+    "detect_trend_structure",
+]

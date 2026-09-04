@@ -1,0 +1,99 @@
+bots:
+  - symbol: PNUTUSDT
+    strategy_id: "412235095"
+    deploy_ts: "2026-05-26T14:17:57+00:00"
+    grid_lower: 0.05492
+    grid_upper: 0.05922
+    num_grids: 11
+    leverage: 10
+    capital_usdt: 8.00
+    candidate_id: null
+    inactive_reason: expired
+    archived_at: "2026-05-26T17:39:14.7600390-05:00"
+    execution_telemetry:
+      source: live_bot_data_scanner
+      captured_at: "2026-05-26T22:39:14.7600390+00:00"
+      pnl:
+        total_profit_usdt: 0.23
+        total_profit_pct: 2.98
+        matched_profit_usdt: 0.26
+        matched_profit_pct: 3.35
+        realized_profit_usdt: 0.14
+        unmatched_pnl_usdt: -0.03
+        unmatched_pnl_pct: -0.36
+        funding_fee_usdt: 0.00
+        funding_fee_pct: -0.00
+        annualized_yield_pct: 4662.42
+      open_order_ladder:
+        qty_per_order_base: 93
+        last_price: 0.05649
+        buy:
+          - level: 1
+            price: 0.05606
+            pct_to_fill: -0.76
+          - level: 2
+            price: 0.05567
+            pct_to_fill: -1.45
+          - level: 3
+            price: 0.05529
+            pct_to_fill: -2.12
+          - level: 4
+            price: 0.05492
+            pct_to_fill: -2.77
+        sell:
+          - level: 1
+            price: 0.05683
+            pct_to_fill: 0.60
+          - level: 2
+            price: 0.05722
+            pct_to_fill: 1.29
+          - level: 3
+            price: 0.05761
+            pct_to_fill: 1.98
+          - level: 4
+            price: 0.05801
+            pct_to_fill: 2.69
+          - level: 5
+            price: 0.05841
+            pct_to_fill: 3.39
+          - level: 6
+            price: 0.05881
+            pct_to_fill: 4.10
+          - level: 7
+            price: 0.05922
+            pct_to_fill: 4.83
+      position_inventory:
+        symbol: PNUTUSDT
+        contract: perp
+        margin_mode: isolated
+        isolated_margin_balance_usdt: 8.2462
+        maintenance_margin_usdt: 0.1578
+        size_usdt: 10.5071400
+        size_base: 186
+        margin_usdt: 1.05
+        entry_price: 0.0559619
+        position_pnl_usdt: 0.09
+        position_roe_pct: 9.35
+        margin_ratio_pct: 1.91
+        liquidation_price: 0.0123791
+        mark_price: 0.0565284
+      risk:
+        risk_ratio: 2.6
+        risk_label: Low Risk
+        margin_ratio_pct: 1.91
+        maintenance_margin_usdt: 0.1578
+        isolated_margin_balance_usdt: 8.2462
+        liquidation_price: 0.0123791
+        mark_price: 0.0565284
+        liquidation_distance_to_mark_pct: 78.10
+      tp_sl:
+        stop_loss:
+          pnl_usdt: -0.80
+          roi_pct: -10.0
+          price_type: last
+        take_profit:
+          pnl_usdt: 1.20
+          roi_pct: 15.0
+          price_type: last
+        close_all_positions_on_stop: true
+        close_all_positions_on_tp_sl_stop: true

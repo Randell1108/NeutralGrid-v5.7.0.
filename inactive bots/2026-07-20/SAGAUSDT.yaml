@@ -1,0 +1,9 @@
+bots:
+  - symbol: SAGAUSDT
+    strategy_id: "413304140"
+    deploy_ts: "2026-07-20T09:54:06Z"
+    grid_lower: 0.01158
+    grid_upper: 0.01361
+    num_grids: 16
+    leverage: 10
+    capital_usdt: 11.55

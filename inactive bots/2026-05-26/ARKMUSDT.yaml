@@ -1,0 +1,105 @@
+bots:
+  - symbol: ARKMUSDT
+    strategy_id: "412223355"
+    deploy_ts: "2026-05-25T23:44:38+00:00"
+    grid_lower: 0.1368
+    grid_upper: 0.1530
+    num_grids: 13
+    leverage: 10
+    capital_usdt: 30.00
+    candidate_id: null
+    inactive_reason: expired
+    archived_at: "2026-05-26T08:29:22.0069395-05:00"
+    execution_telemetry:
+      source: live_bot_data_scanner
+      captured_at: "2026-05-26T13:29:22.0069395+00:00"
+      pnl:
+        total_profit_usdt: 0.57
+        total_profit_pct: 1.93
+        matched_profit_usdt: 0.58
+        matched_profit_pct: 1.95
+        realized_profit_usdt: 0.22
+        unmatched_pnl_usdt: -0.01
+        unmatched_pnl_pct: -0.02
+        funding_fee_usdt: 0.00
+        funding_fee_pct: 0.00
+        annualized_yield_pct: 5522.55
+      open_order_ladder:
+        qty_per_order_base: 118
+        last_price: 0.1435
+        buy:
+          - level: 1
+            price: 0.1415
+            pct_to_fill: -1.39
+          - level: 2
+            price: 0.1403
+            pct_to_fill: -2.22
+          - level: 3
+            price: 0.1391
+            pct_to_fill: -3.06
+          - level: 4
+            price: 0.1379
+            pct_to_fill: -3.90
+          - level: 5
+            price: 0.1368
+            pct_to_fill: -4.66
+        sell:
+          - level: 1
+            price: 0.1440
+            pct_to_fill: 0.34
+          - level: 2
+            price: 0.1452
+            pct_to_fill: 1.18
+          - level: 3
+            price: 0.1465
+            pct_to_fill: 2.09
+          - level: 4
+            price: 0.1478
+            pct_to_fill: 2.99
+          - level: 5
+            price: 0.1490
+            pct_to_fill: 3.83
+          - level: 6
+            price: 0.1503
+            pct_to_fill: 4.73
+          - level: 7
+            price: 0.1516
+            pct_to_fill: 5.64
+          - level: 8
+            price: 0.1530
+            pct_to_fill: 6.62
+      position_inventory:
+        symbol: ARKMUSDT
+        contract: perp
+        margin_mode: isolated
+        isolated_margin_balance_usdt: 30.6035
+        maintenance_margin_usdt: 0.5080
+        size_usdt: 33.8660000
+        size_base: 236
+        margin_usdt: 3.39
+        entry_price: 0.1418753
+        position_pnl_usdt: 0.38
+        position_roe_pct: 11.32
+        margin_ratio_pct: 1.66
+        liquidation_price: 0.0140342
+        mark_price: 0.1435000
+      risk:
+        risk_ratio: 2.6
+        risk_label: Low Risk
+        margin_ratio_pct: 1.66
+        maintenance_margin_usdt: 0.5080
+        isolated_margin_balance_usdt: 30.6035
+        liquidation_price: 0.0140342
+        mark_price: 0.1435000
+        liquidation_distance_to_mark_pct: 90.22
+      tp_sl:
+        stop_loss:
+          pnl_usdt: -3.00
+          roi_pct: -10.0
+          price_type: last
+        take_profit:
+          pnl_usdt: 4.50
+          roi_pct: 15.0
+          price_type: last
+        close_all_positions_on_stop: true
+        close_all_positions_on_tp_sl_stop: true

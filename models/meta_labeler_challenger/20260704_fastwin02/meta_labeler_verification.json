@@ -1,0 +1,1658 @@
+{
+  "generated_at_utc": "2026-07-04T21:41:08.823325+00:00",
+  "feature_profile": "snapshot_v20260530_fastwin",
+  "expected_feature_count": 20,
+  "selected_feature_count": 20,
+  "selected_features": [
+    "ev_score",
+    "adx_1h",
+    "adx_15m",
+    "adx_5m",
+    "atr_pct_15m",
+    "ou_halflife",
+    "rsi_15m",
+    "ema_slope_1h",
+    "ema_crosses_5m",
+    "vwap_crosses_5m",
+    "hurst_exponent",
+    "range_size_pct",
+    "bb_width",
+    "grid_spacing_pct",
+    "profit_per_grid_pct",
+    "num_grids",
+    "quote_volume_24h",
+    "open_interest",
+    "micro_round_trip_cost_pct",
+    "funding_rate"
+  ],
+  "source_training_row_count": 6195,
+  "training_row_count": 6048,
+  "fast_target_contract": {
+    "duration_column": "duration_hours",
+    "target_contract": "fast_winner_time_to_3pct_le_7h",
+    "duration_hours_max": 7.0,
+    "pnl_column": "net_pnl_pct",
+    "target_column": "fast_winner_target",
+    "eligible_rows": 6195,
+    "positive_count": 2928,
+    "negative_count": 3267,
+    "negative_rows_duration_gt_7h_count": 1209,
+    "excluded_rows_missing_duration_count": 0,
+    "excluded_rows_missing_pnl_count": 0,
+    "builder_y_compared_count": 6195,
+    "builder_y_mismatch_count": 1884,
+    "label_basis": "endogenous_time_to_target"
+  },
+  "active_training_target": {
+    "duration_column": "duration_hours",
+    "target_contract": "fast_winner_time_to_3pct_le_7h",
+    "duration_hours_max": 7.0,
+    "pnl_column": "net_pnl_pct",
+    "target_column": "fast_winner_target",
+    "eligible_rows": 6048,
+    "positive_count": 2834,
+    "negative_count": 3214,
+    "negative_rows_duration_gt_7h_count": 1170,
+    "excluded_rows_missing_duration_count": 0,
+    "excluded_rows_missing_pnl_count": 0,
+    "builder_y_compared_count": 6048,
+    "builder_y_mismatch_count": 1831,
+    "label_basis": "endogenous_time_to_target"
+  },
+  "modelable_feature_filter": {
+    "input_rows": 6195,
+    "modelable_rows": 6048,
+    "excluded_unmodelable_count": 147,
+    "excluded_unmodelable_rows": [
+      {
+        "candidate_id": "1000000MOGUSDT_20260422_181428_c6cfc2b1",
+        "symbol": "1000000MOGUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "RUNEUSDT_20260422_181428_aca58bb3",
+        "symbol": "RUNEUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "METUSDT_20260422_181428_fe262ef3",
+        "symbol": "METUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "RUNEUSDT_20260422_184457_1df24b70",
+        "symbol": "RUNEUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "METUSDT_20260422_184457_f79e58df",
+        "symbol": "METUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "METUSDT_20260422_185103_f79e58df",
+        "symbol": "METUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "RUNEUSDT_20260422_185103_1df24b70",
+        "symbol": "RUNEUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "METUSDT_20260422_185129_f79e58df",
+        "symbol": "METUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "RUNEUSDT_20260422_185129_1df24b70",
+        "symbol": "RUNEUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "RUNEUSDT_20260422_224959_df1789f1",
+        "symbol": "RUNEUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "CETUSUSDT_20260422_224959_4a5f1e15",
+        "symbol": "CETUSUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "ATOMUSDT_20260425_210746_caf6e881",
+        "symbol": "ATOMUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "CROSSUSDT_20260425_210746_5ad8aa43",
+        "symbol": "CROSSUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "RIFUSDT_20260429_182333_f6bf36b8",
+        "symbol": "RIFUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "GENIUSUSDT_20260430_135024_4ff691dc",
+        "symbol": "GENIUSUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "ZECUSDT_20260503_220639_c830927a",
+        "symbol": "ZECUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "AKTUSDT_20260503_220639_62c9df09",
+        "symbol": "AKTUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "ALCHUSDT_20260503_220639_67a47f29",
+        "symbol": "ALCHUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "TAOUSDT_20260503_220639_7e5089d7",
+        "symbol": "TAOUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "FORMUSDT_20260504_211842_e5efcb7e",
+        "symbol": "FORMUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "ZECUSDT_20260504_211842_cfd60d86",
+        "symbol": "ZECUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "PENDLEUSDT_20260505_174720_6747be17",
+        "symbol": "PENDLEUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "ZECUSDT_20260505_174720_346711b2",
+        "symbol": "ZECUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "ONDOUSDT_20260505_174720_51c8fad6",
+        "symbol": "ONDOUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "RENDERUSDT_20260506_175841_6fbe0143",
+        "symbol": "RENDERUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "2ZUSDT_20260506_175841_9788925b",
+        "symbol": "2ZUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "VVVUSDT_20260506_175841_d1141a97",
+        "symbol": "VVVUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "ETCUSDT_20260506_175841_84e85959",
+        "symbol": "ETCUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "GALAUSDT_20260506_175841_feed3895",
+        "symbol": "GALAUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "DASHUSDT_20260506_175841_aeb00ee1",
+        "symbol": "DASHUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "VIRTUALUSDT_20260506_175841_cd3d72a8",
+        "symbol": "VIRTUALUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "ZECUSDT_20260506_233722_382cc2e4",
+        "symbol": "ZECUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "GALAUSDT_20260506_233722_81c82a4a",
+        "symbol": "GALAUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "VIRTUALUSDT_20260506_233722_68d17272",
+        "symbol": "VIRTUALUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "ETCUSDT_20260506_233722_3cdc9221",
+        "symbol": "ETCUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "FARTCOINUSDT_20260506_233722_dd4e256f",
+        "symbol": "FARTCOINUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "2ZUSDT_20260506_233722_fa61bf28",
+        "symbol": "2ZUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "POPCATUSDT_20260506_233722_cb1a15fb",
+        "symbol": "POPCATUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "NOTUSDT_20260506_233722_03316822",
+        "symbol": "NOTUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "ZECUSDT_20260507_035857_930148ac",
+        "symbol": "ZECUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "GALAUSDT_20260507_035857_16b54e65",
+        "symbol": "GALAUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "NEARUSDT_20260507_035857_b953a9b0",
+        "symbol": "NEARUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "NEARUSDT_20260507_164727_365ab6cc",
+        "symbol": "NEARUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "OPUSDT_20260507_164727_bb0d9b20",
+        "symbol": "OPUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "ZECUSDT_20260507_164727_1d33e53e",
+        "symbol": "ZECUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "VVVUSDT_20260507_164727_666dad88",
+        "symbol": "VVVUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "NEARUSDT_20260508_133943_5ca435a9",
+        "symbol": "NEARUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "ICPUSDT_20260508_133943_2f5180c7",
+        "symbol": "ICPUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "HOLOUSDT_20260508_133943_33fb1674",
+        "symbol": "HOLOUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "NXPCUSDT_20260508_133943_24b127c1",
+        "symbol": "NXPCUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "NEARUSDT_20260508_190826_c1a52ed3",
+        "symbol": "NEARUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "ASTRUSDT_20260508_190826_d8698924",
+        "symbol": "ASTRUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "AZTECUSDT_20260508_190826_d0f010a8",
+        "symbol": "AZTECUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "1000FLOKIUSDT_20260508_190826_22934ad6",
+        "symbol": "1000FLOKIUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "ICPUSDT_20260508_190826_2120362c",
+        "symbol": "ICPUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "JTOUSDT_20260508_190826_c0530d94",
+        "symbol": "JTOUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "ASTRUSDT_20260508_224539_bfb2a4d5",
+        "symbol": "ASTRUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "EGLDUSDT_20260508_224539_aa553e4b",
+        "symbol": "EGLDUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "SNXUSDT_20260508_224539_8576068d",
+        "symbol": "SNXUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "SOLUSDT_20260508_224539_14c71782",
+        "symbol": "SOLUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "LINKUSDT_20260508_224539_9134fc3b",
+        "symbol": "LINKUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "JUPUSDT_20260509_160803_cc850002",
+        "symbol": "JUPUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "OPUSDT_20260509_160803_b119c444",
+        "symbol": "OPUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "PLUMEUSDT_20260509_160803_7768f8c8",
+        "symbol": "PLUMEUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "JASMYUSDT_20260509_160803_70787ec0",
+        "symbol": "JASMYUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "OPUSDT_20260509_180515_00f890b0",
+        "symbol": "OPUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "SOLUSDT_20260509_180515_2fc8383f",
+        "symbol": "SOLUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "BROCCOLIF3BUSDT_20260509_180515_5168501d",
+        "symbol": "BROCCOLIF3BUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "PLUMEUSDT_20260509_180515_de714144",
+        "symbol": "PLUMEUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "ICPUSDT_20260509_180515_a0a76200",
+        "symbol": "ICPUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "JUPUSDT_20260510_012734_465ac6ed",
+        "symbol": "JUPUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "PLUMEUSDT_20260510_012734_6755a2f6",
+        "symbol": "PLUMEUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "HOLOUSDT_20260510_012734_4b846def",
+        "symbol": "HOLOUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "SAHARAUSDT_20260510_012734_5f2e740e",
+        "symbol": "SAHARAUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "SEIUSDT_20260511_133210_78d64567",
+        "symbol": "SEIUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "MOVEUSDT_20260511_170209_9dcdc414",
+        "symbol": "MOVEUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "FFUSDT_20260511_170209_bd6efec8",
+        "symbol": "FFUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "TWTUSDT_20260512_030947_36b73be0",
+        "symbol": "TWTUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "ESPORTSUSDT_20260513_160122_a954917d",
+        "symbol": "ESPORTSUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "STOUSDT_20260513_190222_25c87b7a",
+        "symbol": "STOUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "FFUSDT_20260513_214012_185c0165",
+        "symbol": "FFUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "ESPORTSUSDT_20260513_214012_dc9ddb8e",
+        "symbol": "ESPORTSUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "SWARMSUSDT_20260514_154732_bacb2bd9",
+        "symbol": "SWARMSUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "CROSSUSDT_20260514_154732_d5754805",
+        "symbol": "CROSSUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "ESPORTSUSDT_20260515_145542_0a79d183",
+        "symbol": "ESPORTSUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "VETUSDT_20260516_134133_85ead2a6",
+        "symbol": "VETUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "PYTHUSDT_20260516_134133_33a176f3",
+        "symbol": "PYTHUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "TRADOORUSDT_20260516_134133_2ecf0314",
+        "symbol": "TRADOORUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "PENGUUSDT_20260516_134133_4e780ecf",
+        "symbol": "PENGUUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "FARTCOINUSDT_20260516_134133_77d3820e",
+        "symbol": "FARTCOINUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "ALTUSDT_20260516_134133_92ce15d6",
+        "symbol": "ALTUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "FETUSDT_20260516_134133_cdc2af21",
+        "symbol": "FETUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "ZENUSDT_20260516_134133_697ce9b4",
+        "symbol": "ZENUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "POLUSDT_20260516_134133_d7c19874",
+        "symbol": "POLUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "STOUSDT_20260516_134133_a3d4d528",
+        "symbol": "STOUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "MORPHOUSDT_20260516_134133_fb1981fe",
+        "symbol": "MORPHOUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "MAGMAUSDT_20260519_055741_c161d563",
+        "symbol": "MAGMAUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "LAUSDT_20260519_055741_b6c31bc0",
+        "symbol": "LAUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "BANANAS31USDT_20260519_055741_7fa0204d",
+        "symbol": "BANANAS31USDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "CLOUSDT_20260519_055741_9040cde6",
+        "symbol": "CLOUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "TAUSDT_20260519_055741_b85b0a93",
+        "symbol": "TAUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "PROMUSDT_20260519_131126_597bdaee",
+        "symbol": "PROMUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "LITUSDT_20260520_121824_059758c9",
+        "symbol": "LITUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "CLOUSDT_20260520_121824_86543a38",
+        "symbol": "CLOUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "ZECUSDT_20260521_164214_ae88fe5c",
+        "symbol": "ZECUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "GRASSUSDT_20260522_161103_e109b5e6",
+        "symbol": "GRASSUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "ZAMAUSDT_20260522_161103_b900b3ee",
+        "symbol": "ZAMAUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "PLUMEUSDT_20260522_161103_50e128c5",
+        "symbol": "PLUMEUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "NEARUSDT_20260523_085802_72d7daab",
+        "symbol": "NEARUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "RIFUSDT_20260523_143045_78dcad31",
+        "symbol": "RIFUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "NEARUSDT_20260524_051755_ea37bcdc",
+        "symbol": "NEARUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "BANUSDT_20260524_202523_ff61d2f8",
+        "symbol": "BANUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "MORPHOUSDT_20260525_161131_3facf085",
+        "symbol": "MORPHOUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "DEXEUSDT_20260525_161131_f8289ff0",
+        "symbol": "DEXEUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "DEXEUSDT_20260525_213608_0ee41775",
+        "symbol": "DEXEUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "DEXEUSDT_20260525_230249_32b73300",
+        "symbol": "DEXEUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "EIGENUSDT_20260525_230249_d6ca3778",
+        "symbol": "EIGENUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "RENDERUSDT_20260526_131351_23f0387b",
+        "symbol": "RENDERUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "UBUSDT_20260526_214645_9538ce14",
+        "symbol": "UBUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "INITUSDT_20260527_125434_76bb6bbb",
+        "symbol": "INITUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "UBUSDT_20260527_195346_d2262a85",
+        "symbol": "UBUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "INITUSDT_20260527_195346_e52bb213",
+        "symbol": "INITUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "TRADOORUSDT_20260528_130752_6a997d13",
+        "symbol": "TRADOORUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "NEIROUSDT_20260528_130752_0a3ff69b",
+        "symbol": "NEIROUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "STOUSDT_20260528_130752_bf5aa918",
+        "symbol": "STOUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "0GUSDT_20260528_130752_8371a336",
+        "symbol": "0GUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "SYRUPUSDT_20260528_204120_224faff8",
+        "symbol": "SYRUPUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "IRYSUSDT_20260528_204120_98dce629",
+        "symbol": "IRYSUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "MEGAUSDT_20260528_204120_7dddae79",
+        "symbol": "MEGAUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "TRADOORUSDT_20260528_204120_7547ddfa",
+        "symbol": "TRADOORUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "IRYSUSDT_20260528_211543_ccc886b7",
+        "symbol": "IRYSUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "SYRUPUSDT_20260528_211543_6dc50c3f",
+        "symbol": "SYRUPUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "MEGAUSDT_20260528_211543_935850c5",
+        "symbol": "MEGAUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "TRADOORUSDT_20260528_211543_75b3ddb0",
+        "symbol": "TRADOORUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "SPKUSDT_20260528_211543_00177542",
+        "symbol": "SPKUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "TRADOORUSDT_20260529_134409_8cd00edd",
+        "symbol": "TRADOORUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "WALUSDT_20260603_220515_d0cb442c",
+        "symbol": "WALUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "0GUSDT_20260604_130055_6f360d81",
+        "symbol": "0GUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "EDUUSDT_20260604_130055_3290c5d3",
+        "symbol": "EDUUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "PNUTUSDT_20260605_130549_fd6f74ea",
+        "symbol": "PNUTUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "LTCUSDT_20260605_130549_dd23068b",
+        "symbol": "LTCUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "SUSDT_20260605_130549_ffcfc77e",
+        "symbol": "SUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "GWEIUSDT_20260609_132841_65c6fee6",
+        "symbol": "GWEIUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "SYNUSDT_20260610_141158_7cf82520",
+        "symbol": "SYNUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "GPSUSDT_20260615_143054_a8b18806",
+        "symbol": "GPSUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "GPSUSDT_20260616_141932_0a240ea6",
+        "symbol": "GPSUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      },
+      {
+        "candidate_id": "KITEUSDT_20260620_134434_3b4f5ea1",
+        "symbol": "KITEUSDT",
+        "classification": "excluded_unmodelable",
+        "reason": "missing_selected_feature",
+        "missing_features": [
+          "ou_halflife"
+        ]
+      }
+    ]
+  },
+  "meta_target_contract": {
+    "contract_name": "fast_winner_time_to_3pct_le_7h",
+    "target_column": "fast_winner_target",
+    "duration_column": "duration_hours",
+    "duration_hours_max": 7.0
+  },
+  "utility_provenance": {
+    "source": "calibrator_unavailable",
+    "artifact_path": "C:\\Users\\cris_\\OneDrive\\Documents\\Christian\\Crypto\\Neutral Grid Bots\\NEUTRAL grid bot v6.5.8 - Clean\\artifacts\\utility\\current.json",
+    "lambda_risk": null,
+    "kappa_trend": null,
+    "horizon_hours": null
+  },
+  "is_selected_feature_count_exact": true,
+  "is_value_complete": true,
+  "incomplete_features": [],
+  "feature_fill": [
+    {
+      "feature": "ev_score",
+      "non_null_count": 6048,
+      "null_count": 0
+    },
+    {
+      "feature": "adx_1h",
+      "non_null_count": 6048,
+      "null_count": 0
+    },
+    {
+      "feature": "adx_15m",
+      "non_null_count": 6048,
+      "null_count": 0
+    },
+    {
+      "feature": "adx_5m",
+      "non_null_count": 6048,
+      "null_count": 0
+    },
+    {
+      "feature": "atr_pct_15m",
+      "non_null_count": 6048,
+      "null_count": 0
+    },
+    {
+      "feature": "ou_halflife",
+      "non_null_count": 6048,
+      "null_count": 0
+    },
+    {
+      "feature": "rsi_15m",
+      "non_null_count": 6048,
+      "null_count": 0
+    },
+    {
+      "feature": "ema_slope_1h",
+      "non_null_count": 6048,
+      "null_count": 0
+    },
+    {
+      "feature": "ema_crosses_5m",
+      "non_null_count": 6048,
+      "null_count": 0
+    },
+    {
+      "feature": "vwap_crosses_5m",
+      "non_null_count": 6048,
+      "null_count": 0
+    },
+    {
+      "feature": "hurst_exponent",
+      "non_null_count": 6048,
+      "null_count": 0
+    },
+    {
+      "feature": "range_size_pct",
+      "non_null_count": 6048,
+      "null_count": 0
+    },
+    {
+      "feature": "bb_width",
+      "non_null_count": 6048,
+      "null_count": 0
+    },
+    {
+      "feature": "grid_spacing_pct",
+      "non_null_count": 6048,
+      "null_count": 0
+    },
+    {
+      "feature": "profit_per_grid_pct",
+      "non_null_count": 6048,
+      "null_count": 0
+    },
+    {
+      "feature": "num_grids",
+      "non_null_count": 6048,
+      "null_count": 0
+    },
+    {
+      "feature": "quote_volume_24h",
+      "non_null_count": 6048,
+      "null_count": 0
+    },
+    {
+      "feature": "open_interest",
+      "non_null_count": 6048,
+      "null_count": 0
+    },
+    {
+      "feature": "micro_round_trip_cost_pct",
+      "non_null_count": 6048,
+      "null_count": 0
+    },
+    {
+      "feature": "funding_rate",
+      "non_null_count": 6048,
+      "null_count": 0
+    }
+  ],
+  "active_hmm_artifact_version": "rolling_180d_20260701_204849",
+  "artifact_lineage_before": {
+    "metadata_path": "models\\meta_labeler_challenger\\20260704_fastwin02\\meta_labeler\\metadata.json",
+    "active_hmm_artifact_version": "rolling_180d_20260701_204849",
+    "artifact_hmm_artifact_version": "rolling_180d_20260701_204849",
+    "lineage_matches_active_hmm": true,
+    "error": null
+  },
+  "artifact_lineage_after": {
+    "metadata_path": "models\\meta_labeler_challenger\\20260704_fastwin02\\meta_labeler\\metadata.json",
+    "active_hmm_artifact_version": "rolling_180d_20260701_204849",
+    "artifact_hmm_artifact_version": "rolling_180d_20260701_204849",
+    "lineage_matches_active_hmm": true,
+    "error": null
+  },
+  "artifact_loadability_before": {
+    "output_path": "models\\meta_labeler_challenger\\20260704_fastwin02\\meta_labeler.pkl",
+    "can_load": true,
+    "error": null
+  },
+  "artifact_loadability_after": {
+    "output_path": "models\\meta_labeler_challenger\\20260704_fastwin02\\meta_labeler.pkl",
+    "can_load": true,
+    "error": null
+  },
+  "artifact_health_before": {
+    "output_path": "models\\meta_labeler_challenger\\20260704_fastwin02\\meta_labeler.pkl",
+    "artifact_dir": "models\\meta_labeler_challenger\\20260704_fastwin02\\meta_labeler",
+    "artifact_dir_exists": false,
+    "artifact_model_exists": false,
+    "artifact_metadata_exists": false,
+    "artifact_feature_count": 0,
+    "artifact_features": [],
+    "artifact_matches_expected": false,
+    "artifact_error": "missing_metadata.json",
+    "pickle_exists": false,
+    "pickle_feature_count": 0,
+    "pickle_features": [],
+    "pickle_matches_expected": false,
+    "pickle_error": "missing_pickle",
+    "expected_feature_count": 20,
+    "expected_features": [
+      "ev_score",
+      "adx_1h",
+      "adx_15m",
+      "adx_5m",
+      "atr_pct_15m",
+      "ou_halflife",
+      "rsi_15m",
+      "ema_slope_1h",
+      "ema_crosses_5m",
+      "vwap_crosses_5m",
+      "hurst_exponent",
+      "range_size_pct",
+      "bb_width",
+      "grid_spacing_pct",
+      "profit_per_grid_pct",
+      "num_grids",
+      "quote_volume_24h",
+      "open_interest",
+      "micro_round_trip_cost_pct",
+      "funding_rate"
+    ],
+    "is_stale": true
+  },
+  "artifact_health_after": {
+    "output_path": "models\\meta_labeler_challenger\\20260704_fastwin02\\meta_labeler.pkl",
+    "artifact_dir": "models\\meta_labeler_challenger\\20260704_fastwin02\\meta_labeler",
+    "artifact_dir_exists": true,
+    "artifact_model_exists": true,
+    "artifact_metadata_exists": true,
+    "artifact_feature_count": 20,
+    "artifact_features": [
+      "ev_score",
+      "adx_1h",
+      "adx_15m",
+      "adx_5m",
+      "atr_pct_15m",
+      "ou_halflife",
+      "rsi_15m",
+      "ema_slope_1h",
+      "ema_crosses_5m",
+      "vwap_crosses_5m",
+      "hurst_exponent",
+      "range_size_pct",
+      "bb_width",
+      "grid_spacing_pct",
+      "profit_per_grid_pct",
+      "num_grids",
+      "quote_volume_24h",
+      "open_interest",
+      "micro_round_trip_cost_pct",
+      "funding_rate"
+    ],
+    "artifact_matches_expected": true,
+    "artifact_error": null,
+    "pickle_exists": true,
+    "pickle_feature_count": 20,
+    "pickle_features": [
+      "ev_score",
+      "adx_1h",
+      "adx_15m",
+      "adx_5m",
+      "atr_pct_15m",
+      "ou_halflife",
+      "rsi_15m",
+      "ema_slope_1h",
+      "ema_crosses_5m",
+      "vwap_crosses_5m",
+      "hurst_exponent",
+      "range_size_pct",
+      "bb_width",
+      "grid_spacing_pct",
+      "profit_per_grid_pct",
+      "num_grids",
+      "quote_volume_24h",
+      "open_interest",
+      "micro_round_trip_cost_pct",
+      "funding_rate"
+    ],
+    "pickle_matches_expected": true,
+    "pickle_error": null,
+    "expected_feature_count": 20,
+    "expected_features": [
+      "ev_score",
+      "adx_1h",
+      "adx_15m",
+      "adx_5m",
+      "atr_pct_15m",
+      "ou_halflife",
+      "rsi_15m",
+      "ema_slope_1h",
+      "ema_crosses_5m",
+      "vwap_crosses_5m",
+      "hurst_exponent",
+      "range_size_pct",
+      "bb_width",
+      "grid_spacing_pct",
+      "profit_per_grid_pct",
+      "num_grids",
+      "quote_volume_24h",
+      "open_interest",
+      "micro_round_trip_cost_pct",
+      "funding_rate"
+    ],
+    "is_stale": false
+  },
+  "verification_log_path": "models\\meta_labeler_challenger\\20260704_fastwin02\\meta_labeler_verification.json"
+}

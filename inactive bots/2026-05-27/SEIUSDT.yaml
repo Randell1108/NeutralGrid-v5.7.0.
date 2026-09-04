@@ -1,0 +1,112 @@
+bots:
+  - symbol: SEIUSDT
+    strategy_id: "412253238"
+    deploy_ts: "2026-05-27T13:27:13+00:00"
+    grid_lower: 0.06436
+    grid_upper: 0.07292
+    num_grids: 17
+    leverage: 10
+    capital_usdt: 13.00
+    candidate_id: null
+    inactive_reason: canceled
+    archived_at: "2026-05-27T14:25:13-05:00"
+    execution_telemetry:
+      source: live_bot_data_scanner
+      captured_at: "2026-05-27T19:25:13+00:00"
+      pnl:
+        total_profit_usdt: 0.19
+        total_profit_pct: 1.47
+        matched_profit_usdt: 0.36
+        matched_profit_pct: 2.78
+        realized_profit_usdt: 0.26
+        unmatched_pnl_usdt: -0.18
+        unmatched_pnl_pct: -1.31
+        funding_fee_usdt: 0.00
+        funding_fee_pct: 0.00
+        annualized_yield_pct: 2195.18
+      open_order_ladder:
+        qty_per_order_base: 84
+        last_price: 0.06943
+        buy:
+          - level: 1
+            price: 0.06875
+            pct_to_fill: -0.97
+          - level: 2
+            price: 0.06825
+            pct_to_fill: -1.69
+          - level: 3
+            price: 0.06775
+            pct_to_fill: -2.41
+          - level: 4
+            price: 0.06725
+            pct_to_fill: -3.13
+          - level: 5
+            price: 0.06676
+            pct_to_fill: -3.84
+          - level: 6
+            price: 0.06627
+            pct_to_fill: -4.55
+          - level: 7
+            price: 0.06579
+            pct_to_fill: -5.24
+          - level: 8
+            price: 0.06531
+            pct_to_fill: -5.93
+          - level: 9
+            price: 0.06483
+            pct_to_fill: -6.62
+          - level: 10
+            price: 0.06436
+            pct_to_fill: -7.30
+        sell:
+          - level: 1
+            price: 0.06977
+            pct_to_fill: 0.48
+          - level: 2
+            price: 0.07029
+            pct_to_fill: 1.23
+          - level: 3
+            price: 0.07080
+            pct_to_fill: 1.97
+          - level: 4
+            price: 0.07133
+            pct_to_fill: 2.73
+          - level: 5
+            price: 0.07185
+            pct_to_fill: 3.48
+          - level: 6
+            price: 0.07238
+            pct_to_fill: 4.24
+          - level: 7
+            price: 0.07292
+            pct_to_fill: 5.02
+      position_inventory:
+        symbol: SEIUSDT
+        contract: perp
+        margin_mode: isolated
+        isolated_margin_balance_usdt: 13.1942
+        maintenance_margin_usdt: 0.1167
+        size_usdt: -11.6676000
+        size_base: -168
+        margin_usdt: 1.17
+        entry_price: 0.0690050
+        mark_price: 0.0694439
+      risk:
+        risk_ratio: 2.4
+        risk_label: Low Risk
+        maintenance_margin_usdt: 0.1167
+        isolated_margin_balance_usdt: 13.1942
+        margin_ratio_pct: 0.88
+        liquidation_price: 0.1465160
+        mark_price: 0.0694439
+      tp_sl:
+        stop_loss:
+          pnl_usdt: -1.30
+          roi_pct: -10.0
+          price_type: last
+        take_profit:
+          pnl_usdt: 1.95
+          roi_pct: 15.0
+          price_type: last
+        close_all_positions_on_stop: true
+        close_all_positions_on_tp_sl_stop: true

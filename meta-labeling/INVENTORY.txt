@@ -1,0 +1,13 @@
+./data/backtest_vs_actual_comparison.csv
+./data/expired_bots_meta_labeling_details.csv
+./data/meta_labeling_summary.csv
+./INVENTORY.txt
+./live_tracking/TRUMPUSDT_live_bot.json
+./live_tracking/XRPUSDT_live_bot.json
+./models/meta_labeler.pkl
+./models/meta_labeler_model.pkl
+./models/meta_labeler_scaler.pkl
+./README.md
+./reports/comprehensive_meta_labels.json
+./reports/durability_meta_labels.json
+./scripts/ (removed — legacy stubs deleted, use root retrain_meta_labeler.py)

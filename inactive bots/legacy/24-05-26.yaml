@@ -1,0 +1,136 @@
+bots:
+  - symbol: ESPORTSUSDT
+    strategy_id: "412200245"
+    deploy_ts: "2026-05-24T18:11:26+00:00"
+    grid_lower: 0.6606
+    grid_upper: 0.7667
+    num_grids: 24
+    leverage: 10
+    capital_usdt: 200.00
+    candidate_id: null
+    execution_telemetry:
+      source: live_bot_data_scanner
+      captured_at: "2026-05-24T21:43:33.7935897+00:00"
+      pnl:
+        total_profit_usdt: -2.50
+        total_profit_pct: -1.24
+        matched_profit_usdt: 1.10
+        matched_profit_pct: 0.55
+        realized_profit_usdt: 0.07
+        unmatched_pnl_usdt: -3.60
+        unmatched_pnl_pct: -1.79
+        funding_fee_usdt: 0.00
+        funding_fee_pct: -0.00
+        annualized_yield_pct: -3103.77
+      open_order_ladder:
+        qty_per_order_base: 89
+        last_price: 0.6987
+        buy:
+          - level: 1
+            price: 0.6942
+            pct_to_fill: -0.64
+          - level: 2
+            price: 0.6899
+            pct_to_fill: -1.25
+          - level: 3
+            price: 0.6856
+            pct_to_fill: -1.87
+          - level: 4
+            price: 0.6814
+            pct_to_fill: -2.47
+          - level: 5
+            price: 0.6772
+            pct_to_fill: -3.07
+          - level: 6
+            price: 0.6730
+            pct_to_fill: -3.67
+          - level: 7
+            price: 0.6688
+            pct_to_fill: -4.27
+          - level: 8
+            price: 0.6647
+            pct_to_fill: -4.86
+          - level: 9
+            price: 0.6606
+            pct_to_fill: -5.45
+        sell:
+          - level: 1
+            price: 0.7028
+            pct_to_fill: 0.58
+          - level: 2
+            price: 0.7072
+            pct_to_fill: 1.21
+          - level: 3
+            price: 0.7116
+            pct_to_fill: 1.84
+          - level: 4
+            price: 0.7161
+            pct_to_fill: 2.49
+          - level: 5
+            price: 0.7205
+            pct_to_fill: 3.12
+          - level: 6
+            price: 0.7250
+            pct_to_fill: 3.76
+          - level: 7
+            price: 0.7295
+            pct_to_fill: 4.40
+          - level: 8
+            price: 0.7341
+            pct_to_fill: 5.06
+          - level: 9
+            price: 0.7386
+            pct_to_fill: 5.71
+          - level: 10
+            price: 0.7432
+            pct_to_fill: 6.36
+          - level: 11
+            price: 0.7479
+            pct_to_fill: 7.04
+          - level: 12
+            price: 0.7525
+            pct_to_fill: 7.70
+          - level: 13
+            price: 0.7572
+            pct_to_fill: 8.37
+          - level: 14
+            price: 0.7619
+            pct_to_fill: 9.04
+          - level: 15
+            price: 0.7667
+            pct_to_fill: 9.73
+      position_inventory:
+        symbol: ESPORTSUSDT
+        contract: perp
+        margin_mode: isolated
+        isolated_margin_balance_usdt: 197.6173
+        maintenance_margin_usdt: 4.6695
+        size_usdt: 311.2775000
+        size_base: 445
+        margin_usdt: 31.13
+        entry_price: 0.7050666
+        position_pnl_usdt: -2.48
+        position_roe_pct: -7.96
+        margin_ratio_pct: 2.36
+        liquidation_price: 0.2593520
+        mark_price: 0.6995457
+      risk:
+        risk_ratio: 2.3
+        risk_label: Low Risk
+        margin_ratio_pct: 2.36
+        maintenance_margin_usdt: 4.6695
+        isolated_margin_balance_usdt: 197.6173
+        liquidation_price: 0.2593520
+        mark_price: 0.6995457
+        liquidation_distance_to_mark_pct: 62.93
+      tp_sl:
+        stop_loss:
+          pnl_usdt: -20.00
+          roi_pct: -10.0
+          price_type: mark
+        take_profit:
+          pnl_usdt: 30.00
+          roi_pct: 15.0
+          price_type: mark
+        close_all_positions_on_stop: true
+        close_all_positions_on_tp_sl_stop: true

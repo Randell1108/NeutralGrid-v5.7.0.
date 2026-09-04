@@ -1,0 +1,87 @@
+bots:
+  - symbol: IPUSDT
+    strategy_id: "412235216"
+    deploy_ts: "2026-05-26T14:23:48+00:00"
+    grid_lower: 0.4740
+    grid_upper: 0.4970
+    num_grids: 7
+    leverage: 10
+    capital_usdt: 6.00
+    candidate_id: null
+    inactive_reason: expired
+    archived_at: "2026-05-26T17:30:19.8780298-05:00"
+    execution_telemetry:
+      source: live_bot_data_scanner
+      captured_at: "2026-05-26T22:30:19.8780298+00:00"
+      pnl:
+        total_profit_usdt: 0.30
+        total_profit_pct: 5.00
+        matched_profit_usdt: 0.34
+        matched_profit_pct: 5.69
+        realized_profit_usdt: 0.29
+        unmatched_pnl_usdt: -0.05
+        unmatched_pnl_pct: -0.67
+        funding_fee_usdt: 0.00
+        funding_fee_pct: -0.00
+        annualized_yield_pct: 8045.51
+      open_order_ladder:
+        qty_per_order_base: 12.3
+        last_price: 0.4804
+        buy:
+          - level: 1
+            price: 0.4772
+            pct_to_fill: -0.66
+          - level: 2
+            price: 0.4740
+            pct_to_fill: -1.33
+        sell:
+          - level: 1
+            price: 0.4837
+            pct_to_fill: 0.68
+          - level: 2
+            price: 0.4870
+            pct_to_fill: 1.37
+          - level: 3
+            price: 0.4903
+            pct_to_fill: 2.06
+          - level: 4
+            price: 0.4936
+            pct_to_fill: 2.74
+          - level: 5
+            price: 0.4970
+            pct_to_fill: 3.45
+      position_inventory:
+        symbol: IPUSDT
+        contract: perp
+        margin_mode: isolated
+        isolated_margin_balance_usdt: 6.3038
+        maintenance_margin_usdt: 0.1183
+        size_usdt: 11.817840
+        size_base: 24.6
+        margin_usdt: 1.18
+        entry_price: 0.480433
+        position_pnl_usdt: -0.01
+        position_roe_pct: -0.07
+        margin_ratio_pct: 1.88
+        liquidation_price: 0.226655
+        mark_price: 0.480643
+      risk:
+        risk_ratio: 2.6
+        risk_label: Low Risk
+        margin_ratio_pct: 1.88
+        maintenance_margin_usdt: 0.1183
+        isolated_margin_balance_usdt: 6.3038
+        liquidation_price: 0.226655
+        mark_price: 0.480643
+        liquidation_distance_to_mark_pct: 52.85
+      tp_sl:
+        stop_loss:
+          pnl_usdt: -0.60
+          roi_pct: -10.0
+          price_type: last
+        take_profit:
+          pnl_usdt: 0.90
+          roi_pct: 15.0
+          price_type: last
+        close_all_positions_on_stop: true
+        close_all_positions_on_tp_sl_stop: true

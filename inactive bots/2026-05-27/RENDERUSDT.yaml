@@ -1,0 +1,100 @@
+bots:
+  - symbol: RENDERUSDT
+    strategy_id: "412253405"
+    deploy_ts: "2026-05-27T13:34:39+00:00"
+    grid_lower: 2.064
+    grid_upper: 2.273
+    num_grids: 13
+    leverage: 10
+    capital_usdt: 10.00
+    candidate_id: null
+    inactive_reason: canceled
+    archived_at: "2026-05-27T14:31:39-05:00"
+    execution_telemetry:
+      source: live_bot_data_scanner
+      captured_at: "2026-05-27T19:31:39+00:00"
+      pnl:
+        total_profit_usdt: -0.34
+        total_profit_pct: -3.35
+        matched_profit_usdt: 0.26
+        matched_profit_pct: 2.66
+        realized_profit_usdt: -0.29
+        unmatched_pnl_usdt: -0.61
+        unmatched_pnl_pct: -6.02
+        funding_fee_usdt: 0.00
+        funding_fee_pct: 0.00
+        annualized_yield_pct: -4941.76
+      open_order_ladder:
+        qty_per_order_base: 2.5
+        last_price: 2.198
+        buy:
+          - level: 1
+            price: 2.190
+            pct_to_fill: -0.36
+          - level: 2
+            price: 2.174
+            pct_to_fill: -1.09
+          - level: 3
+            price: 2.157
+            pct_to_fill: -1.86
+          - level: 4
+            price: 2.142
+            pct_to_fill: -2.54
+          - level: 5
+            price: 2.126
+            pct_to_fill: -3.27
+          - level: 6
+            price: 2.110
+            pct_to_fill: -4.00
+          - level: 7
+            price: 2.094
+            pct_to_fill: -4.73
+          - level: 8
+            price: 2.079
+            pct_to_fill: -5.41
+          - level: 9
+            price: 2.064
+            pct_to_fill: -6.09
+        sell:
+          - level: 1
+            price: 2.222
+            pct_to_fill: 1.09
+          - level: 2
+            price: 2.239
+            pct_to_fill: 1.86
+          - level: 3
+            price: 2.256
+            pct_to_fill: 2.63
+          - level: 4
+            price: 2.273
+            pct_to_fill: 3.41
+      position_inventory:
+        symbol: RENDERUSDT
+        contract: perp
+        margin_mode: isolated
+        isolated_margin_balance_usdt: 9.6568
+        maintenance_margin_usdt: 0.1649
+        size_usdt: -16.4850000
+        size_base: -7.5
+        margin_usdt: 1.65
+        entry_price: 2.1900000
+        mark_price: 2.1980000
+      risk:
+        risk_ratio: 2.4
+        risk_label: Low Risk
+        maintenance_margin_usdt: 0.1649
+        isolated_margin_balance_usdt: 9.6568
+        margin_ratio_pct: 1.71
+        liquidation_price: 3.4510684
+        mark_price: 2.1980000
+      tp_sl:
+        stop_loss:
+          pnl_usdt: -1.00
+          roi_pct: -10.0
+          price_type: last
+        take_profit:
+          pnl_usdt: 1.50
+          roi_pct: 15.0
+          price_type: last
+        close_all_positions_on_stop: true
+        close_all_positions_on_tp_sl_stop: true

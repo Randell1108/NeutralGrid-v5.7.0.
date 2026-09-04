@@ -1,0 +1,53 @@
+{
+  "schema_version": "neutralgrid_live_volatility_contract_v1",
+  "status": "approved",
+  "primary_series": "mark_kline",
+  "diagnostic_series": "last_kline",
+  "target_measure": "forward_realized_variance",
+  "volatility_transform": "100 * sqrt(realized_variance), non_annualized",
+  "implied_volatility_policy": "rejected_no_verified_options_iv_mapping",
+  "source_interval": "1m",
+  "sampling_minutes": 5,
+  "horizons_minutes": [30, 60, 180, 360],
+  "issuance_cadence_minutes": 3,
+  "minimum_history_days": 90,
+  "fit_fraction": 0.6,
+  "calibration_fraction": 0.2,
+  "prediction_interval_coverage": 0.9,
+  "minimum_non_overlapping_origins": {
+    "fit": 216,
+    "calibration": 72,
+    "test": 72
+  },
+  "ridge_alphas": [0.01, 0.1, 1.0, 10.0, 100.0],
+  "ewma_lambdas": [0.9, 0.94, 0.97, 0.99],
+  "missing_value_policy": "exclude_any_window_touching_gap",
+  "duplicate_policy": "exact_noop_conflict_reject",
+  "point_loss": "patton_qlike",
+  "hac_estimator": "newey_west",
+  "hac_kernel": "bartlett",
+  "hac_lag_rule": "ceil(horizon_minutes / issuance_cadence_minutes) - 1",
+  "interval_width_metric": "mean_normalized_interval_width",
+  "interval_width_formula": "mean((upper - lower) / calibration_median_actual_rv)",
+  "interval_width_scale_source": "calibration_actual_rv_median",
+  "tail_policy": "diagnostic_only_calibration_p90",
+  "archive_checksum_policy": "required_sha256_checksum",
+  "rest_reconciliation_policy": "archive_to_live_tail_and_audited_gaps_only",
+  "non_final_policy": "exclude",
+  "freshness_policy": {
+    "maximum_source_age_seconds": 180,
+    "maximum_roster_age_seconds": 900,
+    "stale_result": "unavailable"
+  },
+  "public_event_streams": {
+    "diff_depth": "@depth@100ms",
+    "aggregate_trades": "@aggTrade",
+    "mark_price": "@markPrice@1s"
+  },
+  "split_policy": "chronological_global_60_20_20_with_complete_horizon_purge",
+  "statistical_policy": "symbol_horizon_qlike_dm_newey_west_holm_and_interval_gate",
+  "shadow_only_policy": "no_active_scanner_model_sizing_grid_or_execution_influence",
+  "runtime_failure_policy": "explicit_unavailable_never_infer_from_incomplete_evidence",
+  "verdict_influence": false,
+  "contract_sha256": "b4c946c749d792381c69db00971d545df018cb7b7dbbc05b7c5988073c14ed23"
+}

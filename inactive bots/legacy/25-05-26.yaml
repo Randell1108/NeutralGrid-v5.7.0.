@@ -1,0 +1,109 @@
+bots:
+  - symbol: RENDERUSDT
+    strategy_id: "412223319"
+    deploy_ts: "2026-05-25T23:41:47+00:00"
+    grid_lower: 2.020
+    grid_upper: 2.275
+    num_grids: 15
+    leverage: 10
+    capital_usdt: 11.00
+    candidate_id: null
+    execution_telemetry:
+      source: live_bot_data_scanner
+      captured_at: "2026-05-26T01:39:23.3382335+00:00"
+      pnl:
+        total_profit_usdt: 0.13
+        total_profit_pct: 1.25
+        matched_profit_usdt: 0.16
+        matched_profit_pct: 1.46
+        realized_profit_usdt: 0.16
+        unmatched_pnl_usdt: -0.03
+        unmatched_pnl_pct: -0.21
+        funding_fee_usdt: 0.00
+        funding_fee_pct: 0.00
+        annualized_yield_pct: 5723.00
+      open_order_ladder:
+        qty_per_order_base: 2.5
+        last_price: 2.161
+        buy:
+          - level: 1
+            price: 2.152
+            pct_to_fill: -0.41
+          - level: 2
+            price: 2.135
+            pct_to_fill: -1.20
+          - level: 3
+            price: 2.118
+            pct_to_fill: -1.98
+          - level: 4
+            price: 2.101
+            pct_to_fill: -2.77
+          - level: 5
+            price: 2.085
+            pct_to_fill: -3.51
+          - level: 6
+            price: 2.068
+            pct_to_fill: -4.30
+          - level: 7
+            price: 2.052
+            pct_to_fill: -5.04
+          - level: 8
+            price: 2.036
+            pct_to_fill: -5.78
+          - level: 9
+            price: 2.020
+            pct_to_fill: -6.52
+        sell:
+          - level: 1
+            price: 2.186
+            pct_to_fill: 1.15
+          - level: 2
+            price: 2.204
+            pct_to_fill: 1.98
+          - level: 3
+            price: 2.221
+            pct_to_fill: 2.77
+          - level: 4
+            price: 2.239
+            pct_to_fill: 3.60
+          - level: 5
+            price: 2.257
+            pct_to_fill: 4.44
+          - level: 6
+            price: 2.275
+            pct_to_fill: 5.27
+      position_inventory:
+        symbol: RENDERUSDT
+        contract: perp
+        margin_mode: isolated
+        isolated_margin_balance_usdt: 11.1427
+        maintenance_margin_usdt: 0.0541
+        size_usdt: 5.4050000
+        size_base: 2.5
+        margin_usdt: 0.54
+        entry_price: 2.1690000
+        position_pnl_usdt: -0.02
+        position_roe_pct: -3.24
+        margin_ratio_pct: 0.49
+        liquidation_price: null
+        mark_price: 2.1620000
+      risk:
+        risk_ratio: 2.1
+        risk_label: Low Risk
+        margin_ratio_pct: 0.49
+        maintenance_margin_usdt: 0.0541
+        isolated_margin_balance_usdt: 11.1427
+        liquidation_price: null
+        mark_price: 2.1620000
+        liquidation_distance_to_mark_pct: null
+      tp_sl:
+        stop_loss:
+          pnl_usdt: -1.10
+          roi_pct: -10.0
+          price_type: last
+        take_profit:
+          pnl_usdt: 1.65
+          roi_pct: 15.0
+          price_type: last
+        close_all_positions_on_stop: true
+        close_all_positions_on_tp_sl_stop: true

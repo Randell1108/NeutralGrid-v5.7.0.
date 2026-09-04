@@ -1,0 +1,16 @@
+{
+  "include": ["src"],
+  "extraPaths": ["src", "."],
+  "pythonVersion": "3.11",
+  "typeCheckingMode": "basic",
+  "reportReturnType": true,
+  "reportArgumentType": true,
+  "reportAttributeAccessIssue": true,
+  "reportOptionalMemberAccess": true,
+  "reportCallIssue": true,
+  "reportUndefinedVariable": true,
+  "reportMissingImports": true,
+  "reportMissingTypeStubs": false,
+  "reportUnusedImport": "warning",
+  "reportUnusedVariable": "warning"
+}

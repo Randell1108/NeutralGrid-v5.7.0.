@@ -1,0 +1,90 @@
+bots:
+  - symbol: "0GUSDT"
+    strategy_id: "412730326"
+    deploy_ts: "2026-06-18T12:58:59+00:00"
+    grid_lower: 0.2749
+    grid_upper: 0.2933
+    num_grids: 9
+    leverage: 10
+    capital_usdt: 100.00
+    candidate_id: null
+    execution_telemetry:
+      source: live_bot_data_scanner
+      captured_at: "2026-06-18T15:46:59+00:00"
+      pnl:
+        total_profit_usdt: -6.87
+        total_profit_pct: -6.86
+        matched_profit_usdt: 0.55
+        matched_profit_pct: 0.55
+        realized_profit_usdt: 0.20
+        unmatched_pnl_usdt: -7.43
+        unmatched_pnl_pct: -7.42
+        funding_fee_usdt: 0.00
+        funding_fee_pct: 0.00
+        annualized_yield_pct: -21480.82
+      open_order_ladder:
+        qty_per_order_base: 281
+        last_price: 0.2717
+        buy: []
+        sell:
+          - level: 1
+            price: 0.2768
+            pct_to_fill: 1.87
+          - level: 2
+            price: 0.2788
+            pct_to_fill: 2.61
+          - level: 3
+            price: 0.2809
+            pct_to_fill: 3.38
+          - level: 4
+            price: 0.2829
+            pct_to_fill: 4.12
+          - level: 5
+            price: 0.2849
+            pct_to_fill: 4.85
+          - level: 6
+            price: 0.2870
+            pct_to_fill: 5.63
+          - level: 7
+            price: 0.2891
+            pct_to_fill: 6.40
+          - level: 8
+            price: 0.2911
+            pct_to_fill: 7.14
+          - level: 9
+            price: 0.2933
+            pct_to_fill: 7.94
+      position_inventory:
+        symbol: "0GUSDT"
+        contract: perp
+        margin_mode: isolated
+        isolated_margin_balance_usdt: 93.1339
+        maintenance_margin_usdt: 3.0495
+        size_usdt: 304.9412000
+        size_base: 1124
+        margin_usdt: 30.49
+        entry_price: 0.2775874
+        position_pnl_usdt: -7.07
+        position_roe_pct: -23.17
+        margin_ratio_pct: 3.27
+        liquidation_price: 0.1903440
+        mark_price: 0.2713000
+      risk:
+        risk_ratio: 2.2
+        risk_label: Low Risk
+        margin_ratio_pct: 3.27
+        maintenance_margin_usdt: 3.0495
+        isolated_margin_balance_usdt: 93.1339
+        liquidation_price: 0.1903440
+        mark_price: 0.2713000
+      tp_sl:
+        stop_loss:
+          pnl_usdt: -20.00
+          roi_pct: -20.0
+          price_type: last
+        take_profit:
+          pnl_usdt: 20.00
+          roi_pct: 20.0
+          price_type: last
+        close_all_positions_on_stop: true
+        close_all_positions_on_tp_sl_stop: true

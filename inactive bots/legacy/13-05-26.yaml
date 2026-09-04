@@ -1,0 +1,154 @@
+bots:
+  - symbol: COSUSDT
+    strategy_id: "411987721"
+    deploy_ts: "2026-05-13T16:03:55+00:00"
+    grid_lower: 0.001275
+    grid_upper: 0.002047
+    num_grids: 30
+    leverage: 10
+    capital_usdt: 400.00
+    candidate_id: null
+    execution_telemetry:
+      source: user_provided_binance_ui
+      captured_at: null
+      pnl:
+        total_profit_usdt: 23.78
+        total_profit_pct: 5.94
+        matched_profit_usdt: 24.05
+        matched_profit_pct: 6.01
+        realized_profit_usdt: 24.03
+        unmatched_pnl_usdt: -0.28
+        unmatched_pnl_pct: -0.06
+        funding_fee_usdt: 0.00
+        funding_fee_pct: 0.00
+        annualized_yield_pct: 38577.55
+      open_order_ladder:
+        qty_per_order_base: 63284
+        last_price: 0.00173
+        buy:
+          - level: 1
+            price: 0.001693
+            pct_to_fill: -2.13
+          - level: 2
+            price: 0.001667
+            pct_to_fill: -3.64
+          - level: 3
+            price: 0.001641
+            pct_to_fill: -5.14
+          - level: 4
+            price: 0.001615
+            pct_to_fill: -6.64
+          - level: 5
+            price: 0.001590
+            pct_to_fill: -8.09
+          - level: 6
+            price: 0.001565
+            pct_to_fill: -9.53
+          - level: 7
+            price: 0.001540
+            pct_to_fill: -10.98
+          - level: 8
+            price: 0.001516
+            pct_to_fill: -12.36
+          - level: 9
+            price: 0.001492
+            pct_to_fill: -13.75
+          - level: 10
+            price: 0.001469
+            pct_to_fill: -15.08
+          - level: 11
+            price: 0.001446
+            pct_to_fill: -16.41
+          - level: 12
+            price: 0.001423
+            pct_to_fill: -17.74
+          - level: 13
+            price: 0.001401
+            pct_to_fill: -19.01
+          - level: 14
+            price: 0.001379
+            pct_to_fill: -20.28
+          - level: 15
+            price: 0.001358
+            pct_to_fill: -21.50
+          - level: 16
+            price: 0.001336
+            pct_to_fill: -22.77
+          - level: 17
+            price: 0.001315
+            pct_to_fill: -23.98
+          - level: 18
+            price: 0.001295
+            pct_to_fill: -25.14
+          - level: 19
+            price: 0.001275
+            pct_to_fill: -26.30
+        sell:
+          - level: 1
+            price: 0.001748
+            pct_to_fill: 1.04
+          - level: 2
+            price: 0.001775
+            pct_to_fill: 2.60
+          - level: 3
+            price: 0.001804
+            pct_to_fill: 4.27
+          - level: 4
+            price: 0.001832
+            pct_to_fill: 5.89
+          - level: 5
+            price: 0.001862
+            pct_to_fill: 7.63
+          - level: 6
+            price: 0.001891
+            pct_to_fill: 9.30
+          - level: 7
+            price: 0.001921
+            pct_to_fill: 11.04
+          - level: 8
+            price: 0.001952
+            pct_to_fill: 12.83
+          - level: 9
+            price: 0.001983
+            pct_to_fill: 14.62
+          - level: 10
+            price: 0.002014
+            pct_to_fill: 16.41
+          - level: 11
+            price: 0.002047
+            pct_to_fill: 18.32
+      position_inventory:
+        symbol: COSUSDT
+        contract: perp
+        margin_mode: isolated
+        isolated_margin_balance_usdt: 423.5148
+        maintenance_margin_usdt: 5.4684
+        size_usdt: -109.2914680
+        size_base: -63284
+        margin_usdt: 10.94
+        entry_price: 0.0017200
+        position_pnl_usdt: -0.45
+        position_roe_pct: -4.05
+        margin_ratio_pct: 1.29
+        liquidation_price: 0.0080195
+        mark_price: 0.0017282
+      risk:
+        risk_ratio: 2.5
+        risk_label: Low Risk
+        margin_ratio_pct: 1.29
+        maintenance_margin_usdt: 5.4684
+        isolated_margin_balance_usdt: 423.5148
+        liquidation_price: 0.0080195
+        mark_price: 0.0017282
+        liquidation_distance_to_mark_pct: 364.0377
+      tp_sl:
+        stop_loss:
+          pnl_usdt: -40.00
+          roi_pct: -10.0
+          price_type: mark
+        take_profit:
+          pnl_usdt: 60.00
+          roi_pct: 15.0
+          price_type: mark
+        close_all_positions_on_stop: true
+        close_all_positions_on_tp_sl_stop: true
