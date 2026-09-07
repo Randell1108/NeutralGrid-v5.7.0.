@@ -1,0 +1,59 @@
+[
+  {
+    "seed": 42,
+    "method": "independently resample scan groups and symbols; multiplicative observation weights",
+    "scan_groups": 3,
+    "symbols": 171,
+    "replicates": 2000,
+    "selected_auc_ci": [
+      0.48009719535783363,
+      0.6634728953198559
+    ],
+    "baseline_auc_ci": [
+      0.4727128514074277,
+      0.6582710217851934
+    ],
+    "paired_delta_ci": [
+      -0.023102349749174765,
+      0.035517640559783355
+    ]
+  },
+  {
+    "seed": 7,
+    "method": "independently resample scan groups and symbols; multiplicative observation weights",
+    "scan_groups": 3,
+    "symbols": 171,
+    "replicates": 2000,
+    "selected_auc_ci": [
+      0.4710406119515052,
+      0.6634424383271913
+    ],
+    "baseline_auc_ci": [
+      0.46812700169146465,
+      0.6541622415073783
+    ],
+    "paired_delta_ci": [
+      -0.03104850784395475,
+      0.043155992889111136
+    ]
+  },
+  {
+    "seed": 123,
+    "method": "independently resample scan groups and symbols; multiplicative observation weights",
+    "scan_groups": 3,
+    "symbols": 171,
+    "replicates": 2000,
+    "selected_auc_ci": [
+      0.47804607411067096,
+      0.6673596700308078
+    ],
+    "baseline_auc_ci": [
+      0.4608086445946082,
+      0.6541029021921924
+    ],
+    "paired_delta_ci": [
+      -0.010830357805417185,
+      0.04291354048766458
+    ]
+  }
+]

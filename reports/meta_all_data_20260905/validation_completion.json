@@ -1,0 +1,11 @@
+{
+  "completed_utc": "2026-09-07T03:04:34.900315+00:00",
+  "development_trials": 166,
+  "folds": 830,
+  "holdout_fits": 9,
+  "serialized_scores_verified": 393,
+  "report": "D:\\Neutral Grid v5.7.0\\reports\\meta_all_data_20260905\\README.md",
+  "cleanup_pending": false,
+  "latest_snapshot_rows_audited_and_scored": 250,
+  "final_completion_utc": "2026-09-07T03:11:54.331325+00:00"
+}

@@ -1,0 +1,1490 @@
+{
+  "frozen_utc": "2026-09-07T02:52:38.990371+00:00",
+  "trials": [
+    {
+      "id": "logistic_top3_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 3,
+      "live": false
+    },
+    {
+      "id": "logistic_top3_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 3,
+      "live": true
+    },
+    {
+      "id": "logistic_top4_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 4,
+      "live": false
+    },
+    {
+      "id": "logistic_top4_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 4,
+      "live": true
+    },
+    {
+      "id": "logistic_top5_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 5,
+      "live": false
+    },
+    {
+      "id": "logistic_top5_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 5,
+      "live": true
+    },
+    {
+      "id": "logistic_top6_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 6,
+      "live": false
+    },
+    {
+      "id": "logistic_top6_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 6,
+      "live": true
+    },
+    {
+      "id": "logistic_top7_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 7,
+      "live": false
+    },
+    {
+      "id": "logistic_top7_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 7,
+      "live": true
+    },
+    {
+      "id": "logistic_top8_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 8,
+      "live": false
+    },
+    {
+      "id": "logistic_top8_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 8,
+      "live": true
+    },
+    {
+      "id": "logistic_top9_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 9,
+      "live": false
+    },
+    {
+      "id": "logistic_top9_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 9,
+      "live": true
+    },
+    {
+      "id": "logistic_top10_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 10,
+      "live": false
+    },
+    {
+      "id": "logistic_top10_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 10,
+      "live": true
+    },
+    {
+      "id": "logistic_top11_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 11,
+      "live": false
+    },
+    {
+      "id": "logistic_top11_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 11,
+      "live": true
+    },
+    {
+      "id": "logistic_top12_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 12,
+      "live": false
+    },
+    {
+      "id": "logistic_top12_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 12,
+      "live": true
+    },
+    {
+      "id": "logistic_top13_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 13,
+      "live": false
+    },
+    {
+      "id": "logistic_top13_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 13,
+      "live": true
+    },
+    {
+      "id": "logistic_top14_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 14,
+      "live": false
+    },
+    {
+      "id": "logistic_top14_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 14,
+      "live": true
+    },
+    {
+      "id": "logistic_top15_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 15,
+      "live": false
+    },
+    {
+      "id": "logistic_top15_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 15,
+      "live": true
+    },
+    {
+      "id": "logistic_top16_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 16,
+      "live": false
+    },
+    {
+      "id": "logistic_top16_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 16,
+      "live": true
+    },
+    {
+      "id": "logistic_top17_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 17,
+      "live": false
+    },
+    {
+      "id": "logistic_top17_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 17,
+      "live": true
+    },
+    {
+      "id": "logistic_top18_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 18,
+      "live": false
+    },
+    {
+      "id": "logistic_top18_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 18,
+      "live": true
+    },
+    {
+      "id": "logistic_top19_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 19,
+      "live": false
+    },
+    {
+      "id": "logistic_top19_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 19,
+      "live": true
+    },
+    {
+      "id": "logistic_top20_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 20,
+      "live": false
+    },
+    {
+      "id": "logistic_top20_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 20,
+      "live": true
+    },
+    {
+      "id": "logistic_top21_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 21,
+      "live": false
+    },
+    {
+      "id": "logistic_top21_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 21,
+      "live": true
+    },
+    {
+      "id": "logistic_top22_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 22,
+      "live": false
+    },
+    {
+      "id": "logistic_top22_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 22,
+      "live": true
+    },
+    {
+      "id": "logistic_top23_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 23,
+      "live": false
+    },
+    {
+      "id": "logistic_top23_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 23,
+      "live": true
+    },
+    {
+      "id": "logistic_top24_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 24,
+      "live": false
+    },
+    {
+      "id": "logistic_top24_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 24,
+      "live": true
+    },
+    {
+      "id": "logistic_top25_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 25,
+      "live": false
+    },
+    {
+      "id": "logistic_top25_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 25,
+      "live": true
+    },
+    {
+      "id": "logistic_top26_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 26,
+      "live": false
+    },
+    {
+      "id": "logistic_top26_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 26,
+      "live": true
+    },
+    {
+      "id": "logistic_top27_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 27,
+      "live": false
+    },
+    {
+      "id": "logistic_top27_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 27,
+      "live": true
+    },
+    {
+      "id": "logistic_top28_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 28,
+      "live": false
+    },
+    {
+      "id": "logistic_top28_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 28,
+      "live": true
+    },
+    {
+      "id": "logistic_top29_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 29,
+      "live": false
+    },
+    {
+      "id": "logistic_top29_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 29,
+      "live": true
+    },
+    {
+      "id": "logistic_top30_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 30,
+      "live": false
+    },
+    {
+      "id": "logistic_top30_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 30,
+      "live": true
+    },
+    {
+      "id": "logistic_top31_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 31,
+      "live": false
+    },
+    {
+      "id": "logistic_top31_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 31,
+      "live": true
+    },
+    {
+      "id": "logistic_top32_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 32,
+      "live": false
+    },
+    {
+      "id": "logistic_top32_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 32,
+      "live": true
+    },
+    {
+      "id": "logistic_top33_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 33,
+      "live": false
+    },
+    {
+      "id": "logistic_top33_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 33,
+      "live": true
+    },
+    {
+      "id": "logistic_top34_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 34,
+      "live": false
+    },
+    {
+      "id": "logistic_top34_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 34,
+      "live": true
+    },
+    {
+      "id": "logistic_top35_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 35,
+      "live": false
+    },
+    {
+      "id": "logistic_top35_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 35,
+      "live": true
+    },
+    {
+      "id": "logistic_top36_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 36,
+      "live": false
+    },
+    {
+      "id": "logistic_top36_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 36,
+      "live": true
+    },
+    {
+      "id": "logistic_top37_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 37,
+      "live": false
+    },
+    {
+      "id": "logistic_top37_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 37,
+      "live": true
+    },
+    {
+      "id": "logistic_top38_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 38,
+      "live": false
+    },
+    {
+      "id": "logistic_top38_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 38,
+      "live": true
+    },
+    {
+      "id": "logistic_top39_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 39,
+      "live": false
+    },
+    {
+      "id": "logistic_top39_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 39,
+      "live": true
+    },
+    {
+      "id": "logistic_top40_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 40,
+      "live": false
+    },
+    {
+      "id": "logistic_top40_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 40,
+      "live": true
+    },
+    {
+      "id": "logistic_top41_live0",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 41,
+      "live": false
+    },
+    {
+      "id": "logistic_top41_live1",
+      "estimator": "logistic",
+      "profile": "rank",
+      "k": 41,
+      "live": true
+    },
+    {
+      "id": "logistic_active20",
+      "estimator": "logistic",
+      "profile": "fixed",
+      "features": [
+        "ev_score",
+        "adx_1h",
+        "adx_15m",
+        "adx_5m",
+        "atr_pct_15m",
+        "ou_halflife",
+        "rsi_15m",
+        "ema_slope_1h",
+        "ema_crosses_5m",
+        "vwap_crosses_5m",
+        "hurst_exponent",
+        "range_size_pct",
+        "bb_width",
+        "grid_spacing_pct",
+        "profit_per_grid_pct",
+        "num_grids",
+        "quote_volume_24h",
+        "open_interest",
+        "micro_round_trip_cost_pct",
+        "funding_rate"
+      ],
+      "k": 20,
+      "live": false
+    },
+    {
+      "id": "logistic_no_ev19",
+      "estimator": "logistic",
+      "profile": "fixed",
+      "features": [
+        "adx_1h",
+        "adx_15m",
+        "adx_5m",
+        "atr_pct_15m",
+        "ou_halflife",
+        "rsi_15m",
+        "ema_slope_1h",
+        "ema_crosses_5m",
+        "vwap_crosses_5m",
+        "hurst_exponent",
+        "range_size_pct",
+        "bb_width",
+        "grid_spacing_pct",
+        "profit_per_grid_pct",
+        "num_grids",
+        "quote_volume_24h",
+        "open_interest",
+        "micro_round_trip_cost_pct",
+        "funding_rate"
+      ],
+      "k": 19,
+      "live": false
+    },
+    {
+      "id": "logistic_prior_no_ou19",
+      "estimator": "logistic",
+      "profile": "fixed",
+      "features": [
+        "ev_score",
+        "adx_1h",
+        "adx_15m",
+        "adx_5m",
+        "atr_pct_15m",
+        "rsi_15m",
+        "ema_slope_1h",
+        "ema_crosses_5m",
+        "vwap_crosses_5m",
+        "hurst_exponent",
+        "range_size_pct",
+        "bb_width",
+        "grid_spacing_pct",
+        "profit_per_grid_pct",
+        "num_grids",
+        "quote_volume_24h",
+        "open_interest",
+        "micro_round_trip_cost_pct",
+        "funding_rate"
+      ],
+      "k": 19,
+      "live": false
+    },
+    {
+      "id": "logistic_all42",
+      "estimator": "logistic",
+      "profile": "fixed",
+      "features": [
+        "ev_score",
+        "adx_1h",
+        "adx_15m",
+        "adx_5m",
+        "atr_pct_15m",
+        "ou_halflife",
+        "rsi_15m",
+        "ema_slope_1h",
+        "ema_crosses_5m",
+        "vwap_crosses_5m",
+        "hurst_exponent",
+        "range_size_pct",
+        "bb_width",
+        "grid_spacing_pct",
+        "profit_per_grid_pct",
+        "num_grids",
+        "quote_volume_24h",
+        "open_interest",
+        "micro_round_trip_cost_pct",
+        "funding_rate",
+        "long_short_ratio",
+        "funding_rate_zscore",
+        "open_interest_change_pct",
+        "bb_width_ratio_1h_15m",
+        "top_account_lsr_log",
+        "top_position_lsr_log",
+        "top_position_vs_account_delta",
+        "global_lsr_log",
+        "taker_imbalance",
+        "taker_buy_sell_log",
+        "basis_pct",
+        "spread_pct",
+        "top20_bid_depth_usdt",
+        "top20_ask_depth_usdt",
+        "top20_depth_min_usdt",
+        "book_imbalance_top20",
+        "oi_notional",
+        "oi_to_volume",
+        "parkinson_vol_ratio_4h_24h_pre",
+        "variance_ratio_1m_15m_pre_2h",
+        "funding_carry_expected_next_7h",
+        "liquidity_stability_z_1h"
+      ],
+      "k": 42,
+      "live": false
+    },
+    {
+      "id": "logistic_legacy_timing_sensitivity",
+      "estimator": "logistic",
+      "profile": "fixed",
+      "features": [
+        "adx_1h",
+        "adx_15m",
+        "adx_5m",
+        "atr_pct_15m",
+        "ou_halflife",
+        "rsi_15m",
+        "ema_slope_1h",
+        "ema_crosses_5m",
+        "vwap_crosses_5m",
+        "hurst_exponent",
+        "range_size_pct",
+        "bb_width",
+        "grid_spacing_pct",
+        "profit_per_grid_pct",
+        "num_grids",
+        "quote_volume_24h",
+        "open_interest",
+        "micro_round_trip_cost_pct",
+        "funding_rate"
+      ],
+      "k": 19,
+      "live": false,
+      "include_legacy_timing": true
+    },
+    {
+      "id": "vote_top3_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 3,
+      "live": false
+    },
+    {
+      "id": "vote_top3_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 3,
+      "live": true
+    },
+    {
+      "id": "vote_top4_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 4,
+      "live": false
+    },
+    {
+      "id": "vote_top4_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 4,
+      "live": true
+    },
+    {
+      "id": "vote_top5_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 5,
+      "live": false
+    },
+    {
+      "id": "vote_top5_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 5,
+      "live": true
+    },
+    {
+      "id": "vote_top6_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 6,
+      "live": false
+    },
+    {
+      "id": "vote_top6_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 6,
+      "live": true
+    },
+    {
+      "id": "vote_top7_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 7,
+      "live": false
+    },
+    {
+      "id": "vote_top7_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 7,
+      "live": true
+    },
+    {
+      "id": "vote_top8_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 8,
+      "live": false
+    },
+    {
+      "id": "vote_top8_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 8,
+      "live": true
+    },
+    {
+      "id": "vote_top9_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 9,
+      "live": false
+    },
+    {
+      "id": "vote_top9_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 9,
+      "live": true
+    },
+    {
+      "id": "vote_top10_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 10,
+      "live": false
+    },
+    {
+      "id": "vote_top10_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 10,
+      "live": true
+    },
+    {
+      "id": "vote_top11_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 11,
+      "live": false
+    },
+    {
+      "id": "vote_top11_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 11,
+      "live": true
+    },
+    {
+      "id": "vote_top12_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 12,
+      "live": false
+    },
+    {
+      "id": "vote_top12_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 12,
+      "live": true
+    },
+    {
+      "id": "vote_top13_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 13,
+      "live": false
+    },
+    {
+      "id": "vote_top13_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 13,
+      "live": true
+    },
+    {
+      "id": "vote_top14_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 14,
+      "live": false
+    },
+    {
+      "id": "vote_top14_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 14,
+      "live": true
+    },
+    {
+      "id": "vote_top15_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 15,
+      "live": false
+    },
+    {
+      "id": "vote_top15_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 15,
+      "live": true
+    },
+    {
+      "id": "vote_top16_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 16,
+      "live": false
+    },
+    {
+      "id": "vote_top16_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 16,
+      "live": true
+    },
+    {
+      "id": "vote_top17_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 17,
+      "live": false
+    },
+    {
+      "id": "vote_top17_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 17,
+      "live": true
+    },
+    {
+      "id": "vote_top18_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 18,
+      "live": false
+    },
+    {
+      "id": "vote_top18_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 18,
+      "live": true
+    },
+    {
+      "id": "vote_top19_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 19,
+      "live": false
+    },
+    {
+      "id": "vote_top19_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 19,
+      "live": true
+    },
+    {
+      "id": "vote_top20_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 20,
+      "live": false
+    },
+    {
+      "id": "vote_top20_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 20,
+      "live": true
+    },
+    {
+      "id": "vote_top21_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 21,
+      "live": false
+    },
+    {
+      "id": "vote_top21_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 21,
+      "live": true
+    },
+    {
+      "id": "vote_top22_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 22,
+      "live": false
+    },
+    {
+      "id": "vote_top22_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 22,
+      "live": true
+    },
+    {
+      "id": "vote_top23_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 23,
+      "live": false
+    },
+    {
+      "id": "vote_top23_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 23,
+      "live": true
+    },
+    {
+      "id": "vote_top24_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 24,
+      "live": false
+    },
+    {
+      "id": "vote_top24_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 24,
+      "live": true
+    },
+    {
+      "id": "vote_top25_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 25,
+      "live": false
+    },
+    {
+      "id": "vote_top25_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 25,
+      "live": true
+    },
+    {
+      "id": "vote_top26_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 26,
+      "live": false
+    },
+    {
+      "id": "vote_top26_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 26,
+      "live": true
+    },
+    {
+      "id": "vote_top27_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 27,
+      "live": false
+    },
+    {
+      "id": "vote_top27_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 27,
+      "live": true
+    },
+    {
+      "id": "vote_top28_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 28,
+      "live": false
+    },
+    {
+      "id": "vote_top28_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 28,
+      "live": true
+    },
+    {
+      "id": "vote_top29_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 29,
+      "live": false
+    },
+    {
+      "id": "vote_top29_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 29,
+      "live": true
+    },
+    {
+      "id": "vote_top30_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 30,
+      "live": false
+    },
+    {
+      "id": "vote_top30_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 30,
+      "live": true
+    },
+    {
+      "id": "vote_top31_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 31,
+      "live": false
+    },
+    {
+      "id": "vote_top31_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 31,
+      "live": true
+    },
+    {
+      "id": "vote_top32_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 32,
+      "live": false
+    },
+    {
+      "id": "vote_top32_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 32,
+      "live": true
+    },
+    {
+      "id": "vote_top33_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 33,
+      "live": false
+    },
+    {
+      "id": "vote_top33_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 33,
+      "live": true
+    },
+    {
+      "id": "vote_top34_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 34,
+      "live": false
+    },
+    {
+      "id": "vote_top34_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 34,
+      "live": true
+    },
+    {
+      "id": "vote_top35_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 35,
+      "live": false
+    },
+    {
+      "id": "vote_top35_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 35,
+      "live": true
+    },
+    {
+      "id": "vote_top36_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 36,
+      "live": false
+    },
+    {
+      "id": "vote_top36_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 36,
+      "live": true
+    },
+    {
+      "id": "vote_top37_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 37,
+      "live": false
+    },
+    {
+      "id": "vote_top37_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 37,
+      "live": true
+    },
+    {
+      "id": "vote_top38_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 38,
+      "live": false
+    },
+    {
+      "id": "vote_top38_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 38,
+      "live": true
+    },
+    {
+      "id": "vote_top39_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 39,
+      "live": false
+    },
+    {
+      "id": "vote_top39_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 39,
+      "live": true
+    },
+    {
+      "id": "vote_top40_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 40,
+      "live": false
+    },
+    {
+      "id": "vote_top40_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 40,
+      "live": true
+    },
+    {
+      "id": "vote_top41_live0",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 41,
+      "live": false
+    },
+    {
+      "id": "vote_top41_live1",
+      "estimator": "vote",
+      "profile": "rank",
+      "k": 41,
+      "live": true
+    },
+    {
+      "id": "vote_active20",
+      "estimator": "vote",
+      "profile": "fixed",
+      "features": [
+        "ev_score",
+        "adx_1h",
+        "adx_15m",
+        "adx_5m",
+        "atr_pct_15m",
+        "ou_halflife",
+        "rsi_15m",
+        "ema_slope_1h",
+        "ema_crosses_5m",
+        "vwap_crosses_5m",
+        "hurst_exponent",
+        "range_size_pct",
+        "bb_width",
+        "grid_spacing_pct",
+        "profit_per_grid_pct",
+        "num_grids",
+        "quote_volume_24h",
+        "open_interest",
+        "micro_round_trip_cost_pct",
+        "funding_rate"
+      ],
+      "k": 20,
+      "live": false
+    },
+    {
+      "id": "vote_no_ev19",
+      "estimator": "vote",
+      "profile": "fixed",
+      "features": [
+        "adx_1h",
+        "adx_15m",
+        "adx_5m",
+        "atr_pct_15m",
+        "ou_halflife",
+        "rsi_15m",
+        "ema_slope_1h",
+        "ema_crosses_5m",
+        "vwap_crosses_5m",
+        "hurst_exponent",
+        "range_size_pct",
+        "bb_width",
+        "grid_spacing_pct",
+        "profit_per_grid_pct",
+        "num_grids",
+        "quote_volume_24h",
+        "open_interest",
+        "micro_round_trip_cost_pct",
+        "funding_rate"
+      ],
+      "k": 19,
+      "live": false
+    },
+    {
+      "id": "vote_prior_no_ou19",
+      "estimator": "vote",
+      "profile": "fixed",
+      "features": [
+        "ev_score",
+        "adx_1h",
+        "adx_15m",
+        "adx_5m",
+        "atr_pct_15m",
+        "rsi_15m",
+        "ema_slope_1h",
+        "ema_crosses_5m",
+        "vwap_crosses_5m",
+        "hurst_exponent",
+        "range_size_pct",
+        "bb_width",
+        "grid_spacing_pct",
+        "profit_per_grid_pct",
+        "num_grids",
+        "quote_volume_24h",
+        "open_interest",
+        "micro_round_trip_cost_pct",
+        "funding_rate"
+      ],
+      "k": 19,
+      "live": false
+    },
+    {
+      "id": "vote_all42",
+      "estimator": "vote",
+      "profile": "fixed",
+      "features": [
+        "ev_score",
+        "adx_1h",
+        "adx_15m",
+        "adx_5m",
+        "atr_pct_15m",
+        "ou_halflife",
+        "rsi_15m",
+        "ema_slope_1h",
+        "ema_crosses_5m",
+        "vwap_crosses_5m",
+        "hurst_exponent",
+        "range_size_pct",
+        "bb_width",
+        "grid_spacing_pct",
+        "profit_per_grid_pct",
+        "num_grids",
+        "quote_volume_24h",
+        "open_interest",
+        "micro_round_trip_cost_pct",
+        "funding_rate",
+        "long_short_ratio",
+        "funding_rate_zscore",
+        "open_interest_change_pct",
+        "bb_width_ratio_1h_15m",
+        "top_account_lsr_log",
+        "top_position_lsr_log",
+        "top_position_vs_account_delta",
+        "global_lsr_log",
+        "taker_imbalance",
+        "taker_buy_sell_log",
+        "basis_pct",
+        "spread_pct",
+        "top20_bid_depth_usdt",
+        "top20_ask_depth_usdt",
+        "top20_depth_min_usdt",
+        "book_imbalance_top20",
+        "oi_notional",
+        "oi_to_volume",
+        "parkinson_vol_ratio_4h_24h_pre",
+        "variance_ratio_1m_15m_pre_2h",
+        "funding_carry_expected_next_7h",
+        "liquidity_stability_z_1h"
+      ],
+      "k": 42,
+      "live": false
+    },
+    {
+      "id": "vote_legacy_timing_sensitivity",
+      "estimator": "vote",
+      "profile": "fixed",
+      "features": [
+        "adx_1h",
+        "adx_15m",
+        "adx_5m",
+        "atr_pct_15m",
+        "ou_halflife",
+        "rsi_15m",
+        "ema_slope_1h",
+        "ema_crosses_5m",
+        "vwap_crosses_5m",
+        "hurst_exponent",
+        "range_size_pct",
+        "bb_width",
+        "grid_spacing_pct",
+        "profit_per_grid_pct",
+        "num_grids",
+        "quote_volume_24h",
+        "open_interest",
+        "micro_round_trip_cost_pct",
+        "funding_rate"
+      ],
+      "k": 19,
+      "live": false,
+      "include_legacy_timing": true
+    }
+  ],
+  "trial_count": 166,
+  "development_rows": 6406,
+  "holdout_rows": 490,
+  "total_rows": 6896,
+  "holdout_start": "2026-09-04 00:00:00+00:00",
+  "holdout_scans": [
+    "2026-09-04 02:25:20+00:00",
+    "2026-09-04 14:01:15+00:00",
+    "2026-09-04 22:33:15+00:00",
+    "2026-09-05 16:55:05+00:00"
+  ],
+  "development_blocks": [
+    [
+      "2026-08-11 21:58:04+00:00",
+      "2026-08-12 12:25:43+00:00",
+      "2026-08-12 20:08:48+00:00",
+      "2026-08-13 12:54:59+00:00",
+      "2026-08-13 20:08:59+00:00",
+      "2026-08-14 12:33:32+00:00"
+    ],
+    [
+      "2026-08-14 21:40:24+00:00",
+      "2026-08-20 15:50:49+00:00",
+      "2026-08-21 14:10:31+00:00",
+      "2026-08-21 21:51:32+00:00",
+      "2026-08-22 12:13:11+00:00",
+      "2026-08-23 03:12:19+00:00"
+    ],
+    [
+      "2026-08-23 14:35:21+00:00",
+      "2026-08-23 22:56:31+00:00",
+      "2026-08-24 11:45:38+00:00",
+      "2026-08-24 20:06:02+00:00",
+      "2026-08-25 11:46:28+00:00",
+      "2026-08-27 22:52:12+00:00"
+    ],
+    [
+      "2026-08-28 12:40:54+00:00",
+      "2026-08-28 22:33:45+00:00",
+      "2026-08-29 15:19:43+00:00",
+      "2026-08-29 23:23:41+00:00",
+      "2026-08-30 13:18:47+00:00",
+      "2026-08-31 13:55:09+00:00"
+    ],
+    [
+      "2026-08-31 22:28:07+00:00",
+      "2026-09-01 14:11:47+00:00",
+      "2026-09-01 23:09:49+00:00",
+      "2026-09-02 11:55:21+00:00",
+      "2026-09-02 21:30:51+00:00",
+      "2026-09-03 16:21:06+00:00"
+    ]
+  ],
+  "row_policy": "All validated unique labelable simulated rows; no 30-row symbol cap; no global complete-case deletion. Strict temporal eligibility applies separately in each fold.",
+  "label": "Canonical FASTWIN: seven-hour endogenous net-MTM +3% threshold; actual bots use only independently provable positive bounds in explicit auxiliary tests.",
+  "feature_selection": "Univariate absolute AUC from fit rows only; EV excluded from ranked family because active HMM was fitted after historical events.",
+  "preprocessing": "Training-only median imputation, no missing indicators or invented observations. Actual-bot measurement timing remains diagnostic, not production-certified.",
+  "validation": "Five chronological six-scan blocks; 12h purge after full seven-hour label end at fit/calibration/test boundaries; calibration uses 3-8 recent past scan groups.",
+  "selection": "Among profiles without EV and without ambiguous legacy timing, highest mean fold AUC with pooled ECE<=0.10. If none pass, lowest ECE then highest mean AUC. Ties fewer features, no live augmentation, ID.",
+  "full_refit": "Fit the frozen algorithm on every primary timestamp-eligible row, plus known live positives if selected. Fit final sigmoid on genuinely past-only raw OOF probabilities from development and the now-consumed holdout. Full refit is diagnostic and has no new independent score.",
+  "holdout_policy": "Freeze selected spec before evaluating September 4-5. Compare selected, active20 and prior19, seeds42/7/123. No retuning after holdout.",
+  "promotion_policy": "Historical research source and timing are diagnostic; numerical thresholds alone cannot override production contracts.",
+  "data_sha256": "51b9f985314a67ba52be603603cad06bfb7cfe8096680d406dacc393b4b06bd0"
+}

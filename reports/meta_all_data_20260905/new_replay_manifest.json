@@ -1,0 +1,15 @@
+{
+  "completed_utc": "2026-09-06T23:28:31.047057+00:00",
+  "queue_rows": 2554,
+  "status_counts": {
+    "success": 2540,
+    "replay_error": 14
+  },
+  "contract": "existing_scan_geometry_7h_legacy_research_v1",
+  "promotion_eligible": false,
+  "outcomes_are_simulations_not_live_records": true,
+  "features_from_recorded_snapshots": true,
+  "capital": 400,
+  "leverage": 10,
+  "engine_parameters": "repository build_training_config defaults with explicit seven-hour horizon"
+}

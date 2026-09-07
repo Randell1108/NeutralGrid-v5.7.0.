@@ -1,0 +1,69 @@
+{
+  "CompletedUtc": "2026-09-07T03:07:59.0724005Z",
+  "Targets": [
+    {
+      "Path": "D:\\Neutral Grid v5.7.0\\reports\\meta_all_data_20260905\\_tmp",
+      "Files": 6200,
+      "Bytes": 234751389.0
+    },
+    {
+      "Path": "D:\\Neutral Grid v5.7.0\\reports\\meta_all_data_20260905\\availability\\_tmp",
+      "Files": 491,
+      "Bytes": 3512737.0
+    },
+    {
+      "Path": "D:\\Neutral Grid v5.7.0\\reports\\meta_all_data_20260905\\development_predictions",
+      "Files": 166,
+      "Bytes": 61046040.0
+    },
+    {
+      "Path": "D:\\Neutral Grid v5.7.0\\reports\\meta_all_data_20260905\\pyright_workbook.log",
+      "Files": 1,
+      "Bytes": 3031.0
+    },
+    {
+      "Path": "D:\\Neutral Grid v5.7.0\\reports\\meta_all_data_20260905\\pyright_experiment.log",
+      "Files": 1,
+      "Bytes": 4105.0
+    },
+    {
+      "Path": "D:\\Neutral Grid v5.7.0\\reports\\meta_all_data_20260905\\pyright_study.log",
+      "Files": 1,
+      "Bytes": 3734.0
+    },
+    {
+      "Path": "D:\\Neutral Grid v5.7.0\\reports\\meta_all_data_20260905\\pyright_all_research.log",
+      "Files": 1,
+      "Bytes": 22515.0
+    },
+    {
+      "Path": "D:\\Neutral Grid v5.7.0\\reports\\meta_all_data_20260905\\pyright_matrix.log",
+      "Files": 1,
+      "Bytes": 1326.0
+    },
+    {
+      "Path": "D:\\Neutral Grid v5.7.0\\reports\\meta_all_data_20260905\\pyright_final_research.log",
+      "Files": 1,
+      "Bytes": 0.0
+    },
+    {
+      "Path": "D:\\Neutral Grid v5.7.0\\reports\\meta_all_data_20260905\\plot_dependencies.log",
+      "Files": 1,
+      "Bytes": 2002.0
+    },
+    {
+      "Path": "D:\\Neutral Grid v5.7.0\\reports\\meta_all_data_20260905\\prepare.log",
+      "Files": 1,
+      "Bytes": 618.0
+    },
+    {
+      "Path": "D:\\Neutral Grid v5.7.0\\reports\\meta_all_data_20260905\\inventory.log",
+      "Files": 1,
+      "Bytes": 78707.0
+    }
+  ],
+  "FilesRemoved": 6866.0,
+  "BytesRemoved": 299426204.0,
+  "EvidenceRetained": "Research matrix, compressed predictions, final model, reports, source ledgers, successful validation logs",
+  "ProductionFilesDeleted": false
+}

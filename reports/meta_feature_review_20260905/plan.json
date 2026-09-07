@@ -1,0 +1,272 @@
+{
+  "candidate_count": 40,
+  "candidates": [
+    {
+      "id": "logistic_top3",
+      "estimator": "logistic",
+      "set": "top_k",
+      "k": 3
+    },
+    {
+      "id": "logistic_top4",
+      "estimator": "logistic",
+      "set": "top_k",
+      "k": 4
+    },
+    {
+      "id": "logistic_top5",
+      "estimator": "logistic",
+      "set": "top_k",
+      "k": 5
+    },
+    {
+      "id": "logistic_top6",
+      "estimator": "logistic",
+      "set": "top_k",
+      "k": 6
+    },
+    {
+      "id": "logistic_top7",
+      "estimator": "logistic",
+      "set": "top_k",
+      "k": 7
+    },
+    {
+      "id": "logistic_top8",
+      "estimator": "logistic",
+      "set": "top_k",
+      "k": 8
+    },
+    {
+      "id": "logistic_top9",
+      "estimator": "logistic",
+      "set": "top_k",
+      "k": 9
+    },
+    {
+      "id": "logistic_top10",
+      "estimator": "logistic",
+      "set": "top_k",
+      "k": 10
+    },
+    {
+      "id": "logistic_top11",
+      "estimator": "logistic",
+      "set": "top_k",
+      "k": 11
+    },
+    {
+      "id": "logistic_top12",
+      "estimator": "logistic",
+      "set": "top_k",
+      "k": 12
+    },
+    {
+      "id": "logistic_top13",
+      "estimator": "logistic",
+      "set": "top_k",
+      "k": 13
+    },
+    {
+      "id": "logistic_top14",
+      "estimator": "logistic",
+      "set": "top_k",
+      "k": 14
+    },
+    {
+      "id": "logistic_top15",
+      "estimator": "logistic",
+      "set": "top_k",
+      "k": 15
+    },
+    {
+      "id": "logistic_top16",
+      "estimator": "logistic",
+      "set": "top_k",
+      "k": 16
+    },
+    {
+      "id": "logistic_top17",
+      "estimator": "logistic",
+      "set": "top_k",
+      "k": 17
+    },
+    {
+      "id": "logistic_top18",
+      "estimator": "logistic",
+      "set": "top_k",
+      "k": 18
+    },
+    {
+      "id": "logistic_top19",
+      "estimator": "logistic",
+      "set": "top_k",
+      "k": 19
+    },
+    {
+      "id": "logistic_full",
+      "estimator": "logistic",
+      "set": "full",
+      "k": 20
+    },
+    {
+      "id": "logistic_no_ev",
+      "estimator": "logistic",
+      "set": "no_ev",
+      "k": 19
+    },
+    {
+      "id": "logistic_no_ou",
+      "estimator": "logistic",
+      "set": "no_ou",
+      "k": 19
+    },
+    {
+      "id": "vote_logit_hgb_top3",
+      "estimator": "vote_logit_hgb",
+      "set": "top_k",
+      "k": 3
+    },
+    {
+      "id": "vote_logit_hgb_top4",
+      "estimator": "vote_logit_hgb",
+      "set": "top_k",
+      "k": 4
+    },
+    {
+      "id": "vote_logit_hgb_top5",
+      "estimator": "vote_logit_hgb",
+      "set": "top_k",
+      "k": 5
+    },
+    {
+      "id": "vote_logit_hgb_top6",
+      "estimator": "vote_logit_hgb",
+      "set": "top_k",
+      "k": 6
+    },
+    {
+      "id": "vote_logit_hgb_top7",
+      "estimator": "vote_logit_hgb",
+      "set": "top_k",
+      "k": 7
+    },
+    {
+      "id": "vote_logit_hgb_top8",
+      "estimator": "vote_logit_hgb",
+      "set": "top_k",
+      "k": 8
+    },
+    {
+      "id": "vote_logit_hgb_top9",
+      "estimator": "vote_logit_hgb",
+      "set": "top_k",
+      "k": 9
+    },
+    {
+      "id": "vote_logit_hgb_top10",
+      "estimator": "vote_logit_hgb",
+      "set": "top_k",
+      "k": 10
+    },
+    {
+      "id": "vote_logit_hgb_top11",
+      "estimator": "vote_logit_hgb",
+      "set": "top_k",
+      "k": 11
+    },
+    {
+      "id": "vote_logit_hgb_top12",
+      "estimator": "vote_logit_hgb",
+      "set": "top_k",
+      "k": 12
+    },
+    {
+      "id": "vote_logit_hgb_top13",
+      "estimator": "vote_logit_hgb",
+      "set": "top_k",
+      "k": 13
+    },
+    {
+      "id": "vote_logit_hgb_top14",
+      "estimator": "vote_logit_hgb",
+      "set": "top_k",
+      "k": 14
+    },
+    {
+      "id": "vote_logit_hgb_top15",
+      "estimator": "vote_logit_hgb",
+      "set": "top_k",
+      "k": 15
+    },
+    {
+      "id": "vote_logit_hgb_top16",
+      "estimator": "vote_logit_hgb",
+      "set": "top_k",
+      "k": 16
+    },
+    {
+      "id": "vote_logit_hgb_top17",
+      "estimator": "vote_logit_hgb",
+      "set": "top_k",
+      "k": 17
+    },
+    {
+      "id": "vote_logit_hgb_top18",
+      "estimator": "vote_logit_hgb",
+      "set": "top_k",
+      "k": 18
+    },
+    {
+      "id": "vote_logit_hgb_top19",
+      "estimator": "vote_logit_hgb",
+      "set": "top_k",
+      "k": 19
+    },
+    {
+      "id": "vote_logit_hgb_full",
+      "estimator": "vote_logit_hgb",
+      "set": "full",
+      "k": 20
+    },
+    {
+      "id": "vote_logit_hgb_no_ev",
+      "estimator": "vote_logit_hgb",
+      "set": "no_ev",
+      "k": 19
+    },
+    {
+      "id": "vote_logit_hgb_no_ou",
+      "estimator": "vote_logit_hgb",
+      "set": "no_ou",
+      "k": 19
+    }
+  ],
+  "development_scan_groups": [
+    "2026-08-27 22:52:12+00:00",
+    "2026-08-28 12:40:54+00:00",
+    "2026-08-28 22:33:45+00:00",
+    "2026-08-29 15:19:43+00:00",
+    "2026-08-29 23:23:41+00:00",
+    "2026-08-30 13:18:47+00:00",
+    "2026-08-31 13:55:09+00:00",
+    "2026-08-31 22:28:07+00:00",
+    "2026-09-01 14:11:47+00:00",
+    "2026-09-01 23:09:49+00:00"
+  ],
+  "holdout_scan_groups": [
+    "2026-09-02 11:55:21+00:00",
+    "2026-09-02 21:30:51+00:00",
+    "2026-09-03 16:21:06+00:00"
+  ],
+  "development_rows": 956,
+  "holdout_rows": 275,
+  "folds": "Last six development scan groups, evaluated in three consecutive two-scan blocks; strictly past fitting, separate last eligible scan for sigmoid calibration.",
+  "purge": "12h between full 7h label endpoint and next calibration/evaluation start",
+  "imputation": "none; 13 incomplete rows excluded uniformly for paired comparisons",
+  "feature_ranking": "absolute univariate AUC distance from 0.5, fit partition only, ties in profile order",
+  "selection": "maximum mean development-fold AUC among pooled ECE<=0.10; if none, maximum mean AUC. Ties: fewer features then ID.",
+  "holdout": "Evaluate frozen winner and 20-feature vote baseline, seeds 42/7/123; no selection or tuning after results.",
+  "uncertainty": "2000 scan-group bootstrap replicates; only three held-out scan groups, limited regime coverage",
+  "production_status": "diagnostics only; no production files or gate thresholds modified"
+}

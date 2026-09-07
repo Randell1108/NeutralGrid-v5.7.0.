@@ -1,0 +1,15 @@
+{
+  "audited_utc": "2026-09-07 03:09:57.908362+00:00",
+  "source": "D:\\Neutral Grid v5.7.0\\artifacts\\pipeline_runs\\default_250_20260906_232957\\deployment_ready_20260906_233011.csv",
+  "sha256": "4f3a6af4fac24deb9a7bddb5c520e45f2220635a7e184e6cd2c4de4365fffe78",
+  "rows": 250,
+  "scan_timestamp_utc": "2026-09-06T23:30:11+00:00",
+  "recorded_available_utc": "2026-09-07 02:48:56.693464+00:00",
+  "earliest_complete_window_utc": "2026-09-07 09:50:56.693464+00:00",
+  "valid_geometry_pending_rows": 111,
+  "missing_geometry_rows": 139,
+  "new_usable_fastwin_labels": 0,
+  "rows_scored": 250,
+  "label_policy": "No partial-window result is treated as a loss. These scores do not alter the frozen selection or its independent holdout.",
+  "source_inventory_update": "1206 files, 261 unique snapshot sources, 25655 unique persisted snapshot IDs after adding this 250-row file"
+}

@@ -1,0 +1,273 @@
+[
+  {
+    "role": "baseline",
+    "features": [
+      "ev_score",
+      "adx_1h",
+      "adx_15m",
+      "adx_5m",
+      "atr_pct_15m",
+      "ou_halflife",
+      "rsi_15m",
+      "ema_slope_1h",
+      "ema_crosses_5m",
+      "vwap_crosses_5m",
+      "hurst_exponent",
+      "range_size_pct",
+      "bb_width",
+      "grid_spacing_pct",
+      "profit_per_grid_pct",
+      "num_grids",
+      "quote_volume_24h",
+      "open_interest",
+      "micro_round_trip_cost_pct",
+      "funding_rate"
+    ],
+    "metrics": {
+      "auc_cv": 0.5631237059790145,
+      "precision_at_5": 0.6666666666666666,
+      "f1_threshold": 0.2690802348336595,
+      "f1_score": 0.6880546075085324,
+      "feature_importance": {
+        "ev_score": {
+          "mdi": 0.0,
+          "permutation": 0.047925681720101754
+        },
+        "adx_1h": {
+          "mdi": 0.0,
+          "permutation": 0.01655017462160575
+        },
+        "adx_15m": {
+          "mdi": 0.0,
+          "permutation": 0.005853000196618915
+        },
+        "adx_5m": {
+          "mdi": 0.0,
+          "permutation": -0.0002965510230109268
+        },
+        "atr_pct_15m": {
+          "mdi": 0.0,
+          "permutation": 0.0034407538837274362
+        },
+        "ou_halflife": {
+          "mdi": 0.0,
+          "permutation": -0.0007171043758555448
+        },
+        "rsi_15m": {
+          "mdi": 0.0,
+          "permutation": -0.010741858031233143
+        },
+        "ema_slope_1h": {
+          "mdi": 0.0,
+          "permutation": 0.0015167545127808084
+        },
+        "ema_crosses_5m": {
+          "mdi": 0.0,
+          "permutation": 0.004204602400631079
+        },
+        "vwap_crosses_5m": {
+          "mdi": 0.0,
+          "permutation": 0.00042183633285861234
+        },
+        "hurst_exponent": {
+          "mdi": 0.0,
+          "permutation": -0.017013264720298932
+        },
+        "range_size_pct": {
+          "mdi": 0.0,
+          "permutation": -0.006763083599850054
+        },
+        "bb_width": {
+          "mdi": 0.0,
+          "permutation": 0.0018465369333123408
+        },
+        "grid_spacing_pct": {
+          "mdi": 0.0,
+          "permutation": -0.0030727074579185256
+        },
+        "profit_per_grid_pct": {
+          "mdi": 0.0,
+          "permutation": -0.008035417021401288
+        },
+        "num_grids": {
+          "mdi": 0.0,
+          "permutation": -0.011410102897014766
+        },
+        "quote_volume_24h": {
+          "mdi": 0.0,
+          "permutation": -0.0003195075799176439
+        },
+        "open_interest": {
+          "mdi": 0.0,
+          "permutation": -0.0005064775965085998
+        },
+        "micro_round_trip_cost_pct": {
+          "mdi": 0.0,
+          "permutation": -0.0027607335144828123
+        },
+        "funding_rate": {
+          "mdi": 0.0,
+          "permutation": 0.002089882605927085
+        }
+      },
+      "train_samples": 1231,
+      "positive_rate": 0.5588952071486596,
+      "calibration_method": "beta_oos",
+      "calibration_ece_raw": 0.12182969482925299,
+      "calibration_ece_calibrated": 0.005039044739230468,
+      "calibration_brier_raw": 0.2646866405827921,
+      "calibration_brier_calibrated": 0.2469983282103547,
+      "calibration_oos_accepted": true,
+      "calibration_oos_reject_reason": null,
+      "label_pnl_column": "net_pnl_pct",
+      "oof_auc": 0.6483521778234614,
+      "oof_auc_ci_low": 0.618775721013011,
+      "oof_auc_ci_high": 0.6787448197330468,
+      "oof_ece": 0.03174646728930319,
+      "oof_deployable_auc": 0.6483521778234614,
+      "oof_deployable_ece": 0.03174646728930319,
+      "oof_deployable_n": 1231,
+      "oof_deployable_n_pos": 688,
+      "oof_deployable_positive_rate": 0.5588952071486596,
+      "oof_deployable_definition": "capital_fraction > 0",
+      "n_pos": 688,
+      "promotion_status": "pass",
+      "promotion_reasons": []
+    },
+    "promotion_eligible": false,
+    "reason": "Native training diagnostic on complete rows; strict full-pool admission failed; chronological development ECE failed; no model publication."
+  },
+  {
+    "role": "selected",
+    "features": [
+      "ev_score",
+      "adx_1h",
+      "adx_15m",
+      "adx_5m",
+      "atr_pct_15m",
+      "rsi_15m",
+      "ema_slope_1h",
+      "ema_crosses_5m",
+      "vwap_crosses_5m",
+      "hurst_exponent",
+      "range_size_pct",
+      "bb_width",
+      "grid_spacing_pct",
+      "profit_per_grid_pct",
+      "num_grids",
+      "quote_volume_24h",
+      "open_interest",
+      "micro_round_trip_cost_pct",
+      "funding_rate"
+    ],
+    "metrics": {
+      "auc_cv": 0.5643030188551017,
+      "precision_at_5": 0.6,
+      "f1_threshold": 0.2690802348336595,
+      "f1_score": 0.6851726472579553,
+      "feature_importance": {
+        "ev_score": {
+          "mdi": 0.0,
+          "permutation": 0.04808048995418083
+        },
+        "adx_1h": {
+          "mdi": 0.0,
+          "permutation": 0.016944762691749476
+        },
+        "adx_15m": {
+          "mdi": 0.0,
+          "permutation": 0.00485621908469579
+        },
+        "adx_5m": {
+          "mdi": 0.0,
+          "permutation": 0.0018372583201007175
+        },
+        "atr_pct_15m": {
+          "mdi": 0.0,
+          "permutation": 0.003681084192161517
+        },
+        "rsi_15m": {
+          "mdi": 0.0,
+          "permutation": -0.010160911849621453
+        },
+        "ema_slope_1h": {
+          "mdi": 0.0,
+          "permutation": 0.002883953635129558
+        },
+        "ema_crosses_5m": {
+          "mdi": 0.0,
+          "permutation": 0.0021054385575803853
+        },
+        "vwap_crosses_5m": {
+          "mdi": 0.0,
+          "permutation": -0.001250784563511235
+        },
+        "hurst_exponent": {
+          "mdi": 0.0,
+          "permutation": -0.0162932211822085
+        },
+        "range_size_pct": {
+          "mdi": 0.0,
+          "permutation": -0.005348100552112575
+        },
+        "bb_width": {
+          "mdi": 0.0,
+          "permutation": 1.308793993300601e-06
+        },
+        "grid_spacing_pct": {
+          "mdi": 0.0,
+          "permutation": -0.0020117735168184714
+        },
+        "profit_per_grid_pct": {
+          "mdi": 0.0,
+          "permutation": -0.006915416614754721
+        },
+        "num_grids": {
+          "mdi": 0.0,
+          "permutation": -0.010972929789971301
+        },
+        "quote_volume_24h": {
+          "mdi": 0.0,
+          "permutation": -0.0010671710528680916
+        },
+        "open_interest": {
+          "mdi": 0.0,
+          "permutation": 0.0003821837710932697
+        },
+        "micro_round_trip_cost_pct": {
+          "mdi": 0.0,
+          "permutation": -0.0028748147313899033
+        },
+        "funding_rate": {
+          "mdi": 0.0,
+          "permutation": 0.002810287515370743
+        }
+      },
+      "train_samples": 1231,
+      "positive_rate": 0.5588952071486596,
+      "calibration_method": "sigmoid_oos",
+      "calibration_ece_raw": 0.12561517335813308,
+      "calibration_ece_calibrated": 0.0038021127950098937,
+      "calibration_brier_raw": 0.2662326594066647,
+      "calibration_brier_calibrated": 0.24755803013784247,
+      "calibration_oos_accepted": true,
+      "calibration_oos_reject_reason": null,
+      "label_pnl_column": "net_pnl_pct",
+      "oof_auc": 0.6421848901451883,
+      "oof_auc_ci_low": 0.6131508374685741,
+      "oof_auc_ci_high": 0.6716488618818068,
+      "oof_ece": 0.02561614612572341,
+      "oof_deployable_auc": 0.6421848901451883,
+      "oof_deployable_ece": 0.02561614612572341,
+      "oof_deployable_n": 1231,
+      "oof_deployable_n_pos": 688,
+      "oof_deployable_positive_rate": 0.5588952071486596,
+      "oof_deployable_definition": "capital_fraction > 0",
+      "n_pos": 688,
+      "promotion_status": "pass",
+      "promotion_reasons": []
+    },
+    "promotion_eligible": false,
+    "reason": "Native training diagnostic on complete rows; strict full-pool admission failed; chronological development ECE failed; no model publication."
+  }
+]

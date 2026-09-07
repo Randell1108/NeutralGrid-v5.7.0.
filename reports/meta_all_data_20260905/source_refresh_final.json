@@ -1,0 +1,13 @@
+{
+  "verified_utc": "2026-09-07T03:07:01.525301+00:00",
+  "source_files_seen": 1206,
+  "new_paths": [
+    "D:\\Neutral Grid v5.7.0\\artifacts\\pipeline_runs\\default_250_20260906_232957\\deployment_ready_20260906_233011.csv"
+  ],
+  "missing_paths": [],
+  "changed_original_hashes": [],
+  "acknowledged_new_sources": {
+    "D:\\Neutral Grid v5.7.0\\artifacts\\pipeline_runs\\default_250_20260906_232957\\deployment_ready_20260906_233011.csv": "250 rows audited/scored; 111 unfinished windows; 139 missing geometry; zero new full-window labels"
+  },
+  "all_detected_sources_accounted_for": true
+}

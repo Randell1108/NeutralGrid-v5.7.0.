@@ -1,0 +1,44 @@
+{
+  "assembled_utc": "2026-09-07T02:52:27.511590+00:00",
+  "existing_rows": 4356,
+  "new_replay_rows": 2540,
+  "total_unique_rows": 6896,
+  "availability_anchored_holdout_rows": 490,
+  "primary_timestamp_eligible_rows": 6587,
+  "legacy_timestamp_sensitivity_rows": 309,
+  "source_counts": {
+    "historical_20260720_20260825": 3112,
+    "new_snapshot_replay": 2050,
+    "recent_20260827_20260903": 1244,
+    "latest_after_artifact_availability": 490
+  },
+  "target_summary": {
+    "duration_column": "duration_hours",
+    "target_contract": "fast_winner_time_to_3pct_le_7h",
+    "duration_hours_max": 7.0,
+    "pnl_column": "net_pnl_pct",
+    "target_column": "fast_winner_target",
+    "eligible_rows": 6896,
+    "positive_count": 3676,
+    "negative_count": 3220,
+    "negative_rows_duration_gt_7h_count": 0,
+    "excluded_rows_missing_duration_count": 0,
+    "excluded_rows_missing_pnl_count": 0,
+    "builder_y_compared_count": 6896,
+    "builder_y_mismatch_count": 1088,
+    "label_basis": "endogenous_time_to_target",
+    "trained_row_count": 6896
+  },
+  "active_hmm": "rolling_180d_20260903_153527",
+  "uniform_lineage_and_finite_probabilities": true,
+  "period_start": "2026-02-18 19:24:30+00:00",
+  "period_end": "2026-09-05 16:55:05+00:00",
+  "original_source_hashes": {
+    "D:\\Neutral Grid v5.7.0\\data\\new_expired_bots.xlsx": "910f7c51464f1c6321a3256a853a77ea81149c9150bff3ec46a12e21c14f8696",
+    "D:\\Neutral Grid v5.7.0\\artifact_manifest.json": "3a3a377e7b817c3bd5e59114824d42a69f2c8a463b5173e5504fc3ca09bf6b8a",
+    "D:\\Neutral Grid v5.7.0\\src\\neutralgrid\\models\\meta_labeler.py": "206685d4c8a72bab82d024c4b62ca7931c15971ffa02ad3e8fcf1b0d597fa8a2"
+  },
+  "retrospective_hmm_rows": 6314,
+  "lineage_limit": "Uniform active-HMM lineage does not establish point-in-time HMM training. Ranked profiles omit EV; fixed EV profiles are conditional diagnostics.",
+  "timing_limit": "Historical development follows existing scan-anchored research contracts. Latest holdout starts only after saved output availability. Legacy February-March timestamps are excluded from main selection and retained for sensitivity."
+}

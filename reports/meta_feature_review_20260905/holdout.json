@@ -1,0 +1,482 @@
+[
+  {
+    "role": "selected",
+    "spec": {
+      "id": "vote_logit_hgb_no_ou",
+      "estimator": "vote_logit_hgb",
+      "set": "no_ou",
+      "k": 19
+    },
+    "seed": 42,
+    "features": [
+      "ev_score",
+      "adx_1h",
+      "adx_15m",
+      "adx_5m",
+      "atr_pct_15m",
+      "rsi_15m",
+      "ema_slope_1h",
+      "ema_crosses_5m",
+      "vwap_crosses_5m",
+      "hurst_exponent",
+      "range_size_pct",
+      "bb_width",
+      "grid_spacing_pct",
+      "profit_per_grid_pct",
+      "num_grids",
+      "quote_volume_24h",
+      "open_interest",
+      "micro_round_trip_cost_pct",
+      "funding_rate"
+    ],
+    "n": 275,
+    "positives": 148,
+    "auc": 0.5650670355394765,
+    "ece": 0.09992272094221201,
+    "brier": 0.25074062176584316,
+    "fit_rows": 631,
+    "calibration_rows": 108,
+    "test_rows": 275,
+    "fit_end": "2026-08-31 21:57:46.224261+00:00",
+    "cal_start": "2026-09-01 14:11:47+00:00",
+    "cal_end": "2026-09-01 21:52:05.960342+00:00",
+    "test_start": "2026-09-02 11:55:21+00:00",
+    "cluster_auc_ci": {
+      "low": 0.5438871473354232,
+      "high": 0.608712715855573,
+      "scan_groups": 3,
+      "bootstrap_replicates": 2000
+    },
+    "per_scan": [
+      {
+        "scan": "2026-09-02 11:55:21+00:00",
+        "n": 111,
+        "positives": 71,
+        "auc": 0.5549295774647888,
+        "ece": 0.12572331818135535,
+        "brier": 0.23527441122074638
+      },
+      {
+        "scan": "2026-09-02 21:30:51+00:00",
+        "n": 101,
+        "positives": 52,
+        "auc": 0.608712715855573,
+        "ece": 0.14465751348514222,
+        "brier": 0.2504200156867165
+      },
+      {
+        "scan": "2026-09-03 16:21:06+00:00",
+        "n": 63,
+        "positives": 25,
+        "auc": 0.5557894736842105,
+        "ece": 0.2521368081477662,
+        "brier": 0.27850459929754967
+      }
+    ]
+  },
+  {
+    "role": "baseline",
+    "spec": {
+      "id": "vote_logit_hgb_full",
+      "estimator": "vote_logit_hgb",
+      "set": "full",
+      "k": 20
+    },
+    "seed": 42,
+    "features": [
+      "ev_score",
+      "adx_1h",
+      "adx_15m",
+      "adx_5m",
+      "atr_pct_15m",
+      "ou_halflife",
+      "rsi_15m",
+      "ema_slope_1h",
+      "ema_crosses_5m",
+      "vwap_crosses_5m",
+      "hurst_exponent",
+      "range_size_pct",
+      "bb_width",
+      "grid_spacing_pct",
+      "profit_per_grid_pct",
+      "num_grids",
+      "quote_volume_24h",
+      "open_interest",
+      "micro_round_trip_cost_pct",
+      "funding_rate"
+    ],
+    "n": 275,
+    "positives": 148,
+    "auc": 0.5595339433922111,
+    "ece": 0.0870669889657538,
+    "brier": 0.25296951820780317,
+    "fit_rows": 631,
+    "calibration_rows": 108,
+    "test_rows": 275,
+    "fit_end": "2026-08-31 21:57:46.224261+00:00",
+    "cal_start": "2026-09-01 14:11:47+00:00",
+    "cal_end": "2026-09-01 21:52:05.960342+00:00",
+    "test_start": "2026-09-02 11:55:21+00:00",
+    "cluster_auc_ci": {
+      "low": 0.5414648047876888,
+      "high": 0.6004709576138147,
+      "scan_groups": 3,
+      "bootstrap_replicates": 2000
+    },
+    "per_scan": [
+      {
+        "scan": "2026-09-02 11:55:21+00:00",
+        "n": 111,
+        "positives": 71,
+        "auc": 0.5514084507042254,
+        "ece": 0.1666717962706392,
+        "brier": 0.2381983135389622
+      },
+      {
+        "scan": "2026-09-02 21:30:51+00:00",
+        "n": 101,
+        "positives": 52,
+        "auc": 0.6004709576138147,
+        "ece": 0.12348268912022572,
+        "brier": 0.25340496669623935
+      },
+      {
+        "scan": "2026-09-03 16:21:06+00:00",
+        "n": 63,
+        "positives": 25,
+        "auc": 0.5515789473684211,
+        "ece": 0.19603730688185694,
+        "brier": 0.2782968740952521
+      }
+    ]
+  },
+  {
+    "seed": 42,
+    "paired_selected_minus_baseline_auc_ci": {
+      "low": 0.002422342547734435,
+      "high": 0.009440993788820018,
+      "scan_groups": 3,
+      "bootstrap_replicates": 2000
+    }
+  },
+  {
+    "role": "selected",
+    "spec": {
+      "id": "vote_logit_hgb_no_ou",
+      "estimator": "vote_logit_hgb",
+      "set": "no_ou",
+      "k": 19
+    },
+    "seed": 7,
+    "features": [
+      "ev_score",
+      "adx_1h",
+      "adx_15m",
+      "adx_5m",
+      "atr_pct_15m",
+      "rsi_15m",
+      "ema_slope_1h",
+      "ema_crosses_5m",
+      "vwap_crosses_5m",
+      "hurst_exponent",
+      "range_size_pct",
+      "bb_width",
+      "grid_spacing_pct",
+      "profit_per_grid_pct",
+      "num_grids",
+      "quote_volume_24h",
+      "open_interest",
+      "micro_round_trip_cost_pct",
+      "funding_rate"
+    ],
+    "n": 275,
+    "positives": 148,
+    "auc": 0.5622472866567354,
+    "ece": 0.0816545711929638,
+    "brier": 0.2502596167397979,
+    "fit_rows": 631,
+    "calibration_rows": 108,
+    "test_rows": 275,
+    "fit_end": "2026-08-31 21:57:46.224261+00:00",
+    "cal_start": "2026-09-01 14:11:47+00:00",
+    "cal_end": "2026-09-01 21:52:05.960342+00:00",
+    "test_start": "2026-09-02 11:55:21+00:00",
+    "cluster_auc_ci": {
+      "low": 0.531134226275292,
+      "high": 0.6130298273155417,
+      "scan_groups": 3,
+      "bootstrap_replicates": 2000
+    },
+    "per_scan": [
+      {
+        "scan": "2026-09-02 11:55:21+00:00",
+        "n": 111,
+        "positives": 71,
+        "auc": 0.553169014084507,
+        "ece": 0.1306063438051777,
+        "brier": 0.23441056008166586
+      },
+      {
+        "scan": "2026-09-02 21:30:51+00:00",
+        "n": 101,
+        "positives": 52,
+        "auc": 0.6130298273155417,
+        "ece": 0.1210114875169615,
+        "brier": 0.2492166180158851
+      },
+      {
+        "scan": "2026-09-03 16:21:06+00:00",
+        "n": 63,
+        "positives": 25,
+        "auc": 0.5357894736842106,
+        "ece": 0.2502648109320422,
+        "brier": 0.2798562542027797
+      }
+    ]
+  },
+  {
+    "role": "baseline",
+    "spec": {
+      "id": "vote_logit_hgb_full",
+      "estimator": "vote_logit_hgb",
+      "set": "full",
+      "k": 20
+    },
+    "seed": 7,
+    "features": [
+      "ev_score",
+      "adx_1h",
+      "adx_15m",
+      "adx_5m",
+      "atr_pct_15m",
+      "ou_halflife",
+      "rsi_15m",
+      "ema_slope_1h",
+      "ema_crosses_5m",
+      "vwap_crosses_5m",
+      "hurst_exponent",
+      "range_size_pct",
+      "bb_width",
+      "grid_spacing_pct",
+      "profit_per_grid_pct",
+      "num_grids",
+      "quote_volume_24h",
+      "open_interest",
+      "micro_round_trip_cost_pct",
+      "funding_rate"
+    ],
+    "n": 275,
+    "positives": 148,
+    "auc": 0.5528303894445626,
+    "ece": 0.08376694673715102,
+    "brier": 0.25346398311488333,
+    "fit_rows": 631,
+    "calibration_rows": 108,
+    "test_rows": 275,
+    "fit_end": "2026-08-31 21:57:46.224261+00:00",
+    "cal_start": "2026-09-01 14:11:47+00:00",
+    "cal_end": "2026-09-01 21:52:05.960342+00:00",
+    "test_start": "2026-09-02 11:55:21+00:00",
+    "cluster_auc_ci": {
+      "low": 0.5350147163300518,
+      "high": 0.5945839874411303,
+      "scan_groups": 3,
+      "bootstrap_replicates": 2000
+    },
+    "per_scan": [
+      {
+        "scan": "2026-09-02 11:55:21+00:00",
+        "n": 111,
+        "positives": 71,
+        "auc": 0.5411971830985915,
+        "ece": 0.15688594459175711,
+        "brier": 0.23995178536337095
+      },
+      {
+        "scan": "2026-09-02 21:30:51+00:00",
+        "n": 101,
+        "positives": 52,
+        "auc": 0.5945839874411303,
+        "ece": 0.12664887453567045,
+        "brier": 0.2532534082899721
+      },
+      {
+        "scan": "2026-09-03 16:21:06+00:00",
+        "n": 63,
+        "positives": 25,
+        "auc": 0.5589473684210526,
+        "ece": 0.2281803410165033,
+        "brier": 0.27760877688843766
+      }
+    ]
+  },
+  {
+    "seed": 7,
+    "paired_selected_minus_baseline_auc_ci": {
+      "low": -0.023157894736842044,
+      "high": 0.01995859213250517,
+      "scan_groups": 3,
+      "bootstrap_replicates": 2000
+    }
+  },
+  {
+    "role": "selected",
+    "spec": {
+      "id": "vote_logit_hgb_no_ou",
+      "estimator": "vote_logit_hgb",
+      "set": "no_ou",
+      "k": 19
+    },
+    "seed": 123,
+    "features": [
+      "ev_score",
+      "adx_1h",
+      "adx_15m",
+      "adx_5m",
+      "atr_pct_15m",
+      "rsi_15m",
+      "ema_slope_1h",
+      "ema_crosses_5m",
+      "vwap_crosses_5m",
+      "hurst_exponent",
+      "range_size_pct",
+      "bb_width",
+      "grid_spacing_pct",
+      "profit_per_grid_pct",
+      "num_grids",
+      "quote_volume_24h",
+      "open_interest",
+      "micro_round_trip_cost_pct",
+      "funding_rate"
+    ],
+    "n": 275,
+    "positives": 148,
+    "auc": 0.5673015535220259,
+    "ece": 0.0814263817005585,
+    "brier": 0.24956412491958305,
+    "fit_rows": 631,
+    "calibration_rows": 108,
+    "test_rows": 275,
+    "fit_end": "2026-08-31 21:57:46.224261+00:00",
+    "cal_start": "2026-09-01 14:11:47+00:00",
+    "cal_end": "2026-09-01 21:52:05.960342+00:00",
+    "test_start": "2026-09-02 11:55:21+00:00",
+    "cluster_auc_ci": {
+      "low": 0.5413935594186379,
+      "high": 0.6138147566718996,
+      "scan_groups": 3,
+      "bootstrap_replicates": 2000
+    },
+    "per_scan": [
+      {
+        "scan": "2026-09-02 11:55:21+00:00",
+        "n": 111,
+        "positives": 71,
+        "auc": 0.5461267605633803,
+        "ece": 0.12765401014964314,
+        "brier": 0.2345241417790553
+      },
+      {
+        "scan": "2026-09-02 21:30:51+00:00",
+        "n": 101,
+        "positives": 52,
+        "auc": 0.6138147566718996,
+        "ece": 0.13386612506629814,
+        "brier": 0.2488884498624376
+      },
+      {
+        "scan": "2026-09-03 16:21:06+00:00",
+        "n": 63,
+        "positives": 25,
+        "auc": 0.5536842105263158,
+        "ece": 0.24141335863161217,
+        "brier": 0.27714636792546005
+      }
+    ]
+  },
+  {
+    "role": "baseline",
+    "spec": {
+      "id": "vote_logit_hgb_full",
+      "estimator": "vote_logit_hgb",
+      "set": "full",
+      "k": 20
+    },
+    "seed": 123,
+    "features": [
+      "ev_score",
+      "adx_1h",
+      "adx_15m",
+      "adx_5m",
+      "atr_pct_15m",
+      "ou_halflife",
+      "rsi_15m",
+      "ema_slope_1h",
+      "ema_crosses_5m",
+      "vwap_crosses_5m",
+      "hurst_exponent",
+      "range_size_pct",
+      "bb_width",
+      "grid_spacing_pct",
+      "profit_per_grid_pct",
+      "num_grids",
+      "quote_volume_24h",
+      "open_interest",
+      "micro_round_trip_cost_pct",
+      "funding_rate"
+    ],
+    "n": 275,
+    "positives": 148,
+    "auc": 0.5497446265162801,
+    "ece": 0.09550862640812403,
+    "brier": 0.2533423348657845,
+    "fit_rows": 631,
+    "calibration_rows": 108,
+    "test_rows": 275,
+    "fit_end": "2026-08-31 21:57:46.224261+00:00",
+    "cal_start": "2026-09-01 14:11:47+00:00",
+    "cal_end": "2026-09-01 21:52:05.960342+00:00",
+    "test_start": "2026-09-02 11:55:21+00:00",
+    "cluster_auc_ci": {
+      "low": 0.5282844115132517,
+      "high": 0.5989010989010989,
+      "scan_groups": 3,
+      "bootstrap_replicates": 2000
+    },
+    "per_scan": [
+      {
+        "scan": "2026-09-02 11:55:21+00:00",
+        "n": 111,
+        "positives": 71,
+        "auc": 0.5376760563380282,
+        "ece": 0.139043572401811,
+        "brier": 0.23927578147501094
+      },
+      {
+        "scan": "2026-09-02 21:30:51+00:00",
+        "n": 101,
+        "positives": 52,
+        "auc": 0.5989010989010989,
+        "ece": 0.10763560093503015,
+        "brier": 0.25256892051112484
+      },
+      {
+        "scan": "2026-09-03 16:21:06+00:00",
+        "n": 63,
+        "positives": 25,
+        "auc": 0.5421052631578948,
+        "ece": 0.2297864170222477,
+        "brier": 0.2793661805196971
+      }
+    ]
+  },
+  {
+    "seed": 123,
+    "paired_selected_minus_baseline_auc_ci": {
+      "low": 0.008450704225352101,
+      "high": 0.018964803312629397,
+      "scan_groups": 3,
+      "bootstrap_replicates": 2000
+    }
+  }
+]

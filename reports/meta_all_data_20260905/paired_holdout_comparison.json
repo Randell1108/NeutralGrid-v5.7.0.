@@ -1,0 +1,32 @@
+[
+  {
+    "seed": 42,
+    "auc_delta_ci": {
+      "low": -0.05893162700292353,
+      "high": 0.046732830108443646,
+      "scan_groups": 4,
+      "symbols": 216,
+      "replicates": 2000
+    }
+  },
+  {
+    "seed": 7,
+    "auc_delta_ci": {
+      "low": -0.05893162700292353,
+      "high": 0.046732830108443646,
+      "scan_groups": 4,
+      "symbols": 216,
+      "replicates": 2000
+    }
+  },
+  {
+    "seed": 123,
+    "auc_delta_ci": {
+      "low": -0.05893162700292353,
+      "high": 0.046732830108443646,
+      "scan_groups": 4,
+      "symbols": 216,
+      "replicates": 2000
+    }
+  }
+]

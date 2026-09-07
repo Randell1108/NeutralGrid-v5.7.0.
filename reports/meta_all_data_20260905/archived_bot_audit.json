@@ -1,0 +1,7 @@
+{
+  "additional_strategy_ids": 27,
+  "proven_positive_labels": 8,
+  "unknown_labels": 19,
+  "timing_policy": "Only within-bot elapsed timestamps establish positive labels; saved measurements are diagnostic, with availability unverified.",
+  "not_merged_into_original_workbook": true
+}

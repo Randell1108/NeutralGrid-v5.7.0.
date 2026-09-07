@@ -1,0 +1,21 @@
+{
+  "completed_utc": "2026-09-05T21:36:42.7905308Z",
+  "targets": [
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\reports\\meta_feature_review_20260905\\_tmp",
+      "files_removed": 2,
+      "absent_verified": true
+    },
+    {
+      "path": "C:\\Users\\cris_\\AppData\\Local\\Temp\\pytest-of-cris_\\pytest-67",
+      "files_removed": 25,
+      "absent_verified": true
+    },
+    {
+      "path": "C:\\Users\\cris_\\AppData\\Local\\Temp\\pytest-of-cris_\\pytest-68",
+      "files_removed": 36,
+      "absent_verified": true
+    }
+  ],
+  "scope": "This study temporary inputs and its two identified pytest runs; unrelated pre-existing temporary files retained"
+}

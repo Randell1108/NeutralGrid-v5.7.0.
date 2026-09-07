@@ -1,0 +1,32 @@
+{
+  "artifact": "D:\\Neutral Grid v5.7.0\\reports\\meta_feature_review_20260905\\selected_candidate_diagnostic.joblib",
+  "sha256": "0bb7407867b976b980b89f73489e1c0b0c9b634dd5a928bc2fc19931d8298a87",
+  "feature_count": 19,
+  "features": [
+    "ev_score",
+    "adx_1h",
+    "adx_15m",
+    "adx_5m",
+    "atr_pct_15m",
+    "rsi_15m",
+    "ema_slope_1h",
+    "ema_crosses_5m",
+    "vwap_crosses_5m",
+    "hurst_exponent",
+    "range_size_pct",
+    "bb_width",
+    "grid_spacing_pct",
+    "profit_per_grid_pct",
+    "num_grids",
+    "quote_volume_24h",
+    "open_interest",
+    "micro_round_trip_cost_pct",
+    "funding_rate"
+  ],
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "runtime_meta_labeler_compatible": false,
+  "roundtrip_predictions_verified": 10,
+  "train_rows": 1231,
+  "note": "Full-data research fit; held-out study metrics evaluate earlier past-only fits, not independent testing of this full-data object."
+}

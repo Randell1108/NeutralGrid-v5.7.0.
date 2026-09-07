@@ -1,0 +1,48 @@
+{
+  "spec": {
+    "id": "vote_top24_live0",
+    "estimator": "vote",
+    "profile": "rank",
+    "k": 24,
+    "live": false
+  },
+  "features": [
+    "atr_pct_15m",
+    "rsi_15m",
+    "bb_width",
+    "range_size_pct",
+    "profit_per_grid_pct",
+    "grid_spacing_pct",
+    "num_grids",
+    "top20_ask_depth_usdt",
+    "top20_bid_depth_usdt",
+    "top20_depth_min_usdt",
+    "oi_to_volume",
+    "liquidity_stability_z_1h",
+    "top_account_lsr_log",
+    "ema_slope_1h",
+    "parkinson_vol_ratio_4h_24h_pre",
+    "open_interest",
+    "open_interest_change_pct",
+    "micro_round_trip_cost_pct",
+    "spread_pct",
+    "bb_width_ratio_1h_15m",
+    "basis_pct",
+    "adx_1h",
+    "adx_15m",
+    "quote_volume_24h"
+  ],
+  "feature_count": 24,
+  "support": {
+    "base_fit_rows": 6587,
+    "auxiliary_live_rows": 0,
+    "total_base_fit_rows": 6587,
+    "past_only_oof_calibration_rows": 3833,
+    "full_data_model_has_independent_holdout": false
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "workbook_scored_rows": 366,
+  "archived_scored_rows": 27,
+  "warning": "Workbook scores are descriptive, with imputation and possible training overlap; not an accuracy estimate."
+}

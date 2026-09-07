@@ -1,0 +1,7 @@
+{
+  "rows": 490,
+  "scan_start_positives": 229,
+  "availability_start_positives": 201,
+  "positive_to_negative": 58,
+  "negative_to_positive": 30
+}

@@ -1,0 +1,147 @@
+{
+  "calibration_rows": 867,
+  "calibration_win_rate": 0.5778546712802768,
+  "fit_rows": 5084,
+  "fit_win_rate": 0.5310778914240756,
+  "holdout_rows": 490,
+  "holdout_win_rate": 0.41020408163265304,
+  "models": {
+    "selected_calibrated": {
+      "rows": 490,
+      "positives": 201,
+      "auc": 0.6999087606947958,
+      "ece": 0.15592868546080932,
+      "brier": 0.23348946437304613,
+      "mean_prediction": 0.5415848156504812,
+      "prediction_bias": 0.13138073401782818
+    },
+    "selected_raw": {
+      "rows": 490,
+      "positives": 201,
+      "auc": 0.6999087606947958,
+      "ece": 0.09766157067541746,
+      "brier": 0.21695411571754125,
+      "mean_prediction": 0.48601382508973096,
+      "prediction_bias": 0.07580974345707792
+    },
+    "baseline_calibrated": {
+      "rows": 490,
+      "positives": 201,
+      "auc": 0.7154538725059822,
+      "ece": 0.14072896529789772,
+      "brier": 0.22876190296380766,
+      "mean_prediction": 0.5433833129036648,
+      "prediction_bias": 0.13317923127101178
+    },
+    "baseline_raw": {
+      "rows": 490,
+      "positives": 201,
+      "auc": 0.7154538725059822,
+      "ece": 0.10861226324706887,
+      "brier": 0.21702581365235574,
+      "mean_prediction": 0.5063548041244065,
+      "prediction_bias": 0.09615072249175344
+    },
+    "prior_calibrated": {
+      "rows": 490,
+      "positives": 201,
+      "auc": 0.717313088536556,
+      "ece": 0.13781663574096736,
+      "brier": 0.22794400198219672,
+      "mean_prediction": 0.5428570393713356,
+      "prediction_bias": 0.13265295773868252
+    },
+    "prior_raw": {
+      "rows": 490,
+      "positives": 201,
+      "auc": 0.717313088536556,
+      "ece": 0.11064050532352074,
+      "brier": 0.216468747212431,
+      "mean_prediction": 0.5066232415996298,
+      "prediction_bias": 0.09641915996697675
+    }
+  },
+  "scans": [
+    {
+      "scan": "2026-09-04 02:25:20+00:00",
+      "rows": 104,
+      "win_rate": 0.5769230769230769,
+      "selected_mean": 0.5571480000731642,
+      "selected_ece": 0.11723378189782038
+    },
+    {
+      "scan": "2026-09-04 14:01:15+00:00",
+      "rows": 140,
+      "win_rate": 0.4785714285714286,
+      "selected_mean": 0.5323122913868389,
+      "selected_ece": 0.12996042979516675
+    },
+    {
+      "scan": "2026-09-04 22:33:15+00:00",
+      "rows": 147,
+      "win_rate": 0.2653061224489796,
+      "selected_mean": 0.5209583608749724,
+      "selected_ece": 0.2738280817183242
+    },
+    {
+      "scan": "2026-09-05 16:55:05+00:00",
+      "rows": 99,
+      "win_rate": 0.35353535353535354,
+      "selected_mean": 0.568975432508569,
+      "selected_ece": 0.21544007897321543
+    }
+  ],
+  "historical_promotion_record": {
+    "path": "models/meta_labeler_promotion_decision.json",
+    "generated_at_utc": "2026-08-23T03:00:10.346380+00:00",
+    "previous_champion": {
+      "artifact_version": "20260822_230654",
+      "features": [
+        "ev_score",
+        "adx_1h",
+        "adx_15m",
+        "adx_5m",
+        "atr_pct_15m",
+        "ou_halflife",
+        "rsi_15m",
+        "ema_slope_1h",
+        "ema_crosses_5m",
+        "vwap_crosses_5m",
+        "hurst_exponent",
+        "range_size_pct",
+        "bb_width",
+        "grid_spacing_pct",
+        "profit_per_grid_pct",
+        "num_grids",
+        "quote_volume_24h",
+        "open_interest",
+        "micro_round_trip_cost_pct",
+        "funding_rate"
+      ],
+      "target_contract": "fast_winner_time_to_3pct_le_7h",
+      "promotion_status": "pass",
+      "oof_auc": 0.6173465131798465,
+      "oof_auc_ci_low": 0.5881841344920049,
+      "oof_auc_ci_high": 0.6456244703278164,
+      "oof_ece": 0.02288292063763023,
+      "oof_deployable_auc": 0.6173465131798465,
+      "oof_deployable_ece": 0.02288292063763023,
+      "total_samples": 1386,
+      "promotion_evaluation_contract": null,
+      "hmm_artifact_version": "rolling_180d_20260822_203741"
+    },
+    "replacement_candidate": {
+      "promotion_status": "pass",
+      "oof_auc": 0.7140716531754913,
+      "oof_auc_ci_low": 0.7009337494443506,
+      "oof_auc_ci_high": 0.7273646647774441,
+      "oof_ece": 0.08151344484947146,
+      "oof_deployable_auc": 0.6431777696612632,
+      "oof_deployable_ece": 0.07531994069586594,
+      "train_samples": 5849,
+      "promotion_evaluation_contract": "chronological_contiguous_group_purged_weighted_kfold_v2",
+      "hmm_artifact_version": "rolling_180d_20260822_203741"
+    },
+    "comparison_scope": "incomparable_champion_absolute_gate_only"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "development_auc_ci": {
+    "low": 0.5466656767885801,
+    "high": 0.6546542756282068,
+    "scan_groups": 30,
+    "symbols": 417,
+    "replicates": 2000
+  },
+  "development_thresholds_after_selection_are_descriptive": [
+    "pass",
+    []
+  ],
+  "independent_holdout_threshold_analogues": [
+    {
+      "seed": 42,
+      "threshold_analogue": [
+        "fail",
+        [
+          "ece_gt_0.10(ece=0.156)"
+        ]
+      ]
+    },
+    {
+      "seed": 7,
+      "threshold_analogue": [
+        "fail",
+        [
+          "ece_gt_0.10(ece=0.156)"
+        ]
+      ]
+    },
+    {
+      "seed": 123,
+      "threshold_analogue": [
+        "fail",
+        [
+          "ece_gt_0.10(ece=0.156)"
+        ]
+      ]
+    }
+  ],
+  "within_scan_permutation": {
+    "method": "Shuffle held-out labels within each scan, preserving scan-level class rates; frozen predictions unchanged",
+    "replicates": 2000,
+    "observed_auc": 0.6999087606947958,
+    "null_mean_auc": 0.5094981493914511,
+    "p_one_sided": 0.0004997501249375312
+  },
+  "promotion_completed": false,
+  "production_admission": "Historical research sources are not a finalized fresh_full_pool promotion input; feature profiles are research-only.",
+  "validated_development_trials": 166,
+  "validated_development_folds": 830,
+  "validated_holdout_fits": 9,
+  "no_fit_calibration_test_overlap": true,
+  "no_global_complete_case_deletion": true,
+  "original_hashes_unchanged": true
+}

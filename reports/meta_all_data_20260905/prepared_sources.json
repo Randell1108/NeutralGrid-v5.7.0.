@@ -1,0 +1,19 @@
+{
+  "frozen_utc": "2026-09-05T22:58:51.491724+00:00",
+  "snapshot_sources": 260,
+  "duplicate_snapshot_rows": 12455,
+  "unique_snapshot_candidate_ids": 25405,
+  "geometry_conflict_ids": 0,
+  "dispositions": {
+    "missing_recorded_grid_geometry": 18495,
+    "existing_full_7h_outcome": 4356,
+    "new_outcome_required": 2554
+  },
+  "replay_queue_rows": 2554,
+  "workbook_rows": 366,
+  "workbook_exact_snapshot_matches": 99,
+  "workbook_existing_candidate_outcomes": 88,
+  "workbook_provable_early_positive_labels": 77,
+  "old_pool_index_rows": 6048,
+  "old_pool_index_exact_snapshot_matches": 209
+}

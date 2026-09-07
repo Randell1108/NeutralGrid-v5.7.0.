@@ -1,0 +1,25 @@
+{
+  "unit_tests": {
+    "contract_calibration_alias_leakage": {
+      "passed": 94,
+      "seconds": 29.33
+    },
+    "finalizer_shadow_gate": {
+      "passed": 30,
+      "seconds": 17.76
+    },
+    "total_passed": 124
+  },
+  "source_pyright": "0 errors, 0 warnings, 0 informations",
+  "study_pyright": "0 errors, 0 warnings, 0 informations",
+  "configurations": 56,
+  "development_fold_evaluations": 168,
+  "heldout_evaluations": 6,
+  "native_full_training_diagnostics": 2,
+  "direct_runtime_gate_replications": 2,
+  "python": "3.11.9",
+  "numpy": "2.4.1",
+  "pandas": "2.3.3",
+  "scikit_learn": "1.8.0",
+  "promotion_completed": false
+}

@@ -1,0 +1,466 @@
+{
+  "schema": [
+    {
+      "feature": "ev_score",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "label_guard": false
+    },
+    {
+      "feature": "adx_1h",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "label_guard": false
+    },
+    {
+      "feature": "adx_15m",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "label_guard": false
+    },
+    {
+      "feature": "adx_5m",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "label_guard": false
+    },
+    {
+      "feature": "atr_pct_15m",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "label_guard": false
+    },
+    {
+      "feature": "ou_halflife",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "label_guard": false
+    },
+    {
+      "feature": "rsi_15m",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "label_guard": false
+    },
+    {
+      "feature": "ema_slope_1h",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "label_guard": false
+    },
+    {
+      "feature": "ema_crosses_5m",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "label_guard": false
+    },
+    {
+      "feature": "vwap_crosses_5m",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "label_guard": false
+    },
+    {
+      "feature": "hurst_exponent",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "label_guard": false
+    },
+    {
+      "feature": "range_size_pct",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "label_guard": false
+    },
+    {
+      "feature": "bb_width",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "label_guard": false
+    },
+    {
+      "feature": "grid_spacing_pct",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "label_guard": false
+    },
+    {
+      "feature": "profit_per_grid_pct",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "label_guard": false
+    },
+    {
+      "feature": "num_grids",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "label_guard": false
+    },
+    {
+      "feature": "quote_volume_24h",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "label_guard": false
+    },
+    {
+      "feature": "open_interest",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "label_guard": false
+    },
+    {
+      "feature": "micro_round_trip_cost_pct",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "label_guard": false
+    },
+    {
+      "feature": "funding_rate",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "label_guard": false
+    }
+  ],
+  "leakage_guards": {
+    "_prepare_features": true,
+    "train": true
+  },
+  "artifacts": [
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\artifacts\\diagnostics\\recovery_20260827\\shadow_meta_labeler.pkl",
+      "type": "dict",
+      "keys": [
+        "model",
+        "feature_names",
+        "imputer",
+        "is_calibrated",
+        "oos_calibration_method",
+        "oos_calibration_report",
+        "label_pnl_col_used",
+        "config",
+        "metrics"
+      ],
+      "feature_names": [
+        "ev_score",
+        "adx_1h",
+        "adx_15m",
+        "adx_5m",
+        "atr_pct_15m",
+        "ou_halflife",
+        "rsi_15m",
+        "ema_slope_1h",
+        "ema_crosses_5m",
+        "vwap_crosses_5m",
+        "hurst_exponent",
+        "range_size_pct",
+        "bb_width",
+        "grid_spacing_pct",
+        "profit_per_grid_pct",
+        "num_grids",
+        "quote_volume_24h",
+        "open_interest",
+        "micro_round_trip_cost_pct",
+        "funding_rate"
+      ],
+      "imputer_n_features_in": 20
+    },
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\artifacts\\diagnostics\\meta_prob_surrogate\\hmm_rolling_180d_20260822_203741_20260827_185315\\diagnostic_meta_prob_surrogate.joblib",
+      "type": "dict",
+      "keys": [
+        "artifact_kind",
+        "diagnostic_only",
+        "promotion_eligible",
+        "runtime_meta_labeler_compatible",
+        "target",
+        "feature_profile",
+        "hmm_artifact_version",
+        "features",
+        "estimator"
+      ],
+      "features": [
+        "ev_score",
+        "adx_1h",
+        "adx_15m",
+        "adx_5m",
+        "atr_pct_15m",
+        "ou_halflife",
+        "rsi_15m",
+        "ema_slope_1h",
+        "ema_crosses_5m",
+        "vwap_crosses_5m",
+        "hurst_exponent",
+        "range_size_pct",
+        "bb_width",
+        "grid_spacing_pct",
+        "profit_per_grid_pct",
+        "num_grids",
+        "quote_volume_24h",
+        "open_interest",
+        "micro_round_trip_cost_pct",
+        "funding_rate"
+      ],
+      "feature_profile": "snapshot_v20260530_fastwin",
+      "estimator_n_features_in": 20
+    }
+  ],
+  "additional_scanner_mapped_features": {
+    "basis_pct": {
+      "finite": 1244,
+      "unique": 1244
+    },
+    "bb_width_ratio_1h_15m": {
+      "finite": 1244,
+      "unique": 1244
+    },
+    "book_imbalance_top20": {
+      "finite": 1244,
+      "unique": 1244
+    },
+    "funding_carry_expected_next_7h": {
+      "finite": 1244,
+      "unique": 465
+    },
+    "funding_rate_zscore": {
+      "finite": 1244,
+      "unique": 1084
+    },
+    "global_lsr_log": {
+      "finite": 1244,
+      "unique": 1068
+    },
+    "hlabel": {
+      "finite": 1244,
+      "unique": 4
+    },
+    "hmm_tail_cvar_95": {
+      "finite": 67,
+      "unique": 67
+    },
+    "liquidity_stability_z_1h": {
+      "finite": 1244,
+      "unique": 1244
+    },
+    "long_short_ratio": {
+      "finite": 1244,
+      "unique": 1072
+    },
+    "micro_osc_score": {
+      "finite": 1244,
+      "unique": 945
+    },
+    "mode": {
+      "finite": 0,
+      "unique": 1
+    },
+    "oi_notional": {
+      "finite": 1244,
+      "unique": 1244
+    },
+    "oi_to_volume": {
+      "finite": 1244,
+      "unique": 1244
+    },
+    "open_interest_change_pct": {
+      "finite": 1244,
+      "unique": 1244
+    },
+    "parkinson_vol_ratio_4h_24h_pre": {
+      "finite": 1244,
+      "unique": 1244
+    },
+    "persistence_prob": {
+      "finite": 1244,
+      "unique": 341
+    },
+    "primary_pipeline_score": {
+      "finite": 1244,
+      "unique": 1244
+    },
+    "range_prob": {
+      "finite": 1244,
+      "unique": 1239
+    },
+    "regime_conf": {
+      "finite": 1244,
+      "unique": 94
+    },
+    "spread_pct": {
+      "finite": 1244,
+      "unique": 1226
+    },
+    "survival_prob": {
+      "finite": 1244,
+      "unique": 1173
+    },
+    "taker_buy_sell_log": {
+      "finite": 1244,
+      "unique": 1209
+    },
+    "taker_imbalance": {
+      "finite": 1244,
+      "unique": 1244
+    },
+    "top20_ask_depth_usdt": {
+      "finite": 1244,
+      "unique": 1244
+    },
+    "top20_bid_depth_usdt": {
+      "finite": 1244,
+      "unique": 1244
+    },
+    "top20_depth_min_usdt": {
+      "finite": 1244,
+      "unique": 1244
+    },
+    "top_account_lsr_log": {
+      "finite": 1244,
+      "unique": 1030
+    },
+    "top_position_lsr_log": {
+      "finite": 1244,
+      "unique": 1221
+    },
+    "top_position_vs_account_delta": {
+      "finite": 1244,
+      "unique": 1244
+    },
+    "tos_gcf": {
+      "finite": 583,
+      "unique": 458
+    },
+    "trend_prob": {
+      "finite": 1244,
+      "unique": 1239
+    },
+    "variance_ratio_1m_15m_pre_2h": {
+      "finite": 1244,
+      "unique": 1244
+    }
+  },
+  "active_feature_unique_counts": {
+    "ev_score": 1244,
+    "adx_1h": 1043,
+    "adx_15m": 1035,
+    "adx_5m": 1001,
+    "atr_pct_15m": 1244,
+    "ou_halflife": 1124,
+    "rsi_15m": 1052,
+    "ema_slope_1h": 1244,
+    "ema_crosses_5m": 16,
+    "vwap_crosses_5m": 48,
+    "hurst_exponent": 803,
+    "range_size_pct": 1242,
+    "bb_width": 515,
+    "grid_spacing_pct": 1088,
+    "profit_per_grid_pct": 1244,
+    "num_grids": 32,
+    "quote_volume_24h": 1244,
+    "open_interest": 1244,
+    "micro_round_trip_cost_pct": 877,
+    "funding_rate": 621
+  },
+  "workbooks": [
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\data\\new_expired_bots.xlsx",
+      "rows": 366,
+      "feature_finite": {
+        "ev_score": 0,
+        "adx_1h": 366,
+        "adx_15m": 366,
+        "adx_5m": 366,
+        "atr_pct_15m": 0,
+        "ou_halflife": 0,
+        "rsi_15m": 366,
+        "ema_slope_1h": 366,
+        "ema_crosses_5m": 366,
+        "vwap_crosses_5m": 366,
+        "hurst_exponent": 0,
+        "range_size_pct": 366,
+        "bb_width": 366,
+        "grid_spacing_pct": 366,
+        "profit_per_grid_pct": 0,
+        "num_grids": 0,
+        "quote_volume_24h": 0,
+        "open_interest": 0,
+        "micro_round_trip_cost_pct": 0,
+        "funding_rate": 0
+      },
+      "time_to_target_present": false,
+      "time_to_target_finite": 0,
+      "hmm_versions": {}
+    },
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\data\\new_expired_bots_backfilled_full_v2_20260904_hmm_rolling_180d_20260903_153527.xlsx",
+      "rows": 366,
+      "feature_finite": {
+        "ev_score": 362,
+        "adx_1h": 366,
+        "adx_15m": 366,
+        "adx_5m": 366,
+        "atr_pct_15m": 362,
+        "ou_halflife": 342,
+        "rsi_15m": 366,
+        "ema_slope_1h": 366,
+        "ema_crosses_5m": 366,
+        "vwap_crosses_5m": 366,
+        "hurst_exponent": 362,
+        "range_size_pct": 366,
+        "bb_width": 366,
+        "grid_spacing_pct": 366,
+        "profit_per_grid_pct": 362,
+        "num_grids": 0,
+        "quote_volume_24h": 362,
+        "open_interest": 0,
+        "micro_round_trip_cost_pct": 0,
+        "funding_rate": 362
+      },
+      "time_to_target_present": false,
+      "time_to_target_finite": 0,
+      "hmm_versions": {
+        "rolling_180d_20260903_153527": 362,
+        "NaN": 4
+      }
+    }
+  ]
+}
