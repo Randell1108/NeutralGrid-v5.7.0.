@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "neutralgrid"
-version = "6.5.8"
+version = "5.7.0"
 description = "NEUTRAL Futures Grid Bot Validator for Binance USDT-M"
 requires-python = ">=3.11"
 dependencies = [

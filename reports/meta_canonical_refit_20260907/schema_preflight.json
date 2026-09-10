@@ -1,0 +1,168 @@
+{
+  "schema": [
+    {
+      "feature": "ev_score",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "is_label": false
+    },
+    {
+      "feature": "adx_1h",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "is_label": false
+    },
+    {
+      "feature": "adx_15m",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "is_label": false
+    },
+    {
+      "feature": "adx_5m",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "is_label": false
+    },
+    {
+      "feature": "atr_pct_15m",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "is_label": false
+    },
+    {
+      "feature": "ou_halflife",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "is_label": false
+    },
+    {
+      "feature": "rsi_15m",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "is_label": false
+    },
+    {
+      "feature": "ema_slope_1h",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "is_label": false
+    },
+    {
+      "feature": "ema_crosses_5m",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "is_label": false
+    },
+    {
+      "feature": "vwap_crosses_5m",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "is_label": false
+    },
+    {
+      "feature": "hurst_exponent",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "is_label": false
+    },
+    {
+      "feature": "range_size_pct",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "is_label": false
+    },
+    {
+      "feature": "bb_width",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "is_label": false
+    },
+    {
+      "feature": "grid_spacing_pct",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "is_label": false
+    },
+    {
+      "feature": "profit_per_grid_pct",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "is_label": false
+    },
+    {
+      "feature": "num_grids",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "is_label": false
+    },
+    {
+      "feature": "quote_volume_24h",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "is_label": false
+    },
+    {
+      "feature": "open_interest",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "is_label": false
+    },
+    {
+      "feature": "micro_round_trip_cost_pct",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "is_label": false
+    },
+    {
+      "feature": "funding_rate",
+      "candidate_pipeline": true,
+      "data_generator": true,
+      "unified_builder": true,
+      "inference_alias": true,
+      "is_label": false
+    }
+  ],
+  "guards": {
+    "_prepare_features": true,
+    "train": true
+  }
+}

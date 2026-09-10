@@ -124,7 +124,7 @@ pyright run_full_pipeline.py                                               → 0
 - `metadata.json:47` `model_type="GradientBoostingClassifier"` is a **cosmetic writer-bug** — a hardcoded string at `meta_labeler.py:2000` that never inspects the estimator. The pkl's actual base estimator is `LogisticRegression`; the pkl is authoritative.
 - `auc_cv` (`metadata.json:56` ≈ 0.58, training-CPCV mean-of-folds) and `oof_auc` (0.781, study-faithful purged OOF) are two distinct fields, not a contradiction. Promotion gates on `oof_auc` (CI low `0.7686` > 0.50).
 - `models/meta_labeler_verification.json` is **stale** (generated `2026-06-01`, 256/254 rows, lineage matched against the OLD 0601 HMM). Do **not** cite it as proof the current model loads.
-- `pyproject.toml:7` and `src/neutralgrid/__init__.py:3` still read `6.5.7` inside the v6.5.8 tree. Immaterial to the load gate (which keys on HMM `artifact_version`), but it contradicts the memory note `project_basedir_split_v657_v658`, which is therefore inaccurate.
+- `pyproject.toml:7` and `src/neutralgrid/__init__.py:3` now both report `5.7.0`. This remains immaterial to the load gate (which keys on HMM `artifact_version`), while keeping the workspace identity consistent with the active repository.
 
 ## Assumptions (operator-validated 2026-06-20)
 

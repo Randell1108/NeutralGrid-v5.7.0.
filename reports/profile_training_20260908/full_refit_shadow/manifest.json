@@ -1,0 +1,21 @@
+{
+  "status": "shadow_only",
+  "training_rows": 6832,
+  "features": [
+    "parkinson_vol_ratio_4h_24h_pre",
+    "variance_ratio_1m_15m_pre_2h",
+    "funding_carry_expected_next_7h",
+    "liquidity_stability_z_1h"
+  ],
+  "family": "gaussian",
+  "parameter": 0.9,
+  "model_sha256": "c8407606237fc7f88dec0d4b2a52504c8ba0c88742e702439ae77d44dbad11f7",
+  "pattern_sha256": "d8ea95af166c0740ed0efd6ebf8d8b191208b57ac390add5a61a0dddb911be0f",
+  "evaluation": "D:\\Neutral Grid v5.7.0\\reports\\profile_training_20260908\\holdout_evaluation.json",
+  "validation_scope": "Holdout metrics belong to the frozen development-trained model; the full refit includes holdout rows.",
+  "label_counts": {
+    "1": 3567,
+    "0": 3265
+  },
+  "source_sha256": "a05a589d194176963a1b1c7b3d44897a08882cbeb87b86e759ace5d3f11072e5"
+}

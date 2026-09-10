@@ -1,0 +1,359 @@
+[
+  {
+    "source": "D:\\Deployment files\\organized\\2026-07\\deployment_ready_20260720_123348.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 250,
+    "novel_valid_geometry_score_date": 80
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-07\\deployment_ready_20260720_230136.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 1,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-07\\deployment_ready_20260721_124614.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 1,
+    "novel_valid_geometry_score_date": 1
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-07\\deployment_ready_20260722_124801.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-07\\deployment_ready_20260726_131925.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-07\\deployment_ready_20260727_114138.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-07\\deployment_ready_20260727_203637.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 2,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-07\\deployment_ready_20260728_112819.xlsx",
+    "rows": 248,
+    "missing_required_columns": [],
+    "novel_ids": 2,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-07\\deployment_ready_20260728_205605.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 2,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-07\\deployment_ready_20260729_203139.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-07\\deployment_ready_20260730_121238(1).xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-07\\deployment_ready_20260730_121238.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-07\\deployment_ready_20260731_215156.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260801_083427.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260801_170645.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 3,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260802_010455.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 3,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260802_184031.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260803_070214.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 1,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260803_141347.xlsx",
+    "rows": 249,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260803_221823.xlsx",
+    "rows": 249,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260804_064703.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 1,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260805_055322.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260805_121334.xlsx",
+    "rows": 249,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260805_194308.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260806_082251.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260806_170437.xlsx",
+    "rows": 249,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260807_045243.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260807_163601.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 2,
+    "novel_valid_geometry_score_date": 1
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260808_001012.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260809_121731.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 3,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260810_131617.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260810_211106.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 3,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260811_064640.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260811_133514.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 3,
+    "novel_valid_geometry_score_date": 1
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260811_215804.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 3,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260812_122543.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260812_200848.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 2,
+    "novel_valid_geometry_score_date": 1
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260813_125459.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260813_200859.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260814_123332.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 2,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260814_214024.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 2,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260820_155049.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 1,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260821_141031.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260821_215132.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 1,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260822_121311.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260823_031219.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 1,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260823_143521.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260823_225631.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260824_114538.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260824_200602.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260825_114628.xlsx",
+    "rows": 250,
+    "missing_required_columns": [],
+    "novel_ids": 0,
+    "novel_valid_geometry_score_date": 0
+  }
+]

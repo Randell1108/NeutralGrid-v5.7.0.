@@ -1,0 +1,16 @@
+{
+  "completed_at_utc": "2026-09-08T18:11:03.3599954Z",
+  "owned_temp_directories": [
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\.pft8",
+      "files_removed": 68,
+      "removed": true
+    },
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\reports\\profile_training_20260908\\_tmp",
+      "files_removed": 0,
+      "removed": true
+    }
+  ],
+  "retained": "Trained artifacts, source/outcome evidence, logs and reproducible study scripts"
+}

@@ -1,0 +1,55 @@
+{
+  "captured_utc": "2026-09-07T19:45:55.826008+00:00",
+  "files": [
+    {
+      "path": "artifact_manifest.json",
+      "exists": true,
+      "sha256": "3a3a377e7b817c3bd5e59114824d42a69f2c8a463b5173e5504fc3ca09bf6b8a"
+    },
+    {
+      "path": "models/meta_labeler.pkl",
+      "exists": false,
+      "sha256": null
+    },
+    {
+      "path": "models/meta_labeler/metadata.json",
+      "exists": false,
+      "sha256": null
+    },
+    {
+      "path": "models/meta_labeler_promotion_decision.json",
+      "exists": true,
+      "sha256": "920f9aed5cf63d431c601993379835e555cdb4b03926de4fd2ee981a59af54ee"
+    },
+    {
+      "path": "models/meta_labeler_verification.json",
+      "exists": true,
+      "sha256": "06f7d0357f12120220ff538b3d647a699da55e15f16a865864d301d820516213"
+    },
+    {
+      "path": "data/new_expired_bots.xlsx",
+      "exists": true,
+      "sha256": "910f7c51464f1c6321a3256a853a77ea81149c9150bff3ec46a12e21c14f8696"
+    },
+    {
+      "path": "data/cache/conformal_quantile.json",
+      "exists": false,
+      "sha256": null
+    },
+    {
+      "path": "data/trial_log.json",
+      "exists": true,
+      "sha256": "4ee6f7aa106149a53a3b2900b660df6f38ea5a99f57a531024c2b7f7b34d23cf"
+    },
+    {
+      "path": "src/neutralgrid/models/meta_labeler.py",
+      "exists": true,
+      "sha256": "206685d4c8a72bab82d024c4b62ca7931c15971ffa02ad3e8fcf1b0d597fa8a2"
+    },
+    {
+      "path": "retrain_meta_labeler.py",
+      "exists": true,
+      "sha256": "78be889a365adcfd8d2142e662f7a39f0d7882d23e76cc32a379b82a2985bad2"
+    }
+  ]
+}

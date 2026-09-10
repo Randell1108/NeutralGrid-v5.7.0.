@@ -1,0 +1,35 @@
+{
+  "selected_rows": 5373,
+  "selected_unique_ids": 5373,
+  "workbook_route_rows": 99,
+  "pre_backfill_missing_active_values": {
+    "ev_score": 0,
+    "adx_1h": 0,
+    "adx_15m": 0,
+    "adx_5m": 0,
+    "atr_pct_15m": 0,
+    "ou_halflife": 136,
+    "rsi_15m": 0,
+    "ema_slope_1h": 0,
+    "ema_crosses_5m": 0,
+    "vwap_crosses_5m": 0,
+    "hurst_exponent": 0,
+    "range_size_pct": 0,
+    "bb_width": 0,
+    "grid_spacing_pct": 0,
+    "profit_per_grid_pct": 0,
+    "num_grids": 0,
+    "quote_volume_24h": 0,
+    "open_interest": 0,
+    "micro_round_trip_cost_pct": 0,
+    "funding_rate": 0
+  },
+  "to_dict_fields_match": true,
+  "source_mtime_before_scan_rows": 3,
+  "all_loaded_dispositions": {
+    "missing_recorded_grid_geometry": 17520,
+    "below_score_floor_or_missing_score": 9362,
+    "selected_for_fresh_backtest": 5373,
+    "unparseable_candidate_id_timestamp": 301
+  }
+}

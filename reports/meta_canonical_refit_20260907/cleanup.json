@@ -1,0 +1,20 @@
+{
+  "completed_at_utc": "2026-09-08T14:40:17.0311599Z",
+  "targets": [
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\reports\\meta_canonical_refit_20260907\\_tmp",
+      "removed": true,
+      "files_removed": 1074,
+      "bytes_removed": 60545033.0
+    },
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\.mrp7",
+      "removed": true,
+      "files_removed": 63,
+      "bytes_removed": 90149.0
+    }
+  ],
+  "stale_progress_removed": true,
+  "retained": "Completed datasets, model artifacts, original run manifests, logs and reproducible audit code",
+  "all_removed": true
+}

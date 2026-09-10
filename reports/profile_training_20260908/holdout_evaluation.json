@@ -1,0 +1,69 @@
+{
+  "evaluated_at_utc": "2026-09-08T18:01:23.305837+00:00",
+  "selection": {
+    "selected_at_utc": "2026-09-08T18:00:00.876625+00:00",
+    "family": "gaussian",
+    "parameter": 0.9,
+    "training_rows": 5084,
+    "training_positive_rate": 0.5216365066876475,
+    "model_sha256": "6ebb3c3ba57a0c454f59de1e249e7226aaa93a6420fdb2673e714012bda3248c",
+    "pattern_sha256": "20aeb82efa2f814e4b9150c3850ebaafce6b6dc88f06ff535f95b6bad00555a1",
+    "baseline_sha256": "973f6b690d406a40ece53fec03e6a1fa76f18359163a5822611ba8a535add58d",
+    "holdout_sha256": "cc8ea4e36c76fb4b985592750cbf5a2f751c947dd85fbf959810a7b1b9ae79a7",
+    "nested_result": {
+      "family": "gaussian",
+      "final_parameter": 0.9,
+      "mean_auc": 0.528436110697639,
+      "finite_folds": 5,
+      "pass_rate": 0.4,
+      "pooled": {
+        "auc": 0.5373988027049252,
+        "brier": 0.25069009062823305,
+        "ece": 0.06730200154348917,
+        "rows": 2828,
+        "positives": 1554
+      }
+    },
+    "holdout_opened": false
+  },
+  "selected": {
+    "auc": 0.5514851944676507,
+    "brier": 0.2478283424292439,
+    "ece": 0.03618258400177447,
+    "rows": 1611,
+    "positives": 855
+  },
+  "gaussian_0_3_baseline": {
+    "auc": 0.545629505863424,
+    "brier": 0.24796220146615922,
+    "ece": 0.02315052378951782,
+    "rows": 1611,
+    "positives": 855
+  },
+  "train_prevalence_baseline": {
+    "auc": 0.5,
+    "brier": 0.24913852069223608,
+    "ece": 0.00908975029559278,
+    "rows": 1611,
+    "positives": 855
+  },
+  "cluster_bootstrap": {
+    "cluster_unit": "recorded outcome-start timestamp",
+    "clusters": 14,
+    "replicates": 5000,
+    "auc_ci95": [
+      0.4865971804294268,
+      0.616714081305572
+    ],
+    "paired_auc_delta_ci95": [
+      -0.0008422310857524039,
+      0.014338829750582116
+    ]
+  },
+  "promotion_status": "shadow_only",
+  "production_blockers": [
+    "Expanded FASTWIN target differs from canonical completed-bot profile labels",
+    "Holdout includes prior meta-labeler outcome exposure and is not a wholly unseen prospective bot cohort"
+  ],
+  "no_post_holdout_tuning": true
+}

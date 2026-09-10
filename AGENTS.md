@@ -1,7 +1,7 @@
 # AGENTS.md
 
 ## Project Overview
-- NEUTRAL Grid Bot v6.5.8 — Binance USDT-M futures grid bot with AFML-aligned pipeline
+- NEUTRAL Grid Bot v5.7.0 — Binance USDT-M futures grid bot with AFML-aligned pipeline
 - Python 3.11+, package source in 'src/neutralgrid/'
 - Pipeline flow: scan → enrich → backtest → deploy
 
@@ -107,7 +107,7 @@
 
 ## Live Bot Data Storage Policy
 
-- All newly ingested live bot data must be stored under `C:\Users\cris_\OneDrive\Documents\Christian\Crypto\Neutral Grid Bots\NEUTRAL grid bot v6.5.8 - Clean\Live` (this repository's `Live\` folder; repointed from the retired non-Clean tree 2026-07-10, historical folders copied over)
+- All newly ingested live bot data must be stored under `D:\Neutral Grid v5.7.0\Live` (this repository's `Live\` folder)
 - For each ingestion event, create a new date folder inside `Live\` using the ingestion date in `YYYY-MM-DD` format
 - Inside that date folder, create a symbol-specific folder named with the trading pair/symbol
 - Store the user-provided live bot data only inside that `Live\<ingestion-date>\<SYMBOL>\` folder

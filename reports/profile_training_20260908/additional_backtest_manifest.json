@@ -1,0 +1,21 @@
+{
+  "completed_at_utc": "2026-09-08T17:52:31.371344+00:00",
+  "requested_candidates": 1773,
+  "successful_rows": 1772,
+  "failures": [
+    {
+      "candidate_id": "AERGOUSDT_20260720_123348_dd64e7ad",
+      "attempts": 3,
+      "error": "BinanceAPIError('[400] -1121: Invalid symbol. | /fapi/v1/klines')"
+    }
+  ],
+  "hours": 7,
+  "min_bars": 420,
+  "realism_profile": "legacy",
+  "capital": 400,
+  "leverage": 10,
+  "max_concurrency": 4,
+  "entrypoint": "run_single_backtest -> build_training_config -> run_backtest",
+  "results_path": "D:\\Neutral Grid v5.7.0\\reports\\profile_training_20260908\\additional_backtest_results.jsonl",
+  "results_sha256": "0dc1374d0299974bd98745ae94e7704e706223140299d1a893955e6143c7dab2"
+}

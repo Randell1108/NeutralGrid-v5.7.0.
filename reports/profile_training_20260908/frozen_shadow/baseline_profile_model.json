@@ -1,0 +1,70 @@
+{
+  "duration_band": {
+    "max_hours": 7.0,
+    "min_hours": 0.0
+  },
+  "feature_impute": {
+    "funding_carry_expected_next_7h": 0.005,
+    "liquidity_stability_z_1h": -0.36294907561246503,
+    "parkinson_vol_ratio_4h_24h_pre": 0.8833761378827611,
+    "variance_ratio_1m_15m_pre_2h": 0.6899556694920268
+  },
+  "feature_mean": {
+    "funding_carry_expected_next_7h": -0.005720568843430528,
+    "liquidity_stability_z_1h": 0.045148014260752885,
+    "parkinson_vol_ratio_4h_24h_pre": 0.9276235386357456,
+    "variance_ratio_1m_15m_pre_2h": 0.7565469720876964
+  },
+  "feature_std": {
+    "funding_carry_expected_next_7h": 0.07594934679095243,
+    "liquidity_stability_z_1h": 1.8101415026197514,
+    "parkinson_vol_ratio_4h_24h_pre": 0.3077460948224829,
+    "variance_ratio_1m_15m_pre_2h": 0.35190797220931996
+  },
+  "features": [
+    "parkinson_vol_ratio_4h_24h_pre",
+    "variance_ratio_1m_15m_pre_2h",
+    "funding_carry_expected_next_7h",
+    "liquidity_stability_z_1h"
+  ],
+  "inv_cov": [
+    [
+      1.136047567581318,
+      -0.03513154749149935,
+      0.026945677152258315,
+      -0.3852259999228924
+    ],
+    [
+      -0.03513154749149936,
+      1.0070111523901528,
+      -0.004305775666262544,
+      -0.06793198993114143
+    ],
+    [
+      0.026945677152258308,
+      -0.004305775666262545,
+      1.0038561695214285,
+      0.02910902701911791
+    ],
+    [
+      -0.3852259999228924,
+      -0.06793198993114143,
+      0.029109027019117908,
+      1.141801926945198
+    ]
+  ],
+  "loser_mu": {
+    "funding_carry_expected_next_7h": 0.04854153063667438,
+    "liquidity_stability_z_1h": -0.06421207751367151,
+    "parkinson_vol_ratio_4h_24h_pre": -0.043979119617534035,
+    "variance_ratio_1m_15m_pre_2h": -0.003931344046903987
+  },
+  "model_family": "gaussian_lda_v1",
+  "prior_winner": 0.5216365066876475,
+  "winner_mu": {
+    "funding_carry_expected_next_7h": -0.04451470682819727,
+    "liquidity_stability_z_1h": 0.05888528375311041,
+    "parkinson_vol_ratio_4h_24h_pre": 0.0403307763611649,
+    "variance_ratio_1m_15m_pre_2h": 0.0036052144502454206
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "duration_band": {
+    "max_hours": 7.0,
+    "min_hours": 0.0
+  },
+  "feature_impute": {
+    "funding_carry_expected_next_7h": 0.005,
+    "liquidity_stability_z_1h": -0.3478773762448121,
+    "parkinson_vol_ratio_4h_24h_pre": 0.885319047976443,
+    "variance_ratio_1m_15m_pre_2h": 0.6908889028170745
+  },
+  "feature_mean": {
+    "funding_carry_expected_next_7h": -0.005275285275175412,
+    "liquidity_stability_z_1h": 0.0347483318188347,
+    "parkinson_vol_ratio_4h_24h_pre": 0.9321247857362678,
+    "variance_ratio_1m_15m_pre_2h": 0.7568190486875587
+  },
+  "feature_std": {
+    "funding_carry_expected_next_7h": 0.07271369893256766,
+    "liquidity_stability_z_1h": 1.6876168112023366,
+    "parkinson_vol_ratio_4h_24h_pre": 0.3144744486648899,
+    "variance_ratio_1m_15m_pre_2h": 0.3506843750812167
+  },
+  "features": [
+    "parkinson_vol_ratio_4h_24h_pre",
+    "variance_ratio_1m_15m_pre_2h",
+    "funding_carry_expected_next_7h",
+    "liquidity_stability_z_1h"
+  ],
+  "inv_cov": [
+    [
+      1.0041711404672753,
+      -0.009759230701820297,
+      0.0036308217382522933,
+      -0.04873801020870412
+    ],
+    [
+      -0.009759230701820295,
+      1.000359742127951,
+      -0.0004947241275281264,
+      -0.011216730512519184
+    ],
+    [
+      0.0036308217382522937,
+      -0.0004947241275281264,
+      1.0017085703706383,
+      0.004283252113281613
+    ],
+    [
+      -0.04873801020870412,
+      -0.011216730512519183,
+      0.004283252113281613,
+      1.005451028448724
+    ]
+  ],
+  "loser_mu": {
+    "funding_carry_expected_next_7h": 0.04634367508843851,
+    "liquidity_stability_z_1h": -0.05925052222104143,
+    "parkinson_vol_ratio_4h_24h_pre": -0.04648877968368897,
+    "variance_ratio_1m_15m_pre_2h": -0.021476011919928848
+  },
+  "model_family": "gaussian_lda_v1",
+  "prior_winner": 0.5221018735362998,
+  "selection_summary": {
+    "artifact_role": "shadow_full_refit",
+    "family": "gaussian",
+    "features": [
+      "parkinson_vol_ratio_4h_24h_pre",
+      "variance_ratio_1m_15m_pre_2h",
+      "funding_carry_expected_next_7h",
+      "liquidity_stability_z_1h"
+    ],
+    "label_counts": {
+      "0": 3265,
+      "1": 3567
+    },
+    "parameter": 0.9,
+    "promotion_blockers": [
+      "Target differs from canonical completed-bot profile",
+      "No wholly unseen prospective bot-disjoint validation"
+    ],
+    "refit_includes_disclosed_holdout": true,
+    "source_sha256": "a05a589d194176963a1b1c7b3d44897a08882cbeb87b86e759ace5d3f11072e5",
+    "target_contract": "fast_winner_time_to_3pct_le_7h",
+    "training_rows": 6832,
+    "validation_artifact": "frozen_shadow/profile_model.json"
+  },
+  "winner_mu": {
+    "funding_carry_expected_next_7h": -0.04241998855165898,
+    "liquidity_stability_z_1h": 0.05423407767078764,
+    "parkinson_vol_ratio_4h_24h_pre": 0.04255280786856967,
+    "variance_ratio_1m_15m_pre_2h": 0.01965774570185586
+  }
+}

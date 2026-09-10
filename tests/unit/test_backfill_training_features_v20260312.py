@@ -764,7 +764,7 @@ def test_backfiller_attempts_hmm_inference_when_exchange_returns_fewer_than_requ
                 persistence_prob=0.60,
                 trained_at_utc="2026-08-15T23:14:45.834213+00:00",
                 artifact_version="hmm_v1",
-                pipeline_version="6.5.8",
+                pipeline_version="5.7.0",
                 calibration_provenance={"status": "ok"},
             )
 
@@ -843,7 +843,7 @@ def test_backfiller_uses_candidate_scan_time_for_scanner_origin_replay(
                 persistence_prob=0.60,
                 trained_at_utc="2026-08-15T23:14:45.834213+00:00",
                 artifact_version="hmm_v1",
-                pipeline_version="6.5.8",
+                pipeline_version="5.7.0",
                 calibration_provenance={"status": "ok"},
             )
 
@@ -933,7 +933,7 @@ def test_hmm_lineage_only_accepts_snapshot_candidate_id_without_start_time(
                 persistence_prob=0.60,
                 trained_at_utc="2026-08-15T23:14:45.834213+00:00",
                 artifact_version="hmm_v1",
-                pipeline_version="6.5.8",
+                pipeline_version="5.7.0",
                 calibration_provenance={"status": "ok"},
             )
 
@@ -1009,7 +1009,7 @@ def test_hmm_lineage_only_scope_fetches_only_15m_and_preserves_snapshot_inputs(
                 persistence_prob=0.60,
                 trained_at_utc="2026-08-15T23:14:45.834213+00:00",
                 artifact_version="hmm_v1",
-                pipeline_version="6.5.8",
+                pipeline_version="5.7.0",
                 calibration_provenance={"status": "ok"},
             )
 

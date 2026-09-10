@@ -1,0 +1,60 @@
+{
+  "checked_at_utc": "2026-09-08T18:06:02.932882+00:00",
+  "known_paths": 1074,
+  "current_scanner_files": 1075,
+  "additional_paths": [
+    "d:\\neutral grid v5.7.0\\artifacts\\pipeline_runs\\default_250_20260908_143315\\deployment_ready_20260908_143317.csv"
+  ],
+  "changed_or_missing_sources": [],
+  "scan_errors": [],
+  "roots": [
+    "D:\\Neutral Grid v5.7.0\\results",
+    "D:\\Neutral Grid v5.7.0\\artifacts",
+    "D:\\Neutral Grid v5.7.0\\outputs",
+    "D:\\Neutral Grid v5.7.0\\data",
+    "D:\\Neutral Grids\\data",
+    "D:\\Neutral Grids\\artifacts",
+    "D:\\Neutral Grids\\outputs",
+    "D:\\Deployment files\\organized",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.2\\data",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.2\\results",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.2\\Live",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.3\\data",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.3\\results",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.3\\Live",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.4\\data",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.4\\results",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.4\\Live",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.4.2\\data",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.4.2\\results",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.4.2\\Live",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.4.3\\data",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.4.3\\results",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.4.3\\Live",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.4.4\\data",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.4.4\\results",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.4.4\\Live",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.4.5\\data",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.4.5\\results",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.4.5\\Live",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.4.6\\data",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.4.6\\results",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.4.6\\Live",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.5.1\\data",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.5.1\\results",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.5.1\\Live",
+    "D:\\Backup\\Christian\\Crypto\\Antigravity - NEUTRAL grid v1\\data",
+    "D:\\Backup\\Christian\\Crypto\\Antigravity - NEUTRAL grid v1\\results"
+  ],
+  "additional_file_audits": [
+    {
+      "path": "d:\\neutral grid v5.7.0\\artifacts\\pipeline_runs\\default_250_20260908_143315\\deployment_ready_20260908_143317.csv",
+      "sha256": "41e8d2cb4674df0e01131254fae8fe26df4b3daf4b12f0c989b4c6e354eb0e70",
+      "rows": 250,
+      "mature_rows": 0,
+      "earliest_maturity_utc": "2026-09-08T22:13:05.375352+00:00",
+      "latest_maturity_utc": "2026-09-08T22:13:05.375352+00:00",
+      "disposition": "excluded: seven-hour outcomes are not yet observable"
+    }
+  ]
+}

@@ -175,3 +175,140 @@ def test_parse_private_telemetry_preserves_complete_drawer_fields() -> None:
 def test_parse_private_telemetry_fails_closed_on_ladder_count_mismatch() -> None:
     with pytest.raises(PrivateTelemetryParseError, match="ladder count mismatch"):
         parse_private_telemetry_text(_BAND_DRAWER.replace("Sell(2)", "Sell(3)"))
+
+
+def test_parse_private_telemetry_preserves_declared_side_after_price_crossing() -> None:
+    drawer = _BAND_DRAWER.replace(
+        "Last Price\n0.1588 USDT\nBuy(2)",
+        "Last Price\n0.1580 USDT\nBuy(2)",
+    )
+
+    parsed = parse_private_telemetry_text(drawer)
+
+    ladder = parsed["open_order_ladder"]
+    assert [row["price"] for row in ladder["buy"]] == [0.1583, 0.1573]
+    assert [row["price"] for row in ladder["sell"]] == [0.1606, 0.1617]
+
+
+def test_parse_private_telemetry_preserves_column_major_all_buy_ladder() -> None:
+    pending_start = _BAND_DRAWER.index("Pending Order\n")
+    grid_start = _BAND_DRAWER.index("Grid Details\n", pending_start)
+    pending = """Pending Order
+Qty Per Order
+995.9 BAND
+Last Price
+0.1588 USDT
+Buy(3)
+Sell(0)
+% to Fill
+Price (USDT)
+% to Fill
+-0.31%
+0.1583
+-0.94%
+0.1573
+-1.57%
+0.1563
+1
+2
+3
+No pending orders.
+"""
+    drawer = _BAND_DRAWER[:pending_start] + pending + _BAND_DRAWER[grid_start:]
+
+    parsed = parse_private_telemetry_text(drawer)
+
+    ladder = parsed["open_order_ladder"]
+    assert [row["price"] for row in ladder["buy"]] == [0.1583, 0.1573, 0.1563]
+    assert ladder["sell"] == []
+
+
+def test_parse_private_telemetry_preserves_integer_valued_decimal_price() -> None:
+    pending_start = _BAND_DRAWER.index("Pending Order\n")
+    grid_start = _BAND_DRAWER.index("Grid Details\n", pending_start)
+    pending = """Pending Order
+Qty Per Order
+2.56 ETC
+Last Price
+8.827 USDT
+Buy(14)
+Sell(2)
+% to Fill
+Price (USDT)
+% to Fill
+-0.94%
+8.744
+1
+8.874
+0.53%
+-1.67%
+8.679
+2
+8.941
+1.29%
+-2.40%
+8.615
+3
+-3.11%
+8.552
+4
+-3.84%
+8.488
+5
+-4.54%
+8.426
+6
+-5.25%
+8.363
+7
+-5.94%
+8.302
+8
+-6.65%
+8.240
+9
+-7.34%
+8.179
+10
+-8.02%
+8.119
+11
+-8.70%
+8.059
+12
+-9.36%
+8.000
+13
+-10.03%
+7.941
+14
+"""
+    drawer = (
+        _BAND_DRAWER[:pending_start]
+        + pending
+        + _BAND_DRAWER[grid_start:].replace(
+            "0.1530 - 0.1686 USDT",
+            "7.941 - 8.941 USDT",
+        )
+    )
+
+    parsed = parse_private_telemetry_text(drawer)
+
+    ladder = parsed["open_order_ladder"]
+    assert [row["price"] for row in ladder["buy"]] == [
+        8.744,
+        8.679,
+        8.615,
+        8.552,
+        8.488,
+        8.426,
+        8.363,
+        8.302,
+        8.240,
+        8.179,
+        8.119,
+        8.059,
+        8.0,
+        7.941,
+    ]
+    assert [row["price"] for row in ladder["sell"]] == [8.874, 8.941]

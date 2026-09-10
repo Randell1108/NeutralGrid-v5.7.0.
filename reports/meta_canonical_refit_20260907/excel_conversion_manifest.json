@@ -1,0 +1,170 @@
+[
+  {
+    "source": "D:\\Deployment files\\organized\\2026-07\\deployment_ready_20260720_123348.xlsx",
+    "source_sha256": "ac86e6c2f3d3be79b56fef16b16b2197aad47d13d971b234d4ad7a1ecc5e0d34",
+    "staged_path": "D:\\Neutral Grid v5.7.0\\reports\\meta_canonical_refit_20260907\\_tmp\\scanners\\deployment_ready_xlsx_000_20260720_123348.csv",
+    "staged_sha256": "e31d6366fb699ef4180605e4f795d53589da394e065b8218196dbb9eba6c4123",
+    "rows": 250,
+    "mtime_preserved": true
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-07\\deployment_ready_20260720_230136.xlsx",
+    "source_sha256": "05b2e9674b6451c2755f3389e5d87c5d836d5aa7910db52c09098f5e3eeb0c1c",
+    "staged_path": "D:\\Neutral Grid v5.7.0\\reports\\meta_canonical_refit_20260907\\_tmp\\scanners\\deployment_ready_xlsx_001_20260720_230136.csv",
+    "staged_sha256": "e9c468ad2adeb06ceea4e4c07100fe09549b4c182ee918f07d4ee37b813f40cc",
+    "rows": 1,
+    "mtime_preserved": true
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-07\\deployment_ready_20260721_124614.xlsx",
+    "source_sha256": "e496f347a99e4e9ab7b166b560f29d7d85feac3219c76ef4064d2e905a0ff77c",
+    "staged_path": "D:\\Neutral Grid v5.7.0\\reports\\meta_canonical_refit_20260907\\_tmp\\scanners\\deployment_ready_xlsx_002_20260721_124614.csv",
+    "staged_sha256": "f40a64786a0abe6e8aa8718ec3b17c1e57886b2f3fc35ebf28e7c46e4debe233",
+    "rows": 1,
+    "mtime_preserved": true
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-07\\deployment_ready_20260727_203637.xlsx",
+    "source_sha256": "66da24318a5fbfbe6e96a546812f1e3e5c69d028c1c0b14ad5f3a49e9e6c37ae",
+    "staged_path": "D:\\Neutral Grid v5.7.0\\reports\\meta_canonical_refit_20260907\\_tmp\\scanners\\deployment_ready_xlsx_006_20260727_203637.csv",
+    "staged_sha256": "9c876b645e06e3c1e6e7491d6ec93dce3dcd5098e78b1625291f008c59877780",
+    "rows": 2,
+    "mtime_preserved": true
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-07\\deployment_ready_20260728_112819.xlsx",
+    "source_sha256": "12a8fc6967f836159e6501914e9c7a65e3457785d733e4c254a84bdad7485e7b",
+    "staged_path": "D:\\Neutral Grid v5.7.0\\reports\\meta_canonical_refit_20260907\\_tmp\\scanners\\deployment_ready_xlsx_007_20260728_112819.csv",
+    "staged_sha256": "1aeba3f2e01cc9200891caecdaee50b8aa783d1418ce020bee40c4de76c0a3b1",
+    "rows": 2,
+    "mtime_preserved": true
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-07\\deployment_ready_20260728_205605.xlsx",
+    "source_sha256": "7dde6c326389683f19eb0357d452379e02050788a1ef963a13f530e82ff0126b",
+    "staged_path": "D:\\Neutral Grid v5.7.0\\reports\\meta_canonical_refit_20260907\\_tmp\\scanners\\deployment_ready_xlsx_008_20260728_205605.csv",
+    "staged_sha256": "22eb9257bedf7a548a115e57b628ab7cd45c085355504933cb67efe159f57df4",
+    "rows": 2,
+    "mtime_preserved": true
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260801_170645.xlsx",
+    "source_sha256": "a505b606bebbdb8b52a7646c052468b14f686992bebd13809a0182c23b702513",
+    "staged_path": "D:\\Neutral Grid v5.7.0\\reports\\meta_canonical_refit_20260907\\_tmp\\scanners\\deployment_ready_xlsx_014_20260801_170645.csv",
+    "staged_sha256": "12c7768e94a027c13032ba763ae9b649558ef2c7f0b2808eae4aa5c7ad88a1a5",
+    "rows": 3,
+    "mtime_preserved": true
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260802_010455.xlsx",
+    "source_sha256": "6e222b0bf7491011b4b667d0d5d90be5688590ca182a31861c8f66156e7412f0",
+    "staged_path": "D:\\Neutral Grid v5.7.0\\reports\\meta_canonical_refit_20260907\\_tmp\\scanners\\deployment_ready_xlsx_015_20260802_010455.csv",
+    "staged_sha256": "8bb0694f31c4040e7be1b8e228e4ddd98fc28ce800decb384314f24bce6ac831",
+    "rows": 3,
+    "mtime_preserved": true
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260803_070214.xlsx",
+    "source_sha256": "7dfe13ef1304e9d201f56289da0a7b37787f7afe02429170405d261d08b7ac81",
+    "staged_path": "D:\\Neutral Grid v5.7.0\\reports\\meta_canonical_refit_20260907\\_tmp\\scanners\\deployment_ready_xlsx_017_20260803_070214.csv",
+    "staged_sha256": "6e8caf898a04debee3337473777048c90abd92dd44568c5cc1c822d74081bbdf",
+    "rows": 1,
+    "mtime_preserved": true
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260804_064703.xlsx",
+    "source_sha256": "dc69764c4a3783d9df42ae37e47ed35d99cfcefa74e7454bf8546469595e0a10",
+    "staged_path": "D:\\Neutral Grid v5.7.0\\reports\\meta_canonical_refit_20260907\\_tmp\\scanners\\deployment_ready_xlsx_020_20260804_064703.csv",
+    "staged_sha256": "2118fd03197ccc3d850164b61f0d5e20e717924182c05e182f992171ccff08c0",
+    "rows": 1,
+    "mtime_preserved": true
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260807_163601.xlsx",
+    "source_sha256": "16a33fe843f4f6ca565109e518cb7c5088596aedcc2daeb1d426320eb9bc783b",
+    "staged_path": "D:\\Neutral Grid v5.7.0\\reports\\meta_canonical_refit_20260907\\_tmp\\scanners\\deployment_ready_xlsx_027_20260807_163601.csv",
+    "staged_sha256": "0a8648c35ae0655c19df0b313833b2ac713bc3d1f8ff62dad77110ec6799bef6",
+    "rows": 2,
+    "mtime_preserved": true
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260809_121731.xlsx",
+    "source_sha256": "05e29b46555679820cba57343362963ebfc467395514a98964084ad228b87748",
+    "staged_path": "D:\\Neutral Grid v5.7.0\\reports\\meta_canonical_refit_20260907\\_tmp\\scanners\\deployment_ready_xlsx_029_20260809_121731.csv",
+    "staged_sha256": "5ca5459df62004effc984facf6cd1a61c367f96f41fb85d1d3787974721b0f6d",
+    "rows": 3,
+    "mtime_preserved": true
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260810_211106.xlsx",
+    "source_sha256": "b887fbaef206557550dc2f9b84ae5b0b98188aa7c84521e06d0dcda6f6a70424",
+    "staged_path": "D:\\Neutral Grid v5.7.0\\reports\\meta_canonical_refit_20260907\\_tmp\\scanners\\deployment_ready_xlsx_031_20260810_211106.csv",
+    "staged_sha256": "d9131edec358c3d35d9d5efd3e378d29ba94eda224d7b7eb309316ddfe88c9cb",
+    "rows": 3,
+    "mtime_preserved": true
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260811_133514.xlsx",
+    "source_sha256": "32be8c8ce60e875026a59d8dad5e99f74a33cb9f70867dc96a5dd3974575264b",
+    "staged_path": "D:\\Neutral Grid v5.7.0\\reports\\meta_canonical_refit_20260907\\_tmp\\scanners\\deployment_ready_xlsx_033_20260811_133514.csv",
+    "staged_sha256": "3a054e3af02b857beb92bafab0eea7890601804ff78230238cfbada136a74345",
+    "rows": 3,
+    "mtime_preserved": true
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260811_215804.xlsx",
+    "source_sha256": "b197b2cc023acc773f70033ccb99721eaa43ad57199c49c8fe2416ed2ef279ac",
+    "staged_path": "D:\\Neutral Grid v5.7.0\\reports\\meta_canonical_refit_20260907\\_tmp\\scanners\\deployment_ready_xlsx_034_20260811_215804.csv",
+    "staged_sha256": "92dddb098e2b2fe617850b9c1be681ce4ea40d671bdccd35366edc0adafa5036",
+    "rows": 3,
+    "mtime_preserved": true
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260812_200848.xlsx",
+    "source_sha256": "b03ee257480e635e02ba8fa68bc1b51e429b2af67f09b123e5c15f99802210da",
+    "staged_path": "D:\\Neutral Grid v5.7.0\\reports\\meta_canonical_refit_20260907\\_tmp\\scanners\\deployment_ready_xlsx_036_20260812_200848.csv",
+    "staged_sha256": "2e1ec0b391ed9d1f47ec9dca174935db11d41b9110f6c07be993e074663ca3fc",
+    "rows": 2,
+    "mtime_preserved": true
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260814_123332.xlsx",
+    "source_sha256": "082cb449cea23d8645b27367262bb918269abe70b190e98a3b6cf69226248c7b",
+    "staged_path": "D:\\Neutral Grid v5.7.0\\reports\\meta_canonical_refit_20260907\\_tmp\\scanners\\deployment_ready_xlsx_039_20260814_123332.csv",
+    "staged_sha256": "a7edc1d78a36bc287c6373b001fb21c48ab30568d1622a36c5ed9fde5d590669",
+    "rows": 2,
+    "mtime_preserved": true
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260814_214024.xlsx",
+    "source_sha256": "9f77617fda6f84ac5002e9fa276a4ef1b87ab4ce6558d57385d63b050f50a49b",
+    "staged_path": "D:\\Neutral Grid v5.7.0\\reports\\meta_canonical_refit_20260907\\_tmp\\scanners\\deployment_ready_xlsx_040_20260814_214024.csv",
+    "staged_sha256": "a9ff3e4d03e18d44ba2269a096ded930e54f62ef8e6066ad091b0a3fb0a6667c",
+    "rows": 2,
+    "mtime_preserved": true
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260820_155049.xlsx",
+    "source_sha256": "4c66a8e99a8b013fe2b1d195cfe0c31f3b4547e40534cc0e6e621f3416cb87dc",
+    "staged_path": "D:\\Neutral Grid v5.7.0\\reports\\meta_canonical_refit_20260907\\_tmp\\scanners\\deployment_ready_xlsx_041_20260820_155049.csv",
+    "staged_sha256": "a9e1cc126fead3325e99995060c38aaee92d4e46b3b9ee0e5f8ee86b1e879876",
+    "rows": 1,
+    "mtime_preserved": true
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260821_215132.xlsx",
+    "source_sha256": "850c183b6e29708b1351a12d25c16ec04a883b46e70ff0bffa23fa5254d81cbc",
+    "staged_path": "D:\\Neutral Grid v5.7.0\\reports\\meta_canonical_refit_20260907\\_tmp\\scanners\\deployment_ready_xlsx_043_20260821_215132.csv",
+    "staged_sha256": "d537ae2d8e231801a08cedffcc22c0db0892be3bf2b13592b75419dcb2831954",
+    "rows": 1,
+    "mtime_preserved": true
+  },
+  {
+    "source": "D:\\Deployment files\\organized\\2026-08\\deployment_ready_20260823_031219.xlsx",
+    "source_sha256": "ea9bfb3bfdc0533412fd4a3d980a5a7cf6084a1f17725d1d2b2f7a240066294b",
+    "staged_path": "D:\\Neutral Grid v5.7.0\\reports\\meta_canonical_refit_20260907\\_tmp\\scanners\\deployment_ready_xlsx_045_20260823_031219.csv",
+    "staged_sha256": "62f413eca32795387dccf5b7eb2164100904a07812c42ecf9a63ef6949cb49d2",
+    "rows": 1,
+    "mtime_preserved": true
+  }
+]

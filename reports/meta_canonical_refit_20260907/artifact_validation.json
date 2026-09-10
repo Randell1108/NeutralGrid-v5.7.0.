@@ -1,0 +1,278 @@
+{
+  "artifact_version": "20260908_143214",
+  "checks": {
+    "exact_20_features": true,
+    "all_5369_rows_used": true,
+    "all_inputs_finite": true,
+    "labels_match_time_to_target": true,
+    "positive_count_matches": true,
+    "hmm_matches_active": true,
+    "saved_model_promotion_pass": true,
+    "predictions_finite_and_bounded": true,
+    "pickle_and_artifact_predictions_match": true,
+    "single_sigmoid_wrapper": true,
+    "feature_health_pass": true,
+    "target_contract_correct": true,
+    "final_scaler_fit_on_all_rows": true,
+    "original_unchanged:artifact_manifest.json": true,
+    "original_unchanged:data/new_expired_bots.xlsx": true,
+    "original_unchanged:data/cache/conformal_quantile.json": true,
+    "original_unchanged:src/neutralgrid/models/meta_labeler.py": true,
+    "original_unchanged:retrain_meta_labeler.py": true,
+    "trial_logged": true
+  },
+  "rows": 5369,
+  "positive_labels": 2835,
+  "features": [
+    "ev_score",
+    "adx_1h",
+    "adx_15m",
+    "adx_5m",
+    "atr_pct_15m",
+    "ou_halflife",
+    "rsi_15m",
+    "ema_slope_1h",
+    "ema_crosses_5m",
+    "vwap_crosses_5m",
+    "hurst_exponent",
+    "range_size_pct",
+    "bb_width",
+    "grid_spacing_pct",
+    "profit_per_grid_pct",
+    "num_grids",
+    "quote_volume_24h",
+    "open_interest",
+    "micro_round_trip_cost_pct",
+    "funding_rate"
+  ],
+  "metrics": {
+    "auc_cv": 0.5534529207650783,
+    "precision_at_5": 0.5333333333333333,
+    "positive_rate": 0.5280312907431551,
+    "target_contract": "fast_winner_time_to_3pct_le_7h",
+    "target_label_column": "fast_winner_target",
+    "target_duration_column": "duration_hours",
+    "target_duration_hours_max": 7.0,
+    "target_positive_pnl_threshold_pct": 3.0,
+    "is_calibrated": true,
+    "calibration_method": "sigmoid_oos",
+    "calibration_ece_raw": 0.13320636700776414,
+    "calibration_ece_calibrated": 0.011920881449043843,
+    "calibration_brier_raw": 0.2713408703839545,
+    "calibration_brier_calibrated": 0.24673920540821367,
+    "calibration_oos_accepted": true,
+    "calibration_oos_reject_reason": null,
+    "label_pnl_column": "net_pnl_pct",
+    "oof_auc": 0.6867744355773823,
+    "oof_auc_ci_low": 0.6722756292573285,
+    "oof_auc_ci_high": 0.699757872786888,
+    "oof_ece": 0.013505508604505478,
+    "oof_deployable_auc": 0.6867744355773823,
+    "oof_deployable_ece": 0.013505508604505478,
+    "oof_deployable_n": 5369,
+    "oof_deployable_n_pos": 2835,
+    "oof_deployable_positive_rate": 0.5280312907431551,
+    "oof_deployable_definition": "capital_fraction > 0",
+    "n_pos": 2835,
+    "promotion_status": "pass",
+    "promotion_reasons": []
+  },
+  "promotion_decision": {
+    "schema_version": 1,
+    "generated_at_utc": "2026-09-08T14:32:14.204372+00:00",
+    "comparison_kind": "stored_summary_nonpaired",
+    "output_path": "models\\meta_labeler.pkl",
+    "champion_metadata_path": "models\\meta_labeler\\metadata.json",
+    "candidate": {
+      "promotion_status": "pass",
+      "oof_auc": 0.6867744355773823,
+      "oof_auc_ci_low": 0.6722756292573285,
+      "oof_auc_ci_high": 0.699757872786888,
+      "oof_ece": 0.013505508604505478,
+      "oof_deployable_auc": 0.6867744355773823,
+      "oof_deployable_ece": 0.013505508604505478,
+      "train_samples": 5369,
+      "promotion_evaluation_contract": "chronological_contiguous_group_purged_weighted_kfold_v2",
+      "hmm_artifact_version": "rolling_180d_20260903_153527"
+    },
+    "champion": null,
+    "status": "pass",
+    "reasons": [],
+    "comparison_scope": "initial_deployment"
+  },
+  "calibration_report": {
+    "brier_raw": 0.2713408703839545,
+    "brier_calibrated": 0.24673920540821367,
+    "ece_raw": 0.13320636700776414,
+    "ece_calibrated": 0.011920881449043843,
+    "samples": 10578.0,
+    "ece_improvement": 0.1212854855587203,
+    "brier_improvement": 0.024601664975740817,
+    "accepted": 1.0,
+    "beta_upgrade": false,
+    "reliability_max_deviation": 0.021249471593337066
+  },
+  "actual_estimator_repr": "VotingClassifier(estimators=[('logit',\n                              LogisticRegression(class_weight='balanced',\n                                                 penalty='l2', random_state=42,\n                                                 solver='liblinear')),\n                             ('hgb',\n                              HistGradientBoostingClassifier(early_stopping=False,\n                                                             l2_regularization=3.0,\n                                                             learning_rate=0.03,\n                                                             max_features=0.8,\n                                                             max_iter=350,\n                                                             max_leaf_nodes=10,\n                                                             min_samples_leaf=60,\n                                                             random_state=42))],\n                 voting='soft', weights=[1.0, 1.0])",
+  "actual_calibrator_repr": "LogisticRegression(random_state=42)",
+  "scaler_samples_seen": 5369.0,
+  "prediction_smoke_test": {
+    "rows": 5369,
+    "min": 0.42694018228311353,
+    "max": 0.6105884151825909,
+    "mean": 0.5168529244925418,
+    "max_pickle_artifact_difference": 0.0,
+    "interpretation": "Load and inference check on training rows, not out-of-sample performance"
+  },
+  "files_before_after": [
+    {
+      "path": "artifact_manifest.json",
+      "before_exists": true,
+      "after_exists": true,
+      "before_sha256": "3a3a377e7b817c3bd5e59114824d42a69f2c8a463b5173e5504fc3ca09bf6b8a",
+      "after_sha256": "3a3a377e7b817c3bd5e59114824d42a69f2c8a463b5173e5504fc3ca09bf6b8a",
+      "unchanged": true
+    },
+    {
+      "path": "models/meta_labeler.pkl",
+      "before_exists": false,
+      "after_exists": true,
+      "before_sha256": null,
+      "after_sha256": "e87cf2273df5539c1f9b62faf7c5b33d4b7c66acd302a06d29820c9b446ae4a5",
+      "unchanged": false
+    },
+    {
+      "path": "models/meta_labeler/metadata.json",
+      "before_exists": false,
+      "after_exists": true,
+      "before_sha256": null,
+      "after_sha256": "55d5bbecac90895c3bf1c6a86bcf4fc4f4839eabb4cb82a82bdb3641dc9d7af8",
+      "unchanged": false
+    },
+    {
+      "path": "models/meta_labeler_promotion_decision.json",
+      "before_exists": true,
+      "after_exists": true,
+      "before_sha256": "920f9aed5cf63d431c601993379835e555cdb4b03926de4fd2ee981a59af54ee",
+      "after_sha256": "31cef1e232d47f303e28bdf8fe5daa6ebc626bdaed226004c73a66429be665cf",
+      "unchanged": false
+    },
+    {
+      "path": "models/meta_labeler_verification.json",
+      "before_exists": true,
+      "after_exists": true,
+      "before_sha256": "06f7d0357f12120220ff538b3d647a699da55e15f16a865864d301d820516213",
+      "after_sha256": "6340fef4219784532d4279048343c6586fac985cc0f7629412670065d6ebb0dc",
+      "unchanged": false
+    },
+    {
+      "path": "data/new_expired_bots.xlsx",
+      "before_exists": true,
+      "after_exists": true,
+      "before_sha256": "910f7c51464f1c6321a3256a853a77ea81149c9150bff3ec46a12e21c14f8696",
+      "after_sha256": "910f7c51464f1c6321a3256a853a77ea81149c9150bff3ec46a12e21c14f8696",
+      "unchanged": true
+    },
+    {
+      "path": "data/cache/conformal_quantile.json",
+      "before_exists": false,
+      "after_exists": false,
+      "before_sha256": null,
+      "after_sha256": null,
+      "unchanged": true
+    },
+    {
+      "path": "data/trial_log.json",
+      "before_exists": true,
+      "after_exists": true,
+      "before_sha256": "4ee6f7aa106149a53a3b2900b660df6f38ea5a99f57a531024c2b7f7b34d23cf",
+      "after_sha256": "edb5c86ed091c3368ba2a767fdb13f868ec5447c5783b4c9837412a18011528c",
+      "unchanged": false
+    },
+    {
+      "path": "src/neutralgrid/models/meta_labeler.py",
+      "before_exists": true,
+      "after_exists": true,
+      "before_sha256": "206685d4c8a72bab82d024c4b62ca7931c15971ffa02ad3e8fcf1b0d597fa8a2",
+      "after_sha256": "206685d4c8a72bab82d024c4b62ca7931c15971ffa02ad3e8fcf1b0d597fa8a2",
+      "unchanged": true
+    },
+    {
+      "path": "retrain_meta_labeler.py",
+      "before_exists": true,
+      "after_exists": true,
+      "before_sha256": "78be889a365adcfd8d2142e662f7a39f0d7882d23e76cc32a379b82a2985bad2",
+      "after_sha256": "78be889a365adcfd8d2142e662f7a39f0d7882d23e76cc32a379b82a2985bad2",
+      "unchanged": true
+    }
+  ],
+  "trial_records": [
+    {
+      "trial_id": "meta_labeler_20260908_143214",
+      "timestamp": "2026-09-08T14:32:14.092510+00:00",
+      "model_type": "meta_labeler",
+      "hyperparameters": {
+        "hurdle_pct": 3.0,
+        "sl_pct": -12.0,
+        "horizon_hours": 6.0,
+        "cv_folds": 5,
+        "random_state": 42,
+        "n_estimators": 50,
+        "max_depth": 3,
+        "learning_rate": 0.05
+      },
+      "cv_score": 0.5534529207650783,
+      "test_score": null,
+      "feature_set": [
+        "ev_score",
+        "adx_1h",
+        "adx_15m",
+        "adx_5m",
+        "atr_pct_15m",
+        "ou_halflife",
+        "rsi_15m",
+        "ema_slope_1h",
+        "ema_crosses_5m",
+        "vwap_crosses_5m",
+        "hurst_exponent",
+        "range_size_pct",
+        "bb_width",
+        "grid_spacing_pct",
+        "profit_per_grid_pct",
+        "num_grids",
+        "quote_volume_24h",
+        "open_interest",
+        "micro_round_trip_cost_pct",
+        "funding_rate"
+      ],
+      "notes": "Training samples: 5369, Positive rate: 52.8%"
+    }
+  ],
+  "code_contract_constants": {
+    "LABEL_CONTRACT_VERSION": "2026-05-09",
+    "FORMULA_VERSION": "alignment-v2-geometric-realism"
+  },
+  "saved_artifact_files": [
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\models\\meta_labeler.pkl",
+      "sha256": "e87cf2273df5539c1f9b62faf7c5b33d4b7c66acd302a06d29820c9b446ae4a5",
+      "bytes": 464961
+    },
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\models\\meta_labeler\\model.joblib",
+      "sha256": "d666c5d826514dc48267427b4daa1587cb7a5d849296c711a3177db8b8976366",
+      "bytes": 193792
+    },
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\models\\meta_labeler\\scaler.joblib",
+      "sha256": "85f82bb197871a230efc5331601499b193a879af3b5c1b71da66131ea15762c9",
+      "bytes": 1169
+    },
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\models\\meta_labeler\\metadata.json",
+      "sha256": "55d5bbecac90895c3bf1c6a86bcf4fc4f4839eabb4cb82a82bdb3641dc9d7af8",
+      "bytes": 2815
+    }
+  ],
+  "sequential_bootstrap_enabled": false,
+  "final_fit_scope_evidence": "Sequential bootstrap is disabled; unchanged MetaLabeler.train fits base_model on the full X/y arrays at meta_labeler.py:1767; final scaler saw all 5369 rows."
+}

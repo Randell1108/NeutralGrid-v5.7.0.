@@ -1,0 +1,160 @@
+{
+  "review_date": "2026-09-07",
+  "repository": "Randell1108/neutral-grid-bot-v6.5.8-clean",
+  "default_branch": "fastwin-v2-regrow-err059-v658",
+  "inspected_branch": "codex/latest-worktree-20260820",
+  "inspected_commit": "55be3a5e1af8bc274149fdfe2d683533df921b60",
+  "branches": [
+    {
+      "name": "codex/latest-worktree-20260820",
+      "commit": {
+        "sha": "55be3a5e1af8bc274149fdfe2d683533df921b60",
+        "url": "https://api.github.com/repos/Randell1108/neutral-grid-bot-v6.5.8-clean/commits/55be3a5e1af8bc274149fdfe2d683533df921b60"
+      },
+      "protected": false
+    },
+    {
+      "name": "fastwin-recall-gate4-union-0603",
+      "commit": {
+        "sha": "2578dba7a10ee318b8bf304aeeab7ce2e654c046",
+        "url": "https://api.github.com/repos/Randell1108/neutral-grid-bot-v6.5.8-clean/commits/2578dba7a10ee318b8bf304aeeab7ce2e654c046"
+      },
+      "protected": false
+    },
+    {
+      "name": "fastwin-v2-regrow-err059-v658",
+      "commit": {
+        "sha": "60ab8998887f36d60c8a41443abe016a49507eb0",
+        "url": "https://api.github.com/repos/Randell1108/neutral-grid-bot-v6.5.8-clean/commits/60ab8998887f36d60c8a41443abe016a49507eb0"
+      },
+      "protected": false
+    },
+    {
+      "name": "grid-synch-impl",
+      "commit": {
+        "sha": "84a9de7ea8d08862c4e21e5114a1e1d4f4f3eb4d",
+        "url": "https://api.github.com/repos/Randell1108/neutral-grid-bot-v6.5.8-clean/commits/84a9de7ea8d08862c4e21e5114a1e1d4f4f3eb4d"
+      },
+      "protected": false
+    },
+    {
+      "name": "main",
+      "commit": {
+        "sha": "6520901ec0255e13c1705fcd5303d957804aa992",
+        "url": "https://api.github.com/repos/Randell1108/neutral-grid-bot-v6.5.8-clean/commits/6520901ec0255e13c1705fcd5303d957804aa992"
+      },
+      "protected": false
+    }
+  ],
+  "champion": {
+    "artifact_version": "20260822_230654",
+    "features": [
+      "ev_score",
+      "adx_1h",
+      "adx_15m",
+      "adx_5m",
+      "atr_pct_15m",
+      "ou_halflife",
+      "rsi_15m",
+      "ema_slope_1h",
+      "ema_crosses_5m",
+      "vwap_crosses_5m",
+      "hurst_exponent",
+      "range_size_pct",
+      "bb_width",
+      "grid_spacing_pct",
+      "profit_per_grid_pct",
+      "num_grids",
+      "quote_volume_24h",
+      "open_interest",
+      "micro_round_trip_cost_pct",
+      "funding_rate"
+    ],
+    "target_contract": "fast_winner_time_to_3pct_le_7h",
+    "promotion_status": "pass",
+    "oof_auc": 0.6173465131798465,
+    "oof_auc_ci_low": 0.5881841344920049,
+    "oof_auc_ci_high": 0.6456244703278164,
+    "oof_ece": 0.02288292063763023,
+    "oof_deployable_auc": 0.6173465131798465,
+    "oof_deployable_ece": 0.02288292063763023,
+    "total_samples": 1386,
+    "promotion_evaluation_contract": null,
+    "hmm_artifact_version": "rolling_180d_20260822_203741"
+  },
+  "exact_champion_final_calibration_method_verified": false,
+  "reason": "Dedicated champion metadata and binary are gitignored and absent from inspected branch tips; metadata path history is empty on the default and August-24 branches. Summary omits calibration method. Defaults permit gated beta replacement.",
+  "local_matches_remote_git_blob": {
+    "src/neutralgrid/models/meta_labeler.py": "0887095dd79e8fdc67970a4284c073be7060cff4",
+    "retrain_meta_labeler.py": "8bbfb156825bd62cabe65222a1cfc64f11e662d9",
+    "models/meta_labeler_promotion_decision.json": "0ae595543b6db9576641a47e1c9395c4aebe441d"
+  },
+  "training_recipe_evidence_level": "Verified archived/current canonical code; exact historical run configuration and retained calibrator are not recovered.",
+  "code_default_calibration_method": "sigmoid",
+  "code_oos_sigmoid_input": "clipped raw probability, not logit",
+  "code_beta_replacement_possible": true,
+  "promotion_evaluation_code": "CalibratedClassifierCV(method='sigmoid', cv=3); this is separate from the final model's pooled OOS calibrator.",
+  "current_recovery_shadow": {
+    "artifact_version": "20260827_204845",
+    "features": 20,
+    "total_samples": 2985,
+    "calibration_method": "sigmoid_oos",
+    "calibration_oos_accepted": true
+  },
+  "current_research_candidate": {
+    "features": 24,
+    "diagnostic_only": true,
+    "calibration_input": "logit of clipped raw probability",
+    "calibrator": "LogisticRegression",
+    "identical_to_canonical_oos_calibrator": false
+  },
+  "canonical_model_files_present": false,
+  "archived_experiment_static_inspection": [
+    {
+      "name": "baseline",
+      "blob_sha": "80ffd42fdec344783174f58fabb2b75ae41126d7",
+      "bytes": 456895,
+      "champion_version_present": false,
+      "train_samples": 4957,
+      "oof_ece": 0.032128706586761153,
+      "calibration_strings": [
+        "sigmoid_oos"
+      ]
+    },
+    {
+      "name": "cap0",
+      "blob_sha": "ef7ca046a34a6800ce17273f2df12283981e3b16",
+      "bytes": 457162,
+      "champion_version_present": false,
+      "train_samples": 5143,
+      "oof_ece": 0.026478054720698616,
+      "calibration_strings": [
+        "beta_oos",
+        "sigmoid_oos"
+      ]
+    },
+    {
+      "name": "cap60",
+      "blob_sha": "5b9ed39cb9218be835fd4bcce20b9206b65b9ab1",
+      "bytes": 457162,
+      "champion_version_present": false,
+      "train_samples": 5143,
+      "oof_ece": 0.02802535507527126,
+      "calibration_strings": [
+        "beta_oos",
+        "sigmoid_oos"
+      ]
+    }
+  ],
+  "validation": {
+    "command": "python -m pytest tests/unit/test_meta_labeler_calibration_gate.py -q -p no:cacheprovider",
+    "passed": 4,
+    "seconds": 25.26,
+    "scope": "Current calibration gate regression tests; not historical champion reproduction."
+  },
+  "cleanup": {
+    "temporary_files_created": 0,
+    "temporary_files_remaining": 0,
+    "remote_pickle_inspection": "Decoded bytes inspected statically in tool memory; no pickle execution or filesystem download."
+  }
+}

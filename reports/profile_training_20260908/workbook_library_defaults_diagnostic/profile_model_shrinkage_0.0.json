@@ -1,0 +1,140 @@
+{
+  "duration_band": {
+    "max_hours": 7.0,
+    "min_hours": 0.0
+  },
+  "feature_impute": {
+    "funding_carry_expected_next_7h": 0.005,
+    "liquidity_stability_z_1h": -0.2053983225671835,
+    "parkinson_vol_ratio_4h_24h_pre": 0.9159354594615254,
+    "variance_ratio_1m_15m_pre_2h": 0.6980892179207583
+  },
+  "feature_mean": {
+    "funding_carry_expected_next_7h": -0.04633864102564098,
+    "liquidity_stability_z_1h": -0.14618424634150667,
+    "parkinson_vol_ratio_4h_24h_pre": 0.9948083407394401,
+    "variance_ratio_1m_15m_pre_2h": 0.7157498185517919
+  },
+  "feature_std": {
+    "funding_carry_expected_next_7h": 0.19330283486783878,
+    "liquidity_stability_z_1h": 0.5348166302370775,
+    "parkinson_vol_ratio_4h_24h_pre": 0.38759225760464394,
+    "variance_ratio_1m_15m_pre_2h": 0.19101926617999546
+  },
+  "features": [
+    "parkinson_vol_ratio_4h_24h_pre",
+    "variance_ratio_1m_15m_pre_2h",
+    "funding_carry_expected_next_7h",
+    "liquidity_stability_z_1h"
+  ],
+  "inv_cov": [
+    [
+      1.1057747002618545,
+      0.09450378383971192,
+      0.04928238465596808,
+      -0.358803722318327
+    ],
+    [
+      0.09450378383971189,
+      1.1154295389240432,
+      0.02195642452544614,
+      -0.38809574238086575
+    ],
+    [
+      0.04928238465596807,
+      0.021956424525446144,
+      1.0293312072165453,
+      -0.048775057537417774
+    ],
+    [
+      -0.3588037223183271,
+      -0.3880957423808658,
+      -0.04877505753741777,
+      1.2325010583898033
+    ]
+  ],
+  "loser_mu": {
+    "funding_carry_expected_next_7h": 0.10759016843842553,
+    "liquidity_stability_z_1h": -0.05784971487740451,
+    "parkinson_vol_ratio_4h_24h_pre": -0.057228030199359604,
+    "variance_ratio_1m_15m_pre_2h": 0.03187566120407144
+  },
+  "model_family": "gaussian_lda_v1",
+  "prior_winner": 0.24615384615384617,
+  "selection_summary": {
+    "artifact_role": "shadow_diagnostic",
+    "blocker": "historical_funding_availability_unverified; canonical_backfill_uses_future_realized_proxy",
+    "bounded_universe_size": 223,
+    "duration_band": {
+      "max_hours": 7.0,
+      "min_hours": 0.0
+    },
+    "label_definition": {
+      "duration_rule": "0 <= duration_hours < 7.0",
+      "performance_rule": "profit_factor >= min_profit_factor and pnl_pct >= train_only_top_quantile_threshold",
+      "time_to_target_claimed": false
+    },
+    "label_name": "fast_completed_winner_under_7h",
+    "labeled_universe_size": 195,
+    "losers_count": 147,
+    "max_duration_hours": 7.0,
+    "min_avg_profit_per_grid": 0.59,
+    "min_profit_factor": 1.5,
+    "pnl_threshold": 4.535,
+    "shrinkage": 0.0,
+    "top_quantile": 0.75,
+    "winners_count": 48,
+    "winners_symbols": [
+      "AINUSDT",
+      "AKEUSDT",
+      "ALLOUSDT",
+      "APRUSDT",
+      "AXSUSDT",
+      "BASUSDT",
+      "BIOUSDT",
+      "BOBUSDT",
+      "BSVUSDT",
+      "COSUSDT",
+      "CTSIUSDT",
+      "DAMUSDT",
+      "ENJUSDT",
+      "ERAUSDT",
+      "GIGGLEUSDT",
+      "GRASSUSDT",
+      "IOUSDT",
+      "IPUSDT",
+      "JCTUSDT",
+      "KATUSDT",
+      "KOMAUSDT",
+      "LABUSDT",
+      "MAGMAUSDT",
+      "METUSDT",
+      "MEUSDT",
+      "NOMUSDT",
+      "ONUSDT",
+      "RAVEUSDT",
+      "RESOLVUSDT",
+      "RIVERUSDT",
+      "ROBOUSDT",
+      "SKYAIUSDT",
+      "SWARMSUSDT",
+      "TACUSDT",
+      "TRIAUSDT",
+      "TRUUSDT",
+      "UBUSDT",
+      "USUSDT",
+      "WETUSDT",
+      "WLDUSDT",
+      "WLFIUSDT",
+      "ZAMAUSDT",
+      "ZEREBROUSDT"
+    ],
+    "xlsx": "D:\\Neutral Grid v5.7.0\\data\\new_expired_bots.xlsx"
+  },
+  "winner_mu": {
+    "funding_carry_expected_next_7h": -0.32949489084267936,
+    "liquidity_stability_z_1h": 0.17716475181205316,
+    "parkinson_vol_ratio_4h_24h_pre": 0.1752608424855433,
+    "variance_ratio_1m_15m_pre_2h": -0.09761921243744548
+  }
+}

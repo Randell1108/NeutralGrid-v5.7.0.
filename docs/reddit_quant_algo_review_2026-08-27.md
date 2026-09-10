@@ -1,8 +1,8 @@
-# Reddit-wide quant/algo review — NEUTRAL Grid Bot v6.5.8
+# Reddit-wide quant/algo review — NEUTRAL Grid Bot v5.7.0
 
 **Review date:** 2026-08-27
 **Evidence window:** 2025-08-27 through 2026-08-27, inclusive
-**Repository:** `D:\Neutral Grids`
+**Repository:** `D:\Neutral Grid v5.7.0`
 
 ## Scope and limitations
 

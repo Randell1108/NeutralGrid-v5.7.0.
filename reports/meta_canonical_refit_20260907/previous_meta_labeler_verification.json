@@ -1,0 +1,429 @@
+{
+  "generated_at_utc": "2026-08-23T03:00:10.584011+00:00",
+  "feature_profile": "snapshot_v20260530_fastwin",
+  "expected_feature_count": 20,
+  "selected_feature_count": 20,
+  "selected_features": [
+    "ev_score",
+    "adx_1h",
+    "adx_15m",
+    "adx_5m",
+    "atr_pct_15m",
+    "ou_halflife",
+    "rsi_15m",
+    "ema_slope_1h",
+    "ema_crosses_5m",
+    "vwap_crosses_5m",
+    "hurst_exponent",
+    "range_size_pct",
+    "bb_width",
+    "grid_spacing_pct",
+    "profit_per_grid_pct",
+    "num_grids",
+    "quote_volume_24h",
+    "open_interest",
+    "micro_round_trip_cost_pct",
+    "funding_rate"
+  ],
+  "source_training_row_count": 5849,
+  "training_row_count": 5849,
+  "training_source_manifest": {
+    "backtest_results_dir": "outputs\\finalized_fastwin_20260822_champion_plus_standard",
+    "source_file_count": 1,
+    "source_files": [
+      {
+        "path": "outputs\\finalized_fastwin_20260822_champion_plus_standard\\training_data_20260822.csv",
+        "size_bytes": 44004826,
+        "modified_at_utc": "2026-08-23T02:59:09.231488+00:00",
+        "sha256": "e6201ae26bd0aa2d5a6cbd9ae4212a58e681a93a908edfaf87eaf6c6ca256cfe"
+      }
+    ],
+    "source_training_rows": 5849,
+    "unique_candidate_ids": 5849,
+    "duplicate_candidate_id_rows": 0,
+    "market_event_time_utc": {
+      "min": "2026-02-19T00:26:54.114993+00:00",
+      "max": "2026-08-22T12:33:03.411885+00:00"
+    },
+    "backtest_write_time_utc": {
+      "min": "2026-08-23T00:41:28.869741+00:00",
+      "max": "2026-08-23T01:47:12.973058+00:00"
+    },
+    "pool_generation_mode": "fresh_full_pool",
+    "pool_manifest_path": "outputs\\finalized_fastwin_20260822_champion_plus_standard\\authoritative_pool_manifest.json",
+    "meta_pool_max_rows_per_symbol": 30
+  },
+  "training_hmm_lineage": {
+    "required": true,
+    "dependent_selected_features": [
+      "ev_score"
+    ],
+    "active_hmm_artifact_version": "rolling_180d_20260822_203741",
+    "training_row_count": 5849,
+    "lineage_column_present": true,
+    "missing_lineage_count": 0,
+    "mismatched_lineage_count": 0,
+    "observed_versions": {
+      "rolling_180d_20260822_203741": 5849
+    },
+    "active_hmm_trained_at_utc": "2026-08-22T20:52:47.318841+00:00",
+    "observed_hmm_trained_at_utc": {
+      "2026-08-22T20:52:47.318841+00:00": 5849
+    },
+    "passes": true,
+    "reasons": []
+  },
+  "allow_imputation": true,
+  "imputed_features": {
+    "ou_halflife": {
+      "count": 137,
+      "default": 24.0
+    }
+  },
+  "fast_target_contract": {
+    "duration_column": "duration_hours",
+    "target_contract": "fast_winner_time_to_3pct_le_7h",
+    "duration_hours_max": 7.0,
+    "pnl_column": "net_pnl_pct",
+    "target_column": "fast_winner_target",
+    "eligible_rows": 5849,
+    "positive_count": 2518,
+    "negative_count": 3331,
+    "negative_rows_duration_gt_7h_count": 0,
+    "excluded_rows_missing_duration_count": 0,
+    "excluded_rows_missing_pnl_count": 0,
+    "builder_y_compared_count": 5849,
+    "builder_y_mismatch_count": 774,
+    "label_basis": "endogenous_time_to_target"
+  },
+  "active_training_target": {
+    "duration_column": "duration_hours",
+    "target_contract": "fast_winner_time_to_3pct_le_7h",
+    "duration_hours_max": 7.0,
+    "pnl_column": "net_pnl_pct",
+    "target_column": "fast_winner_target",
+    "eligible_rows": 5849,
+    "positive_count": 2518,
+    "negative_count": 3331,
+    "negative_rows_duration_gt_7h_count": 0,
+    "excluded_rows_missing_duration_count": 0,
+    "excluded_rows_missing_pnl_count": 0,
+    "builder_y_compared_count": 5849,
+    "builder_y_mismatch_count": 774,
+    "label_basis": "endogenous_time_to_target"
+  },
+  "modelable_feature_filter": {
+    "input_rows": 5849,
+    "modelable_rows": 5849,
+    "excluded_unmodelable_count": 0,
+    "excluded_unmodelable_rows": []
+  },
+  "meta_target_contract": {
+    "contract_name": "fast_winner_time_to_3pct_le_7h",
+    "target_column": "fast_winner_target",
+    "duration_column": "duration_hours",
+    "duration_hours_max": 7.0
+  },
+  "utility_provenance": {
+    "source": "calibrator_unavailable",
+    "artifact_path": "C:\\Users\\cris_\\OneDrive\\Documents\\Christian\\Crypto\\Neutral Grid Bots\\NEUTRAL grid bot v6.5.8 - Clean\\artifacts\\utility\\current.json",
+    "lambda_risk": null,
+    "kappa_trend": null,
+    "horizon_hours": null
+  },
+  "is_selected_feature_count_exact": true,
+  "is_value_complete": true,
+  "incomplete_features": [],
+  "feature_fill": [
+    {
+      "feature": "ev_score",
+      "non_null_count": 5849,
+      "null_count": 0
+    },
+    {
+      "feature": "adx_1h",
+      "non_null_count": 5849,
+      "null_count": 0
+    },
+    {
+      "feature": "adx_15m",
+      "non_null_count": 5849,
+      "null_count": 0
+    },
+    {
+      "feature": "adx_5m",
+      "non_null_count": 5849,
+      "null_count": 0
+    },
+    {
+      "feature": "atr_pct_15m",
+      "non_null_count": 5849,
+      "null_count": 0
+    },
+    {
+      "feature": "ou_halflife",
+      "non_null_count": 5849,
+      "null_count": 0
+    },
+    {
+      "feature": "rsi_15m",
+      "non_null_count": 5849,
+      "null_count": 0
+    },
+    {
+      "feature": "ema_slope_1h",
+      "non_null_count": 5849,
+      "null_count": 0
+    },
+    {
+      "feature": "ema_crosses_5m",
+      "non_null_count": 5849,
+      "null_count": 0
+    },
+    {
+      "feature": "vwap_crosses_5m",
+      "non_null_count": 5849,
+      "null_count": 0
+    },
+    {
+      "feature": "hurst_exponent",
+      "non_null_count": 5849,
+      "null_count": 0
+    },
+    {
+      "feature": "range_size_pct",
+      "non_null_count": 5849,
+      "null_count": 0
+    },
+    {
+      "feature": "bb_width",
+      "non_null_count": 5849,
+      "null_count": 0
+    },
+    {
+      "feature": "grid_spacing_pct",
+      "non_null_count": 5849,
+      "null_count": 0
+    },
+    {
+      "feature": "profit_per_grid_pct",
+      "non_null_count": 5849,
+      "null_count": 0
+    },
+    {
+      "feature": "num_grids",
+      "non_null_count": 5849,
+      "null_count": 0
+    },
+    {
+      "feature": "quote_volume_24h",
+      "non_null_count": 5849,
+      "null_count": 0
+    },
+    {
+      "feature": "open_interest",
+      "non_null_count": 5849,
+      "null_count": 0
+    },
+    {
+      "feature": "micro_round_trip_cost_pct",
+      "non_null_count": 5849,
+      "null_count": 0
+    },
+    {
+      "feature": "funding_rate",
+      "non_null_count": 5849,
+      "null_count": 0
+    }
+  ],
+  "active_hmm_artifact_version": "rolling_180d_20260822_203741",
+  "artifact_lineage_before": {
+    "metadata_path": "models\\meta_labeler\\metadata.json",
+    "active_hmm_artifact_version": "rolling_180d_20260822_203741",
+    "artifact_hmm_artifact_version": "rolling_180d_20260822_203741",
+    "lineage_matches_active_hmm": true,
+    "error": null
+  },
+  "artifact_lineage_after": {
+    "metadata_path": "models\\meta_labeler\\metadata.json",
+    "active_hmm_artifact_version": "rolling_180d_20260822_203741",
+    "artifact_hmm_artifact_version": "rolling_180d_20260822_203741",
+    "lineage_matches_active_hmm": true,
+    "error": null
+  },
+  "artifact_loadability_before": {
+    "output_path": "models\\meta_labeler.pkl",
+    "can_load": true,
+    "error": null
+  },
+  "artifact_loadability_after": {
+    "output_path": "models\\meta_labeler.pkl",
+    "can_load": true,
+    "error": null
+  },
+  "artifact_health_before": {
+    "output_path": "models\\meta_labeler.pkl",
+    "artifact_dir": "models\\meta_labeler",
+    "artifact_dir_exists": true,
+    "artifact_model_exists": true,
+    "artifact_metadata_exists": true,
+    "artifact_feature_count": 20,
+    "artifact_features": [
+      "ev_score",
+      "adx_1h",
+      "adx_15m",
+      "adx_5m",
+      "atr_pct_15m",
+      "ou_halflife",
+      "rsi_15m",
+      "ema_slope_1h",
+      "ema_crosses_5m",
+      "vwap_crosses_5m",
+      "hurst_exponent",
+      "range_size_pct",
+      "bb_width",
+      "grid_spacing_pct",
+      "profit_per_grid_pct",
+      "num_grids",
+      "quote_volume_24h",
+      "open_interest",
+      "micro_round_trip_cost_pct",
+      "funding_rate"
+    ],
+    "artifact_matches_expected": true,
+    "artifact_error": null,
+    "pickle_exists": true,
+    "pickle_feature_count": 20,
+    "pickle_features": [
+      "ev_score",
+      "adx_1h",
+      "adx_15m",
+      "adx_5m",
+      "atr_pct_15m",
+      "ou_halflife",
+      "rsi_15m",
+      "ema_slope_1h",
+      "ema_crosses_5m",
+      "vwap_crosses_5m",
+      "hurst_exponent",
+      "range_size_pct",
+      "bb_width",
+      "grid_spacing_pct",
+      "profit_per_grid_pct",
+      "num_grids",
+      "quote_volume_24h",
+      "open_interest",
+      "micro_round_trip_cost_pct",
+      "funding_rate"
+    ],
+    "pickle_matches_expected": true,
+    "pickle_error": null,
+    "expected_feature_count": 20,
+    "expected_features": [
+      "ev_score",
+      "adx_1h",
+      "adx_15m",
+      "adx_5m",
+      "atr_pct_15m",
+      "ou_halflife",
+      "rsi_15m",
+      "ema_slope_1h",
+      "ema_crosses_5m",
+      "vwap_crosses_5m",
+      "hurst_exponent",
+      "range_size_pct",
+      "bb_width",
+      "grid_spacing_pct",
+      "profit_per_grid_pct",
+      "num_grids",
+      "quote_volume_24h",
+      "open_interest",
+      "micro_round_trip_cost_pct",
+      "funding_rate"
+    ],
+    "is_stale": false
+  },
+  "artifact_health_after": {
+    "output_path": "models\\meta_labeler.pkl",
+    "artifact_dir": "models\\meta_labeler",
+    "artifact_dir_exists": true,
+    "artifact_model_exists": true,
+    "artifact_metadata_exists": true,
+    "artifact_feature_count": 20,
+    "artifact_features": [
+      "ev_score",
+      "adx_1h",
+      "adx_15m",
+      "adx_5m",
+      "atr_pct_15m",
+      "ou_halflife",
+      "rsi_15m",
+      "ema_slope_1h",
+      "ema_crosses_5m",
+      "vwap_crosses_5m",
+      "hurst_exponent",
+      "range_size_pct",
+      "bb_width",
+      "grid_spacing_pct",
+      "profit_per_grid_pct",
+      "num_grids",
+      "quote_volume_24h",
+      "open_interest",
+      "micro_round_trip_cost_pct",
+      "funding_rate"
+    ],
+    "artifact_matches_expected": true,
+    "artifact_error": null,
+    "pickle_exists": true,
+    "pickle_feature_count": 20,
+    "pickle_features": [
+      "ev_score",
+      "adx_1h",
+      "adx_15m",
+      "adx_5m",
+      "atr_pct_15m",
+      "ou_halflife",
+      "rsi_15m",
+      "ema_slope_1h",
+      "ema_crosses_5m",
+      "vwap_crosses_5m",
+      "hurst_exponent",
+      "range_size_pct",
+      "bb_width",
+      "grid_spacing_pct",
+      "profit_per_grid_pct",
+      "num_grids",
+      "quote_volume_24h",
+      "open_interest",
+      "micro_round_trip_cost_pct",
+      "funding_rate"
+    ],
+    "pickle_matches_expected": true,
+    "pickle_error": null,
+    "expected_feature_count": 20,
+    "expected_features": [
+      "ev_score",
+      "adx_1h",
+      "adx_15m",
+      "adx_5m",
+      "atr_pct_15m",
+      "ou_halflife",
+      "rsi_15m",
+      "ema_slope_1h",
+      "ema_crosses_5m",
+      "vwap_crosses_5m",
+      "hurst_exponent",
+      "range_size_pct",
+      "bb_width",
+      "grid_spacing_pct",
+      "profit_per_grid_pct",
+      "num_grids",
+      "quote_volume_24h",
+      "open_interest",
+      "micro_round_trip_cost_pct",
+      "funding_rate"
+    ],
+    "is_stale": false
+  },
+  "verification_log_path": "models\\meta_labeler_verification.json"
+}

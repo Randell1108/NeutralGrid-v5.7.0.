@@ -1,6 +1,6 @@
 # Changelog
 
-## [unreleased] - FASTWIN-V2-REGROW + ERR-059 Live Reintegration + v6.5.8 (2026-06-22)
+## [unreleased] - Neutral Grid v5.7.0
 
 ### Summary
 
@@ -14,6 +14,261 @@ decision path (ERR-059): `ev_score` is now computed BEFORE the Stage-12 meta
 probe, so `meta_prob` is authoritative for Kelly sizing and the soft Stage-B meta
 gate is ON. Closed the meta-labeler ERR cluster (054b/035/036/053). Bumped the
 package version 6.5.7 -> 6.5.8 to match the working tree.
+
+### TELEMETRYFIX-0909 - Preserve structural ladder sides after price crossings (2026-09-09)
+
+Corrected the private-telemetry ladder parser after a valid GRASSUSDT ladder
+crossed the displayed moving last price. Buy and sell sides now come from the
+Binance drawer's structural price columns while the exact declared-versus-parsed
+buy and sell count gate remains unchanged and fail closed.
+
+A same-day follow-up extended that structural handling to Binance's column-major
+all-buy layout (observed on BMTUSDT as `Buy (10)` / `Sell (0)`). The parser only
+accepts this layout when exactly the declared number of valid prices precede an
+exact `1..N` index block and no price appears after the block; all existing
+count, bounds, positivity, and index-sequence gates remain fail closed.
+
+Captured and canonically ingested the ten running Chrome strategies under
+`Live/2026-09-09/<SYMBOL>/`, collected a 60-second strategy-ID-linked L2 sample,
+and replay-verified all ten order books. An observational scanner pass fetched
+the public market bundle and wrote ten immutable PnL observations. The shadow
+volatility path then acquired checksum-verified one-minute mark and last-price
+history for all ten symbols; every symbol is ready on 121 calendar days with
+284 fit, 94 calibration, and 95 test examples. The same-day Binance Vision
+`bookDepth` archive was requested but remained unpublished (HTTP 404), so no
+unverified archive was stored or substituted.
+
+**Files modified or produced:**
+- `src/neutralgrid/live/decision/private_telemetry.py`
+- `tests/unit/test_live_private_telemetry.py`
+- `outputs/audits/chrome_plugin_telemetry/cycles/cycle_20260909_105150_lima_chrome_20260909T155150970Z.json`
+- `outputs/audits/chrome_plugin_telemetry/targets/targets_20260909_105150_lima_chrome_20260909T155150970Z.csv`
+- `outputs/audits/diff_depth_20260909_160232/manifest.json`
+- `outputs/audits/diff_depth_20260909_160232/verification.json`
+- `outputs/audits/live_telemetry_controller_20260909_chrome/manifest.json`
+- `outputs/audits/pnl_training_readiness_20260909_chrome.json`
+- `outputs/audits/bookdepth_live_roster_20260909_142705.csv`
+- `outputs/audits/bookdepth_live_roster_20260909_142705_manifest.json`
+- `outputs/audits/live_volatility_backfill/manifest.json`
+- `outputs/audits/chrome_plugin_telemetry/cycles/cycle_20260909_133731_lima_chrome_20260909T183731021Z.json`
+- `outputs/audits/diff_depth_20260909_184926/{manifest.json,verification.json}`
+- `outputs/audits/live_telemetry_controller_20260909_chrome_10m/manifest.json`
+- `outputs/audits/pnl_training_readiness_20260909_chrome_10m.json`
+- `data/price_store/<SYMBOL>/{mark_kline,last_kline}/1m/`
+- `Live/2026-09-09/<SYMBOL>/`
+- `CHANGELOG.md`
+
+**AFML / Hudson & Thames citation:** No model, feature, label, estimator, or
+validation methodology changed. This session corrected source-structure parsing
+and acquired timestamped inputs for existing scanner, replay, PnL-observation,
+and shadow-volatility contracts.
+
+**Decision rationale:** A moving last price cannot authoritatively identify the
+side of a structurally rendered ladder row after a crossing. The UI column does,
+and exact declared-versus-parsed counts still independently enforce completeness.
+No deploy candidate linkage was asserted because rounded drawer bounds exceed the
+existing forensic tolerance and no authoritative deploy-linkage ledger exists.
+
+**Backward compatibility:** No breaking change. Existing positive-price,
+grid-bound, index-sequence, and exact order-count validation remains active.
+All captures remain valid at their fetch timestamps. Volatility data and PnL
+observations remain shadow/observational only and have no execution influence.
+
+**Verification:** The new crossing regression failed before the parser change
+and passed after it; 21 focused tests and 117 feature-contract tests passed, and
+targeted source Pyright reported zero diagnostics. The canonical telemetry cycle
+loaded all ten exact strategy identities. L2 replay verified 10/10 symbols across
+4,475 raw events with zero sequence gaps or hash failures. The volatility audit
+reports 10/10 ready, zero missing archives, gaps, missing minutes, or conflicting
+duplicates; the price store contains 2,420 Parquet partitions (117.22 MiB).
+Dependency-lock verification passed. Pipeline preflight is WARN, not FAIL,
+because the utility-current pointer and promoted profile model remain absent.
+The column-major all-buy regression failed before the follow-up parser change
+and passed afterward; 22 focused tests passed and targeted source Pyright again
+reported zero diagnostics. The follow-up Chrome cycle preserved eight stable
+Running identities plus a separately timestamped RENDERUSDT transition capture;
+its 60-second L2 run replay-verified 8/8 symbols with zero sequence gaps or hash
+failures, and its observational scanner appended eight immutable PnL records.
+
+### TELEMETRYFIX-0908 - Preserve decimal-formatted integer ladder prices (2026-09-08)
+
+Fixed ERR-098 in the private-telemetry ladder parser. Plain integer ladder-index
+rows remain excluded lexically, while positive decimal-formatted prices such as
+`8.000` are retained. Exact declared-versus-parsed buy and sell count equality
+is unchanged and continues to fail closed.
+
+Re-ingested the unchanged ten-capture Chrome bundle into the required
+`Live/2026-09-08/<SYMBOL>/` hierarchy, verified every committed identity and
+hash, collected and replay-verified one strategy-linked L2 stream per bot, and
+backfilled the approved shadow-volatility history. Nine symbols meet the
+history contract; ARXUSDT correctly stops at its verified listing boundary.
+
+**Files modified or produced:**
+- `src/neutralgrid/live/decision/private_telemetry.py`
+- `tests/unit/test_live_private_telemetry.py`
+- `ERRORS_LOG.md`
+- `outputs/audits/live_data_ingestion_20260909/README.md`
+- `outputs/audits/chrome_plugin_telemetry/cycles/cycle_20260908_212446_lima_chrome_20260909T022446806Z.json`
+- `outputs/audits/chrome_plugin_telemetry/targets/targets_20260908_212446_lima_chrome_20260909T022446806Z.csv`
+- `outputs/audits/diff_depth_20260909_031114/manifest.json`
+- `outputs/audits/diff_depth_20260909_031114/verification.json`
+- `outputs/audits/live_volatility_backfill/`
+- `Live/2026-09-08/<SYMBOL>/`
+- `CHANGELOG.md`
+
+**AFML / Hudson & Thames citation:** No model, feature, label, estimator, or
+validation methodology changed. The change preserves the existing fail-closed
+ingestion invariant and immutable raw-data provenance.
+
+**Decision rationale:** The lexical row form distinguishes plain integer ladder
+indices from decimal-formatted prices without weakening the exact count gate.
+Candidate linkage was not written: the authoritative deploy ledger is absent
+and rounded drawer bounds do not satisfy the existing 0.01% forensic tolerance
+for every bot.
+
+**Backward compatibility:** No breaking change. Existing non-positive-price,
+grid-bound, and exact order-count validation remains active. New live records
+stay under the repository's date/symbol hierarchy. Volatility history remains
+shadow-only and has no verdict, sizing, grid, or execution influence.
+
+**Verification:** The corrected regression failed before the parser change and
+passed after it. Focused private-telemetry and plugin-ingestion tests passed
+20/20; targeted Pyright reported 0 errors and 0 warnings. Unchanged ETC bytes
+parse to 14 buys and 2 sells including `8.0`. The ten-bot controller load and
+hash/identity/roster checks passed. Independent L2 replay passed 10/10 across
+4,925 raw events with zero hash failures and exact stored/replayed action counts.
+The dependency lock check passed. Whole-project Pyright was attempted separately
+and retained 221 errors and 3 warnings, principally unresolved third-party
+imports in that environment plus pre-existing diagnostics.
+
+### PROFILESTUDY-0908 - Isolated profile training and shadow artifacts (2026-09-08)
+
+Trained a four-feature Gaussian profile and paired pattern artifact on 6,832
+compatible recorded scanner rows, including 1,772 newly backtested seven-hour
+legacy outcomes. Nested chronological selection chose shrinkage 0.9; mean
+development AUC 0.5284 and 40% passing folds failed the unchanged profile gates.
+The frozen 1,611-row holdout yielded AUC 0.5515, cluster interval
+[0.4866, 0.6167], with no established improvement over the fixed Gaussian
+baseline. The canonical 366-row workbook was tested separately: 195 labelable
+rows, best mean AUC 0.4515 and 20% passing folds at the CLI's 0.68 quantile.
+All artifacts remain shadow-only. Today's additional 250 scanner rows were
+excluded because their seven-hour outcome windows were not yet mature.
+
+**Files modified or produced:**
+- `reports/profile_training_20260908/README.md`
+- `reports/profile_training_20260908/preregistration.json`
+- `reports/profile_training_20260908/additional_backtest_manifest.json`
+- `reports/profile_training_20260908/complete_profile_pool.csv`
+- `reports/profile_training_20260908/development_evaluation.json`
+- `reports/profile_training_20260908/holdout_evaluation.json`
+- `reports/profile_training_20260908/full_refit_shadow/profile_model.json`
+- `reports/profile_training_20260908/full_refit_shadow/pattern_profile.json`
+- `reports/profile_training_20260908/full_refit_shadow/manifest.json`
+- `reports/profile_training_20260908/artifact_validation.json`
+- `reports/profile_training_20260908/inventory_refresh.json`
+- `reports/profile_training_20260908/cleanup.json`
+- `CHANGELOG.md`
+
+**AFML / Hudson & Thames citation:** No methodology or gate change; existing
+purged chronological validation was reused. See ERR-095 and ERR-096 for the
+standing discrimination, feature provenance and fresh-evidence constraints.
+
+**Decision rationale:** Preserve the failed promotion result, keep FASTWIN
+labels separate from completed-bot profit-factor labels, and retain both a
+frozen validation model and a clearly marked full-data shadow refit. Holdout
+metrics do not validate the full refit, which includes those disclosed rows.
+
+**Backward compatibility:** No breaking changes. Production Python source,
+active meta-labeler, HMM manifest, canonical workbook and profile bootstrap
+remain unchanged; no production profile pointer was created.
+
+**Verification:** 80 focused tests passed; configured Pyright reported zero
+errors and warnings. Source/protected-file hashes, runtime artifact loading,
+prediction equivalence, finite features, split disjointness and purges passed.
+Owned test temporary directories were removed; evidence and model artifacts
+are retained in the report directory.
+
+### METAREFIT-0908 - Canonical FASTWIN refit on all compatible sources (2026-09-08)
+
+Trained and saved meta-labeler `20260908_143214` on 5,369 unique fresh canonical
+FASTWIN outcomes with the unchanged 20-feature profile and sigmoid_oos
+calibration. The existing promotion gate passed: OOF AUC 0.686774, 95% interval
+[0.672276, 0.699758], ECE 0.013506 and 2,835 positives. All 99 compatible
+canonical-workbook matches and 209 compatible historical-pool matches received
+fresh outcomes. Disabled the per-symbol cap and recorded 144 OU half-life
+imputations using the existing fixed default. The September 8 inventory check
+found no newer exports beyond the September 7 snapshot.
+
+**Files modified or produced:**
+- `models/meta_labeler.pkl`
+- `models/meta_labeler/model.joblib`
+- `models/meta_labeler/scaler.joblib`
+- `models/meta_labeler/metadata.json`
+- `models/meta_labeler_promotion_decision.json`
+- `models/meta_labeler_verification.json`
+- `data/trial_log.json`
+- `reports/meta_canonical_refit_20260907/README.md`
+- `reports/meta_canonical_refit_20260907/artifact_validation.json`
+- `reports/meta_canonical_refit_20260907/finalized_fresh_pool/authoritative_pool_manifest.json`
+- `reports/meta_canonical_refit_20260907/finalized_fresh_pool/training_data_20260907.csv`
+- `CHANGELOG.md`
+
+**AFML / Hudson & Thames citation:** No methodology change; existing source
+contracts and the ERR-066 evaluation limitation are retained. See the linked
+report for the executed validation and canonical source provenance.
+
+**Decision rationale:** Complete the requested canonical refit using every
+compatible available row, freshly generated seven-hour outcomes and uniformly
+pinned active-HMM features. No model or promotion code was changed. The prior
+canonical artifact was absent, so the script used its initial-deployment gate;
+this is not evidence of paired superiority over an old champion. Temporal purge
+collapsed in all five promotion folds (ERR-066); separate training CV AUC was
+0.553453 and remains material context for the higher promotion AUC.
+
+**Backward compatibility:** No breaking changes. Existing 20-feature and target
+contracts are preserved; the saved model is pinned to
+`rolling_180d_20260903_153527`. Canonical workbook and HMM manifest are unchanged.
+
+**Verification:** 19 artifact checks and 96 post-refit contract tests passed;
+Pyright reported zero errors and warnings. The earlier full suite retained one
+unrelated utility-workbook lineage failure after ten Windows path-length
+failures passed on retry. Detailed report: `reports/meta_canonical_refit_20260907/README.md`.
+
+### VERSION-570 - Align workspace identity (2026-09-07)
+
+Aligned the live package identity, maintained operating guidance, operational
+data-root reference, review header, and relevant backfill-test fixtures with the
+current `Neutral Grid v5.7.0` workspace. Historical changelog, audit, model,
+and artifact references remain unchanged as provenance.
+
+**Files modified:**
+- `pyproject.toml`
+- `src/neutralgrid/__init__.py`
+- `AGENTS.md`
+- `CLAUDE.md`
+- `docs/reddit_quant_algo_review_2026-08-27.md`
+- `.claude/settings.local.json`
+- `METALABELER_LIVETELEMETRY.md`
+- `tests/unit/test_backfill_training_features_v20260312.py`
+- `CHANGELOG.md`
+
+**AFML / Hudson & Thames citation:** Not applicable; this is an operational
+version and path alignment with no change to model, label, feature, or gate
+semantics.
+
+**Decision rationale:** The repository and active workspace identify as v5.7.0,
+while live package metadata and maintained guidance still reported legacy v6.5.8
+or `D:\\Neutral Grids` paths. Updating only live references avoids rewriting
+historical evidence.
+
+**Backward compatibility:** The public package version now reports `5.7.0`; no
+runtime API, feature schema, universe, threshold, model artifact, or production
+gate behavior changed.
+
+**Verification:** The focused backfill suite passed (28 passed). The editable
+installation was refreshed with local build tooling and both the imported module
+and installed distribution report `5.7.0`. Pyright against the project virtual
+environment completed cleanly with `--pythonpath .\\.venv\\Scripts\\python.exe`.
 
 ### HMMROTATE-0903 - Rolling HMM rotation and fail-closed pipeline run (2026-09-03)
 

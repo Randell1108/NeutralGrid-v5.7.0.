@@ -1,0 +1,98 @@
+{
+  "features": [
+    "parkinson_vol_ratio_4h_24h_pre",
+    "variance_ratio_1m_15m_pre_2h",
+    "funding_carry_expected_next_7h",
+    "liquidity_stability_z_1h"
+  ],
+  "means": {
+    "funding_carry_expected_next_7h": -0.1100309375,
+    "liquidity_stability_z_1h": 0.5336323900084354,
+    "parkinson_vol_ratio_4h_24h_pre": 1.0725249281405422,
+    "variance_ratio_1m_15m_pre_2h": 0.6941430191454129
+  },
+  "q10": {
+    "funding_carry_expected_next_7h": -0.48036419999999996,
+    "liquidity_stability_z_1h": -0.395453444641351,
+    "parkinson_vol_ratio_4h_24h_pre": 0.5895664041318459,
+    "variance_ratio_1m_15m_pre_2h": 0.4293848031764446
+  },
+  "q90": {
+    "funding_carry_expected_next_7h": 0.04250030000000001,
+    "liquidity_stability_z_1h": 1.5175937487888354,
+    "parkinson_vol_ratio_4h_24h_pre": 1.6786998262728077,
+    "variance_ratio_1m_15m_pre_2h": 1.0713560839557326
+  },
+  "selection_summary": {
+    "bounded_universe_size": 223,
+    "duration_band": {
+      "max_hours": 7.0,
+      "min_hours": 0.0
+    },
+    "label_definition": {
+      "duration_rule": "0 <= duration_hours < 7.0",
+      "performance_rule": "profit_factor >= min_profit_factor and pnl_pct >= train_only_top_quantile_threshold",
+      "time_to_target_claimed": false
+    },
+    "label_name": "fast_completed_winner_under_7h",
+    "labeled_universe_size": 195,
+    "max_duration_hours": 7.0,
+    "min_avg_profit_per_grid": 0.59,
+    "min_profit_factor": 1.5,
+    "pnl_threshold": 4.535,
+    "top_quantile": 0.75,
+    "winners_count": 48,
+    "winners_symbols": [
+      "AINUSDT",
+      "AKEUSDT",
+      "ALLOUSDT",
+      "APRUSDT",
+      "AXSUSDT",
+      "BASUSDT",
+      "BIOUSDT",
+      "BOBUSDT",
+      "BSVUSDT",
+      "COSUSDT",
+      "CTSIUSDT",
+      "DAMUSDT",
+      "ENJUSDT",
+      "ERAUSDT",
+      "GIGGLEUSDT",
+      "GRASSUSDT",
+      "IOUSDT",
+      "IPUSDT",
+      "JCTUSDT",
+      "KATUSDT",
+      "KOMAUSDT",
+      "LABUSDT",
+      "MAGMAUSDT",
+      "METUSDT",
+      "MEUSDT",
+      "NOMUSDT",
+      "ONUSDT",
+      "RAVEUSDT",
+      "RESOLVUSDT",
+      "RIVERUSDT",
+      "ROBOUSDT",
+      "SKYAIUSDT",
+      "SWARMSUSDT",
+      "TACUSDT",
+      "TRIAUSDT",
+      "TRUUSDT",
+      "UBUSDT",
+      "USUSDT",
+      "WETUSDT",
+      "WLDUSDT",
+      "WLFIUSDT",
+      "ZAMAUSDT",
+      "ZEREBROUSDT"
+    ],
+    "xlsx": "D:\\Neutral Grid v5.7.0\\data\\new_expired_bots.xlsx"
+  },
+  "stds": {
+    "funding_carry_expected_next_7h": 0.2351362848114548,
+    "liquidity_stability_z_1h": 0.9129078766636435,
+    "parkinson_vol_ratio_4h_24h_pre": 0.43623936641813105,
+    "variance_ratio_1m_15m_pre_2h": 0.296787966794204
+  }
+}

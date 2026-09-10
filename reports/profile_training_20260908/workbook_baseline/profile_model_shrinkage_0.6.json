@@ -1,0 +1,153 @@
+{
+  "duration_band": {
+    "max_hours": 7.0,
+    "min_hours": 0.0
+  },
+  "feature_impute": {
+    "funding_carry_expected_next_7h": 0.005,
+    "liquidity_stability_z_1h": -0.2053983225671835,
+    "parkinson_vol_ratio_4h_24h_pre": 0.9159354594615254,
+    "variance_ratio_1m_15m_pre_2h": 0.6980892179207583
+  },
+  "feature_mean": {
+    "funding_carry_expected_next_7h": -0.04633864102564094,
+    "liquidity_stability_z_1h": -0.14618424634150673,
+    "parkinson_vol_ratio_4h_24h_pre": 0.99480834073944,
+    "variance_ratio_1m_15m_pre_2h": 0.7157498185517919
+  },
+  "feature_std": {
+    "funding_carry_expected_next_7h": 0.19330283486783878,
+    "liquidity_stability_z_1h": 0.5348166302370775,
+    "parkinson_vol_ratio_4h_24h_pre": 0.38759225760464394,
+    "variance_ratio_1m_15m_pre_2h": 0.1910192661799955
+  },
+  "features": [
+    "parkinson_vol_ratio_4h_24h_pre",
+    "variance_ratio_1m_15m_pre_2h",
+    "funding_carry_expected_next_7h",
+    "liquidity_stability_z_1h"
+  ],
+  "inv_cov": [
+    [
+      1.009781606904385,
+      0.006240235561615418,
+      0.01749513026882503,
+      -0.12241047593199653
+    ],
+    [
+      0.0062402355616154185,
+      1.0306617364516186,
+      0.010747362840428458,
+      -0.13219997196055217
+    ],
+    [
+      0.01749513026882503,
+      0.010747362840428456,
+      1.0217461023469527,
+      -0.00868687070211697
+    ],
+    [
+      -0.12241047593199654,
+      -0.13219997196055217,
+      -0.008686870702116972,
+      1.0224212209749481
+    ]
+  ],
+  "loser_mu": {
+    "funding_carry_expected_next_7h": 0.12002800591858279,
+    "liquidity_stability_z_1h": -0.022214384537602827,
+    "parkinson_vol_ratio_4h_24h_pre": -0.04852436177560999,
+    "variance_ratio_1m_15m_pre_2h": 0.10428038737193698
+  },
+  "model_family": "gaussian_lda_v1",
+  "prior_winner": 0.31794871794871793,
+  "selection_summary": {
+    "artifact_role": "shadow_diagnostic",
+    "blocker": "historical_funding_availability_unverified; canonical_backfill_uses_future_realized_proxy",
+    "bounded_universe_size": 223,
+    "duration_band": {
+      "max_hours": 7.0,
+      "min_hours": 0.0
+    },
+    "label_definition": {
+      "duration_rule": "0 <= duration_hours < 7.0",
+      "performance_rule": "profit_factor >= min_profit_factor and pnl_pct >= train_only_top_quantile_threshold",
+      "time_to_target_claimed": false
+    },
+    "label_name": "fast_completed_winner_under_7h",
+    "labeled_universe_size": 195,
+    "losers_count": 133,
+    "max_duration_hours": 7.0,
+    "min_avg_profit_per_grid": 0.59,
+    "min_profit_factor": 1.5,
+    "pnl_threshold": 3.485200000000001,
+    "shrinkage": 0.6,
+    "top_quantile": 0.68,
+    "winners_count": 62,
+    "winners_symbols": [
+      "1000CATUSDT",
+      "ADAUSDT",
+      "AGTUSDT",
+      "AINUSDT",
+      "AKEUSDT",
+      "ALLOUSDT",
+      "APRUSDT",
+      "AXSUSDT",
+      "BABYUSDT",
+      "BASUSDT",
+      "BIOUSDT",
+      "BOBUSDT",
+      "BSVUSDT",
+      "CLOUSDT",
+      "COSUSDT",
+      "CTSIUSDT",
+      "DAMUSDT",
+      "DUSDT",
+      "ENJUSDT",
+      "ERAUSDT",
+      "GIGGLEUSDT",
+      "GRASSUSDT",
+      "INJUSDT",
+      "IOUSDT",
+      "IPUSDT",
+      "JCTUSDT",
+      "KATUSDT",
+      "KMNOUSDT",
+      "KOMAUSDT",
+      "LABUSDT",
+      "MAGMAUSDT",
+      "METUSDT",
+      "MEUSDT",
+      "NAORISUSDT",
+      "NOMUSDT",
+      "ONUSDT",
+      "PYTHUSDT",
+      "RAVEUSDT",
+      "RESOLVUSDT",
+      "RIVERUSDT",
+      "ROBOUSDT",
+      "SEIUSDT",
+      "SKYAIUSDT",
+      "STABLEUSDT",
+      "SWARMSUSDT",
+      "TACUSDT",
+      "TAGUSDT",
+      "TRIAUSDT",
+      "TRUUSDT",
+      "UBUSDT",
+      "USUSDT",
+      "WETUSDT",
+      "WLDUSDT",
+      "WLFIUSDT",
+      "ZAMAUSDT",
+      "ZEREBROUSDT"
+    ],
+    "xlsx": "D:\\Neutral Grid v5.7.0\\data\\new_expired_bots.xlsx"
+  },
+  "winner_mu": {
+    "funding_carry_expected_next_7h": -0.2574794320511554,
+    "liquidity_stability_z_1h": 0.0476534377984085,
+    "parkinson_vol_ratio_4h_24h_pre": 0.1040925825186516,
+    "variance_ratio_1m_15m_pre_2h": -0.22369825033010532
+  }
+}

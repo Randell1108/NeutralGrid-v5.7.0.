@@ -1,0 +1,8 @@
+{
+  "candidate_id": "HOLOUSDT_20260728_205605_ce91b2d4",
+  "source": "reports\\meta_canonical_refit_20260907\\_tmp\\scanners\\deployment_ready_00020_20260728_205605.csv",
+  "source_sha256": "f558bfa09da45cf3ef2b964cd928982d74387a6f35aba1b6ea71c58d2aba70a9",
+  "staged": "reports\\meta_canonical_refit_20260907\\_tmp\\fetch_recovery_scanners\\deployment_ready_00020_20260728_205605.csv",
+  "staged_sha256": "b131e7228b56594f4224389bf2dd2439fb844bfe8c5e8b9ef5cd842d46237a0f",
+  "reason": "Main run kline fetch failed without an API error code; retry unchanged canonical candidate"
+}

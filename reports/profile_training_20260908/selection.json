@@ -1,0 +1,26 @@
+{
+  "selected_at_utc": "2026-09-08T18:00:00.876625+00:00",
+  "family": "gaussian",
+  "parameter": 0.9,
+  "training_rows": 5084,
+  "training_positive_rate": 0.5216365066876475,
+  "model_sha256": "6ebb3c3ba57a0c454f59de1e249e7226aaa93a6420fdb2673e714012bda3248c",
+  "pattern_sha256": "20aeb82efa2f814e4b9150c3850ebaafce6b6dc88f06ff535f95b6bad00555a1",
+  "baseline_sha256": "973f6b690d406a40ece53fec03e6a1fa76f18359163a5822611ba8a535add58d",
+  "holdout_sha256": "cc8ea4e36c76fb4b985592750cbf5a2f751c947dd85fbf959810a7b1b9ae79a7",
+  "nested_result": {
+    "family": "gaussian",
+    "final_parameter": 0.9,
+    "mean_auc": 0.528436110697639,
+    "finite_folds": 5,
+    "pass_rate": 0.4,
+    "pooled": {
+      "auc": 0.5373988027049252,
+      "brier": 0.25069009062823305,
+      "ece": 0.06730200154348917,
+      "rows": 2828,
+      "positives": 1554
+    }
+  },
+  "holdout_opened": false
+}

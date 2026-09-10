@@ -1,0 +1,18 @@
+{
+  "method": "disjoint union after identical active-HMM canonical backfill",
+  "rows": 5369,
+  "components": [
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\reports\\meta_canonical_refit_20260907\\combined_backfilled.csv",
+      "sha256": "2d0382818be5546f0b8a0b40d7de7bb6b729114cd5643acd011a4af72407de79",
+      "rows": 5368
+    },
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\reports\\meta_canonical_refit_20260907\\recovery_backfilled.csv",
+      "sha256": "550fc5e923fa15433de7f88c7c3b6f028dc10e86024edd88cb49f1bda996a35a",
+      "rows": 1
+    }
+  ],
+  "output": "D:\\Neutral Grid v5.7.0\\reports\\meta_canonical_refit_20260907\\all_backfilled.csv",
+  "output_sha256": "4479aa3a90cf049ae4445818379ce8e161453c871e1758fe2e0d762eb385e319"
+}

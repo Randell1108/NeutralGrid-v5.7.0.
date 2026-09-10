@@ -1,0 +1,32 @@
+{
+  "created_at_utc": "2026-09-08T17:56:22.052082+00:00",
+  "rows": 6832,
+  "old_source": {
+    "path": "D:\\Neutral Grid v5.7.0\\reports\\meta_canonical_refit_20260907\\fresh_all_outcomes\\training_data_20260907.csv",
+    "sha256": "17f147ce3cc6d2e74f138ae03483d11b492277c371c41487ca6248345655e850"
+  },
+  "new_source": {
+    "path": "D:\\Neutral Grid v5.7.0\\reports\\profile_training_20260908\\additional_backtest_results.jsonl",
+    "sha256": "0dc1374d0299974bd98745ae94e7704e706223140299d1a893955e6143c7dab2"
+  },
+  "excluded_failed_ids": [
+    "AERGOUSDT_20260720_123348_dd64e7ad"
+  ],
+  "splits": {
+    "development": {
+      "path": "D:\\Neutral Grid v5.7.0\\reports\\profile_training_20260908\\development.csv",
+      "rows": 5084,
+      "sha256": "10324dd57da96ed98a9a8adaf28876e139d12b333d8a2e6087ee7977365918ea"
+    },
+    "holdout": {
+      "path": "D:\\Neutral Grid v5.7.0\\reports\\profile_training_20260908\\holdout.csv",
+      "rows": 1611,
+      "sha256": "cc8ea4e36c76fb4b985592750cbf5a2f751c947dd85fbf959810a7b1b9ae79a7"
+    },
+    "boundary_purge": {
+      "path": "D:\\Neutral Grid v5.7.0\\reports\\profile_training_20260908\\boundary_purge.csv",
+      "rows": 137,
+      "sha256": "605f7c9a3f42f7a8448c04712a65af03a997da56c1851c3000ddcbcf8a6336d9"
+    }
+  }
+}

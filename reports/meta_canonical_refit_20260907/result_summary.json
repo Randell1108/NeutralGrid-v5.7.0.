@@ -1,0 +1,52 @@
+{
+  "status": "complete",
+  "completed_at_utc": "2026-09-08T14:41:29.755160+00:00",
+  "artifact_version": "20260908_143214",
+  "promoted_under_existing_canonical_gate": true,
+  "features": 20,
+  "training_rows": 5369,
+  "positive_rows": 2835,
+  "negative_rows": 2534,
+  "workbook_rows_reviewed": 366,
+  "workbook_matching_fresh_outcomes": 99,
+  "historical_pool_matching_fresh_outcomes": 209,
+  "latest_available_scan_utc": "2026-09-07T14:34:01+00:00",
+  "inventory_rechecked_utc": "2026-09-08T14:31:17.608927+00:00",
+  "calibration_method": "sigmoid_oos",
+  "promotion_oof_ece": 0.013505508604505478,
+  "promotion_oof_auc": 0.6867744355773823,
+  "separate_training_cv_auc": 0.5534529207650783,
+  "post_refit_tests_passed": 96,
+  "pyright_errors": 0,
+  "pyright_warnings": 0,
+  "existing_full_suite_failures_remaining": 1,
+  "temporary_directories_removed": true,
+  "limitations": [
+    "Promotion time purge collapsed on all five folds (ERR-066)",
+    "Active HMM was fitted after most historical scans",
+    "Canonical prior champion artifact absent; initial-deployment gate, no paired champion comparison",
+    "Pre-existing utility workbook lineage test remains failing"
+  ],
+  "artifact_files": [
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\models\\meta_labeler.pkl",
+      "sha256": "e87cf2273df5539c1f9b62faf7c5b33d4b7c66acd302a06d29820c9b446ae4a5",
+      "bytes": 464961
+    },
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\models\\meta_labeler\\model.joblib",
+      "sha256": "d666c5d826514dc48267427b4daa1587cb7a5d849296c711a3177db8b8976366",
+      "bytes": 193792
+    },
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\models\\meta_labeler\\scaler.joblib",
+      "sha256": "85f82bb197871a230efc5331601499b193a879af3b5c1b71da66131ea15762c9",
+      "bytes": 1169
+    },
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\models\\meta_labeler\\metadata.json",
+      "sha256": "55d5bbecac90895c3bf1c6a86bcf4fc4f4839eabb4cb82a82bdb3641dc9d7af8",
+      "bytes": 2815
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "checked_at_utc": "2026-09-08T03:04:34.879354+00:00",
+  "previous_sources": 1065,
+  "current_scanner_files": 1074,
+  "additional_paths": [
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.2\\results\\deployment_ready.csv",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.3\\results\\deployment_ready.csv",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.4.2\\results\\deployment_ready.csv",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.4.3\\results\\deployment_ready.csv",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.4.4\\results\\deployment_ready.csv",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.4.5\\results\\deployment_ready.csv",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.4.6\\results\\deployment_ready.csv",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.4\\results\\deployment_ready.csv",
+    "D:\\Backup\\Grid Bots\\NEUTRAL grid bot v6.5.1\\results\\deployment_ready.csv"
+  ],
+  "changed_original_sources": [],
+  "missing_original_sources": [],
+  "scan_errors": []
+}

@@ -274,27 +274,68 @@ def _parse_ladder(
     price_header = _find_index(lines, "Price (USDT)")
     if price_header is None:
         raise PrivateTelemetryParseError("pending-order ladder is missing Price (USDT)")
-    candidates: list[float] = []
-    max_level = max(buy_count, sell_count)
-    for line in lines[price_header + 1 :]:
+
+    ladder_lines = lines[price_header + 1 :]
+
+    def ladder_price(line: str) -> float | None:
         if "%" in line or re.fullmatch(r"\d+", line):
-            continue
+            return None
         values = _numbers(line)
         if len(values) != 1:
-            continue
+            return None
         value = values[0]
-        if value <= 0 or (value.is_integer() and value <= max_level):
-            continue
+        if value <= 0:
+            return None
         if grid_lower is not None and value < grid_lower:
-            continue
+            return None
         if grid_upper is not None and value > grid_upper:
-            continue
-        candidates.append(value)
+            return None
+        return value
+
+    index_positions = [
+        (offset, int(line))
+        for offset, line in enumerate(ladder_lines)
+        if re.fullmatch(r"\d+", line)
+    ]
+    if [value for _, value in index_positions] != list(
+        range(1, len(index_positions) + 1)
+    ):
+        raise PrivateTelemetryParseError(
+            "pending-order ladder index sequence is invalid"
+        )
+
+    buy_prices: list[float] = []
+    sell_prices: list[float] = []
+    for offset, _ in index_positions:
+        if offset > 0:
+            buy_price = ladder_price(ladder_lines[offset - 1])
+            if buy_price is not None:
+                buy_prices.append(buy_price)
+        if offset + 2 < len(ladder_lines) and "%" in ladder_lines[offset + 2]:
+            sell_price = ladder_price(ladder_lines[offset + 1])
+            if sell_price is not None:
+                sell_prices.append(sell_price)
+
+    if sell_count == 0 and len(index_positions) == buy_count:
+        first_index_offset = index_positions[0][0] if index_positions else 0
+        column_buy_prices = [
+            price
+            for line in ladder_lines[:first_index_offset]
+            if (price := ladder_price(line)) is not None
+        ]
+        prices_after_first_index = [
+            price
+            for line in ladder_lines[first_index_offset:]
+            if (price := ladder_price(line)) is not None
+        ]
+        if len(column_buy_prices) == buy_count and not prices_after_first_index:
+            buy_prices = column_buy_prices
+            sell_prices = []
 
     if last_price is None:
         raise PrivateTelemetryParseError("pending-order ladder is missing Last Price")
-    buy_prices = sorted((value for value in candidates if value < last_price), reverse=True)
-    sell_prices = sorted(value for value in candidates if value >= last_price)
+    buy_prices.sort(reverse=True)
+    sell_prices.sort()
     if len(buy_prices) != buy_count or len(sell_prices) != sell_count:
         raise PrivateTelemetryParseError(
             "pending-order ladder count mismatch: "

@@ -1,0 +1,16 @@
+{
+  "workbook_rows": 366,
+  "nonempty_id_rows": 214,
+  "unique_ids": 214,
+  "rows_with_snapshot": 99,
+  "unique_ids_with_snapshot": 99,
+  "rows_in_selected": 99,
+  "unique_ids_in_selected": 99,
+  "selected_duplicated_ids": 0,
+  "historical_index_rows": 6048,
+  "historical_columns": [
+    "candidate_id",
+    "available_snapshot",
+    "admitted_universe"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-23T03:00:10.346380+00:00",
+  "comparison_kind": "stored_summary_nonpaired",
+  "output_path": "models\\meta_labeler.pkl",
+  "champion_metadata_path": "models\\meta_labeler\\metadata.json",
+  "candidate": {
+    "promotion_status": "pass",
+    "oof_auc": 0.7140716531754913,
+    "oof_auc_ci_low": 0.7009337494443506,
+    "oof_auc_ci_high": 0.7273646647774441,
+    "oof_ece": 0.08151344484947146,
+    "oof_deployable_auc": 0.6431777696612632,
+    "oof_deployable_ece": 0.07531994069586594,
+    "train_samples": 5849,
+    "promotion_evaluation_contract": "chronological_contiguous_group_purged_weighted_kfold_v2",
+    "hmm_artifact_version": "rolling_180d_20260822_203741"
+  },
+  "champion": {
+    "artifact_version": "20260822_230654",
+    "features": [
+      "ev_score",
+      "adx_1h",
+      "adx_15m",
+      "adx_5m",
+      "atr_pct_15m",
+      "ou_halflife",
+      "rsi_15m",
+      "ema_slope_1h",
+      "ema_crosses_5m",
+      "vwap_crosses_5m",
+      "hurst_exponent",
+      "range_size_pct",
+      "bb_width",
+      "grid_spacing_pct",
+      "profit_per_grid_pct",
+      "num_grids",
+      "quote_volume_24h",
+      "open_interest",
+      "micro_round_trip_cost_pct",
+      "funding_rate"
+    ],
+    "target_contract": "fast_winner_time_to_3pct_le_7h",
+    "promotion_status": "pass",
+    "oof_auc": 0.6173465131798465,
+    "oof_auc_ci_low": 0.5881841344920049,
+    "oof_auc_ci_high": 0.6456244703278164,
+    "oof_ece": 0.02288292063763023,
+    "oof_deployable_auc": 0.6173465131798465,
+    "oof_deployable_ece": 0.02288292063763023,
+    "total_samples": 1386,
+    "promotion_evaluation_contract": null,
+    "hmm_artifact_version": "rolling_180d_20260822_203741"
+  },
+  "status": "pass",
+  "reasons": [],
+  "comparison_scope": "incomparable_champion_absolute_gate_only",
+  "comparison_skipped_reasons": [
+    "promotion_evaluation_contract_mismatch(champion=None,candidate='chronological_contiguous_group_purged_weighted_kfold_v2')"
+  ]
+}

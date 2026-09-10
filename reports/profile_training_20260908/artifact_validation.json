@@ -1,0 +1,60 @@
+{
+  "validated_at_utc": "2026-09-08T18:06:04.931575+00:00",
+  "status": "PASS",
+  "protected_files_unchanged": [
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\artifact_manifest.json",
+      "sha256": "3a3a377e7b817c3bd5e59114824d42a69f2c8a463b5173e5504fc3ca09bf6b8a"
+    },
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\data\\new_expired_bots.xlsx",
+      "sha256": "910f7c51464f1c6321a3256a853a77ea81149c9150bff3ec46a12e21c14f8696"
+    },
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\models\\meta_labeler.pkl",
+      "sha256": "e87cf2273df5539c1f9b62faf7c5b33d4b7c66acd302a06d29820c9b446ae4a5"
+    },
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\data\\profile\\pattern_profile.json",
+      "sha256": "38a32e96d1f941e7738fd122d009923928f60f0329eb0192262de5532fd6af83"
+    },
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\data\\profile\\pattern_profile_bootstrap_manifest.json",
+      "sha256": "8bbda99abdbaf93e0404b4cb5ef7d20bd83fb72cf83d3426d9463d4526d87262"
+    },
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\models\\meta_labeler\\metadata.json",
+      "sha256": "55d5bbecac90895c3bf1c6a86bcf4fc4f4839eabb4cb82a82bdb3641dc9d7af8"
+    },
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\models\\meta_labeler\\model.joblib",
+      "sha256": "d666c5d826514dc48267427b4daa1587cb7a5d849296c711a3177db8b8976366"
+    },
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\models\\meta_labeler\\scaler.joblib",
+      "sha256": "85f82bb197871a230efc5331601499b193a879af3b5c1b71da66131ea15762c9"
+    }
+  ],
+  "source_files_rehashed": 82,
+  "full_rows": 6832,
+  "label_counts": {
+    "1": 3567,
+    "0": 3265
+  },
+  "start_time_min_utc": "2026-07-20T23:01:36+00:00",
+  "start_time_max_utc": "2026-09-07T15:20:36.764784+00:00",
+  "unique_start_groups": 69,
+  "symbols": 480,
+  "features": [
+    "parkinson_vol_ratio_4h_24h_pre",
+    "variance_ratio_1m_15m_pre_2h",
+    "funding_carry_expected_next_7h",
+    "liquidity_stability_z_1h"
+  ],
+  "complete_feature_rows": 6832,
+  "runtime_predictions_verified": true,
+  "frozen_holdout_hashes_unchanged": true,
+  "chronological_purge_and_candidate_id_disjointness": true,
+  "metadata_repair": "Full-refit label counts and source hash corrected from copied development metadata; coefficients and predictions unchanged.",
+  "deployment_status": "shadow_only; active profile pointer absent and bootstrap unchanged"
+}
