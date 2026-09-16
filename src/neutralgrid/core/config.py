@@ -119,6 +119,7 @@ class BinanceConfig:
     """Binance API configuration."""
 
     futures_base_url: str = "https://fapi.binance.com"
+    futures_ws_api_url: str = "wss://ws-fapi.binance.com/ws-fapi/v1"
     api_key: str = ""
     api_secret: str = ""
     endpoints: Dict[str, str] = field(default_factory=lambda: {

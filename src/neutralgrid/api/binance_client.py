@@ -7,12 +7,15 @@ Supports both public and authenticated (signed) API requests.
 import asyncio
 import hmac
 import hashlib
+import json
 import logging
 import ssl
 import time
+import uuid
 from typing import Any, Optional
 from urllib.parse import urlencode
 
+import aiohttp
 import httpx
 import truststore
 
@@ -48,7 +51,13 @@ class BinanceAPIError(Exception):
 class BinanceClient:
     """Async client for Binance Futures USDT-M API with authentication support."""
 
-    def __init__(self, api_key: Optional[str] = None, api_secret: Optional[str] = None, base_url: Optional[str] = None):
+    def __init__(
+        self,
+        api_key: Optional[str] = None,
+        api_secret: Optional[str] = None,
+        base_url: Optional[str] = None,
+        user_data_ws_api_url: Optional[str] = None,
+    ):
         """
         Initialize the Binance Futures client.
         
@@ -56,10 +65,15 @@ class BinanceClient:
             api_key: Binance API key (optional, uses config if not provided)
             api_secret: Binance API secret (optional, uses config if not provided)
             base_url: Binance Futures API base URL (optional, uses config if not provided)
+            user_data_ws_api_url: Binance USD-M WebSocket API URL used for
+                the listen-key lifecycle (optional, uses config if omitted)
         """
         cfg = get_config()
         self._cfg = cfg
         self.base_url = base_url or cfg.binance.futures_base_url
+        self.user_data_ws_api_url = (
+            user_data_ws_api_url or cfg.binance.futures_ws_api_url
+        )
         self.api_key = api_key or cfg.binance.api_key
         self.api_secret = api_secret or cfg.binance.api_secret
         self._client: Optional[httpx.AsyncClient] = None
@@ -696,6 +710,106 @@ class BinanceClient:
         if symbol:
             params["symbol"] = symbol.upper()
         return await self._request(self._cfg.binance.endpoints["positions"], params, signed=True)
+
+    async def _user_data_stream_ws_call(self, method: str) -> dict[str, Any]:
+        """Call the current USD-M listen-key lifecycle WebSocket API.
+
+        The API key is sent only in the WebSocket request payload and no server
+        payload is interpolated into exceptions. This prevents credentials from
+        entering logs through request or validation failures.
+        """
+
+        if not self.api_key:
+            raise ValueError("Binance API key required for user-data stream")
+        allowed = {
+            "userDataStream.start",
+            "userDataStream.ping",
+            "userDataStream.stop",
+        }
+        if method not in allowed:
+            raise ValueError("Unsupported user-data stream lifecycle method")
+        request_id = uuid.uuid4().hex
+        ssl_context = truststore.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
+        connector = aiohttp.TCPConnector(ssl=ssl_context)
+        timeout = aiohttp.ClientTimeout(total=30.0)
+        try:
+            async with aiohttp.ClientSession(
+                connector=connector, timeout=timeout
+            ) as session:
+                async with session.ws_connect(
+                    self.user_data_ws_api_url,
+                    autoping=True,
+                    heartbeat=20.0,
+                    max_msg_size=1_000_000,
+                ) as websocket:
+                    await websocket.send_json(
+                        {
+                            "id": request_id,
+                            "method": method,
+                            "params": {"apiKey": self.api_key},
+                        }
+                    )
+                    message = await websocket.receive()
+        except (aiohttp.ClientError, asyncio.TimeoutError) as exc:
+            raise ValueError(
+                f"User-data stream lifecycle transport failed for {method}"
+            ) from exc
+        if message.type != aiohttp.WSMsgType.TEXT:
+            raise ValueError(
+                f"User-data stream lifecycle returned a non-text frame for {method}"
+            )
+        try:
+            response = json.loads(str(message.data))
+        except json.JSONDecodeError as exc:
+            raise ValueError(
+                f"Invalid user-data stream lifecycle JSON for {method}"
+            ) from exc
+        if not isinstance(response, dict) or response.get("id") != request_id:
+            raise ValueError(
+                f"Invalid user-data stream lifecycle response for {method}"
+            )
+        status = response.get("status")
+        if not isinstance(status, int) or status != 200:
+            error = response.get("error")
+            code = error.get("code") if isinstance(error, dict) else None
+            raise ValueError(
+                f"User-data stream lifecycle {method} failed "
+                f"with status={status!r}, code={code!r}"
+            )
+        result = response.get("result")
+        if not isinstance(result, dict):
+            raise ValueError(
+                f"Invalid user-data stream lifecycle result for {method}"
+            )
+        return result
+
+    async def start_user_data_stream(self) -> str:
+        """Create or extend a listen key via ``userDataStream.start``."""
+
+        response = await self._user_data_stream_ws_call("userDataStream.start")
+        if not isinstance(response, dict):
+            raise ValueError("Invalid user-data stream response")
+        listen_key = response.get("listenKey")
+        if not isinstance(listen_key, str) or not listen_key.strip():
+            raise ValueError("User-data stream response lacks listenKey")
+        return listen_key
+
+    async def keepalive_user_data_stream(self, listen_key: str) -> None:
+        """Extend the active listen key via ``userDataStream.ping``."""
+
+        if not isinstance(listen_key, str) or not listen_key.strip():
+            raise ValueError("listen_key must be a non-empty string")
+        response = await self._user_data_stream_ws_call("userDataStream.ping")
+        returned_key = response.get("listenKey")
+        if not isinstance(returned_key, str) or returned_key != listen_key:
+            raise ValueError("User-data stream keepalive returned a different listenKey")
+
+    async def close_user_data_stream(self, listen_key: str) -> None:
+        """Close the account's active listen key via ``userDataStream.stop``."""
+
+        if not isinstance(listen_key, str) or not listen_key.strip():
+            raise ValueError("listen_key must be a non-empty string")
+        await self._user_data_stream_ws_call("userDataStream.stop")
 
     async def get_account_balance(self) -> dict[str, Any]:
         """

@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 import json
+import os
 from datetime import datetime, timezone
 
 import pytest
 
+from scripts import collect_private_grid_telemetry as private_telemetry
 from scripts.collect_private_grid_telemetry import (
     DrawerSnapshot,
     TelemetryError,
@@ -14,6 +16,16 @@ from scripts.collect_private_grid_telemetry import (
     _validate_drawer_text,
     parse_args,
 )
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Windows PID-probe regression")
+def test_windows_lock_probe_does_not_call_os_kill(monkeypatch) -> None:
+    def fail_if_called(_pid: int, _signal: int) -> None:
+        raise AssertionError("os.kill(pid, 0) is mutating on Windows")
+
+    monkeypatch.setattr(private_telemetry.os, "kill", fail_if_called)
+
+    assert private_telemetry._pid_is_running(os.getpid()) is True
 
 
 def test_private_scheduler_default_matches_approved_three_minute_cadence() -> None:

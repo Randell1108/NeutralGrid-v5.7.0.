@@ -719,6 +719,8 @@ async def test_missing_combined_stream_ack_blocks_capture(
             str(audit_dir),
             "--live-root",
             str(tmp_path / "Live"),
+            "--ingestion-date",
+            "2026-09-10",
             "--ws-base",
             f"ws://127.0.0.1:{port}/public/ws",
             "--market-ws-base",
@@ -821,6 +823,8 @@ async def test_isolated_sequence_gap_is_labelled_and_resynchronized(
             str(audit_dir),
             "--live-root",
             str(tmp_path / "Live"),
+            "--ingestion-date",
+            "2026-09-10",
             "--ws-base",
             f"ws://127.0.0.1:{port}/public/ws",
             "--rest-base",
@@ -858,6 +862,16 @@ async def test_isolated_sequence_gap_is_labelled_and_resynchronized(
     verification = replay_symbol_capture(symbol_run_dir)
 
     assert exit_code == 0
+    assert manifest["service"] == "public_diff_depth"
+    assert manifest["traffic_class"] == "public"
+    assert manifest["live_date_lima"] == "2026-09-10"
+    assert manifest["ingestion_date_basis"] == "supervisor_frozen"
+    assert "2026-09-10" in symbol_run_dir.parts
+    assert manifest["collect_agg_trades"] is False
+    assert manifest["collect_mark_price_updates"] is False
+    assert "dedicated market service" in manifest["scope_note"]
+    assert symbol_manifest["service"] == "public_diff_depth"
+    assert symbol_manifest["traffic_class"] == "public"
     assert symbol_manifest["status"] == "complete_with_labelled_gaps"
     assert symbol_manifest["counters"]["sequence_gaps"] == 1
     assert symbol_manifest["counters"]["snapshots"] >= 2

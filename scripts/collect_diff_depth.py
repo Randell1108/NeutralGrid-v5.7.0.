@@ -27,7 +27,7 @@ import sys
 import time
 import uuid
 from dataclasses import asdict, dataclass
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any, Sequence, cast
 from zoneinfo import ZoneInfo
@@ -252,6 +252,8 @@ class SymbolDiffDepthCollector:
     def _manifest_payload(self, status: str) -> dict[str, Any]:
         return {
             "status": status,
+            "service": "public_diff_depth",
+            "traffic_class": "public",
             "target": asdict(self.target),
             "started_at_utc": self.started_at_utc,
             "updated_at_utc": _utc_now_iso(),
@@ -1348,6 +1350,10 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     source.add_argument("--input", help="CSV containing symbol and optional IDs")
     parser.add_argument("--duration-seconds", type=float, default=0.0)
     parser.add_argument("--live-root", default=str(ROOT / "Live"))
+    parser.add_argument(
+        "--ingestion-date",
+        help="Supervisor-frozen America/Lima date in YYYY-MM-DD form",
+    )
     parser.add_argument("--audit-dir")
     parser.add_argument("--ws-base", default=DEFAULT_WS_BASE)
     parser.add_argument("--market-ws-base", default=DEFAULT_MARKET_WS_BASE)
@@ -1415,6 +1421,13 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     args = parser.parse_args(argv)
     if args.duration_seconds < 0:
         parser.error("--duration-seconds must be >= 0")
+    if args.ingestion_date is not None:
+        try:
+            parsed_date = date.fromisoformat(args.ingestion_date)
+        except ValueError:
+            parser.error("--ingestion-date must be YYYY-MM-DD")
+        if parsed_date.isoformat() != args.ingestion_date:
+            parser.error("--ingestion-date must use canonical YYYY-MM-DD form")
     if args.snapshot_limit not in {5, 10, 20, 50, 100, 500, 1000}:
         parser.error("--snapshot-limit must be a Binance-supported depth limit")
     for name in (
@@ -1444,8 +1457,8 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
 async def collect_diff_depth(args: argparse.Namespace) -> int:
     targets = _load_targets(symbols=args.symbols, input_path=args.input)
     started_at = _utc_now()
-    run_id = started_at.strftime("diff_depth_%Y%m%d_%H%M%S")
-    live_date = started_at.astimezone(LIMA).strftime("%Y-%m-%d")
+    run_id = started_at.strftime("diff_depth_%Y%m%d_%H%M%S_%f") + f"_{os.getpid()}"
+    live_date = args.ingestion_date or started_at.astimezone(LIMA).strftime("%Y-%m-%d")
     audit_dir = (
         Path(args.audit_dir)
         if args.audit_dir
@@ -1468,16 +1481,23 @@ async def collect_diff_depth(args: argparse.Namespace) -> int:
     if hasattr(signal, "SIGTERM"):
         signal.signal(signal.SIGTERM, _request_stop)
 
+    live_root = Path(args.live_root).resolve()
     storages: dict[str, SymbolCaptureStorage] = {}
     collectors: dict[str, SymbolDiffDepthCollector] = {}
     for target in targets:
         symbol_run_dir = (
-            Path(args.live_root)
+            live_root
             / live_date
             / target.symbol
             / "diff_depth"
             / run_id
-        )
+        ).resolve()
+        try:
+            symbol_run_dir.relative_to(live_root)
+        except ValueError as exc:
+            raise DiffDepthError(
+                f"diff-depth path escapes live root: {symbol_run_dir}"
+            ) from exc
         storage = SymbolCaptureStorage(
             symbol_run_dir,
             symbol=target.symbol,
@@ -1502,10 +1522,17 @@ async def collect_diff_depth(args: argparse.Namespace) -> int:
         payload = {
             "schema_version": MANIFEST_SCHEMA_VERSION,
             "status": status,
+            "service": "public_diff_depth",
+            "traffic_class": "public",
             "run_id": run_id,
             "started_at_utc": started_at.replace(microsecond=0).isoformat(),
             "updated_at_utc": _utc_now_iso(),
             "live_date_lima": live_date,
+            "live_root": str(live_root),
+            "ingestion_timezone": "America/Lima",
+            "ingestion_date_basis": (
+                "supervisor_frozen" if args.ingestion_date else "collector_start"
+            ),
             "audit_dir": str(audit_dir),
             "targets": [asdict(target) for target in targets],
             "symbol_run_dirs": {
@@ -1520,6 +1547,9 @@ async def collect_diff_depth(args: argparse.Namespace) -> int:
             "capture_started_at_utc": capture_started_at_utc,
             "update_speed": args.update_speed,
             "snapshot_limit": int(args.snapshot_limit),
+            "ws_base": args.ws_base,
+            "collect_agg_trades": bool(args.collect_agg_trades),
+            "collect_mark_price_updates": bool(args.collect_mark_price_updates),
             "fsync_every": int(args.fsync_every),
             "manifest_heartbeat_seconds": float(
                 args.manifest_heartbeat_seconds
@@ -1531,10 +1561,15 @@ async def collect_diff_depth(args: argparse.Namespace) -> int:
             "git_status_short": _git_output(["status", "--short"]),
             "collector_pid": os.getpid(),
             "scope_note": (
-                "Prospective Binance-published diff-depth on the public endpoint "
-                "plus aggregate trades and mark prices on the market endpoint. "
+                "Prospective Binance-published diff-depth on the public endpoint. "
                 "Depth sequence completeness is per labelled contiguous segment; "
-                "this is not historical queue reconstruction or private fill data."
+                "this is not historical queue reconstruction or private fill data. "
+                + (
+                    "Legacy in-process market subscriptions are enabled."
+                    if args.collect_agg_trades or args.collect_mark_price_updates
+                    else "Market subscriptions are disabled and owned by the "
+                    "dedicated market service."
+                )
             ),
             **extra,
         }
