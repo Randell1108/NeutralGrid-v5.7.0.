@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "completed_at_utc": "2026-09-15T22:16:16.1719194Z",
+  "deleted": [
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\.ra15pre",
+      "deleted": true,
+      "file_count": 23,
+      "bytes": 17775.0
+    },
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\.ra15final",
+      "deleted": true,
+      "file_count": 907,
+      "bytes": 3908369.0
+    },
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp",
+      "deleted": true,
+      "file_count": 407,
+      "bytes": 143545139.0
+    },
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\full_57_input.xlsx",
+      "deleted": true,
+      "file_count": 1,
+      "bytes": 32238
+    },
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\utility_input.xlsx",
+      "deleted": true,
+      "file_count": 1,
+      "bytes": 228416
+    }
+  ],
+  "retained": "Final datasets, artifacts, audit logs, reproducible scripts, raw market evidence and rollback backups",
+  "scope": "Only task-owned temporary staging, isolated runtime, test directories and intermediate input workbooks"
+}

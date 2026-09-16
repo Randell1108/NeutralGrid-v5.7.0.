@@ -1,0 +1,227 @@
+{
+  "artifact": {
+    "artifact_type": "neutralgrid.utility_score",
+    "artifact_version": "utility_20260915_220851_633469",
+    "coefficients": {
+      "horizon_hours": 9.5,
+      "kappa_trend": 0.9086956521739131,
+      "lambda_risk": 0.05
+    },
+    "created_at_utc": "2026-09-15T22:08:51.633469+00:00",
+    "data_contract": {
+      "feature_sheet": "Meta Features",
+      "hmm_artifact_version": "rolling_180d_20260915_210940",
+      "hmm_probability_columns": [
+        "range_prob",
+        "trend_prob",
+        "persistence_prob"
+      ],
+      "ignored_columns": [
+        "utility_score",
+        "ou_halflife",
+        "take_profit_pct"
+      ],
+      "live_outcome_ingestor_used": false,
+      "merge_key": "strategy_id",
+      "optional_feature_columns": [
+        "survival_prob",
+        "hurst_exponent"
+      ],
+      "outcome_columns": [
+        "strategy_id",
+        "symbol",
+        "pnl_pct",
+        "duration_hours",
+        "start_time_utc"
+      ],
+      "outcome_sheet": "General",
+      "range_size_pct_source": "Meta Features",
+      "required_feature_columns": [
+        "num_grids",
+        "range_prob",
+        "trend_prob",
+        "profit_per_grid_pct",
+        "range_size_pct"
+      ],
+      "status_columns": [
+        "backfill_status"
+      ],
+      "stored_utility_score_used": false
+    },
+    "false_optionality_excluded": [
+      "scripts/check_utility_drift.py",
+      "automatic_recalibration_scheduler",
+      "LiveOutcomeIngestor_rewrite",
+      "ou_halflife_required_feature",
+      "take_profit_pct_artifact_field",
+      "hard_liquidation_blacklist",
+      "new_calibration_package",
+      "meta_labeler_rewrite",
+      "scanner_profile_edits",
+      "winner_only_ingest",
+      "dual_provisional_utility_semantics"
+    ],
+    "gates": {
+      "G0_schema": true,
+      "G1_dedup": true,
+      "G2_class_fit_holdout": true,
+      "G3_holdout_auc_gt_0_5": true,
+      "G4_holdout_mean_winner_gt_loser": true,
+      "G5_threshold_selected_on_fit": true,
+      "G6_winner_recall_not_regressed_vs_v0": true,
+      "G7_finite_nonnegative_not_boundary_pinned": false
+    },
+    "label_contract": {
+      "eligible_universe": "duration_hours <= 7.0 and backfill_status != 'hmm_failed' and pnl_pct is observed",
+      "label_column": "utility_outcome_7h",
+      "negative_class": "pnl_pct <= 0.0",
+      "positive_class": "pnl_pct > 0.0"
+    },
+    "metrics": {
+      "candidate": {
+        "fit": {
+          "auc": 0.49348212522220025,
+          "balanced_accuracy": 0.5418724076634407,
+          "false_positive_rate": 0.6867469879518072,
+          "loser_recall": 0.3132530120481928,
+          "mean_loser_utility": 0.45494423425996405,
+          "mean_winner_utility": 0.4753375843157929,
+          "n_losers": 83,
+          "n_winners": 122,
+          "threshold": -0.5148183469848765,
+          "winner_recall": 0.7704918032786885
+        },
+        "holdout": {
+          "auc": 0.6521739130434783,
+          "balanced_accuracy": 0.6185770750988142,
+          "false_positive_rate": 0.5454545454545454,
+          "loser_recall": 0.45454545454545453,
+          "mean_loser_utility": -0.29562358651146176,
+          "mean_winner_utility": 1.332483723093165,
+          "n_losers": 22,
+          "n_winners": 46,
+          "threshold": -0.5148183469848765,
+          "winner_recall": 0.782608695652174
+        }
+      },
+      "v0_fallback": {
+        "coefficients": {
+          "horizon_hours": 6.0,
+          "kappa_trend": 1.5,
+          "lambda_risk": 2.0
+        },
+        "fit": {
+          "auc": 0.4699782737507407,
+          "balanced_accuracy": 0.5,
+          "false_positive_rate": 0.0,
+          "loser_recall": 1.0,
+          "mean_loser_utility": -15.462423680380097,
+          "mean_winner_utility": -17.00061094997419,
+          "n_losers": 83,
+          "n_winners": 122,
+          "threshold": 0.0,
+          "winner_recall": 0.0
+        },
+        "holdout": {
+          "auc": 0.5187747035573123,
+          "balanced_accuracy": 0.5,
+          "false_positive_rate": 0.0,
+          "loser_recall": 1.0,
+          "mean_loser_utility": -17.5782269644656,
+          "mean_winner_utility": -15.435002914612616,
+          "n_losers": 22,
+          "n_winners": 46,
+          "threshold": 0.0,
+          "winner_recall": 0.0
+        },
+        "threshold": {
+          "min_utility": 0.0
+        }
+      }
+    },
+    "pool_feature_coverage": [
+      {
+        "feature": "num_grids",
+        "non_null_count": 273,
+        "null_count": 0
+      },
+      {
+        "feature": "range_prob",
+        "non_null_count": 273,
+        "null_count": 0
+      },
+      {
+        "feature": "trend_prob",
+        "non_null_count": 273,
+        "null_count": 0
+      },
+      {
+        "feature": "profit_per_grid_pct",
+        "non_null_count": 273,
+        "null_count": 0
+      },
+      {
+        "feature": "range_size_pct",
+        "non_null_count": 273,
+        "null_count": 0
+      },
+      {
+        "feature": "survival_prob",
+        "non_null_count": 273,
+        "null_count": 0
+      },
+      {
+        "feature": "hurst_exponent",
+        "non_null_count": 273,
+        "null_count": 0
+      }
+    ],
+    "promotable": false,
+    "promotion_policy": "current.json is updated only when all gates are true",
+    "schema_version": 2,
+    "search_space": {
+      "horizon_hours": [
+        3.25,
+        10.0,
+        28
+      ],
+      "kappa_trend": [
+        0.05,
+        4.0,
+        24
+      ],
+      "lambda_risk": [
+        0.05,
+        4.0,
+        24
+      ]
+    },
+    "source_workbook": "data\\new_expired_bots.xlsx",
+    "split": {
+      "fit_class_counts": {
+        "0": 83,
+        "1": 122
+      },
+      "holdout_class_counts": {
+        "0": 22,
+        "1": 46
+      },
+      "n_fit": 205,
+      "n_holdout": 68,
+      "n_pool": 273,
+      "pool_class_counts": {
+        "0": 105,
+        "1": 168
+      },
+      "rule": "sort by start_time_utc then strategy_id; k_fit = int(round(0.75 * n))"
+    },
+    "threshold": {
+      "criterion": "balanced_accuracy",
+      "min_utility": -0.5148183469848765,
+      "selected_on": "fit"
+    }
+  },
+  "candidate_path": "artifacts\\utility\\utility_20260915_220851_633469.json",
+  "current_path": "artifacts\\utility\\current.json",
+  "promoted": false
+}

@@ -1,0 +1,59 @@
+{
+  "status": "shadow_only",
+  "training": {
+    "artifact_role": "shadow_full_refit",
+    "target_contract": "fast_winner_time_to_3pct_le_7h",
+    "training_rows": 4480,
+    "label_counts": {
+      "0": 2362,
+      "1": 2118
+    },
+    "family": "gaussian_lda_v1",
+    "shrinkage": 0.9,
+    "source_sha256": "59e3c5aff4977b6020b1fa767a4a4a3a5c4f1cca1958fd01c37e453a2e793541",
+    "fresh_outcome_rows": 983,
+    "retained_previous_outcome_rows": 3497,
+    "new_candidate_ids": 371,
+    "promotion_blockers": [
+      "Target differs from canonical completed-bot profile",
+      "No verified production incumbent comparison or bot-disjoint, event-complete promotion evidence"
+    ],
+    "hmm_features_used": false
+  },
+  "historical_source_policy": "Reuse previously audited September 11 pool, including its verified fresh replacements for timestamp-conflicted older outcomes; no raw conflicted historical pool is reintroduced",
+  "prior_pool_audit": {
+    "status": "PASS",
+    "fresh_backtest_rows": 4019,
+    "fresh_complete_profile_rows": 3710,
+    "fresh_incomplete_rows": 309,
+    "retained_historical_rows": 399,
+    "total_unique_training_rows": 4109,
+    "positives": 2009,
+    "all_features_finite": true,
+    "all_scan_times_no_later_than_outcome_start": true,
+    "conflicting_historical_outcomes_reused": 0
+  },
+  "prior_frozen_artifact_available_by": "2026-09-11 15:17:43.359411+00:00",
+  "prior_frozen_model_evaluation": {
+    "new_ids": {
+      "rows": 371,
+      "positives": 110,
+      "auc": 0.5840473702542669,
+      "brier": 0.24367791251329707,
+      "ece": 0.19385719792015976
+    },
+    "new_ids_after_frozen_artifact": {
+      "rows": 363,
+      "positives": 105,
+      "auc": 0.569139904023625,
+      "brier": 0.24385524539981304,
+      "ece": 0.20030169463782416
+    }
+  },
+  "evaluation_scope": "Prior model only; candidate-ID temporal separation does not prove bot-disjoint independence",
+  "newly_refitted_model_has_independent_holdout": false,
+  "model_sha256": "66dfe64de39720835c890741be5069b75cc5543edafc4041a14e9525988016e1",
+  "pattern_sha256": "cfd07966a89790fc150a58a252958ed779d5f320a28b7bddeef21fd16609d071",
+  "source_fresh_sha256": "34cd0298edd49051995954dfc82b0bc8e8b5448aea050c8b74b144a8e06eac6c",
+  "source_previous_sha256": "cc184bb7a24d91ecd8f1c3fc0ef2ad9000a84c577fc1fa10eacc1739cfe115c3"
+}

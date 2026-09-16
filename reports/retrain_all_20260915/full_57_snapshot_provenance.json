@@ -1,0 +1,1769 @@
+[
+  {
+    "strategy_id": "413903108",
+    "candidate_id": "HEMIUSDT_20260814_123332_65a3c1de",
+    "bot_start_utc": "2026-08-19 17:24:00+00:00",
+    "scan_utc": "2026-08-14 12:33:32+00:00",
+    "eligible_snapshot_rows": 0,
+    "fields": {
+      "quote_volume_24h": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "open_interest": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "micro_round_trip_cost_pct": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "413921885",
+    "candidate_id": "BTWUSDT_20260814_214024_65a3c1de",
+    "bot_start_utc": "2026-08-20 12:44:12+00:00",
+    "scan_utc": "2026-08-14 21:40:24+00:00",
+    "eligible_snapshot_rows": 0,
+    "fields": {
+      "quote_volume_24h": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "open_interest": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "micro_round_trip_cost_pct": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "413928491",
+    "candidate_id": "AVAAIUSDT_20260820_155049_65a3c1de",
+    "bot_start_utc": "2026-08-20 17:47:42+00:00",
+    "scan_utc": "2026-08-20 15:50:49+00:00",
+    "eligible_snapshot_rows": 0,
+    "fields": {
+      "quote_volume_24h": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "open_interest": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "micro_round_trip_cost_pct": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "413928390",
+    "candidate_id": "METUSDT_20260820_155049_70a20f9b",
+    "bot_start_utc": "2026-08-20 17:42:37+00:00",
+    "scan_utc": "2026-08-20 15:50:49+00:00",
+    "eligible_snapshot_rows": 0,
+    "fields": {
+      "quote_volume_24h": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "open_interest": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "micro_round_trip_cost_pct": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "413928457",
+    "candidate_id": "HYPEUSDT_20260820_155049_9e836dc4",
+    "bot_start_utc": "2026-08-20 17:46:12+00:00",
+    "scan_utc": "2026-08-20 15:50:49+00:00",
+    "eligible_snapshot_rows": 0,
+    "fields": {
+      "quote_volume_24h": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "open_interest": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "micro_round_trip_cost_pct": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "413928413",
+    "candidate_id": "VIRTUALUSDT_20260820_155049_c9e745c7",
+    "bot_start_utc": "2026-08-20 17:44:02+00:00",
+    "scan_utc": "2026-08-20 15:50:49+00:00",
+    "eligible_snapshot_rows": 0,
+    "fields": {
+      "quote_volume_24h": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "open_interest": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "micro_round_trip_cost_pct": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "413951740",
+    "candidate_id": "NEARUSDT_20260821_141031_6bb22c4a",
+    "bot_start_utc": "2026-08-21 15:23:47+00:00",
+    "scan_utc": "2026-08-21 14:10:31+00:00",
+    "eligible_snapshot_rows": 0,
+    "fields": {
+      "quote_volume_24h": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "open_interest": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "micro_round_trip_cost_pct": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "413951574",
+    "candidate_id": "BIOUSDT_20260821_141031_cdee99ef",
+    "bot_start_utc": "2026-08-21 15:15:08+00:00",
+    "scan_utc": "2026-08-21 14:10:31+00:00",
+    "eligible_snapshot_rows": 0,
+    "fields": {
+      "quote_volume_24h": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "open_interest": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "micro_round_trip_cost_pct": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "413951597",
+    "candidate_id": "GRASSUSDT_20260821_141031_37afded1",
+    "bot_start_utc": "2026-08-21 15:16:13+00:00",
+    "scan_utc": "2026-08-21 14:10:31+00:00",
+    "eligible_snapshot_rows": 0,
+    "fields": {
+      "quote_volume_24h": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "open_interest": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "micro_round_trip_cost_pct": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "413951725",
+    "candidate_id": "ORDIUSDT_20260821_141031_206e2795",
+    "bot_start_utc": "2026-08-21 15:22:57+00:00",
+    "scan_utc": "2026-08-21 14:10:31+00:00",
+    "eligible_snapshot_rows": 0,
+    "fields": {
+      "quote_volume_24h": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "open_interest": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "micro_round_trip_cost_pct": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "413975717",
+    "candidate_id": "MONUSDT_20260822_121311_7aefa36b",
+    "bot_start_utc": "2026-08-22 13:04:00+00:00",
+    "scan_utc": "2026-08-22 12:13:11+00:00",
+    "eligible_snapshot_rows": 0,
+    "fields": {
+      "quote_volume_24h": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "open_interest": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "micro_round_trip_cost_pct": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "413975732",
+    "candidate_id": "CRVUSDT_20260822_121311_dc398709",
+    "bot_start_utc": "2026-08-22 13:04:45+00:00",
+    "scan_utc": "2026-08-22 12:13:11+00:00",
+    "eligible_snapshot_rows": 0,
+    "fields": {
+      "quote_volume_24h": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "open_interest": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "micro_round_trip_cost_pct": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "413997572",
+    "candidate_id": "DASHUSDT_20260823_143521_44c5944d",
+    "bot_start_utc": "2026-08-23 16:05:17+00:00",
+    "scan_utc": "2026-08-23 14:35:21+00:00",
+    "eligible_snapshot_rows": 0,
+    "fields": {
+      "quote_volume_24h": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "open_interest": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "micro_round_trip_cost_pct": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414002663",
+    "candidate_id": "UNIUSDT_20260823_225631_fcda64de",
+    "bot_start_utc": "2026-08-23 23:29:45+00:00",
+    "scan_utc": "2026-08-23 22:56:31+00:00",
+    "eligible_snapshot_rows": 0,
+    "fields": {
+      "quote_volume_24h": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "open_interest": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "micro_round_trip_cost_pct": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414002696",
+    "candidate_id": "STRKUSDT_20260823_225631_9eae2849",
+    "bot_start_utc": "2026-08-23 23:32:02+00:00",
+    "scan_utc": "2026-08-23 22:56:31+00:00",
+    "eligible_snapshot_rows": 0,
+    "fields": {
+      "quote_volume_24h": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "open_interest": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "micro_round_trip_cost_pct": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414002653",
+    "candidate_id": "SPKUSDT_20260823_225631_2fc3caf0",
+    "bot_start_utc": "2026-08-23 23:28:43+00:00",
+    "scan_utc": "2026-08-23 22:56:31+00:00",
+    "eligible_snapshot_rows": 0,
+    "fields": {
+      "quote_volume_24h": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "open_interest": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "micro_round_trip_cost_pct": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414015985",
+    "candidate_id": "GRASSUSDT_20260824_114538_baef2ec1",
+    "bot_start_utc": "2026-08-24 14:01:53+00:00",
+    "scan_utc": "2026-08-24 11:45:38+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 65618083.45063,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00910_20260824_114538.csv",
+        "sha256": "98f00f45a55685f2d115d75f240128b8c3ca0bb26ee2715546c252ad51f7d082",
+        "recorded_availability_utc": "2026-08-24 12:02:28+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 24462569.6,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00910_20260824_114538.csv",
+        "sha256": "98f00f45a55685f2d115d75f240128b8c3ca0bb26ee2715546c252ad51f7d082",
+        "recorded_availability_utc": "2026-08-24 12:02:28+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.2745,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00910_20260824_114538.csv",
+        "sha256": "98f00f45a55685f2d115d75f240128b8c3ca0bb26ee2715546c252ad51f7d082",
+        "recorded_availability_utc": "2026-08-24 12:02:28+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414016321",
+    "candidate_id": "NEARUSDT_20260824_114538_37bf54c8",
+    "bot_start_utc": "2026-08-24 14:12:18+00:00",
+    "scan_utc": "2026-08-24 11:45:38+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 245826331.186,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00910_20260824_114538.csv",
+        "sha256": "98f00f45a55685f2d115d75f240128b8c3ca0bb26ee2715546c252ad51f7d082",
+        "recorded_availability_utc": "2026-08-24 12:02:28+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 38327034.0,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00910_20260824_114538.csv",
+        "sha256": "98f00f45a55685f2d115d75f240128b8c3ca0bb26ee2715546c252ad51f7d082",
+        "recorded_availability_utc": "2026-08-24 12:02:28+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.2496,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00910_20260824_114538.csv",
+        "sha256": "98f00f45a55685f2d115d75f240128b8c3ca0bb26ee2715546c252ad51f7d082",
+        "recorded_availability_utc": "2026-08-24 12:02:28+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414037265",
+    "candidate_id": "UAIUSDT_20260825_114628_87831b94",
+    "bot_start_utc": "2026-08-25 12:57:08+00:00",
+    "scan_utc": "2026-08-25 11:46:28+00:00",
+    "eligible_snapshot_rows": 0,
+    "fields": {
+      "quote_volume_24h": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "open_interest": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "micro_round_trip_cost_pct": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414037172",
+    "candidate_id": "PROMUSDT_20260825_114628_878e7109",
+    "bot_start_utc": "2026-08-25 12:50:20+00:00",
+    "scan_utc": "2026-08-25 11:46:28+00:00",
+    "eligible_snapshot_rows": 0,
+    "fields": {
+      "quote_volume_24h": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "open_interest": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "micro_round_trip_cost_pct": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414037188",
+    "candidate_id": "STXUSDT_20260825_114628_b7f8cd73",
+    "bot_start_utc": "2026-08-25 12:51:10+00:00",
+    "scan_utc": "2026-08-25 11:46:28+00:00",
+    "eligible_snapshot_rows": 0,
+    "fields": {
+      "quote_volume_24h": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "open_interest": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "micro_round_trip_cost_pct": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414343395",
+    "candidate_id": "MEGAUSDT_20260908_223047_356bf3e3",
+    "bot_start_utc": "2026-09-08 23:56:09+00:00",
+    "scan_utc": "2026-09-08 22:30:47+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 16499481.54257,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 104091338.0,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.1479,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414343401",
+    "candidate_id": "XPLUSDT_20260908_223047_0e8a84ff",
+    "bot_start_utc": "2026-09-08 23:57:22+00:00",
+    "scan_utc": "2026-09-08 22:30:47+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 77413092.7444,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 465849700.0,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.0963,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414343436",
+    "candidate_id": "ETHFIUSDT_20260908_223047_89134886",
+    "bot_start_utc": "2026-09-09 00:00:46+00:00",
+    "scan_utc": "2026-09-08 22:30:47+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 23994091.99382,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 41649769.6,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.1186,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414343475",
+    "candidate_id": "BICOUSDT_20260908_223047_e75479e8",
+    "bot_start_utc": "2026-09-09 00:03:45+00:00",
+    "scan_utc": "2026-09-08 22:30:47+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 15042273.9145,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 230368598.0,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.2163,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414343491",
+    "candidate_id": "ARXUSDT_20260908_223047_57dcb417",
+    "bot_start_utc": "2026-09-09 00:04:57+00:00",
+    "scan_utc": "2026-09-08 22:30:47+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 10258340.3805,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 24432548.0,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.3379,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414343515",
+    "candidate_id": "ETCUSDT_20260908_223047_512a2640",
+    "bot_start_utc": "2026-09-09 00:06:57+00:00",
+    "scan_utc": "2026-09-08 22:30:47+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 81380396.609,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 3149496.94,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.1005,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414343544",
+    "candidate_id": "TAOUSDT_20260908_223047_475d3355",
+    "bot_start_utc": "2026-09-09 00:08:59+00:00",
+    "scan_utc": "2026-09-08 22:30:47+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 195253868.95,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 295976.476,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.0719,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414343561",
+    "candidate_id": "ENSUSDT_20260908_223047_fb0fee44",
+    "bot_start_utc": "2026-09-09 00:10:43+00:00",
+    "scan_utc": "2026-09-08 22:30:47+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 12379836.123,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 947845.8,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.1156,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414343581",
+    "candidate_id": "KASUSDT_20260908_223047_66426083",
+    "bot_start_utc": "2026-09-09 00:12:15+00:00",
+    "scan_utc": "2026-09-08 22:30:47+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 16064211.33439,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 102534004.0,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.1651,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414343604",
+    "candidate_id": "BIOUSDT_20260908_223047_4201443b",
+    "bot_start_utc": "2026-09-09 00:13:47+00:00",
+    "scan_utc": "2026-09-08 22:30:47+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 6909893.75358,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 215033032.0,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.313,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+        "sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1",
+        "recorded_availability_utc": "2026-09-08 23:13:03.347746372+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414359045",
+    "candidate_id": "STRKUSDT_20260909_142705_3b2440b6",
+    "bot_start_utc": "2026-09-09 15:36:18+00:00",
+    "scan_utc": "2026-09-09 14:27:05+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 11297677.439009,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 215938145.3,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.1747,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414359199",
+    "candidate_id": "RENDERUSDT_20260909_142705_ed087b32",
+    "bot_start_utc": "2026-09-09 15:42:13+00:00",
+    "scan_utc": "2026-09-09 14:27:05+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 14944634.4475,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 6146240.4,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.2902,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414359073",
+    "candidate_id": "BMTUSDT_20260909_142705_789ecfb7",
+    "bot_start_utc": "2026-09-09 15:37:26+00:00",
+    "scan_utc": "2026-09-09 14:27:05+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 3935717.90248,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 163883577.0,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.2501,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414359162",
+    "candidate_id": "EIGENUSDT_20260909_142705_07414251",
+    "bot_start_utc": "2026-09-09 15:40:54+00:00",
+    "scan_utc": "2026-09-09 14:27:05+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 10353189.773,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 33437482.0,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.2276,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414359137",
+    "candidate_id": "JUPUSDT_20260909_142705_17722a49",
+    "bot_start_utc": "2026-09-09 15:39:54+00:00",
+    "scan_utc": "2026-09-09 14:27:05+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 28067922.9886,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 65488091.0,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.203,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414359012",
+    "candidate_id": "DASHUSDT_20260909_142705_279e0ffc",
+    "bot_start_utc": "2026-09-09 15:35:02+00:00",
+    "scan_utc": "2026-09-09 14:27:05+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 142684676.87,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 542679.234,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.1156,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414358914",
+    "candidate_id": "GRASSUSDT_20260909_142705_6f9bf162",
+    "bot_start_utc": "2026-09-09 15:32:26+00:00",
+    "scan_utc": "2026-09-09 14:27:05+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 11901606.33222,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 21769529.0,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.258,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414358986",
+    "candidate_id": "ETHFIUSDT_20260909_142705_580978a1",
+    "bot_start_utc": "2026-09-09 15:34:01+00:00",
+    "scan_utc": "2026-09-09 14:27:05+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 29240133.54013,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 42708992.8,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.1178,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414358949",
+    "candidate_id": "METUSDT_20260909_142705_ccfdbf20",
+    "bot_start_utc": "2026-09-09 15:33:11+00:00",
+    "scan_utc": "2026-09-09 14:27:05+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 6124018.7661,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 19441885.0,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.2322,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414358889",
+    "candidate_id": "ATOMUSDT_20260909_142705_5e548cf3",
+    "bot_start_utc": "2026-09-09 15:31:17+00:00",
+    "scan_utc": "2026-09-09 14:27:05+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 98119178.659,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 11738710.59,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.2517,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+        "sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57",
+        "recorded_availability_utc": "2026-09-09 15:07:04.456944942+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414365959",
+    "candidate_id": "PHAUSDT_20260909_221327_969a635f",
+    "bot_start_utc": "2026-09-09 23:29:02+00:00",
+    "scan_utc": "2026-09-09 22:13:27+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 36658787.17553,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01001_20260909_221327.csv",
+        "sha256": "4ab62ac13e110bce6e029d57896bc455f3620b0acb11fc3b7c3e187b85289354",
+        "recorded_availability_utc": "2026-09-09 22:58:18.401194811+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 77317796.0,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01001_20260909_221327.csv",
+        "sha256": "4ab62ac13e110bce6e029d57896bc455f3620b0acb11fc3b7c3e187b85289354",
+        "recorded_availability_utc": "2026-09-09 22:58:18.401194811+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.3571,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01001_20260909_221327.csv",
+        "sha256": "4ab62ac13e110bce6e029d57896bc455f3620b0acb11fc3b7c3e187b85289354",
+        "recorded_availability_utc": "2026-09-09 22:58:18.401194811+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414365975",
+    "candidate_id": "EGLDUSDT_20260909_221327_72cbf262",
+    "bot_start_utc": "2026-09-09 23:30:25+00:00",
+    "scan_utc": "2026-09-09 22:13:27+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 17680904.182,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01001_20260909_221327.csv",
+        "sha256": "4ab62ac13e110bce6e029d57896bc455f3620b0acb11fc3b7c3e187b85289354",
+        "recorded_availability_utc": "2026-09-09 22:58:18.401194811+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 816849.5,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01001_20260909_221327.csv",
+        "sha256": "4ab62ac13e110bce6e029d57896bc455f3620b0acb11fc3b7c3e187b85289354",
+        "recorded_availability_utc": "2026-09-09 22:58:18.401194811+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.2014,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01001_20260909_221327.csv",
+        "sha256": "4ab62ac13e110bce6e029d57896bc455f3620b0acb11fc3b7c3e187b85289354",
+        "recorded_availability_utc": "2026-09-09 22:58:18.401194811+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414365988",
+    "candidate_id": "NEARUSDT_20260909_221327_f213e3f7",
+    "bot_start_utc": "2026-09-09 23:31:23+00:00",
+    "scan_utc": "2026-09-09 22:13:27+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 471768176.276,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01001_20260909_221327.csv",
+        "sha256": "4ab62ac13e110bce6e029d57896bc455f3620b0acb11fc3b7c3e187b85289354",
+        "recorded_availability_utc": "2026-09-09 22:58:18.401194811+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 45342118.0,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01001_20260909_221327.csv",
+        "sha256": "4ab62ac13e110bce6e029d57896bc455f3620b0acb11fc3b7c3e187b85289354",
+        "recorded_availability_utc": "2026-09-09 22:58:18.401194811+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.2109,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01001_20260909_221327.csv",
+        "sha256": "4ab62ac13e110bce6e029d57896bc455f3620b0acb11fc3b7c3e187b85289354",
+        "recorded_availability_utc": "2026-09-09 22:58:18.401194811+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414366002",
+    "candidate_id": "EIGENUSDT_20260909_221327_2fc4f566",
+    "bot_start_utc": "2026-09-09 23:32:16+00:00",
+    "scan_utc": "2026-09-09 22:13:27+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 10688589.6162,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01001_20260909_221327.csv",
+        "sha256": "4ab62ac13e110bce6e029d57896bc455f3620b0acb11fc3b7c3e187b85289354",
+        "recorded_availability_utc": "2026-09-09 22:58:18.401194811+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 32629608.9,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01001_20260909_221327.csv",
+        "sha256": "4ab62ac13e110bce6e029d57896bc455f3620b0acb11fc3b7c3e187b85289354",
+        "recorded_availability_utc": "2026-09-09 22:58:18.401194811+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.24,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01001_20260909_221327.csv",
+        "sha256": "4ab62ac13e110bce6e029d57896bc455f3620b0acb11fc3b7c3e187b85289354",
+        "recorded_availability_utc": "2026-09-09 22:58:18.401194811+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414366016",
+    "candidate_id": "APTUSDT_20260909_221327_465798cb",
+    "bot_start_utc": "2026-09-09 23:33:04+00:00",
+    "scan_utc": "2026-09-09 22:13:27+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 65852130.00326,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01001_20260909_221327.csv",
+        "sha256": "4ab62ac13e110bce6e029d57896bc455f3620b0acb11fc3b7c3e187b85289354",
+        "recorded_availability_utc": "2026-09-09 22:58:18.401194811+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 29800939.3,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01001_20260909_221327.csv",
+        "sha256": "4ab62ac13e110bce6e029d57896bc455f3620b0acb11fc3b7c3e187b85289354",
+        "recorded_availability_utc": "2026-09-09 22:58:18.401194811+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.117,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01001_20260909_221327.csv",
+        "sha256": "4ab62ac13e110bce6e029d57896bc455f3620b0acb11fc3b7c3e187b85289354",
+        "recorded_availability_utc": "2026-09-09 22:58:18.401194811+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414366088",
+    "candidate_id": "APEUSDT_20260909_221327_5407e503",
+    "bot_start_utc": "2026-09-09 23:40:40+00:00",
+    "scan_utc": "2026-09-09 22:13:27+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 4434255.4175,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01001_20260909_221327.csv",
+        "sha256": "4ab62ac13e110bce6e029d57896bc455f3620b0acb11fc3b7c3e187b85289354",
+        "recorded_availability_utc": "2026-09-09 22:58:18.401194811+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 27690552.0,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01001_20260909_221327.csv",
+        "sha256": "4ab62ac13e110bce6e029d57896bc455f3620b0acb11fc3b7c3e187b85289354",
+        "recorded_availability_utc": "2026-09-09 22:58:18.401194811+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.3061,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01001_20260909_221327.csv",
+        "sha256": "4ab62ac13e110bce6e029d57896bc455f3620b0acb11fc3b7c3e187b85289354",
+        "recorded_availability_utc": "2026-09-09 22:58:18.401194811+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414366093",
+    "candidate_id": "RENDERUSDT_20260909_221327_52df8d70",
+    "bot_start_utc": "2026-09-09 23:41:33+00:00",
+    "scan_utc": "2026-09-09 22:13:27+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 21107439.7452,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01001_20260909_221327.csv",
+        "sha256": "4ab62ac13e110bce6e029d57896bc455f3620b0acb11fc3b7c3e187b85289354",
+        "recorded_availability_utc": "2026-09-09 22:58:18.401194811+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 6136984.2,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01001_20260909_221327.csv",
+        "sha256": "4ab62ac13e110bce6e029d57896bc455f3620b0acb11fc3b7c3e187b85289354",
+        "recorded_availability_utc": "2026-09-09 22:58:18.401194811+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.3033,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01001_20260909_221327.csv",
+        "sha256": "4ab62ac13e110bce6e029d57896bc455f3620b0acb11fc3b7c3e187b85289354",
+        "recorded_availability_utc": "2026-09-09 22:58:18.401194811+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414380183",
+    "candidate_id": "METUSDT_20260910_141418_0f18d178",
+    "bot_start_utc": "2026-09-10 15:54:26+00:00",
+    "scan_utc": "2026-09-10 14:14:18+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 14189449.3656,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01002_20260910_141418.csv",
+        "sha256": "eb71e6c4c4e88a35509c0df4ebc4a76b5214644fdadb156a70471ff752920758",
+        "recorded_availability_utc": "2026-09-10 15:01:40.348910570+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 21884496.0,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01002_20260910_141418.csv",
+        "sha256": "eb71e6c4c4e88a35509c0df4ebc4a76b5214644fdadb156a70471ff752920758",
+        "recorded_availability_utc": "2026-09-10 15:01:40.348910570+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.2283,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01002_20260910_141418.csv",
+        "sha256": "eb71e6c4c4e88a35509c0df4ebc4a76b5214644fdadb156a70471ff752920758",
+        "recorded_availability_utc": "2026-09-10 15:01:40.348910570+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414380213",
+    "candidate_id": "PORTALUSDT_20260910_141418_c536e9e4",
+    "bot_start_utc": "2026-09-10 15:56:44+00:00",
+    "scan_utc": "2026-09-10 14:14:18+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 15915628.303353,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01002_20260910_141418.csv",
+        "sha256": "eb71e6c4c4e88a35509c0df4ebc4a76b5214644fdadb156a70471ff752920758",
+        "recorded_availability_utc": "2026-09-10 15:01:40.348910570+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 189645552.7,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01002_20260910_141418.csv",
+        "sha256": "eb71e6c4c4e88a35509c0df4ebc4a76b5214644fdadb156a70471ff752920758",
+        "recorded_availability_utc": "2026-09-10 15:01:40.348910570+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.3089,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01002_20260910_141418.csv",
+        "sha256": "eb71e6c4c4e88a35509c0df4ebc4a76b5214644fdadb156a70471ff752920758",
+        "recorded_availability_utc": "2026-09-10 15:01:40.348910570+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414380410",
+    "candidate_id": "ADAUSDT_20260910_141418_c4064ddd",
+    "bot_start_utc": "2026-09-10 16:09:40+00:00",
+    "scan_utc": "2026-09-10 14:14:18+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 205780560.5422,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01002_20260910_141418.csv",
+        "sha256": "eb71e6c4c4e88a35509c0df4ebc4a76b5214644fdadb156a70471ff752920758",
+        "recorded_availability_utc": "2026-09-10 15:01:40.348910570+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 382273292.0,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01002_20260910_141418.csv",
+        "sha256": "eb71e6c4c4e88a35509c0df4ebc4a76b5214644fdadb156a70471ff752920758",
+        "recorded_availability_utc": "2026-09-10 15:01:40.348910570+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.2233,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01002_20260910_141418.csv",
+        "sha256": "eb71e6c4c4e88a35509c0df4ebc4a76b5214644fdadb156a70471ff752920758",
+        "recorded_availability_utc": "2026-09-10 15:01:40.348910570+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414380398",
+    "candidate_id": "AEROUSDT_20260910_141418_47f14f27",
+    "bot_start_utc": "2026-09-10 16:08:31+00:00",
+    "scan_utc": "2026-09-10 14:14:18+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 25261567.87973,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01002_20260910_141418.csv",
+        "sha256": "eb71e6c4c4e88a35509c0df4ebc4a76b5214644fdadb156a70471ff752920758",
+        "recorded_availability_utc": "2026-09-10 15:01:40.348910570+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 35205366.5,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01002_20260910_141418.csv",
+        "sha256": "eb71e6c4c4e88a35509c0df4ebc4a76b5214644fdadb156a70471ff752920758",
+        "recorded_availability_utc": "2026-09-10 15:01:40.348910570+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.1239,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01002_20260910_141418.csv",
+        "sha256": "eb71e6c4c4e88a35509c0df4ebc4a76b5214644fdadb156a70471ff752920758",
+        "recorded_availability_utc": "2026-09-10 15:01:40.348910570+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414380310",
+    "candidate_id": "JTOUSDT_20260910_141418_890ce651",
+    "bot_start_utc": "2026-09-10 16:02:53+00:00",
+    "scan_utc": "2026-09-10 14:14:18+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 17680643.1372,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01002_20260910_141418.csv",
+        "sha256": "eb71e6c4c4e88a35509c0df4ebc4a76b5214644fdadb156a70471ff752920758",
+        "recorded_availability_utc": "2026-09-10 15:01:40.348910570+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 18845603.0,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01002_20260910_141418.csv",
+        "sha256": "eb71e6c4c4e88a35509c0df4ebc4a76b5214644fdadb156a70471ff752920758",
+        "recorded_availability_utc": "2026-09-10 15:01:40.348910570+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.1485,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01002_20260910_141418.csv",
+        "sha256": "eb71e6c4c4e88a35509c0df4ebc4a76b5214644fdadb156a70471ff752920758",
+        "recorded_availability_utc": "2026-09-10 15:01:40.348910570+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414380261",
+    "candidate_id": "NEARUSDT_20260910_141418_2d9f53a5",
+    "bot_start_utc": "2026-09-10 15:59:49+00:00",
+    "scan_utc": "2026-09-10 14:14:18+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 416658672.35,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01002_20260910_141418.csv",
+        "sha256": "eb71e6c4c4e88a35509c0df4ebc4a76b5214644fdadb156a70471ff752920758",
+        "recorded_availability_utc": "2026-09-10 15:01:40.348910570+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 44834923.0,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01002_20260910_141418.csv",
+        "sha256": "eb71e6c4c4e88a35509c0df4ebc4a76b5214644fdadb156a70471ff752920758",
+        "recorded_availability_utc": "2026-09-10 15:01:40.348910570+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.2133,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01002_20260910_141418.csv",
+        "sha256": "eb71e6c4c4e88a35509c0df4ebc4a76b5214644fdadb156a70471ff752920758",
+        "recorded_availability_utc": "2026-09-10 15:01:40.348910570+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414380225",
+    "candidate_id": "DOSUSDT_20260910_141418_cf569eb8",
+    "bot_start_utc": "2026-09-10 15:57:39+00:00",
+    "scan_utc": "2026-09-10 14:14:18+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 6146454.3292,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01002_20260910_141418.csv",
+        "sha256": "eb71e6c4c4e88a35509c0df4ebc4a76b5214644fdadb156a70471ff752920758",
+        "recorded_availability_utc": "2026-09-10 15:01:40.348910570+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 9147125.0,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01002_20260910_141418.csv",
+        "sha256": "eb71e6c4c4e88a35509c0df4ebc4a76b5214644fdadb156a70471ff752920758",
+        "recorded_availability_utc": "2026-09-10 15:01:40.348910570+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.416,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01002_20260910_141418.csv",
+        "sha256": "eb71e6c4c4e88a35509c0df4ebc4a76b5214644fdadb156a70471ff752920758",
+        "recorded_availability_utc": "2026-09-10 15:01:40.348910570+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414380195",
+    "candidate_id": "STRKUSDT_20260910_141418_386489bd",
+    "bot_start_utc": "2026-09-10 15:55:12+00:00",
+    "scan_utc": "2026-09-10 14:14:18+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 23201474.272643,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01002_20260910_141418.csv",
+        "sha256": "eb71e6c4c4e88a35509c0df4ebc4a76b5214644fdadb156a70471ff752920758",
+        "recorded_availability_utc": "2026-09-10 15:01:40.348910570+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 213687126.9,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01002_20260910_141418.csv",
+        "sha256": "eb71e6c4c4e88a35509c0df4ebc4a76b5214644fdadb156a70471ff752920758",
+        "recorded_availability_utc": "2026-09-10 15:01:40.348910570+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.1893,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01002_20260910_141418.csv",
+        "sha256": "eb71e6c4c4e88a35509c0df4ebc4a76b5214644fdadb156a70471ff752920758",
+        "recorded_availability_utc": "2026-09-10 15:01:40.348910570+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  },
+  {
+    "strategy_id": "414380158",
+    "candidate_id": "EGLDUSDT_20260910_141418_469c944b",
+    "bot_start_utc": "2026-09-10 15:52:41+00:00",
+    "scan_utc": "2026-09-10 14:14:18+00:00",
+    "eligible_snapshot_rows": 1,
+    "fields": {
+      "quote_volume_24h": {
+        "value": 55510644.8,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01002_20260910_141418.csv",
+        "sha256": "eb71e6c4c4e88a35509c0df4ebc4a76b5214644fdadb156a70471ff752920758",
+        "recorded_availability_utc": "2026-09-10 15:01:40.348910570+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "open_interest": {
+        "value": 1037236.8,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01002_20260910_141418.csv",
+        "sha256": "eb71e6c4c4e88a35509c0df4ebc4a76b5214644fdadb156a70471ff752920758",
+        "recorded_availability_utc": "2026-09-10 15:01:40.348910570+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "micro_round_trip_cost_pct": {
+        "value": 0.1329,
+        "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\_tmp\\scanners_validated\\deployment_ready_01002_20260910_141418.csv",
+        "sha256": "eb71e6c4c4e88a35509c0df4ebc4a76b5214644fdadb156a70471ff752920758",
+        "recorded_availability_utc": "2026-09-10 15:01:40.348910570+00:00",
+        "method": "Exact candidate snapshot available before bot start; not a fabricated historical ticker/order book"
+      },
+      "primary_pipeline_score": {
+        "status": "missing_or_conflicting_verified_snapshot",
+        "finite_observations": 0
+      }
+    }
+  }
+]

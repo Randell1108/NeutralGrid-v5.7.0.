@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-09-08T14:32:15.638398+00:00",
+  "generated_at_utc": "2026-09-15T22:08:10.286258+00:00",
   "feature_profile": "snapshot_v20260530_fastwin",
   "expected_feature_count": 20,
   "selected_feature_count": 20,
@@ -25,32 +25,32 @@
     "micro_round_trip_cost_pct",
     "funding_rate"
   ],
-  "source_training_row_count": 5369,
-  "training_row_count": 5369,
+  "source_training_row_count": 1211,
+  "training_row_count": 1211,
   "training_source_manifest": {
-    "backtest_results_dir": "reports\\meta_canonical_refit_20260907\\finalized_fresh_pool",
+    "backtest_results_dir": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\finalized_fresh_pool",
     "source_file_count": 1,
     "source_files": [
       {
-        "path": "reports\\meta_canonical_refit_20260907\\finalized_fresh_pool\\training_data_20260907.csv",
-        "size_bytes": 38669980,
-        "modified_at_utc": "2026-09-08T14:29:40.715316+00:00",
-        "sha256": "1e72c81bc61271fab164e3ee7c1c83fa5da2a78f24913d872c4506bec4186a7c"
+        "path": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\finalized_fresh_pool\\training_data_20260915.csv",
+        "size_bytes": 8317709,
+        "modified_at_utc": "2026-09-15T22:07:21.763552+00:00",
+        "sha256": "51d857431a3e962a317aed10b8fbbbaf064e104cdf93fae96850030dac154156"
       }
     ],
-    "source_training_rows": 5369,
-    "unique_candidate_ids": 5369,
+    "source_training_rows": 1211,
+    "unique_candidate_ids": 1211,
     "duplicate_candidate_id_rows": 0,
     "market_event_time_utc": {
       "min": "2026-02-19T00:26:54.114993+00:00",
-      "max": "2026-09-07T15:20:36.764784+00:00"
+      "max": "2026-09-15T14:32:06.839234+00:00"
     },
     "backtest_write_time_utc": {
-      "min": "2026-09-07T19:56:55.266143+00:00",
-      "max": "2026-09-08T03:13:15.951110+00:00"
+      "min": "2026-09-15T21:33:39.667065+00:00",
+      "max": "2026-09-15T21:48:52.548695+00:00"
     },
     "pool_generation_mode": "fresh_full_pool",
-    "pool_manifest_path": "reports\\meta_canonical_refit_20260907\\finalized_fresh_pool\\authoritative_pool_manifest.json",
+    "pool_manifest_path": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\finalized_fresh_pool\\authoritative_pool_manifest.json",
     "meta_pool_max_rows_per_symbol": 0
   },
   "training_hmm_lineage": {
@@ -58,17 +58,17 @@
     "dependent_selected_features": [
       "ev_score"
     ],
-    "active_hmm_artifact_version": "rolling_180d_20260903_153527",
-    "training_row_count": 5369,
+    "active_hmm_artifact_version": "rolling_180d_20260915_210940",
+    "training_row_count": 1211,
     "lineage_column_present": true,
     "missing_lineage_count": 0,
     "mismatched_lineage_count": 0,
     "observed_versions": {
-      "rolling_180d_20260903_153527": 5369
+      "rolling_180d_20260915_210940": 1211
     },
-    "active_hmm_trained_at_utc": "2026-09-03T16:01:24.070598+00:00",
+    "active_hmm_trained_at_utc": "2026-09-15T21:40:39.552889+00:00",
     "observed_hmm_trained_at_utc": {
-      "2026-09-03T16:01:24.070598+00:00": 5369
+      "2026-09-15T21:40:39.552889+00:00": 1211
     },
     "passes": true,
     "reasons": []
@@ -76,7 +76,7 @@
   "allow_imputation": true,
   "imputed_features": {
     "ou_halflife": {
-      "count": 144,
+      "count": 1,
       "default": 24.0
     }
   },
@@ -86,14 +86,14 @@
     "duration_hours_max": 7.0,
     "pnl_column": "net_pnl_pct",
     "target_column": "fast_winner_target",
-    "eligible_rows": 5369,
-    "positive_count": 2835,
-    "negative_count": 2534,
+    "eligible_rows": 1211,
+    "positive_count": 526,
+    "negative_count": 685,
     "negative_rows_duration_gt_7h_count": 0,
     "excluded_rows_missing_duration_count": 0,
     "excluded_rows_missing_pnl_count": 0,
-    "builder_y_compared_count": 5369,
-    "builder_y_mismatch_count": 894,
+    "builder_y_compared_count": 1211,
+    "builder_y_mismatch_count": 175,
     "label_basis": "endogenous_time_to_target"
   },
   "active_training_target": {
@@ -102,19 +102,19 @@
     "duration_hours_max": 7.0,
     "pnl_column": "net_pnl_pct",
     "target_column": "fast_winner_target",
-    "eligible_rows": 5369,
-    "positive_count": 2835,
-    "negative_count": 2534,
+    "eligible_rows": 1211,
+    "positive_count": 526,
+    "negative_count": 685,
     "negative_rows_duration_gt_7h_count": 0,
     "excluded_rows_missing_duration_count": 0,
     "excluded_rows_missing_pnl_count": 0,
-    "builder_y_compared_count": 5369,
-    "builder_y_mismatch_count": 894,
+    "builder_y_compared_count": 1211,
+    "builder_y_mismatch_count": 175,
     "label_basis": "endogenous_time_to_target"
   },
   "modelable_feature_filter": {
-    "input_rows": 5369,
-    "modelable_rows": 5369,
+    "input_rows": 1211,
+    "modelable_rows": 1211,
     "excluded_unmodelable_count": 0,
     "excluded_unmodelable_rows": []
   },
@@ -137,117 +137,117 @@
   "feature_fill": [
     {
       "feature": "ev_score",
-      "non_null_count": 5369,
+      "non_null_count": 1211,
       "null_count": 0
     },
     {
       "feature": "adx_1h",
-      "non_null_count": 5369,
+      "non_null_count": 1211,
       "null_count": 0
     },
     {
       "feature": "adx_15m",
-      "non_null_count": 5369,
+      "non_null_count": 1211,
       "null_count": 0
     },
     {
       "feature": "adx_5m",
-      "non_null_count": 5369,
+      "non_null_count": 1211,
       "null_count": 0
     },
     {
       "feature": "atr_pct_15m",
-      "non_null_count": 5369,
+      "non_null_count": 1211,
       "null_count": 0
     },
     {
       "feature": "ou_halflife",
-      "non_null_count": 5369,
+      "non_null_count": 1211,
       "null_count": 0
     },
     {
       "feature": "rsi_15m",
-      "non_null_count": 5369,
+      "non_null_count": 1211,
       "null_count": 0
     },
     {
       "feature": "ema_slope_1h",
-      "non_null_count": 5369,
+      "non_null_count": 1211,
       "null_count": 0
     },
     {
       "feature": "ema_crosses_5m",
-      "non_null_count": 5369,
+      "non_null_count": 1211,
       "null_count": 0
     },
     {
       "feature": "vwap_crosses_5m",
-      "non_null_count": 5369,
+      "non_null_count": 1211,
       "null_count": 0
     },
     {
       "feature": "hurst_exponent",
-      "non_null_count": 5369,
+      "non_null_count": 1211,
       "null_count": 0
     },
     {
       "feature": "range_size_pct",
-      "non_null_count": 5369,
+      "non_null_count": 1211,
       "null_count": 0
     },
     {
       "feature": "bb_width",
-      "non_null_count": 5369,
+      "non_null_count": 1211,
       "null_count": 0
     },
     {
       "feature": "grid_spacing_pct",
-      "non_null_count": 5369,
+      "non_null_count": 1211,
       "null_count": 0
     },
     {
       "feature": "profit_per_grid_pct",
-      "non_null_count": 5369,
+      "non_null_count": 1211,
       "null_count": 0
     },
     {
       "feature": "num_grids",
-      "non_null_count": 5369,
+      "non_null_count": 1211,
       "null_count": 0
     },
     {
       "feature": "quote_volume_24h",
-      "non_null_count": 5369,
+      "non_null_count": 1211,
       "null_count": 0
     },
     {
       "feature": "open_interest",
-      "non_null_count": 5369,
+      "non_null_count": 1211,
       "null_count": 0
     },
     {
       "feature": "micro_round_trip_cost_pct",
-      "non_null_count": 5369,
+      "non_null_count": 1211,
       "null_count": 0
     },
     {
       "feature": "funding_rate",
-      "non_null_count": 5369,
+      "non_null_count": 1211,
       "null_count": 0
     }
   ],
-  "active_hmm_artifact_version": "rolling_180d_20260903_153527",
+  "active_hmm_artifact_version": "rolling_180d_20260915_210940",
   "artifact_lineage_before": {
     "metadata_path": "models\\meta_labeler\\metadata.json",
-    "active_hmm_artifact_version": "rolling_180d_20260903_153527",
-    "artifact_hmm_artifact_version": "rolling_180d_20260903_153527",
+    "active_hmm_artifact_version": "rolling_180d_20260915_210940",
+    "artifact_hmm_artifact_version": "rolling_180d_20260915_210940",
     "lineage_matches_active_hmm": true,
     "error": null
   },
   "artifact_lineage_after": {
     "metadata_path": "models\\meta_labeler\\metadata.json",
-    "active_hmm_artifact_version": "rolling_180d_20260903_153527",
-    "artifact_hmm_artifact_version": "rolling_180d_20260903_153527",
+    "active_hmm_artifact_version": "rolling_180d_20260915_210940",
+    "artifact_hmm_artifact_version": "rolling_180d_20260915_210940",
     "lineage_matches_active_hmm": true,
     "error": null
   },
@@ -264,18 +264,60 @@
   "artifact_health_before": {
     "output_path": "models\\meta_labeler.pkl",
     "artifact_dir": "models\\meta_labeler",
-    "artifact_dir_exists": false,
-    "artifact_model_exists": false,
-    "artifact_metadata_exists": false,
-    "artifact_feature_count": 0,
-    "artifact_features": [],
-    "artifact_matches_expected": false,
-    "artifact_error": "missing_metadata.json",
-    "pickle_exists": false,
-    "pickle_feature_count": 0,
-    "pickle_features": [],
-    "pickle_matches_expected": false,
-    "pickle_error": "missing_pickle",
+    "artifact_dir_exists": true,
+    "artifact_model_exists": true,
+    "artifact_metadata_exists": true,
+    "artifact_feature_count": 20,
+    "artifact_features": [
+      "ev_score",
+      "adx_1h",
+      "adx_15m",
+      "adx_5m",
+      "atr_pct_15m",
+      "ou_halflife",
+      "rsi_15m",
+      "ema_slope_1h",
+      "ema_crosses_5m",
+      "vwap_crosses_5m",
+      "hurst_exponent",
+      "range_size_pct",
+      "bb_width",
+      "grid_spacing_pct",
+      "profit_per_grid_pct",
+      "num_grids",
+      "quote_volume_24h",
+      "open_interest",
+      "micro_round_trip_cost_pct",
+      "funding_rate"
+    ],
+    "artifact_matches_expected": true,
+    "artifact_error": null,
+    "pickle_exists": true,
+    "pickle_feature_count": 20,
+    "pickle_features": [
+      "ev_score",
+      "adx_1h",
+      "adx_15m",
+      "adx_5m",
+      "atr_pct_15m",
+      "ou_halflife",
+      "rsi_15m",
+      "ema_slope_1h",
+      "ema_crosses_5m",
+      "vwap_crosses_5m",
+      "hurst_exponent",
+      "range_size_pct",
+      "bb_width",
+      "grid_spacing_pct",
+      "profit_per_grid_pct",
+      "num_grids",
+      "quote_volume_24h",
+      "open_interest",
+      "micro_round_trip_cost_pct",
+      "funding_rate"
+    ],
+    "pickle_matches_expected": true,
+    "pickle_error": null,
     "expected_feature_count": 20,
     "expected_features": [
       "ev_score",
@@ -299,7 +341,7 @@
       "micro_round_trip_cost_pct",
       "funding_rate"
     ],
-    "is_stale": true
+    "is_stale": false
   },
   "artifact_health_after": {
     "output_path": "models\\meta_labeler.pkl",

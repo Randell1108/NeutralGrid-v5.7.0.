@@ -1,0 +1,14 @@
+[
+  "retrain_meta_labeler.py",
+  "--input",
+  "D:\\Neutral Grid v5.7.0\\data\\new_expired_bots.xlsx",
+  "--backtest-results-dir",
+  "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\finalized_fresh_pool",
+  "--max-rows-per-symbol",
+  "0",
+  "--estimator",
+  "vote_logit_hgb",
+  "--export-training-data",
+  "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\prepared_training.csv",
+  "--allow-imputation"
+]

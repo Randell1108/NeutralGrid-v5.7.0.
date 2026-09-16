@@ -1,0 +1,1143 @@
+{
+  "status": "PASS",
+  "checked_at_utc": "2026-09-15T21:43:44.946686+00:00",
+  "prior_hmm": "rolling_180d_20260911_131128",
+  "active_hmm": "rolling_180d_20260915_210940",
+  "rotated": true,
+  "artifact_dir": "D:\\Neutral Grid v5.7.0\\artifacts\\hmm\\rolling_180d_20260915_210940",
+  "eval_metrics": {
+    "num_splits": 3,
+    "mean_pass_rate": 1.0,
+    "std_pass_rate": 0.0,
+    "mean_range_prob": 0.3126677610454703,
+    "mean_trend_prob": 0.13091914677612523,
+    "pass_mode": "soft",
+    "splits": [
+      {
+        "fold": 0,
+        "train_frac": 0.25,
+        "train_sequences": 50,
+        "test_sequences": 50,
+        "pass_rate": 1.0,
+        "mean_range_prob": 0.2305167519688738,
+        "mean_trend_prob": 0.09246592590087475,
+        "mean_range_prob_agg": 0.5396618872643183,
+        "mean_trend_prob_agg": 0.4603381127356886,
+        "mean_range_dominance": 0.5396618872103525,
+        "pass_mode": "soft",
+        "range_states": [
+          2,
+          3
+        ],
+        "trend_states": [
+          0,
+          1
+        ]
+      },
+      {
+        "fold": 1,
+        "train_frac": 0.5,
+        "train_sequences": 50,
+        "test_sequences": 50,
+        "pass_rate": 1.0,
+        "mean_range_prob": 0.36435747764428683,
+        "mean_trend_prob": 0.13437939869699084,
+        "mean_range_prob_agg": 0.6376659152326113,
+        "mean_trend_prob_agg": 0.36233408476739526,
+        "mean_range_dominance": 0.6376659151688446,
+        "pass_mode": "soft",
+        "range_states": [
+          1,
+          2
+        ],
+        "trend_states": [
+          0,
+          3
+        ]
+      },
+      {
+        "fold": 2,
+        "train_frac": 0.75,
+        "train_sequences": 50,
+        "test_sequences": 50,
+        "pass_rate": 1.0,
+        "mean_range_prob": 0.34312905352325024,
+        "mean_trend_prob": 0.1659121157305101,
+        "mean_range_prob_agg": 0.6161138558778153,
+        "mean_trend_prob_agg": 0.38388614412219196,
+        "mean_range_dominance": 0.6161138558162014,
+        "pass_mode": "soft",
+        "range_states": [
+          1,
+          2
+        ],
+        "trend_states": [
+          0,
+          3
+        ]
+      }
+    ],
+    "regime_uncertainty": {
+      "method": "empirical_vs_gaussian_tail_risk",
+      "n_samples": 858000,
+      "feature": "r_t",
+      "tail_levels": [
+        0.95,
+        0.99
+      ],
+      "global_reference": {
+        "mean": 1.9749922623202274e-05,
+        "std": 0.006579272330961297,
+        "p05": -0.007333119501012983,
+        "p01": -0.01646294164034842,
+        "loss_2sigma": -0.013138794739299391
+      },
+      "volatility_tiers": {
+        "state_tiers": {
+          "state_0": "medium",
+          "state_1": "low",
+          "state_2": "high",
+          "state_3": "high"
+        },
+        "groups": {
+          "low": [
+            1
+          ],
+          "medium": [
+            0
+          ],
+          "high": [
+            2,
+            3
+          ]
+        },
+        "boundaries": {
+          "q33": 0.0030248188863507986,
+          "q66": 0.00563196513316953
+        }
+      },
+      "regimes": {
+        "state_0": {
+          "sample_count": 209712,
+          "sample_weight": 0.24441958041958042,
+          "sufficient_samples": true,
+          "volatility_tier": "medium",
+          "moments": {
+            "mean": -1.4862382498740205e-05,
+            "std": 0.0030329279946707216,
+            "skew": 0.010522619643311297,
+            "excess_kurtosis": 2.090121395185652
+          },
+          "tail_risk": {
+            "empirical": {
+              "var_95": -0.004998760721319011,
+              "cvar_95": -0.0070087498645973025,
+              "var_99": -0.008286065681366719,
+              "cvar_99": -0.01007992230362694
+            },
+            "gaussian": {
+              "var_95": -0.005003584994815532,
+              "cvar_95": -0.006270921801353851,
+              "var_99": -0.0070705079750199235,
+              "cvar_99": -0.008098265203180036
+            },
+            "cornish_fisher": {
+              "var_95": -0.004866577262467692,
+              "cvar_95": -0.006869885880395977,
+              "var_99": -0.008528938760657051,
+              "cvar_99": -0.010337212564561181
+            },
+            "tail_event_probabilities": {
+              "p_loss_le_global_p05": 0.016122110322728315,
+              "p_loss_le_global_p01": 0.0,
+              "p_loss_le_global_2sigma": 0.0006485084306095979
+            }
+          },
+          "gaussian_divergence": {
+            "jarque_bera_stat": 38173.89664876312,
+            "jarque_bera_pvalue": 0.0,
+            "tail_weight_ratio": 1.308327778275838
+          },
+          "kurtosis_adjusted_vol": 0.0037423558321301917,
+          "tail_adjustment_params": {
+            "mean": -1.4862382498740205e-05,
+            "std": 0.0030329279946707216,
+            "skew": 0.010522619643311297,
+            "excess_kurtosis": 2.090121395185652,
+            "p_empirical_below_2sigma": 0.029936293583581294,
+            "p_gaussian_below_2sigma": 0.0227501319481792
+          },
+          "state_mean_unscaled": [
+            -1.746084359767246e-05,
+            1.0062041645641817,
+            -0.03289063447327426,
+            35.944861988278454,
+            0.02157821609581085
+          ]
+        },
+        "state_1": {
+          "sample_count": 306017,
+          "sample_weight": 0.3566631701631702,
+          "sufficient_samples": true,
+          "volatility_tier": "low",
+          "moments": {
+            "mean": -2.918428836648082e-05,
+            "std": 0.0022220171626784135,
+            "skew": 0.026563138899671677,
+            "excess_kurtosis": 1.5081184995695702
+          },
+          "tail_risk": {
+            "empirical": {
+              "var_95": -0.003701306784239288,
+              "cvar_95": -0.0050555975002163816,
+              "var_99": -0.005915226083069978,
+              "cvar_99": -0.00704705631166068
+            },
+            "gaussian": {
+              "var_95": -0.0036840772775464884,
+              "cvar_95": -0.004612567548324555,
+              "var_99": -0.005198369190845669,
+              "cvar_99": -0.005951336028189428
+            },
+            "cornish_fisher": {
+              "var_95": -0.0035996429030884423,
+              "cvar_95": -0.004962448659130165,
+              "var_99": -0.005937815973129851,
+              "cvar_99": -0.007066447085833903
+            },
+            "tail_event_probabilities": {
+              "p_loss_le_global_p05": 0.003055385811899339,
+              "p_loss_le_global_p01": 0.0,
+              "p_loss_le_global_2sigma": 0.0
+            }
+          },
+          "gaussian_divergence": {
+            "jarque_bera_stat": 29034.76957106996,
+            "jarque_bera_pvalue": 0.0,
+            "tail_weight_ratio": 1.309479377172619
+          },
+          "kurtosis_adjusted_vol": 0.002607468381833359,
+          "tail_adjustment_params": {
+            "mean": -2.918428836648082e-05,
+            "std": 0.0022220171626784135,
+            "skew": 0.026563138899671677,
+            "excess_kurtosis": 1.5081184995695702,
+            "p_empirical_below_2sigma": 0.029550645879150506,
+            "p_gaussian_below_2sigma": 0.0227501319481792
+          },
+          "state_mean_unscaled": [
+            -2.8218841794213233e-05,
+            0.8056993360800991,
+            -0.004999826247881619,
+            18.370651267761886,
+            0.011407550233855581
+          ]
+        },
+        "state_2": {
+          "sample_count": 234085,
+          "sample_weight": 0.27282634032634034,
+          "sufficient_samples": true,
+          "volatility_tier": "high",
+          "moments": {
+            "mean": -8.716724965174995e-06,
+            "std": 0.005685006707424608,
+            "skew": 0.058277398197013816,
+            "excess_kurtosis": 1.9943250131261774
+          },
+          "tail_risk": {
+            "empirical": {
+              "var_95": -0.009153381986487248,
+              "cvar_95": -0.012820494775632898,
+              "var_99": -0.015192381381826766,
+              "cvar_99": -0.018733233649789332
+            },
+            "gaussian": {
+              "var_95": -0.009359720626915988,
+              "cvar_95": -0.011735252871135535,
+              "var_99": -0.013234019992690332,
+              "cvar_99": -0.015160477444354527
+            },
+            "cornish_fisher": {
+              "var_95": -0.00903637716637843,
+              "cvar_95": -0.012704787220441218,
+              "var_99": -0.015633765288197057,
+              "cvar_99": -0.01913892380208787
+            },
+            "tail_event_probabilities": {
+              "p_loss_le_global_p05": 0.0820642074460132,
+              "p_loss_le_global_p01": 0.0071298887156374825,
+              "p_loss_le_global_2sigma": 0.01689557212123801
+            }
+          },
+          "gaussian_divergence": {
+            "jarque_bera_stat": 38922.92194166165,
+            "jarque_bera_pvalue": 0.0,
+            "tail_weight_ratio": 1.2522850970699038
+          },
+          "kurtosis_adjusted_vol": 0.0069593892686487845,
+          "tail_adjustment_params": {
+            "mean": -8.716724965174995e-06,
+            "std": 0.005685006707424608,
+            "skew": 0.058277398197013816,
+            "excess_kurtosis": 1.9943250131261774,
+            "p_empirical_below_2sigma": 0.0271482581113698,
+            "p_gaussian_below_2sigma": 0.0227501319481792
+          },
+          "state_mean_unscaled": [
+            -6.4151522054694495e-06,
+            1.0581614658296692,
+            0.00039659490509215585,
+            20.44308596420741,
+            0.03271148678779448
+          ]
+        },
+        "state_3": {
+          "sample_count": 108186,
+          "sample_weight": 0.1260909090909091,
+          "sufficient_samples": true,
+          "volatility_tier": "high",
+          "moments": {
+            "mean": 0.00028685408930731986,
+            "std": 0.01553999702559243,
+            "skew": -0.3465835592979076,
+            "excess_kurtosis": 119.06350104743966
+          },
+          "tail_risk": {
+            "empirical": {
+              "var_95": -0.019092328169636314,
+              "cvar_95": -0.03477842501794947,
+              "var_99": -0.04073667642533743,
+              "cvar_99": -0.06882872549760338
+            },
+            "gaussian": {
+              "var_95": -0.025274166381053478,
+              "cvar_95": -0.03176769680400949,
+              "var_99": -0.03586458495378062,
+              "cvar_99": -0.04113056696743315
+            },
+            "cornish_fisher": {
+              "var_95": 0.010569266217133765,
+              "cvar_95": -0.003122235575576092,
+              "var_99": -0.09295312806424727,
+              "cvar_99": -0.14517949025987154
+            },
+            "tail_event_probabilities": {
+              "p_loss_le_global_p05": 0.17908047251954967,
+              "p_loss_le_global_p01": 0.06388072393840238,
+              "p_loss_le_global_2sigma": 0.08963266966150889
+            }
+          },
+          "gaussian_divergence": {
+            "jarque_bera_stat": 63898592.4720322,
+            "jarque_bera_pvalue": 0.0,
+            "tail_weight_ratio": 0.8546484960635004
+          },
+          "kurtosis_adjusted_vol": 0.08619569361777073,
+          "tail_adjustment_params": {
+            "mean": 0.00028685408930731986,
+            "std": 0.01553999702559243,
+            "skew": -0.3465835592979076,
+            "excess_kurtosis": 119.06350104743966,
+            "p_empirical_below_2sigma": 0.018634573789584604,
+            "p_gaussian_below_2sigma": 0.0227501319481792
+          },
+          "state_mean_unscaled": [
+            0.0002827141644561924,
+            1.5743316680282382,
+            0.0327284662115908,
+            36.11665920764984,
+            0.08906877837104436
+          ]
+        }
+      },
+      "volatility_tiers_kurtosis_aware": {
+        "state_tiers": {
+          "state_0": "medium",
+          "state_1": "low",
+          "state_2": "high",
+          "state_3": "high"
+        },
+        "groups": {
+          "low": [
+            1
+          ],
+          "medium": [
+            0
+          ],
+          "high": [
+            2,
+            3
+          ]
+        },
+        "boundaries": {
+          "q33": 0.0037310069576272234,
+          "q66": 0.006895048599918413
+        }
+      },
+      "exogenous_uncertainty": {
+        "enabled": true,
+        "features_used": [
+          "volatility_shock",
+          "return_shock",
+          "momentum_divergence"
+        ],
+        "framework": "Synthetic exogenous signals derived from market data (volatility_shock, return_shock, momentum_divergence). Robust z-score aggregation (median/MAD).",
+        "regime_scores": {
+          "state_0": {
+            "mean_abs_z": 0.8316146499875087,
+            "p95_abs_z": 1.8286549537059944
+          },
+          "state_1": {
+            "mean_abs_z": 0.7295813921283276,
+            "p95_abs_z": 1.4753579664144436
+          },
+          "state_2": {
+            "mean_abs_z": 1.0770821643198565,
+            "p95_abs_z": 2.4796406570686913
+          },
+          "state_3": {
+            "mean_abs_z": 1.997349713003745,
+            "p95_abs_z": 5.0436648934213855
+          }
+        }
+      },
+      "transition_matrix": [
+        [
+          0.9520733668126257,
+          0.025283202818069263,
+          0.013682995452141574,
+          0.008960434917163425
+        ],
+        [
+          0.014002344750768725,
+          0.9648857457232147,
+          0.02047214887714235,
+          0.0006397606488743087
+        ],
+        [
+          0.01293207882664895,
+          0.02296547376901959,
+          0.9488984086427976,
+          0.015204038761533851
+        ],
+        [
+          0.025239887781468535,
+          1.8832951874844837e-83,
+          0.026634973529364222,
+          0.9481251386891671
+        ]
+      ],
+      "profile_scope": "global",
+      "profile_scope_detail": "Uncertainty profile computed on X_stacked (all symbols concatenated). Per-state moments reflect cross-symbol averages, not single-symbol characteristics.  This is intentional for global regime detection.",
+      "sequence_boundary_metadata": {
+        "num_sequences": 50,
+        "sequence_lengths": [
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160,
+          17160
+        ],
+        "total_rows": 858000
+      }
+    }
+  },
+  "temperature": {
+    "temperature": 1.0,
+    "fitted": false,
+    "module": "temperature_scaling_v20260311",
+    "runtime_validated": false,
+    "status": "disabled_self_supervised",
+    "label_source": "self_argmax",
+    "calibration_target": "disabled",
+    "notes": "Self-labeled temperature scaling disabled; identity scaler retained for provenance."
+  },
+  "metadata": {
+    "artifact_version": "rolling_180d_20260915_210940",
+    "trained_at_utc": "2026-09-15T21:40:39.552889+00:00",
+    "pipeline_version": "5.7.0",
+    "code_commit": null,
+    "lineage": null,
+    "training_start_utc": "2026-03-18T23:45:00+00:00",
+    "training_end_utc": "2026-09-14T23:45:00+00:00",
+    "symbols_used": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "XRPUSDT",
+      "SOLUSDT",
+      "ZECUSDT",
+      "HYPEUSDT",
+      "LSKUSDT",
+      "DOGEUSDT",
+      "AKEUSDT",
+      "BNBUSDT",
+      "UNIUSDT",
+      "SUIUSDT",
+      "BRUSDT",
+      "POWERUSDT",
+      "1000PEPEUSDT",
+      "NEARUSDT",
+      "ARBUSDT",
+      "\u9f99\u867eUSDT",
+      "ENAUSDT",
+      "ADAUSDT",
+      "FILUSDT",
+      "XLMUSDT",
+      "LINKUSDT",
+      "TAOUSDT",
+      "TRUMPUSDT",
+      "WLDUSDT",
+      "AVAXUSDT",
+      "PUMPUSDT",
+      "VTHOUSDT",
+      "LITUSDT",
+      "AAVEUSDT",
+      "ASTRUSDT",
+      "ONDOUSDT",
+      "SAGAUSDT",
+      "FFUSDT",
+      "BCHUSDT",
+      "USELESSUSDT",
+      "LTCUSDT",
+      "INJUSDT",
+      "PAXGUSDT",
+      "DOTUSDT",
+      "CVCUSDT",
+      "OPUSDT",
+      "DASHUSDT",
+      "ASTERUSDT",
+      "TRXUSDT",
+      "HBARUSDT",
+      "PENGUUSDT",
+      "UAIUSDT",
+      "TUSDT"
+    ],
+    "num_sequences": 50,
+    "total_samples": 858000,
+    "symbol_selection_method": null,
+    "symbol_selection_date": null,
+    "symbol_selection_criteria": null,
+    "includes_delisted": false,
+    "holdout_info": null,
+    "features": [
+      "r_t",
+      "vol_t",
+      "trend_t",
+      "adx_t",
+      "bbwidth_t"
+    ],
+    "timeframes_used": [
+      "15m"
+    ],
+    "transform_type": "RobustScaler",
+    "transform_params": {
+      "quantile_range": [
+        25,
+        75
+      ]
+    },
+    "feature_schema": "v2",
+    "model_type": "GaussianHMM",
+    "model_params": {
+      "n_components": 4,
+      "covariance_type": "diag",
+      "n_iter": 300,
+      "tol": 0.001,
+      "random_state": 7,
+      "effective_n_components": 4
+    },
+    "eval_metrics": {
+      "num_splits": 3,
+      "mean_pass_rate": 1.0,
+      "std_pass_rate": 0.0,
+      "mean_range_prob": 0.3126677610454703,
+      "mean_trend_prob": 0.13091914677612523,
+      "pass_mode": "soft",
+      "splits": [
+        {
+          "fold": 0,
+          "train_frac": 0.25,
+          "train_sequences": 50,
+          "test_sequences": 50,
+          "pass_rate": 1.0,
+          "mean_range_prob": 0.2305167519688738,
+          "mean_trend_prob": 0.09246592590087475,
+          "mean_range_prob_agg": 0.5396618872643183,
+          "mean_trend_prob_agg": 0.4603381127356886,
+          "mean_range_dominance": 0.5396618872103525,
+          "pass_mode": "soft",
+          "range_states": [
+            2,
+            3
+          ],
+          "trend_states": [
+            0,
+            1
+          ]
+        },
+        {
+          "fold": 1,
+          "train_frac": 0.5,
+          "train_sequences": 50,
+          "test_sequences": 50,
+          "pass_rate": 1.0,
+          "mean_range_prob": 0.36435747764428683,
+          "mean_trend_prob": 0.13437939869699084,
+          "mean_range_prob_agg": 0.6376659152326113,
+          "mean_trend_prob_agg": 0.36233408476739526,
+          "mean_range_dominance": 0.6376659151688446,
+          "pass_mode": "soft",
+          "range_states": [
+            1,
+            2
+          ],
+          "trend_states": [
+            0,
+            3
+          ]
+        },
+        {
+          "fold": 2,
+          "train_frac": 0.75,
+          "train_sequences": 50,
+          "test_sequences": 50,
+          "pass_rate": 1.0,
+          "mean_range_prob": 0.34312905352325024,
+          "mean_trend_prob": 0.1659121157305101,
+          "mean_range_prob_agg": 0.6161138558778153,
+          "mean_trend_prob_agg": 0.38388614412219196,
+          "mean_range_dominance": 0.6161138558162014,
+          "pass_mode": "soft",
+          "range_states": [
+            1,
+            2
+          ],
+          "trend_states": [
+            0,
+            3
+          ]
+        }
+      ],
+      "regime_uncertainty": {
+        "method": "empirical_vs_gaussian_tail_risk",
+        "n_samples": 858000,
+        "feature": "r_t",
+        "tail_levels": [
+          0.95,
+          0.99
+        ],
+        "global_reference": {
+          "mean": 1.9749922623202274e-05,
+          "std": 0.006579272330961297,
+          "p05": -0.007333119501012983,
+          "p01": -0.01646294164034842,
+          "loss_2sigma": -0.013138794739299391
+        },
+        "volatility_tiers": {
+          "state_tiers": {
+            "state_0": "medium",
+            "state_1": "low",
+            "state_2": "high",
+            "state_3": "high"
+          },
+          "groups": {
+            "low": [
+              1
+            ],
+            "medium": [
+              0
+            ],
+            "high": [
+              2,
+              3
+            ]
+          },
+          "boundaries": {
+            "q33": 0.0030248188863507986,
+            "q66": 0.00563196513316953
+          }
+        },
+        "regimes": {
+          "state_0": {
+            "sample_count": 209712,
+            "sample_weight": 0.24441958041958042,
+            "sufficient_samples": true,
+            "volatility_tier": "medium",
+            "moments": {
+              "mean": -1.4862382498740205e-05,
+              "std": 0.0030329279946707216,
+              "skew": 0.010522619643311297,
+              "excess_kurtosis": 2.090121395185652
+            },
+            "tail_risk": {
+              "empirical": {
+                "var_95": -0.004998760721319011,
+                "cvar_95": -0.0070087498645973025,
+                "var_99": -0.008286065681366719,
+                "cvar_99": -0.01007992230362694
+              },
+              "gaussian": {
+                "var_95": -0.005003584994815532,
+                "cvar_95": -0.006270921801353851,
+                "var_99": -0.0070705079750199235,
+                "cvar_99": -0.008098265203180036
+              },
+              "cornish_fisher": {
+                "var_95": -0.004866577262467692,
+                "cvar_95": -0.006869885880395977,
+                "var_99": -0.008528938760657051,
+                "cvar_99": -0.010337212564561181
+              },
+              "tail_event_probabilities": {
+                "p_loss_le_global_p05": 0.016122110322728315,
+                "p_loss_le_global_p01": 0.0,
+                "p_loss_le_global_2sigma": 0.0006485084306095979
+              }
+            },
+            "gaussian_divergence": {
+              "jarque_bera_stat": 38173.89664876312,
+              "jarque_bera_pvalue": 0.0,
+              "tail_weight_ratio": 1.308327778275838
+            },
+            "kurtosis_adjusted_vol": 0.0037423558321301917,
+            "tail_adjustment_params": {
+              "mean": -1.4862382498740205e-05,
+              "std": 0.0030329279946707216,
+              "skew": 0.010522619643311297,
+              "excess_kurtosis": 2.090121395185652,
+              "p_empirical_below_2sigma": 0.029936293583581294,
+              "p_gaussian_below_2sigma": 0.0227501319481792
+            },
+            "state_mean_unscaled": [
+              -1.746084359767246e-05,
+              1.0062041645641817,
+              -0.03289063447327426,
+              35.944861988278454,
+              0.02157821609581085
+            ]
+          },
+          "state_1": {
+            "sample_count": 306017,
+            "sample_weight": 0.3566631701631702,
+            "sufficient_samples": true,
+            "volatility_tier": "low",
+            "moments": {
+              "mean": -2.918428836648082e-05,
+              "std": 0.0022220171626784135,
+              "skew": 0.026563138899671677,
+              "excess_kurtosis": 1.5081184995695702
+            },
+            "tail_risk": {
+              "empirical": {
+                "var_95": -0.003701306784239288,
+                "cvar_95": -0.0050555975002163816,
+                "var_99": -0.005915226083069978,
+                "cvar_99": -0.00704705631166068
+              },
+              "gaussian": {
+                "var_95": -0.0036840772775464884,
+                "cvar_95": -0.004612567548324555,
+                "var_99": -0.005198369190845669,
+                "cvar_99": -0.005951336028189428
+              },
+              "cornish_fisher": {
+                "var_95": -0.0035996429030884423,
+                "cvar_95": -0.004962448659130165,
+                "var_99": -0.005937815973129851,
+                "cvar_99": -0.007066447085833903
+              },
+              "tail_event_probabilities": {
+                "p_loss_le_global_p05": 0.003055385811899339,
+                "p_loss_le_global_p01": 0.0,
+                "p_loss_le_global_2sigma": 0.0
+              }
+            },
+            "gaussian_divergence": {
+              "jarque_bera_stat": 29034.76957106996,
+              "jarque_bera_pvalue": 0.0,
+              "tail_weight_ratio": 1.309479377172619
+            },
+            "kurtosis_adjusted_vol": 0.002607468381833359,
+            "tail_adjustment_params": {
+              "mean": -2.918428836648082e-05,
+              "std": 0.0022220171626784135,
+              "skew": 0.026563138899671677,
+              "excess_kurtosis": 1.5081184995695702,
+              "p_empirical_below_2sigma": 0.029550645879150506,
+              "p_gaussian_below_2sigma": 0.0227501319481792
+            },
+            "state_mean_unscaled": [
+              -2.8218841794213233e-05,
+              0.8056993360800991,
+              -0.004999826247881619,
+              18.370651267761886,
+              0.011407550233855581
+            ]
+          },
+          "state_2": {
+            "sample_count": 234085,
+            "sample_weight": 0.27282634032634034,
+            "sufficient_samples": true,
+            "volatility_tier": "high",
+            "moments": {
+              "mean": -8.716724965174995e-06,
+              "std": 0.005685006707424608,
+              "skew": 0.058277398197013816,
+              "excess_kurtosis": 1.9943250131261774
+            },
+            "tail_risk": {
+              "empirical": {
+                "var_95": -0.009153381986487248,
+                "cvar_95": -0.012820494775632898,
+                "var_99": -0.015192381381826766,
+                "cvar_99": -0.018733233649789332
+              },
+              "gaussian": {
+                "var_95": -0.009359720626915988,
+                "cvar_95": -0.011735252871135535,
+                "var_99": -0.013234019992690332,
+                "cvar_99": -0.015160477444354527
+              },
+              "cornish_fisher": {
+                "var_95": -0.00903637716637843,
+                "cvar_95": -0.012704787220441218,
+                "var_99": -0.015633765288197057,
+                "cvar_99": -0.01913892380208787
+              },
+              "tail_event_probabilities": {
+                "p_loss_le_global_p05": 0.0820642074460132,
+                "p_loss_le_global_p01": 0.0071298887156374825,
+                "p_loss_le_global_2sigma": 0.01689557212123801
+              }
+            },
+            "gaussian_divergence": {
+              "jarque_bera_stat": 38922.92194166165,
+              "jarque_bera_pvalue": 0.0,
+              "tail_weight_ratio": 1.2522850970699038
+            },
+            "kurtosis_adjusted_vol": 0.0069593892686487845,
+            "tail_adjustment_params": {
+              "mean": -8.716724965174995e-06,
+              "std": 0.005685006707424608,
+              "skew": 0.058277398197013816,
+              "excess_kurtosis": 1.9943250131261774,
+              "p_empirical_below_2sigma": 0.0271482581113698,
+              "p_gaussian_below_2sigma": 0.0227501319481792
+            },
+            "state_mean_unscaled": [
+              -6.4151522054694495e-06,
+              1.0581614658296692,
+              0.00039659490509215585,
+              20.44308596420741,
+              0.03271148678779448
+            ]
+          },
+          "state_3": {
+            "sample_count": 108186,
+            "sample_weight": 0.1260909090909091,
+            "sufficient_samples": true,
+            "volatility_tier": "high",
+            "moments": {
+              "mean": 0.00028685408930731986,
+              "std": 0.01553999702559243,
+              "skew": -0.3465835592979076,
+              "excess_kurtosis": 119.06350104743966
+            },
+            "tail_risk": {
+              "empirical": {
+                "var_95": -0.019092328169636314,
+                "cvar_95": -0.03477842501794947,
+                "var_99": -0.04073667642533743,
+                "cvar_99": -0.06882872549760338
+              },
+              "gaussian": {
+                "var_95": -0.025274166381053478,
+                "cvar_95": -0.03176769680400949,
+                "var_99": -0.03586458495378062,
+                "cvar_99": -0.04113056696743315
+              },
+              "cornish_fisher": {
+                "var_95": 0.010569266217133765,
+                "cvar_95": -0.003122235575576092,
+                "var_99": -0.09295312806424727,
+                "cvar_99": -0.14517949025987154
+              },
+              "tail_event_probabilities": {
+                "p_loss_le_global_p05": 0.17908047251954967,
+                "p_loss_le_global_p01": 0.06388072393840238,
+                "p_loss_le_global_2sigma": 0.08963266966150889
+              }
+            },
+            "gaussian_divergence": {
+              "jarque_bera_stat": 63898592.4720322,
+              "jarque_bera_pvalue": 0.0,
+              "tail_weight_ratio": 0.8546484960635004
+            },
+            "kurtosis_adjusted_vol": 0.08619569361777073,
+            "tail_adjustment_params": {
+              "mean": 0.00028685408930731986,
+              "std": 0.01553999702559243,
+              "skew": -0.3465835592979076,
+              "excess_kurtosis": 119.06350104743966,
+              "p_empirical_below_2sigma": 0.018634573789584604,
+              "p_gaussian_below_2sigma": 0.0227501319481792
+            },
+            "state_mean_unscaled": [
+              0.0002827141644561924,
+              1.5743316680282382,
+              0.0327284662115908,
+              36.11665920764984,
+              0.08906877837104436
+            ]
+          }
+        },
+        "volatility_tiers_kurtosis_aware": {
+          "state_tiers": {
+            "state_0": "medium",
+            "state_1": "low",
+            "state_2": "high",
+            "state_3": "high"
+          },
+          "groups": {
+            "low": [
+              1
+            ],
+            "medium": [
+              0
+            ],
+            "high": [
+              2,
+              3
+            ]
+          },
+          "boundaries": {
+            "q33": 0.0037310069576272234,
+            "q66": 0.006895048599918413
+          }
+        },
+        "exogenous_uncertainty": {
+          "enabled": true,
+          "features_used": [
+            "volatility_shock",
+            "return_shock",
+            "momentum_divergence"
+          ],
+          "framework": "Synthetic exogenous signals derived from market data (volatility_shock, return_shock, momentum_divergence). Robust z-score aggregation (median/MAD).",
+          "regime_scores": {
+            "state_0": {
+              "mean_abs_z": 0.8316146499875087,
+              "p95_abs_z": 1.8286549537059944
+            },
+            "state_1": {
+              "mean_abs_z": 0.7295813921283276,
+              "p95_abs_z": 1.4753579664144436
+            },
+            "state_2": {
+              "mean_abs_z": 1.0770821643198565,
+              "p95_abs_z": 2.4796406570686913
+            },
+            "state_3": {
+              "mean_abs_z": 1.997349713003745,
+              "p95_abs_z": 5.0436648934213855
+            }
+          }
+        },
+        "transition_matrix": [
+          [
+            0.9520733668126257,
+            0.025283202818069263,
+            0.013682995452141574,
+            0.008960434917163425
+          ],
+          [
+            0.014002344750768725,
+            0.9648857457232147,
+            0.02047214887714235,
+            0.0006397606488743087
+          ],
+          [
+            0.01293207882664895,
+            0.02296547376901959,
+            0.9488984086427976,
+            0.015204038761533851
+          ],
+          [
+            0.025239887781468535,
+            1.8832951874844837e-83,
+            0.026634973529364222,
+            0.9481251386891671
+          ]
+        ],
+        "profile_scope": "global",
+        "profile_scope_detail": "Uncertainty profile computed on X_stacked (all symbols concatenated). Per-state moments reflect cross-symbol averages, not single-symbol characteristics.  This is intentional for global regime detection.",
+        "sequence_boundary_metadata": {
+          "num_sequences": 50,
+          "sequence_lengths": [
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160,
+            17160
+          ],
+          "total_rows": 858000
+        }
+      }
+    },
+    "state_mapping": {
+      "range": 1,
+      "trend": 3
+    },
+    "canonical_metadata": {
+      "selection_time_utc": "2026-09-15T21:00:59.752796+00:00",
+      "target_end_utc": "2026-09-14T23:45:00+00:00",
+      "common_start_utc": "2026-03-18T23:45:00+00:00",
+      "common_end_utc": "2026-09-14T23:45:00+00:00",
+      "timestamp_basis": "open_time",
+      "accepted_symbols": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "XRPUSDT",
+        "SOLUSDT",
+        "ZECUSDT",
+        "HYPEUSDT",
+        "LSKUSDT",
+        "DOGEUSDT",
+        "AKEUSDT",
+        "BNBUSDT",
+        "UNIUSDT",
+        "SUIUSDT",
+        "BRUSDT",
+        "POWERUSDT",
+        "1000PEPEUSDT",
+        "NEARUSDT",
+        "ARBUSDT",
+        "\u9f99\u867eUSDT",
+        "ENAUSDT",
+        "ADAUSDT",
+        "FILUSDT",
+        "XLMUSDT",
+        "LINKUSDT",
+        "TAOUSDT",
+        "TRUMPUSDT",
+        "WLDUSDT",
+        "AVAXUSDT",
+        "PUMPUSDT",
+        "VTHOUSDT",
+        "LITUSDT",
+        "AAVEUSDT",
+        "ASTRUSDT",
+        "ONDOUSDT",
+        "SAGAUSDT",
+        "FFUSDT",
+        "BCHUSDT",
+        "USELESSUSDT",
+        "LTCUSDT",
+        "INJUSDT",
+        "PAXGUSDT",
+        "DOTUSDT",
+        "CVCUSDT",
+        "OPUSDT",
+        "DASHUSDT",
+        "ASTERUSDT",
+        "TRXUSDT",
+        "HBARUSDT",
+        "PENGUUSDT",
+        "UAIUSDT",
+        "TUSDT"
+      ],
+      "canonical_source": "binance_vision"
+    }
+  },
+  "parameter_integrity": "PASS",
+  "gate_limitation": "Soft-mode pass rate is unconditional, not predictive accuracy"
+}

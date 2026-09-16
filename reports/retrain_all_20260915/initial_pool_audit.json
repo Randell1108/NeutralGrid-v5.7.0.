@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "scope": "Initial run before 23 current-day windows completed; superseded by queued fresh full-pool rerun",
+  "rows": 1188,
+  "min_scan": "2026-02-18 19:24:30+00:00",
+  "max_scan": "2026-09-14 22:41:38+00:00",
+  "max_outcome_start": "2026-09-14 23:40:28.673335+00:00",
+  "fastwin_positives": 507,
+  "versions": {
+    "engine_version": {
+      "realistic-v8": 1188
+    },
+    "formula_version": {
+      "alignment-v2-geometric-realism": 1188
+    },
+    "label_contract_version": {
+      "2026-05-09": 1188
+    },
+    "realism_profile": {
+      "legacy": 1188
+    }
+  }
+}

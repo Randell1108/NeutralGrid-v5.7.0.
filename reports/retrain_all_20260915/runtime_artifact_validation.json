@@ -1,0 +1,85 @@
+{
+  "checked_at_utc": "2026-09-15T22:09:06.908822+00:00",
+  "hmm_status": "PASS",
+  "hmm_version": "rolling_180d_20260915_210940",
+  "meta_status": "PASS",
+  "meta_version": "20260915_220809",
+  "meta_features": 20,
+  "rows_smoke_scored": 1211,
+  "prediction_min": 0.2457486604676709,
+  "prediction_max": 0.46857926340552397,
+  "legacy_and_artifact_predictions_equal": true,
+  "batch_and_single_predictions_equal": true,
+  "config_difference_from_prior": {},
+  "utility_current_exists": false,
+  "profile_runtime": {
+    "pattern": {
+      "path": "D:\\Neutral Grid v5.7.0\\data\\profile\\pattern_profile.json",
+      "status": "loaded",
+      "features": [
+        "parkinson_vol_ratio_4h_24h_pre",
+        "variance_ratio_1m_15m_pre_2h",
+        "funding_carry_expected_next_7h",
+        "liquidity_stability_z_1h"
+      ]
+    },
+    "model": {
+      "status": "unavailable",
+      "reason": "[Errno 2] No such file or directory: 'D:\\\\Neutral Grid v5.7.0\\\\data\\\\profile\\\\_no_current_json.missing'"
+    }
+  },
+  "shadow_artifact_integrity": {
+    "profile_candidate": {
+      "status": "PASS",
+      "features": [
+        "parkinson_vol_ratio_4h_24h_pre",
+        "variance_ratio_1m_15m_pre_2h",
+        "funding_carry_expected_next_7h",
+        "liquidity_stability_z_1h"
+      ],
+      "minimum_inverse_covariance_eigenvalue": 0.8011649484595912,
+      "mean_feature_vector_probability": 0.3119216032539061,
+      "promotion_claimed": false
+    },
+    "expanded_profile_shadow": {
+      "status": "PASS",
+      "features": [
+        "parkinson_vol_ratio_4h_24h_pre",
+        "variance_ratio_1m_15m_pre_2h",
+        "funding_carry_expected_next_7h",
+        "liquidity_stability_z_1h"
+      ],
+      "minimum_inverse_covariance_eigenvalue": 0.9494500498826117,
+      "mean_feature_vector_probability": 0.4726711014151932,
+      "promotion_claimed": false
+    }
+  },
+  "conformal_current_exists": false,
+  "artifact_sha256": {
+    "artifact_manifest.json": "8da83885edba43aa7d5753cf76fde06582f87ea60ce273e500fd85e947b2d31b",
+    "data\\new_expired_bots.xlsx": "e0e80afff0d13a74e19495adc33600ab5aa51e9e7f872a7a4e8402cb91685404",
+    "models\\meta_labeler.pkl": "da6cfaf3c2dad974eb7c863e988d97a54d551241fa8aa90dc849f4267dd070f3",
+    "artifacts\\hmm\\rolling_180d_20260915_210940\\eval.json": "330a6fffddc1c3d3dc066f61f30dc1c5bb016750792ee6b19b0bc813ec45641b",
+    "artifacts\\hmm\\rolling_180d_20260915_210940\\feature_schema.json": "205a4c2d70e42b8dfa8d79501d6ab68b7f4403b150c4bfc8b4a5b67fa31c4ed8",
+    "artifacts\\hmm\\rolling_180d_20260915_210940\\metadata.json": "ac056fead17f95499dd96c3f1b66db6b1d32c1fbdc163df17cdb30e7a604c938",
+    "artifacts\\hmm\\rolling_180d_20260915_210940\\model.joblib": "4fbd6d98d985cb45d578151aa8ab488f709f6a54d69affeb07b736b718ac6928",
+    "artifacts\\hmm\\rolling_180d_20260915_210940\\scaler.joblib": "517ee73e1b45ec46e54d94c69be64f0bb8eb7e4a827fe33016bd335843d2bd9e",
+    "artifacts\\hmm\\rolling_180d_20260915_210940\\state_means.npy": "c32f694e8419ff82e4be4d404cdecb079ed0e4b5250e940787a82a12b271a4c5",
+    "artifacts\\hmm\\rolling_180d_20260915_210940\\temperature_scaler.json": "054ebb7116e43198108d813e8dfbf1ac37e1540a7f1293c5bf337b4394a3c0dd",
+    "models\\meta_labeler\\metadata.json": "6a7890fd18118b98cd6b6f9fc4cf454f5fa9f35f80bc57a53b104c722ceb4d89",
+    "models\\meta_labeler\\model.joblib": "269bededee198ee43d1650fce79b27190d2606f30c500a13c522fe5d1c74a031",
+    "models\\meta_labeler\\scaler.joblib": "f7a42862498f8796729d52a2a41477d6a2c5e0df6081cd899f7fe7f981f30a01",
+    "reports\\retrain_all_20260915\\profile_candidate\\pattern_profile.json": "2cf5c57a45310d142531bd40ae8a43fa98b2ec90be69f59a02a82aaba7c9c698",
+    "reports\\retrain_all_20260915\\profile_candidate\\profile_model.json": "f9296e8bfd327c3793c4916b3833c543f57b6da8ece971017a92229b139026e7",
+    "reports\\retrain_all_20260915\\profile_candidate\\report.json": "bf111d370b1e47a153f48e850bf6e67a80873358d337bb0abff4d2a829df4b30",
+    "reports\\retrain_all_20260915\\expanded_profile_shadow\\excluded_fresh_rows.csv": "cdd2c5c62b7a6a6de78c16e28729b26d1011d27fd09e372aa9e0c85ebdb48482",
+    "reports\\retrain_all_20260915\\expanded_profile_shadow\\manifest.json": "9b625ee4cc8139faa1c0458002f5994d3b1c550a6c114a4b5e2946b6e4412938",
+    "reports\\retrain_all_20260915\\expanded_profile_shadow\\pattern_profile.json": "cfd07966a89790fc150a58a252958ed779d5f320a28b7bddeef21fd16609d071",
+    "reports\\retrain_all_20260915\\expanded_profile_shadow\\prior_model_new_id_predictions.csv": "c43e5050db9f1927d4a69edc9a36b1801f561bbace25ed226b31aac1642b855d",
+    "reports\\retrain_all_20260915\\expanded_profile_shadow\\profile_model.json": "66dfe64de39720835c890741be5069b75cc5543edafc4041a14e9525988016e1",
+    "reports\\retrain_all_20260915\\expanded_profile_shadow\\training_pool.csv": "59e3c5aff4977b6020b1fa767a4a4a3a5c4f1cca1958fd01c37e453a2e793541",
+    "artifacts\\utility\\utility_20260915_214731_931010.json": "ab91ca9117c07b658d12948fbed0dcb29442d381f214c6ead55e65da0da4f845",
+    "artifacts\\utility\\utility_20260915_220851_633469.json": "a5df2eeb33990f120778a8699ff4ce27b0595e6c8820f28562cd511da4852d7f"
+  },
+  "scoring_scope": "Serialization/inference integrity only; training-row probabilities are not performance evaluation"
+}

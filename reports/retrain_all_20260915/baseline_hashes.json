@@ -1,0 +1,130 @@
+[
+  {
+    "path": "CHANGELOG.md",
+    "sha256": "d48d5608e5638ec7b944f38080efbb4fc698eec4e0837dfbb9c344f9ccd8fb72"
+  },
+  {
+    "path": "ERRORS_LOG.md",
+    "sha256": "036edb312eb041c9b26e0611d337a0206e3a167eef2d56d6cc3b475841ffbcf6"
+  },
+  {
+    "path": "artifact_manifest.json",
+    "sha256": "2ce45c9d1d811cd7eeac9669106aceb1f8a0ea70331ead562a99a0684b42a6f0"
+  },
+  {
+    "path": "data/new_expired_bots.xlsx",
+    "sha256": "c8d1c67ae1f2a82be016764e6b77d21ed25741165f8ca799a413f599fbbf77bd"
+  },
+  {
+    "path": "models/meta_labeler.pkl",
+    "sha256": "b79f6b5e68462cda4bfd85a2434cbd73b49f74f74582bf0a618843513f0cdad0"
+  },
+  {
+    "path": "models/meta_labeler/metadata.json",
+    "sha256": "43feb61326604ec8c8ba9f334f331c87c74e2d902477cac846788873f3043cc8"
+  },
+  {
+    "path": "data/profile/pattern_profile.json",
+    "sha256": "38a32e96d1f941e7738fd122d009923928f60f0329eb0192262de5532fd6af83"
+  },
+  {
+    "path": "_bot_data_extractor_core.py",
+    "sha256": "e7f3e4f2ee6fc7192b14a9554841c1718d2910a3de167ed7486fe78f7ac31f49"
+  },
+  {
+    "path": "models/meta_labeler_promotion_decision.json",
+    "sha256": "9d6db959fbea63da196cd270d3096b593aede237a082f5bdf584bcac0302d2d7"
+  },
+  {
+    "path": "models/meta_labeler_verification.json",
+    "sha256": "5fbb62c6d86fcad8e5c9e90005d87a67ca416a6d30fe10b5c8ffcfff29e48d5d"
+  },
+  {
+    "path": "new_bot_data_extractor.py",
+    "sha256": "dd4a2a8a97fc7848d18985d006633b1febd31276aac88b55130c53f7535f6ade"
+  },
+  {
+    "path": "scripts/collect_diff_depth.py",
+    "sha256": "9b9d611b185baea300cb7a4ec028fcf6ce2f7b60764b9809afd58f8a47bdae29"
+  },
+  {
+    "path": "scripts/collect_private_grid_telemetry.py",
+    "sha256": "0c573dcab100d42390304334dcd2afd166e1780e5fd3c36b1f3fc0648dda7a8f"
+  },
+  {
+    "path": "src/neutralgrid/api/binance_client.py",
+    "sha256": "c52c7ceb1060526ac4323a7ce461a0103b3f4134404427904dd5ead268d0a05a"
+  },
+  {
+    "path": "src/neutralgrid/core/config.py",
+    "sha256": "feb6f7d9291c631bbf926b5c54ea740726c23beb809711400e6206a78454cb53"
+  },
+  {
+    "path": "tests/unit/test_diff_depth.py",
+    "sha256": "8fb747dbdd7260ee30aa7c1dcd119411d9a87512d5bac531acfe029ac9e11d43"
+  },
+  {
+    "path": "tests/unit/test_new_bot_data_extractor.py",
+    "sha256": "80f0c39d5c4799f36afe0ae99e178c85e09c6b7e68f3caf1cbba5e24f270f291"
+  },
+  {
+    "path": "tests/unit/test_private_grid_telemetry.py",
+    "sha256": "532fe0fb898e969f2bbee95c4291bac63f7b2e7281259c9d71b86006dad82de6"
+  },
+  {
+    "path": "scripts/collect_market_streams.py",
+    "sha256": "9453dfcad18dbe97477dee49992ed4ed423ec30fcd4461447dd5086431c95aeb"
+  },
+  {
+    "path": "scripts/collect_private_user_stream.py",
+    "sha256": "9fc1a222f6b01a3e5c7cb9f1c32cf9cec31287a9e496d3015555af15b4720378"
+  },
+  {
+    "path": "scripts/start_binance_websocket_services.ps1",
+    "sha256": "f73bbf044bb59431fbf8c746d9f09e76738ea26559dbe084ee85696618403fd1"
+  },
+  {
+    "path": "scripts/stop_binance_websocket_services.ps1",
+    "sha256": "6f163e34141450554299253f1fb5e0eff901f895ff8b7963c423762eba82710b"
+  },
+  {
+    "path": "scripts/supervise_binance_websocket_services.py",
+    "sha256": "e65deaa2e0bcc2765e5c5e8435d5ce520ad1837b5990b2661fbf2aa7d86f03cd"
+  },
+  {
+    "path": "scripts/verify_binance_websocket_services.py",
+    "sha256": "9c650b7be5416e018fcf0c79b7513ccd303608dd4b1d172774a5c8b573b6d070"
+  },
+  {
+    "path": "src/neutralgrid/data/market_stream.py",
+    "sha256": "0512d69b96a41cfb9beedd37480dfab180f0beb4c6ef91469e461411917dd776"
+  },
+  {
+    "path": "src/neutralgrid/data/private_user_stream.py",
+    "sha256": "4fd9f9fdd814ab27251327bbe7edf44d237f0ae906f2d475cb482f82b240df3f"
+  },
+  {
+    "path": "tests/unit/test_binance_user_data_stream.py",
+    "sha256": "b48d607043c48e1f770bafe8cc3470577c9aedc79b876f92ee7111f4d1cf63e8"
+  },
+  {
+    "path": "tests/unit/test_binance_websocket_supervisor.py",
+    "sha256": "ed0fdcc1bccafef646c536335b5853a933e1ebff3675ad643d7b3377c31e6276"
+  },
+  {
+    "path": "tests/unit/test_market_stream.py",
+    "sha256": "a2ff59e3e559a17dc04ff9e0715666c683fb8a5e27491391397f3727dc59dfbb"
+  },
+  {
+    "path": "tests/unit/test_private_user_collector.py",
+    "sha256": "822138c48617ea30c49d521c9b7f55527f280053b999dcf02013e89cd1964984"
+  },
+  {
+    "path": "tests/unit/test_private_user_stream.py",
+    "sha256": "8570ea4641e6cd78d8e5adb39ba4aaf5e8afde74c4ddd618be388b82894474d0"
+  },
+  {
+    "path": "tests/unit/test_verify_binance_websocket_services.py",
+    "sha256": "1680a22de0e4f799e1ee3ca98c2d44676294fe9f4bf7281a63415971a1cd17ff"
+  }
+]

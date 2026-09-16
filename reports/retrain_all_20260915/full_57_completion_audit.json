@@ -1,0 +1,1098 @@
+{
+  "status": "PASS",
+  "checked_at_utc": "2026-09-15T22:04:20.212009+00:00",
+  "rows": 57,
+  "selected_features": [
+    "ev_score",
+    "adx_1h",
+    "adx_15m",
+    "adx_5m",
+    "atr_pct_15m",
+    "ou_halflife",
+    "rsi_15m",
+    "ema_slope_1h",
+    "ema_crosses_5m",
+    "vwap_crosses_5m",
+    "hurst_exponent",
+    "range_size_pct",
+    "bb_width",
+    "grid_spacing_pct",
+    "profit_per_grid_pct",
+    "num_grids",
+    "quote_volume_24h",
+    "open_interest",
+    "micro_round_trip_cost_pct",
+    "funding_rate"
+  ],
+  "finite_feature_cells": 1140,
+  "supplemented_snapshots": [
+    {
+      "strategy_id": "413903108",
+      "candidate_id": "HEMIUSDT_20260814_123332_65a3c1de",
+      "sources": [
+        {
+          "candidate_id": "HEMIUSDT_20260814_123332_65a3c1de",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00891_20260814_123332.csv",
+          "mtime": "2026-08-14 11:26:44+00:00",
+          "scan": "2026-08-14 12:33:32+00:00",
+          "bot_start": "2026-08-19 17:24:00+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 2564898.72196,
+            "open_interest": 693404634.0,
+            "micro_round_trip_cost_pct": null
+          },
+          "timestamp_columns": {},
+          "sha256": "806b905bf51eb4ebf77c1aac52865295be7de30187cc523bf07b1c3092862db5"
+        },
+        {
+          "candidate_id": "HEMIUSDT_20260814_123332_65a3c1de",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00892_20260814_123332.csv",
+          "mtime": "2026-08-14 11:33:24+00:00",
+          "scan": "2026-08-14 12:33:32+00:00",
+          "bot_start": "2026-08-19 17:24:00+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 2564898.72196,
+            "open_interest": 693404634.0,
+            "micro_round_trip_cost_pct": null
+          },
+          "timestamp_columns": {},
+          "sha256": "6636a2c52aca23a770ccb4e10a40df6bcc576a1e91fd5a5dd0db670ee77e0bc5"
+        }
+      ],
+      "fields": {
+        "quote_volume_24h": {
+          "value": 2564898.72196,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "open_interest": {
+          "value": 693404634.0,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "micro_round_trip_cost_pct": {
+          "value": 0.1316,
+          "method": "Current canonical microstructure formula, recorded bid-denominator spread converted to mid-denominator spread, historical closed-bar volatility; no fallback spread or volatility",
+          "recorded_spread_pct": 0.021537798836943,
+          "mid_spread_decimal": 0.00021535479702794523,
+          "volatility_pct": 1.8696693151402772,
+          "horizon_hours": 6.0,
+          "config": {
+            "maker_fee": 0.0002,
+            "taker_fee": 0.0005,
+            "maker_fill_ratio": 0.7,
+            "slippage_mult": 1.5,
+            "safety_multiple": 1.5,
+            "funding_extreme_threshold": 0.003,
+            "funding_penalty_mult": 2.0,
+            "min_depth_usdt": 10000.0
+          },
+          "market_data_path": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\full_57_cost_market_data\\HEMIUSDT_20260814_123332_65a3c1de.json",
+          "market_data_sha256": "273e6616690963b0327cf9c1dbce956e91db4e2d2133e2fd9f55f65568dde7b4",
+          "bars": 249,
+          "latest_close_utc": "2026-08-14 12:29:59.999000+00:00",
+          "cutoff_utc": "2026-08-14 12:33:32+00:00",
+          "limitation": "Reconstructed model estimate, not an observed execution cost or a historical saved cost value"
+        }
+      },
+      "timestamp_limitation": "File times precede scan IDs. Both recorded times precede bot start; source was excluded from backtest admission. This does not independently prove archive creation time."
+    },
+    {
+      "strategy_id": "413921885",
+      "candidate_id": "BTWUSDT_20260814_214024_65a3c1de",
+      "sources": [
+        {
+          "candidate_id": "BTWUSDT_20260814_214024_65a3c1de",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00893_20260814_214024.csv",
+          "mtime": "2026-08-14 20:07:02+00:00",
+          "scan": "2026-08-14 21:40:24+00:00",
+          "bot_start": "2026-08-20 12:44:12+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 101819912.94093,
+            "open_interest": 246863449.0,
+            "micro_round_trip_cost_pct": null
+          },
+          "timestamp_columns": {},
+          "sha256": "e4dbb5b86f718670d3d57b407821f7cc004cfca1baa833e77a8ee4161eb1ce73"
+        },
+        {
+          "candidate_id": "BTWUSDT_20260814_214024_65a3c1de",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00894_20260814_214024.csv",
+          "mtime": "2026-08-14 20:45:48+00:00",
+          "scan": "2026-08-14 21:40:24+00:00",
+          "bot_start": "2026-08-20 12:44:12+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 101819912.94093,
+            "open_interest": 246863449.0,
+            "micro_round_trip_cost_pct": null
+          },
+          "timestamp_columns": {},
+          "sha256": "9e5037d494ae6ca8f89ecfcafbdfda93241003d8b3c68a46af388e7fdb3ac25d"
+        }
+      ],
+      "fields": {
+        "quote_volume_24h": {
+          "value": 101819912.94093,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "open_interest": {
+          "value": 246863449.0,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "micro_round_trip_cost_pct": {
+          "value": 0.2186,
+          "method": "Current canonical microstructure formula, recorded bid-denominator spread converted to mid-denominator spread, historical closed-bar volatility; no fallback spread or volatility",
+          "recorded_spread_pct": 0.0350485900908073,
+          "mid_spread_decimal": 0.00035042449148627356,
+          "volatility_pct": 9.651645092704383,
+          "horizon_hours": 6.0,
+          "config": {
+            "maker_fee": 0.0002,
+            "taker_fee": 0.0005,
+            "maker_fill_ratio": 0.7,
+            "slippage_mult": 1.5,
+            "safety_multiple": 1.5,
+            "funding_extreme_threshold": 0.003,
+            "funding_penalty_mult": 2.0,
+            "min_depth_usdt": 10000.0
+          },
+          "market_data_path": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\full_57_cost_market_data\\BTWUSDT_20260814_214024_65a3c1de.json",
+          "market_data_sha256": "0c89a057580b1e9020b1331b6450d38faa87cfcaddee50107c3f4f2bac037ca2",
+          "bars": 249,
+          "latest_close_utc": "2026-08-14 21:29:59.999000+00:00",
+          "cutoff_utc": "2026-08-14 21:40:24+00:00",
+          "limitation": "Reconstructed model estimate, not an observed execution cost or a historical saved cost value"
+        }
+      },
+      "timestamp_limitation": "File times precede scan IDs. Both recorded times precede bot start; source was excluded from backtest admission. This does not independently prove archive creation time."
+    },
+    {
+      "strategy_id": "413928491",
+      "candidate_id": "AVAAIUSDT_20260820_155049_65a3c1de",
+      "sources": [
+        {
+          "candidate_id": "AVAAIUSDT_20260820_155049_65a3c1de",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00895_20260820_155049.csv",
+          "mtime": "2026-08-20 14:25:42+00:00",
+          "scan": "2026-08-20 15:50:49+00:00",
+          "bot_start": "2026-08-20 17:47:42+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 41754441.299516,
+            "open_interest": 524164051.0,
+            "micro_round_trip_cost_pct": null
+          },
+          "timestamp_columns": {},
+          "sha256": "78c4880ca8c5f9711348eefeb40191dbbe4a9e66925ef0c8b2f454119f42af77"
+        },
+        {
+          "candidate_id": "AVAAIUSDT_20260820_155049_65a3c1de",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00896_20260820_155049.csv",
+          "mtime": "2026-08-20 15:33:48+00:00",
+          "scan": "2026-08-20 15:50:49+00:00",
+          "bot_start": "2026-08-20 17:47:42+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 41754441.299516,
+            "open_interest": 524164051.0,
+            "micro_round_trip_cost_pct": null
+          },
+          "timestamp_columns": {},
+          "sha256": "299d8d66ad73704a4debb5a3b9f2854333ace68b6427e4410b8d4ff35f5ae880"
+        }
+      ],
+      "fields": {
+        "quote_volume_24h": {
+          "value": 41754441.299516,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "open_interest": {
+          "value": 524164051.0,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "micro_round_trip_cost_pct": {
+          "value": 0.337,
+          "method": "Current canonical microstructure formula, recorded bid-denominator spread converted to mid-denominator spread, historical closed-bar volatility; no fallback spread or volatility",
+          "recorded_spread_pct": 0.0668277386521314,
+          "mid_spread_decimal": 0.0006680541637760025,
+          "volatility_pct": 6.2420173061793784,
+          "horizon_hours": 6.0,
+          "config": {
+            "maker_fee": 0.0002,
+            "taker_fee": 0.0005,
+            "maker_fill_ratio": 0.7,
+            "slippage_mult": 1.5,
+            "safety_multiple": 1.5,
+            "funding_extreme_threshold": 0.003,
+            "funding_penalty_mult": 2.0,
+            "min_depth_usdt": 10000.0
+          },
+          "market_data_path": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\full_57_cost_market_data\\AVAAIUSDT_20260820_155049_65a3c1de.json",
+          "market_data_sha256": "9f4154f15f4db54c2016eb632de72f7e1c050b0442f265399b81670b5e192127",
+          "bars": 249,
+          "latest_close_utc": "2026-08-20 15:44:59.999000+00:00",
+          "cutoff_utc": "2026-08-20 15:50:49+00:00",
+          "limitation": "Reconstructed model estimate, not an observed execution cost or a historical saved cost value"
+        }
+      },
+      "timestamp_limitation": "File times precede scan IDs. Both recorded times precede bot start; source was excluded from backtest admission. This does not independently prove archive creation time."
+    },
+    {
+      "strategy_id": "413928390",
+      "candidate_id": "METUSDT_20260820_155049_70a20f9b",
+      "sources": [
+        {
+          "candidate_id": "METUSDT_20260820_155049_70a20f9b",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00895_20260820_155049.csv",
+          "mtime": "2026-08-20 14:25:42+00:00",
+          "scan": "2026-08-20 15:50:49+00:00",
+          "bot_start": "2026-08-20 17:42:37+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 41843378.9999,
+            "open_interest": 21369290.0,
+            "micro_round_trip_cost_pct": 0.2451
+          },
+          "timestamp_columns": {},
+          "sha256": "78c4880ca8c5f9711348eefeb40191dbbe4a9e66925ef0c8b2f454119f42af77"
+        },
+        {
+          "candidate_id": "METUSDT_20260820_155049_70a20f9b",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00896_20260820_155049.csv",
+          "mtime": "2026-08-20 15:33:48+00:00",
+          "scan": "2026-08-20 15:50:49+00:00",
+          "bot_start": "2026-08-20 17:42:37+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 41843378.9999,
+            "open_interest": 21369290.0,
+            "micro_round_trip_cost_pct": 0.2451
+          },
+          "timestamp_columns": {},
+          "sha256": "299d8d66ad73704a4debb5a3b9f2854333ace68b6427e4410b8d4ff35f5ae880"
+        }
+      ],
+      "fields": {
+        "quote_volume_24h": {
+          "value": 41843378.9999,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "open_interest": {
+          "value": 21369290.0,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "micro_round_trip_cost_pct": {
+          "value": 0.2451,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        }
+      },
+      "timestamp_limitation": "File times precede scan IDs. Both recorded times precede bot start; source was excluded from backtest admission. This does not independently prove archive creation time."
+    },
+    {
+      "strategy_id": "413928457",
+      "candidate_id": "HYPEUSDT_20260820_155049_9e836dc4",
+      "sources": [
+        {
+          "candidate_id": "HYPEUSDT_20260820_155049_9e836dc4",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00895_20260820_155049.csv",
+          "mtime": "2026-08-20 14:25:42+00:00",
+          "scan": "2026-08-20 15:50:49+00:00",
+          "bot_start": "2026-08-20 17:46:12+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 2554505372.36133,
+            "open_interest": 5404972.27,
+            "micro_round_trip_cost_pct": 0.0633
+          },
+          "timestamp_columns": {},
+          "sha256": "78c4880ca8c5f9711348eefeb40191dbbe4a9e66925ef0c8b2f454119f42af77"
+        },
+        {
+          "candidate_id": "HYPEUSDT_20260820_155049_9e836dc4",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00896_20260820_155049.csv",
+          "mtime": "2026-08-20 15:33:48+00:00",
+          "scan": "2026-08-20 15:50:49+00:00",
+          "bot_start": "2026-08-20 17:46:12+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 2554505372.36133,
+            "open_interest": 5404972.27,
+            "micro_round_trip_cost_pct": 0.0633
+          },
+          "timestamp_columns": {},
+          "sha256": "299d8d66ad73704a4debb5a3b9f2854333ace68b6427e4410b8d4ff35f5ae880"
+        }
+      ],
+      "fields": {
+        "quote_volume_24h": {
+          "value": 2554505372.36133,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "open_interest": {
+          "value": 5404972.27,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "micro_round_trip_cost_pct": {
+          "value": 0.0633,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        }
+      },
+      "timestamp_limitation": "File times precede scan IDs. Both recorded times precede bot start; source was excluded from backtest admission. This does not independently prove archive creation time."
+    },
+    {
+      "strategy_id": "413928413",
+      "candidate_id": "VIRTUALUSDT_20260820_155049_c9e745c7",
+      "sources": [
+        {
+          "candidate_id": "VIRTUALUSDT_20260820_155049_c9e745c7",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00895_20260820_155049.csv",
+          "mtime": "2026-08-20 14:25:42+00:00",
+          "scan": "2026-08-20 15:50:49+00:00",
+          "bot_start": "2026-08-20 17:44:02+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 36651360.54181,
+            "open_interest": 23058143.2,
+            "micro_round_trip_cost_pct": 0.1149
+          },
+          "timestamp_columns": {},
+          "sha256": "78c4880ca8c5f9711348eefeb40191dbbe4a9e66925ef0c8b2f454119f42af77"
+        },
+        {
+          "candidate_id": "VIRTUALUSDT_20260820_155049_c9e745c7",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00896_20260820_155049.csv",
+          "mtime": "2026-08-20 15:33:48+00:00",
+          "scan": "2026-08-20 15:50:49+00:00",
+          "bot_start": "2026-08-20 17:44:02+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 36651360.54181,
+            "open_interest": 23058143.2,
+            "micro_round_trip_cost_pct": 0.1149
+          },
+          "timestamp_columns": {},
+          "sha256": "299d8d66ad73704a4debb5a3b9f2854333ace68b6427e4410b8d4ff35f5ae880"
+        }
+      ],
+      "fields": {
+        "quote_volume_24h": {
+          "value": 36651360.54181,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "open_interest": {
+          "value": 23058143.2,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "micro_round_trip_cost_pct": {
+          "value": 0.1149,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        }
+      },
+      "timestamp_limitation": "File times precede scan IDs. Both recorded times precede bot start; source was excluded from backtest admission. This does not independently prove archive creation time."
+    },
+    {
+      "strategy_id": "413951740",
+      "candidate_id": "NEARUSDT_20260821_141031_6bb22c4a",
+      "sources": [
+        {
+          "candidate_id": "NEARUSDT_20260821_141031_6bb22c4a",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00897_20260821_141031.csv",
+          "mtime": "2026-08-21 12:27:38+00:00",
+          "scan": "2026-08-21 14:10:31+00:00",
+          "bot_start": "2026-08-21 15:23:47+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 247349932.955,
+            "open_interest": 42474387.0,
+            "micro_round_trip_cost_pct": 0.251
+          },
+          "timestamp_columns": {},
+          "sha256": "3920ffa7ba66951927d30d8bc6666e52e6c3ecad5c63dda57f24b2bb6714a6a9"
+        },
+        {
+          "candidate_id": "NEARUSDT_20260821_141031_6bb22c4a",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00898_20260821_141031.csv",
+          "mtime": "2026-08-21 13:24:16+00:00",
+          "scan": "2026-08-21 14:10:31+00:00",
+          "bot_start": "2026-08-21 15:23:47+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 247349932.955,
+            "open_interest": 42474387.0,
+            "micro_round_trip_cost_pct": 0.251
+          },
+          "timestamp_columns": {},
+          "sha256": "1fc5f84dab9a5679055666d6d25efe9f372335c8ac3eb08c1e2f2f48d7a2c43b"
+        }
+      ],
+      "fields": {
+        "quote_volume_24h": {
+          "value": 247349932.955,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "open_interest": {
+          "value": 42474387.0,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "micro_round_trip_cost_pct": {
+          "value": 0.251,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        }
+      },
+      "timestamp_limitation": "File times precede scan IDs. Both recorded times precede bot start; source was excluded from backtest admission. This does not independently prove archive creation time."
+    },
+    {
+      "strategy_id": "413951574",
+      "candidate_id": "BIOUSDT_20260821_141031_cdee99ef",
+      "sources": [
+        {
+          "candidate_id": "BIOUSDT_20260821_141031_cdee99ef",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00897_20260821_141031.csv",
+          "mtime": "2026-08-21 12:27:38+00:00",
+          "scan": "2026-08-21 14:10:31+00:00",
+          "bot_start": "2026-08-21 15:15:08+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 19800101.33654,
+            "open_interest": 276939725.0,
+            "micro_round_trip_cost_pct": 0.1848
+          },
+          "timestamp_columns": {},
+          "sha256": "3920ffa7ba66951927d30d8bc6666e52e6c3ecad5c63dda57f24b2bb6714a6a9"
+        },
+        {
+          "candidate_id": "BIOUSDT_20260821_141031_cdee99ef",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00898_20260821_141031.csv",
+          "mtime": "2026-08-21 13:24:16+00:00",
+          "scan": "2026-08-21 14:10:31+00:00",
+          "bot_start": "2026-08-21 15:15:08+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 19800101.33654,
+            "open_interest": 276939725.0,
+            "micro_round_trip_cost_pct": 0.1848
+          },
+          "timestamp_columns": {},
+          "sha256": "1fc5f84dab9a5679055666d6d25efe9f372335c8ac3eb08c1e2f2f48d7a2c43b"
+        }
+      ],
+      "fields": {
+        "quote_volume_24h": {
+          "value": 19800101.33654,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "open_interest": {
+          "value": 276939725.0,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "micro_round_trip_cost_pct": {
+          "value": 0.1848,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        }
+      },
+      "timestamp_limitation": "File times precede scan IDs. Both recorded times precede bot start; source was excluded from backtest admission. This does not independently prove archive creation time."
+    },
+    {
+      "strategy_id": "413951597",
+      "candidate_id": "GRASSUSDT_20260821_141031_37afded1",
+      "sources": [
+        {
+          "candidate_id": "GRASSUSDT_20260821_141031_37afded1",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00897_20260821_141031.csv",
+          "mtime": "2026-08-21 12:27:38+00:00",
+          "scan": "2026-08-21 14:10:31+00:00",
+          "bot_start": "2026-08-21 15:16:13+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 12397382.32059,
+            "open_interest": 20429734.6,
+            "micro_round_trip_cost_pct": 0.1785
+          },
+          "timestamp_columns": {},
+          "sha256": "3920ffa7ba66951927d30d8bc6666e52e6c3ecad5c63dda57f24b2bb6714a6a9"
+        },
+        {
+          "candidate_id": "GRASSUSDT_20260821_141031_37afded1",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00898_20260821_141031.csv",
+          "mtime": "2026-08-21 13:24:16+00:00",
+          "scan": "2026-08-21 14:10:31+00:00",
+          "bot_start": "2026-08-21 15:16:13+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 12397382.32059,
+            "open_interest": 20429734.6,
+            "micro_round_trip_cost_pct": 0.1785
+          },
+          "timestamp_columns": {},
+          "sha256": "1fc5f84dab9a5679055666d6d25efe9f372335c8ac3eb08c1e2f2f48d7a2c43b"
+        }
+      ],
+      "fields": {
+        "quote_volume_24h": {
+          "value": 12397382.32059,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "open_interest": {
+          "value": 20429734.6,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "micro_round_trip_cost_pct": {
+          "value": 0.1785,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        }
+      },
+      "timestamp_limitation": "File times precede scan IDs. Both recorded times precede bot start; source was excluded from backtest admission. This does not independently prove archive creation time."
+    },
+    {
+      "strategy_id": "413951725",
+      "candidate_id": "ORDIUSDT_20260821_141031_206e2795",
+      "sources": [
+        {
+          "candidate_id": "ORDIUSDT_20260821_141031_206e2795",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00897_20260821_141031.csv",
+          "mtime": "2026-08-21 12:27:38+00:00",
+          "scan": "2026-08-21 14:10:31+00:00",
+          "bot_start": "2026-08-21 15:22:57+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 49150028.984,
+            "open_interest": 2187662.8,
+            "micro_round_trip_cost_pct": 0.1488
+          },
+          "timestamp_columns": {},
+          "sha256": "3920ffa7ba66951927d30d8bc6666e52e6c3ecad5c63dda57f24b2bb6714a6a9"
+        },
+        {
+          "candidate_id": "ORDIUSDT_20260821_141031_206e2795",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00898_20260821_141031.csv",
+          "mtime": "2026-08-21 13:24:16+00:00",
+          "scan": "2026-08-21 14:10:31+00:00",
+          "bot_start": "2026-08-21 15:22:57+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 49150028.984,
+            "open_interest": 2187662.8,
+            "micro_round_trip_cost_pct": 0.1488
+          },
+          "timestamp_columns": {},
+          "sha256": "1fc5f84dab9a5679055666d6d25efe9f372335c8ac3eb08c1e2f2f48d7a2c43b"
+        }
+      ],
+      "fields": {
+        "quote_volume_24h": {
+          "value": 49150028.984,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "open_interest": {
+          "value": 2187662.8,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "micro_round_trip_cost_pct": {
+          "value": 0.1488,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        }
+      },
+      "timestamp_limitation": "File times precede scan IDs. Both recorded times precede bot start; source was excluded from backtest admission. This does not independently prove archive creation time."
+    },
+    {
+      "strategy_id": "413975717",
+      "candidate_id": "MONUSDT_20260822_121311_7aefa36b",
+      "sources": [
+        {
+          "candidate_id": "MONUSDT_20260822_121311_7aefa36b",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00901_20260822_121311.csv",
+          "mtime": "2026-08-22 10:33:02+00:00",
+          "scan": "2026-08-22 12:13:11+00:00",
+          "bot_start": "2026-08-22 13:04:00+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 39581840.15611,
+            "open_interest": 991583548.0,
+            "micro_round_trip_cost_pct": 0.21
+          },
+          "timestamp_columns": {},
+          "sha256": "fd4a74e2f117763ea585404503a4d187310006c6aeb691dcc1ee0d91cb41566f"
+        },
+        {
+          "candidate_id": "MONUSDT_20260822_121311_7aefa36b",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00902_20260822_121311.csv",
+          "mtime": "2026-08-22 11:03:24+00:00",
+          "scan": "2026-08-22 12:13:11+00:00",
+          "bot_start": "2026-08-22 13:04:00+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 39581840.15611,
+            "open_interest": 991583548.0,
+            "micro_round_trip_cost_pct": 0.21
+          },
+          "timestamp_columns": {},
+          "sha256": "6e53c4ba691f3e148588e7ac8ca9fc45fdff769bb2e14f22af2981d6ebfcdf97"
+        }
+      ],
+      "fields": {
+        "quote_volume_24h": {
+          "value": 39581840.15611,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "open_interest": {
+          "value": 991583548.0,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "micro_round_trip_cost_pct": {
+          "value": 0.21,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        }
+      },
+      "timestamp_limitation": "File times precede scan IDs. Both recorded times precede bot start; source was excluded from backtest admission. This does not independently prove archive creation time."
+    },
+    {
+      "strategy_id": "413975732",
+      "candidate_id": "CRVUSDT_20260822_121311_dc398709",
+      "sources": [
+        {
+          "candidate_id": "CRVUSDT_20260822_121311_dc398709",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00901_20260822_121311.csv",
+          "mtime": "2026-08-22 10:33:02+00:00",
+          "scan": "2026-08-22 12:13:11+00:00",
+          "bot_start": "2026-08-22 13:04:45+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 104233983.8897,
+            "open_interest": 61770984.3,
+            "micro_round_trip_cost_pct": 0.1795
+          },
+          "timestamp_columns": {},
+          "sha256": "fd4a74e2f117763ea585404503a4d187310006c6aeb691dcc1ee0d91cb41566f"
+        },
+        {
+          "candidate_id": "CRVUSDT_20260822_121311_dc398709",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00902_20260822_121311.csv",
+          "mtime": "2026-08-22 11:03:24+00:00",
+          "scan": "2026-08-22 12:13:11+00:00",
+          "bot_start": "2026-08-22 13:04:45+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 104233983.8897,
+            "open_interest": 61770984.3,
+            "micro_round_trip_cost_pct": 0.1795
+          },
+          "timestamp_columns": {},
+          "sha256": "6e53c4ba691f3e148588e7ac8ca9fc45fdff769bb2e14f22af2981d6ebfcdf97"
+        }
+      ],
+      "fields": {
+        "quote_volume_24h": {
+          "value": 104233983.8897,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "open_interest": {
+          "value": 61770984.3,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "micro_round_trip_cost_pct": {
+          "value": 0.1795,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        }
+      },
+      "timestamp_limitation": "File times precede scan IDs. Both recorded times precede bot start; source was excluded from backtest admission. This does not independently prove archive creation time."
+    },
+    {
+      "strategy_id": "413997572",
+      "candidate_id": "DASHUSDT_20260823_143521_44c5944d",
+      "sources": [
+        {
+          "candidate_id": "DASHUSDT_20260823_143521_44c5944d",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00905_20260823_143521.csv",
+          "mtime": "2026-08-23 13:50:20+00:00",
+          "scan": "2026-08-23 14:35:21+00:00",
+          "bot_start": "2026-08-23 16:05:17+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 117123908.2,
+            "open_interest": 454040.845,
+            "micro_round_trip_cost_pct": 0.1591
+          },
+          "timestamp_columns": {},
+          "sha256": "632efe0c8b1c6dfdecb399a33c64c883e8074887c2f496bf046e0439987f264f"
+        },
+        {
+          "candidate_id": "DASHUSDT_20260823_143521_44c5944d",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00906_20260823_143521.csv",
+          "mtime": "2026-08-23 14:01:54+00:00",
+          "scan": "2026-08-23 14:35:21+00:00",
+          "bot_start": "2026-08-23 16:05:17+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 117123908.2,
+            "open_interest": 454040.845,
+            "micro_round_trip_cost_pct": 0.1591
+          },
+          "timestamp_columns": {},
+          "sha256": "551a4cbbf3638c9d5e41abba2ff611ef695a0c703d70c8ec2d62acba5c457a01"
+        }
+      ],
+      "fields": {
+        "quote_volume_24h": {
+          "value": 117123908.2,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "open_interest": {
+          "value": 454040.845,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "micro_round_trip_cost_pct": {
+          "value": 0.1591,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        }
+      },
+      "timestamp_limitation": "File times precede scan IDs. Both recorded times precede bot start; source was excluded from backtest admission. This does not independently prove archive creation time."
+    },
+    {
+      "strategy_id": "414002663",
+      "candidate_id": "UNIUSDT_20260823_225631_fcda64de",
+      "sources": [
+        {
+          "candidate_id": "UNIUSDT_20260823_225631_fcda64de",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00907_20260823_225631.csv",
+          "mtime": "2026-08-23 21:25:28+00:00",
+          "scan": "2026-08-23 22:56:31+00:00",
+          "bot_start": "2026-08-23 23:29:45+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 210589172.175,
+            "open_interest": 19599456.0,
+            "micro_round_trip_cost_pct": 0.1461
+          },
+          "timestamp_columns": {},
+          "sha256": "ed54e8965aa45fb01f94f7c0f7b15134cd66d49f9ac0f3ba020e5c7079d11ca9"
+        },
+        {
+          "candidate_id": "UNIUSDT_20260823_225631_fcda64de",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00908_20260823_225631.csv",
+          "mtime": "2026-08-23 21:27:18+00:00",
+          "scan": "2026-08-23 22:56:31+00:00",
+          "bot_start": "2026-08-23 23:29:45+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 210589172.175,
+            "open_interest": 19599456.0,
+            "micro_round_trip_cost_pct": 0.1461
+          },
+          "timestamp_columns": {},
+          "sha256": "57c14a7ea72632681686b5ac625a79de07077115ff64e1478ae653673dc5cd40"
+        }
+      ],
+      "fields": {
+        "quote_volume_24h": {
+          "value": 210589172.175,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "open_interest": {
+          "value": 19599456.0,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "micro_round_trip_cost_pct": {
+          "value": 0.1461,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        }
+      },
+      "timestamp_limitation": "File times precede scan IDs. Both recorded times precede bot start; source was excluded from backtest admission. This does not independently prove archive creation time."
+    },
+    {
+      "strategy_id": "414002696",
+      "candidate_id": "STRKUSDT_20260823_225631_9eae2849",
+      "sources": [
+        {
+          "candidate_id": "STRKUSDT_20260823_225631_9eae2849",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00907_20260823_225631.csv",
+          "mtime": "2026-08-23 21:25:28+00:00",
+          "scan": "2026-08-23 22:56:31+00:00",
+          "bot_start": "2026-08-23 23:32:02+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 15309341.874948,
+            "open_interest": 189558092.8,
+            "micro_round_trip_cost_pct": 0.1951
+          },
+          "timestamp_columns": {},
+          "sha256": "ed54e8965aa45fb01f94f7c0f7b15134cd66d49f9ac0f3ba020e5c7079d11ca9"
+        },
+        {
+          "candidate_id": "STRKUSDT_20260823_225631_9eae2849",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00908_20260823_225631.csv",
+          "mtime": "2026-08-23 21:27:18+00:00",
+          "scan": "2026-08-23 22:56:31+00:00",
+          "bot_start": "2026-08-23 23:32:02+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 15309341.874948,
+            "open_interest": 189558092.8,
+            "micro_round_trip_cost_pct": 0.1951
+          },
+          "timestamp_columns": {},
+          "sha256": "57c14a7ea72632681686b5ac625a79de07077115ff64e1478ae653673dc5cd40"
+        }
+      ],
+      "fields": {
+        "quote_volume_24h": {
+          "value": 15309341.874948,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "open_interest": {
+          "value": 189558092.8,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "micro_round_trip_cost_pct": {
+          "value": 0.1951,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        }
+      },
+      "timestamp_limitation": "File times precede scan IDs. Both recorded times precede bot start; source was excluded from backtest admission. This does not independently prove archive creation time."
+    },
+    {
+      "strategy_id": "414002653",
+      "candidate_id": "SPKUSDT_20260823_225631_2fc3caf0",
+      "sources": [
+        {
+          "candidate_id": "SPKUSDT_20260823_225631_2fc3caf0",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00907_20260823_225631.csv",
+          "mtime": "2026-08-23 21:25:28+00:00",
+          "scan": "2026-08-23 22:56:31+00:00",
+          "bot_start": "2026-08-23 23:28:43+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 89120162.20008,
+            "open_interest": 353991304.0,
+            "micro_round_trip_cost_pct": 0.2407
+          },
+          "timestamp_columns": {},
+          "sha256": "ed54e8965aa45fb01f94f7c0f7b15134cd66d49f9ac0f3ba020e5c7079d11ca9"
+        },
+        {
+          "candidate_id": "SPKUSDT_20260823_225631_2fc3caf0",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00908_20260823_225631.csv",
+          "mtime": "2026-08-23 21:27:18+00:00",
+          "scan": "2026-08-23 22:56:31+00:00",
+          "bot_start": "2026-08-23 23:28:43+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 89120162.20008,
+            "open_interest": 353991304.0,
+            "micro_round_trip_cost_pct": 0.2407
+          },
+          "timestamp_columns": {},
+          "sha256": "57c14a7ea72632681686b5ac625a79de07077115ff64e1478ae653673dc5cd40"
+        }
+      ],
+      "fields": {
+        "quote_volume_24h": {
+          "value": 89120162.20008,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "open_interest": {
+          "value": 353991304.0,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "micro_round_trip_cost_pct": {
+          "value": 0.2407,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        }
+      },
+      "timestamp_limitation": "File times precede scan IDs. Both recorded times precede bot start; source was excluded from backtest admission. This does not independently prove archive creation time."
+    },
+    {
+      "strategy_id": "414037265",
+      "candidate_id": "UAIUSDT_20260825_114628_87831b94",
+      "sources": [
+        {
+          "candidate_id": "UAIUSDT_20260825_114628_87831b94",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00913_20260825_114628.csv",
+          "mtime": "2026-08-25 10:42:18+00:00",
+          "scan": "2026-08-25 11:46:28+00:00",
+          "bot_start": "2026-08-25 12:57:08+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 130358565.4219,
+            "open_interest": 26169204.0,
+            "micro_round_trip_cost_pct": 0.1856
+          },
+          "timestamp_columns": {},
+          "sha256": "20f3c7cc7056012310d8e95d5e31a9caa4cefc6f77067666acd8ab42b5a316a3"
+        },
+        {
+          "candidate_id": "UAIUSDT_20260825_114628_87831b94",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00914_20260825_114628.csv",
+          "mtime": "2026-08-25 10:49:50+00:00",
+          "scan": "2026-08-25 11:46:28+00:00",
+          "bot_start": "2026-08-25 12:57:08+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 130358565.4219,
+            "open_interest": 26169204.0,
+            "micro_round_trip_cost_pct": 0.1856
+          },
+          "timestamp_columns": {},
+          "sha256": "49bca1e315df1750d288c5426972c8dcbde5b8a9003bb1684561b1c45c4b1900"
+        }
+      ],
+      "fields": {
+        "quote_volume_24h": {
+          "value": 130358565.4219,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "open_interest": {
+          "value": 26169204.0,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "micro_round_trip_cost_pct": {
+          "value": 0.1856,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        }
+      },
+      "timestamp_limitation": "File times precede scan IDs. Both recorded times precede bot start; source was excluded from backtest admission. This does not independently prove archive creation time."
+    },
+    {
+      "strategy_id": "414037172",
+      "candidate_id": "PROMUSDT_20260825_114628_878e7109",
+      "sources": [
+        {
+          "candidate_id": "PROMUSDT_20260825_114628_878e7109",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00913_20260825_114628.csv",
+          "mtime": "2026-08-25 10:42:18+00:00",
+          "scan": "2026-08-25 11:46:28+00:00",
+          "bot_start": "2026-08-25 12:50:20+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 413842425.3185,
+            "open_interest": 3754235.0,
+            "micro_round_trip_cost_pct": 0.1684
+          },
+          "timestamp_columns": {},
+          "sha256": "20f3c7cc7056012310d8e95d5e31a9caa4cefc6f77067666acd8ab42b5a316a3"
+        },
+        {
+          "candidate_id": "PROMUSDT_20260825_114628_878e7109",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00914_20260825_114628.csv",
+          "mtime": "2026-08-25 10:49:50+00:00",
+          "scan": "2026-08-25 11:46:28+00:00",
+          "bot_start": "2026-08-25 12:50:20+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 413842425.3185,
+            "open_interest": 3754235.0,
+            "micro_round_trip_cost_pct": 0.1684
+          },
+          "timestamp_columns": {},
+          "sha256": "49bca1e315df1750d288c5426972c8dcbde5b8a9003bb1684561b1c45c4b1900"
+        }
+      ],
+      "fields": {
+        "quote_volume_24h": {
+          "value": 413842425.3185,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "open_interest": {
+          "value": 3754235.0,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "micro_round_trip_cost_pct": {
+          "value": 0.1684,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        }
+      },
+      "timestamp_limitation": "File times precede scan IDs. Both recorded times precede bot start; source was excluded from backtest admission. This does not independently prove archive creation time."
+    },
+    {
+      "strategy_id": "414037188",
+      "candidate_id": "STXUSDT_20260825_114628_b7f8cd73",
+      "sources": [
+        {
+          "candidate_id": "STXUSDT_20260825_114628_b7f8cd73",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00913_20260825_114628.csv",
+          "mtime": "2026-08-25 10:42:18+00:00",
+          "scan": "2026-08-25 11:46:28+00:00",
+          "bot_start": "2026-08-25 12:51:10+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 94520806.2969,
+            "open_interest": 39235173.0,
+            "micro_round_trip_cost_pct": 0.2142
+          },
+          "timestamp_columns": {},
+          "sha256": "20f3c7cc7056012310d8e95d5e31a9caa4cefc6f77067666acd8ab42b5a316a3"
+        },
+        {
+          "candidate_id": "STXUSDT_20260825_114628_b7f8cd73",
+          "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00914_20260825_114628.csv",
+          "mtime": "2026-08-25 10:49:50+00:00",
+          "scan": "2026-08-25 11:46:28+00:00",
+          "bot_start": "2026-08-25 12:51:10+00:00",
+          "scan_and_recorded_file_time_before_bot_start": true,
+          "file_time_before_scan": true,
+          "values": {
+            "quote_volume_24h": 94520806.2969,
+            "open_interest": 39235173.0,
+            "micro_round_trip_cost_pct": 0.2142
+          },
+          "timestamp_columns": {},
+          "sha256": "49bca1e315df1750d288c5426972c8dcbde5b8a9003bb1684561b1c45c4b1900"
+        }
+      ],
+      "fields": {
+        "quote_volume_24h": {
+          "value": 94520806.2969,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "open_interest": {
+          "value": 39235173.0,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        },
+        "micro_round_trip_cost_pct": {
+          "value": 0.2142,
+          "method": "Recorded exact-candidate snapshot; copies agree"
+        }
+      },
+      "timestamp_limitation": "File times precede scan IDs. Both recorded times precede bot start; source was excluded from backtest admission. This does not independently prove archive creation time."
+    }
+  ],
+  "active_hmm": "rolling_180d_20260915_210940"
+}

@@ -1,0 +1,51 @@
+{
+  "active_hmm": {
+    "artifact_version": "rolling_180d_20260915_210940",
+    "feature_semantics_version": "agg_regime_probs_v20260320",
+    "metadata_path": "D:\\Neutral Grid v5.7.0\\artifacts\\hmm\\rolling_180d_20260915_210940\\metadata.json",
+    "metadata_sha256": "ac056fead17f95499dd96c3f1b66db6b1d32c1fbdc163df17cdb30e7a604c938",
+    "pipeline_version": "5.7.0",
+    "trained_at_utc": "2026-09-15T21:40:39.552889+00:00"
+  },
+  "allow_active_feature_imputation": true,
+  "eligible_rows": 1211,
+  "feature_cutoff_contract": "candidate_id_scan_time",
+  "full_pool": true,
+  "generation_mode": "fresh_full_pool",
+  "input_rows": 1211,
+  "missing_active_features": {
+    "ou_halflife": 1
+  },
+  "pool_contract_version": "active_hmm_authoritative_meta_pool_v1",
+  "pool_file": "training_data_20260915.csv",
+  "pool_sha256": "51d857431a3e962a317aed10b8fbbbaf064e104cdf93fae96850030dac154156",
+  "run_manifest_path": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\fresh_production_pool\\backtest_run_manifest.json",
+  "run_manifest_sha256": "07f64ab093a121486c9ba487d4362ec423ce5837fc0789f401b7747e58613021",
+  "selected_features": [
+    "ev_score",
+    "adx_1h",
+    "adx_15m",
+    "adx_5m",
+    "atr_pct_15m",
+    "ou_halflife",
+    "rsi_15m",
+    "ema_slope_1h",
+    "ema_crosses_5m",
+    "vwap_crosses_5m",
+    "hurst_exponent",
+    "range_size_pct",
+    "bb_width",
+    "grid_spacing_pct",
+    "profit_per_grid_pct",
+    "num_grids",
+    "quote_volume_24h",
+    "open_interest",
+    "micro_round_trip_cost_pct",
+    "funding_rate"
+  ],
+  "source_path": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\fresh_meta_validated_backfilled.csv",
+  "source_sha256": "dce1ad3e986f8f3d25a5c30ee7f58b6ba6d1d9c07f27c968c87000b3830af76b",
+  "unique_eligible_candidate_ids": 1211,
+  "window_end_utc": "2026-09-15T23:59:59.999999+00:00",
+  "window_start_utc": "2026-02-18T00:00:00+00:00"
+}

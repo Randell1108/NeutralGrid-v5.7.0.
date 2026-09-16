@@ -1,0 +1,36 @@
+{
+  "unique_training_rows": 1211,
+  "valid_auxiliary_cpcv_folds": 6,
+  "validation_prediction_occurrences": 2523,
+  "unique_validation_candidates": 841,
+  "occurrences_per_candidate_distribution": {
+    "3": 841
+  },
+  "folds": [
+    {
+      "train_rows": 54,
+      "test_rows": 518
+    },
+    {
+      "train_rows": 54,
+      "test_rows": 455
+    },
+    {
+      "train_rows": 54,
+      "test_rows": 376
+    },
+    {
+      "train_rows": 228,
+      "test_rows": 465
+    },
+    {
+      "train_rows": 228,
+      "test_rows": 386
+    },
+    {
+      "train_rows": 289,
+      "test_rows": 323
+    }
+  ],
+  "scope": "Auxiliary CPCV/calibrator fitting observations, not independent repeated samples or the separate promotion OOF predictions"
+}

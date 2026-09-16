@@ -1,0 +1,48 @@
+{
+  "status": "PASS",
+  "checked_at_utc": "2026-09-15T22:16:42.335422+00:00",
+  "workbook_publication_before_meta_training": true,
+  "workbook_published_at_utc": "2026-09-15 22:05:53.381241+00:00",
+  "meta_trained_at_utc": "2026-09-15 22:08:09.790883+00:00",
+  "canonical_workbook_unchanged_after_review": true,
+  "all_row_hmm_lineage": {
+    "General": 423,
+    "Meta Features": 423
+  },
+  "original_general_outcomes_and_profile_inputs_preserved": true,
+  "protected_files_unchanged": [
+    "ERRORS_LOG.md",
+    "data/profile/pattern_profile.json",
+    "_bot_data_extractor_core.py",
+    "new_bot_data_extractor.py",
+    "scripts/collect_diff_depth.py",
+    "scripts/collect_private_grid_telemetry.py",
+    "src/neutralgrid/api/binance_client.py",
+    "src/neutralgrid/core/config.py",
+    "tests/unit/test_diff_depth.py",
+    "tests/unit/test_new_bot_data_extractor.py",
+    "tests/unit/test_private_grid_telemetry.py",
+    "scripts/collect_market_streams.py",
+    "scripts/collect_private_user_stream.py",
+    "scripts/start_binance_websocket_services.ps1",
+    "scripts/stop_binance_websocket_services.ps1",
+    "scripts/supervise_binance_websocket_services.py",
+    "scripts/verify_binance_websocket_services.py",
+    "src/neutralgrid/data/market_stream.py",
+    "src/neutralgrid/data/private_user_stream.py",
+    "tests/unit/test_binance_user_data_stream.py",
+    "tests/unit/test_binance_websocket_supervisor.py",
+    "tests/unit/test_market_stream.py",
+    "tests/unit/test_private_user_collector.py",
+    "tests/unit/test_private_user_stream.py",
+    "tests/unit/test_verify_binance_websocket_services.py"
+  ],
+  "report_scripts_parse": true,
+  "utility_all_required_and_optional_features_complete": true,
+  "remaining_runtime_blockers": [
+    "No promoted profile model",
+    "No promoted utility calibrator",
+    "No independent new-model conformal calibration cohort"
+  ],
+  "production_source_or_gate_changes": false
+}

@@ -1,0 +1,54 @@
+{
+  "checked_at_utc": "2026-09-15T21:45:21.955822+00:00",
+  "active_hmm": "rolling_180d_20260915_210940",
+  "rows": 423,
+  "valid_rows": 423,
+  "invalid_rows": [],
+  "versions": {
+    "rolling_180d_20260915_210940": 423
+  },
+  "status": "PASS",
+  "workbook_updated": true,
+  "changed_columns": {
+    "General": [
+      "range_prob",
+      "trend_prob",
+      "persistence_prob",
+      "hmm_trained_at_utc",
+      "hmm_artifact_version",
+      "hmm_pipeline_version",
+      "hmm_feature_semantics_version",
+      "hmm_feature_source",
+      "hmm_replay_scope",
+      "hmm_feature_cutoff_utc",
+      "feature_cutoff_utc",
+      "hmm_calibration_status",
+      "utility_score",
+      "ev_score",
+      "regime_conf"
+    ],
+    "Meta Features": [
+      "range_prob",
+      "trend_prob",
+      "persistence_prob",
+      "hmm_trained_at_utc",
+      "hmm_artifact_version",
+      "hmm_pipeline_version",
+      "hmm_feature_semantics_version",
+      "hmm_feature_source",
+      "hmm_replay_scope",
+      "hmm_feature_cutoff_utc",
+      "feature_cutoff_utc",
+      "hmm_calibration_status",
+      "utility_score",
+      "ev_score",
+      "regime_conf",
+      "backfill_status"
+    ]
+  },
+  "appended_meta_rows": 57,
+  "new_meta_feature_provenance": "Recorded General fields plus canonical grid geometry derivation; optional unavailable features remain missing",
+  "outcome_and_unrelated_cells_preserved": true,
+  "canonical_sha256_after": "e8448192fec1af594f4098d12ba89aca6e295acfa6e75defa2a3a9a7ec4fb978",
+  "canonical_sha256_before": "c8d1c67ae1f2a82be016764e6b77d21ed25741165f8ca799a413f599fbbf77bd"
+}

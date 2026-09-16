@@ -1,0 +1,14 @@
+{
+  "scope": "Pre-activation inventory; final runtime validation supersedes this snapshot",
+  "paths": {
+    "artifacts/utility/current.json": false,
+    "data/profile/current.json": false,
+    "data/profile/pattern_profile.json": true,
+    "data/profile/profile_model.json": false,
+    "data/cache/conformal_quantile.json": false
+  },
+  "temperature_policy": "Identity T=1, self-supervised calibration disabled",
+  "mi_policy": "Backtest entry point explicitly skips generation until source-column and raw-MI provenance exist",
+  "profile_cli": "Stops before mutation because bootstrap pair is incomplete; core canonical training and evaluation functions used in isolated report directory",
+  "conformal_requirement": "At least 20 independent calibration samples; final-cohort availability reviewed before activation"
+}

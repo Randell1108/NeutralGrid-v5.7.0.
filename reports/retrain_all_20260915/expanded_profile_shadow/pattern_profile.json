@@ -1,0 +1,52 @@
+{
+  "features": [
+    "parkinson_vol_ratio_4h_24h_pre",
+    "variance_ratio_1m_15m_pre_2h",
+    "funding_carry_expected_next_7h",
+    "liquidity_stability_z_1h"
+  ],
+  "means": {
+    "funding_carry_expected_next_7h": -0.004747612842304059,
+    "liquidity_stability_z_1h": -0.004911905088126609,
+    "parkinson_vol_ratio_4h_24h_pre": 0.9472674772162373,
+    "variance_ratio_1m_15m_pre_2h": 0.7417180797691266
+  },
+  "q10": {
+    "funding_carry_expected_next_7h": -0.011979199999999999,
+    "liquidity_stability_z_1h": -1.0218697569058812,
+    "parkinson_vol_ratio_4h_24h_pre": 0.6193802102612908,
+    "variance_ratio_1m_15m_pre_2h": 0.38795420739399733
+  },
+  "q90": {
+    "funding_carry_expected_next_7h": 0.01,
+    "liquidity_stability_z_1h": 1.3391425562781356,
+    "parkinson_vol_ratio_4h_24h_pre": 1.3358091289283522,
+    "variance_ratio_1m_15m_pre_2h": 1.1460467018363116
+  },
+  "selection_summary": {
+    "artifact_role": "shadow_full_refit",
+    "family": "gaussian_lda_v1",
+    "fresh_outcome_rows": 983,
+    "hmm_features_used": false,
+    "label_counts": {
+      "0": 2362,
+      "1": 2118
+    },
+    "new_candidate_ids": 371,
+    "promotion_blockers": [
+      "Target differs from canonical completed-bot profile",
+      "No verified production incumbent comparison or bot-disjoint, event-complete promotion evidence"
+    ],
+    "retained_previous_outcome_rows": 3497,
+    "shrinkage": 0.9,
+    "source_sha256": "59e3c5aff4977b6020b1fa767a4a4a3a5c4f1cca1958fd01c37e453a2e793541",
+    "target_contract": "fast_winner_time_to_3pct_le_7h",
+    "training_rows": 4480
+  },
+  "stds": {
+    "funding_carry_expected_next_7h": 0.062479867278515795,
+    "liquidity_stability_z_1h": 1.288034560308339,
+    "parkinson_vol_ratio_4h_24h_pre": 0.29540097698443823,
+    "variance_ratio_1m_15m_pre_2h": 0.32440061662070846
+  }
+}

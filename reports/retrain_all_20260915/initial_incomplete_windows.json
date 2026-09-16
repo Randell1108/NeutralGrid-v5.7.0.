@@ -1,0 +1,169 @@
+{
+  "initial_successful_rows": 1188,
+  "initial_selected_rows": 1211,
+  "skipped_rows": [
+    {
+      "candidate_id": "MUBARAKUSDT_20260915_134436_bfc71db6",
+      "symbol": "MUBARAKUSDT",
+      "bars": 394,
+      "requested_start_ms": 1789482726839,
+      "complete_after_utc": "2026-09-15 21:33:06.839000+00:00"
+    },
+    {
+      "candidate_id": "IOSTUSDT_20260915_134436_4b2fc430",
+      "symbol": "IOSTUSDT",
+      "bars": 394,
+      "requested_start_ms": 1789482726839,
+      "complete_after_utc": "2026-09-15 21:33:06.839000+00:00"
+    },
+    {
+      "candidate_id": "ONGUSDT_20260915_134436_7d59af27",
+      "symbol": "ONGUSDT",
+      "bars": 394,
+      "requested_start_ms": 1789482726839,
+      "complete_after_utc": "2026-09-15 21:33:06.839000+00:00"
+    },
+    {
+      "candidate_id": "GWEIUSDT_20260915_134436_bbc5e809",
+      "symbol": "GWEIUSDT",
+      "bars": 394,
+      "requested_start_ms": 1789482726839,
+      "complete_after_utc": "2026-09-15 21:33:06.839000+00:00"
+    },
+    {
+      "candidate_id": "ETHFIUSDT_20260915_134436_7714ef3d",
+      "symbol": "ETHFIUSDT",
+      "bars": 394,
+      "requested_start_ms": 1789482726839,
+      "complete_after_utc": "2026-09-15 21:33:06.839000+00:00"
+    },
+    {
+      "candidate_id": "GASUSDT_20260915_134436_648ba40e",
+      "symbol": "GASUSDT",
+      "bars": 394,
+      "requested_start_ms": 1789482726839,
+      "complete_after_utc": "2026-09-15 21:33:06.839000+00:00"
+    },
+    {
+      "candidate_id": "EDENUSDT_20260915_134436_ea5d069a",
+      "symbol": "EDENUSDT",
+      "bars": 394,
+      "requested_start_ms": 1789482726839,
+      "complete_after_utc": "2026-09-15 21:33:06.839000+00:00"
+    },
+    {
+      "candidate_id": "DASHUSDT_20260915_134436_43b0d80e",
+      "symbol": "DASHUSDT",
+      "bars": 395,
+      "requested_start_ms": 1789482726839,
+      "complete_after_utc": "2026-09-15 21:33:06.839000+00:00"
+    },
+    {
+      "candidate_id": "LDOUSDT_20260915_134436_5bda3508",
+      "symbol": "LDOUSDT",
+      "bars": 396,
+      "requested_start_ms": 1789482726839,
+      "complete_after_utc": "2026-09-15 21:33:06.839000+00:00"
+    },
+    {
+      "candidate_id": "WLDUSDT_20260915_134436_ed890446",
+      "symbol": "WLDUSDT",
+      "bars": 396,
+      "requested_start_ms": 1789482726839,
+      "complete_after_utc": "2026-09-15 21:33:06.839000+00:00"
+    },
+    {
+      "candidate_id": "SANDUSDT_20260915_134436_21f8aa9e",
+      "symbol": "SANDUSDT",
+      "bars": 396,
+      "requested_start_ms": 1789482726839,
+      "complete_after_utc": "2026-09-15 21:33:06.839000+00:00"
+    },
+    {
+      "candidate_id": "PUMPUSDT_20260915_134436_7f154ea6",
+      "symbol": "PUMPUSDT",
+      "bars": 396,
+      "requested_start_ms": 1789482726839,
+      "complete_after_utc": "2026-09-15 21:33:06.839000+00:00"
+    },
+    {
+      "candidate_id": "OPUSDT_20260915_134436_54687fb9",
+      "symbol": "OPUSDT",
+      "bars": 397,
+      "requested_start_ms": 1789482726839,
+      "complete_after_utc": "2026-09-15 21:33:06.839000+00:00"
+    },
+    {
+      "candidate_id": "KASUSDT_20260915_134436_ccea2543",
+      "symbol": "KASUSDT",
+      "bars": 397,
+      "requested_start_ms": 1789482726839,
+      "complete_after_utc": "2026-09-15 21:33:06.839000+00:00"
+    },
+    {
+      "candidate_id": "BILLUSDT_20260915_134436_360af6a1",
+      "symbol": "BILLUSDT",
+      "bars": 397,
+      "requested_start_ms": 1789482726839,
+      "complete_after_utc": "2026-09-15 21:33:06.839000+00:00"
+    },
+    {
+      "candidate_id": "ARUSDT_20260915_134436_e7758656",
+      "symbol": "ARUSDT",
+      "bars": 397,
+      "requested_start_ms": 1789482726839,
+      "complete_after_utc": "2026-09-15 21:33:06.839000+00:00"
+    },
+    {
+      "candidate_id": "MIRAUSDT_20260915_134436_a110488f",
+      "symbol": "MIRAUSDT",
+      "bars": 398,
+      "requested_start_ms": 1789482726839,
+      "complete_after_utc": "2026-09-15 21:33:06.839000+00:00"
+    },
+    {
+      "candidate_id": "METUSDT_20260915_134436_e0676ee4",
+      "symbol": "METUSDT",
+      "bars": 398,
+      "requested_start_ms": 1789482726839,
+      "complete_after_utc": "2026-09-15 21:33:06.839000+00:00"
+    },
+    {
+      "candidate_id": "PENGUUSDT_20260915_134436_757d349a",
+      "symbol": "PENGUUSDT",
+      "bars": 398,
+      "requested_start_ms": 1789482726839,
+      "complete_after_utc": "2026-09-15 21:33:06.839000+00:00"
+    },
+    {
+      "candidate_id": "ZILUSDT_20260915_134436_1ef20832",
+      "symbol": "ZILUSDT",
+      "bars": 399,
+      "requested_start_ms": 1789482726839,
+      "complete_after_utc": "2026-09-15 21:33:06.839000+00:00"
+    },
+    {
+      "candidate_id": "SUIUSDT_20260915_134436_ab9a929f",
+      "symbol": "SUIUSDT",
+      "bars": 399,
+      "requested_start_ms": 1789482726839,
+      "complete_after_utc": "2026-09-15 21:33:06.839000+00:00"
+    },
+    {
+      "candidate_id": "KNCUSDT_20260915_134436_5744d11c",
+      "symbol": "KNCUSDT",
+      "bars": 400,
+      "requested_start_ms": 1789482726839,
+      "complete_after_utc": "2026-09-15 21:33:06.839000+00:00"
+    },
+    {
+      "candidate_id": "VIRTUALUSDT_20260915_134436_767a3f75",
+      "symbol": "VIRTUALUSDT",
+      "bars": 400,
+      "requested_start_ms": 1789482726839,
+      "complete_after_utc": "2026-09-15 21:33:06.839000+00:00"
+    }
+  ],
+  "rerun_after_utc": "2026-09-15 21:33:06.839000+00:00",
+  "reason": "Incomplete current-day outcome windows, not irrecoverable data gaps"
+}

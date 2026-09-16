@@ -1,0 +1,39 @@
+{
+  "source": "D:\\Neutral Grid v5.7.0\\data\\new_expired_bots.xlsx",
+  "source_sha256": "c8d1c67ae1f2a82be016764e6b77d21ed25741165f8ca799a413f599fbbf77bd",
+  "rows": 423,
+  "new_rows": 57,
+  "new_row_geometry": "num_grids from recorded grids_count; profit_per_grid_pct derived by canonical TrainingDataBackfiller from recorded bounds, count and mode",
+  "new_required_missing": {
+    "num_grids": 0,
+    "range_prob": 0,
+    "trend_prob": 0,
+    "profit_per_grid_pct": 0,
+    "range_size_pct": 0
+  },
+  "outcomes_and_cutoff": "General",
+  "utility_features": "Meta Features for existing IDs; recorded General plus canonical geometry derivation for new IDs",
+  "feature_columns_copied": [
+    "ev_score",
+    "feature_cutoff_utc",
+    "hmm_artifact_version",
+    "hmm_calibration_status",
+    "hmm_feature_cutoff_utc",
+    "hmm_feature_semantics_version",
+    "hmm_feature_source",
+    "hmm_pipeline_version",
+    "hmm_replay_scope",
+    "hmm_trained_at_utc",
+    "hurst_exponent",
+    "num_grids",
+    "persistence_prob",
+    "profit_per_grid_pct",
+    "range_prob",
+    "range_size_pct",
+    "regime_conf",
+    "survival_prob",
+    "trend_prob"
+  ],
+  "backfill_status": "Derived from the result of the forthcoming pinned HMM replay",
+  "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260915\\utility_input.xlsx"
+}

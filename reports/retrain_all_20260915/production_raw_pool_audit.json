@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "selected_rows": 1211,
+  "successful_rows": 1211,
+  "recovered_incomplete_windows": 23,
+  "all_ids_unique": true,
+  "all_scan_times_no_later_than_outcome_start": true,
+  "earliest_scan_utc": "2026-02-18 19:24:30+00:00",
+  "latest_scan_utc": "2026-09-15 13:44:36+00:00",
+  "latest_outcome_start_utc": "2026-09-15 14:32:06.839234+00:00",
+  "fastwin_positive_rows": 526,
+  "repeated_initial_rows": 1188,
+  "repeated_label_changes": 0,
+  "repeated_net_pnl_changes": 0,
+  "source_sha256": "34cd0298edd49051995954dfc82b0bc8e8b5448aea050c8b74b144a8e06eac6c"
+}

@@ -1,0 +1,572 @@
+[
+  {
+    "candidate_id": "HEMIUSDT_20260814_123332_65a3c1de",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00891_20260814_123332.csv",
+    "mtime": "2026-08-14 11:26:44+00:00",
+    "scan": "2026-08-14 12:33:32+00:00",
+    "bot_start": "2026-08-19 17:24:00+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 2564898.72196,
+      "open_interest": 693404634.0,
+      "micro_round_trip_cost_pct": null
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "HEMIUSDT_20260814_123332_65a3c1de",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00892_20260814_123332.csv",
+    "mtime": "2026-08-14 11:33:24+00:00",
+    "scan": "2026-08-14 12:33:32+00:00",
+    "bot_start": "2026-08-19 17:24:00+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 2564898.72196,
+      "open_interest": 693404634.0,
+      "micro_round_trip_cost_pct": null
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "BTWUSDT_20260814_214024_65a3c1de",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00893_20260814_214024.csv",
+    "mtime": "2026-08-14 20:07:02+00:00",
+    "scan": "2026-08-14 21:40:24+00:00",
+    "bot_start": "2026-08-20 12:44:12+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 101819912.94093,
+      "open_interest": 246863449.0,
+      "micro_round_trip_cost_pct": null
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "BTWUSDT_20260814_214024_65a3c1de",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00894_20260814_214024.csv",
+    "mtime": "2026-08-14 20:45:48+00:00",
+    "scan": "2026-08-14 21:40:24+00:00",
+    "bot_start": "2026-08-20 12:44:12+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 101819912.94093,
+      "open_interest": 246863449.0,
+      "micro_round_trip_cost_pct": null
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "VIRTUALUSDT_20260820_155049_c9e745c7",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00895_20260820_155049.csv",
+    "mtime": "2026-08-20 14:25:42+00:00",
+    "scan": "2026-08-20 15:50:49+00:00",
+    "bot_start": "2026-08-20 17:44:02+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 36651360.54181,
+      "open_interest": 23058143.2,
+      "micro_round_trip_cost_pct": 0.1149
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "HYPEUSDT_20260820_155049_9e836dc4",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00895_20260820_155049.csv",
+    "mtime": "2026-08-20 14:25:42+00:00",
+    "scan": "2026-08-20 15:50:49+00:00",
+    "bot_start": "2026-08-20 17:46:12+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 2554505372.36133,
+      "open_interest": 5404972.27,
+      "micro_round_trip_cost_pct": 0.0633
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "METUSDT_20260820_155049_70a20f9b",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00895_20260820_155049.csv",
+    "mtime": "2026-08-20 14:25:42+00:00",
+    "scan": "2026-08-20 15:50:49+00:00",
+    "bot_start": "2026-08-20 17:42:37+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 41843378.9999,
+      "open_interest": 21369290.0,
+      "micro_round_trip_cost_pct": 0.2451
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "AVAAIUSDT_20260820_155049_65a3c1de",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00895_20260820_155049.csv",
+    "mtime": "2026-08-20 14:25:42+00:00",
+    "scan": "2026-08-20 15:50:49+00:00",
+    "bot_start": "2026-08-20 17:47:42+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 41754441.299516,
+      "open_interest": 524164051.0,
+      "micro_round_trip_cost_pct": null
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "VIRTUALUSDT_20260820_155049_c9e745c7",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00896_20260820_155049.csv",
+    "mtime": "2026-08-20 15:33:48+00:00",
+    "scan": "2026-08-20 15:50:49+00:00",
+    "bot_start": "2026-08-20 17:44:02+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 36651360.54181,
+      "open_interest": 23058143.2,
+      "micro_round_trip_cost_pct": 0.1149
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "METUSDT_20260820_155049_70a20f9b",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00896_20260820_155049.csv",
+    "mtime": "2026-08-20 15:33:48+00:00",
+    "scan": "2026-08-20 15:50:49+00:00",
+    "bot_start": "2026-08-20 17:42:37+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 41843378.9999,
+      "open_interest": 21369290.0,
+      "micro_round_trip_cost_pct": 0.2451
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "HYPEUSDT_20260820_155049_9e836dc4",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00896_20260820_155049.csv",
+    "mtime": "2026-08-20 15:33:48+00:00",
+    "scan": "2026-08-20 15:50:49+00:00",
+    "bot_start": "2026-08-20 17:46:12+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 2554505372.36133,
+      "open_interest": 5404972.27,
+      "micro_round_trip_cost_pct": 0.0633
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "AVAAIUSDT_20260820_155049_65a3c1de",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00896_20260820_155049.csv",
+    "mtime": "2026-08-20 15:33:48+00:00",
+    "scan": "2026-08-20 15:50:49+00:00",
+    "bot_start": "2026-08-20 17:47:42+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 41754441.299516,
+      "open_interest": 524164051.0,
+      "micro_round_trip_cost_pct": null
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "ORDIUSDT_20260821_141031_206e2795",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00897_20260821_141031.csv",
+    "mtime": "2026-08-21 12:27:38+00:00",
+    "scan": "2026-08-21 14:10:31+00:00",
+    "bot_start": "2026-08-21 15:22:57+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 49150028.984,
+      "open_interest": 2187662.8,
+      "micro_round_trip_cost_pct": 0.1488
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "GRASSUSDT_20260821_141031_37afded1",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00897_20260821_141031.csv",
+    "mtime": "2026-08-21 12:27:38+00:00",
+    "scan": "2026-08-21 14:10:31+00:00",
+    "bot_start": "2026-08-21 15:16:13+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 12397382.32059,
+      "open_interest": 20429734.6,
+      "micro_round_trip_cost_pct": 0.1785
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "NEARUSDT_20260821_141031_6bb22c4a",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00897_20260821_141031.csv",
+    "mtime": "2026-08-21 12:27:38+00:00",
+    "scan": "2026-08-21 14:10:31+00:00",
+    "bot_start": "2026-08-21 15:23:47+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 247349932.955,
+      "open_interest": 42474387.0,
+      "micro_round_trip_cost_pct": 0.251
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "BIOUSDT_20260821_141031_cdee99ef",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00897_20260821_141031.csv",
+    "mtime": "2026-08-21 12:27:38+00:00",
+    "scan": "2026-08-21 14:10:31+00:00",
+    "bot_start": "2026-08-21 15:15:08+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 19800101.33654,
+      "open_interest": 276939725.0,
+      "micro_round_trip_cost_pct": 0.1848
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "BIOUSDT_20260821_141031_cdee99ef",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00898_20260821_141031.csv",
+    "mtime": "2026-08-21 13:24:16+00:00",
+    "scan": "2026-08-21 14:10:31+00:00",
+    "bot_start": "2026-08-21 15:15:08+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 19800101.33654,
+      "open_interest": 276939725.0,
+      "micro_round_trip_cost_pct": 0.1848
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "GRASSUSDT_20260821_141031_37afded1",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00898_20260821_141031.csv",
+    "mtime": "2026-08-21 13:24:16+00:00",
+    "scan": "2026-08-21 14:10:31+00:00",
+    "bot_start": "2026-08-21 15:16:13+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 12397382.32059,
+      "open_interest": 20429734.6,
+      "micro_round_trip_cost_pct": 0.1785
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "NEARUSDT_20260821_141031_6bb22c4a",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00898_20260821_141031.csv",
+    "mtime": "2026-08-21 13:24:16+00:00",
+    "scan": "2026-08-21 14:10:31+00:00",
+    "bot_start": "2026-08-21 15:23:47+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 247349932.955,
+      "open_interest": 42474387.0,
+      "micro_round_trip_cost_pct": 0.251
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "ORDIUSDT_20260821_141031_206e2795",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00898_20260821_141031.csv",
+    "mtime": "2026-08-21 13:24:16+00:00",
+    "scan": "2026-08-21 14:10:31+00:00",
+    "bot_start": "2026-08-21 15:22:57+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 49150028.984,
+      "open_interest": 2187662.8,
+      "micro_round_trip_cost_pct": 0.1488
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "CRVUSDT_20260822_121311_dc398709",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00901_20260822_121311.csv",
+    "mtime": "2026-08-22 10:33:02+00:00",
+    "scan": "2026-08-22 12:13:11+00:00",
+    "bot_start": "2026-08-22 13:04:45+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 104233983.8897,
+      "open_interest": 61770984.3,
+      "micro_round_trip_cost_pct": 0.1795
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "MONUSDT_20260822_121311_7aefa36b",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00901_20260822_121311.csv",
+    "mtime": "2026-08-22 10:33:02+00:00",
+    "scan": "2026-08-22 12:13:11+00:00",
+    "bot_start": "2026-08-22 13:04:00+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 39581840.15611,
+      "open_interest": 991583548.0,
+      "micro_round_trip_cost_pct": 0.21
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "MONUSDT_20260822_121311_7aefa36b",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00902_20260822_121311.csv",
+    "mtime": "2026-08-22 11:03:24+00:00",
+    "scan": "2026-08-22 12:13:11+00:00",
+    "bot_start": "2026-08-22 13:04:00+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 39581840.15611,
+      "open_interest": 991583548.0,
+      "micro_round_trip_cost_pct": 0.21
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "CRVUSDT_20260822_121311_dc398709",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00902_20260822_121311.csv",
+    "mtime": "2026-08-22 11:03:24+00:00",
+    "scan": "2026-08-22 12:13:11+00:00",
+    "bot_start": "2026-08-22 13:04:45+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 104233983.8897,
+      "open_interest": 61770984.3,
+      "micro_round_trip_cost_pct": 0.1795
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "DASHUSDT_20260823_143521_44c5944d",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00905_20260823_143521.csv",
+    "mtime": "2026-08-23 13:50:20+00:00",
+    "scan": "2026-08-23 14:35:21+00:00",
+    "bot_start": "2026-08-23 16:05:17+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 117123908.2,
+      "open_interest": 454040.845,
+      "micro_round_trip_cost_pct": 0.1591
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "DASHUSDT_20260823_143521_44c5944d",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00906_20260823_143521.csv",
+    "mtime": "2026-08-23 14:01:54+00:00",
+    "scan": "2026-08-23 14:35:21+00:00",
+    "bot_start": "2026-08-23 16:05:17+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 117123908.2,
+      "open_interest": 454040.845,
+      "micro_round_trip_cost_pct": 0.1591
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "SPKUSDT_20260823_225631_2fc3caf0",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00907_20260823_225631.csv",
+    "mtime": "2026-08-23 21:25:28+00:00",
+    "scan": "2026-08-23 22:56:31+00:00",
+    "bot_start": "2026-08-23 23:28:43+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 89120162.20008,
+      "open_interest": 353991304.0,
+      "micro_round_trip_cost_pct": 0.2407
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "STRKUSDT_20260823_225631_9eae2849",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00907_20260823_225631.csv",
+    "mtime": "2026-08-23 21:25:28+00:00",
+    "scan": "2026-08-23 22:56:31+00:00",
+    "bot_start": "2026-08-23 23:32:02+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 15309341.874948,
+      "open_interest": 189558092.8,
+      "micro_round_trip_cost_pct": 0.1951
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "UNIUSDT_20260823_225631_fcda64de",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00907_20260823_225631.csv",
+    "mtime": "2026-08-23 21:25:28+00:00",
+    "scan": "2026-08-23 22:56:31+00:00",
+    "bot_start": "2026-08-23 23:29:45+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 210589172.175,
+      "open_interest": 19599456.0,
+      "micro_round_trip_cost_pct": 0.1461
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "UNIUSDT_20260823_225631_fcda64de",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00908_20260823_225631.csv",
+    "mtime": "2026-08-23 21:27:18+00:00",
+    "scan": "2026-08-23 22:56:31+00:00",
+    "bot_start": "2026-08-23 23:29:45+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 210589172.175,
+      "open_interest": 19599456.0,
+      "micro_round_trip_cost_pct": 0.1461
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "STRKUSDT_20260823_225631_9eae2849",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00908_20260823_225631.csv",
+    "mtime": "2026-08-23 21:27:18+00:00",
+    "scan": "2026-08-23 22:56:31+00:00",
+    "bot_start": "2026-08-23 23:32:02+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 15309341.874948,
+      "open_interest": 189558092.8,
+      "micro_round_trip_cost_pct": 0.1951
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "SPKUSDT_20260823_225631_2fc3caf0",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00908_20260823_225631.csv",
+    "mtime": "2026-08-23 21:27:18+00:00",
+    "scan": "2026-08-23 22:56:31+00:00",
+    "bot_start": "2026-08-23 23:28:43+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 89120162.20008,
+      "open_interest": 353991304.0,
+      "micro_round_trip_cost_pct": 0.2407
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "STXUSDT_20260825_114628_b7f8cd73",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00913_20260825_114628.csv",
+    "mtime": "2026-08-25 10:42:18+00:00",
+    "scan": "2026-08-25 11:46:28+00:00",
+    "bot_start": "2026-08-25 12:51:10+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 94520806.2969,
+      "open_interest": 39235173.0,
+      "micro_round_trip_cost_pct": 0.2142
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "PROMUSDT_20260825_114628_878e7109",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00913_20260825_114628.csv",
+    "mtime": "2026-08-25 10:42:18+00:00",
+    "scan": "2026-08-25 11:46:28+00:00",
+    "bot_start": "2026-08-25 12:50:20+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 413842425.3185,
+      "open_interest": 3754235.0,
+      "micro_round_trip_cost_pct": 0.1684
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "UAIUSDT_20260825_114628_87831b94",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00913_20260825_114628.csv",
+    "mtime": "2026-08-25 10:42:18+00:00",
+    "scan": "2026-08-25 11:46:28+00:00",
+    "bot_start": "2026-08-25 12:57:08+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 130358565.4219,
+      "open_interest": 26169204.0,
+      "micro_round_trip_cost_pct": 0.1856
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "PROMUSDT_20260825_114628_878e7109",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00914_20260825_114628.csv",
+    "mtime": "2026-08-25 10:49:50+00:00",
+    "scan": "2026-08-25 11:46:28+00:00",
+    "bot_start": "2026-08-25 12:50:20+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 413842425.3185,
+      "open_interest": 3754235.0,
+      "micro_round_trip_cost_pct": 0.1684
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "STXUSDT_20260825_114628_b7f8cd73",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00914_20260825_114628.csv",
+    "mtime": "2026-08-25 10:49:50+00:00",
+    "scan": "2026-08-25 11:46:28+00:00",
+    "bot_start": "2026-08-25 12:51:10+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 94520806.2969,
+      "open_interest": 39235173.0,
+      "micro_round_trip_cost_pct": 0.2142
+    },
+    "timestamp_columns": {}
+  },
+  {
+    "candidate_id": "UAIUSDT_20260825_114628_87831b94",
+    "path": "reports\\retrain_all_20260915\\_tmp\\scanners\\deployment_ready_00914_20260825_114628.csv",
+    "mtime": "2026-08-25 10:49:50+00:00",
+    "scan": "2026-08-25 11:46:28+00:00",
+    "bot_start": "2026-08-25 12:57:08+00:00",
+    "scan_and_recorded_file_time_before_bot_start": true,
+    "file_time_before_scan": true,
+    "values": {
+      "quote_volume_24h": 130358565.4219,
+      "open_interest": 26169204.0,
+      "micro_round_trip_cost_pct": 0.1856
+    },
+    "timestamp_columns": {}
+  }
+]
