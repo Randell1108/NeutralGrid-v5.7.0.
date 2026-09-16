@@ -2,6 +2,257 @@
 
 ## [unreleased] - Neutral Grid v5.7.0
 
+### REFIT-0915 - HMM rotation, downstream refits and 57-row feature completion
+
+**Date:** 2026-09-15.
+
+Promoted HMM `rolling_180d_20260915_210940` and meta-labeler
+`20260915_220809` through the existing gates. Completed all 20 selected features
+for 57 canonical workbook rows before meta fitting, with archived-input and
+historical-market provenance. The final fresh FASTWIN pool contains 1,211 rows.
+The unchanged calibration routine selected beta OOS calibration; promotion OOF
+AUC is 0.663243 and ECE is 0.028080. Utility and both profile candidates remain
+unpromoted. Temporal-purge fallback and incomparable-champion limitations are
+recorded in the report; these gate passes do not establish improved performance.
+
+**Files modified or produced:**
+- `artifact_manifest.json`
+- `artifacts/hmm/rolling_180d_20260915_210940/model.joblib`
+- `artifacts/hmm/rolling_180d_20260915_210940/metadata.json`
+- `data/new_expired_bots.xlsx`
+- `models/meta_labeler.pkl`
+- `models/meta_labeler/model.joblib`
+- `models/meta_labeler/scaler.joblib`
+- `models/meta_labeler/metadata.json`
+- `models/meta_labeler_promotion_decision.json`
+- `models/meta_labeler_verification.json`
+- `artifacts/utility/utility_20260915_220851_633469.json`
+- `reports/retrain_all_20260915/REPORT.md`
+- `reports/retrain_all_20260915/full_57_completion_audit.json`
+- `reports/retrain_all_20260915/full_57_publication_audit.json`
+- `reports/retrain_all_20260915/profile_candidate/profile_model.json`
+- `reports/retrain_all_20260915/profile_candidate/pattern_profile.json`
+- `reports/retrain_all_20260915/expanded_profile_shadow/profile_model.json`
+- `reports/retrain_all_20260915/expanded_profile_shadow/pattern_profile.json`
+- `CHANGELOG.md`
+
+**Decision rationale / AFML:** Retained the existing purging, label, lineage and
+promotion contracts, with their observed limitations explicitly disclosed.
+No validation methodology or threshold was changed in this operational refit.
+Utility failed G7; canonical profile pooled OOF AUC failed its 0.55 floor.
+
+**Backward compatibility:** No breaking changes. Model artifacts and workbook
+features changed; production source and the 20-feature schema did not.
+
+**Verification:** 2,027 tests passed, two skipped; Pyright zero errors/warnings;
+all-row lineage, 57-row completeness, workbook preservation, exact inference
+serialization parity and protected-file checks passed. See the report and
+cleanup receipt for retained evidence and task-owned temporary-file removal.
+
+### BINANCELIVE-0915 - Fail closed on private acquisition health (2026-09-15)
+
+Extended the established non-mutating Windows PID probe to the dedicated Chrome
+drawer collector and strengthened the Binance WebSocket verifier so a live
+private worker with zero established user-data connections cannot pass service
+verification. This was required after the restarted private stream repeatedly
+received Binance `401 / -2015` while its process and heartbeat remained live.
+The public L2 and market collectors remain observational-only and running; the
+private failure is preserved as an explicit acquisition blocker.
+
+**Files modified or produced:**
+- `scripts/collect_private_grid_telemetry.py`
+- `scripts/verify_binance_websocket_services.py`
+- `tests/unit/test_private_grid_telemetry.py`
+- `tests/unit/test_verify_binance_websocket_services.py`
+- `ERRORS_LOG.md`
+- `outputs/audits/binance_websocket_targets_20260915_012547_lima.csv`
+- `outputs/audits/binance_websocket_targets_20260915_012547_lima_capture.md`
+- `outputs/audits/live_data_restart_20260915_014641_lima.md`
+- `CHANGELOG.md`
+
+**AFML / Hudson & Thames citation:** No model, feature, label, estimator, or
+validation methodology changed. The changes enforce provenance, process
+ownership, and fail-closed data-quality gates before live observations may be
+treated as model/runtime evidence.
+
+**Decision rationale:** A Windows signal API is not an acceptable observational
+liveness probe, and a live retry loop is not proof that its upstream data source
+is connected. Requiring the replicated private run manifests to show at least
+one established connection prevents process liveness from being conflated with
+data availability while preserving the private stream's explicit
+`event_completeness=unknown` boundary. See ERR-115 and ERR-116.
+
+**Backward compatibility:** The drawer collector keeps the same lock interface.
+The live WebSocket verifier is intentionally stricter: callers that previously
+received PASS while the private process was retrying without a connection now
+receive FAIL and must resolve the reported authentication/connection blocker.
+
+**Verification:** The combined focused suites for private drawer telemetry and
+WebSocket verification pass 16 tests. Targeted Pyright with the checkout
+interpreter reports 0 errors, 0 warnings, and 0 information messages. A live
+negative check reproduces the `401 / -2015` state and now yields an explicit
+verifier FAIL, while public and market counter deltas independently prove those
+two collectors are acquiring data.
+
+### INGESTFIX-0914 - Append 57 expired bots with exact trade-time semantics (2026-09-14)
+
+Appended 57 expired neutral-grid bots to the canonical workbook using exact
+candidate IDs recovered from their eligible pre-start deployment snapshots.
+Updated the extractor's accepted canonical schema to the current 69-column
+workbook and corrected timezone-naive Binance export timestamps: plain `Time`
+columns are now interpreted in the configured bot timezone before conversion to
+UTC, while explicit `Time(UTC)` columns remain UTC. Recomputed the affected
+order-linked trade metrics and excursion features, refreshed all canonical HMM
+features against the active artifact, and preserved all five workbook sheets.
+
+**Files modified or produced:**
+- `_bot_data_extractor_core.py`
+- `new_bot_data_extractor.py`
+- `tests/unit/test_new_bot_data_extractor.py`
+- `data/new_expired_bots.xlsx`
+- `outputs/01a0a16d-66e5-7e03-8aad-eb2aa640c959/new_expired_bots.xlsx`
+- `outputs/01a0a16d-66e5-7e03-8aad-eb2aa640c959/trade_metric_repair_report.json`
+- `outputs/01a0a16d-66e5-7e03-8aad-eb2aa640c959/validation_report.json`
+- `CHANGELOG.md`
+
+**AFML / Hudson & Thames citation:** No model, feature definition, label,
+estimator, or validation methodology changed. The correction enforces
+point-in-time event alignment and uniform model-lineage provenance before data
+enters the training backbone.
+
+**Decision rationale:** Treating a timezone-naive local export as UTC shifted
+the fill window by five hours and truncated every newly ingested bot's trade
+metrics. Localizing plain `Time` values to `America/Lima` matches the source UI
+and the bot records; preserving explicit UTC headers avoids changing already
+unambiguous exports. Exact strategy/order joins were used for repair rather than
+symbol-only inference. The missing utility artifact remains fail-closed and is
+already tracked by ERR-105; no utility values were fabricated. The ingestion
+incidents and remaining follow-ups are tracked by ERR-108 through ERR-112.
+
+**Backward compatibility:** Plain Binance `Time` columns now follow the
+configured bot timezone instead of being assumed UTC. Explicit `Time(UTC)`
+inputs are unchanged. The canonical workbook schema and existing rows remain
+compatible, and all auxiliary sheets are preserved.
+
+**Verification:** The focused extractor suite passes (16 tests), including
+regressions for local-time trade and transaction exports and explicit UTC
+headers. All 57 new rows have unique candidate IDs, exact order-linked trade
+metrics, complete training-critical fields, and candidate timestamps no later
+than bot start. The 423-row workbook passes uniform lineage validation against
+`rolling_180d_20260911_131128` with finite range, trend, and persistence
+probabilities. Spreadsheet inspection found zero formula-error tokens. Targeted
+Pyright found no new errors; the pre-existing unresolved optional `PIL` import
+remains at `_bot_data_extractor_core.py:654`.
+
+### BINANCEWS-0914 - Make Windows PID validation non-mutating (2026-09-14)
+
+Replaced the Binance WebSocket supervisor and verifier's Windows
+`os.kill(pid, 0)` liveness probes with read-only `OpenProcess` and
+`GetExitCodeProcess` checks. The former probe terminated the owner supervisor
+during the first live verification attempt, leaving its collectors orphaned.
+The orphaned collectors were stopped through their audit stop markers before
+the corrected single-owner service set was restarted. The supported Windows
+launcher now batches `fsync` every 100 records per append-only file after the
+per-record setting starved the public collector's five-second heartbeat on the
+21-symbol roster; writes still flush immediately and shutdown performs a final
+`fsync`.
+
+**Files modified or produced:**
+- `scripts/supervise_binance_websocket_services.py`
+- `scripts/verify_binance_websocket_services.py`
+- `scripts/start_binance_websocket_services.ps1`
+- `tests/unit/test_binance_websocket_supervisor.py`
+- `tests/unit/test_verify_binance_websocket_services.py`
+- `outputs/audits/binance_websocket_targets_20260914_150004_lima.csv`
+- `outputs/audits/binance_websocket_targets_20260914_150004_lima_capture.md`
+- `CHANGELOG.md`
+
+**AFML / Hudson & Thames citation:** No model, feature, label, estimator, or
+validation methodology changed. This is an operational process-ownership and
+evidence-continuity safety correction.
+
+**Decision rationale:** Windows does not provide POSIX `kill(pid, 0)` semantics
+for a non-mutating existence check. Querying a process handle and reading its
+exit code preserves the fail-closed liveness contract without signaling the
+target process. Access-denied results remain treated as evidence that a PID
+exists, avoiding unsafe duplicate ownership. At full-roster depth rates,
+per-record `fsync` performed synchronous durable commits frequently enough to
+starve audit heartbeats; a bounded 100-record sync interval restores observability
+without disabling append flushes or final durable shutdown.
+
+**Backward compatibility:** No breaking API changes. POSIX PID checks retain
+their existing behavior; Windows callers receive the same boolean interface
+without the process-termination side effect. The Windows launcher's abrupt-crash
+durability window changes from one record to at most 100 records per file.
+
+**Verification:** The two focused supervisor/verifier test files pass,
+including Windows regression coverage that fails if `os.kill` is called. Pyright
+with the checkout interpreter reports 0 errors, 0 warnings, and 0 information
+messages. A measured full-roster run with `FsyncEvery=1` reproduced a stale
+public heartbeat after processing 76,747 wire events. With `FsyncEvery=100`, the
+heartbeat continued advancing with zero sequence gaps and parse errors, and the
+corrected live verifier repeatedly passed all seven checks for the exact
+21-target roster.
+
+### RETRAIN-0911 - Rotate HMM and refit downstream artifacts (2026-09-11)
+
+Retrained and promoted HMM `rolling_180d_20260911_131128` on 858,000
+observations from 50 symbols, then promoted the unchanged 20-feature,
+sigmoid-calibrated meta-labeler `20260911_145206` on all 840 eligible distinct
+FASTWIN rows from the finalized fresh production pool. Refreshed HMM fields
+in all 366 canonical workbook rows at their bot-start cutoff, preserving
+outcomes and unrelated data. Fitted the utility candidate on 222 eligible bots
+and retained two unpromoted profile pairs: 195 canonical labeled bots and
+4,109 distinct candidates in the expanded shadow pool.
+
+**Files modified or produced (primary artifacts):**
+- `artifact_manifest.json`
+- `artifacts/hmm/rolling_180d_20260911_131128/model.joblib`
+- `artifacts/hmm/rolling_180d_20260911_131128/scaler.joblib`
+- `artifacts/hmm/rolling_180d_20260911_131128/state_means.npy`
+- `artifacts/hmm/rolling_180d_20260911_131128/feature_schema.json`
+- `artifacts/hmm/rolling_180d_20260911_131128/metadata.json`
+- `artifacts/hmm/rolling_180d_20260911_131128/eval.json`
+- `artifacts/hmm/rolling_180d_20260911_131128/temperature_scaler.json`
+- `data/new_expired_bots.xlsx`
+- `data/trial_log.json`
+- `models/meta_labeler.pkl`
+- `models/meta_labeler/model.joblib`
+- `models/meta_labeler/scaler.joblib`
+- `models/meta_labeler/metadata.json`
+- `models/meta_labeler_verification.json`
+- `models/meta_labeler_promotion_decision.json`
+- `artifacts/utility/utility_20260911_140229_939458.json`
+- `reports/retrain_all_20260911/profile_candidate/profile_model.json`
+- `reports/retrain_all_20260911/profile_candidate/pattern_profile.json`
+- `reports/retrain_all_20260911/expanded_profile_shadow/profile_model.json`
+- `reports/retrain_all_20260911/expanded_profile_shadow/pattern_profile.json`
+- `reports/retrain_all_20260911/REPORT.md`
+- `CHANGELOG.md`
+
+**Decision rationale:** Existing canonical gates controlled activation; no
+methodology or gate thresholds changed. Utility failed G7 because the selected
+risk coefficient lies on the search boundary. Profiles lack sufficient
+independent promotion evidence; conformal calibration lacks independent
+calibration outcomes for the new model. Timestamp-conflicted source rows were
+excluded and production selection parity verified before the final meta fit.
+Meta OOF AUC is 0.641694 and ECE 0.031889, but auxiliary CPCV AUC is 0.493549
+and all five promotion-OOF folds used the existing fallback without time
+purging. HMM soft-mode walk-forward passes are unconditional; a short independent
+likelihood comparison did not show aggregate improvement. Promotion therefore
+does not establish superiority to the previous models. Detailed limitations,
+data lineage, rollback files and hashes are recorded in the report.
+
+**Backward compatibility:** No breaking changes. Production source code and
+feature schemas are unchanged; HMM and meta active artifacts have rotated.
+Production utility and profile activation remain unavailable.
+
+**Verification:** Final full suite: 2,017 passed, 2 skipped. Post-refit contract
+suite: 155 passed. Pyright: zero errors, warnings or information messages.
+Full-row lineage/cutoff and workbook preservation audits passed; actual artifact
+and legacy-pickle predictions agree on all 840 rows. Both shadow pairs passed
+load and covariance checks. Cleanup paths are recorded in the report receipt.
+
 ### Summary
 
 Grew the FASTWIN meta-labeler training pool with the 2026-06-08 -> 06-22 gap
@@ -14,6 +265,95 @@ decision path (ERR-059): `ev_score` is now computed BEFORE the Stage-12 meta
 probe, so `meta_prob` is authoritative for Kelly sizing and the soft Stage-B meta
 gate is ON. Closed the meta-labeler ERR cluster (054b/035/036/053). Bumped the
 package version 6.5.7 -> 6.5.8 to match the working tree.
+
+### BINANCEWS-0911 - Split direct Binance traffic into public, market, and private services (2026-09-11)
+
+Implemented three independently supervised Binance USD-M WebSocket services:
+`/public` owns diff-depth only, `/market` owns aggregate trades, one-second mark
+price/funding/index updates, and 1m/5m/15m/1h klines, and `/private` owns the
+authenticated user-data stream. Raw wire frames are append-only and hashed
+before parsing; canonical records use strict schemas, deterministic deduplication,
+explicit conflict rejection, and exact symbol/order/strategy ownership where
+private linkage exists. Account-wide private events remain raw-only and carry
+`event_completeness=unknown` so a reconnect is never represented as a complete
+historical account reconstruction.
+
+The private listen-key lifecycle uses Binance's currently documented USD-M
+WebSocket API methods `userDataStream.start`, `userDataStream.ping`, and
+`userDataStream.stop` at `wss://ws-fapi.binance.com/ws-fapi/v1`; the legacy REST
+listen-key lifecycle is not used.
+
+Added a single-owner supervisor, reversible PowerShell start/stop wrappers, and
+static/live verification. The supervisor freezes one America/Lima ingestion date
+for every child, confines output to `Live/<YYYY-MM-DD>/<SYMBOL>/`, keeps secrets
+out of process arguments and persisted frames, restarts unexpected public/market
+failures with bounded backoff, and records a durable blocked state rather than
+looping when the private API key is unavailable. The operational prompt now
+describes the exact commands, route ownership, cadence, credential setup, and
+fail-closed limitations.
+
+**Files modified or produced:**
+- `src/neutralgrid/core/config.py`
+- `src/neutralgrid/api/binance_client.py`
+- `src/neutralgrid/data/market_stream.py`
+- `src/neutralgrid/data/private_user_stream.py`
+- `scripts/collect_diff_depth.py`
+- `scripts/collect_market_streams.py`
+- `scripts/collect_private_user_stream.py`
+- `scripts/supervise_binance_websocket_services.py`
+- `scripts/verify_binance_websocket_services.py`
+- `scripts/start_binance_websocket_services.ps1`
+- `scripts/stop_binance_websocket_services.ps1`
+- `tests/unit/test_diff_depth.py`
+- `tests/unit/test_binance_user_data_stream.py`
+- `tests/unit/test_binance_websocket_supervisor.py`
+- `tests/unit/test_market_stream.py`
+- `tests/unit/test_private_user_collector.py`
+- `tests/unit/test_private_user_stream.py`
+- `tests/unit/test_verify_binance_websocket_services.py`
+- `outputs/audits/live_data_acquisition_prompt_20260910.md`
+- `outputs/audits/binance_websocket_services_static_verification.json`
+- `outputs/audits/binance_ws_live_smoke_20260911/`
+- `Live/2026-09-11/BTCUSDT/{diff_depth,market_stream}/`
+- `CHANGELOG.md`
+
+**AFML / Hudson & Thames citation:** No model, feature, label, estimator, or
+validation methodology changed. The work strengthens event-time provenance,
+point-in-time ownership, immutable raw evidence, and fail-closed data-quality
+controls consistent with López de Prado, *Advances in Financial Machine
+Learning*, Chapter 7.
+
+**Decision rationale:** Binance now exposes distinct USD-M `/public`, `/market`,
+and `/private` WebSocket paths. One process per traffic class makes cadence,
+failure, restart, and provenance independently observable and prevents market or
+private events from being misclassified as L2 continuity. Exact private linkage
+is required because a symbol alone is insufficient when multiple strategies own
+orders on the same symbol. A frozen Lima date prevents the UTC/local split-folder
+class tracked by ERR-100; ERR-099 remains an independent Chrome drawer-parser
+issue and is not claimed fixed here.
+
+**Backward compatibility:** No breaking change. Direct invocations of the
+existing diff-depth collector retain their prior optional market subscriptions;
+the supported supervisor explicitly disables them so the dedicated market
+service is the sole owner. New collectors and wrappers are additive. No training,
+artifact promotion, decision, sizing, grid, or execution path is invoked.
+
+**Verification:** The final-tree complete suite produced 2,016 passes and 2
+skips after deselecting only the pre-existing canonical utility-workbook lineage
+assertion. A separate current execution of that assertion failed closed on the
+same mismatch: workbook `rolling_180d_20260827_144604` versus active HMM
+`rolling_180d_20260903_153527`. The post-cleanup 28-test lifecycle/private/
+supervisor/verifier gate includes a local WebSocket API lifecycle handshake and
+private-stream integration. Whole-project Pyright reported 0 errors and 0
+warnings, locked dependencies matched exactly, PowerShell parsing and
+`git diff --check` passed, and the WebSocket static verifier passed. An external
+BTCUSDT connectivity probe (not an active-bot assertion) captured 105 public
+depth frames with 99 applied events and zero sequence gaps, plus 90 market frames
+containing 19 aggregate trades and 10 mark/funding/index updates with zero parse
+errors or coverage gaps. Public replay matched all 111 stored actions with zero
+hash failures; all 90 market raw-frame hashes also verified. Production model
+preflight remains blocked independently by the stale utility lineage, absent
+utility-current pointer, and absent promoted profile model.
 
 ### TELEMETRYFIX-0909 - Preserve structural ladder sides after price crossings (2026-09-09)
 
