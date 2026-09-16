@@ -6,7 +6,7 @@ import os
 import shutil
 import sys
 from pathlib import Path
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from types import SimpleNamespace
 from uuid import uuid4
 
@@ -130,6 +130,67 @@ Time    Side    Order Type    Avg. Price    Executed    Total    Fee
 """
 
 
+def test_plain_time_trade_export_is_localized_to_lima_before_filtering():
+    trades = pd.DataFrame(
+        {
+            "Time": ["2026-09-09 18:41:33", "2026-09-09 18:41:32"],
+            "Symbol": ["RENDERUSDT", "RENDERUSDT"],
+        }
+    )
+    start = datetime(2026, 9, 9, 23, 41, 33, tzinfo=timezone.utc)
+
+    filtered = nbde.filter_trades_by_symbol_and_time(
+        trades,
+        "RENDERUSDT",
+        start,
+        start + timedelta(seconds=1),
+    )
+
+    assert len(filtered) == 1
+    assert filtered.iloc[0]["parsed_time"] == pd.Timestamp(start)
+
+
+def test_explicit_utc_trade_export_time_is_not_shifted():
+    trades = pd.DataFrame(
+        {
+            "Time(UTC)": ["2026-09-09 23:41:33"],
+            "Symbol": ["RENDERUSDT"],
+        }
+    )
+    start = datetime(2026, 9, 9, 23, 41, 33, tzinfo=timezone.utc)
+
+    filtered = nbde.filter_trades_by_symbol_and_time(
+        trades,
+        "RENDERUSDT",
+        start,
+        start,
+    )
+
+    assert len(filtered) == 1
+    assert filtered.iloc[0]["parsed_time"] == pd.Timestamp(start)
+
+
+def test_plain_time_transaction_export_is_localized_to_lima():
+    transactions = pd.DataFrame(
+        {
+            "Time": ["2026-09-09 18:41:33"],
+            "Type": ["FUNDING_FEE"],
+            "Amount": [-0.25],
+            "Symbol": ["RENDERUSDT"],
+        }
+    )
+    timestamp = datetime(2026, 9, 9, 23, 41, 33, tzinfo=timezone.utc)
+
+    events = nbde.extract_funding_fee_events_from_transactions(
+        transactions,
+        "RENDERUSDT",
+        timestamp,
+        timestamp,
+    )
+
+    assert events == [{"time": int(timestamp.timestamp() * 1000), "income": -0.25}]
+
+
 class DummyClient:
     async def close(self) -> None:
         return None
@@ -212,6 +273,40 @@ def test_filter_row_to_schema_drops_unapproved_keys():
     filtered = nbde.filter_row_to_schema(row, nbde.DEFAULT_WORKBOOK_COLUMNS)
     assert list(filtered.keys()) == nbde.DEFAULT_WORKBOOK_COLUMNS
     assert "coherence_ok" not in filtered
+
+
+def test_resolve_workbook_columns_accepts_current_training_schema(workspace_tmp_dir):
+    from openpyxl import Workbook
+
+    output_path = workspace_tmp_dir / "new_expired_bots.xlsx"
+    workbook = Workbook()
+    worksheet = workbook.active
+    assert worksheet is not None
+    worksheet.append(nbde.DEFAULT_WORKBOOK_COLUMNS)
+    workbook.save(output_path)
+    workbook.close()
+
+    columns = nbde.resolve_workbook_columns(output_path, read_only=True)
+
+    assert columns == nbde.DEFAULT_WORKBOOK_COLUMNS
+    assert "hmm_artifact_version" in columns
+    assert "range_prob" in columns
+    assert "utility_score" in columns
+
+
+def test_resolve_workbook_columns_still_rejects_unknown_columns(workspace_tmp_dir):
+    from openpyxl import Workbook
+
+    output_path = workspace_tmp_dir / "new_expired_bots.xlsx"
+    workbook = Workbook()
+    worksheet = workbook.active
+    assert worksheet is not None
+    worksheet.append([*nbde.DEFAULT_WORKBOOK_COLUMNS, "unexpected_training_field"])
+    workbook.save(output_path)
+    workbook.close()
+
+    with pytest.raises(ValueError, match="Workbook schema drift detected"):
+        nbde.resolve_workbook_columns(output_path, read_only=True)
 
 
 def test_pnl_curve_sheet_columns_defined():

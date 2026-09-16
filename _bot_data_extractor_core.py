@@ -903,6 +903,32 @@ def load_transaction_history(csv_path: Path) -> pd.DataFrame:
     return df
 
 
+def _parse_binance_export_times_to_utc(
+    series: pd.Series,
+    *,
+    column_name: str,
+) -> pd.Series:
+    """Parse Binance export timestamps using their header timezone contract.
+
+    Explicit ``*(UTC)`` columns are already UTC. Plain ``Time`` columns in
+    account exports use the UI timezone, which is the same Lima timezone used
+    for manually pasted bot timestamps.
+    """
+
+    if "(UTC)" in column_name.upper():
+        return cast(pd.Series, pd.to_datetime(series, utc=True, errors="coerce"))
+
+    parsed = cast(pd.Series, pd.to_datetime(series, errors="coerce"))
+    if isinstance(parsed.dtype, pd.DatetimeTZDtype):
+        return cast(pd.Series, parsed.dt.tz_convert("UTC"))
+    localized = parsed.dt.tz_localize(
+        _MANUAL_UI_TIMEZONE,
+        ambiguous="NaT",
+        nonexistent="shift_forward",
+    )
+    return cast(pd.Series, localized.dt.tz_convert("UTC"))
+
+
 def filter_trades_by_symbol_and_time(
     df: pd.DataFrame,
     symbol: str,
@@ -915,7 +941,10 @@ def filter_trades_by_symbol_and_time(
 
     df = df.copy()
     time_col = 'Time(UTC)' if 'Time(UTC)' in df.columns else 'Time'
-    df['parsed_time'] = pd.to_datetime(df[time_col], utc=True)
+    df['parsed_time'] = _parse_binance_export_times_to_utc(
+        cast(pd.Series, df[time_col]),
+        column_name=time_col,
+    )
 
     mask = (
         (df['Symbol'] == symbol) &
@@ -1088,7 +1117,10 @@ def extract_funding_fee_events_from_transactions(
     if time_col not in tx_df.columns:
         return []
     tx_df = tx_df.copy()
-    tx_df['parsed_time'] = pd.to_datetime(tx_df[time_col], utc=True, errors='coerce')
+    tx_df['parsed_time'] = _parse_binance_export_times_to_utc(
+        cast(pd.Series, tx_df[time_col]),
+        column_name=time_col,
+    )
     start_ts = pd.Timestamp(start_time)
     end_ts = pd.Timestamp(end_time)
     if start_ts.tzinfo is None:
