@@ -1,0 +1,52 @@
+{
+  "checked_at_utc": "2026-09-11T13:58:53.506697+00:00",
+  "active_hmm": "rolling_180d_20260911_131128",
+  "rows": 366,
+  "valid_rows": 366,
+  "invalid_rows": [],
+  "versions": {
+    "rolling_180d_20260911_131128": 366
+  },
+  "status": "PASS",
+  "workbook_updated": true,
+  "changed_columns": {
+    "General": [
+      "range_prob",
+      "trend_prob",
+      "persistence_prob",
+      "hmm_trained_at_utc",
+      "hmm_artifact_version",
+      "hmm_pipeline_version",
+      "hmm_feature_semantics_version",
+      "hmm_feature_source",
+      "hmm_replay_scope",
+      "hmm_feature_cutoff_utc",
+      "feature_cutoff_utc",
+      "hmm_calibration_status",
+      "utility_score",
+      "ev_score",
+      "regime_conf"
+    ],
+    "Meta Features": [
+      "range_prob",
+      "trend_prob",
+      "persistence_prob",
+      "hmm_trained_at_utc",
+      "hmm_artifact_version",
+      "hmm_pipeline_version",
+      "hmm_feature_semantics_version",
+      "hmm_feature_source",
+      "hmm_replay_scope",
+      "hmm_feature_cutoff_utc",
+      "feature_cutoff_utc",
+      "hmm_calibration_status",
+      "utility_score",
+      "ev_score",
+      "regime_conf",
+      "backfill_status"
+    ]
+  },
+  "outcome_and_unrelated_cells_preserved": true,
+  "canonical_sha256_after": "9fb64dc0d3f5ca5b2a733904c3d087d1b5372354debd5371df58f5c5d6760bd6",
+  "canonical_sha256_before": "910f7c51464f1c6321a3256a853a77ea81149c9150bff3ec46a12e21c14f8696"
+}

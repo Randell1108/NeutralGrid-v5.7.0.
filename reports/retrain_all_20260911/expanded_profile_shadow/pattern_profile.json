@@ -1,0 +1,53 @@
+{
+  "features": [
+    "parkinson_vol_ratio_4h_24h_pre",
+    "variance_ratio_1m_15m_pre_2h",
+    "funding_carry_expected_next_7h",
+    "liquidity_stability_z_1h"
+  ],
+  "means": {
+    "funding_carry_expected_next_7h": -0.0049332478845196615,
+    "liquidity_stability_z_1h": 0.004942247823086974,
+    "parkinson_vol_ratio_4h_24h_pre": 0.9462152343535111,
+    "variance_ratio_1m_15m_pre_2h": 0.738988452747351
+  },
+  "q10": {
+    "funding_carry_expected_next_7h": -0.01123239999999998,
+    "liquidity_stability_z_1h": -1.0254228961735894,
+    "parkinson_vol_ratio_4h_24h_pre": 0.6160119346629216,
+    "variance_ratio_1m_15m_pre_2h": 0.3869604604327267
+  },
+  "q90": {
+    "funding_carry_expected_next_7h": 0.01,
+    "liquidity_stability_z_1h": 1.3866093896733016,
+    "parkinson_vol_ratio_4h_24h_pre": 1.3407433647437905,
+    "variance_ratio_1m_15m_pre_2h": 1.1459183914504847
+  },
+  "selection_summary": {
+    "artifact_role": "shadow_full_refit",
+    "family": "gaussian_lda_v1",
+    "fresh_outcome_rows": 3710,
+    "hmm_features_used": false,
+    "label_counts": {
+      "0": 2100,
+      "1": 2009
+    },
+    "new_candidate_ids": 673,
+    "promotion_blockers": [
+      "Target differs from canonical completed-bot profile",
+      "No verified production incumbent comparison or bot-disjoint promotion evidence"
+    ],
+    "recipe_source": "D:\\Neutral Grid v5.7.0\\reports\\profile_training_20260908\\selection.json",
+    "retained_previous_outcome_rows": 399,
+    "shrinkage": 0.9,
+    "source_sha256": "cc184bb7a24d91ecd8f1c3fc0ef2ad9000a84c577fc1fa10eacc1739cfe115c3",
+    "target_contract": "fast_winner_time_to_3pct_le_7h",
+    "training_rows": 4109
+  },
+  "stds": {
+    "funding_carry_expected_next_7h": 0.06406360866536279,
+    "liquidity_stability_z_1h": 1.3085998119134699,
+    "parkinson_vol_ratio_4h_24h_pre": 0.29825251296643696,
+    "variance_ratio_1m_15m_pre_2h": 0.32729147779860035
+  }
+}

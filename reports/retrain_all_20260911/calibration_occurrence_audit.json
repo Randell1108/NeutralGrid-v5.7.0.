@@ -1,0 +1,36 @@
+{
+  "unique_training_rows": 840,
+  "valid_auxiliary_cpcv_folds": 6,
+  "validation_prediction_occurrences": 1749,
+  "unique_validation_candidates": 583,
+  "occurrences_per_candidate_distribution": {
+    "3": 583
+  },
+  "folds": [
+    {
+      "train_rows": 54,
+      "test_rows": 362
+    },
+    {
+      "train_rows": 54,
+      "test_rows": 311
+    },
+    {
+      "train_rows": 54,
+      "test_rows": 266
+    },
+    {
+      "train_rows": 164,
+      "test_rows": 317
+    },
+    {
+      "train_rows": 164,
+      "test_rows": 272
+    },
+    {
+      "train_rows": 289,
+      "test_rows": 221
+    }
+  ],
+  "method": "Reconstructed canonical CPCV splits only; no estimator fitting or trial added."
+}

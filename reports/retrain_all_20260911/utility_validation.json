@@ -1,0 +1,22 @@
+{
+  "canonical_equals_flat": true,
+  "input_rows": 366,
+  "admitted_rows": 222,
+  "exclusions": {
+    "duration_over_7h": 143,
+    "missing_pnl": 1
+  },
+  "gates": {
+    "G0_schema": true,
+    "G1_dedup": true,
+    "G2_class_fit_holdout": true,
+    "G3_holdout_auc_gt_0_5": true,
+    "G4_holdout_mean_winner_gt_loser": true,
+    "G5_threshold_selected_on_fit": true,
+    "G6_winner_recall_not_regressed_vs_v0": true,
+    "G7_finite_nonnegative_not_boundary_pinned": false
+  },
+  "promotable": false,
+  "current_exists": false,
+  "active_hmm": "rolling_180d_20260911_131128"
+}

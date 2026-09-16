@@ -1,0 +1,16 @@
+{
+  "rows": 840,
+  "scan_after_start": 0,
+  "fastwin_positive_rows": 417,
+  "scan_min": "2026-02-18 19:24:30+00:00",
+  "scan_max": "2026-09-10 22:12:09+00:00",
+  "outcome_start_min": "2026-02-19 00:26:54.114993+00:00",
+  "outcome_start_max": "2026-09-10 22:53:22.270092+00:00",
+  "missing_ou_halflife": 1,
+  "engine_versions": {
+    "realistic-v8": 840
+  },
+  "label_contract_versions": {
+    "2026-05-09": 840
+  }
+}

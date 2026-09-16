@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "rows": 840,
+  "legacy_artifact_prediction_parity": true,
+  "finite_probability_range": [
+    0.43171142534542983,
+    0.5401220129798885
+  ],
+  "config_difference": {}
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "candidate_line": "2026-09-11 09:00:01 | INFO     | backtest_candidates | [5026/6046] \ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffdUSDT (score=50.1, id=\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffdUSDT_20260807_163601_362f57fc)",
+    "error": "2026-09-11 09:00:01 | WARNING  | backtest_candidates |   Kline fetch failed for \ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffdUSDT: [400] -1121: Invalid symbol. | /fapi/v1/klines \u2014 skipping"
+  },
+  {
+    "candidate_line": "2026-09-11 09:00:06 | INFO     | backtest_candidates | [5035/6046] \ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffdUSDT (score=50.0, id=\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffdUSDT_20260811_133514_7aaecaa3)",
+    "error": "2026-09-11 09:00:06 | WARNING  | backtest_candidates |   Kline fetch failed for \ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffdUSDT: [400] -1121: Invalid symbol. | /fapi/v1/klines \u2014 skipping"
+  },
+  {
+    "candidate_line": "2026-09-11 09:00:59 | INFO     | backtest_candidates | [5131/6046] \ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffdUSDT (score=49.8, id=\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffdUSDT_20260721_124614_e5fee3ec)",
+    "error": "2026-09-11 09:01:00 | WARNING  | backtest_candidates |   Kline fetch failed for \ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffdUSDT: [400] -1121: Invalid symbol. | /fapi/v1/klines \u2014 skipping"
+  },
+  {
+    "candidate_line": "2026-09-11 09:07:20 | INFO     | backtest_candidates | [5809/6046] \ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffdUSDT (score=46.2, id=\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffdUSDT_20260812_200848_149e9f91)",
+    "error": "2026-09-11 09:07:20 | WARNING  | backtest_candidates |   Kline fetch failed for \ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffdUSDT: [400] -1121: Invalid symbol. | /fapi/v1/klines \u2014 skipping"
+  }
+]

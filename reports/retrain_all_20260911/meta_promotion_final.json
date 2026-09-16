@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-09-11T14:52:06.002973+00:00",
+  "comparison_kind": "stored_summary_nonpaired",
+  "output_path": "models\\meta_labeler.pkl",
+  "champion_metadata_path": "models\\meta_labeler\\metadata.json",
+  "candidate": {
+    "promotion_status": "pass",
+    "oof_auc": 0.6416937372088146,
+    "oof_auc_ci_low": 0.6041326606935297,
+    "oof_auc_ci_high": 0.6796071131501142,
+    "oof_ece": 0.03188902009835016,
+    "oof_deployable_auc": 0.6416937372088146,
+    "oof_deployable_ece": 0.03188902009835016,
+    "train_samples": 840,
+    "promotion_evaluation_contract": "chronological_contiguous_group_purged_weighted_kfold_v2",
+    "hmm_artifact_version": "rolling_180d_20260911_131128"
+  },
+  "champion": {
+    "artifact_version": "20260908_143214",
+    "features": [
+      "ev_score",
+      "adx_1h",
+      "adx_15m",
+      "adx_5m",
+      "atr_pct_15m",
+      "ou_halflife",
+      "rsi_15m",
+      "ema_slope_1h",
+      "ema_crosses_5m",
+      "vwap_crosses_5m",
+      "hurst_exponent",
+      "range_size_pct",
+      "bb_width",
+      "grid_spacing_pct",
+      "profit_per_grid_pct",
+      "num_grids",
+      "quote_volume_24h",
+      "open_interest",
+      "micro_round_trip_cost_pct",
+      "funding_rate"
+    ],
+    "target_contract": "fast_winner_time_to_3pct_le_7h",
+    "promotion_status": "pass",
+    "oof_auc": 0.6867744355773823,
+    "oof_auc_ci_low": 0.6722756292573285,
+    "oof_auc_ci_high": 0.699757872786888,
+    "oof_ece": 0.013505508604505478,
+    "oof_deployable_auc": 0.6867744355773823,
+    "oof_deployable_ece": 0.013505508604505478,
+    "total_samples": 5369,
+    "promotion_evaluation_contract": null,
+    "hmm_artifact_version": "rolling_180d_20260903_153527"
+  },
+  "status": "pass",
+  "reasons": [],
+  "comparison_scope": "incomparable_champion_absolute_gate_only",
+  "comparison_skipped_reasons": [
+    "promotion_evaluation_contract_mismatch(champion=None,candidate='chronological_contiguous_group_purged_weighted_kfold_v2')",
+    "hmm_lineage_mismatch(champion='rolling_180d_20260903_153527',candidate='rolling_180d_20260911_131128')"
+  ]
+}

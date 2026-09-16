@@ -1,0 +1,39 @@
+{
+  "status": "shadow_only",
+  "training": {
+    "artifact_role": "shadow_full_refit",
+    "target_contract": "fast_winner_time_to_3pct_le_7h",
+    "training_rows": 4109,
+    "label_counts": {
+      "0": 2100,
+      "1": 2009
+    },
+    "family": "gaussian_lda_v1",
+    "shrinkage": 0.9,
+    "recipe_source": "D:\\Neutral Grid v5.7.0\\reports\\profile_training_20260908\\selection.json",
+    "source_sha256": "cc184bb7a24d91ecd8f1c3fc0ef2ad9000a84c577fc1fa10eacc1739cfe115c3",
+    "fresh_outcome_rows": 3710,
+    "retained_previous_outcome_rows": 399,
+    "new_candidate_ids": 673,
+    "promotion_blockers": [
+      "Target differs from canonical completed-bot profile",
+      "No verified production incumbent comparison or bot-disjoint promotion evidence"
+    ],
+    "hmm_features_used": false
+  },
+  "quarantined_historical_rows": 4220,
+  "prior_frozen_model_evaluation": {
+    "rows": 673,
+    "positives": 397,
+    "auc": 0.5000821377724236,
+    "brier": 0.24883268161383446,
+    "ece": 0.07523382988265737,
+    "scope": "Prior frozen September 8 full-refit model on IDs absent from its training pool; no claim of global prior non-disclosure or bot-disjoint independence"
+  },
+  "prior_model_limitation": "Previously frozen model included historical IDs now subject to timestamp conflict; its score is diagnostic only",
+  "newly_refitted_model_has_independent_holdout": false,
+  "model_sha256": "c20ed607d8cb9bfad9125e27da73cab2dc6666a21ce40fd127430a30ed2d5608",
+  "pattern_sha256": "ef26195bdc8fc97fb5a877fb4214d539dcc7ecc664a3b69a03716726622dff1d",
+  "source_fresh_sha256": "48863884489413cec4abf1d058913ac86b6a293cafc305689476a7b93b43e5b0",
+  "source_previous_sha256": "a05a589d194176963a1b1c7b3d44897a08882cbeb87b86e759ace5d3f11072e5"
+}

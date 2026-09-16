@@ -1,0 +1,1724 @@
+{
+  "checked_at_utc": "2026-09-11T13:52:59.398403+00:00",
+  "active_hmm": "rolling_180d_20260911_131128",
+  "rows": 366,
+  "valid_rows": 152,
+  "invalid_rows": [
+    {
+      "strategy_id": 409845158,
+      "symbol": "XRPUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9765092067718647,
+      "trend_prob": 0.02349079322813519,
+      "persistence_prob": 0.967359131924566
+    },
+    {
+      "strategy_id": 409845187,
+      "symbol": "TRUMPUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9892734616142075,
+      "trend_prob": 0.01072653838579255,
+      "persistence_prob": 0.9770813598927812
+    },
+    {
+      "strategy_id": 409964859,
+      "symbol": "LTCUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9819784555205977,
+      "trend_prob": 0.01802154447940227,
+      "persistence_prob": 0.9659175580611143
+    },
+    {
+      "strategy_id": 409964869,
+      "symbol": "ADAUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9809756154908602,
+      "trend_prob": 0.01902438450913976,
+      "persistence_prob": 0.9659177021786485
+    },
+    {
+      "strategy_id": 410008944,
+      "symbol": "FILUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9389165299938198,
+      "trend_prob": 0.06108347000618018,
+      "persistence_prob": 0.9309176420610341
+    },
+    {
+      "strategy_id": 410008983,
+      "symbol": "XRPUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.4577849410898773,
+      "trend_prob": 0.5422150589101226,
+      "persistence_prob": 0.9389729484334648
+    },
+    {
+      "strategy_id": 410008992,
+      "symbol": "DOTUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9908765256038108,
+      "trend_prob": 0.009123474396189256,
+      "persistence_prob": 0.9770813433443217
+    },
+    {
+      "strategy_id": 410009132,
+      "symbol": "SOLUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.05746403658108772,
+      "trend_prob": 0.9425359634189124,
+      "persistence_prob": 0.9535562793362431
+    },
+    {
+      "strategy_id": 410009140,
+      "symbol": "LTCUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9908837167043885,
+      "trend_prob": 0.009116283295611632,
+      "persistence_prob": 0.9770813598927812
+    },
+    {
+      "strategy_id": 410016825,
+      "symbol": "ENAUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.02597246563344332,
+      "trend_prob": 0.9740275343665566,
+      "persistence_prob": 0.9681395585345032
+    },
+    {
+      "strategy_id": 410023026,
+      "symbol": "FILUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9467041482008809,
+      "trend_prob": 0.05329585179911903,
+      "persistence_prob": 0.9453294408464782
+    },
+    {
+      "strategy_id": 410023358,
+      "symbol": "TRXUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.02598136764651682,
+      "trend_prob": 0.9740186323534832,
+      "persistence_prob": 0.9681396311629289
+    },
+    {
+      "strategy_id": 410110388,
+      "symbol": "LTCUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.03133318310457699,
+      "trend_prob": 0.968666816895423,
+      "persistence_prob": 0.9681395839890325
+    },
+    {
+      "strategy_id": 410110397,
+      "symbol": "ADAUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.02596714113765842,
+      "trend_prob": 0.9740328588623417,
+      "persistence_prob": 0.968139548989056
+    },
+    {
+      "strategy_id": 410110420,
+      "symbol": "SOLUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.75184255925788,
+      "trend_prob": 0.24815744074212,
+      "persistence_prob": 0.9659177107205741
+    },
+    {
+      "strategy_id": 410124370,
+      "symbol": "ASTERUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9809304717148736,
+      "trend_prob": 0.0190695282851264,
+      "persistence_prob": 0.9538487330015495
+    },
+    {
+      "strategy_id": 410143187,
+      "symbol": "BERAUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01596336728243894,
+      "trend_prob": 0.9840366327175611,
+      "persistence_prob": 0.9665513852126255
+    },
+    {
+      "strategy_id": 410143227,
+      "symbol": "FARTCOINUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.0201270601222067,
+      "trend_prob": 0.9798729398777932,
+      "persistence_prob": 0.9665509219783669
+    },
+    {
+      "strategy_id": 410143248,
+      "symbol": "LINEAUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.1462040048081741,
+      "trend_prob": 0.8537959951918259,
+      "persistence_prob": 0.9681395732198079
+    },
+    {
+      "strategy_id": 410143262,
+      "symbol": "APTUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9510371463085819,
+      "trend_prob": 0.04896285369141814,
+      "persistence_prob": 0.927028744789437
+    },
+    {
+      "strategy_id": 410143278,
+      "symbol": "JUPUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9593497547344978,
+      "trend_prob": 0.04065024526550212,
+      "persistence_prob": 0.9453294408464782
+    },
+    {
+      "strategy_id": 410148539,
+      "symbol": "ENAUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.8673045989169371,
+      "trend_prob": 0.1326954010830628,
+      "persistence_prob": 0.9659174705612601
+    },
+    {
+      "strategy_id": 410166270,
+      "symbol": "SENTUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01603545452889955,
+      "trend_prob": 0.9839645454711003,
+      "persistence_prob": 0.9665513662081109
+    },
+    {
+      "strategy_id": 410184066,
+      "symbol": "SOMIUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9812107578710398,
+      "trend_prob": 0.01878924212896025,
+      "persistence_prob": 0.9492510195689431
+    },
+    {
+      "strategy_id": 410204556,
+      "symbol": "GUNUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9811251179177447,
+      "trend_prob": 0.01887488208225537,
+      "persistence_prob": 0.9659177107205741
+    },
+    {
+      "strategy_id": 410204567,
+      "symbol": "LITUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9812135572052362,
+      "trend_prob": 0.0187864427947638,
+      "persistence_prob": 0.9569433480840116
+    },
+    {
+      "strategy_id": 410213140,
+      "symbol": "1000PEPEUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9901822284166475,
+      "trend_prob": 0.009817771583352428,
+      "persistence_prob": 0.9770813513508556
+    },
+    {
+      "strategy_id": 410213150,
+      "symbol": "RIVERUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01653477310291617,
+      "trend_prob": 0.9834652268970838,
+      "persistence_prob": 0.9665513157273825
+    },
+    {
+      "strategy_id": 410257818,
+      "symbol": "VIRTUALUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.02521806325390969,
+      "trend_prob": 0.9747819367460903,
+      "persistence_prob": 0.9269631313246662
+    },
+    {
+      "strategy_id": 410269321,
+      "symbol": "RIVERUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9520668640365162,
+      "trend_prob": 0.04793313596348392,
+      "persistence_prob": 0.9367509886165792
+    },
+    {
+      "strategy_id": 410342342,
+      "symbol": "BERAUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.968961506855717,
+      "trend_prob": 0.03103849314428294,
+      "persistence_prob": 0.954251032949891
+    },
+    {
+      "strategy_id": 410382732,
+      "symbol": "WLFIUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.1124061466393238,
+      "trend_prob": 0.8875938533606762,
+      "persistence_prob": 0.9475513617744944
+    },
+    {
+      "strategy_id": 410448673,
+      "symbol": "BULLAUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.02133004233583022,
+      "trend_prob": 0.9786699576641698,
+      "persistence_prob": 0.9665514178106535
+    },
+    {
+      "strategy_id": 410448696,
+      "symbol": "IPUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9811542489199108,
+      "trend_prob": 0.01884575108008919,
+      "persistence_prob": 0.9659177107205741
+    },
+    {
+      "strategy_id": 410448724,
+      "symbol": "LITUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9693066440035585,
+      "trend_prob": 0.03069335599644157,
+      "persistence_prob": 0.9564582462458071
+    },
+    {
+      "strategy_id": 410448713,
+      "symbol": "ALGOUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9573556111797247,
+      "trend_prob": 0.04264438882027542,
+      "persistence_prob": 0.9425843359499037
+    },
+    {
+      "strategy_id": 410448651,
+      "symbol": "NEARUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.04066671964158894,
+      "trend_prob": 0.959333280358411,
+      "persistence_prob": 0.9665512369774849
+    },
+    {
+      "strategy_id": 410514600,
+      "symbol": "STEEMUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9908646470478637,
+      "trend_prob": 0.009135352952136298,
+      "persistence_prob": 0.9770813494207091
+    },
+    {
+      "strategy_id": 410524706,
+      "symbol": "NEARUSDT",
+      "hmm_feature_source": "invalid_candidate_id_scan_time",
+      "range_prob": NaN,
+      "trend_prob": NaN,
+      "persistence_prob": NaN
+    },
+    {
+      "strategy_id": 410529498,
+      "symbol": "STRKUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.06308166328936182,
+      "trend_prob": 0.9369183367106382,
+      "persistence_prob": 0.9665513515228061
+    },
+    {
+      "strategy_id": 410547075,
+      "symbol": "XRPUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9908550428400894,
+      "trend_prob": 0.009144957159910578,
+      "persistence_prob": 0.9770813122332236
+    },
+    {
+      "strategy_id": 410547084,
+      "symbol": "XPLUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9778717158066923,
+      "trend_prob": 0.02212828419330782,
+      "persistence_prob": 0.9659177107205741
+    },
+    {
+      "strategy_id": 410547101,
+      "symbol": "HBARUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9907975795309297,
+      "trend_prob": 0.009202420469070305,
+      "persistence_prob": 0.9770812947332341
+    },
+    {
+      "strategy_id": 410547120,
+      "symbol": "FILUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9807242587398707,
+      "trend_prob": 0.0192757412601293,
+      "persistence_prob": 0.9659177107205741
+    },
+    {
+      "strategy_id": 410561428,
+      "symbol": "ENSOUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9908936163865321,
+      "trend_prob": 0.00910638361346788,
+      "persistence_prob": 0.9558692317740716
+    },
+    {
+      "strategy_id": 410571568,
+      "symbol": "AXSUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9811285202821116,
+      "trend_prob": 0.0188714797178884,
+      "persistence_prob": 0.938994583652736
+    },
+    {
+      "strategy_id": 410571577,
+      "symbol": "TRUMPUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9811064645062282,
+      "trend_prob": 0.01889353549377184,
+      "persistence_prob": 0.9440426729047626
+    },
+    {
+      "strategy_id": 410587921,
+      "symbol": "BNBUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9908690139262685,
+      "trend_prob": 0.009130986073731546,
+      "persistence_prob": 0.9770813598927812
+    },
+    {
+      "strategy_id": 410587966,
+      "symbol": "SANDUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9903416974611361,
+      "trend_prob": 0.009658302538863926,
+      "persistence_prob": 0.9770813297332153
+    },
+    {
+      "strategy_id": 410588008,
+      "symbol": "ETHUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9906149309301868,
+      "trend_prob": 0.009385069069813123,
+      "persistence_prob": 0.9770813588998737
+    },
+    {
+      "strategy_id": 410588036,
+      "symbol": "SENTUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.0259671333712287,
+      "trend_prob": 0.9740328666287713,
+      "persistence_prob": 0.9412165045807522
+    },
+    {
+      "strategy_id": 410588056,
+      "symbol": "GIGGLEUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9335206759982448,
+      "trend_prob": 0.06647932400175519,
+      "persistence_prob": 0.9453294408464782
+    },
+    {
+      "strategy_id": 410638395,
+      "symbol": "BIOUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.958700213998477,
+      "trend_prob": 0.04129978600152296,
+      "persistence_prob": 0.9645813465189241
+    },
+    {
+      "strategy_id": 410653893,
+      "symbol": "ICPUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9705895765203729,
+      "trend_prob": 0.02941042347962715,
+      "persistence_prob": 0.9553116419223422
+    },
+    {
+      "strategy_id": 410680162,
+      "symbol": "AVAXUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9450751031667917,
+      "trend_prob": 0.05492489683320849,
+      "persistence_prob": 0.907081228233328
+    },
+    {
+      "strategy_id": 410403270,
+      "symbol": "TAOUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9144417008012222,
+      "trend_prob": 0.08555829919877776,
+      "persistence_prob": 0.9553116419223422
+    },
+    {
+      "strategy_id": 410403283,
+      "symbol": "SOLUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.5168249931554513,
+      "trend_prob": 0.4831750068445486,
+      "persistence_prob": 0.9665503969815168
+    },
+    {
+      "strategy_id": 410403292,
+      "symbol": "WLDUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9764530257028489,
+      "trend_prob": 0.02354697429715118,
+      "persistence_prob": 0.9549802016156892
+    },
+    {
+      "strategy_id": 410403308,
+      "symbol": "SANDUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.4554046117166281,
+      "trend_prob": 0.5445953882833718,
+      "persistence_prob": 0.9665503969815168
+    },
+    {
+      "strategy_id": 410421619,
+      "symbol": "ZECUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.03273990220472363,
+      "trend_prob": 0.9672600977952763,
+      "persistence_prob": 0.9665511844775794
+    },
+    {
+      "strategy_id": 410421651,
+      "symbol": "0GUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9474855390738711,
+      "trend_prob": 0.05251446092612898,
+      "persistence_prob": 0.9564582462458071
+    },
+    {
+      "strategy_id": 410472399,
+      "symbol": "STRKUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9667443883593191,
+      "trend_prob": 0.03325561164068103,
+      "persistence_prob": 0.9529547331295902
+    },
+    {
+      "strategy_id": 410472408,
+      "symbol": "FILUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9807028648833219,
+      "trend_prob": 0.01929713511667796,
+      "persistence_prob": 0.9507002987509863
+    },
+    {
+      "strategy_id": 410472427,
+      "symbol": "DOTUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9811260353121568,
+      "trend_prob": 0.01887396468784311,
+      "persistence_prob": 0.9567071800831612
+    },
+    {
+      "strategy_id": 410472435,
+      "symbol": "PENGUUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.04292777020803662,
+      "trend_prob": 0.9570722297919635,
+      "persistence_prob": 0.9396282975690552
+    },
+    {
+      "strategy_id": 410488531,
+      "symbol": "FOGOUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01596341360594513,
+      "trend_prob": 0.9840365863940549,
+      "persistence_prob": 0.9665513157273825
+    },
+    {
+      "strategy_id": 410488627,
+      "symbol": "TRIAUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01807899458109848,
+      "trend_prob": 0.9819210054189016,
+      "persistence_prob": 0.9665514151591389
+    },
+    {
+      "strategy_id": 410488583,
+      "symbol": "APTUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9812033102209435,
+      "trend_prob": 0.01879668977905641,
+      "persistence_prob": 0.939991772087066
+    },
+    {
+      "strategy_id": 410488609,
+      "symbol": "TIAUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.981120597697017,
+      "trend_prob": 0.01887940230298314,
+      "persistence_prob": 0.9433370569423752
+    },
+    {
+      "strategy_id": 410488558,
+      "symbol": "ETHFIUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9811081969016809,
+      "trend_prob": 0.01889180309831912,
+      "persistence_prob": 0.9513343584082268
+    },
+    {
+      "strategy_id": 410493323,
+      "symbol": "1000BONKUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01613206236011786,
+      "trend_prob": 0.9838679376398822,
+      "persistence_prob": 0.9665513157273825
+    },
+    {
+      "strategy_id": 410493332,
+      "symbol": "ZKUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.02608029623034108,
+      "trend_prob": 0.973919703769659,
+      "persistence_prob": 0.9681395039890996
+    },
+    {
+      "strategy_id": 410514576,
+      "symbol": "TAOUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01598056546399915,
+      "trend_prob": 0.9840194345360009,
+      "persistence_prob": 0.9665514049773236
+    },
+    {
+      "strategy_id": 410899699,
+      "symbol": "FOLKSUSDT",
+      "hmm_feature_source": "invalid_candidate_id_scan_time",
+      "range_prob": NaN,
+      "trend_prob": NaN,
+      "persistence_prob": NaN
+    },
+    {
+      "strategy_id": 410899682,
+      "symbol": "ONDOUSDT",
+      "hmm_feature_source": "invalid_candidate_id_scan_time",
+      "range_prob": NaN,
+      "trend_prob": NaN,
+      "persistence_prob": NaN
+    },
+    {
+      "strategy_id": 410899660,
+      "symbol": "ROBOUSDT",
+      "hmm_feature_source": "invalid_candidate_id_scan_time",
+      "range_prob": NaN,
+      "trend_prob": NaN,
+      "persistence_prob": NaN
+    },
+    {
+      "strategy_id": 410702937,
+      "symbol": "ZAMAUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9859041685204775,
+      "trend_prob": 0.01409583147952258,
+      "persistence_prob": 0.9636198054580628
+    },
+    {
+      "strategy_id": 410697832,
+      "symbol": "OPNUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9811808313187039,
+      "trend_prob": 0.01881916868129604,
+      "persistence_prob": 0.9659177107205741
+    },
+    {
+      "strategy_id": 410702898,
+      "symbol": "RENDERUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9812285060935814,
+      "trend_prob": 0.01877149390641859,
+      "persistence_prob": 0.9659176712963062
+    },
+    {
+      "strategy_id": 410697784,
+      "symbol": "STRKUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9652831302683896,
+      "trend_prob": 0.03471686973161043,
+      "persistence_prob": 0.9519176933010041
+    },
+    {
+      "strategy_id": 411514854,
+      "symbol": "STABLEUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.02597583692436854,
+      "trend_prob": 0.9740241630756314,
+      "persistence_prob": 0.9681395789890354
+    },
+    {
+      "strategy_id": 411526827,
+      "symbol": "RUNEUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9879568316456093,
+      "trend_prob": 0.01204316835439053,
+      "persistence_prob": 0.9770808572342549
+    },
+    {
+      "strategy_id": 411991896,
+      "symbol": "DOGEUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9572724428347394,
+      "trend_prob": 0.04272755716526067,
+      "persistence_prob": 0.9425843359499037
+    },
+    {
+      "strategy_id": 411991885,
+      "symbol": "STABLEUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9709885315562099,
+      "trend_prob": 0.02901146844379015,
+      "persistence_prob": 0.9564582462458071
+    },
+    {
+      "strategy_id": 411991933,
+      "symbol": "ETHFIUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9629317440556671,
+      "trend_prob": 0.03706825594433302,
+      "persistence_prob": 0.9492510195689431
+    },
+    {
+      "strategy_id": 412010252,
+      "symbol": "INJUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.961797999958273,
+      "trend_prob": 0.03820200004172698,
+      "persistence_prob": 0.9464732346042195
+    },
+    {
+      "strategy_id": 412116222,
+      "symbol": "NEARUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9850160706936664,
+      "trend_prob": 0.01498392930633369,
+      "persistence_prob": 0.9420812912332412
+    },
+    {
+      "strategy_id": 412159706,
+      "symbol": "GRASSUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.321801267534594,
+      "trend_prob": 0.6781987324654061,
+      "persistence_prob": 0.9570919601621263
+    },
+    {
+      "strategy_id": 412223376,
+      "symbol": "SAGAUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9812133683930238,
+      "trend_prob": 0.01878663160697618,
+      "persistence_prob": 0.9659176280610398
+    },
+    {
+      "strategy_id": 412223289,
+      "symbol": "EIGENUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.981249499228667,
+      "trend_prob": 0.01875050077133301,
+      "persistence_prob": 0.9659176580610191
+    },
+    {
+      "strategy_id": 412223355,
+      "symbol": "ARKMUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9681854028281722,
+      "trend_prob": 0.0318145971718278,
+      "persistence_prob": 0.9529547331295902
+    },
+    {
+      "strategy_id": 412223319,
+      "symbol": "RENDERUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9811751577514841,
+      "trend_prob": 0.01882484224851588,
+      "persistence_prob": 0.965917645561027
+    },
+    {
+      "strategy_id": 412235156,
+      "symbol": "VETUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9886847564103796,
+      "trend_prob": 0.01131524358962046,
+      "persistence_prob": 0.9770810322336715
+    },
+    {
+      "strategy_id": 412235216,
+      "symbol": "IPUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9754029301993797,
+      "trend_prob": 0.02459706980062026,
+      "persistence_prob": 0.9659176280610398
+    },
+    {
+      "strategy_id": 412235095,
+      "symbol": "PNUTUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9809533904459463,
+      "trend_prob": 0.01904660955405363,
+      "persistence_prob": 0.9575843755213176
+    },
+    {
+      "strategy_id": 412241506,
+      "symbol": "ARKMUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.980389064956784,
+      "trend_prob": 0.01961093504321604,
+      "persistence_prob": 0.965917689311005
+    },
+    {
+      "strategy_id": 412253286,
+      "symbol": "PYTHUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.8390644845958597,
+      "trend_prob": 0.1609355154041402,
+      "persistence_prob": 0.9519176933010041
+    },
+    {
+      "strategy_id": 412253463,
+      "symbol": "IOUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.970635705503044,
+      "trend_prob": 0.02936429449695606,
+      "persistence_prob": 0.9553116419223422
+    },
+    {
+      "strategy_id": 412259730,
+      "symbol": "BIOUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9671604858880669,
+      "trend_prob": 0.03283951411193316,
+      "persistence_prob": 0.9519176933010041
+    },
+    {
+      "strategy_id": 412259746,
+      "symbol": "WIFUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.981231998901504,
+      "trend_prob": 0.01876800109849585,
+      "persistence_prob": 0.9561954827523589
+    },
+    {
+      "strategy_id": 412273649,
+      "symbol": "ETHFIUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.950351968722126,
+      "trend_prob": 0.04964803127787405,
+      "persistence_prob": 0.9453294408464782
+    },
+    {
+      "strategy_id": 412272261,
+      "symbol": "SEIUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9812610848677537,
+      "trend_prob": 0.01873891513224636,
+      "persistence_prob": 0.9659177107205741
+    },
+    {
+      "strategy_id": 412323869,
+      "symbol": "1000CATUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9651145283275682,
+      "trend_prob": 0.03488547167243184,
+      "persistence_prob": 0.9500085973172041
+    },
+    {
+      "strategy_id": 412412500,
+      "symbol": "THETAUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9810952766734518,
+      "trend_prob": 0.01890472332654829,
+      "persistence_prob": 0.9659177107205741
+    },
+    {
+      "strategy_id": 412412527,
+      "symbol": "ARBUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9722905257989954,
+      "trend_prob": 0.02770947420100458,
+      "persistence_prob": 0.9571677076860003
+    },
+    {
+      "strategy_id": 412515867,
+      "symbol": "KASUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9908098751546939,
+      "trend_prob": 0.009190124845306154,
+      "persistence_prob": 0.9501582328249432
+    },
+    {
+      "strategy_id": 412534023,
+      "symbol": "ONDOUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9812332722110259,
+      "trend_prob": 0.01876672778897418,
+      "persistence_prob": 0.9659176747276772
+    },
+    {
+      "strategy_id": 412554334,
+      "symbol": "ROBOUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9385791372115778,
+      "trend_prob": 0.06142086278842216,
+      "persistence_prob": 0.9553116419223422
+    },
+    {
+      "strategy_id": 412554408,
+      "symbol": "BERAUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9673440490317764,
+      "trend_prob": 0.03265595096822362,
+      "persistence_prob": 0.9571677076860003
+    },
+    {
+      "strategy_id": 412554374,
+      "symbol": "CHZUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9724751118719109,
+      "trend_prob": 0.02752488812808893,
+      "persistence_prob": 0.9571677076860003
+    },
+    {
+      "strategy_id": 412554275,
+      "symbol": "KASUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9573534471573523,
+      "trend_prob": 0.04264655284264778,
+      "persistence_prob": 0.9425843359499037
+    },
+    {
+      "strategy_id": 412715151,
+      "symbol": "ZENUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.1207094639413642,
+      "trend_prob": 0.8792905360586357,
+      "persistence_prob": 0.9681396189890186
+    },
+    {
+      "strategy_id": 412715052,
+      "symbol": "HBARUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9805899924754683,
+      "trend_prob": 0.01941000752453178,
+      "persistence_prob": 0.9659177012428198
+    },
+    {
+      "strategy_id": 412715207,
+      "symbol": "LDOUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9812488399279269,
+      "trend_prob": 0.01875116007207319,
+      "persistence_prob": 0.9659177091973636
+    },
+    {
+      "strategy_id": 412715102,
+      "symbol": "LINKUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.8641236338922486,
+      "trend_prob": 0.1358763661077514,
+      "persistence_prob": 0.9425843359499037
+    },
+    {
+      "strategy_id": 412715083,
+      "symbol": "VETUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.02645164621254237,
+      "trend_prob": 0.9735483537874576,
+      "persistence_prob": 0.9681396231066646
+    },
+    {
+      "strategy_id": 412715175,
+      "symbol": "SUSHIUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9736125825784183,
+      "trend_prob": 0.02638741742158173,
+      "persistence_prob": 0.9583090152443645
+    },
+    {
+      "strategy_id": 412730340,
+      "symbol": "LDOUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.2115778419034126,
+      "trend_prob": 0.7884221580965876,
+      "persistence_prob": 0.9098061845446602
+    },
+    {
+      "strategy_id": 412730326,
+      "symbol": "0GUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9901091778020339,
+      "trend_prob": 0.009890822197966085,
+      "persistence_prob": 0.9770811722333728
+    },
+    {
+      "strategy_id": 412730355,
+      "symbol": "ENAUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.964583998553874,
+      "trend_prob": 0.035416001446126,
+      "persistence_prob": 0.9492510195689431
+    },
+    {
+      "strategy_id": 413304140,
+      "symbol": "SAGAUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.0159633672824389,
+      "trend_prob": 0.9840366327175611,
+      "persistence_prob": 0.9665513852126255
+    },
+    {
+      "strategy_id": 413310277,
+      "symbol": "HMSTRUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9866398282761981,
+      "trend_prob": 0.01336017172380189,
+      "persistence_prob": 0.9641183823017974
+    },
+    {
+      "strategy_id": 413310269,
+      "symbol": "PUMPUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9732452587929361,
+      "trend_prob": 0.02675474120706388,
+      "persistence_prob": 0.9579631644659585
+    },
+    {
+      "strategy_id": 413310226,
+      "symbol": "ZAMAUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9812320746521992,
+      "trend_prob": 0.01876792534780088,
+      "persistence_prob": 0.9659176630610165
+    },
+    {
+      "strategy_id": 413322176,
+      "symbol": "NIGHTUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01596334107671416,
+      "trend_prob": 0.984036658923286,
+      "persistence_prob": 0.9665514246368933
+    },
+    {
+      "strategy_id": 413322343,
+      "symbol": "ZILUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9896176089244334,
+      "trend_prob": 0.01038239107556668,
+      "persistence_prob": 0.9770811722333728
+    },
+    {
+      "strategy_id": 413422702,
+      "symbol": "INJUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.6001340408177613,
+      "trend_prob": 0.3998659591822388,
+      "persistence_prob": 0.9604146687411502
+    },
+    {
+      "strategy_id": 413440903,
+      "symbol": "XPLUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9841793622605676,
+      "trend_prob": 0.01582063773943243,
+      "persistence_prob": 0.9770813166082212
+    },
+    {
+      "strategy_id": 413440791,
+      "symbol": "CHIPUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.4195809232243345,
+      "trend_prob": 0.5804190767756655,
+      "persistence_prob": 0.9412165045807522
+    },
+    {
+      "strategy_id": 413440856,
+      "symbol": "IRYSUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01596334166153217,
+      "trend_prob": 0.9840366583384679,
+      "persistence_prob": 0.9665514236439856
+    },
+    {
+      "strategy_id": 413440952,
+      "symbol": "0GUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9689514735107867,
+      "trend_prob": 0.03104852648921331,
+      "persistence_prob": 0.9770811722333728
+    },
+    {
+      "strategy_id": 413440776,
+      "symbol": "SOONUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.3924076999340195,
+      "trend_prob": 0.6075923000659804,
+      "persistence_prob": 0.9589427291606836
+    },
+    {
+      "strategy_id": 413440969,
+      "symbol": "BOMEUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9811970484857104,
+      "trend_prob": 0.01880295151428962,
+      "persistence_prob": 0.9659176712963062
+    },
+    {
+      "strategy_id": 413440831,
+      "symbol": "CFGUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9779044390633554,
+      "trend_prob": 0.02209556093664448,
+      "persistence_prob": 0.9659177086423953
+    },
+    {
+      "strategy_id": 413450367,
+      "symbol": "IDUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.5204615726773055,
+      "trend_prob": 0.4795384273226946,
+      "persistence_prob": 0.8492508719501458
+    },
+    {
+      "strategy_id": 413450476,
+      "symbol": "ZILUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9809426542491738,
+      "trend_prob": 0.01905734575082611,
+      "persistence_prob": 0.9659175830610833
+    },
+    {
+      "strategy_id": 413468936,
+      "symbol": "VANRYUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01597020588094694,
+      "trend_prob": 0.984029794119053,
+      "persistence_prob": 0.9665514246368933
+    },
+    {
+      "strategy_id": 413468946,
+      "symbol": "XPLUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9699252448218819,
+      "trend_prob": 0.03007475517811815,
+      "persistence_prob": 0.9553116419223422
+    },
+    {
+      "strategy_id": 413468928,
+      "symbol": "SOONUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01596460917472022,
+      "trend_prob": 0.9840353908252798,
+      "persistence_prob": 0.9665514246368933
+    },
+    {
+      "strategy_id": 413468963,
+      "symbol": "SPXUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9812149391901348,
+      "trend_prob": 0.01878506080986526,
+      "persistence_prob": 0.9659177107205741
+    },
+    {
+      "strategy_id": 413468955,
+      "symbol": "ONDOUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9679692350320869,
+      "trend_prob": 0.03203076496791309,
+      "persistence_prob": 0.9546273780662047
+    },
+    {
+      "strategy_id": 413491078,
+      "symbol": "OPENUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9808608185626836,
+      "trend_prob": 0.01913918143731637,
+      "persistence_prob": 0.965917689311005
+    },
+    {
+      "strategy_id": 413490966,
+      "symbol": "MIRAUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9678748995432058,
+      "trend_prob": 0.0321251004567943,
+      "persistence_prob": 0.9433370569423752
+    },
+    {
+      "strategy_id": 413490951,
+      "symbol": "FLOWUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9674747271159894,
+      "trend_prob": 0.03252527288401062,
+      "persistence_prob": 0.953417697346717
+    },
+    {
+      "strategy_id": 413506347,
+      "symbol": "SKYAIUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9812297386146852,
+      "trend_prob": 0.01877026138531484,
+      "persistence_prob": 0.9659176926763885
+    },
+    {
+      "strategy_id": 413506397,
+      "symbol": "XPLUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.4380528929265589,
+      "trend_prob": 0.5619471070734411,
+      "persistence_prob": 0.9475513617744944
+    },
+    {
+      "strategy_id": 413527314,
+      "symbol": "KOMAUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01596334452702869,
+      "trend_prob": 0.9840366554729714,
+      "persistence_prob": 0.9665514193457408
+    },
+    {
+      "strategy_id": 413527415,
+      "symbol": "TLMUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01608787240490769,
+      "trend_prob": 0.9839121275950923,
+      "persistence_prob": 0.9665513719773383
+    },
+    {
+      "strategy_id": 413533816,
+      "symbol": "TAGUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01603696184517802,
+      "trend_prob": 0.9839630381548219,
+      "persistence_prob": 0.9665514246368933
+    },
+    {
+      "strategy_id": 413533848,
+      "symbol": "1MBABYDOGEUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.1212612710886168,
+      "trend_prob": 0.8787387289113832,
+      "persistence_prob": 0.9681391289900639
+    },
+    {
+      "strategy_id": 413542967,
+      "symbol": "GIGGLEUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01596334099959375,
+      "trend_prob": 0.9840366590004063,
+      "persistence_prob": 0.9665514246368933
+    },
+    {
+      "strategy_id": 413569096,
+      "symbol": "FLOWUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9804193281247049,
+      "trend_prob": 0.01958067187529502,
+      "persistence_prob": 0.9659176712963062
+    },
+    {
+      "strategy_id": 413583934,
+      "symbol": "PUMPUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9811862739279372,
+      "trend_prob": 0.01881372607206275,
+      "persistence_prob": 0.9571677076860003
+    },
+    {
+      "strategy_id": 413590002,
+      "symbol": "ADAUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.3624817379776926,
+      "trend_prob": 0.6375182620223075,
+      "persistence_prob": 0.9506396049890238
+    },
+    {
+      "strategy_id": 413595402,
+      "symbol": "SKYAIUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01596334099959406,
+      "trend_prob": 0.984036659000406,
+      "persistence_prob": 0.9665514246368933
+    },
+    {
+      "strategy_id": 413595380,
+      "symbol": "ADAUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9807403915499779,
+      "trend_prob": 0.01925960845002207,
+      "persistence_prob": 0.9659176630610165
+    },
+    {
+      "strategy_id": 413595563,
+      "symbol": "ENAUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9907109118746287,
+      "trend_prob": 0.009289088125371384,
+      "persistence_prob": 0.9654146821220981
+    },
+    {
+      "strategy_id": 413620390,
+      "symbol": "BICOUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01596334099959375,
+      "trend_prob": 0.9840366590004063,
+      "persistence_prob": 0.9665514246368933
+    },
+    {
+      "strategy_id": 413620471,
+      "symbol": "RESOLVUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.0163573276424425,
+      "trend_prob": 0.9836426723575575,
+      "persistence_prob": 0.9665514178106535
+    },
+    {
+      "strategy_id": 413620453,
+      "symbol": "BIOUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.7632126947113608,
+      "trend_prob": 0.2367873052886393,
+      "persistence_prob": 0.9659173830614644
+    },
+    {
+      "strategy_id": 413620435,
+      "symbol": "BABYUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01603350980088225,
+      "trend_prob": 0.9839664901991177,
+      "persistence_prob": 0.9665513515228061
+    },
+    {
+      "strategy_id": 413629108,
+      "symbol": "UNIUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.0260995041814566,
+      "trend_prob": 0.9739004958185434,
+      "persistence_prob": 0.9681396221708359
+    },
+    {
+      "strategy_id": 413656472,
+      "symbol": "KMNOUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01596337610596371,
+      "trend_prob": 0.9840366238940363,
+      "persistence_prob": 0.9415513791201935
+    },
+    {
+      "strategy_id": 413670210,
+      "symbol": "ENAUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9634413667234517,
+      "trend_prob": 0.03655863327654806,
+      "persistence_prob": 0.9492510195689431
+    },
+    {
+      "strategy_id": 413670196,
+      "symbol": "SAGAUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01599094835276503,
+      "trend_prob": 0.984009051647235,
+      "persistence_prob": 0.9665514219773192
+    },
+    {
+      "strategy_id": 413669586,
+      "symbol": "TSTUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01596334669421087,
+      "trend_prob": 0.9840366533057892,
+      "persistence_prob": 0.9665514160949675
+    },
+    {
+      "strategy_id": 413770812,
+      "symbol": "AIGENSYNUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01655731017841295,
+      "trend_prob": 0.9834426898215871,
+      "persistence_prob": 0.966551359477346
+    },
+    {
+      "strategy_id": 413303999,
+      "symbol": "ALICEUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01596335527263981,
+      "trend_prob": 0.9840366447273602,
+      "persistence_prob": 0.9665514032273241
+    },
+    {
+      "strategy_id": 413802846,
+      "symbol": "ARBUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.98049308227947,
+      "trend_prob": 0.01950691772053003,
+      "persistence_prob": 0.9659176376064871
+    },
+    {
+      "strategy_id": 413506424,
+      "symbol": "ARXUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9488537844380223,
+      "trend_prob": 0.05114621556197772,
+      "persistence_prob": 0.938994583652736
+    },
+    {
+      "strategy_id": 413784924,
+      "symbol": "ATUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.0159633601617177,
+      "trend_prob": 0.9840366398382824,
+      "persistence_prob": 0.9665513992500528
+    },
+    {
+      "strategy_id": 413770782,
+      "symbol": "BANKUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01596336728243895,
+      "trend_prob": 0.9840366327175611,
+      "persistence_prob": 0.9665513852126255
+    },
+    {
+      "strategy_id": 413810611,
+      "symbol": "BANKUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.6928545559905868,
+      "trend_prob": 0.3071454440094133,
+      "persistence_prob": 0.9556235857426623
+    },
+    {
+      "strategy_id": 413590013,
+      "symbol": "BERAUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.0315466076798725,
+      "trend_prob": 0.9684533923201276,
+      "persistence_prob": 0.9276625083970811
+    },
+    {
+      "strategy_id": 413802831,
+      "symbol": "BILLUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9711934191257159,
+      "trend_prob": 0.02880658087428398,
+      "persistence_prob": 0.9459177053467153
+    },
+    {
+      "strategy_id": 413704254,
+      "symbol": "BIOUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9602366151528909,
+      "trend_prob": 0.03976338484710902,
+      "persistence_prob": 0.9453294408464782
+    },
+    {
+      "strategy_id": 413533826,
+      "symbol": "CFXUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9810753548259742,
+      "trend_prob": 0.01892464517402574,
+      "persistence_prob": 0.9659176747276772
+    },
+    {
+      "strategy_id": 413802714,
+      "symbol": "CHIPUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9601603845218409,
+      "trend_prob": 0.03983961547815913,
+      "persistence_prob": 0.9484176840610075
+    },
+    {
+      "strategy_id": 413739197,
+      "symbol": "CRVUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9758081291455144,
+      "trend_prob": 0.02419187085448563,
+      "persistence_prob": 0.9659175830610833
+    },
+    {
+      "strategy_id": 413802786,
+      "symbol": "CRVUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9791981115353693,
+      "trend_prob": 0.02080188846463066,
+      "persistence_prob": 0.965917667436014
+    },
+    {
+      "strategy_id": 413595481,
+      "symbol": "DEXEUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9901734286437835,
+      "trend_prob": 0.009826571356216408,
+      "persistence_prob": 0.9770812322332905
+    },
+    {
+      "strategy_id": 413745266,
+      "symbol": "DEXEUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.02729903342685364,
+      "trend_prob": 0.9727009665731462,
+      "persistence_prob": 0.9681395789890354
+    },
+    {
+      "strategy_id": 413785303,
+      "symbol": "ENAUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9790622565520295,
+      "trend_prob": 0.02093774344797059,
+      "persistence_prob": 0.9492510195689431
+    },
+    {
+      "strategy_id": 413533841,
+      "symbol": "FORMUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9809630410553113,
+      "trend_prob": 0.01903695894468868,
+      "persistence_prob": 0.9659176926763885
+    },
+    {
+      "strategy_id": 413739050,
+      "symbol": "GRVTUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9676936792841104,
+      "trend_prob": 0.0323063207158896,
+      "persistence_prob": 0.9659175830610833
+    },
+    {
+      "strategy_id": 413810566,
+      "symbol": "GRVTUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01597407716852182,
+      "trend_prob": 0.9840259228314783,
+      "persistence_prob": 0.9665514193457408
+    },
+    {
+      "strategy_id": 413802768,
+      "symbol": "IDUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9578743323913196,
+      "trend_prob": 0.04212566760868033,
+      "persistence_prob": 0.9659177107205741
+    },
+    {
+      "strategy_id": 413506455,
+      "symbol": "INJUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9807385619472765,
+      "trend_prob": 0.0192614380527235,
+      "persistence_prob": 0.9770810322336715
+    },
+    {
+      "strategy_id": 413785023,
+      "symbol": "INJUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.8737032487666707,
+      "trend_prob": 0.1262967512333293,
+      "persistence_prob": 0.9440426729047627
+    },
+    {
+      "strategy_id": 413810602,
+      "symbol": "INJUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9804218670761309,
+      "trend_prob": 0.01957813292386913,
+      "persistence_prob": 0.9659175580611143
+    },
+    {
+      "strategy_id": 413724717,
+      "symbol": "KAITOUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9726161389499381,
+      "trend_prob": 0.02738386105006181,
+      "persistence_prob": 0.9573811229182281
+    },
+    {
+      "strategy_id": 413770737,
+      "symbol": "KAITOUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01685153503206862,
+      "trend_prob": 0.9831484649679314,
+      "persistence_prob": 0.9665514246368933
+    },
+    {
+      "strategy_id": 413322133,
+      "symbol": "MIRAUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.02332052182363562,
+      "trend_prob": 0.9766794781763644,
+      "persistence_prob": 0.9665514151591389
+    },
+    {
+      "strategy_id": 413704210,
+      "symbol": "MMTUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01596334099959653,
+      "trend_prob": 0.9840366590004035,
+      "persistence_prob": 0.9665514246368933
+    },
+    {
+      "strategy_id": 413785138,
+      "symbol": "NIGHTUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.0263533826980368,
+      "trend_prob": 0.9736466173019632,
+      "persistence_prob": 0.968139608336848
+    },
+    {
+      "strategy_id": 413450443,
+      "symbol": "OPENUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.0159696624987853,
+      "trend_prob": 0.9840303375012147,
+      "persistence_prob": 0.9665514032273241
+    },
+    {
+      "strategy_id": 413506493,
+      "symbol": "OPENUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9800405950881811,
+      "trend_prob": 0.01995940491181891,
+      "persistence_prob": 0.9659177107205741
+    },
+    {
+      "strategy_id": 413590042,
+      "symbol": "OPENUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9742663999225554,
+      "trend_prob": 0.02573360007744464,
+      "persistence_prob": 0.9354829100931408
+    },
+    {
+      "strategy_id": 413595519,
+      "symbol": "ORDIUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9779285333037389,
+      "trend_prob": 0.0220714666962612,
+      "persistence_prob": 0.9641183823017974
+    },
+    {
+      "strategy_id": 413785038,
+      "symbol": "ORDIUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9899631165293696,
+      "trend_prob": 0.01003688347063043,
+      "persistence_prob": 0.9770812322332905
+    },
+    {
+      "strategy_id": 413745247,
+      "symbol": "PHAUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.5794506544444646,
+      "trend_prob": 0.4205493455555355,
+      "persistence_prob": 0.9770808572342549
+    },
+    {
+      "strategy_id": 413450414,
+      "symbol": "PIPPINUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01596495910589698,
+      "trend_prob": 0.984035040894103,
+      "persistence_prob": 0.9665514032273241
+    },
+    {
+      "strategy_id": 413462622,
+      "symbol": "PIPPINUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.0159633896249112,
+      "trend_prob": 0.9840366103750888,
+      "persistence_prob": 0.9544824469178687
+    },
+    {
+      "strategy_id": 413462600,
+      "symbol": "REUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.05261820181670764,
+      "trend_prob": 0.9473817981832924,
+      "persistence_prob": 0.9446763868210819
+    },
+    {
+      "strategy_id": 413810583,
+      "symbol": "RVNUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9620446446027084,
+      "trend_prob": 0.03795535539729149,
+      "persistence_prob": 0.9492510195689431
+    },
+    {
+      "strategy_id": 413462579,
+      "symbol": "SKYAIUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.02293695715140784,
+      "trend_prob": 0.9770630428485922,
+      "persistence_prob": 0.9331395629890503
+    },
+    {
+      "strategy_id": 413506306,
+      "symbol": "SOONUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01618953766619976,
+      "trend_prob": 0.9838104623338003,
+      "persistence_prob": 0.9665514246368933
+    },
+    {
+      "strategy_id": 413802753,
+      "symbol": "TLMUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01596342610592085,
+      "trend_prob": 0.9840365738940792,
+      "persistence_prob": 0.9665512969774026
+    },
+    {
+      "strategy_id": 413322197,
+      "symbol": "VANRYUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.01596413734002594,
+      "trend_prob": 0.984035862659974,
+      "persistence_prob": 0.9665513662081109
+    },
+    {
+      "strategy_id": 413785316,
+      "symbol": "XPLUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9851983109086903,
+      "trend_prob": 0.01480168909130972,
+      "persistence_prob": 0.9770813204685134
+    },
+    {
+      "strategy_id": 413802860,
+      "symbol": "XPLUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9252404476235814,
+      "trend_prob": 0.07475955237641864,
+      "persistence_prob": 0.9659176018110635
+    },
+    {
+      "strategy_id": 413322105,
+      "symbol": "YGGUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.6233269214732081,
+      "trend_prob": 0.3766730785267919,
+      "persistence_prob": 0.8959175790611209
+    },
+    {
+      "strategy_id": 413785326,
+      "symbol": "ZAMAUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9907260450969395,
+      "trend_prob": 0.009273954903060487,
+      "persistence_prob": 0.9667872349148694
+    },
+    {
+      "strategy_id": 413802871,
+      "symbol": "ZECUSDT",
+      "hmm_feature_source": "pinned_artifact_replay",
+      "range_prob": 0.9793930552519005,
+      "trend_prob": 0.02060694474809956,
+      "persistence_prob": 0.9657910272384118
+    }
+  ],
+  "versions": {
+    "rolling_180d_20260911_131128": 362,
+    "NaN": 4
+  }
+}

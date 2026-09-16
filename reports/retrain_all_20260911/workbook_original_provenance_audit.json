@@ -1,0 +1,15 @@
+{
+  "rows": 366,
+  "original_metadata_columns": [
+    "backfill_status",
+    "hmm_feature_source",
+    "hmm_feature_cutoff_utc"
+  ],
+  "hmm_feature_cutoff_utc": {
+    "known": 362,
+    "after_bot_start": 0,
+    "equal_bot_start": 0,
+    "before_bot_start": 362
+  },
+  "limitation": "Only HMM fields were replayed. Existing non-HMM features retain their recorded provenance; refreshed HMM cutoff is not proof of point-in-time availability for other features."
+}

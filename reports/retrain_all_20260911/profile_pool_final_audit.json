@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "fresh_backtest_rows": 4019,
+  "fresh_complete_profile_rows": 3710,
+  "fresh_incomplete_rows": 309,
+  "retained_historical_rows": 399,
+  "total_unique_training_rows": 4109,
+  "positives": 2009,
+  "all_features_finite": true,
+  "all_scan_times_no_later_than_outcome_start": true,
+  "conflicting_historical_outcomes_reused": 0
+}

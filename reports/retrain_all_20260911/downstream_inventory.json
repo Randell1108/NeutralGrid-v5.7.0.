@@ -1,0 +1,37 @@
+{
+  "scope": "HMM and downstream artifacts requested 2026-09-11",
+  "hmm": {
+    "entrypoint": "retrain_hmm.py",
+    "components": ["model.joblib", "scaler.joblib", "state_means.npy", "feature_schema.json", "metadata.json", "eval.json", "temperature_scaler.json"],
+    "temperature_policy": "identity; self-labeled temperature scaling disabled",
+    "optional_cpcv_threshold": "Absent in prior active HMM; no new threshold sweep requested"
+  },
+  "meta_labeler": {
+    "entrypoint": "retrain_meta_labeler.py",
+    "components": ["models/meta_labeler.pkl", "models/meta_labeler/model.joblib", "models/meta_labeler/scaler.joblib", "models/meta_labeler/metadata.json", "models/meta_labeler_promotion_decision.json", "models/meta_labeler_verification.json"],
+    "probability_calibration": "Included in canonical training, reviewed after fit",
+    "source_contract": "new fresh_full_pool legacy outcomes, explicit HMM replay and canonical finalization"
+  },
+  "utility": {
+    "entrypoint": "scripts/recalibrate_utility.py",
+    "source": "Canonical General outcomes and Meta Features, followed by fresh HMM replay",
+    "promotion": "Only through unchanged G0-G7 gates"
+  },
+  "profile": {
+    "entrypoint_attempt": "retrain_scanner.py",
+    "fallback_refit": "report-local core canonical trainer; no funding proxy backfill",
+    "components": ["profile_model.json", "pattern_profile.json"],
+    "status": "shadow; no fresh canonical holdout after previous disclosure",
+    "legacy_profile_gate": "Unsupported by current four-feature PatternProfile contract"
+  },
+  "conformal": {
+    "runtime_path": "data/cache/conformal_quantile.json",
+    "prior_runtime_artifact_present": false,
+    "requirement": "At least 20 valid independent calibration labels and held-out probabilities attributable to the new model",
+    "backtest_side_effect_policy": "Outputs remain in isolated runtime directory; historical model probabilities do not justify new-model activation"
+  },
+  "mi_weights": {
+    "status": "disabled by existing production code",
+    "reason": "Source-column and raw-MI provenance contract is not implemented; do not enable by retraining"
+  }
+}

@@ -1,0 +1,2137 @@
+{
+  "created_at_utc": "2026-09-11T14:18:01.320788+00:00",
+  "policy": "Retain original first-inventory source identity and mtime. Require recorded scan <= recorded file availability and outcome start. Conflicting archive/recovery copies are not assigned a guessed replacement timestamp.",
+  "original_files": 268,
+  "staged_files": 112,
+  "excluded_source_rows": 18994,
+  "ledger": [
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00001_20260122_012609.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00002_20260122_012719.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00003_20260122_013028.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 200
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00004_20260122_013854.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 200
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00005_20260122_014449.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 465
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00006_20260122_014956.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 437
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00007_20260202_132027.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00008_20260203_085231.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00009_20260203_125109.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00010_20260204_113926.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00011_20260204_170500.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00012_20260204_201011.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00013_20260204_201127.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00014_20260205_132231.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 100
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00015_20260205_133851.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 200
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00016_20260205_153039.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 200
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00017_20260205_200355.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 200
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00018_20260205_200612.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 200
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00019_20260205_200825.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 200
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00020_20260206_082213.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00021_20260206_102748.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00022_20260206_102855.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00023_20260206_102944.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00024_20260206_120611.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00025_20260206_203637.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00026_20260208_164943.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00027_20260208_165058.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00028_20260208_165455.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00029_20260208_170743.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00030_20260208_170932.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00031_20260208_174442.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00032_20260208_200228.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00033_20260208_222003.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00034_20260209_000114.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00035_20260209_101003.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00036_20260209_124416.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00037_20260209_124526.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00038_20260209_130645.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 100
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00039_20260209_143813.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 100
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00040_20260209_151836.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 100
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00041_20260210_180052.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00042_20260210_180153.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00043_20260210_183425.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00044_20260210_184938.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00045_20260210_192811.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 100
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00046_20260210_232834.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00047_20260210_233420.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00048_20260211_064853.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00049_20260211_065022.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00050_20260211_085513.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00051_20260211_085819.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00052_20260211_143523.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00053_20260211_150602.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00054_20260211_160642.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00055_20260211_170859.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00056_20260211_171942.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00057_20260211_180611.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00058_20260211_181116.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00059_20260211_181249.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00060_20260211_181411.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00061_20260211_182640.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00062_20260211_184800.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00063_20260213_102625.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00064_20260213_102737.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00065_20260213_193746.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00066_20260213_193858.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00067_20260215_152153.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00068_20260215_180450.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00069_20260216_114440.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00141_20260216_121841.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00142_20260216_150916.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00143_20260216_165228.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00144_20260217_102832.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00145_20260217_102930.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00146_20260217_103039.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 50
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00221_20260217_104916.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 150
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00222_20260217_110700.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 150
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00223_20260217_170412.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 149
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00224_20260218_162506.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 150
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00225_20260218_171033.csv",
+      "reason": "missing_recorded_candidate_id",
+      "rows": 150
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00305_20260218_192430.csv",
+      "source_sha256": "8b019a9188bba6df73a4001f1ce5e199a90353f1a1b5435fe1745c899953dc60",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-19 00:26:54.114992857+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00305_20260218_192430.csv",
+      "destination_sha256": "ea43ce08cf1194c1f2c70862247a8f4a1cce0f5444a64af3b7e97fdb0029b671"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00306_20260219_100556.csv",
+      "source_sha256": "5fbea62c5186abd9727adf08fea38b4dc999e9091827e574624d9a6780dd6aab",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-19 15:11:50.880969048+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00306_20260219_100556.csv",
+      "destination_sha256": "b802eacb68b2dce0fe98428a682d4d82088774f5af37895c713b3f8528f3e8c1"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00307_20260219_101215.csv",
+      "source_sha256": "6a2915e2f0b68998bed95a83717331c53cb47a9989a2a0994d38e00a2a1cc514",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-19 15:18:13.941457748+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00307_20260219_101215.csv",
+      "destination_sha256": "2ebb06f5754b8b635506a0fa0dca652efd50f14866b9a639e0d7f4bcaaa6d5e0"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00308_20260219_110515.csv",
+      "source_sha256": "7236052569be3bea2e52aaafa9533354d237ef85e7bb62f58499eddb42692471",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-19 16:11:16.538455963+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00308_20260219_110515.csv",
+      "destination_sha256": "b5010cd26120f215cbfaa251889c0398c692a04f99cf399d59db93294ba65304"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00309_20260219_120648.csv",
+      "source_sha256": "41ad4b395a03cce23bcc570bc45445e474410c325b47c5444d6539b66a0a2862",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-19 17:12:40.379121542+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00309_20260219_120648.csv",
+      "destination_sha256": "5e928245fc6415b05b6fbe37c81eb2c53ca424d34cb853f34e845ac1e42f8d9e"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00390_20260219_161003.csv",
+      "source_sha256": "ff93779d7527010588fbec5fcbebfa78b5855b60e0f0cbe83d1f72785683372e",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-19 21:15:38.409172297+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00390_20260219_161003.csv",
+      "destination_sha256": "adb514741e44b351989398df9091cf95c5602e971e470968ed7778efce425752"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00391_20260220_110101.csv",
+      "source_sha256": "9815187ac26d9731f029be077648e280c5838d915260848e4d47115d88f11412",
+      "input_rows": 148,
+      "retained_rows": 148,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-20 16:17:49.124185801+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00391_20260220_110101.csv",
+      "destination_sha256": "ac78e8d3d6eb6ffb840d2fe2b9a6d494fdf5a600f68a83fd3498034e76190209"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00392_20260220_193637.csv",
+      "source_sha256": "e90390e263f323cecc1f61ae3ef2f8a0a053435f8941ecb9f171ee07f34370ff",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-21 00:42:21.285922527+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00392_20260220_193637.csv",
+      "destination_sha256": "95db58accf5963e1080a0281cb4c9b96616d4ea2e8fe914f538e408af725f968"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00393_20260222_002012.csv",
+      "source_sha256": "42b1a0dacedc9725232d8981d6439ed09a69755e9397aeffa1af31ea1fd9c71a",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-22 05:25:55.876449347+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00393_20260222_002012.csv",
+      "destination_sha256": "398402c4e2c3e8cea1af9207398f2d94c168c65ca5cb2470b8d1e66e71df24ff"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00394_20260222_002612.csv",
+      "source_sha256": "946a23d1c5027f843a581ee9e1a39cb23213d79e189698630109dd6a193b2f77",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-22 05:31:53.660612583+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00394_20260222_002612.csv",
+      "destination_sha256": "d5608c0dbe91bc621f9a1806bece41f593e3200823577a1aeaacf5f92438a688"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00395_20260223_110222.csv",
+      "source_sha256": "cd89e3f9c653704f5056b1aadd488b8bf8542722d3f38e646c2b547792fc346b",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-23 16:07:43.835815668+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00395_20260223_110222.csv",
+      "destination_sha256": "d559c2424dd4e015037047f477b557c5c067fad7c758966eed1ebb546dc4f4ff"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00396_20260223_182603.csv",
+      "source_sha256": "82c48d323062570b9bcd5029bf94580dffce24dd7b1bfce06a08f13c1a650012",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-23 23:34:10.546536446+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00396_20260223_182603.csv",
+      "destination_sha256": "9cf3b88591ce3c2bb373dfda07d59d5076262bc08f5f5947d30ef7f30679e1e1"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00397_20260223_190237.csv",
+      "source_sha256": "0bf8c602eef675fa09d9813d7d18cd65bd083cbfd06de8a9bd3c7a5288504853",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-24 00:08:35.847271204+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00397_20260223_190237.csv",
+      "destination_sha256": "df0930cbc505a464cab56a1dcd69073c526fccad658547c2cde446014644e2c4"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00398_20260223_200146.csv",
+      "source_sha256": "09b8f004f0ef345452735cf567fd08fa35f99f0095d5b02ce86a8fb060ce10ce",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-24 01:08:02.134102583+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00398_20260223_200146.csv",
+      "destination_sha256": "171384f8f26dcbfe59bc7443f89ad2df35fec2aa900bfc66607381bec07eaefc"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00399_20260223_210559.csv",
+      "source_sha256": "d54c0bd07db2b516021d6829273d4a933018c4e306aa2f02eb04461fca311517",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-24 02:20:26.644603491+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00399_20260223_210559.csv",
+      "destination_sha256": "ecf81a7f75be66af20fce5b6018b88066e33422584344797acdbe43cacf50f6a"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00400_20260224_090249.csv",
+      "source_sha256": "fd657e4601a14c37a2c12f4ef7c5e1791bea3adb35dd9461a6107d716aea737d",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-24 14:12:43.626984835+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00400_20260224_090249.csv",
+      "destination_sha256": "2ab02fb4ef8d913c727769f2ede26c1d00754421adca477c36796440bef95e15"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00401_20260224_102314.csv",
+      "source_sha256": "d17ae15e5ea0e6815dca9bddc00547db1052d66034df749979ace72c4a9b9167",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-24 15:29:07.192628622+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00401_20260224_102314.csv",
+      "destination_sha256": "7f622ce1e608679919999f8fbd250702b085422ac7c81f01b025e131727d7ee3"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00402_20260224_120629.csv",
+      "source_sha256": "0f44afcf15e80a5d6c0eaadeee8857b06bf293199142b68b11d3109ec1cafd9d",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-24 17:11:57.156294107+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00402_20260224_120629.csv",
+      "destination_sha256": "8ac38448f5521608305b5698d049b2fa4d2f452ca18e693ed4fe5c68b5ea787c"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00403_20260224_151842.csv",
+      "source_sha256": "ac0735193a82604bd557e9d63517b6b7d1b5b00261037d76b33710ade9d09c97",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-24 20:24:25.285263538+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00403_20260224_151842.csv",
+      "destination_sha256": "fdb5da2a0657f64530066c7b96723f5838e7205a703e3376c7fde850022c9d13"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00404_20260224_160308.csv",
+      "source_sha256": "198de96ead31dc1afe34c7308afa6ceb505d423a6a04ec8cb7600795344870da",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-24 21:08:14.640343189+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00404_20260224_160308.csv",
+      "destination_sha256": "743f63e6027f2064a557a04f41ab7e728f83565313f1a7c030296efac1550436"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00405_20260225_112340.csv",
+      "source_sha256": "92129217daca5d0399b5c8b04ba6a807b8acad561a30be25f0beae95f0b2a9cc",
+      "input_rows": 149,
+      "retained_rows": 149,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-25 16:39:29.491116285+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00405_20260225_112340.csv",
+      "destination_sha256": "f40018c336b4a2cb18ef780f65e29daac4e1ed473abb95d3d6402632cb6d075d"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00489_20260221_072121.csv",
+      "source_sha256": "753d74c7e0abd5ef8a267fc6788e3998136dcf32278a938f2085133dbe95ccb6",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-21 12:36:00.506222486+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00489_20260221_072121.csv",
+      "destination_sha256": "a4ec5927ceedf8241e8a279612fb32818b8a7f9848f40496b93ad23eebaea1a5"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00490_20260223_114023.csv",
+      "source_sha256": "72c897e14add0d9284526134d636122b72e28c54bd3bdf2c5442f9ed0ed38978",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-23 16:53:00.933332682+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00490_20260223_114023.csv",
+      "destination_sha256": "cadc889ad11b9dbe62bb2839cdfbc045e4d990633b416fc08932224f3db5176f"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00491_20260223_115314.csv",
+      "source_sha256": "db3456d6fe9bd82c6812a7c819b47a66bb3598f4af67dac38e6c4fa2ce121036",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-23 17:08:52.856385708+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00491_20260223_115314.csv",
+      "destination_sha256": "861dc9b60781aa6302ed92c07d3c0bee3191655a41a788ba7d347fd62e4a04bf"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00492_20260223_130238.csv",
+      "source_sha256": "dd638960cc43107eafbd8469c14a749a810fda978819457fa2777c35e6d68f98",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-23 18:15:07.071333170+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00492_20260223_130238.csv",
+      "destination_sha256": "bae85ac2b1a23130b4599305fddc8fb4b342b6e69c6faf297f8f217f262c6c67"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00493_20260223_140819.csv",
+      "source_sha256": "ca96117ba9694d85313486192e645e2179646c4638d8500b0d5d3a45391f88bd",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-23 19:19:31.200200558+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00493_20260223_140819.csv",
+      "destination_sha256": "a3a528bee43b2caf8f973049adbb44d0feba7237016002e4b9ac03ae0c9fcd9e"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00494_20260223_180222.csv",
+      "source_sha256": "68b5ff4f0346bf12dbd793b1087689ea5b329a623552c7c1aa0cf769e9399981",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-23 23:18:05.718847275+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00494_20260223_180222.csv",
+      "destination_sha256": "9d5427fbaa9b7e4aad93eb8e34bb6ba199d0bac13b2ecddd6c3aa6a876f63696"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00495_20260223_194134.csv",
+      "source_sha256": "ce054772cbc94b626f7d26ee2c0f3726968c5e2ece89ff836c153b32effedb0a",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-24 00:48:53.443027020+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00495_20260223_194134.csv",
+      "destination_sha256": "7aa0f91ca1154926841327baaf73c26084d88ed9c941f2c5ef04ec191ca71d03"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00496_20260223_200132.csv",
+      "source_sha256": "480b905aea1e16bd4a210018d88ac2d5213ab7cf0714178baa8a77b5b0697363",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-24 01:11:52.259060860+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00496_20260223_200132.csv",
+      "destination_sha256": "00c200e8229a63454cf532adefbf77d78fe38dc6185295cd9d74781340ad0632"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00497_20260223_210533.csv",
+      "source_sha256": "63f7ffdd8f514f6187e4d494a9d860ab674efae92eb355bb0a6182b071172870",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-24 02:22:15.522271872+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00497_20260223_210533.csv",
+      "destination_sha256": "20edb4216a83a2fef0b1be66c4cd49d5b3c8bb6c0401268f25e403fce1a4e29b"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00498_20260224_090226.csv",
+      "source_sha256": "7414a2c830f9cf452bddd655aacb2d24f999c22517d9d8f6319e2d964d09aafb",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-24 14:15:01.325816393+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00498_20260224_090226.csv",
+      "destination_sha256": "03e3d9d3a96cf22818d39af8e0e8a3a5ccbc20c9e91d3f2d25b2ff8487a95ead"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00499_20260224_100100.csv",
+      "source_sha256": "ffe9f11e727180f3fd83ab6acbbe2439fe64184e40b7f0cc63d6f912fa0bce42",
+      "input_rows": 149,
+      "retained_rows": 149,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-24 15:16:21.860331774+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00499_20260224_100100.csv",
+      "destination_sha256": "c634927943d8408e0f423040d74361e8005d7acff6529c995fb14427f81132b5"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00500_20260225_000508.csv",
+      "source_sha256": "d73ef653552803ff4d84276fdf235ece78ea56a39acbf73bda6ed8a6ffcc7d73",
+      "input_rows": 149,
+      "retained_rows": 149,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-25 05:28:26.600204706+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00500_20260225_000508.csv",
+      "destination_sha256": "00075ffda7458cd4ed77fefb873e163c1559ce830c0f2794df3b506411b6a8e3"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00501_20260225_090451.csv",
+      "source_sha256": "724e053e46862ee550973e006744cff4cfe0f3de78ed4b05e265dd9071c7f9e9",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-25 14:13:05.830534220+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00501_20260225_090451.csv",
+      "destination_sha256": "7f2c427c7a4e5adcdee6ac1ca734a0dbdbebc20cf4b67c4928e2e631f28248a6"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00688_20260227_195512.csv",
+      "source_sha256": "7bc89b25e18c3a31aeaab9b2cff12e558ef3a27593dab3c1eb8251de1f451e9b",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-28 01:02:08.073596954+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00688_20260227_195512.csv",
+      "destination_sha256": "ec0e5b42f34c2714bac3e145ffa86e974519952e2cf702207d6e2062f2b43732"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00689_20260228_080448.csv",
+      "source_sha256": "a0bb21ae5a31e6fb2a0cd9ec7a47cb5639fc36ab48647fe0cefb2820a87f4d0f",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-28 13:17:10.976374865+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00689_20260228_080448.csv",
+      "destination_sha256": "8b27c0369a4a14ad4767a3271135a7ac7ccce1064c011f49578bebf24a2e48c9"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00690_20260228_111344.csv",
+      "source_sha256": "24590d75d5d0bd3c4fffb5138e7e3dae4f07221842fc0733374592717927c79a",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-02-28 20:03:13.406479836+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00690_20260228_111344.csv",
+      "destination_sha256": "76ee8ec596deb76654c6afd17f07cfeead1057355b91affeb966e4a8857bcf53"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00691_20260301_072624.csv",
+      "source_sha256": "810a5a21b11747c47e4c21eb6b625bd870f108cbc9da03a20edb5c8edd533f0b",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-03-01 12:34:38.194706678+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00691_20260301_072624.csv",
+      "destination_sha256": "bbdd09acd3aaaf4e02e2079d0e95d56206f7ad026410f1a02addbaf97dc11444"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00692_20260301_121323.csv",
+      "source_sha256": "fa3075cbd8ef3bfdce41a4433b8b7f904e54584924c31bb7755e7f130246eeb7",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-03-01 17:24:28.733078718+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00692_20260301_121323.csv",
+      "destination_sha256": "59be988b27caf98c954fd487ea7dc08f4fd1aad87c92680e486362ca20f86870"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00791_20260301_090516.csv",
+      "source_sha256": "5c852228b19f0580ab35100f5008278a0a2ecd09f3d6a2cc03e11beb7fc74ca6",
+      "input_rows": 148,
+      "retained_rows": 148,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-03-01 14:29:07.752400637+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00791_20260301_090516.csv",
+      "destination_sha256": "91be6768479517527bb53cc9bc843db9341ab173439583d759c677e9ad42bc05"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00792_20260301_121328.csv",
+      "source_sha256": "736b6de43d49f228499a2b62981c74e184f53512075e879586421a76784551ee",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-03-01 17:24:31.239176989+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00792_20260301_121328.csv",
+      "destination_sha256": "75ffe85a65a523a4b4cf9a663dc09804dc7abc296658a6c72bfbd8074cc1b93b"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00793_20260301_125351.csv",
+      "source_sha256": "4ef460c1f8b203f5d6eaf894c851392c201bc08d6286a4c254709b8a89fb927b",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-03-01 18:00:59.663376570+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00793_20260301_125351.csv",
+      "destination_sha256": "8665080af6331cee3fb15fba6f9453b8c8bd1474bdc51d10776ba3010ee3ff12"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00794_20260301_130417.csv",
+      "source_sha256": "1584aa42e126c2a352d89a3711260ec4ffd572af6444bb148b907c1824e60177",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-03-01 18:11:14.430808544+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00794_20260301_130417.csv",
+      "destination_sha256": "8a348aae327c3023a3d25f1bd51261a0dbf7f08796735f61391c383d4c5fa2f1"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00795_20260301_131508.csv",
+      "source_sha256": "bf90ef429ab775c88da6ce077e39b093539d6e0efefd45d77d50095ad82e62f7",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-03-01 18:22:01.578424215+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00795_20260301_131508.csv",
+      "destination_sha256": "3138296ad344c647ae866f2977fb3d32a62fcd782ae46fd13c902d5fd8688a25"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00796_20260301_143336.csv",
+      "source_sha256": "293cb12586ff092339c3317534521c01b91d2f0284168856e33d5587ed034652",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-03-01 19:44:02.108104229+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00796_20260301_143336.csv",
+      "destination_sha256": "e4a0507aa56e6e4487aa05c0d8530f814931457689e0c5a9efd765f02a9c8865"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00797_20260301_155438.csv",
+      "source_sha256": "6c82d23f9891b2b9f84ee514d9863e0418d4bb158a091d4aae991bd50b2a2814",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-03-01 21:03:21.482558727+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00797_20260301_155438.csv",
+      "destination_sha256": "ccedf4339f6dc4c5688473e83abc0f90dd1a08aa43e6617cd14e00334274e003"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00798_20260301_161720.csv",
+      "source_sha256": "512b5c8de611fc996b6445823f035d8fb52f28c19b1589e7826a078dcfb64569",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-03-01 21:25:18.364398241+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00798_20260301_161720.csv",
+      "destination_sha256": "d45cf0e3b47e4c35b58f568197af2b0dd7164173a715f5a5bcfc33d0393c5fe5"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00799_20260301_163036.csv",
+      "source_sha256": "7eded51d37aeef665e233d53dda9d940d11a42d352220f348ee1970ae3f6caba",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-03-01 21:43:49.928358078+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00799_20260301_163036.csv",
+      "destination_sha256": "55026fa6209d0e6892895b1e0bef5ca774e8b13a4e059f82741f1ffc7582279c"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00800_20260301_170827.csv",
+      "source_sha256": "d41e2bc6ba432698a2816828bade75d4930f5a8c12524adf92077fb5e9363345",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-03-01 22:19:11.210496902+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00800_20260301_170827.csv",
+      "destination_sha256": "59bf263e7138e0b041b09ed81023a3b1a61f3ae2f0dff745acc17a63b0af6832"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00801_20260301_181831.csv",
+      "source_sha256": "c7444ff154cf24119c93b1be25a854f1f6eed35990d05cc219a763a493cd59a9",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-03-01 23:24:14.488644361+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00801_20260301_181831.csv",
+      "destination_sha256": "124959c79954901a743dfdfda7bba7f021d1f7ebd6ecf6abb09eb181ca994bff"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00802_20260301_182844.csv",
+      "source_sha256": "9b7463a185e59f5407b6629331cf3cc9da873b336e3b6508c9a0bc7deeb4e4f2",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-03-01 23:35:27.402640343+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00802_20260301_182844.csv",
+      "destination_sha256": "701d50f313fee7cc2ce4a902ef98441700907f1a1e85f82503ab75ebf8c861fc"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00803_20260301_200208.csv",
+      "source_sha256": "3b93c34b255cae76b1927d78438b7d2fccf6ad0f2d787ac3af78abb0fea08410",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-03-02 01:13:08.043472528+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00803_20260301_200208.csv",
+      "destination_sha256": "259594958846bfc1d4e5ebdcfe9484c31d39091cc0c6260ac1c96a0cdb9f7d2a"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00804_20260301_210030.csv",
+      "source_sha256": "0bdfb2304dd5d5845e8fc9b3148f5b9be273338429a7cb412d64d1a569705cd1",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-03-02 02:05:51.575739384+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00804_20260301_210030.csv",
+      "destination_sha256": "95b42dbab0899ac4e0e3b42d3542339b4b337259cc72258dd15eb7d984610403"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00805_20260302_010125.csv",
+      "source_sha256": "a607a31c4bf9418b0df587fbd21d5be340fa16841dbe017eed57bd2724b80c42",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-03-02 06:08:45.748648882+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00805_20260302_010125.csv",
+      "destination_sha256": "4201d749a071ccd91974e97533751a99ee29de01532e1165e7d13ba91fe4443a"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00806_20260302_013745.csv",
+      "source_sha256": "97373a5788af35c707399bdea7c08679879be6ee4b4f32d503a628197d28e0de",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-03-02 06:44:39.302844524+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00806_20260302_013745.csv",
+      "destination_sha256": "8f8e9f9ff0aaf0204d15db26cd53f20bcdecb61646b656e717ceb9d59efca94e"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00807_20260302_094201.csv",
+      "source_sha256": "bdc163fde33501220847ae80b6f5b5349442c532745dc5b452cf030cffddb8f6",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-03-02 14:58:45.040174723+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00807_20260302_094201.csv",
+      "destination_sha256": "34a4a0fa5a1658f14ea4715ce997f46b1e814a104747dc5690397187feec4162"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00808_20260302_112731.csv",
+      "source_sha256": "36e91019184491d593278101e87f6f3f298e1db434015da9fd1ce53d73a3c563",
+      "input_rows": 150,
+      "retained_rows": 150,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-03-02 16:35:23.024633408+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00808_20260302_112731.csv",
+      "destination_sha256": "e82e2669f920bfcdcda4a0f0343ab946001951cc1c8ce2a654094efc6f46c8b4"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00809_recorded_ids.csv",
+      "source_sha256": "06fb27a6ef81af0ad41ed0ee516ca159a329082c6335ea7074b1cbbe3cd3ca11",
+      "input_rows": 50,
+      "retained_rows": 50,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-03-01 21:53:32.122591734+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00809_recorded_ids.csv",
+      "destination_sha256": "4e9efbbf4240431b88efa2bbeac4b1cf4cf3d5c76230bf05dafaee8524db604d"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00810_recorded_ids.csv",
+      "source_sha256": "171b474c24d5b8693f544020260e8e9ab0853bebdaed6cb67612f1d54e493391",
+      "input_rows": 10,
+      "retained_rows": 10,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-03-01 21:33:14.204924583+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00810_recorded_ids.csv",
+      "destination_sha256": "6c5e2c53047f14c7d33bef49e0ddb99732aa3fa31d3e191d531c80467e806739"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00811_recorded_ids.csv",
+      "source_sha256": "8d6c34b9439d04f08c1d51de5db2366fa72ffd0b7b4ffeee0d29d3d15b8bfbef",
+      "input_rows": 10,
+      "retained_rows": 10,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-03-01 22:00:04.712610960+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00811_recorded_ids.csv",
+      "destination_sha256": "765d173373339b5ee1df0f444e272b5beca916a14022a846ac3ea56b19a9e180"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00813_recorded_ids.csv",
+      "source_sha256": "1517bc8643c6a8521e5eaa1a7324cdcd8a15ef5ac5a5fc2af5bf5ed6e08be8bb",
+      "input_rows": 10,
+      "retained_rows": 10,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-03-01 18:23:43.516649245+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00813_recorded_ids.csv",
+      "destination_sha256": "126f2cbaa07ba46c9d08d2456294b4e03a6617803c0e81903a6c9abf35d083da"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00814_recorded_ids.csv",
+      "source_sha256": "f5e1c60eb2f88354d0e78f51d31fe49b0ad26044b42369110e44621df8b7652f",
+      "input_rows": 10,
+      "retained_rows": 10,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-03-01 23:13:52.920225620+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00814_recorded_ids.csv",
+      "destination_sha256": "26acab80d405019cc3b674e47bff40e3ec3055d13095b00d62fa3e6ba1725deb"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00815_20260720_123348.csv",
+      "source_sha256": "e31d6366fb699ef4180605e4f795d53589da394e065b8218196dbb9eba6c4123",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-08-27 17:59:41.899693966+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00815_20260720_123348.csv",
+      "destination_sha256": "47ff1d920ed83a339b8d87a0912428dfefa5f0eefdfaa30ffc3bd7032fa0c468"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00816_20260720_230136.csv",
+      "source_sha256": "d195a1232bb35ca3088da60de69ba1ecaf102f4c7ffe5d38925ab2d3fe907b19",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-08-27 17:59:55.994149685+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00816_20260720_230136.csv",
+      "destination_sha256": "d8e3c0dd143586d0c39c2fa9271dbd684042bba4b5252217b9dad8c748dbf896"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00817_20260720_230136.csv",
+      "source_sha256": "21b7ec67dd57ca029dc2567175a96f4caffd0de1173d2a4f032357f06094d9ab",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-08-27 17:59:49.653168201+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00817_20260720_230136.csv",
+      "destination_sha256": "d39cc4ee56ad54c51096706973fca3d11c27a75e380d81d700b44bbebd4faf5a"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00818_20260721_124614.csv",
+      "source_sha256": "c6e209f2389f72971bae8f1a473e80e1528bdccb2de6b5875d71321edefa9afe",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-08-27 18:00:10.465883493+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00818_20260721_124614.csv",
+      "destination_sha256": "228b123325f5a4196fc08c50042d58b8a7742d4b9227a7d2fbbaf7537f086084"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00819_20260721_124614.csv",
+      "source_sha256": "f67ba21b1da05a0c44ecc050127791e7442621cc2ff6fde9e75dce74e08b1851",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-08-27 18:00:04.185981274+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00819_20260721_124614.csv",
+      "destination_sha256": "e8b56920c838f67fe17ffba0a0a5871a9aa0b20a2b7a63280135b59175409709"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00820_20260722_124801.csv",
+      "source_sha256": "e1a219c52da025c46ff083016534c0fe9716f0912ef2c6ae69ef95c5cca738b4",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-08-27 18:00:41.581025600+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00820_20260722_124801.csv",
+      "destination_sha256": "aa5ea8de05846ed21cf8fcb5539ba9c2b9d1e0cda9a152b60f912d24307e76e9"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00821_20260722_124801.csv",
+      "source_sha256": "1b37cbda936e5f45a2bafda6bd22398e8ae275bffc2328a45a84913879afd070",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-08-27 18:00:21.867757320+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00821_20260722_124801.csv",
+      "destination_sha256": "bdcf58a778bc404a66f9154f6ec20478e54f8b230ff048829d2b01567e7bca2b"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00822_20260726_131925.csv",
+      "source_sha256": "a92090de385af3c3a40e6a3d91fb5ad60a504e7bd737243e1ef71d39f931454c",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-08-27 18:01:15.020190716+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00822_20260726_131925.csv",
+      "destination_sha256": "7d3b88c9c2d7f1a8c178289346a9a956711fc3b3251f318fc5bb893a01cdf61d"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00823_20260726_131925.csv",
+      "source_sha256": "9a1744ae5b0ab1264479043ec23dc22fcf809cd84ce21f5e35c5ace17a525bf2",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-08-27 18:00:49.400771856+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00823_20260726_131925.csv",
+      "destination_sha256": "0a77f282d7f9117c5e46cb558b7e10be0c19aa0ad3b7057f3344e9227f04f007"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00824_20260727_114138.csv",
+      "source_sha256": "42a30b8e28401cb675502702d3eff953b33e40b6ef36677e95d8f08014e31ad4",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-07-27 09:59:34+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00825_20260727_114138.csv",
+      "source_sha256": "18b654f8967fe2e4805e5c4234171d6d4b6585a70f6c483f003eb0e595ebc79c",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-07-27 21:32:36+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00825_20260727_114138.csv",
+      "destination_sha256": "81748a09557302c52dc922cba64523320fff1ea277780240039349f44a46755e"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00826_20260727_203637.csv",
+      "source_sha256": "230fbcdc4d1312068980f98ee45802af4864a954b6155bf2ca08a778ecf0d4af",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-07-27 19:31:34+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00827_20260727_203637.csv",
+      "source_sha256": "eed7687aefe4f42ec7b34b4541c61849092571e2d4921207eeeefedd16d08bd7",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-07-27 21:41:54+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00827_20260727_203637.csv",
+      "destination_sha256": "b86ef3d9e597a9f40285577be89194f504fc70e5d0142e45cbbd3e42e4d0bab3"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00828_20260728_112819.csv",
+      "source_sha256": "a3b89cb7313854ab941eb2d560a01acb2b0fa3843bc48caac2b436fea1577b74",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-07-28 10:49:56+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00829_20260728_112819.csv",
+      "source_sha256": "aa430bb1b3eb7ddc846ffc84a43bb9dead9a9db85b0c4812901702dc3d0d69b1",
+      "input_rows": 248,
+      "retained_rows": 248,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-07-28 12:34:14+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00829_20260728_112819.csv",
+      "destination_sha256": "1fa86222e27acdfa9eec1d8226282ff40526eab9075f3990ef4bff4e5be537c2"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00830_20260728_205605.csv",
+      "source_sha256": "f558bfa09da45cf3ef2b964cd928982d74387a6f35aba1b6ea71c58d2aba70a9",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-07-28 19:20:40+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00831_20260728_205605.csv",
+      "source_sha256": "d1c5bd575df74bf2d6fc61d11b50c146b9697b925ae8bf013dd798605faa7bbc",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-07-28 20:24:10+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00832_20260729_203139.csv",
+      "source_sha256": "436294c90e79f3f57daa107b75044834df19b3ac1352852dcbe77817d501bda1",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-07-29 19:09:44+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00833_20260729_203139.csv",
+      "source_sha256": "e35006fa0079b0b9c6bc9c9715165cad5f681b2d7bf456852846e53db4bcc383",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-07-29 22:05:50+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00833_20260729_203139.csv",
+      "destination_sha256": "42b98662a26982d0a4d463c874687577a5b7c2c81c80ada64e1ba321fc0fedbf"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00834_20260730_121238.csv",
+      "source_sha256": "c446741b8418171f45da287e3e3e48eaefbe3099f52caaf73cde88b1545f80c2",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-07-31 12:28:34+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00834_20260730_121238.csv",
+      "destination_sha256": "8cef762233ae450632ff2e1cc59b7483594a96767055e0658e5196d197b10379"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00835_20260730_121238.csv",
+      "source_sha256": "861532672f2ce4b8cd052b2c99402e0adb764d5a476977a55e987b6e61a30714",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-07-30 11:03:26+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00836_20260730_121238.csv",
+      "source_sha256": "0d02209bf186a075a14f1bb2336a2089968efdc2ca08d6142478bbab3b1c5b2e",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-07-30 13:07:08+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00836_20260730_121238.csv",
+      "destination_sha256": "c7f29466a40b448060c99c32b4447aa79112d2509033b69cd3aa9c0b79d7035f"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00837_20260731_215156.csv",
+      "source_sha256": "08ae77cc635d5d9cd6320de799c85c146ca59dfaa455e84d4daa0549eb4b69f0",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-07-31 20:33:44+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00838_20260731_215156.csv",
+      "source_sha256": "aacedfcc4944db6314398fef6f317de27b4f449dbd84c4a69c27eb3e1e74011c",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-07-31 20:42:18+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00839_20260801_083427.csv",
+      "source_sha256": "a3e91bdb5348bd3aff1aa655cca9cac31c7672fdf9d5805c9f3895150628eff3",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-01 07:16:22+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00840_20260801_083427.csv",
+      "source_sha256": "eec97d06249a25867f85391168f4e93623cd0c2f9628cfb811ea970fcb89a242",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-08-01 12:21:12+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00840_20260801_083427.csv",
+      "destination_sha256": "81a746c7233e619176363b44c468bc27b3c5fd650c3ffdf1474fc2af058d3648"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00841_20260801_170645.csv",
+      "source_sha256": "0f3f9bcd0666b17eb449d6d48b00507cbe4079afa9dc18e3f5f9a90cc49a219a",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-01 15:31:50+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00842_20260801_170645.csv",
+      "source_sha256": "be32860f81300ed663ef9439e3dcee866dc2f012796cba07366a5770a9ca2edb",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-01 16:45:36+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00843_20260802_010455.csv",
+      "source_sha256": "bba268a6aeec620fcab56d8f0b7f2881fa37fafc5e775f71bc58eb431cbad639",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-02 00:17:06+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00844_20260802_010455.csv",
+      "source_sha256": "ed2de364647c8c2d5e0d6d08d6b8fadd216d0037effa1df5cca708e2f87a9a01",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-02 00:44:24+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00845_20260802_184031.csv",
+      "source_sha256": "217acf9ed4b88ef8ece91b056cf3b465e34f1cf857cc43715a7042b8d2a26e26",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-02 17:09:16+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00846_20260802_184031.csv",
+      "source_sha256": "659928defaef11119b32a7665773fd3c36e85f6e37d3a1152fe11f1119aced28",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-08-02 18:58:10+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00846_20260802_184031.csv",
+      "destination_sha256": "97975cd222337f07a8a7df696daa83239787af3007682b20e61ce1851137e4ec"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00847_20260803_070214.csv",
+      "source_sha256": "53f1f5391d871ef088da1eee50a82fff796372efafeb3b619ecf09500c8bc5d0",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-03 05:49:20+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00848_20260803_070214.csv",
+      "source_sha256": "24aec77040a05c165a6c66c034306b9b3553c77ebc1c7b7f34cab4d4c441b996",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-08-03 11:04:38+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00848_20260803_070214.csv",
+      "destination_sha256": "6e428cac96eb356a0945e2d8fd090de8e1112f7150a9c93be54c3e954ff26167"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00849_20260803_141347.csv",
+      "source_sha256": "df1ce4b8864dabd548bb9dd14bc525b140dedc480b6d34462afa3125d22102b1",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-03 12:32:12+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00850_20260803_141347.csv",
+      "source_sha256": "868baa5dd705d04103d8c13e8749b6c8b4aa0d486938991b019dd3e9585db8bc",
+      "input_rows": 249,
+      "retained_rows": 0,
+      "excluded_rows": 249,
+      "mtime_utc": "2026-08-03 13:52:04+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00851_20260803_221823.csv",
+      "source_sha256": "c50dede3dfb5876846f4fb772c8ef29cca1bf24f5607072d5d9db7910380257f",
+      "input_rows": 249,
+      "retained_rows": 0,
+      "excluded_rows": 249,
+      "mtime_utc": "2026-08-03 21:26:58+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00852_20260803_221823.csv",
+      "source_sha256": "ec54e8f661492d9aa474ef11ec2071cc262e6361dfaa80cd3781d64b7b2d9a42",
+      "input_rows": 249,
+      "retained_rows": 0,
+      "excluded_rows": 249,
+      "mtime_utc": "2026-08-03 21:48:12+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00853_20260804_064703.csv",
+      "source_sha256": "b1e2e8504d528de44e0ec1d04efd37b597bd9ee538c7878b649214c9ee08469f",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-04 05:12:02+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00854_20260804_064703.csv",
+      "source_sha256": "0ed3b4b4970ab08370440641991759cda6c776aeb92f948048ca20aff860869a",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-04 05:17:32+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00855_20260805_055322.csv",
+      "source_sha256": "6f951a2320bbb08cb64b8a41d04a99d65f92ae2caa84e6b5e57ac266f6798f32",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-05 04:22:48+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00856_20260805_055322.csv",
+      "source_sha256": "c8508e35d1e14b3bedaade9f8f0339dbf1c5766acd3e1dda5c009afde5042087",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-05 04:47:44+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00857_20260805_121334.csv",
+      "source_sha256": "474b21eb709986064e58f2d7a6de619b2003f911804c05273084bd60d880c275",
+      "input_rows": 249,
+      "retained_rows": 0,
+      "excluded_rows": 249,
+      "mtime_utc": "2026-08-05 10:51:06+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00858_20260805_121334.csv",
+      "source_sha256": "85b70162140b8a0a19576d106cb7f72680f159aa0df204e760325cd26f272535",
+      "input_rows": 249,
+      "retained_rows": 0,
+      "excluded_rows": 249,
+      "mtime_utc": "2026-08-05 11:03:30+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00859_20260805_194308.csv",
+      "source_sha256": "038b3bafa079da61543a23d8873015592b98bd77ef6bd37954496c26e66c868b",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-05 18:06:38+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00860_20260805_194308.csv",
+      "source_sha256": "c9ae0eea810fb2a48ce328bbbbd541422f06dbad508995a34d7ec5c759d85dfb",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-05 19:35:30+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00861_20260806_082251.csv",
+      "source_sha256": "fc949602f8e8fc9723969b2f1c61809f306c9cc4b1c45149502332c349ab27cd",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-06 07:23:46+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00862_20260806_082251.csv",
+      "source_sha256": "4a1be80d2ffc855fd6b7fb99761cfaf7c182f40a5be6508836d4239c073dfc0e",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-06 07:31:00+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00863_20260806_170437.csv",
+      "source_sha256": "c295ce8c3dd908c750805c52e997e3be1a7ce38b9e3f5581d1a4036eacb6430b",
+      "input_rows": 249,
+      "retained_rows": 0,
+      "excluded_rows": 249,
+      "mtime_utc": "2026-08-06 15:55:34+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00864_20260806_170437.csv",
+      "source_sha256": "3422ddc3115bef4a4608bc2057dc498f5bad6ea51a996cde015d7a162d5a509f",
+      "input_rows": 249,
+      "retained_rows": 249,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-08-06 20:29:08+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00864_20260806_170437.csv",
+      "destination_sha256": "f2023e1c0dc0a6b2547630c69150d0ccd98be765b808e074c7c5866db0b188a3"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00865_20260807_045243.csv",
+      "source_sha256": "cb010b994b73ccd2a434e63318276f0fd1b5136136f15f53a4abf59f347f8537",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-07 03:16:56+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00866_20260807_045243.csv",
+      "source_sha256": "8b3605962cae1ac62df211578f9727eda8ed1c39dadb484b75e877fa266091d9",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-07 03:45:20+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00867_20260807_163601.csv",
+      "source_sha256": "d7cdf3b72086039d6f670d5f4c60fee5a9125e71e587edf014106f5a3307917f",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-07 15:01:42+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00868_20260807_163601.csv",
+      "source_sha256": "a654d12e60d7c7157186d8b5d2485f42cb6614d4af4e1acaa1ed560941b75088",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-07 15:55:24+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00869_20260808_001012.csv",
+      "source_sha256": "1fbfa4b7ad25a376977d6c1cf930614c0378fb2f5deaca85a9c6ca268760d7a8",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-07 23:01:18+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00870_20260808_001012.csv",
+      "source_sha256": "b313760f82891ba5a0222f7c3f5fc1f2fb0af6359490cd667cd0d54819e01590",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-08-08 00:27:22+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00870_20260808_001012.csv",
+      "destination_sha256": "ccbe8f204e35736b4ea7d3082a367abc158ccc9a862796f1d09550700d0c1c7d"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00871_20260809_121731.csv",
+      "source_sha256": "3a0b35f3d11d315c251eb84b317c63f993f4dd721ca785315175dbf0d431b466",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-09 10:35:16+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00872_20260809_121731.csv",
+      "source_sha256": "1d4dddcb5c14d12154784621d01cab10ade02b6d6df207c862de3d89de224e80",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-09 11:28:44+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00873_20260810_131617.csv",
+      "source_sha256": "35054031e64e51406f51e8c4a37ee6f01ef5bd0f06ad6f87fd13034d379db378",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-10 11:43:30+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00874_20260810_131617.csv",
+      "source_sha256": "d2262f446abbc6776723d95a3a6b9dada76682533fc47337db0f9e8198c9085d",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-10 11:46:54+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00875_20260810_211106.csv",
+      "source_sha256": "f712b03983e92ec56aef16bf20fbb7c749ba7df1b784b7db7f23a67e86958b53",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-10 20:17:20+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00876_20260810_211106.csv",
+      "source_sha256": "d5f0f4de8e6f1ddafd8e09a80a8f45d94412d3f6f649a91432a0ba20150af491",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-10 20:28:34+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00877_20260811_064640.csv",
+      "source_sha256": "4469c73fc65fcb563bf041a99cbaab1fb309c50de17a756639c1f546c0bebbb8",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-11 05:10:50+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00878_20260811_064640.csv",
+      "source_sha256": "0556845fe813626d0889734f94e1e5ac65593cb4ff21961516c7f3448e019c88",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-11 05:55:08+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00879_20260811_133514.csv",
+      "source_sha256": "f53cb4e6be9387a2a71f166e942ddcd323548fc35916c4f5355abb5f1f9d2247",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-11 12:26:00+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00880_20260811_133514.csv",
+      "source_sha256": "82a7d05abfc18d3c700006e4677e1832cc7ef0e731c06aa3a9da451037c450e6",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-11 12:28:16+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00881_20260811_215804.csv",
+      "source_sha256": "765cd914bad5151bab59b2327b59dd297ebbbc3110592429cbee6232cb5553f4",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-11 20:16:36+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00882_20260811_215804.csv",
+      "source_sha256": "7f64f5b95638e91a2ce0b0b451c719c8bda2718f112c8056dc401325d21ccb61",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-11 20:22:30+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00883_20260812_122543.csv",
+      "source_sha256": "9318cb50cf0580194818ae25976fcbce1b5a474a72b5515cb683acf91c9d3e71",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-12 11:01:36+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00884_20260812_122543.csv",
+      "source_sha256": "663bc67236364a61d80a56c9c45e5ddc9759a42e136b6df7ec9033e64950261f",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-08-12 16:09:52+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00884_20260812_122543.csv",
+      "destination_sha256": "e45fbcf42f5001548384e3f855bf18b76b34818ea8170aa34adce02ec715dc38"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00885_20260812_200848.csv",
+      "source_sha256": "fc026d1d5f4e986b4db7d58ade09df3c285a2b3bb4a45fb33e048a2b50c72fc9",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-12 18:34:00+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00886_20260812_200848.csv",
+      "source_sha256": "364f3a6dae16921174df83ea5b5889ef0edb5ab06a3e01bad39a7394be07d308",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-12 20:00:24+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00887_20260813_125459.csv",
+      "source_sha256": "e2e86ceb0af13bceb089fb8317e51fd6c387e89f6ccbb133092843603105eb92",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-13 12:07:02+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00888_20260813_125459.csv",
+      "source_sha256": "38053478b26e183d4b0263e5643785ba2c36fbbbdfef3ab1a782a3a2d35ce033",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-08-13 13:15:10+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00888_20260813_125459.csv",
+      "destination_sha256": "ad1633136c4c1645362196b2dd218afe341220890b85ff93edb84c78a4a814a2"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00889_20260813_200859.csv",
+      "source_sha256": "9254b7c8350a0110f55b5d38c001e280c35870e48f12419e8737940d9ac8bb14",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-13 18:34:54+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00890_20260813_200859.csv",
+      "source_sha256": "8d4d75c2c7c4bca038e0c2532d4b9b1808b553dca75eb759750c832898b500e6",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-13 18:58:16+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00891_20260814_123332.csv",
+      "source_sha256": "806b905bf51eb4ebf77c1aac52865295be7de30187cc523bf07b1c3092862db5",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-14 11:26:44+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00892_20260814_123332.csv",
+      "source_sha256": "6636a2c52aca23a770ccb4e10a40df6bcc576a1e91fd5a5dd0db670ee77e0bc5",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-14 11:33:24+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00893_20260814_214024.csv",
+      "source_sha256": "e4dbb5b86f718670d3d57b407821f7cc004cfca1baa833e77a8ee4161eb1ce73",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-14 20:07:02+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00894_20260814_214024.csv",
+      "source_sha256": "9e5037d494ae6ca8f89ecfcafbdfda93241003d8b3c68a46af388e7fdb3ac25d",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-14 20:45:48+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00895_20260820_155049.csv",
+      "source_sha256": "78c4880ca8c5f9711348eefeb40191dbbe4a9e66925ef0c8b2f454119f42af77",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-20 14:25:42+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00896_20260820_155049.csv",
+      "source_sha256": "299d8d66ad73704a4debb5a3b9f2854333ace68b6427e4410b8d4ff35f5ae880",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-20 15:33:48+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00897_20260821_141031.csv",
+      "source_sha256": "3920ffa7ba66951927d30d8bc6666e52e6c3ecad5c63dda57f24b2bb6714a6a9",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-21 12:27:38+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00898_20260821_141031.csv",
+      "source_sha256": "1fc5f84dab9a5679055666d6d25efe9f372335c8ac3eb08c1e2f2f48d7a2c43b",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-21 13:24:16+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00899_20260821_215132.csv",
+      "source_sha256": "8d5333bda2b4c30c45ef267a62596ab64cb2c1c9da7ab58a3be2c1a96aa034ac",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-21 20:17:10+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00900_20260821_215132.csv",
+      "source_sha256": "e095edc77854de3cd3cfce47ba7e8a9e34e7886db5a9d46467fc6082624198b4",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-21 20:22:12+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00901_20260822_121311.csv",
+      "source_sha256": "fd4a74e2f117763ea585404503a4d187310006c6aeb691dcc1ee0d91cb41566f",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-22 10:33:02+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00902_20260822_121311.csv",
+      "source_sha256": "6e53c4ba691f3e148588e7ac8ca9fc45fdff769bb2e14f22af2981d6ebfcdf97",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-22 11:03:24+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00903_20260823_031219.csv",
+      "source_sha256": "16c528214f41ebdd811f2c548727821d5cff3eb71b93d1365eb2c31e57443e56",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-23 01:32:28+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00904_20260823_031219.csv",
+      "source_sha256": "82bde45105be95b556bbb1422efaca96bdb8f1a7c3364fb72bb7d60f04dbf247",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-08-23 04:57:58+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00904_20260823_031219.csv",
+      "destination_sha256": "2ee7e4541e358fc1d5f5ba102f4b36499d0a6434f01ae7f76f0d114ab0d45502"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00905_20260823_143521.csv",
+      "source_sha256": "632efe0c8b1c6dfdecb399a33c64c883e8074887c2f496bf046e0439987f264f",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-23 13:50:20+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00906_20260823_143521.csv",
+      "source_sha256": "551a4cbbf3638c9d5e41abba2ff611ef695a0c703d70c8ec2d62acba5c457a01",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-23 14:01:54+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00907_20260823_225631.csv",
+      "source_sha256": "ed54e8965aa45fb01f94f7c0f7b15134cd66d49f9ac0f3ba020e5c7079d11ca9",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-23 21:25:28+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00908_20260823_225631.csv",
+      "source_sha256": "57c14a7ea72632681686b5ac625a79de07077115ff64e1478ae653673dc5cd40",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-23 21:27:18+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00909_20260824_114538.csv",
+      "source_sha256": "ee7965d6874ef1c73b821551e521ee7decdf57fbbe88ebe923d275069d71c649",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-24 10:05:20+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00910_20260824_114538.csv",
+      "source_sha256": "161762bf194c53f3917645300cd06cc6f155f72e67f13a1ca43f2b9a62339875",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-08-24 12:02:28+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00910_20260824_114538.csv",
+      "destination_sha256": "98f00f45a55685f2d115d75f240128b8c3ca0bb26ee2715546c252ad51f7d082"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00911_20260824_200602.csv",
+      "source_sha256": "183ed7fce90ceba7077fa73a96bba6eb6f27564b3c1bb30be62322f834779569",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-24 18:49:38+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00912_20260824_200602.csv",
+      "source_sha256": "95a7f88f136260c65f7e8b343a86d9c3e079a471cfcc7284b749c8cfb56c6630",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-24 19:39:10+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00913_20260825_114628.csv",
+      "source_sha256": "20f3c7cc7056012310d8e95d5e31a9caa4cefc6f77067666acd8ab42b5a316a3",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-25 10:42:18+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00914_20260825_114628.csv",
+      "source_sha256": "49bca1e315df1750d288c5426972c8dcbde5b8a9003bb1684561b1c45c4b1900",
+      "input_rows": 250,
+      "retained_rows": 0,
+      "excluded_rows": 250,
+      "mtime_utc": "2026-08-25 10:49:50+00:00"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00916_20260827_225212.csv",
+      "source_sha256": "0d7753cf072ef9c57cda595d9fe47820ef0a8c07f43e5b0871f6374ef8d20fd7",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-08-27 23:29:28.964197874+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00916_20260827_225212.csv",
+      "destination_sha256": "61ee5c5289e37501dd3491602d8d4c2bcce428950966e1b5aa15e767231f8d79"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00917_20260828_124054.csv",
+      "source_sha256": "9e312029b99a7570e7bc6700478b095975f0d8f134786b99615f01de9f5a7b3a",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-08-28 13:14:59.665824413+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00917_20260828_124054.csv",
+      "destination_sha256": "e95eec4ba9c2c3006987978c30b2db11539e9a2ecc7de8083230fb0b24998283"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00918_20260828_223345.csv",
+      "source_sha256": "02b84ebb446a170b76bc7ea00f178297913d0589fe60920453ef45696d317891",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-08-28 23:17:09.033810377+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00918_20260828_223345.csv",
+      "destination_sha256": "c1d991bcf9c2d231191f9de78b8b0926d07baae23062e884812d78fa20701156"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00919_20260829_151943.csv",
+      "source_sha256": "401ea71a591c4795742a87b772c39674b921007009d51a050ba018d390f85f25",
+      "input_rows": 248,
+      "retained_rows": 248,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-08-29 16:15:33.183063745+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00919_20260829_151943.csv",
+      "destination_sha256": "be8dd87469133da9fb2d08be3948638c6ec2e6bfa32e2c15d8733cd01dece723"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00920_20260829_232341.csv",
+      "source_sha256": "af1b10f87deff761a31a2e8ca269ea0c12ef13b055b39ce96775439d2d71edb1",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-08-29 23:55:50.568181753+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00920_20260829_232341.csv",
+      "destination_sha256": "8f469925ee1ec11528f15475239ac5097298356e229ae8309e6eaa56dc17cd84"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00921_20260830_131847.csv",
+      "source_sha256": "3d133c712a7e76ea69ad57eb19e54d82c0f0213ebf4c47aa2916b58fbf5080b6",
+      "input_rows": 249,
+      "retained_rows": 249,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-08-30 14:02:09.566377401+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00921_20260830_131847.csv",
+      "destination_sha256": "406ffb151e7863cc08ff442bbd14c51b39f981ed2d46f317f51addd2e80e961c"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00922_20260831_135509.csv",
+      "source_sha256": "eb569a5c3dedc40ca4cfb1fe6c22e810f02c2ccd94bb762150d080f959993859",
+      "input_rows": 246,
+      "retained_rows": 246,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-08-31 14:57:46.224261284+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00922_20260831_135509.csv",
+      "destination_sha256": "816bf75d8fb6c952ec50354b0ef30e56acdfbc2cc0fa57dbc3ff5065067c5ff3"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00923_20260831_222807.csv",
+      "source_sha256": "248af72bc66031bcdfd470e37f1852fb6b89fea9bf74cc05791f4a0399e07271",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-08-31 23:06:18.795950174+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00923_20260831_222807.csv",
+      "destination_sha256": "8e374ce8f029b6bc6c9748676d69ee7055a268f9f6a093abf70de3ed4af28d2b"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00924_20260901_141147.csv",
+      "source_sha256": "5d964d432880f00f969863ed8cf41f6a918fb6241c99750dace1a029819848d0",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-09-01 14:52:05.960342407+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00924_20260901_141147.csv",
+      "destination_sha256": "3c6b727e1495ad3e4e46e7523abf522f3995b5d30b40278765ed24855208ee5f"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00925_20260901_230949.csv",
+      "source_sha256": "46ad7f63c001167e649b6e6af080e4ad8d56c931ba038b2530c5facb7802a8f2",
+      "input_rows": 249,
+      "retained_rows": 249,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-09-01 23:47:54.174309492+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00925_20260901_230949.csv",
+      "destination_sha256": "4bcb214a66937e2ab535c019d5fb7e23a5cce209a53db290f149a4bb51ab340b"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00926_20260902_115521.csv",
+      "source_sha256": "1835eb670acc47400c83432a1be84b537bdbc9615dd582df1c9d4dab8d7d24ec",
+      "input_rows": 248,
+      "retained_rows": 248,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-09-02 12:45:01.579714298+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00926_20260902_115521.csv",
+      "destination_sha256": "3655cfb0eeb2dd152b89c5ddc68540f65eef0ed52a9053d091f5f305d746c77c"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00927_20260902_213051.csv",
+      "source_sha256": "b2cb26b0cd0991077df948b53af1486b457987abc93ad3b10389297b84aac746",
+      "input_rows": 249,
+      "retained_rows": 249,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-09-02 22:29:29.543075800+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00927_20260902_213051.csv",
+      "destination_sha256": "0620b3bd94804fc4764dfddc52b38996517e27f122aa9d0b030acf0201f3039a"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00928_20260903_162106.csv",
+      "source_sha256": "86250592babe37f7cd66dbf4a7e059e979cf268bc06f6dee047f1942474a2f85",
+      "input_rows": 249,
+      "retained_rows": 249,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-09-03 17:03:45.383632898+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00928_20260903_162106.csv",
+      "destination_sha256": "7e7e4ccf32766da03eb8d84b9e35c39f4bae843f6547543b40b6cd86a4c94bee"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00991_20260904_022520.csv",
+      "source_sha256": "651abe78e24623b6b4e5d8cd02bd4341f754151f2e94763aeb7233a7477df92e",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-09-04 03:09:42.066015959+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00991_20260904_022520.csv",
+      "destination_sha256": "eae9d22d7060f3949dc72fa75c07cd0b066bf94200a6e47994f139c254793d67"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00992_20260904_140115.csv",
+      "source_sha256": "d510aa9f31b80538b726f3f6508882064c17e2ddbaa30275f8fee4b5b9834229",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-09-04 14:27:15.880232096+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00992_20260904_140115.csv",
+      "destination_sha256": "37d4ba3ab4c2e7ca0351d5775edab4b674cfecebb0d41bf763c636c4b1897de1"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00993_20260904_223315.csv",
+      "source_sha256": "39a308bd5a21f45c518085706ad99e7907c3f9429801c1d06458e040434b1b4e",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-09-04 23:02:40.017624855+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00993_20260904_223315.csv",
+      "destination_sha256": "bdb8c93af47ab59152293b30005adad16fd609b5484b3b5a54d053f181733aac"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00994_20260905_165505.csv",
+      "source_sha256": "ebace6f3ced623dc984c9c7092975db1b1294320949114db39a8455e6b82dbea",
+      "input_rows": 248,
+      "retained_rows": 248,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-09-05 17:28:13.697680473+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00994_20260905_165505.csv",
+      "destination_sha256": "36c44ac681a167533a8a1001f827e55dc64f52880d6599e8a7f38cec965a300f"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00995_20260906_233011.csv",
+      "source_sha256": "4f3a6af4fac24deb9a7bddb5c520e45f2220635a7e184e6cd2c4de4365fffe78",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-09-07 00:10:11.640493393+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00995_20260906_233011.csv",
+      "destination_sha256": "39771a580dd374f776bc05cc946e4447667853b794761a64919a7b5a2be27459"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00996_20260907_143401.csv",
+      "source_sha256": "af90f4651ddf7b3a91f6de40a32c036428cffe845c36c29eaa4527fc0abfcd04",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-09-07 15:20:36.764783859+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00996_20260907_143401.csv",
+      "destination_sha256": "9100528457c102b77815b89cc8a9f72b6e7b99c76e958488cda8f7504e328e43"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00997_20260908_143317.csv",
+      "source_sha256": "41e8d2cb4674df0e01131254fae8fe26df4b3daf4b12f0c989b4c6e354eb0e70",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-09-08 15:13:05.375352383+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00997_20260908_143317.csv",
+      "destination_sha256": "c0756961216f02fe4455d9cb4e48d801885bfec3ab3b156d40ce5eaa751960b8"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00998_20260908_223047.csv",
+      "source_sha256": "e85209932557e7fe110371dd03bfe39594c0bbdc1d681849787253a928bbeb0f",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-09-08 23:13:03.347746372+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00998_20260908_223047.csv",
+      "destination_sha256": "22ee7318533742357b9b0972ec4ba8d1d5cdef072d719f4d0aa88284d7d713a1"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_00999_20260909_062653.csv",
+      "source_sha256": "ceab1a805c861b0c55369c636bb2d120a4a8db4de5a6648ae687c83676ceccb0",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-09-09 07:03:51.231782675+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_00999_20260909_062653.csv",
+      "destination_sha256": "3c8ba9312f10abb02524ab2d9124c9ff7da0c057ebf08b73dc7fa196acddbe22"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_01000_20260909_142705.csv",
+      "source_sha256": "a0a891139a0d2d8e949e07c43c0127d172aa3f4a8fdaddae787644430e955e1c",
+      "input_rows": 249,
+      "retained_rows": 249,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-09-09 15:07:04.456944942+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_01000_20260909_142705.csv",
+      "destination_sha256": "1ff6167b834eb16fdb22643f8947d318d7beed2fa4fde388e32f3afaebe80a57"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_01001_20260909_221327.csv",
+      "source_sha256": "65e0457685adde8bab7727f357551c65505edd79c68a51f5f9f9fd902df5007d",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-09-09 22:58:18.401194811+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_01001_20260909_221327.csv",
+      "destination_sha256": "4ab62ac13e110bce6e029d57896bc455f3620b0acb11fc3b7c3e187b85289354"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_01002_20260910_141418.csv",
+      "source_sha256": "6ed8593f33c5a9d419aef1c82b28e62a7df14333bac39e6e74dc9a00702d61ac",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-09-10 15:01:40.348910570+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_01002_20260910_141418.csv",
+      "destination_sha256": "eb71e6c4c4e88a35509c0df4ebc4a76b5214644fdadb156a70471ff752920758"
+    },
+    {
+      "source": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners\\deployment_ready_01003_20260910_221209.csv",
+      "source_sha256": "ec0881a63463ded4b00d918ed8fe9b91a35c4ca51860bd587b5879be2b013856",
+      "input_rows": 250,
+      "retained_rows": 250,
+      "excluded_rows": 0,
+      "mtime_utc": "2026-09-10 22:53:22.270092487+00:00",
+      "destination": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp\\scanners_validated\\deployment_ready_01003_20260910_221209.csv",
+      "destination_sha256": "5a98d1f1ca607433fa7159760613e4728bc133f6bfb68c13c18880466dc30850"
+    }
+  ]
+}

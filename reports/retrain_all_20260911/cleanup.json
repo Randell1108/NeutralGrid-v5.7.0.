@@ -1,0 +1,43 @@
+{
+  "checked_at_utc": "2026-09-11T15:16:58.6914484Z",
+  "status": "PASS",
+  "paths": [
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\_tmp",
+      "removed": true,
+      "exists_after": false
+    },
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\.rag11",
+      "removed": true,
+      "exists_after": false
+    },
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\.rah11",
+      "removed": true,
+      "exists_after": false
+    },
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\utility_backfilled.xlsx",
+      "removed": true,
+      "exists_after": false
+    },
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\utility_input.xlsx",
+      "removed": true,
+      "exists_after": false
+    },
+    {
+      "path": "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\fresh_meta_validated_input.csv",
+      "removed": true,
+      "exists_after": false
+    }
+  ],
+  "earlier_cleanup_receipt": "test_temp_cleanup.json",
+  "retained": [
+    "Final artifacts and training/source datasets",
+    "Audit reports, logs and reproducibility scripts",
+    "Rollback workbook and original model backups",
+    "Fetched market data"
+  ]
+}

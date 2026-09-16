@@ -1,0 +1,16 @@
+{
+  "role": "diagnostic_replay_and_verified_HMM_cache",
+  "rows": 6042,
+  "reusable_lineage_rows": 3224,
+  "invalid_rows": 2818,
+  "source_counts": {
+    "pinned_artifact_replay": 3224,
+    "invalid_candidate_id_scan_time": 2818
+  },
+  "artifact_versions": {
+    "rolling_180d_20260911_131128": 3224,
+    "NaN": 2818
+  },
+  "sha256": "d51701ee144b97ee58ace517a24c28769544dab85fb4af0648a232c3fc56fc64",
+  "restriction": "Not eligible as a whole training pool. Only verified rows with identical causal inputs may be reused by finish_meta_refit.py; all final outcomes come from fresh_validated_pool."
+}

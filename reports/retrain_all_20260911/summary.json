@@ -1,0 +1,90 @@
+{
+  "completed_at_utc": "2026-09-11T15:17:43.359411+00:00",
+  "status": "completed_with_unpromoted_downstream_candidates",
+  "hmm": {
+    "version": "rolling_180d_20260911_131128",
+    "status": "promoted",
+    "features": 5,
+    "states": 4,
+    "symbols": 50,
+    "observations": 858000
+  },
+  "meta_labeler": {
+    "version": "20260911_145206",
+    "status": "promoted",
+    "features": 20,
+    "unique_rows": 840,
+    "positive_rows": 417,
+    "oof_auc": 0.6416937372088146,
+    "oof_ece": 0.03188902009835016,
+    "auxiliary_cpcv_auc": 0.49354864985657176,
+    "calibration": "sigmoid_oos"
+  },
+  "utility": {
+    "status": "unpromoted",
+    "eligible_rows": 222,
+    "failed_gate": "G7"
+  },
+  "canonical_profile": {
+    "status": "shadow",
+    "features": 4,
+    "labeled_rows": 195
+  },
+  "expanded_profile": {
+    "status": "shadow",
+    "features": 4,
+    "unique_rows": 4109
+  },
+  "conformal": {
+    "status": "unavailable",
+    "reason": "Independent calibration outcomes for new model unavailable"
+  },
+  "production_pipeline_fully_ready": false,
+  "tests": {
+    "final_full_passed": 2017,
+    "final_full_skipped": 2,
+    "postfit_contract_passed": 155,
+    "pyright_errors": 0,
+    "pyright_warnings": 0
+  },
+  "cleanup_status": "PASS",
+  "post_cleanup_artifact_hashes": {
+    "artifact_manifest.json": true,
+    "data\\new_expired_bots.xlsx": true,
+    "models\\meta_labeler.pkl": true,
+    "artifacts\\hmm\\rolling_180d_20260911_131128\\eval.json": true,
+    "artifacts\\hmm\\rolling_180d_20260911_131128\\feature_schema.json": true,
+    "artifacts\\hmm\\rolling_180d_20260911_131128\\metadata.json": true,
+    "artifacts\\hmm\\rolling_180d_20260911_131128\\model.joblib": true,
+    "artifacts\\hmm\\rolling_180d_20260911_131128\\scaler.joblib": true,
+    "artifacts\\hmm\\rolling_180d_20260911_131128\\state_means.npy": true,
+    "artifacts\\hmm\\rolling_180d_20260911_131128\\temperature_scaler.json": true,
+    "models\\meta_labeler\\metadata.json": true,
+    "models\\meta_labeler\\model.joblib": true,
+    "models\\meta_labeler\\scaler.joblib": true,
+    "reports\\retrain_all_20260911\\profile_candidate\\pattern_profile.json": true,
+    "reports\\retrain_all_20260911\\profile_candidate\\profile_model.json": true,
+    "reports\\retrain_all_20260911\\profile_candidate\\report.json": true,
+    "reports\\retrain_all_20260911\\expanded_profile_shadow\\manifest.json": true,
+    "reports\\retrain_all_20260911\\expanded_profile_shadow\\pattern_profile.json": true,
+    "reports\\retrain_all_20260911\\expanded_profile_shadow\\prior_model_new_id_predictions.csv": true,
+    "reports\\retrain_all_20260911\\expanded_profile_shadow\\profile_model.json": true,
+    "reports\\retrain_all_20260911\\expanded_profile_shadow\\quarantined_historical_rows.csv": true,
+    "reports\\retrain_all_20260911\\expanded_profile_shadow\\training_pool.csv": true,
+    "artifacts\\utility\\utility_20260911_140229_939458.json": true
+  },
+  "protected_prior_artifacts": {
+    "D:\\Neutral Grid v5.7.0\\data\\profile\\pattern_profile.json": true,
+    "D:\\Neutral Grid v5.7.0\\data\\profile\\pattern_profile_bootstrap_manifest.json": true,
+    "D:\\Neutral Grid v5.7.0\\artifacts\\utility\\utility_20260904_022344_253218.json": true
+  },
+  "workbook_rollback_hash_matches": true,
+  "report_links_exist": true,
+  "limitations": [
+    "HMM soft-mode walk-forward gate returns unconditional passes",
+    "Short post-training HMM likelihood comparison did not show aggregate improvement",
+    "Meta promotion OOF used unpurged fallback in all five folds",
+    "Prior champion comparison skipped as incomparable",
+    "Profiles lack sufficient independent promotion validation"
+  ]
+}

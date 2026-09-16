@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "root_and_isolated_dryrun_output_equal_ignoring_log_timestamps": true,
+  "selected_candidates": 840,
+  "metadata_sha256": "55d5bbecac90895c3bf1c6a86bcf4fc4f4839eabb4cb82a82bdb3641dc9d7af8",
+  "bootstrap": false,
+  "canonical_grid_is_valid_filter": true,
+  "uncapped": true,
+  "linkage_path": "data/linkage/deploy_linkage_log.csv",
+  "linkage_exists": false
+}

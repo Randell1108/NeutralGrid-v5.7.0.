@@ -1,0 +1,13 @@
+{
+  "fresh_backtest_rows": 6042,
+  "complete_profile_rows": 5733,
+  "incomplete_profile_rows": 309,
+  "nonfinite_by_feature": {
+    "parkinson_vol_ratio_4h_24h_pre": 309,
+    "variance_ratio_1m_15m_pre_2h": 309,
+    "funding_carry_expected_next_7h": 309,
+    "liquidity_stability_z_1h": 309
+  },
+  "candidate_scan_date_min": "2026-02-18 00:00:00",
+  "candidate_scan_date_max": "2026-09-10 00:00:00"
+}

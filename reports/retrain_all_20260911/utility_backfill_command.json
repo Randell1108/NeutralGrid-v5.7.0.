@@ -1,0 +1,18 @@
+[
+  "D:\\Neutral Grid v5.7.0\\.venv\\Scripts\\python.exe",
+  "D:\\Neutral Grid v5.7.0\\scripts\\backfill_training_features.py",
+  "--input",
+  "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\utility_input.xlsx",
+  "--output",
+  "D:\\Neutral Grid v5.7.0\\reports\\retrain_all_20260911\\utility_backfilled.xlsx",
+  "--default-artifact-version",
+  "rolling_180d_20260911_131128",
+  "--hmm-only",
+  "--feature-cutoff-source",
+  "start_time_utc",
+  "--replay-scope",
+  "hmm_lineage_only",
+  "--require-fresh-output",
+  "--max-concurrency",
+  "1"
+]

@@ -1,0 +1,38 @@
+{
+  "status": "invalidated_timestamp_audit",
+  "training": {
+    "artifact_role": "shadow_full_refit",
+    "target_contract": "fast_winner_time_to_3pct_le_7h",
+    "training_rows": 7505,
+    "label_counts": {
+      "1": 3872,
+      "0": 3633
+    },
+    "family": "gaussian_lda_v1",
+    "shrinkage": 0.9,
+    "recipe_source": "D:\\Neutral Grid v5.7.0\\reports\\profile_training_20260908\\selection.json",
+    "source_sha256": "2db2f14ac0702ec43638c2f6a1f2ee1dfee54cec85dfe030bfdf5febb3baa2e2",
+    "fresh_outcome_rows": 5733,
+    "retained_previous_outcome_rows": 1772,
+    "new_candidate_ids": 673,
+    "promotion_blockers": [
+      "Target differs from canonical completed-bot profile",
+      "No verified production incumbent comparison or bot-disjoint promotion evidence"
+    ],
+    "hmm_features_used": false
+  },
+  "prior_frozen_model_evaluation": {
+    "rows": 673,
+    "positives": 397,
+    "auc": 0.5000821377724236,
+    "brier": 0.24883268161383446,
+    "ece": 0.07523382988265737,
+    "scope": "Prior frozen September 8 full-refit model on IDs absent from its training pool; no claim of global prior non-disclosure or bot-disjoint independence"
+  },
+  "newly_refitted_model_has_independent_holdout": false,
+  "model_sha256": "648fc1dbaf6276c7f94ef9cb9f45d22c4035ddde6f5a888f2c816d712044c776",
+  "pattern_sha256": "57c101762f096fc9ba1e6915c1e459494ff588b15eec5b23bd8d268cc6a63486",
+  "source_fresh_sha256": "230e9ea32b12641c6ad33018578f45ffea6d14aff17036964071e04c45c19131",
+  "source_previous_sha256": "a05a589d194176963a1b1c7b3d44897a08882cbeb87b86e759ace5d3f11072e5",
+  "invalid_reason": "Fresh backtests included rows whose recorded output mtime precedes candidate scan time. Superseded by corrected timestamp-valid refit."
+}
