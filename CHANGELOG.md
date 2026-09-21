@@ -2,6 +2,547 @@
 
 ## [unreleased] - Neutral Grid v5.7.0
 
+### RETRAIN-0920 - Refresh HMM and downstream artifacts from the updated workbook
+
+**Date:** 2026-09-20.
+
+Promoted canonical HMM `rolling_180d_20260919_220822` and meta-labeler
+`20260920_154714` from the September 19 frozen sources. Refreshed HMM lineage,
+probabilities and dependent EV fields for all 578 canonical workbook rows while
+preserving unrelated cells and workbook structure. Replayed 1,633 fresh FASTWIN
+candidates without a row cap, corrected their derived event ends to recorded
+backtest durations, and refitted the unchanged 20-feature soft-vote classifier
+with sigmoid OOS calibration. Profile and utility candidates were fitted but
+retained without promotion because their existing requirements were not met.
+
+**Files modified:**
+- `artifact_manifest.json`
+- `data/new_expired_bots.xlsx`
+- `data/trial_log.json`
+- `data/holdout_access_log.json`
+- `models/meta_labeler.pkl`
+- `models/meta_labeler/model.joblib`
+- `models/meta_labeler/scaler.joblib`
+- `models/meta_labeler/metadata.json`
+- `models/meta_labeler_promotion_decision.json`
+- `models/meta_labeler_verification.json`
+- `CHANGELOG.md`
+
+**Artifact and evidence additions:**
+- `artifacts/hmm/rolling_180d_20260919_220822/model.joblib`
+- `artifacts/hmm/rolling_180d_20260919_220822/scaler.joblib`
+- `artifacts/hmm/rolling_180d_20260919_220822/state_means.npy`
+- `artifacts/hmm/rolling_180d_20260919_220822/metadata.json`
+- `artifacts/hmm/rolling_180d_20260919_220822/feature_schema.json`
+- `artifacts/hmm/rolling_180d_20260919_220822/temperature_scaler.json`
+- `artifacts/hmm/rolling_180d_20260919_220822/eval.json`
+- `artifacts/hmm/rolling_180d_20260919_220822/cpcv_results.json`
+- `artifacts/hmm/rolling_180d_20260919_220822/wf_stability_report.json`
+- `artifacts/utility/utility_20260920_152001_390357.json`
+- `data/profile/profile_evaluation_20260919_220432_362695.json`
+- `reports/retrain_all_20260919/profile_candidate/profile_model.json`
+- `reports/retrain_all_20260919/profile_candidate/pattern_profile.json`
+- `reports/retrain_all_20260919/finalized_duration_aligned_pool/authoritative_pool_manifest.json`
+- `reports/retrain_all_20260919/REPORT.md`
+- `reports/retrain_all_20260919/final_validation.json`
+- `reports/retrain_all_20260919/cleanup_receipt.json`
+
+**Decision rationale:** Keep one active HMM lineage and the existing feature,
+target, estimator and promotion contracts. Correct derived training event ends
+from observed durations, and use consistent timestamp precision to prevent the
+existing parser's fallback. The final 1,633 training rows have verified event
+ends, unchanged feature values and unchanged FASTWIN labels. Utility failed G7
+at parameter boundaries; profile lacks the required incumbent comparison and
+its observed validation performance is below the relevant thresholds. No gate
+was bypassed. Historical conformal output was retained as a diagnostic rather
+than attributed to the new model.
+
+**AFML / Hudson & Thames citation:** This run follows the project's existing
+purge/embargo and provenance procedures; no new theoretical claim or threshold
+change is introduced. The report explicitly discloses the existing meta-labeler
+promotion fallback to unpurged training on four of five folds and the mismatch
+between its evaluation-contract label and implemented splitting method.
+
+**Backward compatibility:** No breaking changes. Production source code,
+feature lists and saved meta-labeler configuration are unchanged. Profile and
+utility remain unavailable as promoted runtime artifacts.
+
+**Verification:** 2,158 distinct tests passed across the full-suite run and a
+short-path rerun of four Windows-path failures; two tests were skipped. The
+49-test meta-labeler contract suite passed again after the final fit. Verified
+578 workbook lineages, 84,131 original cells, all 1,633 meta event ends, model
+reload and prediction parity, source hashes, frozen HMM diagnostics and cleanup.
+Full results and limitations are recorded in the linked report directory.
+
+### DATAINGEST-0919B - Ingest 12 candidate-linked September strategies
+
+**Date:** 2026-09-19.
+
+Added 12 supplied Binance Futures Grid outcomes, from SAGAUSDT strategy
+`414488247` through BICOUSDT strategy `414488374`, to the canonical expired-bot
+workbook. `new_bot_data_extractor.py` supplied terminal, execution, indicator,
+liquidation and profile fields from the pasted bot records and the explicit
+Order, Trade and Transaction exports. The exact pre-entry deployment snapshot
+supplied candidate linkage and all 20 active Meta Features inputs, while the
+governed backfill refreshed General against the active HMM.
+
+**Files modified:**
+- `data/new_expired_bots.xlsx`
+- `CHANGELOG.md`
+- `data/archive/ingestion_20260919_batch21_12_strategies/new_expired_bots_before.xlsx`
+
+**Evidence added:**
+- `outputs/01a0a16d-66e5-7e03-8aad-eb2aa640c959/batch21_extraction_report.json`
+- `outputs/01a0a16d-66e5-7e03-8aad-eb2aa640c959/batch21_source_coverage_12.csv`
+- `outputs/01a0a16d-66e5-7e03-8aad-eb2aa640c959/batch21_candidate_linkage_evidence_12.csv`
+- `outputs/01a0a16d-66e5-7e03-8aad-eb2aa640c959/batch21_hmm_lineage_validation.json`
+- `outputs/01a0a16d-66e5-7e03-8aad-eb2aa640c959/batch21_final_validation.json`
+- `outputs/01a0a16d-66e5-7e03-8aad-eb2aa640c959/batch21_reimport_validation.json`
+
+**Decision rationale:** Candidate linkage uses the SHA-256-verified
+`deployment_ready_20260915_222223.csv` snapshot. Eleven strategies satisfy the
+strict symbol, grid-count and one-percent per-bound geometry contract.
+BILLUSDT `414488299` has a one-grid candidate/UI count difference but is linked
+by its exact creation-time order ladder and matching bounds. SAGAUSDT
+`414488247` retains the supplied long liquidation price even though it lies
+inside the supplied grid; no correction was inferred, and derived
+`liq_asymmetry` remains blank. Five bot windows have no matching Transaction
+rows; later same-symbol transactions were not force-linked because Order and
+Trade data already provide direct execution evidence.
+
+**AFML / Hudson & Thames citation:** No new theoretical claim. The ingestion
+preserves point-in-time feature provenance, active-model lineage and explicit
+missingness. Scanner-time inputs remain distinct from terminal outcomes to
+avoid look-ahead contamination.
+
+**Backward compatibility:** No breaking changes. Workbook schemas, feature
+definitions, model artifacts and gates are unchanged. No model was retrained
+or promoted.
+
+**Verification:** All 12 extractor identity and source-field checks passed.
+Candidate linkage is 12/12 with 12 unique IDs; all scans precede strategy
+creation. Order and in-window Trade coverage is 12/12, while exact-window
+Transaction coverage is 7/12. The nine curves with at least three points were
+stored; three two-point curves remain excluded by the existing contract. All
+12 new Meta rows contain every active meta-labeler feature, and all 578 General
+and Meta rows share `rolling_180d_20260915_210940` with finite regime
+probabilities. Cell comparison found zero unexpected value or style changes;
+native table ranges, artifact-tool re-import and formula-error scans pass.
+
+### DATALINK-0919 - Link 72 September strategies to deployment candidates
+
+**Date:** 2026-09-19.
+
+Filled `candidate_id` in both General and Meta Features for the 72 strategies
+added by DATAINGEST-0919. Five pre-entry deployment snapshots resolve 72 unique
+candidate IDs: 68 pass the extractor's strict symbol, grid-count and one-percent
+per-bound geometry contract; DYMUSDT `414502011`, ENAUSDT `414502080`, and
+NEARUSDT `414501978` are supported by their creation-time order ladders; and
+zero-order JUPUSDT `414569158` is recorded as a batch-only link to the unique
+same-symbol approved candidate in scan `20260919_045605`. The JUP exception is
+explicit because its saved Binance grid differs from the scanner row.
+
+**Files modified:**
+- `data/new_expired_bots.xlsx`
+- `CHANGELOG.md`
+- `data/archive/candidate_linkage_20260919_72_strategies/new_expired_bots_before.xlsx`
+
+**Evidence added:**
+- `outputs/01a0a16d-66e5-7e03-8aad-eb2aa640c959/candidate_linkage_evidence_72.csv`
+- `outputs/01a0a16d-66e5-7e03-8aad-eb2aa640c959/candidate_linkage_evidence_72.json`
+- `outputs/01a0a16d-66e5-7e03-8aad-eb2aa640c959/candidate_linkage_edit_receipt.json`
+- `outputs/01a0a16d-66e5-7e03-8aad-eb2aa640c959/candidate_linkage_validation.json`
+- `outputs/01a0a16d-66e5-7e03-8aad-eb2aa640c959/candidate_linkage_reimport_validation.json`
+
+**Decision rationale:** Prefer exact point-in-time geometry links and preserve
+the distinction between strict and exception evidence. The three order-ladder
+exceptions use exchange orders stamped at strategy creation, not terminal UI
+geometry. JUP had no orders or trades, so its linkage is intentionally labeled
+batch-only: it is the sole JUP candidate in the latest approved pre-start scan,
+whose other four deployed strategies match strictly. No candidate value was
+fabricated, and the full discrepancy record remains in the evidence CSV.
+
+**AFML / Hudson & Thames citation:** No new theoretical claim. This data-lineage
+repair preserves point-in-time provenance and explicit uncertainty instead of
+collapsing strict and exception links into one undocumented class.
+
+**Backward compatibility:** No breaking changes. Workbook schema, feature
+definitions, HMM lineage, model artifacts and gates are unchanged. No model was
+retrained or promoted.
+
+**Verification:** Both candidate columns contain the same 72 mappings with 72
+unique candidate IDs. All scan timestamps precede bot start by 2,954 to 5,273
+seconds. The 68 strict rows have maximum lower/upper deviations of 0.0642% and
+0.3812%. Cell-level comparison found exactly 218 intended value changes, zero
+unexpected value changes and zero style changes. Sheet dimensions, native table
+ranges and freeze panes are unchanged; artifact-tool re-import and the formula
+error scan pass.
+
+### DATAINGEST-0919 - Ingest 72 validated sub-seven-hour grid strategies
+
+**Date:** 2026-09-19.
+
+Inserted 72 unique Binance Futures Grid strategies, from NEARUSDT strategy
+`414488333` through JUPUSDT strategy `414569158`, into the canonical expired-bot
+workbook. Browser PnL and trade totals were reconciled with the explicit UTC-5
+Order, Trade and Transaction exports. The canonical extractor supplied bot,
+trade, indicator and profile fields; a pinned causal replay supplied the active
+HMM lineage and historically computable training features; strictly pre-entry
+five-minute Binance samples supplied open interest.
+
+**Files modified:**
+- `data/new_expired_bots.xlsx`
+- `CHANGELOG.md`
+- `data/archive/ingestion_20260919_72_strategies/new_expired_bots_before.xlsx`
+
+**Evidence added:**
+- `outputs/01a0a16d-66e5-7e03-8aad-eb2aa640c959/final_validation.json`
+- `outputs/01a0a16d-66e5-7e03-8aad-eb2aa640c959/hmm_lineage_validation.json`
+- `outputs/01a0a16d-66e5-7e03-8aad-eb2aa640c959/publication_receipt.json`
+- `outputs/01a0a16d-66e5-7e03-8aad-eb2aa640c959/open_interest_72.json`
+
+**Decision rationale:** Admit only the 72 browser-validated strategies with bot
+duration at or below seven hours. Preserve exact source values and leave
+unavailable fields absent instead of imputing them: nine positive-trade bots
+fall after the explicit trade-export window, no exact pre-entry book-ticker
+source exists for historical microstructure cost, candidate snapshots were not
+resolved during the initial ingestion and are addressed by DATALINK-0919, the
+governed utility calibrator is unavailable (see ERR-105), and one OU half-life
+correctly fails closed as non-mean-reverting.
+
+**AFML / Hudson & Thames citation:** No new theoretical claim. The ingestion
+preserves point-in-time cutoffs, uniform model lineage, source provenance and
+fail-closed treatment of unavailable features.
+
+**Backward compatibility:** No breaking changes. Workbook schemas, labels,
+feature definitions, gates and active model artifacts are unchanged. No model
+was retrained or promoted.
+
+**Verification:** All 72 browser identity/PnL/trade-total checks passed. The
+five-sheet workbook now has 566 unique General rows and an exact 566-row Meta
+ID match; 71 source-backed PnL-curve rows were added, while the two-point SAGA
+curve was excluded by the existing three-point minimum. All 566 General and
+Meta rows use `rolling_180d_20260915_210940` with finite range, trend and
+persistence probabilities. Required General training inputs for the new rows
+have zero missing values. Pre-existing cells had zero unexpected changes,
+native table ranges were extended, the formula-error scan was clean, and the
+published workbook hash matches the validated output. The prior canonical
+workbook is retained as a byte-identical rollback copy.
+
+### DATARECOVERY-0919 - Apply verified historical workbook feature repairs
+
+**Date:** 2026-09-19.
+
+Applied 1,093 verified missing-input cell updates and appended 12 provenance
+audit rows to the canonical expired-bot workbook. Complete profile inputs
+increased from 179 to 315 of 315 eligible labeled rows; complete inputs across
+the 20 active meta features increased from 128 to 217 of 494 rows. Four rows
+with conflicting start-time evidence remain excluded from reconstructed
+market-input fills. Sampled historical observations and three costs computed
+with the current recipe are explicitly distinguished from original snapshots.
+
+**Files modified:**
+- `data/new_expired_bots.xlsx`
+- `CHANGELOG.md`
+
+**Evidence added:**
+- `reports/canonical_verified_updates_20260919/REPORT.md`
+- `reports/canonical_verified_updates_20260919/applied_cell_provenance.csv`
+- `reports/canonical_verified_updates_20260919/patch_plan.json`
+- `reports/canonical_verified_updates_20260919/publication.json`
+- `reports/canonical_verified_updates_20260919/published_validation.json`
+- `data/archive/canonical_verified_updates_20260919/new_expired_bots_before.xlsx`
+
+**Decision rationale:** Apply only verified missing-cell repairs by exact
+strategy identity, retain source timestamps and hashes, preserve unrelated
+workbook content, and retain a byte-identical rollback copy. The remaining
+nonfinite inputs are 4 open-interest, 276 transaction-cost, and 19 OU half-life
+cells, overlapping across 277 incomplete meta rows. No values were imputed.
+
+**AFML / Hudson & Thames citation:** No new theoretical claim. This data-only
+update preserves the existing point-in-time cutoff and uniform-HMM controls.
+
+**Backward compatibility:** No breaking changes. Feature schema, architecture,
+labels, gates, and active model artifacts are unchanged. Models were not refit.
+
+**Verification:** 23 focused workbook-preservation and profile-training tests
+passed. Cell-by-cell validation checked 73,905 original cells and the actual
+training loaders. All five sheets and pre-existing unrelated values/styles
+were preserved; 17 of 21 workbook package members remain byte-identical.
+Both 494-row lineage checks pass for `rolling_180d_20260915_210940`, and an
+intentional mixed-lineage negative control is rejected. The 343-row utility
+pool and 282 protected files outside the workbook/changelog are unchanged.
+
+### RESOLUTION-0919 - Deduplicated incidents, process ownership and data integrity
+
+**Date:** 2026-09-19.
+
+Deduplicated 40 repeated ledger rows while archiving their exact original
+history. Repaired orphan shutdown, catchable supervisor termination evidence,
+duplicate Windows liveness probes, silent multi-sheet backfill export, and
+nonfinite promotion-gate input handling. Applied a verified metadata-only
+repair to four native tables in the canonical expired-bot workbook; all five
+worksheets and 17 other package members remain byte-identical. Reconciled one
+verified dead September 17 public collector manifest with a byte backup.
+
+**Files modified or added:**
+- `src/neutralgrid/core/process_identity.py`
+- `src/neutralgrid/live/decision/pnl_history.py`
+- `src/neutralgrid/models/meta_labeler.py`
+- `scripts/request_binance_websocket_stop.py`
+- `scripts/websocket_process_identity.py`
+- `scripts/stop_binance_websocket_services.ps1`
+- `scripts/supervise_binance_websocket_services.py`
+- `scripts/verify_binance_websocket_services.py`
+- `scripts/collect_diff_depth.py`
+- `scripts/collect_market_streams.py`
+- `scripts/collect_private_user_stream.py`
+- `scripts/collect_private_grid_telemetry.py`
+- `scripts/run_live_telemetry_controller.py`
+- `scripts/run_live_volatility_loop.py`
+- `scripts/backfill_training_features.py`
+- `scripts/BACKFILL_WORKBOOK_SAFETY.md`
+- `tests/unit/test_websocket_stop_ownership.py`
+- `tests/unit/test_collector_process_probes.py`
+- `tests/unit/test_duplicate_process_liveness.py`
+- `tests/unit/test_binance_websocket_supervisor.py`
+- `tests/unit/test_verify_binance_websocket_services.py`
+- `tests/unit/test_resolution_model_contracts.py`
+- `tests/unit/test_backfill_workbook_preservation.py`
+- `tests/unit/test_backfill_training_features_v20260312.py`
+- `tests/fixtures/backfill_preservation_five_sheets.xlsx`
+- `tests/fixtures/.gitignore`
+- `data/new_expired_bots.xlsx` (native table metadata only)
+- `outputs/audits/binance_websocket_services_current/public/manifest.json`
+  (verified stale status only)
+- `AGENTS.md`, `CLAUDE.md`
+- `.agents/skills/backfill-features/SKILL.md`
+- `.claude/skills/backfill-features/SKILL.md`
+- `ERRORS_LOG.md`, `CHANGELOG.md`
+- `reports/error_resolution_20260919/REPORT.md` and its linked evidence,
+  reports, verification scripts, images and preserved backups.
+
+**Decision rationale:** Reproductions and independent reviews determine the
+scope. A native read-only process query distinguishes exited from unknown;
+creation identity prevents PID reuse from authorizing orphan shutdown. Fresh
+flat exports use no-clobber publication; ordinary overwrite remains a
+single-writer operation. Nonfinite promotion evidence fails through existing
+reason codes instead of promoting or throwing conversion exceptions. No
+empirical threshold, feature list, label, active model or training-cell value
+was changed. Current profile/utility failures, temporal-purge fallback,
+authentication and missing cadence/overnight evidence remain explicit.
+
+**AFML / Hudson & Thames citation:** Preserve event identities, train-only
+processing and separate empirical validation from code correctness. The
+model-contract report cites Hudson & Thames experimental-design guidance and
+scikit-learn temporal/group validation guidance. Current unique-key, lineage,
+target and fold populations were verified directly; no class balancing,
+normalization or fold-policy change was inferred from test success.
+
+**Backward compatibility:** Multi-sheet backfill requires the explicit
+`--allow-flat-workbook-export` flag and a fresh destination; its flat result
+must be merged by key, not copied over the canonical workbook. Existing
+single-table feature formats remain supported. New service manifests expose
+additive process identity. The orphan helper rejects legacy manifests that
+lack birth identity; it never invents provenance or kills an unverified PID.
+Unknown process states block competing writers. Existing finite promotion
+metrics follow unchanged thresholds. Seven-hour consumer differences are
+tested and retained. Missing profile models still use the existing flagged
+similarity-only scan path; preflight advice is not a runtime hard gate.
+
+**Verification:** Full suite **2,158 passed, 2 skipped** in 262.73 seconds.
+Configured Pyright **158 source files**, plus a separate **13-script** check:
+zero errors and warnings. Focused suites: runtime 106, duplicate process
+consumers 76, backfill 42, model contracts 171; leakage selection 74 before
+and after. A 13-minute observation of the existing 12-symbol public collector
+showed advancing counters and no reported sequence/parse gaps or resyncs.
+This is not overnight-host durability proof. Both updated skills validate.
+Exact current dispositions, rejected alternatives, preservation hashes and
+line-review evidence: `reports/error_resolution_20260919/REPORT.md`.
+
+### AUDIT-0919 - Verified telemetry parser, ingestion date, bootstrap and process-query fixes
+
+**Date:** 2026-09-19.
+
+Reproduced and corrected four logged runtime defects: sell-only column-major
+telemetry (ERR-099), UTC-derived Live ingestion dates (ERR-100), redundant
+bootstrap snapshot requests (ERR-103), and a mutating Windows PID probe
+(ERR-117). Preserved model artifacts, feature and label schemas, training data,
+thresholds, promotion gates, sequence validation and exact telemetry counts.
+
+**Files modified or added:**
+- `scripts/collect_depth_shadow.py`
+- `scripts/collect_diff_depth.py`
+- `scripts/finalize_stale_telemetry_manifests.py`
+- `src/neutralgrid/live/decision/private_telemetry.py`
+- `tests/unit/test_diff_depth.py`
+- `tests/unit/test_audit_runtime_regressions.py`
+- `tests/fixtures/private_telemetry/BANKUSDT_414380279.txt`
+- `tests/fixtures/private_telemetry/STRKUSDT_414380195.txt`
+- `reports/code_audit_20260919/AUDIT_REPORT.md`
+- `reports/code_audit_20260919/audit_state.py`
+- `reports/code_audit_20260919/incident_review.md`
+- `ERRORS_LOG.md`
+- `CHANGELOG.md`
+
+**Decision rationale:** Fix the demonstrated boundary failures without weakening
+admission or sequence checks. Retain a valid bootstrap snapshot until the
+engine applies or rejects it. Resolve one Lima ingestion date per run. Treat
+unknown process-query results conservatively to preserve live-owner manifests.
+The detailed report records alternative approaches, rejection reasons and
+remaining operational closure conditions.
+
+**AFML / Hudson & Thames citation:** No estimator, label, sample weighting or
+statistical gate was changed. The read-only audit verifies event-identity
+deduplication, uniform HMM lineage and label exclusion. Technical authority for
+the PID correction is Python 3.11 os.kill documentation and Microsoft's
+OpenProcess API documentation, linked in the audit report.
+
+**Backward compatibility:** Valid row-oriented and all-buy telemetry retains its
+behavior. Valid sell-only column captures now parse. New depth captures use the
+Lima run-start date and expose additive ingestion provenance in the manifest;
+historical directories are unchanged. Path-like symbols now raise before
+capture writes. Cleanup remains dry-run by default; inaccessible/unknown owners
+are retained. No model-facing contract changed.
+
+**Verification:** 18 new regression cases failed before the fix; four negative
+cases already passed. Focused group: 69 passed. Final full suite: 2,054 passed,
+2 skipped. Configured Pyright: 157 source files, zero errors/warnings. Separate
+operational-script Pyright: 3 files, zero errors/warnings. All 13 original Chrome
+captures pass canonical pre-write validation with unchanged hashes. Cleanup
+dry-run inspected 47 manifests without mutation. Initial long-path test failures
+and interpreter-resolution diagnostics are preserved in the audit report, with
+the corrected invocations and their results. ERR-103 still needs a live soak;
+ERR-117 still needs a separately verified operational cleanup if required.
+
+### TRAININGDATA-0919 - Complete source-backed retraining artifacts
+
+**Date:** 2026-09-19.
+
+Completed the recoverable retraining inputs for the 71 bots appended on
+2026-09-17. Registered exact candidate-to-strategy identities in the governed
+deployment ledger, archived the four exact scanner snapshots, appended 71
+source-backed Meta Features rows and 71 Last Features rows, refreshed the
+Canonical Audit, and made the canonical General sheet consumable by the
+winner-IQR profile without adding a training-only column. Live meta-label
+ingestion now preserves source-provided path labels and exposes explicit CLI
+paths for its linkage and scanner evidence. The 71 current rows remain
+fail-closed for live meta-labeler retraining because no timestamped
+`time_to_target_hours` observations were supplied.
+
+**Files modified or produced:**
+- `_bot_data_extractor_core.py`
+- `retrain_meta_labeler.py`
+- `src/neutralgrid/grid/spacing_profile.py`
+- `src/neutralgrid/training/live_outcome_ingestor.py`
+- `tests/unit/test_bot_data_extractor_v2.py`
+- `tests/unit/test_enrich_grid_params.py`
+- `tests/unit/test_live_outcome_ingestor.py`
+- `tests/unit/test_meta_labeler_retrain_contract_v20260530.py`
+- `data/new_expired_bots.xlsx`
+- `data/linkage/deploy_linkage_log.csv`
+- `data/linkage/candidate_snapshots/deployment_ready_20260910_141418.csv`
+- `data/linkage/candidate_snapshots/deployment_ready_20260910_221209.csv`
+- `data/linkage/candidate_snapshots/deployment_ready_20260914_130126.csv`
+- `data/linkage/candidate_snapshots/deployment_ready_20260914_224138.csv`
+- `outputs/01a08c4b-6e2f-7d82-82b8-b0816ea2c706/source_registration_report.json`
+- `ERRORS_LOG.md`
+- `CHANGELOG.md`
+
+**AFML / Hudson & Thames citation:** The integration follows AFML's
+point-in-time feature and event-identity discipline: each candidate ID denotes
+one ex-ante feature event, later outcomes remain labels, and path-derived
+targets are not reconstructed from untimestamped terminal summaries. Uniform
+HMM lineage is required before calibration, and label columns remain excluded
+by both meta-labeler leakage guards.
+
+**Decision rationale:** The scanner snapshots contain all 20 active non-outcome
+features and one unique pre-start candidate ID per bot, so those inputs are
+admissible. Their HMM fields are stale and were rejected; HMM probabilities and
+lineage come only from the active-HMM General rows. `profit_per_grid_pct` is
+deterministically reconstructed by the existing canonical geometry/fee formula
+when the winner-IQR builder reads General, rather than duplicating that value in
+the 69-column extractor contract. `time_to_target_hours` cannot be recovered
+from an untimestamped PnL value sequence, so no label was invented. See
+ERR-112 and ERR-118.
+
+**Backward compatibility:** No existing CLI option or workbook column was
+removed. Two optional live-evidence CLI arguments were added. OCR remains
+optional and now fails closed through dynamic imports. Existing finite
+`profit_per_grid_pct` values are preserved; derivation runs only when the
+column/value is absent. Native Meta/Last Excel table ranges remain a known UI
+limitation under ERR-118; model readers load the full sheet ranges.
+
+**Verification:** Targeted extractor tests pass 169/169. The combined linkage,
+live-outcome, utility, winner-profile, and meta-contract regression group passes
+147/147. Contract tests pass 118/118; leakage-specific contracts pass 74/74.
+Full configured Pyright reports 0 errors and 0 warnings. General and PnL sheets
+have zero cell-value differences from the pre-edit backup at `1e-12` numeric
+tolerance. Meta contains 494 unique strategy IDs with exact General-set
+equality, 494/494 active HMM lineage, and zero non-finite regime probabilities.
+All 71 new Meta rows have complete active features; all 71 new Last rows have
+four exact source values. The utility pool loads 343 uniform-lineage rows,
+including 70 new bots. Live ingestion finds 71 direct-linked feature-complete
+rows and the active path-label guard rejects all 71 for missing
+`time_to_target_hours`. Saved-workbook inspection found zero formula-error
+tokens.
+
+### INGESTFIX-0917 - Append 71 canceled/expired bots with exact signed evidence
+
+**Date:** 2026-09-17.
+
+Appended 71 canceled or expired neutral-grid bots to the canonical training
+workbook. Each row is linked to one unique, eligible pre-start candidate ID and
+to exact strategy/order/trade evidence from Binance exports 20 and 21. Added
+parser support for the observed `Duration\n7h` form and comma-grouped prices,
+then refreshed the new rows against active HMM
+`rolling_180d_20260915_210940`. Candidate `ev_score` values were restored from
+the exact deployment snapshots. No Meta Features rows were added or changed.
+
+**Files modified or produced:**
+- `_bot_data_extractor_core.py`
+- `tests/unit/test_bot_data_extractor_v2.py`
+- `data/new_expired_bots.xlsx`
+- `data/manual_input/2026-09-17/`
+- `outputs/01a08c4b-6e2f-7d82-82b8-b0816ea2c706/new_expired_bots.xlsx`
+- `outputs/01a08c4b-6e2f-7d82-82b8-b0816ea2c706/pre_ingestion_report.json`
+- `outputs/01a08c4b-6e2f-7d82-82b8-b0816ea2c706/extractor_run_report.json`
+- `outputs/01a08c4b-6e2f-7d82-82b8-b0816ea2c706/exact_trade_repair_report.json`
+- `outputs/01a08c4b-6e2f-7d82-82b8-b0816ea2c706/hmm_backfill_merge_report.json`
+- `outputs/01a08c4b-6e2f-7d82-82b8-b0816ea2c706/candidate_ev_fill_report.json`
+- `outputs/01a08c4b-6e2f-7d82-82b8-b0816ea2c706/final_validation_report.json`
+- `CHANGELOG.md`
+
+**AFML / Hudson & Thames citation:** No model, label, estimator, feature
+definition, or validation methodology changed. The ingestion preserves
+point-in-time candidate alignment, exact order-linked trade attribution, and
+uniform HMM-lineage provenance before the rows enter the training backbone.
+
+**Decision rationale:** Export 20 is required for 28 September 10 strategies;
+export 21 supplies the remaining 43 September 14/15 strategies. A pasted
+`BIOUSDT` header was normalized to `APTUSDT` only after the record body,
+archived captures, order symbol, and price geometry agreed. One incoherent
+SUIUSDT liquidation pair was invalidated instead of guessed. Fourteen bots
+therefore retain evidence-backed liquidation blanks, all trigger prices remain
+blank because the UI supplied `--`, and utility scores remain blank because the
+exact candidate rows contain no utility value. One FILUSDT record has only one
+PnL observation, so no two-point curve feature row was fabricated.
+
+**Backward compatibility:** No breaking schema or API changes. Existing 423
+General rows and the Meta Features, Last Features, and Canonical Audit sheets
+are preserved. The parser now accepts two additional source-compatible text
+formats without changing existing parse semantics.
+
+**Verification:** The focused extractor suites pass 185 tests. The canonical
+workbook contains 494 unique General rows, 71 unique pre-start candidate IDs,
+850 exact trade rows, 1,550 exact order rows, 27,001 session mark bars, and 24
+funding events. All 494 rows have finite range/trend/persistence probabilities
+under `rolling_180d_20260915_210940`; workbook inspection found zero formula
+error tokens. Meta Features, Last Features, and Canonical Audit match their
+pre-ingestion cell/style fingerprints. Targeted Pyright reports the existing
+optional-PIL and fixture-annotation baseline (3 errors, 10 warnings) and no new
+parser error.
+
 ### REFIT-0915 - HMM rotation, downstream refits and 57-row feature completion
 
 **Date:** 2026-09-15.
