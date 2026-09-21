@@ -97,5 +97,8 @@ outputs/
 pytest-of-cris_/
 tests/unit/utility_calibrator_tmp/
 
+# Generated audit evidence, backups, market captures, and bundled tool dependencies
+reports/
+
 # Investor presentation materials (permanently excluded per operator, 2026-07-13)
 presentation/

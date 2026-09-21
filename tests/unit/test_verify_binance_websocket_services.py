@@ -27,9 +27,28 @@ def test_windows_pid_probe_does_not_call_os_kill(monkeypatch) -> None:
     def fail_if_called(_pid: int, _signal: int) -> None:
         raise AssertionError("os.kill(pid, 0) is mutating on Windows")
 
-    monkeypatch.setattr(verifier.os, "kill", fail_if_called)
+    monkeypatch.setattr(os, "kill", fail_if_called)
 
     assert verifier._is_running(os.getpid()) is True
+
+
+def test_verifier_rejects_unknown_and_reused_identity(monkeypatch):
+    from scripts.websocket_process_identity import ProcessObservation
+
+    monkeypatch.setattr(verifier, "query_process", lambda pid: ProcessObservation(pid, "unknown"))
+    assert verifier._is_running(123) is False
+    monkeypatch.setattr(verifier, "query_process", lambda pid: ProcessObservation(pid, "running", "new_birth", "python.exe"))
+    with pytest.raises(verifier.ServiceVerificationError, match="identity is no longer live"):
+        verifier._validate_recorded_identity({
+            "pid": 123,
+            "process_identity": {"pid": 123, "creation_token": "old_birth", "executable": "python.exe"},
+        }, "pid")
+
+
+@pytest.mark.parametrize("status", ["failed", "unknown", "starting"])
+def test_failed_or_unestablished_supervisor_cannot_verify(status):
+    with pytest.raises(verifier.ServiceVerificationError, match="not in a verifiable service state"):
+        verifier._validate_service_processes({"status": status}, [])
 
 
 def _write_json(path: Path, payload: dict[str, object]) -> None:

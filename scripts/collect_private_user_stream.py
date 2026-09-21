@@ -50,6 +50,7 @@ from neutralgrid.data.private_user_stream import (  # noqa: E402
     validate_target,
 )
 from scripts.collect_diff_depth import _git_output  # noqa: E402
+from neutralgrid.core.process_identity import query_process  # noqa: E402
 
 
 logger = logging.getLogger(__name__)
@@ -96,11 +97,7 @@ def _sanitize_value(value: Any, listen_key: str | None) -> Any:
 def _pid_is_running(pid: int) -> bool:
     if pid <= 0:
         return False
-    try:
-        os.kill(pid, 0)
-    except OSError:
-        return False
-    return True
+    return query_process(pid).state != "exited"
 
 
 def _acquire_private_lock(lock_path: Path) -> int:
@@ -582,6 +579,7 @@ async def collect_private_user_stream(args: argparse.Namespace) -> int:
         args.linkage_file, expected_targets=targets
     )
     started_at = _utc_now()
+    process_identity = query_process(os.getpid()).identity()
     run_id = (
         started_at.strftime("private_user_stream_%Y%m%d_%H%M%S_%f")
         + f"_{os.getpid()}"
@@ -608,6 +606,8 @@ async def collect_private_user_stream(args: argparse.Namespace) -> int:
         ),
         "live_root": str(live_root),
         "collector_pid": os.getpid(),
+        "process_identity": process_identity,
+        "audit_dir": str(audit_dir),
         "targets": [asdict(target) for target in targets],
         "linkages": [
             {

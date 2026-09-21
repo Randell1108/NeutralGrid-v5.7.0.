@@ -37,6 +37,8 @@ import aiohttp
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "src"
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
@@ -59,6 +61,7 @@ from neutralgrid.live.decision.l2_risk import (  # noqa: E402
     L2IntervalAccumulator,
     build_l2_risk_record,
 )
+from neutralgrid.core.process_identity import query_process  # noqa: E402
 
 
 logger = logging.getLogger(__name__)
@@ -170,11 +173,7 @@ def _load_targets(
 def _pid_is_running(pid: int) -> bool:
     if pid <= 0:
         return False
-    try:
-        os.kill(pid, 0)
-    except OSError:
-        return False
-    return True
+    return query_process(pid).state != "exited"
 
 
 def _acquire_lock(lock_path: Path) -> int:
@@ -920,6 +919,9 @@ class SymbolDiffDepthCollector:
 
                 if (
                     engine.phase == "buffering"
+                    # A snapshot can arrive before its bridging depth event.
+                    # Retain it until the engine applies or rejects it.
+                    and engine.snapshot is None
                     and snapshot_task is None
                     and time.monotonic() >= snapshot_retry_at
                 ):
@@ -1457,6 +1459,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
 async def collect_diff_depth(args: argparse.Namespace) -> int:
     targets = _load_targets(symbols=args.symbols, input_path=args.input)
     started_at = _utc_now()
+    process_identity = query_process(os.getpid()).identity()
     run_id = started_at.strftime("diff_depth_%Y%m%d_%H%M%S_%f") + f"_{os.getpid()}"
     live_date = args.ingestion_date or started_at.astimezone(LIMA).strftime("%Y-%m-%d")
     audit_dir = (
@@ -1560,6 +1563,7 @@ async def collect_diff_depth(args: argparse.Namespace) -> int:
             "git_head": _git_output(["rev-parse", "--short", "HEAD"]),
             "git_status_short": _git_output(["status", "--short"]),
             "collector_pid": os.getpid(),
+            "process_identity": process_identity,
             "scope_note": (
                 "Prospective Binance-published diff-depth on the public endpoint. "
                 "Depth sequence completeness is per labelled contiguous segment; "

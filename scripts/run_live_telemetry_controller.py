@@ -52,6 +52,7 @@ PLUGIN_SNAPSHOT_SCHEMA = "neutralgrid_private_telemetry_snapshot_v2"
 DEFAULT_DEBUG_ENDPOINT = "http://127.0.0.1:9222"
 
 from _bot_data_extractor_core import parse_user_text
+from neutralgrid.core.process_identity import query_process
 from neutralgrid.live.decision.private_telemetry import (
     PrivateTelemetryParseError,
     parse_private_telemetry_text,
@@ -1643,11 +1644,7 @@ def _acquire_lock(lock_path: Path) -> int:
         except (OSError, ValueError, IndexError):
             pid = -1
         if pid > 0:
-            try:
-                os.kill(pid, 0)
-            except OSError:
-                pass
-            else:
+            if query_process(pid).state != "exited":
                 raise ControllerError(f"controller already running with PID {pid}")
         lock_path.unlink(missing_ok=True)
     descriptor = os.open(lock_path, os.O_CREAT | os.O_EXCL | os.O_WRONLY)

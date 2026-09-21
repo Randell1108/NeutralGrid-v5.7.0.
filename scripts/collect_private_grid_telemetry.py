@@ -10,7 +10,6 @@ complete View Details drawer.
 from __future__ import annotations
 
 import argparse
-import ctypes
 import json
 import logging
 import os
@@ -27,6 +26,7 @@ from zoneinfo import ZoneInfo
 
 from websockets.sync.client import connect as websocket_connect
 
+from neutralgrid.core.process_identity import query_process
 from neutralgrid.live.monotonic_schedule import advance_nominal_start
 
 
@@ -517,31 +517,7 @@ def collect_cycle(args: argparse.Namespace) -> dict[str, Any]:
 def _pid_is_running(pid: int) -> bool:
     if pid <= 0:
         return False
-    if os.name == "nt":
-        process_query_limited_information = 0x1000
-        still_active = 259
-        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
-        handle = kernel32.OpenProcess(
-            process_query_limited_information,
-            False,
-            pid,
-        )
-        if not handle:
-            return ctypes.get_last_error() == 5
-        exit_code = ctypes.c_ulong()
-        try:
-            success = kernel32.GetExitCodeProcess(
-                handle,
-                ctypes.byref(exit_code),
-            )
-            return bool(success) and exit_code.value == still_active
-        finally:
-            kernel32.CloseHandle(handle)
-    try:
-        os.kill(pid, 0)
-    except OSError:
-        return False
-    return True
+    return query_process(pid).state != "exited"
 
 
 def _acquire_lock(lock_path: Path) -> int:

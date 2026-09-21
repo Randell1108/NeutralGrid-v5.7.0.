@@ -10,14 +10,15 @@ from __future__ import annotations
 import math
 import shutil
 import sys
+from collections.abc import Iterator
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional
-from unittest.mock import patch
 from uuid import uuid4
 
 import pandas as pd
 import pytest
+
+import _bot_data_extractor_core as extractor_core
 
 # Project root on sys.path so `from new_bot_data_extractor import ...` works.
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
@@ -103,7 +104,7 @@ def bot_data_basic() -> ExtractedBotData:
 
 
 @pytest.fixture
-def workspace_tmp_dir() -> Path:
+def workspace_tmp_dir() -> Iterator[Path]:
     root = Path("tests") / ".tmp_test_bot_data_extractor_v2"
     root.mkdir(parents=True, exist_ok=True)
     case_dir = root / uuid4().hex
@@ -117,6 +118,37 @@ def workspace_tmp_dir() -> Path:
 @pytest.fixture()
 def empty_trade_metrics() -> TradeMetrics:
     return TradeMetrics()
+
+
+class TestOptionalOcrBoundary:
+    """The text-only extractor must not require the optional OCR stack."""
+
+    def test_missing_optional_dependency_fails_closed(self, monkeypatch, tmp_path):
+        def missing_import(_name):
+            raise ModuleNotFoundError("optional OCR package not installed")
+
+        monkeypatch.setattr(extractor_core, "import_module", missing_import)
+
+        assert extractor_core.try_ocr_extraction(tmp_path / "missing.png") is None
+
+    def test_ocr_engine_failure_fails_closed(self, monkeypatch, tmp_path):
+        class FakeImageModule:
+            @staticmethod
+            def open(_path):
+                return object()
+
+        class FailingTesseract:
+            @staticmethod
+            def image_to_string(_image):
+                raise RuntimeError("OCR engine unavailable")
+
+        modules = {
+            "pytesseract": FailingTesseract,
+            "PIL.Image": FakeImageModule,
+        }
+        monkeypatch.setattr(extractor_core, "import_module", modules.__getitem__)
+
+        assert extractor_core.try_ocr_extraction(tmp_path / "image.png") is None
 
 
 # =============================================================================
@@ -261,6 +293,10 @@ class TestParseUserText:
         data = parse_user_text("Duration: 72.0 hrs")
         assert data["duration_hours"] == pytest.approx(72.0)
 
+    def test_duration_hours_only_with_short_suffix(self):
+        data = parse_user_text("Duration\n7h")
+        assert data["duration_hours"] == pytest.approx(7.0)
+
     def test_duration_hours_minutes_without_trailing_m(self):
         data = parse_user_text("Duration\n6h 23")
         assert data["duration_hours"] == pytest.approx(6 + 23 / 60)
@@ -336,6 +372,19 @@ Position Margin
         data = parse_user_text("Price Range: 10.00\u201320.00")
         assert data["price_range_low"] == pytest.approx(10.0)
         assert data["price_range_high"] == pytest.approx(20.0)
+
+    def test_price_fields_with_thousands_separators(self):
+        data = parse_user_text(
+            "Price Range\n2,473.30 - 2,535.52 USDT\n"
+            "Grid Start Price\n2,498.82 USDT\n"
+            "Est. Liq. Price (Long): 1,651.66\n"
+            "Est. Liq. Price (Short): 3,137.29\n"
+        )
+        assert data["price_range_low"] == pytest.approx(2473.30)
+        assert data["price_range_high"] == pytest.approx(2535.52)
+        assert data["grid_start_price"] == pytest.approx(2498.82)
+        assert data["liq_price_long"] == pytest.approx(1651.66)
+        assert data["liq_price_short"] == pytest.approx(3137.29)
 
     # -- Grid start price --
 
@@ -1424,7 +1473,7 @@ class TestBuildBotDataFromText:
     """End-to-end tests for text parsing into structured data."""
 
     def test_full_parse(self, full_bot_text):
-        bot_data, fills, pnl_curve = build_bot_data_from_text(full_bot_text)
+        bot_data, _, _ = build_bot_data_from_text(full_bot_text)
         assert bot_data.symbol == "TAOUSDT"
         assert bot_data.strategy_id == 1234567890
         assert bot_data.status == "expired"
@@ -1450,7 +1499,7 @@ class TestBuildBotDataFromText:
             "Buy 2000.00 0.01\n"
             "Sell 2050.00 0.01\n"
         )
-        bot_data, fills, pnl_curve = build_bot_data_from_text(text)
+        bot_data, fills, _ = build_bot_data_from_text(text)
         assert bot_data.symbol == "ETHUSDT"
         assert len(fills) == 2
         assert fills[0].side == "BUY"
@@ -1464,7 +1513,7 @@ class TestBuildBotDataFromText:
             "2  1.00 USDT\n"
             "3  -0.20 USDT\n"
         )
-        bot_data, fills, pnl_curve = build_bot_data_from_text(text)
+        _, _, pnl_curve = build_bot_data_from_text(text)
         assert len(pnl_curve) == 3
         assert pnl_curve[0] == pytest.approx(0.50)
         assert pnl_curve[1] == pytest.approx(1.00)

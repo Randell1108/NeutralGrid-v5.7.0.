@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 import argparse
-import ctypes
 import hashlib
+import json
+import math
 import os
 import signal
 import subprocess
@@ -43,6 +44,7 @@ from scripts.collect_diff_depth import (  # noqa: E402
     DEFAULT_REST_BASE,
     DEFAULT_WS_BASE as DEFAULT_PUBLIC_WS_BASE,
 )
+from neutralgrid.core.process_identity import matches_identity, query_process  # noqa: E402
 
 
 SUPERVISOR_SCHEMA_VERSION = "neutralgrid_binance_ws_supervisor_v1"
@@ -71,6 +73,7 @@ class ServiceProcess:
     next_restart_monotonic: float = 0.0
     restart_backoff_seconds: float = 0.0
     blocked_reason: str | None = None
+    process_identity: dict[str, Any] | None = None
 
     def manifest_record(self) -> dict[str, Any]:
         process = self.process
@@ -90,6 +93,7 @@ class ServiceProcess:
             "last_started_at_utc": self.last_started_at_utc,
             "last_exited_at_utc": self.last_exited_at_utc,
             "blocked_reason": self.blocked_reason,
+            "process_identity": self.process_identity,
         }
 
 
@@ -100,31 +104,7 @@ def _utc_now_iso() -> str:
 def _pid_is_running(pid: int) -> bool:
     if pid <= 0:
         return False
-    if os.name == "nt":
-        process_query_limited_information = 0x1000
-        still_active = 259
-        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
-        handle = kernel32.OpenProcess(
-            process_query_limited_information,
-            False,
-            pid,
-        )
-        if not handle:
-            return ctypes.get_last_error() == 5
-        exit_code = ctypes.c_ulong()
-        try:
-            success = kernel32.GetExitCodeProcess(
-                handle,
-                ctypes.byref(exit_code),
-            )
-            return bool(success) and exit_code.value == still_active
-        finally:
-            kernel32.CloseHandle(handle)
-    try:
-        os.kill(pid, 0)
-    except OSError:
-        return False
-    return True
+    return query_process(pid).state != "exited"
 
 
 def _acquire_lock(path: Path) -> int:
@@ -245,6 +225,7 @@ def _start_service(service: ServiceProcess, *, base_backoff: float) -> None:
         creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
     )
     service.starts += 1
+    service.process_identity = query_process(service.process.pid).identity()
     service.last_started_at_utc = _utc_now_iso()
     service.last_exit_code = None
     service.blocked_reason = None
@@ -260,30 +241,67 @@ def _request_child_stop(service: ServiceProcess) -> None:
 
 
 def _stop_services(services: Mapping[str, ServiceProcess], timeout: float) -> None:
+    errors: list[str] = []
+    workers: dict[str, Mapping[str, Any]] = {}
     for service in services.values():
-        if service.process is not None and service.process.poll() is None:
+        try:
+            # The supervisor created and owns these exact service directories.
+            # A Windows launcher can exit while its worker remains alive.
             _request_child_stop(service)
+            child_manifest = service.audit_dir / "manifest.json"
+            if child_manifest.is_file():
+                payload = json.loads(child_manifest.read_text(encoding="utf-8"))
+                identity = payload.get("process_identity") if isinstance(payload, dict) else None
+                if (
+                    not isinstance(identity, Mapping)
+                    or payload.get("audit_dir") != str(service.audit_dir)
+                    or payload.get("collector_pid") != identity.get("pid")
+                    or not isinstance(identity.get("pid"), int)
+                    or isinstance(identity.get("pid"), bool)
+                    or identity["pid"] <= 0
+                ):
+                    errors.append(f"{service.name}: worker identity unavailable during shutdown")
+                else:
+                    workers[service.name] = identity
+        except (OSError, ValueError) as exc:
+            errors.append(f"{service.name}: stop request or worker manifest failed: {exc!r}")
+
+    def workers_exited() -> bool:
+        return all(query_process(identity["pid"]).state == "exited" for identity in workers.values())
+
     deadline = time.monotonic() + timeout
     while time.monotonic() < deadline:
         if all(
             service.process is None or service.process.poll() is not None
             for service in services.values()
-        ):
+        ) and workers_exited():
             break
         time.sleep(0.1)
     for service in services.values():
         process = service.process
-        if process is not None and process.poll() is None:
-            process.terminate()
-            try:
-                process.wait(timeout=min(5.0, max(1.0, timeout)))
-            except subprocess.TimeoutExpired:
-                process.kill()
-                process.wait(timeout=min(5.0, max(1.0, timeout)))
-        if process is not None:
-            service.last_exit_code = process.poll()
-            service.last_exited_at_utc = _utc_now_iso()
-        _close_logs(service)
+        try:
+            if process is not None and process.poll() is None:
+                process.terminate()
+                try:
+                    process.wait(timeout=min(5.0, max(1.0, timeout)))
+                except subprocess.TimeoutExpired:
+                    process.kill()
+                    process.wait(timeout=min(5.0, max(1.0, timeout)))
+        except (OSError, subprocess.TimeoutExpired) as exc:
+            errors.append(f"{service.name}: shutdown failed: {exc!r}")
+        finally:
+            if process is not None:
+                service.last_exit_code = process.poll()
+                if service.last_exit_code is not None:
+                    service.last_exited_at_utc = _utc_now_iso()
+            _close_logs(service)
+    for name, identity in workers.items():
+        observed = query_process(identity["pid"])
+        if observed.state != "exited":
+            state = "still running" if matches_identity(observed, identity) else "unverified or reused PID"
+            errors.append(f"{name}: worker {state} after bounded shutdown")
+    if errors:
+        raise WebSocketSupervisorError("; ".join(errors))
 
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
@@ -328,8 +346,8 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
             "non-production Binance endpoints require "
             "--allow-nonproduction-endpoints"
         )
-    if args.duration_seconds < 0:
-        parser.error("--duration-seconds must be >= 0")
+    if not math.isfinite(args.duration_seconds) or args.duration_seconds < 0:
+        parser.error("--duration-seconds must be finite and >= 0")
     if args.ingestion_date is None:
         args.ingestion_date = datetime.now(LIMA).date().isoformat()
     else:
@@ -347,8 +365,9 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         "restart_max_seconds",
         "shutdown_timeout_seconds",
     ):
-        if float(getattr(args, field)) <= 0:
-            parser.error(f"--{field.replace('_', '-')} must be positive")
+        value = float(getattr(args, field))
+        if not math.isfinite(value) or value <= 0:
+            parser.error(f"--{field.replace('_', '-')} must be finite and positive")
     return args
 
 
@@ -361,9 +380,7 @@ def supervise(args: argparse.Namespace) -> int:
     audit_root = Path(args.audit_root).resolve()
     audit_root.mkdir(parents=True, exist_ok=True)
     stop_path = audit_root / "STOP"
-    stop_path.unlink(missing_ok=True)
     lock_path = audit_root / "supervisor.lock"
-    lock_descriptor = _acquire_lock(lock_path)
     manifest_path = audit_root / "manifest.json"
     commands = build_service_commands(args, targets)
     services = {
@@ -377,14 +394,16 @@ def supervise(args: argparse.Namespace) -> int:
         for name, command in commands.items()
     }
     started_at = _utc_now_iso()
+    process_identity = query_process(os.getpid()).identity()
     deadline: float | None = None
     stopping = False
     git_head = _git_output(["rev-parse", "--short", "HEAD"])
     target_sha256 = hashlib.sha256(Path(args.target_csv).read_bytes()).hexdigest()
 
     def request_stop(_signum: int, _frame: Any) -> None:
-        nonlocal stopping
+        nonlocal stopping, stop_reason
         stopping = True
+        stop_reason = f"signal_{_signum}"
 
     signal.signal(signal.SIGINT, request_stop)
     if hasattr(signal, "SIGTERM"):
@@ -399,6 +418,7 @@ def supervise(args: argparse.Namespace) -> int:
                 "started_at_utc": started_at,
                 "updated_at_utc": _utc_now_iso(),
                 "supervisor_pid": os.getpid(),
+                "process_identity": process_identity,
                 "target_csv": str(Path(args.target_csv).resolve()),
                 "target_sha256": target_sha256,
                 "targets": [asdict(target) for target in targets],
@@ -436,11 +456,14 @@ def supervise(args: argparse.Namespace) -> int:
             },
         )
 
-    write_manifest("starting")
     last_manifest_write = float("-inf")
     exit_code = 0
     stop_reason = "requested"
+    terminal_error: str | None = None
+    lock_descriptor = _acquire_lock(lock_path)
     try:
+        stop_path.unlink(missing_ok=True)
+        write_manifest("starting")
         for service in services.values():
             _start_service(
                 service, base_backoff=float(args.restart_base_seconds)
@@ -509,15 +532,20 @@ def supervise(args: argparse.Namespace) -> int:
     except Exception as exc:
         exit_code = 2
         stop_reason = "supervisor_exception"
-        write_manifest("failed", error=repr(exc))
+        terminal_error = repr(exc)
     finally:
-        _stop_services(services, float(args.shutdown_timeout_seconds))
-        if exit_code == 0:
+        try:
+            _stop_services(services, float(args.shutdown_timeout_seconds))
+        except Exception as exc:
+            exit_code = 2
+            stop_reason = "shutdown_exception"
+            terminal_error = f"{terminal_error + '; ' if terminal_error else ''}{exc!r}"
+        try:
             had_restarts = any(
                 service.unexpected_exits for service in services.values()
             )
             private_blocked = services["private"].blocked_reason is not None
-            final_status = (
+            final_status = "failed" if exit_code else (
                 "complete_private_blocked"
                 if private_blocked
                 else (
@@ -528,9 +556,12 @@ def supervise(args: argparse.Namespace) -> int:
                 final_status,
                 completed_at_utc=_utc_now_iso(),
                 stop_reason=stop_reason,
+                exit_code=exit_code,
+                error=terminal_error,
             )
-        os.close(lock_descriptor)
-        lock_path.unlink(missing_ok=True)
+        finally:
+            os.close(lock_descriptor)
+            lock_path.unlink(missing_ok=True)
     return exit_code
 
 

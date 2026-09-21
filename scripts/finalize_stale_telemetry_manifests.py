@@ -9,6 +9,7 @@ and have no live owner process.  Private one-shot manifests normalize to
 from __future__ import annotations
 
 import argparse
+import ctypes
 import json
 import os
 from collections import Counter
@@ -30,6 +31,30 @@ def _utc_iso(value: datetime) -> str:
 
 
 def _pid_is_alive(pid: int) -> bool:
+    """Treat inaccessible/unknown owners as alive; never signal on Windows."""
+    if not isinstance(pid, int) or isinstance(pid, bool) or pid <= 0:
+        return False
+    if os.name == "nt":
+        from ctypes import wintypes
+
+        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+        kernel32.OpenProcess.argtypes = (wintypes.DWORD, wintypes.BOOL, wintypes.DWORD)
+        kernel32.OpenProcess.restype = wintypes.HANDLE
+        kernel32.GetExitCodeProcess.argtypes = (wintypes.HANDLE, ctypes.POINTER(wintypes.DWORD))
+        kernel32.GetExitCodeProcess.restype = wintypes.BOOL
+        kernel32.CloseHandle.argtypes = (wintypes.HANDLE,)
+        kernel32.CloseHandle.restype = wintypes.BOOL
+        handle = kernel32.OpenProcess(0x1000, False, pid)
+        if not handle:
+            # ERROR_INVALID_PARAMETER establishes that the PID does not exist.
+            # Access denied and other query failures do not establish death.
+            return ctypes.get_last_error() != 87
+        exit_code = wintypes.DWORD()
+        try:
+            success = kernel32.GetExitCodeProcess(handle, ctypes.byref(exit_code))
+            return not success or exit_code.value == 259  # STILL_ACTIVE
+        finally:
+            kernel32.CloseHandle(handle)
     try:
         os.kill(pid, 0)
     except ProcessLookupError:
@@ -37,7 +62,7 @@ def _pid_is_alive(pid: int) -> bool:
     except PermissionError:
         return True
     except OSError:
-        return False
+        return True
     return True
 
 

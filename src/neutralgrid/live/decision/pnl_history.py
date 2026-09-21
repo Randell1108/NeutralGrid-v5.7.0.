@@ -30,6 +30,8 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence, cast
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
+from neutralgrid.core.process_identity import query_process
+
 
 PNL_OBSERVATION_SCHEMA_VERSION = "neutralgrid_live_pnl_observation_v1"
 _HEX_SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
@@ -553,11 +555,7 @@ def load_pnl_observations(
 def _pid_is_running(pid: int) -> bool:
     if pid <= 0:
         return False
-    try:
-        os.kill(pid, 0)
-    except OSError:
-        return False
-    return True
+    return query_process(pid).state != "exited"
 
 
 def _acquire_bot_lock(lock_path: Path) -> int:

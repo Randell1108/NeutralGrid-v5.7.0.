@@ -17,11 +17,13 @@ from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
+from zoneinfo import ZoneInfo
 
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "src"
+INGESTION_TIMEZONE = ZoneInfo("America/Lima")
 if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
@@ -240,9 +242,13 @@ def _write_rejected_targets(path: Path, rejected: list[Any]) -> None:
 
 async def collect_depth_shadow(args: argparse.Namespace) -> int:
     input_path = Path(args.input) if args.input else _latest_deployment_csv()
-    run_id = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+    ingestion_started_at = datetime.now(timezone.utc)
+    run_id = ingestion_started_at.strftime("%Y%m%d_%H%M%S")
     audit_dir = Path(args.output_dir) if args.output_dir else ROOT / "outputs" / "audits" / f"depth_shadow_{run_id}"
-    live_root = ROOT / "Live" / datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    ingestion_date = ingestion_started_at.astimezone(INGESTION_TIMEZONE).date().isoformat()
+    live_base = (ROOT / "Live").resolve()
+    live_root = (live_base / ingestion_date).resolve()
+    live_root.relative_to(live_base)
 
     symbols = [s.upper() for s in args.symbols] if args.symbols else None
     if args.symbols and not args.input:
@@ -268,6 +274,11 @@ async def collect_depth_shadow(args: argparse.Namespace) -> int:
         )
 
     unique_symbols = sorted({target.symbol for target in targets})
+    for symbol in unique_symbols:
+        # Reject path-like symbols before any capture is written.
+        if not symbol.isascii() or not symbol.isalnum():
+            raise ValueError(f"Invalid depth-shadow symbol: {symbol!r}")
+        (live_root / symbol).resolve().relative_to(live_root)
     manifest: dict[str, Any] = {
         "run_id": run_id,
         "created_at_utc": utc_now_iso(),
@@ -276,6 +287,9 @@ async def collect_depth_shadow(args: argparse.Namespace) -> int:
         "input_path": str(input_path) if not args.symbols or args.input else "--symbols",
         "audit_dir": str(audit_dir),
         "live_root": str(live_root),
+        "ingestion_date": ingestion_date,
+        "ingestion_timezone": INGESTION_TIMEZONE.key,
+        "ingestion_started_at_utc": ingestion_started_at.isoformat(),
         "original_target_count": original_target_count,
         "target_count": len(targets),
         "rejected_target_count": len(rejected_targets),

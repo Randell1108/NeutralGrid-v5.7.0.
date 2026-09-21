@@ -23,6 +23,42 @@ from neutralgrid.data.diff_depth import (
 from scripts.collect_diff_depth import _load_targets, collect_diff_depth, parse_args
 
 
+@pytest.mark.asyncio
+async def test_snapshot_before_first_event_does_not_start_redundant_fetch(tmp_path, monkeypatch):
+    from types import SimpleNamespace
+    from unittest.mock import AsyncMock, Mock
+    from aiohttp import WSMsgType
+    from scripts.collect_diff_depth import CaptureTarget, SymbolDiffDepthCollector
+
+    args = parse_args(["--symbols", "BTCUSDT", "--audit-dir", str(tmp_path / "audit")])
+    storage = Mock(run_id="test-run")
+    receives = 0
+
+    async def receive(**kwargs):
+        nonlocal receives
+        receives += 1
+        await asyncio.sleep(0)  # Snapshot task completes before the next loop turn.
+        if receives == 1:
+            raise TimeoutError
+        if receives == 2:
+            return SimpleNamespace(type=WSMsgType.TEXT, data=json.dumps(_event_payload(
+                first_update_id=100, final_update_id=101, previous_final_update_id=99)))
+        return SimpleNamespace(type=WSMsgType.CLOSED)
+
+    ws = SimpleNamespace(receive=receive, closed=False, close=AsyncMock(), close_code=1000)
+    collector = SymbolDiffDepthCollector(target=CaptureTarget("BTCUSDT"), storage=storage,
+        session=SimpleNamespace(ws_connect=AsyncMock(return_value=ws)), args=args,
+        stop_event=asyncio.Event(), deadline_monotonic=None)
+    fetch = AsyncMock(return_value=_snapshot(last_update_id=100))
+    monkeypatch.setattr(collector, "_fetch_snapshot", fetch)
+    monkeypatch.setattr(collector, "write_heartbeat", AsyncMock())
+    assert await collector._run_connection("connection-a", None) == "websocket_closed_1000"
+    assert fetch.await_count == 1
+    actions = [action for call in storage.append_actions.call_args_list for action in call.args[0]]
+    assert sum(action.kind == "event_applied" for action in actions) == 1
+    assert not any(action.kind == "sequence_gap" for action in actions)
+
+
 @pytest.mark.parametrize("strategy_column", ["strategy_id", "strategy_number"])
 def test_load_targets_preserves_exact_strategy_identity(
     tmp_path: Path,

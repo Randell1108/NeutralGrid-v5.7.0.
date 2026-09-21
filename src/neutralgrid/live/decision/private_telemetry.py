@@ -332,6 +332,27 @@ def _parse_ladder(
             buy_prices = column_buy_prices
             sell_prices = []
 
+    if buy_count == 0 and sell_count > 0 and len(index_positions) == sell_count:
+        first_index_offset = index_positions[0][0]
+        last_index_offset = index_positions[-1][0]
+        column_sell_prices = [
+            price
+            for line in ladder_lines[last_index_offset + 1 :]
+            if (price := ladder_price(line)) is not None
+        ]
+        prices_before_last_index = [
+            price
+            for line in ladder_lines[:last_index_offset]
+            if (price := ladder_price(line)) is not None
+        ]
+        if (
+            last_index_offset - first_index_offset + 1 == sell_count
+            and len(column_sell_prices) == sell_count
+            and not prices_before_last_index
+        ):
+            buy_prices = []
+            sell_prices = column_sell_prices
+
     if last_price is None:
         raise PrivateTelemetryParseError("pending-order ladder is missing Last Price")
     buy_prices.sort(reverse=True)

@@ -1,0 +1,34 @@
+Synthetic private telemetry fixture. No customer account data.
+Pending Order
+Qty Per Order
+1.00
+Last Price
+200.00 USDT
+Buy(0)
+Sell(11)
+Price (USDT)
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+201.00
+202.00
+203.00
+204.00
+205.00
+206.00
+207.00
+208.00
+209.00
+210.00
+211.00
+Grid Details
+Advanced (Optional)
+History

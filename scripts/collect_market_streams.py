@@ -54,6 +54,7 @@ from scripts.collect_diff_depth import (  # noqa: E402
     _git_output,
     _load_targets,
 )
+from neutralgrid.core.process_identity import query_process  # noqa: E402
 
 
 logger = logging.getLogger(__name__)
@@ -622,6 +623,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
 async def collect_market_streams(args: argparse.Namespace) -> int:
     targets = _load_targets(symbols=args.symbols, input_path=args.input)
     started_at = _utc_now()
+    process_identity = query_process(os.getpid()).identity()
     run_id = started_at.strftime("market_stream_%Y%m%d_%H%M%S_%f") + f"_{os.getpid()}"
     live_date = args.ingestion_date or started_at.astimezone(LIMA).strftime("%Y-%m-%d")
     audit_dir = args.audit_dir or ROOT / "outputs" / "audits" / run_id
@@ -682,6 +684,8 @@ async def collect_market_streams(args: argparse.Namespace) -> int:
             ),
             "live_root": str(live_root),
             "collector_pid": os.getpid(),
+            "process_identity": process_identity,
+            "audit_dir": str(audit_dir),
             "targets": [asdict(target) for target in targets],
             "symbol_run_dirs": {
                 symbol: str(storage.run_dir) for symbol, storage in storages.items()

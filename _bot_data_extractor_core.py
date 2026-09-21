@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+from importlib import import_module
 import json
 import logging
 import math
@@ -284,6 +285,14 @@ def parse_user_text(text: str) -> Dict[str, Any]:
                     dur_hrs = re.search(r'Duration[:\s]*([\d.]+)\s*(?:hours?|hrs?)', text, re.IGNORECASE)
                     if dur_hrs:
                         data["duration_hours"] = float(dur_hrs.group(1))
+                    else:
+                        dur_short_hours = re.search(
+                            r'Duration\s*[:\n]\s*([\d.]+)\s*[hH]\b',
+                            text,
+                            re.IGNORECASE,
+                        )
+                        if dur_short_hours:
+                            data["duration_hours"] = float(dur_short_hours.group(1))
 
     # --- Invested Margin ---
     margin_m = re.search(
@@ -312,16 +321,16 @@ def parse_user_text(text: str) -> Dict[str, Any]:
 
     # --- Price Range ---
     range_m = re.search(
-        r'Price\s*Range[:\s]*([\d.]+)\s*[-\u2013\u2014]\s*([\d.]+)', text, re.IGNORECASE
+        r'Price\s*Range[:\s]*([\d,.]+)\s*[-\u2013\u2014]\s*([\d,.]+)', text, re.IGNORECASE
     )
     if range_m:
-        data["price_range_low"] = float(range_m.group(1))
-        data["price_range_high"] = float(range_m.group(2))
+        data["price_range_low"] = float(range_m.group(1).replace(",", ""))
+        data["price_range_high"] = float(range_m.group(2).replace(",", ""))
 
     # --- Grid Start Price ---
-    start_p = re.search(r'Grid\s*Start\s*Price[:\s]*([\d.]+)', text, re.IGNORECASE)
+    start_p = re.search(r'Grid\s*Start\s*Price[:\s]*([\d,.]+)', text, re.IGNORECASE)
     if start_p:
-        data["grid_start_price"] = float(start_p.group(1))
+        data["grid_start_price"] = float(start_p.group(1).replace(",", ""))
 
     # --- Qty/Order or Qty Per Order ---
     qty_m = re.search(r'Qty\s*(?:/|Per)\s*Order[:\s]*([\d,.]+)', text, re.IGNORECASE)
@@ -391,21 +400,21 @@ def parse_user_text(text: str) -> Dict[str, Any]:
     # --- Liquidation Prices ---
     # Handles: "Liq Long", "Liq. Price (Long)", "Est. Liq. Price (Long)", "Liquidation Price (Long)"
     liq_l = re.search(
-        r'Liq(?:uidation)?\.?\s*(?:Price\s*)?\(?Long\)?[:\s]*([\d.]+)', text, re.IGNORECASE
+        r'Liq(?:uidation)?\.?\s*(?:Price\s*)?\(?Long\)?[:\s]*([\d,.]+)', text, re.IGNORECASE
     )
     if liq_l:
-        data["liq_price_long"] = float(liq_l.group(1))
+        data["liq_price_long"] = float(liq_l.group(1).replace(",", ""))
 
     liq_s = re.search(
-        r'Liq(?:uidation)?\.?\s*(?:Price\s*)?\(?Short\)?[:\s]*([\d.]+)', text, re.IGNORECASE
+        r'Liq(?:uidation)?\.?\s*(?:Price\s*)?\(?Short\)?[:\s]*([\d,.]+)', text, re.IGNORECASE
     )
     if liq_s:
-        data["liq_price_short"] = float(liq_s.group(1))
+        data["liq_price_short"] = float(liq_s.group(1).replace(",", ""))
 
     # --- Trigger Price ---
-    trig_m = re.search(r'Trigger\s*Price[:\s]*([\d.]+)', text, re.IGNORECASE)
+    trig_m = re.search(r'Trigger\s*Price[:\s]*([\d,.]+)', text, re.IGNORECASE)
     if trig_m:
-        data["trigger_price"] = float(trig_m.group(1))
+        data["trigger_price"] = float(trig_m.group(1).replace(",", ""))
 
     return data
 
@@ -648,17 +657,22 @@ def build_bot_data_from_text(
 # =============================================================================
 
 def try_ocr_extraction(image_path: Path) -> Optional[str]:
-    """Attempt OCR extraction using available libraries."""
-    try:
-        import pytesseract  # type: ignore[reportMissingImports]
-        from PIL import Image
+    """Attempt OCR extraction when both optional OCR packages are installed.
 
-        img = Image.open(image_path)
+    Dynamic imports keep the manual-text extractor usable when the optional
+    OCR stack is absent.  Import failures return ``None``; image/engine errors
+    are logged and also fail closed instead of escaping into ingestion.
+    """
+    try:
+        pytesseract = import_module("pytesseract")
+        pil_image = import_module("PIL.Image")
+
+        img = pil_image.open(image_path)
         text = pytesseract.image_to_string(img)
         logger.info(f"OCR extracted {len(text)} characters from {image_path.name}")
         return text
     except ImportError:
-        logger.warning("pytesseract not available, OCR disabled")
+        logger.warning("Optional OCR dependencies are unavailable; OCR disabled")
         return None
     except Exception as e:
         logger.error(f"OCR failed for {image_path}: {e}")

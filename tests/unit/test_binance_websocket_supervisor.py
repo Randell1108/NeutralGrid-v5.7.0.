@@ -159,3 +159,105 @@ def test_supervisor_restarts_failed_market_and_quarantines_missing_private_key(
     assert services["market"]["unexpected_exits"] >= 1
     assert services["public"]["last_exit_code"] is not None
     assert not (audit_root / "supervisor.lock").exists()
+
+
+@pytest.mark.parametrize("failure_stage", ["start", "shutdown"])
+def test_catchable_failures_record_terminal_reason_and_release_lock(tmp_path, monkeypatch, failure_stage):
+    roster = _roster(tmp_path / "targets.csv")
+    audit_root = tmp_path / "audit"
+    args = supervisor.parse_args([
+        "--target-csv", str(roster), "--audit-root", str(audit_root),
+        "--live-root", str(tmp_path / "Live"), "--log-root", str(tmp_path / "logs"),
+        "--duration-seconds", "0.001",
+    ])
+
+    def start_service(_service, **_kwargs):
+        if failure_stage == "start":
+            raise OSError("fixture start failure")
+
+    def stop_services(services, _timeout):
+        if failure_stage == "shutdown":
+            raise OSError("fixture shutdown failure")
+        for service in services.values():
+            service.last_exit_code = 17
+
+    monkeypatch.setattr(supervisor, "_git_output", lambda _args: None)
+    monkeypatch.setattr(supervisor, "_start_service", start_service)
+    monkeypatch.setattr(supervisor, "_stop_services", stop_services)
+    assert supervisor.supervise(args) == 2
+    manifest = json.loads((audit_root / "manifest.json").read_text())
+    assert manifest["status"] == "failed"
+    assert manifest["exit_code"] == 2
+    assert manifest["stop_reason"] == ("supervisor_exception" if failure_stage == "start" else "shutdown_exception")
+    assert f"fixture {failure_stage} failure" in manifest["error"]
+    assert "completed_at_utc" in manifest
+    if failure_stage == "start":
+        assert all(item["last_exit_code"] == 17 for item in manifest["services"].values())
+    assert not (audit_root / "supervisor.lock").exists()
+
+
+def test_competing_start_cannot_remove_existing_stop_marker(tmp_path, monkeypatch):
+    roster = _roster(tmp_path / "targets.csv")
+    audit_root = tmp_path / "audit"
+    audit_root.mkdir()
+    (audit_root / "STOP").write_text("existing owner's pending stop")
+    (audit_root / "supervisor.lock").write_text(str(os.getpid()))
+    args = supervisor.parse_args(["--target-csv", str(roster), "--audit-root", str(audit_root)])
+    monkeypatch.setattr(supervisor, "_git_output", lambda _args: None)
+    with pytest.raises(supervisor.WebSocketSupervisorError, match="already running"):
+        supervisor.supervise(args)
+    assert (audit_root / "STOP").read_text() == "existing owner's pending stop"
+
+
+@pytest.mark.parametrize("option", ["--duration-seconds", "--shutdown-timeout-seconds", "--manifest-heartbeat-seconds"])
+@pytest.mark.parametrize("value", ["nan", "inf"])
+def test_supervisor_rejects_nonfinite_lifetime_bounds(tmp_path, option, value):
+    with pytest.raises(SystemExit):
+        supervisor.parse_args(["--target-csv", str(tmp_path / "targets.csv"), option, value])
+
+
+@pytest.mark.parametrize("worker_stops", [True, False])
+def test_supervisor_shutdown_handles_worker_after_launcher_exit(tmp_path, monkeypatch, worker_stops):
+    from neutralgrid.core.process_identity import ProcessObservation
+
+    service = supervisor.ServiceProcess(
+        "public", ["unused"], tmp_path / "public", tmp_path / "out", tmp_path / "err"
+    )
+    service.audit_dir.mkdir()
+    identity = ProcessObservation(123, "running", "worker_birth", "python.exe")
+    (service.audit_dir / "manifest.json").write_text(json.dumps({
+        "collector_pid": 123, "process_identity": identity.identity(), "audit_dir": str(service.audit_dir),
+    }))
+
+    class ExitedLauncher:
+        def poll(self):
+            return 0
+
+    service.process = ExitedLauncher()
+    monkeypatch.setattr(supervisor, "query_process", lambda pid: (
+        ProcessObservation(pid, "exited") if worker_stops and (service.audit_dir / "STOP").exists() else identity
+    ))
+    if worker_stops:
+        supervisor._stop_services({"public": service}, timeout=0)
+    else:
+        with pytest.raises(supervisor.WebSocketSupervisorError, match="worker still running"):
+            supervisor._stop_services({"public": service}, timeout=0)
+    assert (service.audit_dir / "STOP").is_file()
+
+
+def test_failed_stop_marker_does_not_skip_other_owned_services(tmp_path, monkeypatch):
+    services = {
+        name: supervisor.ServiceProcess(name, [], tmp_path / name, tmp_path / "out", tmp_path / "err")
+        for name in ("public", "market", "private")
+    }
+    requested = []
+
+    def request_stop(service):
+        requested.append(service.name)
+        if service.name == "public":
+            raise PermissionError("fixture write failure")
+
+    monkeypatch.setattr(supervisor, "_request_child_stop", request_stop)
+    with pytest.raises(supervisor.WebSocketSupervisorError, match="fixture write failure"):
+        supervisor._stop_services(services, timeout=0)
+    assert requested == ["public", "market", "private"]

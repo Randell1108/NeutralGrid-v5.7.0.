@@ -3,10 +3,8 @@
 from __future__ import annotations
 
 import argparse
-import ctypes
 import hashlib
 import json
-import os
 import sys
 import time
 from dataclasses import asdict, dataclass
@@ -40,6 +38,7 @@ from scripts.collect_private_user_stream import (  # noqa: E402
 from scripts.supervise_binance_websocket_services import (  # noqa: E402
     SUPERVISOR_SCHEMA_VERSION,
 )
+from neutralgrid.core.process_identity import matches_identity, query_process  # noqa: E402
 
 
 VERIFICATION_SCHEMA_VERSION = "neutralgrid_binance_ws_verification_v1"
@@ -91,33 +90,17 @@ def _parse_utc(value: Any, *, field: str) -> datetime:
 
 
 def _is_running(pid: Any) -> bool:
-    if not isinstance(pid, int) or pid <= 0:
+    if not isinstance(pid, int) or isinstance(pid, bool) or pid <= 0:
         return False
-    if os.name == "nt":
-        process_query_limited_information = 0x1000
-        still_active = 259
-        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
-        handle = kernel32.OpenProcess(
-            process_query_limited_information,
-            False,
-            pid,
-        )
-        if not handle:
-            return ctypes.get_last_error() == 5
-        exit_code = ctypes.c_ulong()
-        try:
-            success = kernel32.GetExitCodeProcess(
-                handle,
-                ctypes.byref(exit_code),
-            )
-            return bool(success) and exit_code.value == still_active
-        finally:
-            kernel32.CloseHandle(handle)
-    try:
-        os.kill(pid, 0)
-    except OSError:
-        return False
-    return True
+    return query_process(pid).state == "running"
+
+
+def _validate_recorded_identity(payload: Mapping[str, Any], pid_field: str) -> None:
+    identity = payload.get("process_identity")
+    if identity is not None:
+        pid = payload.get(pid_field)
+        if not isinstance(pid, int) or not matches_identity(query_process(pid), identity):
+            raise ServiceVerificationError(f"{pid_field}: recorded process identity is no longer live")
 
 
 def _under(path: Path, root: Path) -> bool:
@@ -205,9 +188,13 @@ def _validate_service_processes(
     supervisor: Mapping[str, Any], checks: list[Check]
 ) -> None:
     status = str(supervisor.get("status", ""))
+    if status not in {"running", "running_private_blocked", "complete", "complete_with_restarts", "complete_private_blocked"}:
+        raise ServiceVerificationError(f"supervisor is not in a verifiable service state: {status}")
     running = status.startswith("running")
     if running and not _is_running(supervisor.get("supervisor_pid")):
         raise ServiceVerificationError("running supervisor PID is not live")
+    if running:
+        _validate_recorded_identity(supervisor, "supervisor_pid")
     services = supervisor.get("services")
     if not isinstance(services, Mapping) or set(services) != {
         "public",
@@ -223,6 +210,8 @@ def _validate_service_processes(
             item.get("running") is not True or not _is_running(item.get("pid"))
         ):
             raise ServiceVerificationError(f"{name} service process is not live")
+        if running:
+            _validate_recorded_identity(item, "pid")
     private = services["private"]
     if not isinstance(private, Mapping):
         raise ServiceVerificationError("private process record is invalid")
@@ -240,6 +229,8 @@ def _validate_service_processes(
     ):
         raise ServiceVerificationError("private service process is not live")
     else:
+        if running:
+            _validate_recorded_identity(private, "pid")
         checks.append(Check("process_ownership", "PASS", "One supervisor owns three services."))
 
 
@@ -354,6 +345,7 @@ def _validate_live_once(
             _freshness_check(
                 payload, path=manifest_path, max_age_seconds=max_age_seconds
             )
+            _validate_recorded_identity(payload, "collector_pid")
         if payload.get("live_date_lima") != ingestion_date:
             raise ServiceVerificationError(f"{name} service ingestion date mismatch")
         if payload.get("ingestion_timezone") != "America/Lima":
