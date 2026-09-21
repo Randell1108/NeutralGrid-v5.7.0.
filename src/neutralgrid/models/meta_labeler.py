@@ -920,11 +920,16 @@ class MetaLabeler:
         a model is never promoted on absent evidence.
         """
         reasons: List[str] = []
-        if oof_auc_ci_low is None or oof_auc_ci_high is None:
+        if (
+            oof_auc_ci_low is None
+            or oof_auc_ci_high is None
+            or not np.isfinite(oof_auc_ci_low)
+            or not np.isfinite(oof_auc_ci_high)
+        ):
             reasons.append("auc_ci_unavailable")
         elif not (oof_auc_ci_low > 0.50):
             reasons.append(f"auc_ci_includes_0.50(low={oof_auc_ci_low:.3f})")
-        if n_pos is None:
+        if n_pos is None or not np.isfinite(n_pos):
             reasons.append("n_pos_unavailable")
         elif int(n_pos) < int(min_n_pos):
             reasons.append(f"n_pos_lt_{int(min_n_pos)}(n_pos={int(n_pos)})")

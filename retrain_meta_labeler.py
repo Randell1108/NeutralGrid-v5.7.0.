@@ -139,6 +139,25 @@ def parse_args() -> argparse.Namespace:
         ),
     )
     parser.add_argument(
+        "--live-linkage-dir",
+        type=str,
+        default="data/linkage",
+        help=(
+            "Directory containing the governed deploy_linkage_log.csv used by "
+            "--include-live-outcomes (default: data/linkage)."
+        ),
+    )
+    parser.add_argument(
+        "--live-scanner-results-dir",
+        type=str,
+        default="data/linkage/candidate_snapshots",
+        help=(
+            "Directory containing durable deployment_ready_*.csv scan snapshots "
+            "used by --include-live-outcomes "
+            "(default: data/linkage/candidate_snapshots)."
+        ),
+    )
+    parser.add_argument(
         "--hurdle-pct",
         type=float,
         default=3.0,
@@ -1539,6 +1558,9 @@ def _build_unified_training_data(args) -> pd.DataFrame:
         )
         training_df = builder.build_meta_labeler_pool(
             include_live_outcomes=_hybrid,
+            live_expired_bots_path=str(args.input),
+            live_linkage_dir=str(args.live_linkage_dir),
+            live_scanner_results_dir=str(args.live_scanner_results_dir),
             max_rows_per_symbol=int(args.max_rows_per_symbol),
         )
     else:

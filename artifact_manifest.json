@@ -1,8 +1,8 @@
 {
   "hmm": {
-    "active_version": "rolling_180d_20260915_210940",
-    "artifact_dir": "artifacts\\hmm\\rolling_180d_20260915_210940",
-    "promoted_utc": "2026-09-15T21:40:40.714055+00:00"
+    "active_version": "rolling_180d_20260919_220822",
+    "artifact_dir": "artifacts\\hmm\\rolling_180d_20260919_220822",
+    "promoted_utc": "2026-09-19T22:32:05.602947+00:00"
   },
-  "updated_utc": "2026-09-15T21:40:40.715574+00:00"
+  "updated_utc": "2026-09-19T22:32:05.604109+00:00"
 }

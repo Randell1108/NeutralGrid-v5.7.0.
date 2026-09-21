@@ -1,23 +1,23 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-09-15T22:08:09.705128+00:00",
+  "generated_at_utc": "2026-09-20T15:47:14.673417+00:00",
   "comparison_kind": "stored_summary_nonpaired",
   "output_path": "models\\meta_labeler.pkl",
   "champion_metadata_path": "models\\meta_labeler\\metadata.json",
   "candidate": {
     "promotion_status": "pass",
-    "oof_auc": 0.6632427631761538,
-    "oof_auc_ci_low": 0.6322750729893257,
-    "oof_auc_ci_high": 0.6949017408984314,
-    "oof_ece": 0.02808024618719856,
-    "oof_deployable_auc": 0.6632427631761538,
-    "oof_deployable_ece": 0.02808024618719856,
-    "train_samples": 1211,
+    "oof_auc": 0.635798664612224,
+    "oof_auc_ci_low": 0.6108785916204907,
+    "oof_auc_ci_high": 0.6629734667542946,
+    "oof_ece": 0.022587085936175644,
+    "oof_deployable_auc": 0.635798664612224,
+    "oof_deployable_ece": 0.022587085936175644,
+    "train_samples": 1633,
     "promotion_evaluation_contract": "chronological_contiguous_group_purged_weighted_kfold_v2",
-    "hmm_artifact_version": "rolling_180d_20260915_210940"
+    "hmm_artifact_version": "rolling_180d_20260919_220822"
   },
   "champion": {
-    "artifact_version": "20260911_145206",
+    "artifact_version": "20260920_154437",
     "features": [
       "ev_score",
       "adx_1h",
@@ -42,21 +42,20 @@
     ],
     "target_contract": "fast_winner_time_to_3pct_le_7h",
     "promotion_status": "pass",
-    "oof_auc": 0.6416937372088146,
-    "oof_auc_ci_low": 0.6041326606935297,
-    "oof_auc_ci_high": 0.6796071131501142,
-    "oof_ece": 0.03188902009835016,
-    "oof_deployable_auc": 0.6416937372088146,
-    "oof_deployable_ece": 0.03188902009835016,
-    "total_samples": 840,
+    "oof_auc": 0.635798664612224,
+    "oof_auc_ci_low": 0.6108785916204907,
+    "oof_auc_ci_high": 0.6629734667542946,
+    "oof_ece": 0.022587085936175644,
+    "oof_deployable_auc": 0.635798664612224,
+    "oof_deployable_ece": 0.022587085936175644,
+    "total_samples": 1633,
     "promotion_evaluation_contract": null,
-    "hmm_artifact_version": "rolling_180d_20260911_131128"
+    "hmm_artifact_version": "rolling_180d_20260919_220822"
   },
   "status": "pass",
   "reasons": [],
   "comparison_scope": "incomparable_champion_absolute_gate_only",
   "comparison_skipped_reasons": [
-    "promotion_evaluation_contract_mismatch(champion=None,candidate='chronological_contiguous_group_purged_weighted_kfold_v2')",
-    "hmm_lineage_mismatch(champion='rolling_180d_20260911_131128',candidate='rolling_180d_20260915_210940')"
+    "promotion_evaluation_contract_mismatch(champion=None,candidate='chronological_contiguous_group_purged_weighted_kfold_v2')"
   ]
 }

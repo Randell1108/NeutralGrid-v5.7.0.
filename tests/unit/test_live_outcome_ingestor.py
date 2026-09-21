@@ -22,6 +22,8 @@ def setup_data(tmp_path: Path) -> dict:
             "pnl_pct": 5.2,
             "total_profit_usdt": 20.8,
             "duration_hours": 8.5,
+            "time_to_target_hours": 4.25,
+            "target_reached": True,
             "total_trades": 42,
             "grids_count": 30,
             "invested_margin_usdt": 400,
@@ -310,6 +312,8 @@ class TestLiveOutcomeIngestor:
         assert btc_row["total_trades"] == 42
         assert btc_row["mae"] == pytest.approx(18.0)
         assert btc_row["mfe"] == pytest.approx(27.0)
+        assert btc_row["time_to_target_hours"] == pytest.approx(4.25)
+        assert bool(btc_row["target_reached"]) is True
 
     def test_empty_bots_returns_empty(self, tmp_path: Path):
         """Returns empty DataFrame when no bots file exists."""

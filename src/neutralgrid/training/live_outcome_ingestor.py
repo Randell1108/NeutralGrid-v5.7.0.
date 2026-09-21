@@ -104,6 +104,8 @@ _OUTCOME_FIELDS = [
     "commission_usdt",
     "funding_fee_usdt",
     "duration_hours",
+    "time_to_target_hours",
+    "target_reached",
     "total_trades",
     "maker_count",
     "taker_count",

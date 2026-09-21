@@ -67,6 +67,8 @@ def test_parse_args_bare_run_uses_documented_reference_workbook(monkeypatch) -> 
 
     assert args.input == "data/new_expired_bots.xlsx"
     assert args.max_rows_per_symbol == 30
+    assert args.live_linkage_dir == "data/linkage"
+    assert args.live_scanner_results_dir == "data/linkage/candidate_snapshots"
 
 
 def test_parse_args_allows_uncapped_authoritative_meta_pool(monkeypatch) -> None:

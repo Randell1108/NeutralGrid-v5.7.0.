@@ -1861,6 +1861,16 @@ def test_winner_iqr_profile_rejects_duplicate_strategy_ids() -> None:
         build_winner_iqr_profile(winners, deciles=2)
 
 
+def test_winner_iqr_profile_derives_missing_profit_per_grid_from_geometry() -> None:
+    winners = _winner_iqr_rows().drop(columns=["profit_per_grid_pct"])
+
+    profile = build_winner_iqr_profile(winners, deciles=2, min_pool_n=8)
+
+    assert profile.geometry_rows == 12
+    assert profile.dropped_geometry_rows == 1
+    assert profile.medians["profit_per_grid_pct"] > 0.0
+
+
 def test_winner_iqr_scores_candidates_and_counts_dropped_geometry() -> None:
     profile = build_winner_iqr_profile(_winner_iqr_rows(), deciles=2, min_pool_n=8)
 

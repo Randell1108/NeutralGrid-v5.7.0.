@@ -29,7 +29,10 @@ from typing import Any, Optional, Sequence, cast
 import numpy as np
 import pandas as pd
 
-from neutralgrid.grid.formulas import grid_spacing_pct as _grid_spacing_pct
+from neutralgrid.grid.formulas import (
+    grid_spacing_pct as _grid_spacing_pct,
+    profit_per_grid_pct as _profit_per_grid_pct,
+)
 
 from neutralgrid.core.config import get_config
 from neutralgrid.core.constants import BOT_INCLUSION_TOLERANCE_HOURS
@@ -92,7 +95,8 @@ WINNER_IQR_REQUIRED_COLUMNS = (
     "grids_count",
     "range_size_pct",
     "grid_spacing_pct",
-    "profit_per_grid_pct",
+    "price_range_low",
+    "price_range_high",
 )
 
 CANDIDATE_IQR_REQUIRED_COLUMNS = (
@@ -314,6 +318,72 @@ def _numeric(df: pd.DataFrame, columns: Sequence[str]) -> pd.DataFrame:
     return out
 
 
+def _ensure_profit_per_grid_pct(df: pd.DataFrame) -> pd.DataFrame:
+    """Fill only missing per-grid profit values from canonical grid geometry.
+
+    The canonical expired-bot ``General`` schema stores the inputs needed for
+    this calculation but does not store ``profit_per_grid_pct`` itself.  The
+    derivation uses the shared canonical formula and the configured effective
+    fee scalar, under this module's existing legacy line-count semantics.
+    Invalid/ambiguous rows remain ``NaN`` and are excluded by the caller's
+    existing geometry completeness gate.
+    """
+    out = cast(pd.DataFrame, df.copy())
+    if "profit_per_grid_pct" not in out.columns:
+        out["profit_per_grid_pct"] = np.nan
+    else:
+        out["profit_per_grid_pct"] = pd.to_numeric(
+            out["profit_per_grid_pct"], errors="coerce"
+        )
+
+    cfg_grid = get_config().grid
+    maker_fee = float(cfg_grid.maker_fee)
+    taker_fee = float(cfg_grid.taker_fee)
+    close_fee_mode = str(getattr(cfg_grid, "close_fee_mode", "maker")).lower()
+    close_fee_rate = maker_fee if close_fee_mode == "maker" else taker_fee
+    effective_fee = max(0.0, (maker_fee + close_fee_rate) / 2.0)
+
+    derived_count = 0
+    for idx, row in out.loc[out["profit_per_grid_pct"].isna()].iterrows():
+        try:
+            low = float(row["price_range_low"])
+            high = float(row["price_range_high"])
+            grids = int(float(row["grids_count"]))
+            spacing = float(row["grid_spacing_pct"])
+            mode = str(row.get("mode", "")).strip().lower()
+            if mode not in {"arithmetic", "geometric"}:
+                mode = _infer_mode(low, high, grids, spacing)
+            if mode not in {"arithmetic", "geometric"}:
+                continue
+            value = _profit_per_grid_pct(
+                low,
+                high,
+                grids,
+                mode,
+                effective_fee,
+            )
+            if not np.isfinite(value):
+                continue
+        except (KeyError, TypeError, ValueError, ZeroDivisionError, OverflowError):
+            continue
+        out.at[idx, "profit_per_grid_pct"] = float(value)
+        derived_count += 1
+
+    unresolved_count = int(out["profit_per_grid_pct"].isna().sum())
+    if derived_count:
+        logger.info(
+            "Derived profit_per_grid_pct for %d row(s) from canonical geometry and fees",
+            derived_count,
+        )
+    if unresolved_count:
+        logger.warning(
+            "profit_per_grid_pct remains unavailable for %d row(s); they will fail "
+            "the geometry completeness gate",
+            unresolved_count,
+        )
+    return out
+
+
 def _iqr(series: pd.Series) -> IQRBand:
     numeric = cast(pd.Series, pd.to_numeric(series, errors="coerce"))
     values = numeric.dropna()
@@ -354,8 +424,9 @@ def build_winner_iqr_profile(
 
     df = _numeric(
         df,
-        list(WINNER_IQR_REQUIRED_COLUMNS) + ["price_range_low", "price_range_high"],
+        list(WINNER_IQR_REQUIRED_COLUMNS) + ["profit_per_grid_pct"],
     )
+    df = _ensure_profit_per_grid_pct(df)
     winners = cast(
         pd.DataFrame,
         df.loc[
