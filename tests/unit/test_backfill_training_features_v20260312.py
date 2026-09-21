@@ -1360,7 +1360,7 @@ def test_backfill_writes_separate_flat_workbook_and_leaves_raw_input_untouched(
             raw_general.to_excel(writer, sheet_name="General", index=False)
             raw_pnl.to_excel(writer, sheet_name="PnL Curve Features", index=False)
 
-        backfiller = TrainingDataBackfiller()
+        backfiller = TrainingDataBackfiller(allow_flat_workbook_export=True)
 
         async def _noop(*args, **kwargs):
             return None

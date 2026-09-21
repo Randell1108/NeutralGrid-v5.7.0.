@@ -1,6 +1,6 @@
 ---
 name: backfill-features
-description: Run scripts/backfill_training_features.py with the correct HMM lineage authority semantics (UTILFIX-01). Use when re-inferring HMM features on an expired-bot workbook after an HMM rotation, after appending new rows, or to refresh stale lineage before calibration. Always passes --default-artifact-version <active_hmm> as AUTHORITATIVE; decides --skip-if-fresh based on whether the active HMM has rotated since last run. Writes to a fresh output path to avoid the merge-contamination pitfall.
+description: Run scripts/backfill_training_features.py with the correct HMM lineage authority semantics (UTILFIX-01). Use when re-inferring HMM features on an expired-bot workbook after an HMM rotation, after appending new rows, or to refresh stale lineage before calibration. Always passes --default-artifact-version ACTIVE_HMM as AUTHORITATIVE; decides --skip-if-fresh based on whether the active HMM has rotated since last run. Writes to a fresh output path to avoid the merge-contamination pitfall.
 ---
 
 # backfill-features
@@ -39,8 +39,13 @@ The backfill script is the single point where row-level HMM lineage is brought i
      --feature-cutoff-source <start_time_utc|candidate_id_scan_time> `
      --replay-scope <full_feature_refresh|hmm_lineage_only> `
      --require-fresh-output `
+     [--allow-flat-workbook-export] `
      [--skip-if-fresh]
    ```
+   Multi-sheet input requires `--allow-flat-workbook-export`; it produces a flat
+   staging table at a fresh destination. Merge refreshed fields by strategy ID
+   into a canonical workbook copy, preserving auxiliary sheets and table
+   metadata. Never replace the canonical workbook with the flat export.
 6. After the run, validate with the `verify-hmm-lineage` skill against the output. Verdict must be PASS.
 7. If any row's `utility_score` is NaN, that is expected when `artifacts/utility/current.json` is absent (UTILFIX-01 fallback path). Do not silently substitute defaults.
 

@@ -22,7 +22,7 @@
 ### Pipeline
 - 'python run_full_pipeline.py' — scan → enrich → deploy 
 - 'python retrain_hmm.py' — retrain HMM regime model
-- 'python scripts/backfill_training_features.py --input data/new_expired_bots.xlsx --output data/new_expired_bots_backfilled.xlsx --default-artifact-version <active_hmm>' —
+- 'python scripts/backfill_training_features.py --input data/new_expired_bots.xlsx --output data/new_expired_bots_backfilled.xlsx --default-artifact-version <active_hmm> --allow-flat-workbook-export --require-fresh-output' —
   re-backfill expired-bot HMM features against the active HMM. Per UTILFIX-01,
   '--default-artifact-version' is AUTHORITATIVE: rows whose merge-preserved
   hmm_artifact_version differs from this value are invalidated and re-inferenced.
@@ -31,6 +31,10 @@
   finite range_prob/trend_prob/persistence_prob. Stale-lineage rows are still
   re-inferenced because the merge invalidates them; after an HMM rotation the
   flag is effectively a no-op for that run. Default off (opt-in).
+  Multi-sheet input requires explicit flat export to a fresh destination. The
+  result is a staging table: merge refreshed fields by strategy ID into the
+  canonical workbook while preserving auxiliary sheets; do not replace it with
+  the flat export.
 - 'python retrain_meta_labeler.py --backtest-results-dir <finalized_fresh_pool>' — retrain meta-labeling classifier (auto-pins to active HMM). The source must be a finalized `fresh_full_pool` manifest; historical exact replays require explicit `--allow-historical-replay` and are diagnostic only.
 - 'python retrain_scanner.py' — retrain pattern scanner
 - 'python scripts/recalibrate_utility.py' — refit utility calibrator (promotion gated by G0-G7 in 'calibration/utility_calibrator.py'; UTILFIX-01 fail-closed runtime)

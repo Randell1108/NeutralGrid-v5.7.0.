@@ -4,6 +4,11 @@ Backfill historically computable training features.
 This script backfills decision-time features without inventing proxy values for
 utility, profit-per-grid, or funding. It reuses the same shared feature and
 scoring logic used by the live pipeline.
+
+Outputs are flat feature exports, not replacements for a canonical workbook.
+Multi-sheet sources require an explicit flat-export acknowledgement and a fresh
+destination. Merge refreshed feature columns into a preserved canonical copy by
+validated row keys; do not replace the canonical workbook with this export.
 """
 
 from __future__ import annotations
@@ -158,7 +163,26 @@ def _non_empty_str(value: Any) -> str:
     return "" if text.lower() in {"nan", "<na>", "nat", "none"} else text
 
 
-def _write_dataframe_atomic(df: pd.DataFrame, output_path: Path) -> None:
+def _workbook_sheet_names(path: Path) -> list[str]:
+    if path.suffix.lower() not in {".xlsx", ".xls"}:
+        return []
+    with pd.ExcelFile(path) as workbook:
+        return list(workbook.sheet_names)
+
+
+def _refuse_multisheet_destination(output_path: Path) -> None:
+    if output_path.exists() and len(_workbook_sheet_names(output_path)) > 1:
+        raise ValueError(
+            f"Refusing to replace multi-sheet workbook: {output_path}. "
+            "Backfill writes a flat feature export. Use a fresh output path, "
+            "then merge refreshed feature columns by validated row keys into "
+            "a preserved copy of the canonical workbook."
+        )
+
+
+def _write_dataframe_atomic(
+    df: pd.DataFrame, output_path: Path, *, require_fresh: bool = False,
+) -> None:
     """Publish a dataframe through a same-directory durable temporary file."""
     output_path.parent.mkdir(parents=True, exist_ok=True)
     temp_suffix = f".{uuid.uuid4().hex}.tmp{output_path.suffix}"
@@ -173,7 +197,13 @@ def _write_dataframe_atomic(df: pd.DataFrame, output_path: Path) -> None:
                 df.to_csv(handle, index=False)
                 handle.flush()
                 os.fsync(handle.fileno())
-        os.replace(temp_path, output_path)
+        _refuse_multisheet_destination(output_path)
+        if require_fresh:
+            # A hard link publishes the completed same-filesystem file without
+            # replacing a destination created after the preflight check.
+            os.link(temp_path, output_path)
+        else:
+            os.replace(temp_path, output_path)
     finally:
         temp_path.unlink(missing_ok=True)
 
@@ -190,6 +220,7 @@ class TrainingDataBackfiller:
         require_fresh_output: bool = False,
         feature_cutoff_source: str = "start_time_utc",
         replay_scope: str = "full_feature_refresh",
+        allow_flat_workbook_export: bool = False,
     ) -> None:
         self.hmm_predictor = None
         self._hmm_predictors: Dict[str, Optional[HMMRegimePredictor]] = {}
@@ -204,6 +235,7 @@ class TrainingDataBackfiller:
             raise ValueError("max_concurrency must be between 1 and 8")
         self.max_concurrency = int(max_concurrency)
         self.require_fresh_output = bool(require_fresh_output)
+        self.allow_flat_workbook_export = bool(allow_flat_workbook_export)
         normalized_cutoff_source = str(feature_cutoff_source).strip()
         if normalized_cutoff_source not in FEATURE_CUTOFF_SOURCES:
             raise ValueError(
@@ -801,6 +833,30 @@ class TrainingDataBackfiller:
                 f"Refusing to overwrite existing backfill output: {output_path}"
             )
 
+        input_sheets = _workbook_sheet_names(input_path)
+        multisheet_source = len(input_sheets) > 1
+        if multisheet_source:
+            if not self.allow_flat_workbook_export:
+                raise ValueError(
+                    f"Source workbook contains {len(input_sheets)} sheets. "
+                    "Backfill exports only its first sheet and cannot preserve "
+                    "the full workbook. Pass --allow-flat-workbook-export with "
+                    "a fresh output path, then merge refreshed feature columns "
+                    "by validated row keys into a preserved canonical copy. "
+                    "Do not use the flat export as a canonical replacement."
+                )
+            if output_path.exists():
+                raise FileExistsError(
+                    "Multi-sheet workbook exports require a fresh destination: "
+                    f"{output_path}"
+                )
+            logger.warning(
+                "Exporting only sheet %s from %d-sheet workbook %s; the flat "
+                "export must be merged into a preserved canonical copy.",
+                input_sheets[0], len(input_sheets), input_path,
+            )
+        _refuse_multisheet_destination(output_path)
+
         if input_path.suffix.lower() in {".xlsx", ".xls"}:
             df = pd.read_excel(input_path)
         else:
@@ -1088,11 +1144,12 @@ class TrainingDataBackfiller:
             except Exception as exc:
                 logger.error("Failed to close Binance client cleanly: %s", exc)
 
-        if self.require_fresh_output and output_path.exists():
+        require_fresh = self.require_fresh_output or multisheet_source
+        if require_fresh and output_path.exists():
             raise FileExistsError(
                 f"Refusing to replace output created during replay: {output_path}"
             )
-        _write_dataframe_atomic(df, output_path)
+        _write_dataframe_atomic(df, output_path, require_fresh=require_fresh)
 
         logger.info("Backfill complete: %s", output_path)
         logger.info(
@@ -1121,7 +1178,10 @@ def _parse_args(argv: Optional[list[str]] = None) -> argparse.Namespace:
         "--output",
         type=Path,
         default=Path("data/new_expired_bots_backfilled.xlsx"),
-        help="Path for the backfilled workbook (default: data/new_expired_bots_backfilled.xlsx).",
+        help=(
+            "Path for the flat feature export, never a canonical multi-sheet "
+            "replacement (default: data/new_expired_bots_backfilled.xlsx)."
+        ),
     )
     parser.add_argument(
         "--default-artifact-version",
@@ -1170,6 +1230,16 @@ def _parse_args(argv: Optional[list[str]] = None) -> argparse.Namespace:
         help="Refuse to read, merge, or replace an existing output path.",
     )
     parser.add_argument(
+        "--allow-flat-workbook-export",
+        action="store_true",
+        help=(
+            "Explicitly export the first sheet of a multi-sheet source to a "
+            "fresh, separate file. Auxiliary sheets are not exported. Merge "
+            "refreshed features by validated row keys into a preserved "
+            "canonical copy; never replace it with this flat export."
+        ),
+    )
+    parser.add_argument(
         "--feature-cutoff-source",
         choices=sorted(FEATURE_CUTOFF_SOURCES),
         default="start_time_utc",
@@ -1208,6 +1278,7 @@ async def main(argv: Optional[list[str]] = None) -> None:
         require_fresh_output=args.require_fresh_output,
         feature_cutoff_source=args.feature_cutoff_source,
         replay_scope=args.replay_scope,
+        allow_flat_workbook_export=args.allow_flat_workbook_export,
     )
     await backfiller.backfill_all(
         str(args.input),
