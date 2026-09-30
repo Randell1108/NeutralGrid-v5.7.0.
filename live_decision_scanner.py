@@ -17,6 +17,7 @@ from __future__ import annotations
 import argparse
 import asyncio
 import logging
+import math
 import os
 import signal
 import sys
@@ -198,8 +199,8 @@ def parse_interval(s: str) -> float:
     except ValueError as e:
         raise ValueError(f"--interval not a number: {s!r}") from e
     seconds = value * multiplier
-    if seconds <= 0:
-        raise ValueError(f"--interval must be positive, got {seconds}s")
+    if not math.isfinite(seconds) or seconds <= 0:
+        raise ValueError(f"--interval must be finite and positive, got {seconds}s")
     return seconds
 
 
@@ -325,8 +326,12 @@ async def _run_tick(
     results: list[ScanResult] = []
     for spec in specs:
         history = load_history(spec.state_key, base_dir=args.state_dir)
-        evaluation = await evaluate_bot(spec, context=context, client=client, now=now)
-        decision = decide(evaluation, history, cfg, now)
+        # Live manifests advance while earlier bots await market/model work.
+        # Keep the tick timestamp for scheduling, but date each observation
+        # when it is actually read rather than against the start of the batch.
+        evaluated_at = datetime.now(timezone.utc)
+        evaluation = await evaluate_bot(spec, context=context, client=client, now=evaluated_at)
+        decision = decide(evaluation, history, cfg, evaluated_at)
         save_history(spec.state_key, decision.new_history, base_dir=args.state_dir)
         results.append(
             ScanResult(
@@ -407,8 +412,13 @@ async def _run_once(args: argparse.Namespace, yaml_paths: list[Path]) -> int:
     cfg = _load_recommender_config(args)
     context = MonitorContext.create(meta_labeler_path=args.meta_labeler_path)
     client = BinanceClient()
-    sink = DiscordDigestSink(_resolve_webhook(args))
-    renderer = ConsoleRenderer()
+    try:
+        sink = DiscordDigestSink(_resolve_webhook(args))
+        renderer = ConsoleRenderer()
+    except BaseException:
+        with suppress(Exception):
+            await client.close()
+        raise
 
     now = datetime.now(timezone.utc)
     try:
@@ -422,9 +432,11 @@ async def _run_once(args: argparse.Namespace, yaml_paths: list[Path]) -> int:
         if results:
             await sink.send(results, now=now)
     finally:
-        await sink.aclose()
-        with suppress(Exception):
-            await client.close()
+        try:
+            await sink.aclose()
+        finally:
+            with suppress(Exception):
+                await client.close()
     return 0
 
 
@@ -452,10 +464,22 @@ async def _run_loop(args: argparse.Namespace) -> int:
     if not lock.acquire():
         return 1
 
-    context = MonitorContext.create(meta_labeler_path=args.meta_labeler_path)
-    client = BinanceClient()
-    sink = DiscordDigestSink(_resolve_webhook(args))
-    renderer = ConsoleRenderer()
+    client: Optional[BinanceClient] = None
+    sink: Optional[DiscordDigestSink] = None
+    try:
+        context = MonitorContext.create(meta_labeler_path=args.meta_labeler_path)
+        client = BinanceClient()
+        sink = DiscordDigestSink(_resolve_webhook(args))
+        renderer = ConsoleRenderer()
+    except BaseException:
+        if sink is not None:
+            with suppress(Exception):
+                await sink.aclose()
+        if client is not None:
+            with suppress(Exception):
+                await client.close()
+        lock.release()
+        raise
 
     stop_event = asyncio.Event()
     loop = asyncio.get_running_loop()
@@ -544,10 +568,12 @@ async def _run_loop(args: argparse.Namespace) -> int:
                     await asyncio.wait_for(stop_event.wait(), timeout=interval_s)
     finally:
         logger.info("Loop draining; closing sinks.")
-        await sink.aclose()
-        with suppress(Exception):
-            await client.close()
-        lock.release()
+        try:
+            await sink.aclose()
+        finally:
+            with suppress(Exception):
+                await client.close()
+            lock.release()
 
     logger.info("Loop exit clean.")
     return 0

@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import logging
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any, Iterable, Optional, Sequence, cast
@@ -19,6 +20,7 @@ import pandas as pd
 
 from neutralgrid.training.live_outcome_ingestor import LiveOutcomeIngestor
 
+logger = logging.getLogger(__name__)
 
 DEFAULT_THRESHOLDS: tuple[float, ...] = tuple(round(i / 100.0, 2) for i in range(5, 96, 5))
 
@@ -108,6 +110,22 @@ def join_shadow_to_outcomes(decisions: pd.DataFrame, outcomes: pd.DataFrame) -> 
                 suffixes=("_decision", "_outcome"),
             ),
         )
+        if not by_candidate.empty:
+            conflicts = pd.Series(False, index=by_candidate.index, dtype=bool)
+            for field in ("strategy_id", "symbol"):
+                decision_identity = cast(pd.Series, by_candidate[f"{field}_decision"])
+                outcome_identity = cast(pd.Series, by_candidate[f"{field}_outcome"])
+                conflicts |= (
+                    decision_identity.ne("")
+                    & outcome_identity.ne("")
+                    & decision_identity.ne(outcome_identity)
+                )
+            if bool(conflicts.any()):
+                logger.warning(
+                    "Rejected %d candidate_id join row(s) with conflicting strategy or symbol",
+                    int(conflicts.sum()),
+                )
+                by_candidate = cast(pd.DataFrame, by_candidate.loc[~conflicts].copy())
         if not by_candidate.empty:
             by_candidate["join_method"] = "candidate_id"
             by_candidate["join_key"] = cast(pd.Series, by_candidate["candidate_id"]).astype(str)
@@ -585,6 +603,7 @@ def _eligibility_funnel(joined: pd.DataFrame, *, config: ShadowAnalysisConfig) -
         & meta_full_fidelity
         & ~post_outcome
         & ~pre_deploy
+        & ~window_missing
     )
     return {
         "joined_rows": int(len(df)),
@@ -595,7 +614,7 @@ def _eligibility_funnel(joined: pd.DataFrame, *, config: ShadowAnalysisConfig) -
         "meta_authoritative_true": int(meta_authoritative.sum()),
         "meta_full_fidelity_true": int(meta_full_fidelity.sum()),
         "with_authoritative_full_fidelity_meta": int(authoritative_full_fidelity_meta.sum()),
-        "within_bot_life_window": int((~post_outcome & ~pre_deploy).sum()),
+        "within_bot_life_window": int((~post_outcome & ~pre_deploy & ~window_missing).sum()),
         "outcome_life_window_missing": int(window_missing.sum()),
         "all_eligible": int(eligible.sum()),
         "failed_reason_counts": {
@@ -607,6 +626,7 @@ def _eligibility_funnel(joined: pd.DataFrame, *, config: ShadowAnalysisConfig) -
             "not_full_fidelity": int((~meta_full_fidelity).sum()),
             "post_outcome_tick": int(post_outcome.sum()),
             "pre_deploy_tick": int(pre_deploy.sum()),
+            "outcome_life_window_missing": int(window_missing.sum()),
         },
         "thresholds": {
             "outcome_positive_pnl_pct": float(config.outcome_positive_pnl_pct),
@@ -847,13 +867,17 @@ def _life_window_outside_mask(df: pd.DataFrame) -> tuple[pd.Series, pd.Series, p
     ENAUSDT ghost ticks of 2026-06-21/07-03 recorded days after the bot was
     canceled on 2026-06-18. Joining such ticks to the finalized outcome would
     calibrate D5/D6 on meta probabilities computed against post-mortem market
-    data. Rows whose outcome lacks a parseable window are NOT excluded (the
-    join itself is still valid) but are surfaced separately for visibility.
+    data. Rows whose outcome lacks either end of a parseable window are
+    excluded from calibration and surfaced separately for visibility.
 
     Returns ``(post_outcome, pre_deploy, window_missing)``.
     """
-    ts = pd.to_datetime(cast(pd.Series, df.get("ts_utc")), utc=True, errors="coerce")
     idx = df.index
+    ts = (
+        pd.to_datetime(cast(pd.Series, df["ts_utc"]), utc=True, errors="coerce")
+        if "ts_utc" in df.columns
+        else pd.Series(pd.NaT, index=idx, dtype="datetime64[ns, UTC]")
+    )
 
     def _col(*names: str) -> pd.Series:
         for name in names:
@@ -867,7 +891,7 @@ def _life_window_outside_mask(df: pd.DataFrame) -> tuple[pd.Series, pd.Series, p
     start = _col("start_time_utc", "start_time_utc_outcome")
     post_outcome = ts.notna() & end.notna() & (ts > end)
     pre_deploy = ts.notna() & start.notna() & (ts < start)
-    window_missing = end.isna() & start.isna()
+    window_missing = end.isna() | start.isna()
     return post_outcome, pre_deploy, window_missing
 
 
@@ -880,7 +904,10 @@ def _prepare_eligible(joined: pd.DataFrame, *, config: ShadowAnalysisConfig) -> 
             df["join_key"] = cast(pd.Series, df["candidate_id"]).fillna("").astype(str)
         else:
             df["join_key"] = ""
-    required = {"join_key", "meta_proba", "meta_authoritative", "meta_full_fidelity", "pnl_pct"}
+    required = {
+        "join_key", "meta_proba", "meta_authoritative", "meta_full_fidelity",
+        "pnl_pct", "ts_utc", "verdict",
+    }
     if not required.issubset(df.columns):
         return pd.DataFrame()
     df["join_key"] = cast(pd.Series, df["join_key"]).fillna("").astype(str)
@@ -896,7 +923,7 @@ def _prepare_eligible(joined: pd.DataFrame, *, config: ShadowAnalysisConfig) -> 
     df["bad_outcome"] = ~cast(pd.Series, df["outcome_positive"])
     df["is_end"] = cast(pd.Series, df["verdict"]).fillna("").astype(str).str.upper() == "END"
     df["is_adjust"] = cast(pd.Series, df["verdict"]).fillna("").astype(str).str.upper() == "ADJUST"
-    post_outcome, pre_deploy, _window_missing = _life_window_outside_mask(df)
+    post_outcome, pre_deploy, window_missing = _life_window_outside_mask(df)
     mask = (
         (cast(pd.Series, df["join_key"]).str.strip() != "")
         & cast(pd.Series, df["meta_proba"]).notna()
@@ -906,6 +933,7 @@ def _prepare_eligible(joined: pd.DataFrame, *, config: ShadowAnalysisConfig) -> 
         & _bool_series(df, "meta_full_fidelity")
         & ~post_outcome
         & ~pre_deploy
+        & ~window_missing
     )
     return cast(pd.DataFrame, df.loc[mask].copy())
 

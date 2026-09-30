@@ -141,6 +141,67 @@ def setup_data(tmp_path: Path) -> dict:
 class TestLiveOutcomeIngestor:
     """Tests for the LiveOutcomeIngestor class."""
 
+    def test_mixed_excel_end_times_preserve_actual_utc_dates(self, tmp_path: Path):
+        bots_path = tmp_path / "expired_bots.xlsx"
+        excel_serial = (
+            pd.Timestamp("2026-02-20T18:00:00Z") - pd.Timestamp("1899-12-30T00:00:00Z")
+        ) / pd.Timedelta(days=1)
+        pd.DataFrame(
+            [
+                {"strategy_id": "one", "symbol": "BTCUSDT", "start_time_utc": "2026-02-20T10:00:00Z", "end_time_utc": excel_serial},
+                {"strategy_id": "two", "symbol": "ETHUSDT", "start_time_utc": "2026-02-21T10:00:00Z", "end_time_utc": "2026-02-21T18:00:00Z"},
+            ]
+        ).to_excel(bots_path, index=False)
+        ingestor = LiveOutcomeIngestor(
+            expired_bots_path=bots_path,
+            linkage_dir=tmp_path / "missing_linkage",
+            scanner_results_dir=tmp_path / "missing_scans",
+        )
+        loaded = ingestor._load_bots()
+        assert loaded.loc[0, "end_time_utc"].year == 2026
+        assert loaded.loc[0, "end_time_utc"].month == 2
+        assert loaded.loc[1, "end_time_utc"] == pd.Timestamp("2026-02-21T18:00:00Z")
+
+    def test_impossible_finalized_life_window_is_excluded_with_error(
+        self, tmp_path: Path, caplog: pytest.LogCaptureFixture,
+    ) -> None:
+        bots_path = tmp_path / "expired_bots.xlsx"
+        pd.DataFrame([
+            {"strategy_id": "bad", "symbol": "BTCUSDT", "start_time_utc": "2026-09-15T23:25:12Z", "end_time_utc": 25569.00053565972},
+            {"strategy_id": "good", "symbol": "ETHUSDT", "start_time_utc": "2026-09-15T23:25:12Z", "end_time_utc": "2026-09-16T00:25:12Z"},
+        ]).to_excel(bots_path, index=False)
+        ingestor = LiveOutcomeIngestor(
+            expired_bots_path=bots_path,
+            linkage_dir=tmp_path / "missing_linkage",
+            scanner_results_dir=tmp_path / "missing_scans",
+        )
+
+        loaded = ingestor._load_bots()
+
+        assert loaded["strategy_id"].tolist() == ["good"]
+        assert "Excluded 1" in caplog.text
+        assert "bad" in caplog.text
+
+    def test_malformed_finalized_timestamp_is_excluded_with_error(
+        self, tmp_path: Path, caplog: pytest.LogCaptureFixture,
+    ) -> None:
+        bots_path = tmp_path / "expired_bots.csv"
+        pd.DataFrame([
+            {"strategy_id": "bad-time", "symbol": "BTCUSDT", "start_time_utc": "2026-09-15T00:00:00Z", "end_time_utc": "not-a-time"},
+            {"strategy_id": "good", "symbol": "ETHUSDT", "start_time_utc": "2026-09-15T00:00:00Z", "end_time_utc": "2026-09-15T01:00:00Z"},
+        ]).to_csv(bots_path, index=False)
+        loaded = LiveOutcomeIngestor(expired_bots_path=bots_path)._load_bots()
+        assert loaded["strategy_id"].tolist() == ["good"]
+        assert "bad-time" in caplog.text
+
+    def test_numeric_csv_timestamp_requires_declared_epoch(self, tmp_path: Path) -> None:
+        bots_path = tmp_path / "expired_bots.csv"
+        pd.DataFrame([
+            {"strategy_id": "one", "symbol": "BTCUSDT", "start_time_utc": "2026-02-20T10:00:00Z", "end_time_utc": 46073.75},
+        ]).to_csv(bots_path, index=False)
+        with pytest.raises(ValueError, match="numeric CSV timestamps"):
+            LiveOutcomeIngestor(expired_bots_path=bots_path)._load_bots()
+
     def test_ingest_returns_dataframe(self, setup_data):
         """ingest() returns a non-empty DataFrame."""
         d = setup_data

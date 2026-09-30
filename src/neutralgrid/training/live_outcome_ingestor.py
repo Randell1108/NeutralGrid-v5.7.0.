@@ -243,21 +243,66 @@ class LiveOutcomeIngestor:
 
         if path.suffix.lower() in (".xlsx", ".xls"):
             df = pd.read_excel(path)
+            excel_serial = True
         else:
             df = pd.read_csv(path)
+            excel_serial = False
 
         if "start_time_utc" in df.columns:
-            df["start_time_utc"] = pd.to_datetime(df["start_time_utc"], utc=True)
+            df["start_time_utc"] = self._parse_utc_times(
+                cast(pd.Series, df["start_time_utc"]), excel_serial=excel_serial
+            )
         if "end_time_utc" in df.columns:
-            df["end_time_utc"] = pd.to_datetime(df["end_time_utc"], utc=True)
+            df["end_time_utc"] = self._parse_utc_times(
+                cast(pd.Series, df["end_time_utc"]), excel_serial=excel_serial
+            )
 
-        # Filter by date
+        if {"start_time_utc", "end_time_utc"}.issubset(df.columns):
+            start = cast(pd.Series, df["start_time_utc"])
+            end = cast(pd.Series, df["end_time_utc"])
+            invalid_window = start.isna() | end.isna() | (end < start)
+            if bool(invalid_window.any()):
+                examples = (
+                    cast(pd.Series, df.loc[invalid_window, "strategy_id"]).astype(str).head(10).tolist()
+                    if "strategy_id" in df.columns
+                    else list(cast(pd.Index, df.loc[invalid_window].head(10).index))
+                )
+                logger.error(
+                    "Excluded %d finalized bot row(s) with missing or impossible life windows "
+                    "from %s; example strategy IDs: %s",
+                    int(invalid_window.sum()), path, examples,
+                )
+                df = cast(pd.DataFrame, df.loc[~invalid_window].copy())
+
+        # Filter by date only after invalid source windows have been reported.
         if self._min_date and "start_time_utc" in df.columns:
             cutoff = pd.Timestamp(self._min_date, tz="UTC")
             df = df[df["start_time_utc"] >= cutoff]
 
         logger.info("Loaded %d expired bots from %s", len(df), path.name)
         return cast(pd.DataFrame, df.reset_index(drop=True))
+
+    @staticmethod
+    def _parse_utc_times(values: pd.Series, *, excel_serial: bool = False) -> pd.Series:
+        """Parse ISO/datetime cells and Excel day serials without mixing epochs."""
+        numeric = values.map(
+            lambda value: isinstance(value, (int, float, np.integer, np.floating))
+            and not isinstance(value, (bool, np.bool_))
+        )
+        parsed = pd.Series(pd.NaT, index=values.index, dtype="datetime64[ns, UTC]")
+        if bool(numeric.any()):
+            if not excel_serial:
+                raise ValueError("numeric CSV timestamps have no declared epoch or unit")
+            numeric_values = cast(pd.Series, pd.to_numeric(values.loc[numeric]))
+            parsed.loc[numeric] = pd.to_datetime(
+                numeric_values,
+                unit="D", origin="1899-12-30", utc=True, errors="coerce",
+            )
+        if bool((~numeric).any()):
+            parsed.loc[~numeric] = pd.to_datetime(
+                values.loc[~numeric], utc=True, errors="coerce", format="mixed"
+            )
+        return parsed
 
     def _load_linkage(self) -> pd.DataFrame:
         """Load deploy linkage log if it exists."""

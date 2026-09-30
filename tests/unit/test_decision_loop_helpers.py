@@ -6,9 +6,11 @@ Covers:
 """
 from __future__ import annotations
 
+import asyncio
 from datetime import datetime, timezone
 import sys
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -19,6 +21,7 @@ _PROJECT_ROOT = Path(__file__).resolve().parents[2]
 if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
+import live_decision_scanner as scanner  # noqa: E402
 from live_decision_scanner import LockFile, _load_specs_from_yaml_paths, parse_interval  # noqa: E402
 
 
@@ -60,10 +63,52 @@ def test_parse_interval_valid(raw: str, expected: float) -> None:
     assert parse_interval(raw) == pytest.approx(expected)
 
 
-@pytest.mark.parametrize("raw", ["", "  ", "abc", "5x", "-1m", "0s", "-30"])
+@pytest.mark.parametrize("raw", ["", "  ", "abc", "5x", "-1m", "0s", "-30", "nan", "inf", "1e309h"])
 def test_parse_interval_invalid(raw: str) -> None:
     with pytest.raises(ValueError):
         parse_interval(raw)
+
+
+def test_loop_releases_lock_when_context_initialization_fails(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    def fail_create(**_kwargs: object) -> None:
+        raise RuntimeError("context initialization failed")
+
+    monkeypatch.setattr(scanner.MonitorContext, "create", fail_create)
+    args = SimpleNamespace(
+        interval="60s", config_file=None, state_dir=tmp_path / "state",
+        meta_labeler_path=None,
+    )
+    with pytest.raises(RuntimeError, match="context initialization failed"):
+        asyncio.run(scanner._run_loop(args))
+    assert not (tmp_path / ".scanner.lock").exists()
+
+
+def test_loop_closes_client_and_releases_lock_when_sink_initialization_fails(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    closed: list[bool] = []
+
+    class FakeClient:
+        async def close(self) -> None:
+            closed.append(True)
+
+    def fail_sink(_webhook: object) -> None:
+        raise RuntimeError("sink initialization failed")
+
+    monkeypatch.setattr(scanner.MonitorContext, "create", lambda **_kwargs: object())
+    monkeypatch.setattr(scanner, "BinanceClient", FakeClient)
+    monkeypatch.setattr(scanner, "DiscordDigestSink", fail_sink)
+    args = SimpleNamespace(
+        interval="60s", config_file=None, state_dir=tmp_path / "state",
+        meta_labeler_path=None, no_discord=True,
+    )
+
+    with pytest.raises(RuntimeError, match="sink initialization failed"):
+        asyncio.run(scanner._run_loop(args))
+    assert closed == [True]
+    assert not (tmp_path / ".scanner.lock").exists()
 
 
 # -- LockFile ----------------------------------------------------------------

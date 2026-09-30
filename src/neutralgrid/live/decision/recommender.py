@@ -87,6 +87,37 @@ class RecommenderConfig:
     end_latch_clear_ticks: int = 12
 
     def __post_init__(self) -> None:
+        for name in (
+            "min_range_prob", "adjust_range_prob_floor", "end_trend_prob_threshold",
+            "meta_tilt_low_threshold",
+        ):
+            value = getattr(self, name)
+            if isinstance(value, bool) or not isinstance(value, (int, float)):
+                raise ValueError(f"RecommenderConfig.{name} must be numeric, got {value!r}")
+            if not math.isfinite(float(value)) or not 0.0 <= value <= 1.0:
+                raise ValueError(f"RecommenderConfig.{name} must be finite in [0, 1], got {value!r}")
+        proximity = self.boundary_proximity_pct
+        if (
+            isinstance(proximity, bool)
+            or not isinstance(proximity, (int, float))
+            or not math.isfinite(float(proximity))
+            or proximity < 0
+        ):
+            raise ValueError(
+                "RecommenderConfig.boundary_proximity_pct must be finite and nonnegative, "
+                f"got {proximity!r}"
+            )
+        for name, minimum in (
+            ("end_cooldown_min", 0), ("adjust_escalate_after", 1),
+            ("continue_heartbeat_min", 0), ("microstructure_failures_to_end", 1),
+            ("transient_failures_to_end", 1),
+        ):
+            value = getattr(self, name)
+            if isinstance(value, bool) or not isinstance(value, int) or value < minimum:
+                raise ValueError(f"RecommenderConfig.{name} must be an integer >= {minimum}, got {value!r}")
+        for name in ("emit_every_tick", "meta_tilt_enabled"):
+            if not isinstance(getattr(self, name), bool):
+                raise ValueError(f"RecommenderConfig.{name} must be a bool")
         # Type-then-range validation, fail-closed at construction. bool is
         # excluded from the numeric check (bool subclasses int) so a YAML
         # "true" cannot silently pass as a threshold.
@@ -103,6 +134,8 @@ class RecommenderConfig:
                     f"RecommenderConfig.{name} must be numeric, got "
                     f"{type(value).__name__}: {value!r}"
                 )
+            if name in {"end_outside_min_ticks", "end_latch_clear_ticks"} and not isinstance(value, int):
+                raise ValueError(f"RecommenderConfig.{name} must be an integer, got {value!r}")
             if not math.isfinite(float(value)):
                 raise ValueError(f"RecommenderConfig.{name} must be finite, got {value!r}")
             if (value <= minimum) if exclusive else (value < minimum):
@@ -138,7 +171,10 @@ class RecommenderConfig:
         if path.suffix.lower() in (".yaml", ".yml"):
             import yaml  # local import keeps pyyaml optional for callers
 
-            data = yaml.safe_load(text)
+            try:
+                data = yaml.safe_load(text)
+            except yaml.YAMLError as exc:
+                raise ValueError(f"invalid YAML config: {exc}") from exc
         elif path.suffix.lower() == ".json":
             data = json.loads(text)
         else:

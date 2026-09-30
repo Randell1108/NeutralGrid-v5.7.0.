@@ -126,6 +126,21 @@ def test_join_rejects_duplicate_finalized_outcome_identity() -> None:
         join_shadow_to_outcomes(decisions, outcomes)
 
 
+def test_candidate_join_rejects_conflicting_live_identity() -> None:
+    decisions = pd.DataFrame([
+        {"candidate_id": "CID-1", "strategy_id": "live-1", "symbol": "BTCUSDT"},
+        {"candidate_id": "CID-1", "strategy_id": "live-2", "symbol": "ETHUSDT"},
+    ])
+    outcomes = pd.DataFrame([
+        {"candidate_id": "CID-1", "strategy_id": "live-1", "symbol": "BTCUSDT", "pnl_pct": 2.0},
+    ])
+
+    joined = join_shadow_to_outcomes(decisions, outcomes)
+
+    assert len(joined) == 1
+    assert joined.iloc[0]["strategy_id_decision"] == "live-1"
+
+
 def test_decision_loader_flattens_verdict_inert_execution_evidence(
     tmp_path: Path,
 ) -> None:
@@ -211,6 +226,8 @@ def test_unique_candidate_count_classifies_blanks_without_future_warning() -> No
                     "join_key": f"BOT_{index}",
                     "candidate_id": candidate_id,
                     "ts_utc": "2026-06-21T00:00:00+00:00",
+                    "start_time_utc": "2026-06-20T00:00:00+00:00",
+                    "end_time_utc": "2026-06-22T00:00:00+00:00",
                     "verdict": "ADJUST",
                     "meta_proba": 0.42,
                     "meta_authoritative": True,
@@ -308,9 +325,8 @@ def test_post_mortem_ticks_are_excluded_from_eligibility() -> None:
     assert result["counts"]["eligible_rows"] == 1
 
 
-def test_rows_without_life_window_are_kept_but_counted() -> None:
-    """Outcomes lacking end/start times must not silently drop eligible rows —
-    they are kept and surfaced via outcome_life_window_missing."""
+def test_rows_without_life_window_are_excluded_and_counted() -> None:
+    """An outcome without a verified life window cannot calibrate live policy."""
     joined = pd.DataFrame(
         [
             {
@@ -329,9 +345,23 @@ def test_rows_without_life_window_are_kept_but_counted() -> None:
     result = analyze_joined_shadow(joined, config=ShadowAnalysisConfig(min_joined_rows=5))
 
     funnel = result["eligibility_funnel"]
-    assert funnel["all_eligible"] == 1
+    assert funnel["all_eligible"] == 0
     assert funnel["outcome_life_window_missing"] == 1
+    assert funnel["failed_reason_counts"]["outcome_life_window_missing"] == 1
     assert funnel["failed_reason_counts"]["post_outcome_tick"] == 0
+
+
+def test_incomplete_joined_shadow_row_fails_closed_without_crashing() -> None:
+    joined = pd.DataFrame([{
+        "join_key": "BOT_1", "meta_proba": 0.4,
+        "meta_authoritative": True, "meta_full_fidelity": True,
+        "pnl_pct": -1.0,
+    }])
+
+    result = analyze_joined_shadow(joined)
+
+    assert result["status"] == "insufficient_joined_rows"
+    assert result["eligibility_funnel"]["failed_reason_counts"]["missing_ts_utc"] == 1
 
 
 def test_pending_authoritative_outcomes_reports_unmatched_d7_rows() -> None:
@@ -419,6 +449,8 @@ def test_analysis_split_keeps_each_join_key_on_one_side() -> None:
                     "join_key": f"BOT_{bot_idx}",
                     "candidate_id": f"CID_{bot_idx}",
                     "ts_utc": f"2026-06-21T00:{bot_idx}{tick_idx}:00+00:00",
+                    "start_time_utc": "2026-06-20T00:00:00+00:00",
+                    "end_time_utc": "2026-06-22T00:00:00+00:00",
                     "verdict": "ADJUST",
                     "meta_proba": 0.40 if bot_idx % 2 == 0 else 0.80,
                     "meta_authoritative": True,
@@ -485,6 +517,8 @@ def _synthetic_joined_rows() -> pd.DataFrame:
             {
                 "candidate_id": f"CID_{idx:03d}",
                 "ts_utc": f"2026-06-21T00:{idx:02d}:00+00:00",
+                "start_time_utc": "2026-06-20T00:00:00+00:00",
+                "end_time_utc": "2026-06-22T00:00:00+00:00",
                 "verdict": "ADJUST",
                 "meta_proba": 0.40 if low_confidence else 0.80,
                 "meta_authoritative": True,

@@ -492,6 +492,8 @@ def validate_cycle_freshness(
     now: datetime,
     max_age_seconds: float,
 ) -> None:
+    if not math.isfinite(max_age_seconds) or max_age_seconds <= 0:
+        raise ControllerError("max_age_seconds must be finite and positive")
     age_seconds = (now - cycle.completed_at_utc).total_seconds()
     if age_seconds < -5:
         raise ControllerError(
@@ -502,6 +504,17 @@ def validate_cycle_freshness(
             f"telemetry cycle is stale: age={age_seconds:.1f}s "
             f"> max={max_age_seconds:.1f}s"
         )
+    for bot in cycle.bots:
+        age = (now - bot.captured_at_utc).total_seconds()
+        if age < -5:
+            raise ControllerError(f"{bot.symbol}: drawer capture is in the future")
+        if age > max_age_seconds:
+            raise ControllerError(
+                f"{bot.symbol}: drawer capture is stale: age={age:.1f}s "
+                f"> max={max_age_seconds:.1f}s"
+            )
+        if not cycle.started_at_utc <= bot.captured_at_utc <= cycle.completed_at_utc:
+            raise ControllerError(f"{bot.symbol}: drawer capture is outside its cycle")
 
 
 def _run_process(
@@ -716,7 +729,18 @@ def attach_l2_streams(
             ):
                 raise ControllerError(f"{symbol}: symbol manifest identity mismatch")
             expected_strategy = active_strategy_by_symbol[symbol]
-            if public_trade_path.is_file():
+            run_trades = payload.get("collect_agg_trades")
+            symbol_trades = symbol_payload.get("collect_agg_trades")
+            for flag in (run_trades, symbol_trades):
+                if flag is not None and not isinstance(flag, bool):
+                    raise ControllerError(f"{symbol}: collect_agg_trades must be boolean")
+            if run_trades != symbol_trades:
+                raise ControllerError(f"{symbol}: aggregate-trade configuration mismatch")
+            has_trade_file = public_trade_path.is_file()
+            if run_trades is False and has_trade_file and public_trade_path.stat().st_size:
+                raise ControllerError(f"{symbol}: disabled aggregate-trade stream has nonempty evidence")
+            attach_trades = has_trade_file and run_trades is not False
+            if attach_trades:
                 target_strategy = target_strategy_by_symbol.get(symbol, "")
                 symbol_target = symbol_payload.get("target")
                 symbol_target_strategy = (
@@ -740,7 +764,7 @@ def attach_l2_streams(
             refs[symbol] = {
                 "feature_path": str(feature_path),
                 "public_trade_path": (
-                    str(public_trade_path) if public_trade_path.is_file() else None
+                    str(public_trade_path) if attach_trades else None
                 ),
                 "manifest_path": str(symbol_manifest),
                 "symbol": symbol,
@@ -915,7 +939,50 @@ def run_scanner_tick(
             "scanner output does not match active telemetry set: "
             f"expected={sorted(expected)}, observed={sorted(observed)}"
         )
+    if getattr(args, "require_l2_evidence", False):
+        validate_required_l2_evidence(cycle, rows)
     return rows, process_evidence
+
+
+def validate_required_l2_evidence(
+    cycle: TelemetryCycle, rows: Sequence[Mapping[str, Any]],
+) -> None:
+    """Reject unavailable required evidence before publishing or routing results.
+
+    The scanner can legitimately return a recommendation with diagnostic-only
+    L2 failure in legacy mode. Recurring drawer publication requires validated
+    L2 for every exact bot. Preserve the scanner logs even when rejecting them.
+    """
+    bots = {(bot.symbol, bot.strategy_id): bot for bot in cycle.bots}
+    for row in rows:
+        identity = (str(row.get("symbol", "")).upper(), str(row.get("strategy_id", "")))
+        bot = bots[identity]  # run_scanner_tick already verified the exact roster.
+        label = f"{bot.symbol}/{bot.strategy_id}: required L2"
+        ref = bot.scanner_entry.get("l2_stream")
+        evaluation = row.get("evaluation")
+        if not isinstance(ref, dict) or not isinstance(evaluation, dict):
+            raise ControllerError(f"{label} reference or evaluation missing")
+        diagnostics = evaluation.get("diagnostics")
+        if not isinstance(diagnostics, list) or any(not isinstance(d, str) for d in diagnostics):
+            raise ControllerError(f"{label} diagnostics invalid")
+        unavailable = [d for d in diagnostics if d.startswith("l2_stream_unavailable")]
+        if unavailable:
+            raise ControllerError(f"{label} unavailable: {'; '.join(unavailable)}")
+        evidence = evaluation.get("l2_risk")
+        if not isinstance(evidence, dict) or not evidence:
+            raise ControllerError(f"{label} evidence missing")
+        if not ref.get("run_id") or evidence.get("run_id") != ref["run_id"]:
+            raise ControllerError(f"{label} run identity mismatch")
+        evaluated = _parse_datetime(evaluation.get("evaluated_at_utc"), field=f"{label} evaluated_at")
+        captured = _parse_datetime(evidence.get("captured_at_utc"), field=f"{label} captured_at")
+        age = (evaluated - captured).total_seconds()
+        limit = _finite_optional(ref.get("max_age_seconds"))
+        reported_age = _finite_optional(evidence.get("age_seconds"))
+        if (limit is None or limit <= 0 or reported_age is None
+                or isinstance(evidence.get("age_seconds"), bool)
+                or age < -5 or age > limit
+                or not math.isclose(age, reported_age, rel_tol=0.0, abs_tol=1e-6)):
+            raise ControllerError(f"{label} freshness invalid: age={age:.6f}s, limit={limit}")
 
 
 def persist_cycle_pnl_history(
@@ -1587,6 +1654,7 @@ def run_iteration(args: argparse.Namespace) -> dict[str, Any]:
                 ),
                 "registry_path": str(registry),
                 "scanner_returncode": process_evidence["returncode"],
+                "required_evidence_validated": bool(getattr(args, "require_l2_evidence", False)),
                 "pnl_history": pnl_history,
                 "pnl_history_appended": sum(
                     item["status"] == "appended" for item in pnl_history
@@ -1708,6 +1776,10 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         help="repeatable event-complete collector manifest covering active symbols",
     )
     parser.add_argument("--max-l2-age-seconds", type=float, default=15.0)
+    parser.add_argument(
+        "--require-l2-evidence", action="store_true",
+        help="block publication when any active bot lacks validated scanner L2 evidence",
+    )
     parser.add_argument("--l2-history-window-seconds", type=float, default=300.0)
     parser.add_argument(
         "--l2-deterioration-min-duration-seconds",

@@ -331,9 +331,17 @@ def ingest_capture_bundle(
         if captured_at < started_at or captured_at > completed_at:
             raise PluginIngestError(f"{symbol}: capture timestamp is outside cycle")
         deployment_time_lima = _require_text(raw_capture, "deployment_time_lima")
+        raw_value = _require_text(raw_capture, "raw_text_path")
+        # New recurring captures persist raw evidence directly under Live.
+        # Keep the older run-owned staging format readable for historical runs.
+        capture_root = (
+            resolved_live_root / started_at.astimezone(LIMA).strftime("%Y-%m-%d")
+            / symbol / "drawer_captures" / run_id
+        ).resolve()
+        raw_root = capture_root if _is_relative_to(Path(raw_value).resolve(), capture_root) else staging_root
         raw_path = _resolve_inside(
-            _require_text(raw_capture, "raw_text_path"),
-            root=staging_root,
+            raw_value,
+            root=raw_root,
             label=f"{symbol} raw capture",
             must_exist=True,
         )

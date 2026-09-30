@@ -180,6 +180,38 @@ def test_attach_l2_streams_round_trips_through_scanner_registry(tmp_path: Path) 
     assert specs[0].l2_stream.history_window_seconds == 240.0
 
 
+@pytest.mark.parametrize("root_flag,symbol_flag,trade_text,expected_error", [
+    (False, False, "", None),
+    (False, False, "{}\n", "disabled.*nonempty"),
+    (False, True, "", "configuration mismatch"),
+    (False, None, "", "configuration mismatch"),
+    ("false", "false", "", "must be boolean"),
+    (True, True, "", "collector target mismatch"),
+])
+def test_public_only_collector_does_not_attach_disabled_trade_file(
+    tmp_path, root_flag, symbol_flag, trade_text, expected_error,
+):
+    cycle = controller.load_complete_cycle(_write_cycle(
+        tmp_path, completed_at=datetime(2026, 7, 30, 17, 0, tzinfo=UTC)))
+    run_dir = tmp_path / "diff_depth" / "public-only"
+    run_dir.mkdir(parents=True)
+    (run_dir / "l2_risk_snapshots.jsonl").write_text("{}\n", encoding="utf-8")
+    (run_dir / "public_agg_trades.jsonl").write_text(trade_text, encoding="utf-8")
+    (run_dir / "manifest.json").write_text(json.dumps({
+        "symbol": "BTCUSDT", "run_id": "public-only", "collect_agg_trades": symbol_flag}), encoding="utf-8")
+    manifest = tmp_path / "public_manifest.json"
+    manifest.write_text(json.dumps({"run_id": "public-only", "collect_agg_trades": root_flag,
+        "symbol_run_dirs": {"BTCUSDT": str(run_dir)}}), encoding="utf-8")
+    kwargs = dict(manifest_paths=[manifest], max_age_seconds=15, history_window_seconds=240)
+    if expected_error:
+        with pytest.raises(controller.ControllerError, match=expected_error):
+            controller.attach_l2_streams(cycle, **kwargs)
+    else:
+        attached = controller.attach_l2_streams(cycle, **kwargs)
+        assert attached.bots[0].scanner_entry["l2_stream"]["public_trade_path"] is None
+        assert attached.bots[0].scanner_entry["l2_stream"]["feature_path"] == str(run_dir / "l2_risk_snapshots.jsonl")
+
+
 def test_public_trade_attachment_requires_exact_collector_strategy_target(
     tmp_path: Path,
 ) -> None:

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 from typing import Any
 
 import pytest
@@ -1044,4 +1045,40 @@ def test_config_validation_rejects_bad_values() -> None:
     with pytest.raises(ValueError):
         RecommenderConfig(end_latch_clear_ticks=0)
     with pytest.raises(ValueError):
+        RecommenderConfig(**{"end_outside_min_ticks": 1.5})
+    with pytest.raises(ValueError):
+        RecommenderConfig(**{"end_latch_clear_ticks": 2.5})
+    with pytest.raises(ValueError):
         RecommenderConfig(end_on_first_outside_tick="yes")  # type: ignore[arg-type]
+
+
+@pytest.mark.parametrize(
+    "field,value",
+    [
+        ("min_range_prob", float("nan")),
+        ("min_range_prob", 1.1),
+        ("adjust_range_prob_floor", -0.1),
+        ("end_trend_prob_threshold", float("inf")),
+        ("meta_tilt_low_threshold", 1.1),
+        ("boundary_proximity_pct", -1),
+        ("end_cooldown_min", -1),
+        ("adjust_escalate_after", 0),
+        ("continue_heartbeat_min", -1),
+        ("microstructure_failures_to_end", 0),
+        ("transient_failures_to_end", 0),
+        ("emit_every_tick", "false"),
+        ("meta_tilt_enabled", "false"),
+    ],
+)
+def test_config_validation_rejects_invalid_legacy_gate_values(
+    field: str, value: object,
+) -> None:
+    with pytest.raises(ValueError, match=field):
+        RecommenderConfig(**{field: value})
+
+
+def test_malformed_yaml_config_is_reported_as_validation_error(tmp_path: Path) -> None:
+    config_path = tmp_path / "scanner.yaml"
+    config_path.write_text("min_range_prob: [\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="invalid YAML config"):
+        RecommenderConfig.from_file(config_path)

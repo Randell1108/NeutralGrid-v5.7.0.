@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -9,9 +10,93 @@ import pytest
 
 from scripts import ingest_chrome_plugin_telemetry_cycle as ingest
 from scripts import run_live_telemetry_controller as controller
+from scripts import run_drawer_verdict_cycle as recurring
 
 
 UTC = timezone.utc
+
+
+@pytest.mark.parametrize("missing_l2", [False, True])
+def test_ingest_to_recurring_controller_commits_once_without_action_dispatch(tmp_path, monkeypatch, missing_l2):
+    bundle, _, _ = _write_bundle(tmp_path)
+    live = tmp_path / "Live"
+    manifest = ingest.ingest_capture_bundle(bundle, workspace_root=tmp_path,
+        live_root=live, audit_dir=tmp_path / "outputs/audits/plugin_cycles")
+    now = datetime(2026, 8, 13, 15, 0, 35, tzinfo=UTC)
+    monkeypatch.setattr(recurring, "_utc_now", lambda: now)
+    monkeypatch.setattr(controller, "_utc_now", lambda: now)
+    run_dir = tmp_path / "public_run"
+    run_dir.mkdir()
+    (run_dir / "l2_risk_snapshots.jsonl").write_text("{}\n", encoding="utf-8")
+    (run_dir / "manifest.json").write_text(json.dumps({"symbol": "BTCUSDT", "run_id": "run-1"}), encoding="utf-8")
+    public_manifest = tmp_path / "public.json"
+    public_manifest.write_text(json.dumps({"run_id": "run-1", "symbol_run_dirs": {"BTCUSDT": str(run_dir)}}), encoding="utf-8")
+    cycle = controller.load_complete_cycle(manifest)
+    calls = []
+    def scanner(command, **kwargs):
+        calls.append(command)
+        registry_path = Path(command[command.index("--bots") + 1])
+        assert registry_path.is_file()
+        row = {"ts": now.isoformat(), "symbol": "BTCUSDT", "strategy_id": "413500001",
+                 "verdict": "END", "reasons": ["synthetic_test_only"],
+                 "execution_telemetry": cycle.bots[0].scanner_entry["execution_telemetry"],
+                 "evaluation": {"evaluated_at_utc": now.isoformat(), "price": 1.5, "diagnostics": [],
+                                "l2_risk": None if missing_l2 else {"run_id": "run-1", "age_seconds": 0.0,
+                                                                    "captured_at_utc": now.isoformat()}}}
+        log_dir = Path(command[command.index("--logs-dir") + 1])
+        (log_dir / "live_decisions_20260813.jsonl").write_text(json.dumps(row) + "\n", encoding="utf-8")
+        return subprocess.CompletedProcess(command, 0, "", "")
+    monkeypatch.setattr(controller, "_run_process", scanner)
+    def forbidden(*a, **kw):
+        pytest.fail("advisory consumer dispatched an action")
+    monkeypatch.setattr(controller, "route_actions", forbidden)
+    args = recurring.parse_args(["--cycle-manifest", str(manifest), "--live-root", str(live),
+                                 "--audit-dir", str(tmp_path / "consumer"),
+                                 "--diff-depth-manifest", str(public_manifest)])
+    result = recurring.consume(args)
+    if missing_l2:
+        assert result["status"] == "blocked"
+        assert result["verdicts"] == []
+        assert recurring.health(args.audit_dir, now=now)["verdicts"] == []
+        assert recurring.consume(args)["status"] == "blocked"
+        assert len(calls) == 1
+        assert not list(live.rglob("pnl_history/*/observations/*.json"))
+        return
+    assert result["status"] == "complete", result
+    assert result["controller_report"]["pnl_history_appended"] == 1
+    assert result["controller_report"]["action_outcomes"][0]["status"] == "observational_not_executed"
+    assert recurring.consume(args)["status"] == "duplicate"
+    assert len(calls) == 1
+    assert len(list(live.rglob("pnl_history/*/observations/*.json"))) == 1
+
+
+def test_recurring_raw_capture_is_read_from_exact_live_run_directory(tmp_path: Path) -> None:
+    bundle, raw, payload = _write_bundle(tmp_path)
+    live_raw = tmp_path / "Live/2026-08-13/BTCUSDT/drawer_captures/run-1/drawer.txt"
+    live_raw.parent.mkdir(parents=True)
+    live_raw.write_bytes(raw.read_bytes())
+    payload["captures"][0]["raw_text_path"] = str(live_raw)
+    bundle.write_text(json.dumps(payload), encoding="utf-8")
+    path = ingest.ingest_capture_bundle(bundle, workspace_root=tmp_path,
+        live_root=tmp_path / "Live", audit_dir=tmp_path / "outputs/audits/plugin_cycles")
+    assert controller.load_complete_cycle(path).symbols == ("BTCUSDT",)
+
+
+@pytest.mark.parametrize("suffix", [
+    "2026-08-12/BTCUSDT/drawer_captures/run-1",
+    "2026-08-13/ETHUSDT/drawer_captures/run-1",
+    "2026-08-13/BTCUSDT/drawer_captures/another-run",
+])
+def test_recurring_raw_capture_rejects_wrong_date_symbol_or_run(tmp_path: Path, suffix: str) -> None:
+    bundle, raw, payload = _write_bundle(tmp_path)
+    wrong = tmp_path / "Live" / suffix / "drawer.txt"
+    wrong.parent.mkdir(parents=True)
+    wrong.write_bytes(raw.read_bytes())
+    payload["captures"][0]["raw_text_path"] = str(wrong)
+    bundle.write_text(json.dumps(payload), encoding="utf-8")
+    with pytest.raises(ingest.PluginIngestError, match="outside workspace"):
+        ingest.ingest_capture_bundle(bundle, workspace_root=tmp_path,
+            live_root=tmp_path / "Live", audit_dir=tmp_path / "outputs/audits/plugin_cycles")
 
 
 def _drawer_text(
