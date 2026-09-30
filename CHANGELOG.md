@@ -2,6 +2,385 @@
 
 ## [unreleased] - Neutral Grid v5.7.0
 
+### DRAWER-UI-20260930 - Recover observed Chrome drawer transport effects
+
+**Date:** 2026-09-30.
+
+The drawer helper brings the selected UM Grid table into view before the roster
+sweep, retries a bounded read-only drawer-presence check, and observes the exact
+View Details control after a timed-out scroll. It continues only when that
+control is visibly hit-testable; otherwise the capture fails. Complete Working
+rosters, deployment identities, tooltip proof, and raw-data placement remain
+required.
+
+**Files modified:**
+- `scripts/capture_recurring_drawers.mjs`
+- `tests/capture_recurring_drawers.test.mjs`
+- `CHANGELOG.md`
+
+**Decision rationale:** A new authenticated Chrome tab placed the table below
+the viewport. Later, a scroll command timed out after four drawers, but the
+next target was observed in view. Rechecking the exact control handles a lost
+scroll response without issuing an unverified second scroll or relaxing the
+roster and drawer gates.
+
+**AFML / Hudson & Thames citation:** No model, labeling, threshold or training
+method changed; this is an acquisition-control correction.
+
+**Backward compatibility:** No breaking change to raw-data or capture-bundle
+schema.
+
+**Verification:** 30 focused Node tests passed, including blocked no-movement
+and recovered lost-response cases. A fresh Chrome run captured all 11 Working
+bots with matching before/after rosters and raw hashes; ingestion and the
+single-consumption scanner validated 11 L2 streams. The controller reported a
+current advisory at its post-run status check.
+
+### DRAWER-UI-20260929 - Prove virtualized Working roster before drawer capture
+
+**Date:** 2026-09-29.
+
+The Chrome drawer helper now proves the full Working roster with a bounded,
+overlapping sweep of Binance's virtualized table and reveals each proven row
+before opening its drawer. It rejects a count mismatch, skipped scroll interval,
+changed symbol or deployment time, and any failure to reach the table boundary.
+The observed View Details control is clicked at its verified screen coordinates
+after the tooltip check. Raw text remains under `Live/<Lima-date>/<SYMBOL>/`;
+the bundle is published only after an identical complete post-capture roster.
+
+**Files modified:**
+- `scripts/capture_recurring_drawers.mjs`
+- `tests/capture_recurring_drawers.test.mjs`
+- `docs/recurring_drawer_verdict.md`
+- `CHANGELOG.md`
+
+**Decision rationale:** Binance reported 14 Running UM Grid bots while rendering
+only 13 Working rows at a time. Top and bottom table positions exposed different
+overlapping rows. A visible-row-only check could not capture all active bots;
+the bounded sweep preserves the exact count and identity gate. Two incomplete
+cycles also showed that a locator click could return without opening a drawer;
+the observed Details icon responded to a direct coordinate click. No End or
+adjustment control is targeted.
+
+**AFML / Hudson & Thames citation:** No model, labeling, threshold or training
+method changed; this is an acquisition and roster-integrity correction.
+
+**Backward compatibility:** No breaking change to raw-data or capture-bundle
+schema. A verified virtualized roster can now pass where it previously failed.
+
+**Verification:** 26 focused Node tests passed. A live Chrome run captured all
+14 Working bots with identical before/after rosters, and the exact bundle was
+ingested. P0 verification passed for the 14-target roster; the one-time
+observational consumer validated 14 L2 streams and completed. The advisory
+became stale after its existing 15-minute limit.
+
+### DRAWER-UI-20260928 - Verify reachable drawer controls in Chrome
+
+**Date:** 2026-09-28.
+
+The Chrome drawer helper now checks that the exact View Details icon is the
+element reached at its screen coordinates, scrolls the page and the Working
+table separately when a row is clipped (including a fractional viewport edge), and locates Binance's observed
+`View Details` tooltip by its accessible tooltip role. An uncertain response
+to the exact drawer-close click is resolved by observing whether the drawer
+became hidden. The symbol, deployment-time, strategy, roster, tooltip and raw
+capture checks remain required. No trading control was added.
+
+**Files modified:**
+- `scripts/capture_recurring_drawers.mjs`
+- `tests/capture_recurring_drawers.test.mjs`
+- `CHANGELOG.md`
+
+**Decision rationale:** The first Working row was present in the DOM but
+clipped behind the chart by the table's independent scroll position. The
+tooltip appeared as an accessible tooltip while a text locator returned no
+match. Browser transport also timed out after a drawer-close command whose
+effect could be observed. Each correction follows the observed page state and
+fails before clicking if the intended control remains obscured or ambiguous.
+
+**AFML / Hudson & Thames citation:** No model, labeling or training method
+changed; this is an acquisition-control correction.
+
+**Backward compatibility:** No breaking changes to bundle or raw-data schema.
+
+**Verification:** 22 focused Node tests passed and `git diff --check` passed.
+Live Chrome reached seven raw drawer captures before a later drawer failed to
+appear; no complete bundle or current verdict was published. Pyright was attempted but
+reported unresolved imports in the local type-check environment; no Python
+source changed in this entry.
+
+### HMM-REFIT-20260928 - Rotate canonical HMM and refit downstream candidates
+
+**Date:** 2026-09-28.
+
+Canonical HMM `rolling_180d_20260928_134611` replaced the September 19 version,
+using 50 symbols and 858,000 usable observations through September 27 23:45 UTC.
+The canonical workbook retained its 578 bots and auxiliary sheets while 7,528
+HMM-related cells were refreshed at recorded entry cutoffs. A fresh, uncapped
+FASTWIN replay produced 2,289 rows. Meta-labeler `20260928_142929` retained its
+20-feature vote_logit_hgb architecture and sigmoid_oos calibration and passed
+the existing absolute promotion gate: OOF AUC 0.670950, ECE 0.067606.
+All five promotion folds fell back to unpurged training. A separate fixed
+chronological diagnostic gave AUC 0.552218 and ECE 0.202462 on 473 later rows;
+therefore reliable later-period calibration is not established. Profile was
+refitted on 387 rows but had zero fresh validation folds; utility was refitted
+on 427 rows and failed G4/G7. Both remain unpromoted. No trade deployment occurred.
+
+**Files modified or added (principal outputs; full evidence in the run report):**
+- `artifact_manifest.json`
+- `artifacts/hmm/rolling_180d_20260928_134611/model.joblib`
+- `artifacts/hmm/rolling_180d_20260928_134611/scaler.joblib`
+- `artifacts/hmm/rolling_180d_20260928_134611/state_means.npy`
+- `artifacts/hmm/rolling_180d_20260928_134611/metadata.json`
+- `artifacts/hmm/rolling_180d_20260928_134611/eval.json`
+- `artifacts/hmm/rolling_180d_20260928_134611/feature_schema.json`
+- `artifacts/hmm/rolling_180d_20260928_134611/temperature_scaler.json`
+- `artifacts/hmm/rolling_180d_20260928_134611/cpcv_results.json`
+- `artifacts/hmm/rolling_180d_20260928_134611/wf_stability_report.json`
+- `data/new_expired_bots.xlsx`
+- `models/meta_labeler.pkl`
+- `models/meta_labeler/metadata.json`
+- `models/meta_labeler/model.joblib`
+- `models/meta_labeler/scaler.joblib`
+- `models/meta_labeler_verification.json`
+- `models/meta_labeler_promotion_decision.json`
+- `artifacts/utility/utility_20260928_141707_726124.json`
+- `data/profile/evaluations/profile_evaluation_20260928_134553_199868.json`
+- `reports/retrain_all_20260928/profile_candidate/profile_model.json`
+- `reports/retrain_all_20260928/profile_candidate/pattern_profile.json`
+- `reports/retrain_all_20260928/REPORT.md`
+- `CHANGELOG.md`
+
+**Decision rationale:** Apply current production recipes to refreshed data with
+uniform HMM lineage, preserve recorded observations, and retain rejected
+candidates as evidence. Three missing OU inputs use the previous model's
+documented 24.0 imputation; 2,105 derived event ends were corrected to recorded
+replay duration before fitting. Cross-HMM and evaluation-contract differences
+caused the meta gate to skip champion comparison; no superiority claim is made.
+September 21 research cohorts remain unapproved. No production Python source,
+model architecture, feature list or promotion threshold was changed.
+
+**AFML / Hudson & Thames citation:** No new methodology or citation claim. The
+existing purging/embargo contract was audited and its unpurged-fold fallback
+is explicitly disclosed rather than described as leakage-free validation.
+
+**Backward compatibility:** No breaking changes. Active HMM and meta artifact
+versions changed together; utility and profile still lack promoted pointers.
+
+**Verification:** Full tests: 2,241 passed, 2 skipped; preflight contracts: 66
+passed; post-fit contracts: 53 passed. Pyright: 158 files, zero errors/warnings.
+Workbook value/package preservation, feature schema, active lineage, model
+reload and scalar/batch prediction agreement passed. Supplemental HMM diagnostic
+results, execution scope and cleanup receipt are documented in the run report.
+
+### LIVE-SCANNER-01 - Validate live decisions and audit finalized outcome lineage
+
+**Date:** 2026-09-27.
+
+The live scanner now rejects nonfinite intervals and invalid recommender settings,
+and releases its lock and clients when startup fails. Finalized outcome ingestion
+interprets Excel date serials with the Excel epoch, reports and excludes missing
+or impossible bot life windows, and rejects numeric CSV timestamps without an
+explicit unit. Shadow outcome analysis rejects candidate links with conflicting
+strategy or symbol identities, requires a complete bot life window for
+calibration, and handles incomplete rows without an exception. A read-only audit
+classifies all saved private snapshots, persistent PnL observations and scanner
+decision logs against exact finalized bot identities and life windows. It writes
+one row per matched bot and never marks audit records training eligible. No
+threshold, model artifact, forecast model, or live trading path was changed.
+
+**Files modified or added:**
+- `live_decision_scanner.py`
+- `src/neutralgrid/live/decision/recommender.py`
+- `src/neutralgrid/live/decision/meta_shadow_analysis.py`
+- `src/neutralgrid/training/live_outcome_ingestor.py`
+- `scripts/audit_live_scanner_lineage.py`
+- `scripts/audit_live_source_manifests.py`
+- `tests/unit/test_decision_loop_helpers.py`
+- `tests/unit/test_decision_recommender.py`
+- `tests/unit/test_meta_shadow_analysis.py`
+- `tests/unit/test_live_outcome_ingestor.py`
+- `tests/unit/test_audit_live_scanner_lineage.py`
+- `tests/unit/test_audit_live_source_manifests.py`
+- `outputs/audits/live_scanner_review_20260927/summary.json`
+- `outputs/audits/live_scanner_review_20260927/snapshot_links.csv`
+- `outputs/audits/live_scanner_review_20260927/pnl_observation_links.csv`
+- `outputs/audits/live_scanner_review_20260927/decision_links.csv`
+- `outputs/audits/live_scanner_review_20260927/bot_links.csv`
+- `outputs/audits/live_scanner_review_20260927/review.md`
+- `outputs/audits/live_scanner_review_20260927_deploy_checked/summary.json`
+- `outputs/audits/live_scanner_review_20260927_deploy_checked/snapshot_links.csv`
+- `outputs/audits/live_scanner_review_20260927_deploy_checked/pnl_observation_links.csv`
+- `outputs/audits/live_scanner_review_20260927_deploy_checked/decision_links.csv`
+- `outputs/audits/live_scanner_review_20260927_deploy_checked/bot_links.csv`
+- `outputs/audits/live_scanner_manifest_inventory_20260927/summary.json`
+- `outputs/audits/live_scanner_manifest_inventory_20260927/manifest_links.csv`
+- `CHANGELOG.md`
+
+**Decision rationale:** Exact strategy and symbol identity plus a verified
+within-bot life window prevent a saved tick from receiving another bot's label.
+Repeated ticks remain observational evidence rather than independent bot
+outcomes. The current audit found zero finalized matches for 72 decision rows,
+so it supports no live threshold or forecast promotion claim.
+
+**AFML / Hudson & Thames citation:** The existing bot-disjoint temporal
+out-of-sample policy is retained to avoid counting repeated observations of
+one bot as independent evidence. No new statistical method is introduced.
+
+**Backward compatibility:** Invalid config values now fail at construction;
+malformed YAML is reported as a config validation error. Ingestion excludes
+finalized rows with missing or impossible windows, and shadow calibration
+excludes joined rows without both window endpoints. Numeric CSV timestamps
+require an explicit source format before ingestion. Valid config defaults,
+valid finalized rows, and scanner verdict thresholds are unchanged.
+
+**Verification:** Regression tests first reproduced interval, lock, config,
+Excel-date, identity-join, missing-window and incomplete-row failures. The
+complete test suite passed with 2,241 passed and 2 skipped. Source-tree Pyright
+reported zero errors and zero warnings. The saved-data audit classified 198
+private snapshots, 152 PnL observations, and 72 decision rows; it preserved
+72 invalid finalized life windows as individual source errors. The versioned
+follow-up audit confirmed exact deployment times for 101 matched drawer
+snapshots and 75 matched PnL observations; one transition snapshot has no
+deployment field and remains explicitly marked as such. The first audit was
+preserved after automatic approval review rejected its deletion as substantive
+evidence. The separate collector inventory classified all 680 saved market and
+private manifests without assigning symbol-only market streams to bot labels.
+
+### LIVE-DRAWER-03 - Verify drawer closure before a bounded retry
+
+**Date:** 2026-09-26.
+
+The recurring Chrome capture now checks whether a drawer remains visible after
+its close control times out and makes one bounded retry against the same
+observed close icon. This addresses intermittent Binance drawer close clicks
+that left an otherwise complete capture unpublished. Failed attempts retain
+their raw text and failure records; each retry starts a new roster-fenced run.
+
+**Files modified or added:**
+- `scripts/capture_recurring_drawers.mjs`
+- `tests/capture_recurring_drawers.test.mjs`
+- `CHANGELOG.md`
+
+**Decision rationale:** A visible drawer after the close wait is an observed
+UI state. Rechecking that state before retrying preserves the complete-roster
+publication gate without weakening symbol, strategy or deployment checks.
+
+**AFML / Hudson & Thames citation:** No new statistical method or calibration
+claim. This is a browser acquisition reliability correction.
+
+**Backward compatibility:** No breaking changes. The helper still publishes a
+bundle only after all drawers and both roster fences pass.
+
+**Verification:** All 19 drawer helper tests pass, including an ignored first
+close click. A fresh four-bot Chrome capture, ingestion and one-time advisory
+consumption completed with required L2 evidence for all four bots.
+
+### LIVE-DRAWER-02 - Per-bot observation time and required L2 publication proof
+
+**Date:** 2026-09-25.
+
+The live scanner now timestamps each bot immediately before evaluation. A
+slow earlier evaluation therefore cannot make a later live heartbeat appear
+future-dated against the start of the batch. The recurring drawer wrapper
+requires a P0 public L2 manifest and enables an opt-in controller check for
+complete, exact-run L2 evidence before publishing or routing recommendations.
+Missing evidence, L2-unavailable diagnostics and invalid age/provenance block
+the cycle even when the scanner exits successfully. Health rejects older
+receipts without required-evidence validation proof.
+
+**Files modified or added:**
+- `live_decision_scanner.py`
+- `scripts/run_live_telemetry_controller.py`
+- `scripts/run_drawer_verdict_cycle.py`
+- `tests/unit/test_live_evidence_publication.py`
+- `tests/unit/test_drawer_verdict_cycle.py`
+- `tests/unit/test_chrome_plugin_telemetry_ingest.py`
+- `docs/recurring_drawer_verdict.md`
+- `docs/drawer_verdict_repair_20260925.md`
+- `CHANGELOG.md`
+
+**Decision rationale:** Live evidence must be checked against its actual
+per-bot evaluation time, and process success must not substitute for evidence
+availability. Scanner diagnostics remain preserved for rejected cycles.
+Observation deduplication, no-action mode, model artifacts, training exclusion,
+the 15-second L2 age limit, five-second future tolerance, 900-second drawer
+limit and 600-second recurrence are unchanged.
+
+**AFML / Hudson & Thames citation:** No new statistical method or calibration
+claim. This is an operational timestamp and evidence-publication correction
+grounded in the recorded live failures and deterministic regression tests.
+
+**Backward compatibility:** The stricter controller behavior is opt-in through
+`--require-l2-evidence`, which the recurring wrapper always supplies. The
+wrapper now requires the P0 manifest. Pre-repair receipts require a new capture
+and are not replayed or edited to qualify. Batch output timestamps retain their
+existing grouping semantics; each evaluation and decision uses its own time.
+
+**Verification:** Nine pre-repair regression failures reproduced; 65 focused
+ingestion, deduplication, publication and timing checks pass after repair.
+The final full suite reports 2,212 passed and two skipped. Changed-script and
+source-tree Pyright checks report zero errors/warnings with the checkout
+interpreter selected. Full-suite and live acceptance
+results are retained in `outputs/audits/drawer_repair_20260925/` and described
+in `docs/drawer_verdict_repair_20260925.md`.
+
+### LIVE-DRAWER-01 - Recurring Chrome capture with deduplicated advisory consumption
+
+**Date:** 2026-09-25.
+
+Added an authenticated Chrome-extension drawer helper and a single-cycle
+consumer for the existing live decision scanner. The consumer claims cycles
+and individual observations before evaluation, isolates scanner history,
+rejects overlapping consumers, rechecks capture age after evaluation and
+publishes freshness-aware health. Browser failures can explicitly invalidate
+the prior health result. The controller now tests every drawer's age rather
+than only cycle completion and respects P0's explicitly disabled aggregate-trade
+stream when its pre-created file is empty. Conflicting flags and nonempty
+disabled streams remain blocked. New raw captures enter the required Live tree.
+The recurring Codex task uses the controller's existing ten-minute cadence
+and fifteen-minute maximum age. Live acceptance evidence and limitations are
+recorded separately from simulated integration tests in the review report.
+
+**Files modified or added:**
+- `scripts/capture_recurring_drawers.mjs`
+- `scripts/ingest_chrome_plugin_telemetry_cycle.py`
+- `scripts/run_drawer_verdict_cycle.py`
+- `scripts/run_live_telemetry_controller.py`
+- `tests/capture_recurring_drawers.test.mjs`
+- `tests/unit/test_chrome_plugin_telemetry_ingest.py`
+- `tests/unit/test_drawer_verdict_cycle.py`
+- `tests/unit/test_live_telemetry_controller.py`
+- `docs/recurring_drawer_verdict.md`
+- `docs/after_operational_prompt_live_verdict.md`
+- `reports/drawer_integration_20260925/REVIEW.md`
+- `CHANGELOG.md`
+
+**Decision rationale:** Reuse the existing scanner and controller contracts.
+Prevent repeated observations from inflating decision persistence and keep
+active telemetry outside authoritative training pools. A claimed interrupted
+cycle requires new capture rather than replay. Missing or expired evidence
+does not produce a current verdict. See existing ERR-113 for the superseded
+dedicated-profile collector and ERR-116 for separate private-source authority.
+
+**AFML / Hudson & Thames citation:** No new statistical method, trading
+threshold, model-training procedure or AFML compliance claim is introduced.
+This is acquisition, provenance, deduplication and advisory orchestration work.
+
+**Backward compatibility:** Existing staged Chrome bundle inputs remain
+accepted. The controller's default limits are unchanged; individual stale,
+future or out-of-cycle captures that previously passed the completion-only
+check are now rejected. The new consumer uses its own scanner history and
+never routes exchange actions. No changes to model artifacts or features.
+
+**Verification:** Baseline and post-change full pytest runs, failing-then-passing
+freshness and overlapping-observation regression tests, isolated ingestion /
+controller / PnL persistence with a simulated END decision, browser-control
+failure tests, repository pyright with the virtualenv interpreter, feature
+schema audit, protected-file SHA-256 comparison and live browser smoke tests.
+Exact counts, logs, live acceptance status and cleanup receipt are recorded in
+`reports/drawer_integration_20260925/REVIEW.md`.
+
 ### RETRAIN-0920 - Refresh HMM and downstream artifacts from the updated workbook
 
 **Date:** 2026-09-20.
