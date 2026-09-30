@@ -1,23 +1,23 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-09-20T15:47:14.673417+00:00",
+  "generated_at_utc": "2026-09-28T14:29:29.428029+00:00",
   "comparison_kind": "stored_summary_nonpaired",
   "output_path": "models\\meta_labeler.pkl",
   "champion_metadata_path": "models\\meta_labeler\\metadata.json",
   "candidate": {
     "promotion_status": "pass",
-    "oof_auc": 0.635798664612224,
-    "oof_auc_ci_low": 0.6108785916204907,
-    "oof_auc_ci_high": 0.6629734667542946,
-    "oof_ece": 0.022587085936175644,
-    "oof_deployable_auc": 0.635798664612224,
-    "oof_deployable_ece": 0.022587085936175644,
-    "train_samples": 1633,
+    "oof_auc": 0.6709495755297283,
+    "oof_auc_ci_low": 0.6511101753925183,
+    "oof_auc_ci_high": 0.6940414090613615,
+    "oof_ece": 0.06760558528460031,
+    "oof_deployable_auc": 0.6709495755297283,
+    "oof_deployable_ece": 0.06760558528460031,
+    "train_samples": 2289,
     "promotion_evaluation_contract": "chronological_contiguous_group_purged_weighted_kfold_v2",
-    "hmm_artifact_version": "rolling_180d_20260919_220822"
+    "hmm_artifact_version": "rolling_180d_20260928_134611"
   },
   "champion": {
-    "artifact_version": "20260920_154437",
+    "artifact_version": "20260920_154714",
     "features": [
       "ev_score",
       "adx_1h",
@@ -56,6 +56,7 @@
   "reasons": [],
   "comparison_scope": "incomparable_champion_absolute_gate_only",
   "comparison_skipped_reasons": [
-    "promotion_evaluation_contract_mismatch(champion=None,candidate='chronological_contiguous_group_purged_weighted_kfold_v2')"
+    "promotion_evaluation_contract_mismatch(champion=None,candidate='chronological_contiguous_group_purged_weighted_kfold_v2')",
+    "hmm_lineage_mismatch(champion='rolling_180d_20260919_220822',candidate='rolling_180d_20260928_134611')"
   ]
 }
