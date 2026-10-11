@@ -46,12 +46,16 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 CANONICAL_ADJUST_EXECUTOR = ROOT / "scripts" / "execute_live_telemetry_modifications.py"
-ACTION_APPROVAL_SCHEMA = "neutralgrid_action_approval_v1"
 PLUGIN_CYCLE_SCHEMA = "neutralgrid_private_telemetry_cycle_v2"
 PLUGIN_SNAPSHOT_SCHEMA = "neutralgrid_private_telemetry_snapshot_v2"
 DEFAULT_DEBUG_ENDPOINT = "http://127.0.0.1:9222"
 
 from _bot_data_extractor_core import parse_user_text
+from neutralgrid.core.constants import (
+    ACTION_APPROVAL_SCHEMA,
+    ACTION_EXECUTION_SCHEMA,
+    ACTION_INTENT_SCHEMA,
+)
 from neutralgrid.core.process_identity import query_process
 from neutralgrid.live.decision.private_telemetry import (
     PrivateTelemetryParseError,
@@ -1222,7 +1226,7 @@ def build_action_intents(
         )
         intents.append(
             {
-                "schema_version": "neutralgrid_action_intent_v1",
+                "schema_version": ACTION_INTENT_SCHEMA,
                 "iteration_id": iteration_id,
                 "idempotency_key": hashlib.sha256(
                     key_material.encode("utf-8")
@@ -1304,7 +1308,7 @@ def _verification_intent_from_executor(
     verification_intent = dict(intent)
     if str(intent.get("action")) != "ADJUST":
         return verification_intent
-    if response.get("schema_version") != "neutralgrid_action_execution_v1":
+    if response.get("schema_version") != ACTION_EXECUTION_SCHEMA:
         raise ControllerError("executor response schema is unsupported")
     if response.get("preserve_current_position") is not True:
         raise ControllerError("executor did not prove current-position preservation")
@@ -1568,6 +1572,62 @@ def route_or_observe_actions(
     ]
 
 
+def build_cycle_action_shadows(
+    args: argparse.Namespace,
+    cycle: TelemetryCycle,
+    rows: Sequence[Mapping[str, Any]],
+) -> list[dict[str, Any]]:
+    """Optional reporting only. This function never receives action transport."""
+    artifact_dir = getattr(args, "shadow_action_artifact_dir", None)
+    limits_path = getattr(args, "shadow_action_limits", None)
+    record = bool(getattr(args, "record_shadow_decisions", False))
+    if artifact_dir is None and limits_path is None and not record:
+        return []
+    from neutralgrid.live.decision.action_challenger import unavailable
+    from neutralgrid.live.decision.action_shadow_io import report_shadow_row
+    from neutralgrid.live.decision.recommender import Verdict
+    from neutralgrid.live.decision.state_action_reward import BotIdentity
+
+    limits_by_bot: dict[str, Any] = {}
+    configuration_error: str | None = None
+    if limits_path is not None:
+        try:
+            if limits_path.stat().st_size > 1024 * 1024:
+                raise ValueError("oversized risk configuration")
+            limits_raw = json.loads(limits_path.read_text(encoding="utf-8"))
+            if not isinstance(limits_raw, dict):
+                raise ValueError("risk limits must map exact bot hashes to profiles")
+            limits_by_bot = limits_raw
+        except (OSError, ValueError) as exc:
+            configuration_error = type(exc).__name__
+    bots = {(bot.symbol, bot.strategy_id): bot for bot in cycle.bots}
+    results: list[dict[str, Any]] = []
+    for row in rows:
+        try:
+            verdict = Verdict(str(row.get("verdict", "")).upper())
+        except ValueError as exc:
+            raise ControllerError("unsupported scanner verdict in shadow report") from exc
+        try:
+            if configuration_error is not None:
+                raise ValueError("risk_configuration_failure:" + configuration_error)
+            bot = bots[str(row["symbol"]), str(row["strategy_id"])]
+            deployed_at = _parse_datetime(bot.scanner_entry["deploy_ts"], field="shadow.deploy_ts")
+            observations = load_pnl_observations(live_root=args.live_root, symbol=bot.symbol,
+                                                strategy_id=bot.strategy_id, deploy_ts=deployed_at)
+            identity = BotIdentity(symbol=bot.symbol, strategy_id=bot.strategy_id, deployed_at=deployed_at)
+            result = report_shadow_row(row=row, observations=observations,
+                                       model_path=artifact_dir / "model.json" if artifact_dir is not None else None,
+                                       limits_payload=limits_by_bot.get(identity.key),
+                                       live_root=args.live_root if record else None)
+        except Exception as exc:
+            logger.warning("Shadow action report failed for %s: %s", row.get("symbol"), exc)
+            result = unavailable(verdict, "shadow_controller_failure:" + type(exc).__name__)
+        result["symbol"] = row.get("symbol")
+        result["strategy_id"] = row.get("strategy_id")
+        results.append(result)
+    return results
+
+
 def run_iteration(args: argparse.Namespace) -> dict[str, Any]:
     started_at = _utc_now()
     iteration_id = started_at.strftime("%Y%m%d_%H%M%S") + "_" + uuid.uuid4().hex[:8]
@@ -1629,6 +1689,20 @@ def run_iteration(args: argparse.Namespace) -> dict[str, Any]:
             max_data_age_seconds=getattr(args, "max_volatility_data_age_seconds", 180.0),
             asof_utc=started_at,
         )
+        try:
+            shadow_actions = build_cycle_action_shadows(args, cycle, rows)
+            if shadow_actions:
+                report["shadow_actions"] = {
+                    "influence_enabled": False,
+                    "decisions": shadow_actions,
+                }
+        except Exception as exc:
+            logger.warning("Optional shadow action report failed: %s", exc)
+            report["shadow_actions"] = {
+                "influence_enabled": False,
+                "available": False,
+                "diagnostics": ["shadow_controller_failure:" + type(exc).__name__],
+            }
         intents = build_action_intents(rows, iteration_id=iteration_id)
         action_outcomes = route_or_observe_actions(args, intents=intents)
         report.update(
@@ -1847,6 +1921,18 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         default=180.0,
     )
     parser.add_argument(
+        "--shadow-action-artifact-dir", type=Path, default=None,
+        help="Optional snapshot action-association model directory; reporting only.",
+    )
+    parser.add_argument(
+        "--shadow-action-limits", type=Path, default=None,
+        help="JSON risk profiles keyed by exact SAR bot identity hash; missing limits block eligibility.",
+    )
+    parser.add_argument(
+        "--record-shadow-decisions", action="store_true",
+        help="Record immutable decision evidence under Live; never asserts execution.",
+    )
+    parser.add_argument(
         "--allow-actions",
         action="store_true",
         help="Allow routing ADJUST/END to the configured external executor.",
@@ -1878,6 +1964,9 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--action-arg", action="append", default=[])
     parser.add_argument("--once", action="store_true")
     args = parser.parse_args(argv)
+    if (args.shadow_action_artifact_dir is not None or args.shadow_action_limits is not None or
+            args.record_shadow_decisions) and not args.observational_only:
+        parser.error("shadow action reporting requires --observational-only")
     for name in (
         "interval_seconds",
         "max_telemetry_age_seconds",

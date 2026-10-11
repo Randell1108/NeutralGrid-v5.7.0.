@@ -2,6 +2,64 @@
 
 ## [unreleased] - Neutral Grid v5.7.0
 
+### SAR-SHADOW-20261001 - Freeze action evidence contract and isolate challenger
+
+**Date:** 2026-10-01.
+
+SAR contract 1.0 records immutable decision, approval, execution, maintenance,
+outcome and terminal facts independently of the existing scanner contract 1.1.
+Native action receipts, complete costs, intervention coverage and equity
+reconciliation determine observed labels. Unexecuted proposals receive no
+observed reward. A bounded Ridge/logistic association challenger, support checks
+and signed path-signature ablation run offline. Optional controller reporting
+requires observational-only mode and cannot change incumbent action intents.
+
+**Files modified:**
+- `STATE_ACTION_REWARD_CONTRACT.md`
+- `LIVE_DECISION.md`
+- `docs/state_action_reward_v1.schema.catalog.json`
+- `docs/SAR_SHADOW_IMPLEMENTATION_REVIEW.md`
+- `src/neutralgrid/core/constants.py`
+- `src/neutralgrid/live/decision/state_action_reward.py`
+- `src/neutralgrid/live/decision/action_challenger.py`
+- `src/neutralgrid/live/decision/action_path_features.py`
+- `src/neutralgrid/live/decision/action_shadow_io.py`
+- `scripts/evaluate_shadow_actions.py`
+- `scripts/run_live_telemetry_controller.py`
+- `scripts/execute_live_telemetry_modifications.py`
+- `tests/unit/test_state_action_reward.py`
+- `tests/unit/test_action_challenger.py`
+- `tests/unit/test_action_shadow_integration.py`
+- `CHANGELOG.md`
+
+**Decision rationale:** Existing PnL snapshots do not identify executed actions
+or complete per-bot cost/intervention coverage. Keep observed behavior separate
+from proposals and simulations; purge related temporal intervals and retain
+unknown propensities. Existing live-inventory replay remains blocked because
+the realistic ladder seed clears positions rather than restoring inventory.
+No HMM/meta-labeler feature or canonical model promotion changed.
+
+**AFML / Hudson & Thames citation:** AFML Chapter 7 informs temporal purging and
+embargo. Primary methodological references are Deep Hedging
+(`https://arxiv.org/abs/1802.03042`), the signature-method primer
+(`https://arxiv.org/html/1603.03788v2`) and doubly robust off-policy evaluation
+(`https://proceedings.mlr.press/v48/jiang16.html`). Their methods do not establish
+an improvement for this scanner.
+
+**Backward compatibility:** No breaking changes to scanner 1.1, existing intent,
+approval or execution wire values. CONTINUE, ADJUST and END remain the only
+verdicts. New flags default off; SAR is a separate versioned sidecar.
+
+**Verification:** Final focused checks: 147 passed. Package source, controller
+and new CLI: pyright zero errors/warnings. Explicit executor checking reproduces
+two pre-existing protocol return errors in the committed baseline. Full pytest:
+2,299 passed, 2 skipped, 3 short-duration Windows loopback collector failures;
+those same three passed an isolated rerun. Frozen audit: 551 valid PnL records,
+69 uncontrolled one-hour pairs, zero verified action/reward examples, zero fitted
+challengers and null policy gain. Influence, promotion and existing-bot replay
+eligibility remain false. Detailed checks and preserved logs are linked in the
+implementation review.
+
 ### DRAWER-UI-20260930 - Recover observed Chrome drawer transport effects
 
 **Date:** 2026-09-30.

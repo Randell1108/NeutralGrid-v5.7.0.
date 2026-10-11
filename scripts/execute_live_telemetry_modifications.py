@@ -79,12 +79,17 @@ from scripts.collect_private_grid_telemetry import (
     _read_drawer,
     _validate_drawer_text,
 )
+from neutralgrid.core.constants import (
+    ACTION_APPROVAL_SCHEMA,
+    ACTION_EXECUTION_SCHEMA,
+    ACTION_INTENT_SCHEMA,
+)
 
 
 UTC = timezone.utc
-INTENT_SCHEMA = "neutralgrid_action_intent_v1"
-APPROVAL_SCHEMA = "neutralgrid_action_approval_v1"
-RESPONSE_SCHEMA = "neutralgrid_action_execution_v1"
+INTENT_SCHEMA = ACTION_INTENT_SCHEMA
+APPROVAL_SCHEMA = ACTION_APPROVAL_SCHEMA
+RESPONSE_SCHEMA = ACTION_EXECUTION_SCHEMA
 EXTENSION_BRIDGE_SCHEMA = "neutralgrid_extension_bridge_v1"
 SYMBOL_RE = re.compile(r"^[A-Z0-9]+USDT$")
 STRATEGY_RE = re.compile(r"^\d+$")

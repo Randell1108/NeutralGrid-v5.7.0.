@@ -59,6 +59,14 @@ PROFIT_FACTOR_CAP: float = 1000.0
 # BotHistory gains additive state fields; pre-1.1 state files load unchanged.
 DECISION_CONTRACT_VERSION: str = "1.1"
 
+# Independent lifecycle contract; adding its sidecar does not bump the scanner.
+# See STATE_ACTION_REWARD_CONTRACT.md for versioning and accounting semantics.
+ACTION_INTENT_SCHEMA: str = "neutralgrid_action_intent_v1"
+ACTION_APPROVAL_SCHEMA: str = "neutralgrid_action_approval_v1"
+ACTION_EXECUTION_SCHEMA: str = "neutralgrid_action_execution_v1"
+STATE_ACTION_REWARD_CONTRACT_VERSION: str = "1.0"
+STATE_ACTION_REWARD_SCHEMA: str = "neutralgrid_state_action_reward_v1"
+
 # ── Minimum positive-class rate for a trainable meta-labeler target (ERR-035) ─
 # Below this the class weight blows up and the model is unstable. Single source
 # of truth shared by the trainer's fail-closed gate ('models/meta_labeler.py')

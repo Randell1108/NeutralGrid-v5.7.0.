@@ -1,0 +1,3016 @@
+{
+  "contract_version": "1.0",
+  "event_schema": {
+    "$defs": {
+      "BotIdentity": {
+        "additionalProperties": false,
+        "properties": {
+          "deployed_at": {
+            "format": "date-time",
+            "title": "Deployed At",
+            "type": "string"
+          },
+          "strategy_id": {
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Strategy Id",
+            "type": "string"
+          },
+          "symbol": {
+            "pattern": "^[A-Z0-9]+USDT$",
+            "title": "Symbol",
+            "type": "string"
+          }
+        },
+        "required": [
+          "symbol",
+          "strategy_id",
+          "deployed_at"
+        ],
+        "title": "BotIdentity",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "bot": {
+        "$ref": "#/$defs/BotIdentity"
+      },
+      "contract_version": {
+        "default": "1.0",
+        "title": "Contract Version",
+        "type": "string"
+      },
+      "decision_id": {
+        "maxLength": 128,
+        "minLength": 1,
+        "title": "Decision Id",
+        "type": "string"
+      },
+      "event_id": {
+        "title": "Event Id",
+        "type": "string"
+      },
+      "kind": {
+        "enum": [
+          "decision",
+          "approval",
+          "execution",
+          "maintenance",
+          "outcome",
+          "finalized"
+        ],
+        "title": "Kind",
+        "type": "string"
+      },
+      "occurred_at": {
+        "format": "date-time",
+        "title": "Occurred At",
+        "type": "string"
+      },
+      "payload": {
+        "additionalProperties": true,
+        "title": "Payload",
+        "type": "object"
+      },
+      "record_sha256": {
+        "title": "Record Sha256",
+        "type": "string"
+      },
+      "schema_version": {
+        "default": "neutralgrid_state_action_reward_v1",
+        "title": "Schema Version",
+        "type": "string"
+      },
+      "transition_id": {
+        "title": "Transition Id",
+        "type": "string"
+      }
+    },
+    "required": [
+      "bot",
+      "decision_id",
+      "transition_id",
+      "kind",
+      "occurred_at",
+      "event_id",
+      "payload",
+      "record_sha256"
+    ],
+    "title": "LedgerEvent",
+    "type": "object"
+  },
+  "payload_schemas": {
+    "approval": {
+      "$defs": {
+        "Action": {
+          "additionalProperties": false,
+          "properties": {
+            "lower": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Lower"
+            },
+            "upper": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Upper"
+            },
+            "verdict": {
+              "$ref": "#/$defs/Verdict"
+            }
+          },
+          "required": [
+            "verdict"
+          ],
+          "title": "Action",
+          "type": "object"
+        },
+        "SourceRef": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "minLength": 1,
+              "title": "Path",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "title": "Sha256",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "title": "SourceRef",
+          "type": "object"
+        },
+        "Verdict": {
+          "enum": [
+            "CONTINUE",
+            "ADJUST",
+            "END"
+          ],
+          "title": "Verdict",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "$ref": "#/$defs/Action"
+        },
+        "approved_at": {
+          "format": "date-time",
+          "title": "Approved At",
+          "type": "string"
+        },
+        "expires_at": {
+          "format": "date-time",
+          "title": "Expires At",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/SourceRef"
+        }
+      },
+      "required": [
+        "action",
+        "approved_at",
+        "expires_at",
+        "source"
+      ],
+      "title": "Approval",
+      "type": "object"
+    },
+    "decision": {
+      "$defs": {
+        "Action": {
+          "additionalProperties": false,
+          "properties": {
+            "lower": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Lower"
+            },
+            "upper": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Upper"
+            },
+            "verdict": {
+              "$ref": "#/$defs/Verdict"
+            }
+          },
+          "required": [
+            "verdict"
+          ],
+          "title": "Action",
+          "type": "object"
+        },
+        "BotIdentity": {
+          "additionalProperties": false,
+          "properties": {
+            "deployed_at": {
+              "format": "date-time",
+              "title": "Deployed At",
+              "type": "string"
+            },
+            "strategy_id": {
+              "pattern": "^[A-Za-z0-9_-]+$",
+              "title": "Strategy Id",
+              "type": "string"
+            },
+            "symbol": {
+              "pattern": "^[A-Z0-9]+USDT$",
+              "title": "Symbol",
+              "type": "string"
+            }
+          },
+          "required": [
+            "symbol",
+            "strategy_id",
+            "deployed_at"
+          ],
+          "title": "BotIdentity",
+          "type": "object"
+        },
+        "PricePoint": {
+          "additionalProperties": false,
+          "properties": {
+            "available_at": {
+              "format": "date-time",
+              "title": "Available At",
+              "type": "string"
+            },
+            "captured_at": {
+              "format": "date-time",
+              "title": "Captured At",
+              "type": "string"
+            },
+            "price": {
+              "exclusiveMinimum": 0,
+              "title": "Price",
+              "type": "number"
+            },
+            "source_path": {
+              "title": "Source Path",
+              "type": "string"
+            },
+            "source_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "title": "Source Sha256",
+              "type": "string"
+            }
+          },
+          "required": [
+            "captured_at",
+            "available_at",
+            "price",
+            "source_path",
+            "source_sha256"
+          ],
+          "title": "PricePoint",
+          "type": "object"
+        },
+        "RiskLimits": {
+          "additionalProperties": false,
+          "properties": {
+            "max_drawdown_pct": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0.0,
+                  "maximum": 100.0,
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "title": "Max Drawdown Pct"
+            },
+            "max_market_age_seconds": {
+              "default": 15.0,
+              "exclusiveMinimum": 0,
+              "title": "Max Market Age Seconds",
+              "type": "number"
+            },
+            "max_private_age_seconds": {
+              "default": 900.0,
+              "exclusiveMinimum": 0,
+              "title": "Max Private Age Seconds",
+              "type": "number"
+            },
+            "min_liquidation_buffer_pct": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0.0,
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "title": "Min Liquidation Buffer Pct"
+            }
+          },
+          "required": [
+            "min_liquidation_buffer_pct",
+            "max_drawdown_pct"
+          ],
+          "title": "RiskLimits",
+          "type": "object"
+        },
+        "SourceRef": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "minLength": 1,
+              "title": "Path",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "title": "Sha256",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "title": "SourceRef",
+          "type": "object"
+        },
+        "State": {
+          "additionalProperties": false,
+          "properties": {
+            "available_at": {
+              "format": "date-time",
+              "title": "Available At",
+              "type": "string"
+            },
+            "bot": {
+              "$ref": "#/$defs/BotIdentity"
+            },
+            "capital_usdt": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0.0,
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Capital Usdt"
+            },
+            "captured_at": {
+              "format": "date-time",
+              "title": "Captured At",
+              "type": "string"
+            },
+            "entry_price": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0.0,
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Entry Price"
+            },
+            "equity_usdt": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Equity Usdt"
+            },
+            "feature_window_start": {
+              "format": "date-time",
+              "title": "Feature Window Start",
+              "type": "string"
+            },
+            "features": {
+              "additionalProperties": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "title": "Features",
+              "type": "object"
+            },
+            "grid_lower": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Grid Lower"
+            },
+            "grid_upper": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Grid Upper"
+            },
+            "hmm_lineage": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Hmm Lineage"
+            },
+            "liquidation_buffer_pct": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Liquidation Buffer Pct"
+            },
+            "market_captured_at": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Market Captured At"
+            },
+            "market_price": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0.0,
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Market Price"
+            },
+            "num_grids": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0,
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Num Grids"
+            },
+            "orders": {
+              "anyOf": [
+                {
+                  "items": {
+                    "additionalProperties": true,
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Orders"
+            },
+            "peak_equity_usdt": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0.0,
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Peak Equity Usdt"
+            },
+            "position_quantity": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Position Quantity"
+            },
+            "price_path": {
+              "default": [],
+              "items": {
+                "$ref": "#/$defs/PricePoint"
+              },
+              "title": "Price Path",
+              "type": "array"
+            },
+            "sources": {
+              "items": {
+                "$ref": "#/$defs/SourceRef"
+              },
+              "minItems": 1,
+              "title": "Sources",
+              "type": "array"
+            },
+            "symbol_available": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Symbol Available"
+            },
+            "unrealized_usdt": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Unrealized Usdt"
+            }
+          },
+          "required": [
+            "bot",
+            "captured_at",
+            "available_at",
+            "feature_window_start",
+            "sources"
+          ],
+          "title": "State",
+          "type": "object"
+        },
+        "Verdict": {
+          "enum": [
+            "CONTINUE",
+            "ADJUST",
+            "END"
+          ],
+          "title": "Verdict",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "config_hash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Config Hash",
+          "type": "string"
+        },
+        "decided_at": {
+          "format": "date-time",
+          "title": "Decided At",
+          "type": "string"
+        },
+        "diagnostics": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Diagnostics",
+          "type": "array"
+        },
+        "feature_hash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Feature Hash",
+          "type": "string"
+        },
+        "incumbent": {
+          "$ref": "#/$defs/Action"
+        },
+        "limits": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RiskLimits"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "origin": {
+          "default": "uncontrolled",
+          "enum": [
+            "live",
+            "simulation",
+            "uncontrolled"
+          ],
+          "title": "Origin",
+          "type": "string"
+        },
+        "pre_state": {
+          "$ref": "#/$defs/State"
+        },
+        "scanner_contract_version": {
+          "default": "1.1",
+          "title": "Scanner Contract Version",
+          "type": "string"
+        },
+        "shadow": {
+          "$ref": "#/$defs/Action"
+        }
+      },
+      "required": [
+        "decided_at",
+        "pre_state",
+        "incumbent",
+        "shadow",
+        "config_hash",
+        "feature_hash"
+      ],
+      "title": "Decision",
+      "type": "object"
+    },
+    "execution": {
+      "$defs": {
+        "Action": {
+          "additionalProperties": false,
+          "properties": {
+            "lower": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Lower"
+            },
+            "upper": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Upper"
+            },
+            "verdict": {
+              "$ref": "#/$defs/Verdict"
+            }
+          },
+          "required": [
+            "verdict"
+          ],
+          "title": "Action",
+          "type": "object"
+        },
+        "BotIdentity": {
+          "additionalProperties": false,
+          "properties": {
+            "deployed_at": {
+              "format": "date-time",
+              "title": "Deployed At",
+              "type": "string"
+            },
+            "strategy_id": {
+              "pattern": "^[A-Za-z0-9_-]+$",
+              "title": "Strategy Id",
+              "type": "string"
+            },
+            "symbol": {
+              "pattern": "^[A-Z0-9]+USDT$",
+              "title": "Symbol",
+              "type": "string"
+            }
+          },
+          "required": [
+            "symbol",
+            "strategy_id",
+            "deployed_at"
+          ],
+          "title": "BotIdentity",
+          "type": "object"
+        },
+        "PricePoint": {
+          "additionalProperties": false,
+          "properties": {
+            "available_at": {
+              "format": "date-time",
+              "title": "Available At",
+              "type": "string"
+            },
+            "captured_at": {
+              "format": "date-time",
+              "title": "Captured At",
+              "type": "string"
+            },
+            "price": {
+              "exclusiveMinimum": 0,
+              "title": "Price",
+              "type": "number"
+            },
+            "source_path": {
+              "title": "Source Path",
+              "type": "string"
+            },
+            "source_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "title": "Source Sha256",
+              "type": "string"
+            }
+          },
+          "required": [
+            "captured_at",
+            "available_at",
+            "price",
+            "source_path",
+            "source_sha256"
+          ],
+          "title": "PricePoint",
+          "type": "object"
+        },
+        "SourceRef": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "minLength": 1,
+              "title": "Path",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "title": "Sha256",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "title": "SourceRef",
+          "type": "object"
+        },
+        "State": {
+          "additionalProperties": false,
+          "properties": {
+            "available_at": {
+              "format": "date-time",
+              "title": "Available At",
+              "type": "string"
+            },
+            "bot": {
+              "$ref": "#/$defs/BotIdentity"
+            },
+            "capital_usdt": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0.0,
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Capital Usdt"
+            },
+            "captured_at": {
+              "format": "date-time",
+              "title": "Captured At",
+              "type": "string"
+            },
+            "entry_price": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0.0,
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Entry Price"
+            },
+            "equity_usdt": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Equity Usdt"
+            },
+            "feature_window_start": {
+              "format": "date-time",
+              "title": "Feature Window Start",
+              "type": "string"
+            },
+            "features": {
+              "additionalProperties": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "title": "Features",
+              "type": "object"
+            },
+            "grid_lower": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Grid Lower"
+            },
+            "grid_upper": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Grid Upper"
+            },
+            "hmm_lineage": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Hmm Lineage"
+            },
+            "liquidation_buffer_pct": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Liquidation Buffer Pct"
+            },
+            "market_captured_at": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Market Captured At"
+            },
+            "market_price": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0.0,
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Market Price"
+            },
+            "num_grids": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0,
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Num Grids"
+            },
+            "orders": {
+              "anyOf": [
+                {
+                  "items": {
+                    "additionalProperties": true,
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Orders"
+            },
+            "peak_equity_usdt": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0.0,
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Peak Equity Usdt"
+            },
+            "position_quantity": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Position Quantity"
+            },
+            "price_path": {
+              "default": [],
+              "items": {
+                "$ref": "#/$defs/PricePoint"
+              },
+              "title": "Price Path",
+              "type": "array"
+            },
+            "sources": {
+              "items": {
+                "$ref": "#/$defs/SourceRef"
+              },
+              "minItems": 1,
+              "title": "Sources",
+              "type": "array"
+            },
+            "symbol_available": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Symbol Available"
+            },
+            "unrealized_usdt": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Unrealized Usdt"
+            }
+          },
+          "required": [
+            "bot",
+            "captured_at",
+            "available_at",
+            "feature_window_start",
+            "sources"
+          ],
+          "title": "State",
+          "type": "object"
+        },
+        "Verdict": {
+          "enum": [
+            "CONTINUE",
+            "ADJUST",
+            "END"
+          ],
+          "title": "Verdict",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "additional_investment_usdt": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Additional Investment Usdt"
+        },
+        "applied": {
+          "$ref": "#/$defs/Action"
+        },
+        "approval_event_id": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Approval Event Id",
+          "type": "string"
+        },
+        "post_state": {
+          "$ref": "#/$defs/State"
+        },
+        "pre_state": {
+          "$ref": "#/$defs/State"
+        },
+        "preserve_position": {
+          "title": "Preserve Position",
+          "type": "boolean"
+        },
+        "quantum": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Quantum"
+        },
+        "receipt": {
+          "$ref": "#/$defs/SourceRef"
+        },
+        "requested": {
+          "$ref": "#/$defs/Action"
+        },
+        "submitted_at": {
+          "format": "date-time",
+          "title": "Submitted At",
+          "type": "string"
+        },
+        "verified_at": {
+          "format": "date-time",
+          "title": "Verified At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "requested",
+        "applied",
+        "approval_event_id",
+        "pre_state",
+        "post_state",
+        "submitted_at",
+        "verified_at",
+        "receipt",
+        "quantum",
+        "preserve_position",
+        "additional_investment_usdt"
+      ],
+      "title": "Execution",
+      "type": "object"
+    },
+    "finalized": {
+      "$defs": {
+        "BotIdentity": {
+          "additionalProperties": false,
+          "properties": {
+            "deployed_at": {
+              "format": "date-time",
+              "title": "Deployed At",
+              "type": "string"
+            },
+            "strategy_id": {
+              "pattern": "^[A-Za-z0-9_-]+$",
+              "title": "Strategy Id",
+              "type": "string"
+            },
+            "symbol": {
+              "pattern": "^[A-Z0-9]+USDT$",
+              "title": "Symbol",
+              "type": "string"
+            }
+          },
+          "required": [
+            "symbol",
+            "strategy_id",
+            "deployed_at"
+          ],
+          "title": "BotIdentity",
+          "type": "object"
+        },
+        "CostEvent": {
+          "additionalProperties": false,
+          "properties": {
+            "amount_usdt": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Amount Usdt"
+            },
+            "conversion_source": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/SourceRef"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "exchange_id": {
+              "minLength": 1,
+              "title": "Exchange Id",
+              "type": "string"
+            },
+            "kind": {
+              "enum": [
+                "realized",
+                "commission",
+                "funding",
+                "other_trading",
+                "external_flow"
+              ],
+              "title": "Kind",
+              "type": "string"
+            },
+            "occurred_at": {
+              "format": "date-time",
+              "title": "Occurred At",
+              "type": "string"
+            },
+            "source": {
+              "$ref": "#/$defs/SourceRef"
+            },
+            "source_amount": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "title": "Source Amount"
+            },
+            "source_asset": {
+              "minLength": 1,
+              "title": "Source Asset",
+              "type": "string"
+            }
+          },
+          "required": [
+            "exchange_id",
+            "kind",
+            "occurred_at",
+            "source_asset",
+            "source_amount",
+            "amount_usdt",
+            "source"
+          ],
+          "title": "CostEvent",
+          "type": "object"
+        },
+        "Outcome": {
+          "additionalProperties": false,
+          "properties": {
+            "costs": {
+              "default": [],
+              "items": {
+                "$ref": "#/$defs/CostEvent"
+              },
+              "title": "Costs",
+              "type": "array"
+            },
+            "coverage_end": {
+              "format": "date-time",
+              "title": "Coverage End",
+              "type": "string"
+            },
+            "coverage_start": {
+              "format": "date-time",
+              "title": "Coverage Start",
+              "type": "string"
+            },
+            "event_completeness": {
+              "enum": [
+                "event_complete",
+                "history_complete",
+                "snapshot_only",
+                "unknown"
+              ],
+              "title": "Event Completeness",
+              "type": "string"
+            },
+            "intervention_coverage_complete": {
+              "title": "Intervention Coverage Complete",
+              "type": "boolean"
+            },
+            "interventions": {
+              "default": [],
+              "items": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "title": "Interventions",
+              "type": "array"
+            },
+            "realized_includes_commission": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Realized Includes Commission"
+            },
+            "realized_includes_funding": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Realized Includes Funding"
+            },
+            "slippage": {
+              "default": [],
+              "items": {
+                "$ref": "#/$defs/Slippage"
+              },
+              "title": "Slippage",
+              "type": "array"
+            },
+            "state": {
+              "$ref": "#/$defs/State"
+            }
+          },
+          "required": [
+            "state",
+            "coverage_start",
+            "coverage_end",
+            "event_completeness",
+            "intervention_coverage_complete",
+            "realized_includes_commission",
+            "realized_includes_funding"
+          ],
+          "title": "Outcome",
+          "type": "object"
+        },
+        "PricePoint": {
+          "additionalProperties": false,
+          "properties": {
+            "available_at": {
+              "format": "date-time",
+              "title": "Available At",
+              "type": "string"
+            },
+            "captured_at": {
+              "format": "date-time",
+              "title": "Captured At",
+              "type": "string"
+            },
+            "price": {
+              "exclusiveMinimum": 0,
+              "title": "Price",
+              "type": "number"
+            },
+            "source_path": {
+              "title": "Source Path",
+              "type": "string"
+            },
+            "source_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "title": "Source Sha256",
+              "type": "string"
+            }
+          },
+          "required": [
+            "captured_at",
+            "available_at",
+            "price",
+            "source_path",
+            "source_sha256"
+          ],
+          "title": "PricePoint",
+          "type": "object"
+        },
+        "Slippage": {
+          "additionalProperties": false,
+          "properties": {
+            "benchmark_at": {
+              "format": "date-time",
+              "title": "Benchmark At",
+              "type": "string"
+            },
+            "benchmark_price": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0.0,
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "title": "Benchmark Price"
+            },
+            "benchmark_source": {
+              "$ref": "#/$defs/SourceRef"
+            },
+            "estimated": {
+              "title": "Estimated",
+              "type": "boolean"
+            },
+            "fill_at": {
+              "format": "date-time",
+              "title": "Fill At",
+              "type": "string"
+            },
+            "fill_id": {
+              "minLength": 1,
+              "title": "Fill Id",
+              "type": "string"
+            },
+            "fill_price": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0.0,
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "title": "Fill Price"
+            },
+            "quantity": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0.0,
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "title": "Quantity"
+            },
+            "side": {
+              "enum": [
+                "BUY",
+                "SELL"
+              ],
+              "title": "Side",
+              "type": "string"
+            },
+            "source": {
+              "$ref": "#/$defs/SourceRef"
+            }
+          },
+          "required": [
+            "fill_id",
+            "fill_at",
+            "side",
+            "quantity",
+            "fill_price",
+            "benchmark_price",
+            "benchmark_at",
+            "estimated",
+            "source",
+            "benchmark_source"
+          ],
+          "title": "Slippage",
+          "type": "object"
+        },
+        "SourceRef": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "minLength": 1,
+              "title": "Path",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "title": "Sha256",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "title": "SourceRef",
+          "type": "object"
+        },
+        "State": {
+          "additionalProperties": false,
+          "properties": {
+            "available_at": {
+              "format": "date-time",
+              "title": "Available At",
+              "type": "string"
+            },
+            "bot": {
+              "$ref": "#/$defs/BotIdentity"
+            },
+            "capital_usdt": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0.0,
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Capital Usdt"
+            },
+            "captured_at": {
+              "format": "date-time",
+              "title": "Captured At",
+              "type": "string"
+            },
+            "entry_price": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0.0,
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Entry Price"
+            },
+            "equity_usdt": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Equity Usdt"
+            },
+            "feature_window_start": {
+              "format": "date-time",
+              "title": "Feature Window Start",
+              "type": "string"
+            },
+            "features": {
+              "additionalProperties": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "title": "Features",
+              "type": "object"
+            },
+            "grid_lower": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Grid Lower"
+            },
+            "grid_upper": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Grid Upper"
+            },
+            "hmm_lineage": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Hmm Lineage"
+            },
+            "liquidation_buffer_pct": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Liquidation Buffer Pct"
+            },
+            "market_captured_at": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Market Captured At"
+            },
+            "market_price": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0.0,
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Market Price"
+            },
+            "num_grids": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0,
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Num Grids"
+            },
+            "orders": {
+              "anyOf": [
+                {
+                  "items": {
+                    "additionalProperties": true,
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Orders"
+            },
+            "peak_equity_usdt": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0.0,
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Peak Equity Usdt"
+            },
+            "position_quantity": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Position Quantity"
+            },
+            "price_path": {
+              "default": [],
+              "items": {
+                "$ref": "#/$defs/PricePoint"
+              },
+              "title": "Price Path",
+              "type": "array"
+            },
+            "sources": {
+              "items": {
+                "$ref": "#/$defs/SourceRef"
+              },
+              "minItems": 1,
+              "title": "Sources",
+              "type": "array"
+            },
+            "symbol_available": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Symbol Available"
+            },
+            "unrealized_usdt": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Unrealized Usdt"
+            }
+          },
+          "required": [
+            "bot",
+            "captured_at",
+            "available_at",
+            "feature_window_start",
+            "sources"
+          ],
+          "title": "State",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "lifetime": {
+          "$ref": "#/$defs/Outcome"
+        },
+        "source": {
+          "$ref": "#/$defs/SourceRef"
+        },
+        "terminal_at": {
+          "format": "date-time",
+          "title": "Terminal At",
+          "type": "string"
+        },
+        "terminal_status": {
+          "enum": [
+            "ended",
+            "cancelled",
+            "expired"
+          ],
+          "title": "Terminal Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "terminal_at",
+        "terminal_status",
+        "source",
+        "lifetime"
+      ],
+      "title": "Finalized",
+      "type": "object"
+    },
+    "maintenance": {
+      "$defs": {
+        "BotIdentity": {
+          "additionalProperties": false,
+          "properties": {
+            "deployed_at": {
+              "format": "date-time",
+              "title": "Deployed At",
+              "type": "string"
+            },
+            "strategy_id": {
+              "pattern": "^[A-Za-z0-9_-]+$",
+              "title": "Strategy Id",
+              "type": "string"
+            },
+            "symbol": {
+              "pattern": "^[A-Z0-9]+USDT$",
+              "title": "Symbol",
+              "type": "string"
+            }
+          },
+          "required": [
+            "symbol",
+            "strategy_id",
+            "deployed_at"
+          ],
+          "title": "BotIdentity",
+          "type": "object"
+        },
+        "PricePoint": {
+          "additionalProperties": false,
+          "properties": {
+            "available_at": {
+              "format": "date-time",
+              "title": "Available At",
+              "type": "string"
+            },
+            "captured_at": {
+              "format": "date-time",
+              "title": "Captured At",
+              "type": "string"
+            },
+            "price": {
+              "exclusiveMinimum": 0,
+              "title": "Price",
+              "type": "number"
+            },
+            "source_path": {
+              "title": "Source Path",
+              "type": "string"
+            },
+            "source_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "title": "Source Sha256",
+              "type": "string"
+            }
+          },
+          "required": [
+            "captured_at",
+            "available_at",
+            "price",
+            "source_path",
+            "source_sha256"
+          ],
+          "title": "PricePoint",
+          "type": "object"
+        },
+        "SourceRef": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "minLength": 1,
+              "title": "Path",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "title": "Sha256",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "title": "SourceRef",
+          "type": "object"
+        },
+        "State": {
+          "additionalProperties": false,
+          "properties": {
+            "available_at": {
+              "format": "date-time",
+              "title": "Available At",
+              "type": "string"
+            },
+            "bot": {
+              "$ref": "#/$defs/BotIdentity"
+            },
+            "capital_usdt": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0.0,
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Capital Usdt"
+            },
+            "captured_at": {
+              "format": "date-time",
+              "title": "Captured At",
+              "type": "string"
+            },
+            "entry_price": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0.0,
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Entry Price"
+            },
+            "equity_usdt": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Equity Usdt"
+            },
+            "feature_window_start": {
+              "format": "date-time",
+              "title": "Feature Window Start",
+              "type": "string"
+            },
+            "features": {
+              "additionalProperties": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "title": "Features",
+              "type": "object"
+            },
+            "grid_lower": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Grid Lower"
+            },
+            "grid_upper": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Grid Upper"
+            },
+            "hmm_lineage": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Hmm Lineage"
+            },
+            "liquidation_buffer_pct": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Liquidation Buffer Pct"
+            },
+            "market_captured_at": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Market Captured At"
+            },
+            "market_price": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0.0,
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Market Price"
+            },
+            "num_grids": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0,
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Num Grids"
+            },
+            "orders": {
+              "anyOf": [
+                {
+                  "items": {
+                    "additionalProperties": true,
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Orders"
+            },
+            "peak_equity_usdt": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0.0,
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Peak Equity Usdt"
+            },
+            "position_quantity": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Position Quantity"
+            },
+            "price_path": {
+              "default": [],
+              "items": {
+                "$ref": "#/$defs/PricePoint"
+              },
+              "title": "Price Path",
+              "type": "array"
+            },
+            "sources": {
+              "items": {
+                "$ref": "#/$defs/SourceRef"
+              },
+              "minItems": 1,
+              "title": "Sources",
+              "type": "array"
+            },
+            "symbol_available": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Symbol Available"
+            },
+            "unrealized_usdt": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Unrealized Usdt"
+            }
+          },
+          "required": [
+            "bot",
+            "captured_at",
+            "available_at",
+            "feature_window_start",
+            "sources"
+          ],
+          "title": "State",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "coverage_end": {
+          "format": "date-time",
+          "title": "Coverage End",
+          "type": "string"
+        },
+        "coverage_start": {
+          "format": "date-time",
+          "title": "Coverage Start",
+          "type": "string"
+        },
+        "intervention_coverage_complete": {
+          "title": "Intervention Coverage Complete",
+          "type": "boolean"
+        },
+        "source": {
+          "$ref": "#/$defs/SourceRef"
+        },
+        "state": {
+          "$ref": "#/$defs/State"
+        }
+      },
+      "required": [
+        "state",
+        "coverage_start",
+        "coverage_end",
+        "intervention_coverage_complete",
+        "source"
+      ],
+      "title": "Maintenance",
+      "type": "object"
+    },
+    "outcome": {
+      "$defs": {
+        "BotIdentity": {
+          "additionalProperties": false,
+          "properties": {
+            "deployed_at": {
+              "format": "date-time",
+              "title": "Deployed At",
+              "type": "string"
+            },
+            "strategy_id": {
+              "pattern": "^[A-Za-z0-9_-]+$",
+              "title": "Strategy Id",
+              "type": "string"
+            },
+            "symbol": {
+              "pattern": "^[A-Z0-9]+USDT$",
+              "title": "Symbol",
+              "type": "string"
+            }
+          },
+          "required": [
+            "symbol",
+            "strategy_id",
+            "deployed_at"
+          ],
+          "title": "BotIdentity",
+          "type": "object"
+        },
+        "CostEvent": {
+          "additionalProperties": false,
+          "properties": {
+            "amount_usdt": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Amount Usdt"
+            },
+            "conversion_source": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/SourceRef"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "exchange_id": {
+              "minLength": 1,
+              "title": "Exchange Id",
+              "type": "string"
+            },
+            "kind": {
+              "enum": [
+                "realized",
+                "commission",
+                "funding",
+                "other_trading",
+                "external_flow"
+              ],
+              "title": "Kind",
+              "type": "string"
+            },
+            "occurred_at": {
+              "format": "date-time",
+              "title": "Occurred At",
+              "type": "string"
+            },
+            "source": {
+              "$ref": "#/$defs/SourceRef"
+            },
+            "source_amount": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "title": "Source Amount"
+            },
+            "source_asset": {
+              "minLength": 1,
+              "title": "Source Asset",
+              "type": "string"
+            }
+          },
+          "required": [
+            "exchange_id",
+            "kind",
+            "occurred_at",
+            "source_asset",
+            "source_amount",
+            "amount_usdt",
+            "source"
+          ],
+          "title": "CostEvent",
+          "type": "object"
+        },
+        "PricePoint": {
+          "additionalProperties": false,
+          "properties": {
+            "available_at": {
+              "format": "date-time",
+              "title": "Available At",
+              "type": "string"
+            },
+            "captured_at": {
+              "format": "date-time",
+              "title": "Captured At",
+              "type": "string"
+            },
+            "price": {
+              "exclusiveMinimum": 0,
+              "title": "Price",
+              "type": "number"
+            },
+            "source_path": {
+              "title": "Source Path",
+              "type": "string"
+            },
+            "source_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "title": "Source Sha256",
+              "type": "string"
+            }
+          },
+          "required": [
+            "captured_at",
+            "available_at",
+            "price",
+            "source_path",
+            "source_sha256"
+          ],
+          "title": "PricePoint",
+          "type": "object"
+        },
+        "Slippage": {
+          "additionalProperties": false,
+          "properties": {
+            "benchmark_at": {
+              "format": "date-time",
+              "title": "Benchmark At",
+              "type": "string"
+            },
+            "benchmark_price": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0.0,
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "title": "Benchmark Price"
+            },
+            "benchmark_source": {
+              "$ref": "#/$defs/SourceRef"
+            },
+            "estimated": {
+              "title": "Estimated",
+              "type": "boolean"
+            },
+            "fill_at": {
+              "format": "date-time",
+              "title": "Fill At",
+              "type": "string"
+            },
+            "fill_id": {
+              "minLength": 1,
+              "title": "Fill Id",
+              "type": "string"
+            },
+            "fill_price": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0.0,
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "title": "Fill Price"
+            },
+            "quantity": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0.0,
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "title": "Quantity"
+            },
+            "side": {
+              "enum": [
+                "BUY",
+                "SELL"
+              ],
+              "title": "Side",
+              "type": "string"
+            },
+            "source": {
+              "$ref": "#/$defs/SourceRef"
+            }
+          },
+          "required": [
+            "fill_id",
+            "fill_at",
+            "side",
+            "quantity",
+            "fill_price",
+            "benchmark_price",
+            "benchmark_at",
+            "estimated",
+            "source",
+            "benchmark_source"
+          ],
+          "title": "Slippage",
+          "type": "object"
+        },
+        "SourceRef": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "minLength": 1,
+              "title": "Path",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "title": "Sha256",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "title": "SourceRef",
+          "type": "object"
+        },
+        "State": {
+          "additionalProperties": false,
+          "properties": {
+            "available_at": {
+              "format": "date-time",
+              "title": "Available At",
+              "type": "string"
+            },
+            "bot": {
+              "$ref": "#/$defs/BotIdentity"
+            },
+            "capital_usdt": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0.0,
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Capital Usdt"
+            },
+            "captured_at": {
+              "format": "date-time",
+              "title": "Captured At",
+              "type": "string"
+            },
+            "entry_price": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0.0,
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Entry Price"
+            },
+            "equity_usdt": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Equity Usdt"
+            },
+            "feature_window_start": {
+              "format": "date-time",
+              "title": "Feature Window Start",
+              "type": "string"
+            },
+            "features": {
+              "additionalProperties": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "title": "Features",
+              "type": "object"
+            },
+            "grid_lower": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Grid Lower"
+            },
+            "grid_upper": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Grid Upper"
+            },
+            "hmm_lineage": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Hmm Lineage"
+            },
+            "liquidation_buffer_pct": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Liquidation Buffer Pct"
+            },
+            "market_captured_at": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Market Captured At"
+            },
+            "market_price": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0.0,
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Market Price"
+            },
+            "num_grids": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0,
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Num Grids"
+            },
+            "orders": {
+              "anyOf": [
+                {
+                  "items": {
+                    "additionalProperties": true,
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Orders"
+            },
+            "peak_equity_usdt": {
+              "anyOf": [
+                {
+                  "exclusiveMinimum": 0.0,
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Peak Equity Usdt"
+            },
+            "position_quantity": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Position Quantity"
+            },
+            "price_path": {
+              "default": [],
+              "items": {
+                "$ref": "#/$defs/PricePoint"
+              },
+              "title": "Price Path",
+              "type": "array"
+            },
+            "sources": {
+              "items": {
+                "$ref": "#/$defs/SourceRef"
+              },
+              "minItems": 1,
+              "title": "Sources",
+              "type": "array"
+            },
+            "symbol_available": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Symbol Available"
+            },
+            "unrealized_usdt": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Unrealized Usdt"
+            }
+          },
+          "required": [
+            "bot",
+            "captured_at",
+            "available_at",
+            "feature_window_start",
+            "sources"
+          ],
+          "title": "State",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "costs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/CostEvent"
+          },
+          "title": "Costs",
+          "type": "array"
+        },
+        "coverage_end": {
+          "format": "date-time",
+          "title": "Coverage End",
+          "type": "string"
+        },
+        "coverage_start": {
+          "format": "date-time",
+          "title": "Coverage Start",
+          "type": "string"
+        },
+        "event_completeness": {
+          "enum": [
+            "event_complete",
+            "history_complete",
+            "snapshot_only",
+            "unknown"
+          ],
+          "title": "Event Completeness",
+          "type": "string"
+        },
+        "intervention_coverage_complete": {
+          "title": "Intervention Coverage Complete",
+          "type": "boolean"
+        },
+        "interventions": {
+          "default": [],
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "title": "Interventions",
+          "type": "array"
+        },
+        "realized_includes_commission": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Realized Includes Commission"
+        },
+        "realized_includes_funding": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Realized Includes Funding"
+        },
+        "slippage": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Slippage"
+          },
+          "title": "Slippage",
+          "type": "array"
+        },
+        "state": {
+          "$ref": "#/$defs/State"
+        }
+      },
+      "required": [
+        "state",
+        "coverage_start",
+        "coverage_end",
+        "event_completeness",
+        "intervention_coverage_complete",
+        "realized_includes_commission",
+        "realized_includes_funding"
+      ],
+      "title": "Outcome",
+      "type": "object"
+    }
+  },
+  "schema_version": "neutralgrid_state_action_reward_v1"
+}

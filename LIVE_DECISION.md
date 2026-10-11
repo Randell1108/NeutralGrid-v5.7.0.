@@ -1,6 +1,6 @@
 # LIVE_DECISION
 
-Status: Contract v1.2 implemented; PnL forecaster remains shadow-only and unpromoted
+Status: Contract v1.1 implemented; PnL forecaster and state/action/reward challenger remain shadow-only and unpromoted
 Date: 2026-08-10
 Scope: Recurring tactical scanner that evaluates user-declared live grid bots every X minutes against current Binance market state and emits per-bot CONTINUE / ADJUST / END recommendations with reasons. Advisory only.
 
@@ -42,7 +42,7 @@ Inactive symbols are not scanned. Move canceled or expired symbol YAMLs out of `
 
 Shared contracts adopted from v2:
 
-- `DECISION_CONTRACT_VERSION` constant (must be added to `core/constants.py`).
+- `DECISION_CONTRACT_VERSION` is implemented in `core/constants.py`, currently `"1.1"`.
 - Fail-closed semantics: missing inputs surface `data_missing:*` reasons, never silently coerce to `CONTINUE`.
 - `meta_prob` is secondary, not authoritative (current MetaLabeler trains on scan/enrichment-time features, not live-state telemetry).
 - Use the conservative static `min_range_prob = 0.45` rather than the entropy-adaptive scan-time threshold.
@@ -77,7 +77,7 @@ New, unless flagged.
 | `scripts/train_live_pnl_forecaster.py` | Offline shadow trainer with required horizon/tolerance and baseline/promotion gates. |
 | `scripts/run_live_telemetry_controller.py` | Joins exact private-cycle and diff-depth run identities into scanner input. |
 | **edit** `src/neutralgrid/models/alerts.py` | Add `DiscordWebhookHandler(AlertHandler)`. |
-| **edit** `src/neutralgrid/core/constants.py` | Add `DECISION_CONTRACT_VERSION = "1.0"`. |
+| `src/neutralgrid/core/constants.py` | Owns `DECISION_CONTRACT_VERSION = "1.1"`; the original 1.0 proposal is historical. |
 
 ### Reused, read-only
 

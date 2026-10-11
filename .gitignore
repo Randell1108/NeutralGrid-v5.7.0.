@@ -97,6 +97,10 @@ outputs/
 pytest-of-cris_/
 tests/unit/utility_calibrator_tmp/
 
+# Generated State-Action-Reward test and research workspaces
+/.sar_*/
+/.tsar_*/
+
 # Generated audit evidence, backups, market captures, and bundled tool dependencies
 reports/
 
