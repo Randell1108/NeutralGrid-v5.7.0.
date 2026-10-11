@@ -2,6 +2,37 @@
 
 ## [unreleased] - Neutral Grid v5.7.0
 
+### DRAWERFIX-20261005 - Match the exact Working drawer row
+
+**Date:** 2026-10-05 (America/Lima).
+
+Anchor the drawer action-row lookup to the beginning of the displayed symbol.
+The prior substring lookup matched both `SUSDT Perp` and `KASUSDT Perp` when
+capturing SUSDT, so a proven 16- or 17-bot roster stopped after 12 drawers.
+The complete-roster, deployment-time, tooltip, and read-only drawer checks remain
+in force. Failed captures remain blocked and are not replayed.
+
+**Files modified:**
+- `scripts/capture_recurring_drawers.mjs`
+- `tests/capture_recurring_drawers.test.mjs`
+- `CHANGELOG.md`
+
+**Decision rationale:** Exact symbol identity is required before opening a
+drawer. Prefix anchoring removes the observed substring collision without
+accepting a partial roster or an ambiguous action control.
+
+**AFML / Hudson & Thames citation:** No statistical method or model change;
+this is a source-identity guard for observational telemetry.
+
+**Backward compatibility:** No breaking changes to bundle format, scanner
+inputs, cadence, age limits, or trading behavior.
+
+**Verification:** On the authenticated 16-bot page the previous lookup matched
+two rows, while the exact SUSDT and KASUSDT lookups each matched one. All 31
+drawer-helper tests passed, including a new symbol-collision regression test;
+`node --check` and `git diff --check` passed. A complete live capture remains
+pending the next scheduled attempt.
+
 ### META-REFIT-20261004 - Promote and activate the fresh-pool meta-labeler on the current HMM
 
 **Date:** 2026-10-04 (America/Lima).

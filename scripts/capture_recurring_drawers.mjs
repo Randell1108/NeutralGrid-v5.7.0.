@@ -224,7 +224,7 @@ async function waitForVisible(locator, timeoutMs) {
 
 async function openDrawer(tab, symbol) {
   const row = tab.playwright.getByRole('table', {name:'Virtual Table', exact:true})
-    .getByRole('row').filter({hasText:`${symbol} Perp`});
+    .getByRole('row').filter({hasText:new RegExp(`^\\s*${symbol}\\s+Perp`)});
   if (await row.count() !== 1) throw new Error('active row disappeared or duplicated');
   const buttons = row.getByRole('cell').last().getByRole('button');
   const total = await buttons.count();

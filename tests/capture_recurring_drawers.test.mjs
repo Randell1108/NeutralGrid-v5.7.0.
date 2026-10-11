@@ -220,7 +220,7 @@ for (const options of [{changedRoster:true},{invalidDrawer:true}]) {
 }
 
 function virtualTab(options={}) {
-  const symbols=['BTCUSDT','ETHUSDT','SOLUSDT'];
+  const symbols=options.symbols || ['BTCUSDT','ETHUSDT','SOLUSDT'];
   const rows=symbols.map((symbol,index)=>({symbol,
     created:`2026-09-25 09:2${index}:39`,status:'Working'}));
   const events=[];
@@ -257,9 +257,10 @@ function virtualTab(options={}) {
     getByRole:()=>({
       evaluateAll:async()=>visible(),
       filter:({hasText})=>({
-        count:async()=>visible().filter(row=>hasText.includes(`${row.symbol} Perp`)).length,
+        count:async()=>visible().filter(row=>hasText.test(`${row.symbol} PerpNeutral 10x`)).length,
         getByRole:()=>({last:()=>({getByRole:()=>({count:async()=>4}),
-          locator:()=>{details.symbol=hasText.split(' ')[0];return details;}})}),
+          locator:()=>{details.symbol=visible().find(row=>
+            hasText.test(`${row.symbol} PerpNeutral 10x`))?.symbol;return details;}})}),
       }),
     }),
   };
@@ -280,7 +281,7 @@ function virtualTab(options={}) {
         if(role==='dialog')return drawer;
         if(role==='tooltip')return {waitFor:async()=>{events.push('tooltip');}};
         if(role==='tab')return {
-          allTextContents:async()=>[`UM Grid (${options.incomplete?4:3})`],
+          allTextContents:async()=>[`UM Grid (${symbols.length+(options.incomplete?1:0)})`],
           evaluate:async()=> 'true',
           click:async()=>{events.push('focus-grid');},
         };
@@ -302,6 +303,15 @@ test('virtual table captures every Working bot from a complete overlapping sweep
   assert.deepEqual(events.filter(e=>e.startsWith('open:')),
     ['open:BTCUSDT','open:ETHUSDT','open:SOLUSDT']);
   assert.ok(bundle.captures.every(c=>c.raw_text_path.startsWith(path.join(root,'Live')+path.sep)));
+});
+
+test('SUSDT drawer row does not collide with KASUSDT',async t=>{
+  const root=await temporaryRoot(t);
+  const {tab,events}=virtualTab({symbols:['KASUSDT','SUSDT','SOLUSDT']});
+  const result=await captureDrawers(tab,{workspaceRoot:root});
+  assert.deepEqual(result.symbols,['KASUSDT','SUSDT','SOLUSDT']);
+  assert.deepEqual(events.filter(e=>e.startsWith('open:')),
+    ['open:KASUSDT','open:SUSDT','open:SOLUSDT']);
 });
 
 for (const options of [{incomplete:true},{stuckScroll:true},{changedAfterDrawer:true}]) {
