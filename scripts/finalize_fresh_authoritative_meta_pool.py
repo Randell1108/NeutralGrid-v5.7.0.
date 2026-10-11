@@ -89,7 +89,7 @@ def finalize_fresh_pool(
     if "candidate_id" not in frame.columns:
         raise ValueError("Fresh full-pool source lacks candidate_id")
     candidate_id = frame["candidate_id"].astype("string").str.strip()
-    if bool(candidate_id.eq("").any()) or bool(candidate_id.duplicated(keep=False).any()):
+    if bool(candidate_id.isna().any()) or bool(candidate_id.eq("").any()) or bool(candidate_id.duplicated(keep=False).any()):
         raise ValueError("Fresh full-pool source has blank or duplicate candidate_id values")
 
     scan_time = _parse_scan_time(candidate_id)

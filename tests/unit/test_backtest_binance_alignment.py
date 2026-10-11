@@ -272,7 +272,7 @@ def test_deployment_ready_output_time_is_backtest_start(tmp_path) -> None:
     row = loaded.iloc[0].to_dict()
 
     assert row["scan_file"] == csv_path.name
-    assert row["candidate_available_source"] == "deployment_ready_csv_mtime"
+    assert row["candidate_available_source"] == "legacy_mtime_unverified"
     assert resolve_backtest_start_timestamp(row) == datetime(
         2026, 5, 26, 14, 11, 7, tzinfo=timezone.utc
     )

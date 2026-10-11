@@ -379,22 +379,17 @@ async def main() -> None:
 
     logger.info("Loading scanner CSVs from %s ...", results_dir)
 
+    all_candidates = load_all_scanner_csvs(results_dir)
+    source_audit = all_candidates.attrs.get("source_audit", {})
     if args.latest_only:
-        csvs = sorted(
-            results_dir.glob("deployment_ready_*.csv"),
-            key=lambda p: p.stat().st_mtime,
-        )
-        if not csvs:
-            logger.error("No deployment_ready CSVs found")
-            sys.exit(1)
-        # Load only the latest file
-        latest = csvs[-1]
-        logger.info("Latest-only mode: using %s", latest.name)
-        all_candidates = load_all_scanner_csvs(
-            results_dir, filename_pattern=latest.name
-        )
-    else:
-        all_candidates = load_all_scanner_csvs(results_dir)
+        # Legacy file ordering is operational only, not proof of capture time.
+        latest = all_candidates.sort_values(
+            ["candidate_available_ts_utc", "scan_file"], kind="stable"
+        ).iloc[-1]["scan_file"]
+        all_candidates = cast(pd.DataFrame, all_candidates.loc[
+            all_candidates["scan_file"] == latest
+        ].copy())
+        logger.info("Latest scanner CSV by legacy file time: %s", latest)
 
     logger.info("Total candidates loaded: %d", len(all_candidates))
 
@@ -843,6 +838,7 @@ async def main() -> None:
     logger.info("Training data saved to: %s (%d rows)", training_path, len(training_df))
 
     run_manifest = {
+        "candidate_source_audit": source_audit,
         "generation_mode": "fresh_full_pool" if args.fastwin_full_pool else "fresh_candidate_backtest",
         "full_pool": bool(args.fastwin_full_pool),
         "realism_profile": args.realism_profile,

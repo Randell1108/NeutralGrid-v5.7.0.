@@ -2,6 +2,155 @@
 
 ## [unreleased] - Neutral Grid v5.7.0
 
+### META-REFIT-20261004 - Promote and activate the fresh-pool meta-labeler on the current HMM
+
+**Date:** 2026-10-04 (America/Lima).
+
+Generate and validate 2,329 new FASTWIN backtests, refresh HMM-dependent inputs
+against `rolling_180d_20261003_024008`, and admit the finalized `fresh_full_pool`
+without historical-replay, live-outcome, or feature-imputation exemptions. Train
+the existing 20-feature logistic/HGB ensemble on all admitted rows (symbol cap
+disabled), then activate artifact `20261004_202104` after the normal gates and
+artifact/legacy/runtime-alias prediction checks pass. Preserve the prior artifact
+under `data/meta_refit_20261004/champion_before` for rollback.
+
+**Files modified or created:**
+- `models/meta_labeler.pkl`
+- `models/meta_labeler/model.joblib`
+- `models/meta_labeler/scaler.joblib`
+- `models/meta_labeler/metadata.json`
+- `models/meta_labeler_promotion_decision.json`
+- `models/meta_labeler_verification.json`
+- `data/trial_log.json`
+- `data/meta_refit_20261004/finalized_fresh_pool/training_data_20261004.csv`
+- `data/meta_refit_20261004/finalized_fresh_pool/authoritative_pool_manifest.json`
+- `data/meta_refit_20261004/fit_metrics.json`
+- `data/meta_refit_20261004/code_audit.json`
+- `data/meta_refit_20261004/pin_validation.json`
+- `CHANGELOG.md`
+
+**Decision rationale:** The pool has 1,285 positives and 1,044 negatives across
+247 symbols. OOF AUC is 0.6722117864543734, its row-bootstrap 95% interval is
+[0.6510729567516758, 0.6959407477789583], and OOF ECE is 0.06178690599189118.
+All absolute promotion criteria pass. The existing comparator uses absolute
+gates because the prior champion has different HMM lineage and no recorded
+promotion-evaluation contract; this is not evidence of paired superiority.
+All five promotion folds fell back to unpurged training. Sigmoid OOS calibration
+was accepted; its fit ECE is 0.0047403474000321, not an independent holdout score.
+
+**AFML / Hudson & Thames citation:** No new statistical method or architecture.
+Retain the existing event-interval purging and concurrency-weighting implementation.
+The converter defaults event ends to six hours despite the full-pool CLI requesting
+seven; this run's prepared `t1` values conservatively cover all 420 verified closed
+one-minute candles. This is a data preparation correction, not a production-code
+change. Current-HMM replay is retrospective and does not establish prospective
+end-to-end performance.
+
+**Backward compatibility:** No feature-schema, estimator, promotion-threshold,
+live-outcome-default, workbook, or HMM-manifest changes. The normal production
+model path now resolves the new compatible artifact.
+
+**Verification:** 121 targeted tests passed, followed by 57 post-activation
+contract/compatibility/inference tests. All 2,329 rows passed lineage and finite
+feature checks; the 19 independent predictors and labels were preserved through
+HMM replay. Artifact/pickle predictions agree on all rows, 100 single-row checks
+agree with batch inference, and runtime aliases produce identical probabilities.
+
+### CAPTURE-REMOVE-20261004 - Remove capture references and refit the 10,735-row diagnostic cohort
+
+**Date:** 2026-10-04 (America/Lima).
+
+Remove the deployment capture publisher/reader and the candidate capture path,
+payload-hash and manifest-hash fields from the active pipeline. Restore plain
+scanner CSV publication/loading. Keep source-conflict quarantine, exact-copy
+deduplication and finalized-pool CSV hash, row-count and identity checks. Refit
+the exact 10,735-row earlier chronological partition with the unchanged 20-feature
+meta-labeler and active HMM lineage. Save candidate `20261004_163514` separately;
+do not activate it or change production pointers.
+
+**Files modified or removed:**
+- `src/neutralgrid/data/candidate_capture.py` (removed)
+- `src/neutralgrid/backtest/candidate_pipeline.py`
+- `src/neutralgrid/training/meta_pool_contract.py`
+- `scripts/finalize_fresh_authoritative_meta_pool.py`
+- `run_full_pipeline.py`
+- `backtest_candidates.py`
+- `tests/unit/test_candidate_capture.py` (retired with the removed implementation)
+- `tests/unit/test_scanner_csv_admission.py` (replacement regression coverage)
+- `tests/unit/test_meta_pool_source_contract.py`
+- `tests/unit/test_candidate_pipeline_bypass.py`
+- `tests/unit/test_backtest_binance_alignment.py`
+- `reports/meta_10735_capture_removal_20261004/prepare_subset.py`
+- `reports/meta_10735_capture_removal_20261004/run_research_refit.py`
+- `reports/meta_10735_capture_removal_20261004/validate_and_report.py`
+- `reports/meta_10735_capture_removal_20261004/REPORT.txt`
+- `CHANGELOG.md`
+
+**Decision rationale:** The user explicitly selected "Remove capture
+implementation; diagnostic refit". Retain the earlier historical-versus-fresh
+restriction and do not represent replay as fresh evidence. Statistical gate
+passes (OOF AUC 0.702039; ECE 0.016214), but all five gate folds lost temporal
+purging. Reused later-cohort diagnostics report AUC/ECE 0.625848/0.066657 on
+2,754 rows and 0.695135/0.316615 on the overlapping latest 99 rows. These are
+previously examined simulated outcomes, not untouched prospective validation.
+
+**AFML / Hudson & Thames citation:** No new statistical method or external
+performance claim. Existing leakage and lineage checks and promotion thresholds
+are preserved; limitations are supported by local executable checks and logs.
+
+**Backward compatibility:** Capture sidecars are no longer produced or required;
+archived sidecars remain untouched. The removed Python capture module and loader
+keyword `require_capture_manifest` are no longer available. Availability uses the
+legacy file-time scheduling anchor, labelled `legacy_mtime_unverified`; file time
+is not certified as contemporaneous evidence. The three retired reference fields
+are dropped when reading older CSVs. Historical replay still requires explicit
+diagnostic opt-in. Production HMM, meta-labeler and workbook remain unchanged.
+
+**Verification:** Focused suite: 89 passed, 1 skipped. Full suite: 2,368 passed,
+2 skipped. Pyright over source and changed entry scripts: 0 errors, 0 warnings.
+All requested IDs, labels and active feature values match the reviewed cohort.
+Artifact/legacy loading and single/batch predictions agree. Original source
+snapshots, source diffs, all fit metrics, reused evaluation predictions and
+cleanup receipts are retained in the report directory.
+
+### META-RECOVERY-20261003 - Recover recorded costs and audit target admission
+
+**Date:** 2026-10-03.
+
+Recover 82 canonical Meta Features costs from exact candidate-ID/symbol archived
+observations, plus 79 corresponding Last Features costs and their provenance.
+Finite-complete meta rows increase from 304 to 385 of 656. Preserve earlier scan
+timestamps in per-cell evidence; leave 269 costs, four quarantined open-interest
+values and 20 nonfinite entry-time OU results unresolved. Add seven workbook
+audit entries. No production model, training code or promotion gate changed.
+
+**Files modified or created:**
+- `data/new_expired_bots.xlsx`
+- `reports/meta_recovery_review_20261003/REPORT.txt`
+- `reports/meta_recovery_review_20261003/applied_cell_provenance.csv`
+- `reports/meta_recovery_review_20261003/remaining_meta_gaps.csv`
+- `reports/meta_recovery_review_20261003/workbook_validation.json`
+- `reports/meta_recovery_review_20261003/publication.json`
+- `reports/meta_recovery_review_20261003/model_comparison.json`
+- `reports/meta_recovery_review_20261003/target_validation.json`
+- `reports/meta_recovery_review_20261003/ev_ablation.json`
+
+**Decision rationale:** Restore recorded values without converting them into
+claims of entry-time quotes or historical capture availability. The configured
+live route has 71 complete predictor rows but no path-based target evidence.
+Keep unknown outcomes distinct from verified negatives; proposed schema/gate
+changes are documented for review and are not implemented. Retrospective metric
+comparisons retain their existing evaluation limitations.
+
+**Backward compatibility:** No breaking changes. Workbook completeness does not
+waive linkage, FASTWIN-label, date, calibration or production-admission gates.
+
+**Verification:** Checked 93,539 original workbook cells; 17 untouched package
+members remain byte-identical. Recomputed 4,421 saved backtest path labels with
+zero mismatches. Four production-function controls reproduce live/backtest NaN
+handling. Two isolated fits reproduce the latest metrics and isolate the EV
+change. Production sources, model/manifest and trial-log hashes remain unchanged.
+
 ### RETRAIN-20261002 - Retrain HMM and evaluate downstream candidates
 
 **Date:** 2026-10-02 (local run; artifact timestamps use UTC).

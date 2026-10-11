@@ -2,9 +2,14 @@
 
 from __future__ import annotations
 
+import hashlib
+import io
 import json
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
+
+import pandas as pd
+
 
 
 POOL_CONTRACT_VERSION = "active_hmm_authoritative_meta_pool_v1"
@@ -62,4 +67,33 @@ def validate_retrain_pool_source(
         active_hmm.get("artifact_version", "")
     ).strip():
         raise ValueError("Pool manifest lacks the active_hmm artifact version")
+    if generation_mode == FRESH_FULL_POOL_GENERATION_MODE:
+        _validate_fresh_pool_bytes(source_dir, manifest)
     return manifest
+
+
+def _validate_fresh_pool_bytes(source_dir: Path, manifest: dict[str, Any]) -> None:
+    """Bind admission to the declared bytes and reject additional builder inputs."""
+    name = manifest.get("pool_file")
+    if not isinstance(name, str) or Path(name).name != name or not name.startswith("training_data_") or not name.endswith(".csv"):
+        raise ValueError("Fresh pool manifest has an invalid pool_file")
+    pool_path = source_dir / name
+    inputs = {p.resolve() for pattern in (
+        "training_data_*.csv", "training_rows_*.csv", "backtest_training_*.csv", "backtest_results_*.csv"
+    ) for p in source_dir.glob(pattern)}
+    if inputs != {pool_path.resolve()}:
+        raise ValueError("Fresh pool directory must contain only its declared training CSV")
+    try:
+        raw = pool_path.read_bytes()
+        if hashlib.sha256(raw).hexdigest() != manifest.get("pool_sha256"):
+            raise ValueError("Fresh pool CSV hash differs from its finalized manifest")
+        frame = pd.read_csv(io.BytesIO(raw), low_memory=False)
+    except (OSError, UnicodeError, ValueError) as exc:
+        raise ValueError(f"Cannot validate finalized fresh pool: {exc}") from exc
+    if frame.empty or len(frame) != manifest.get("eligible_rows"):
+        raise ValueError("Fresh pool row count differs from its finalized manifest")
+    if "candidate_id" not in frame:
+        raise ValueError("Fresh pool has missing candidate identities")
+    identities = cast(pd.Series, frame["candidate_id"])
+    if bool(identities.isna().any()) or bool(identities.duplicated().any()):
+        raise ValueError("Fresh pool has missing or duplicate candidate identities")

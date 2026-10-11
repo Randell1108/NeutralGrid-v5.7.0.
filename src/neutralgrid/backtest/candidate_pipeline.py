@@ -14,6 +14,8 @@ AFML safeguards:
 from __future__ import annotations
 
 import logging
+import hashlib
+import json
 import re
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -241,10 +243,12 @@ def load_all_scanner_csvs(
 
     frames: List[pd.DataFrame] = []
     n_skipped_features = 0
+    rejected_files: list[dict[str, str]] = []
     for path in csv_files:
         try:
             df = pd.read_csv(path)
         except Exception as exc:
+            rejected_files.append({"file": str(path), "reason": str(exc)})
             logger.warning("Skipping %s: %s", path.name, exc)
             continue
 
@@ -277,26 +281,58 @@ def load_all_scanner_csvs(
         # Extract file-level timestamp for candidate_id synthesis
         m = _FILENAME_TS_RE.search(path.stem)
         file_ts = m.group(1) if m else path.stem
-        output_ts_utc = datetime.fromtimestamp(path.stat().st_mtime, tz=timezone.utc)
-
         df["scan_file"] = path.name
-        df["candidate_available_ts_utc"] = output_ts_utc.isoformat()
-        df["candidate_available_source"] = "deployment_ready_csv_mtime"
+        # Retain the legacy scheduling anchor without claiming contemporaneous
+        # availability. Capture sidecars and their reference fields are retired.
+        df = df.drop(columns=[c for c in df.columns if c.startswith("candidate_capture_")])
+        df["candidate_available_ts_utc"] = datetime.fromtimestamp(
+            path.stat().st_mtime, tz=timezone.utc
+        ).isoformat()
+        df["candidate_available_source"] = "legacy_mtime_unverified"
 
         # Synthesise candidate_id if missing
         if "candidate_id" not in df.columns or bool(df["candidate_id"].isna().all()):
             df["candidate_id"] = df["symbol"].astype(str) + "_" + file_ts
 
+        payload_cols = [c for c in df.columns if c not in {
+            "candidate_available_ts_utc", "candidate_available_source", "scan_file"
+        }]
+        payload_frame = cast(pd.DataFrame, df.loc[:, payload_cols])
+        df["_source_row_hash"] = [hashlib.sha256(json.dumps(
+            {str(k): None if pd.isna(v) else str(v) for k, v in row.items()},
+            sort_keys=True, ensure_ascii=False,
+        ).encode("utf-8")).hexdigest() for row in payload_frame.to_dict("records")]
+
         frames.append(df)
 
     if not frames:
         raise ValueError(
-            "All scanner CSVs were empty or unreadable"
+            "No eligible scanner CSVs: empty, unreadable or missing required features"
             + (f" ({n_skipped_features} skipped: missing meta-labeler features)"
                if n_skipped_features else "")
         )
 
     combined = pd.concat(frames, ignore_index=True)
+    input_rows = len(combined)
+    conflicts = cast(pd.Series, combined.groupby("candidate_id")["_source_row_hash"].nunique())
+    bad_ids = list(cast(pd.Series, conflicts.loc[conflicts > 1]).index)
+    if bad_ids:
+        logger.error("Quarantining %d candidate IDs with conflicting source payloads", len(bad_ids))
+        combined = combined.loc[~cast(pd.Series, combined["candidate_id"]).isin(bad_ids)].copy()
+    # Exact copies retain the earliest legacy scheduling anchor. Conflicts above
+    # are never resolved by filename order, score, outcome or file mtime.
+    combined = combined.sort_values("candidate_available_ts_utc", kind="stable").drop_duplicates("candidate_id", keep="first")
+    combined = combined.drop(columns=["_source_row_hash"]).reset_index(drop=True)
+    if combined.empty:
+        raise ValueError("No eligible candidates after source-conflict quarantine")
+    combined.attrs["source_audit"] = {
+        "availability_basis": "legacy_mtime_unverified",
+        "files_examined": len(csv_files), "eligible_files": len(frames),
+        "rejected_files": rejected_files,
+        "feature_profile_rejections": n_skipped_features,
+        "conflicting_candidate_ids": [str(v) for v in bad_ids],
+        "rows_before_deduplication": input_rows, "rows_retained": len(combined),
+    }
     logger.info(
         "Loaded %d candidates from %d scanner CSVs (%d skipped: pre-feature-profile)",
         len(combined), len(frames), n_skipped_features,
