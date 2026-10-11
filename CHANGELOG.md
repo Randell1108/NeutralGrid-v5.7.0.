@@ -2,6 +2,79 @@
 
 ## [unreleased] - Neutral Grid v5.7.0
 
+### RETRAIN-20261010-R2 - Rotate HMM and refit downstream artifacts
+
+**Date:** 2026-10-10 (America/Lima; artifact identifiers use UTC 2026-10-11).
+
+Promote HMM `rolling_180d_20261011_025309` after canonical training on 858,000
+feature rows from 50 symbols. Recompute 2,793 fresh FASTWIN backtests, replay
+their HMM features at candidate scan time, finalize the complete 20-feature
+pool, and promote sigmoid-OOS meta-labeler `20261011_034948` pinned to the new
+HMM. Promotion OOF AUC is 0.6880537958 and ECE is 0.0600572641. All five
+promotion folds used the existing unpurged fallback; advisory CPCV AUC is
+0.5093750876 with 78.3% coverage. The normal challenger gate used absolute
+checks only because the old champion's lineage/evaluation contract differed.
+
+Refresh a separate 745-row workbook staging table: 741 rows have complete new
+HMM lineage; four have candidate scans later than bot start. The normal utility
+loader admits 588 rows. Its candidate has held-out AUC 0.5371365990 on 147 rows
+but fails G7 because lambda_risk=0.05 is boundary-pinned. The four-feature
+profile pair is refitted on 553 labeled rows; 89 fresh held-out rows yield
+pooled AUC 0.4169520548 and ECE 0.1241298725. Profile promotion refuses the
+missing incumbent comparison; mean AUC and fold pass rate also miss their
+floors. Neither utility nor profile is force-promoted. Preserve the canonical
+workbook and production source code. Archive scanner inputs and remove test
+fixtures and temporary scanner copies.
+
+**Files modified or created:**
+- `artifact_manifest.json`
+- `artifacts/hmm/rolling_180d_20261011_025309/model.joblib`
+- `artifacts/hmm/rolling_180d_20261011_025309/scaler.joblib`
+- `artifacts/hmm/rolling_180d_20261011_025309/metadata.json`
+- `artifacts/hmm/rolling_180d_20261011_025309/eval.json`
+- `artifacts/hmm/rolling_180d_20261011_025309/feature_schema.json`
+- `artifacts/hmm/rolling_180d_20261011_025309/state_means.npy`
+- `artifacts/hmm/rolling_180d_20261011_025309/temperature_scaler.json`
+- `models/meta_labeler.pkl`
+- `models/meta_labeler/model.joblib`
+- `models/meta_labeler/scaler.joblib`
+- `models/meta_labeler/metadata.json`
+- `models/meta_labeler_backup_20261011_034947.pkl`
+- `models/meta_labeler_promotion_decision.json`
+- `models/meta_labeler_verification.json`
+- `artifacts/utility/utility_20261011_034222_302285.json`
+- `data/profile/evaluations/profile_evaluation_20261011_024504_955951.json`
+- `data/trial_log.json`
+- `data/retrain_all_20261010_run2/profile_candidate/pattern_profile.json`
+- `data/retrain_all_20261010_run2/profile_candidate/profile_model.json`
+- `data/retrain_all_20261010_run2/finalized_fresh_pool/authoritative_pool_manifest.json`
+- `data/retrain_all_20261010_run2/finalized_fresh_pool/training_data_20261010.csv`
+- `data/retrain_all_20261010_run2/RUN_REPORT.json`
+- `data/retrain_all_20261010_run2/run_file_index.json`
+- `data/retrain_all_20261010_run2/tracked_artifact_changes.json`
+- `CHANGELOG.md`
+
+The run index and artifact-change ledger enumerate retained evidence and
+cache-manifest changes with exact paths and hashes.
+
+**Decision rationale:** Use current canonical training and promotion functions
+without changing architecture, features, thresholds, or historical-admission
+policy. Record failed gates and temporal-validation limitations explicitly.
+HMM soft-gate pass rate is not accuracy; calibration-fit ECE is not independent
+held-out ECE. No new AFML or Hudson & Thames methodological claim.
+
+**Backward compatibility:** No breaking changes. HMM and meta production pins
+are aligned. Utility remains unavailable and fail-closed; profile remains a
+candidate. Live-outcome admission and runtime MI artifact generation remain off.
+
+**Verification:** 65 focused tests passed before and after fitting; six dependency
+versions matched the lock. Validated all 2,792 unique market windows (420 bars
+each), all 50 HMM inference cases, all 2,793 complete meta vectors, and identical
+candidate/production predictions. Independently recomputed utility and profile
+held-out metrics. All 268 snapshotted source files and the canonical workbook
+retain their original hashes. Removed 1,466 temporary files; retained verified
+input archives, fitted candidates, evaluation records, and rollback evidence.
+
 ### LAST-RESTORE-20261010 - Complete auxiliary strategy coverage and trace four costs
 
 **Date:** 2026-10-10 (America/Lima).
