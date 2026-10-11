@@ -211,7 +211,7 @@ def run_backtest(
             first_row = klines_df.iloc[0]
             first_close = float(first_row["close"])
             first_ts = pd.Timestamp(first_row["timestamp"])
-            if not pd.isna(first_ts):
+            if not bool(pd.isna(first_ts)):
                 first_dt = first_ts.to_pydatetime()
                 if not isinstance(first_dt, datetime):
                     first_dt = None

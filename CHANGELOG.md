@@ -2,6 +2,38 @@
 
 ## [unreleased] - Neutral Grid v5.7.0
 
+### PYRIGHT-20261011 - Resolve runner scalar check and executor protocol returns
+
+**Date:** 2026-10-11.
+
+Make the candidate-time runner's scalar timestamp null check explicitly boolean
+and mark the two value-returning adjustment-driver Protocol methods as stubs.
+This resolves the three reported Pyright errors without type suppressions or
+changes to checker settings.
+
+**Files modified:**
+- `backtest/btk_unified_runner.py`
+- `scripts/execute_live_telemetry_modifications.py`
+- `CHANGELOG.md`
+
+**Decision rationale:** The timestamp is scalar, so the explicit boolean retains
+its existing missing-value branch. Ellipsis bodies describe Protocol methods
+implemented by concrete drivers; approval, submission and verification logic
+remain unchanged. No AFML / Hudson & Thames methodological change applies.
+
+**Backward compatibility:** No breaking changes. No model, feature, risk-limit,
+wire-schema or trading-policy changes.
+
+**Verification:** Pyright reproduced three errors before the fix and reports
+zero errors and warnings across `src` and both edited files afterward. All 91
+targeted runner, seed-state and executor tests passed. Full suite: 2,363 passed,
+two skipped and five failed. The concurrent-append and three short-duration
+WebSocket collector failures passed an isolated rerun. The remaining canonical
+workbook utility-pool test rejects its `rolling_180d_20261003_024008` lineage
+against active HMM `rolling_180d_20261011_025309`; this also reproduces with the
+committed baseline versions of both edited modules loaded in memory. The
+workbook and fail-closed lineage guard were not changed.
+
 ### RETRAIN-20261010-R2 - Rotate HMM and refit downstream artifacts
 
 **Date:** 2026-10-10 (America/Lima; artifact identifiers use UTC 2026-10-11).

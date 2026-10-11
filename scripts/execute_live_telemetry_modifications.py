@@ -167,6 +167,7 @@ class ExecutionPolicy:
 class AdjustmentDriver(Protocol):
     def read_state(self, intent: ActionIntent, deadline: "Deadline") -> BotState:
         """Read the exact live bot state from a newly opened details drawer."""
+        ...
 
     def prepare(
         self,
@@ -175,6 +176,7 @@ class AdjustmentDriver(Protocol):
         deadline: "Deadline",
     ) -> PreparedAdjustment:
         """Prepare but do not submit the adjustment form."""
+        ...
 
     def submit_once(
         self,
