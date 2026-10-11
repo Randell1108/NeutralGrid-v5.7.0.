@@ -196,6 +196,41 @@ class DummyClient:
         return None
 
 
+@pytest.mark.asyncio
+async def test_expired_ingest_never_uses_future_funding_as_forecast(workspace_tmp_dir, monkeypatch):
+    calls = []
+
+    class FundingClient(DummyClient):
+        async def get_funding_rate(self, **kwargs):
+            calls.append(kwargs)
+            return [{"fundingTime": kwargs["start_time"] + 3600000, "fundingRate": "0.75"}]
+
+    async def historical(*args, **kwargs):
+        return {key: pd.DataFrame() for key in ("1h", "15m", "5m", "1m")}
+
+    async def marks(*args, **kwargs):
+        return []
+
+    observed = []
+    def profile(**kwargs):
+        observed.append(kwargs["funding_carry_expected_next_7h"])
+        return {"parkinson_vol_ratio_4h_24h_pre": 1.25,
+                "funding_carry_expected_next_7h": kwargs["funding_carry_expected_next_7h"]}
+
+    monkeypatch.setattr(nbde, "BinanceClient", FundingClient)
+    monkeypatch.setattr(nbde, "fetch_historical_klines", historical)
+    monkeypatch.setattr(nbde, "fetch_session_mark_klines", marks)
+    monkeypatch.setattr(nbde, "compute_indicators", lambda *a, **kw: TechnicalIndicators())
+    monkeypatch.setattr(nbde, "search_candidate_match", lambda **kw: None)
+    monkeypatch.setattr(nbde, "compute_profile_feature_block", profile)
+    row = await nbde.process_manual_text(SAMPLE_TEXT, output_path=workspace_tmp_dir/'unused.xlsx', verify=False, dry_run=True)
+    assert calls == []
+    assert observed == [None]
+    assert row['funding_carry_expected_next_7h'] is None
+    assert row['funding_fee_usdt'] == pytest.approx(-1.27)
+    assert row['parkinson_vol_ratio_4h_24h_pre'] == 1.25
+
+
 @pytest.fixture
 def workspace_tmp_dir() -> Path:
     root = Path("tests") / ".tmp_new_bot_data_extractor"

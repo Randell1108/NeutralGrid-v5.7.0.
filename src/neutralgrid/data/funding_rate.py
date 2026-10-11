@@ -18,7 +18,10 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Mapping, Optional
 import logging
+import math
 from datetime import datetime, timezone
+
+import numpy as np
 
 logger = logging.getLogger(__name__)
 
@@ -28,22 +31,29 @@ def expected_funding_carry_next_hours(
     *,
     horizon_hours: float = 7.0,
 ) -> Optional[float]:
-    """Expected funding carry over the next horizon using live premiumIndex data."""
+    """Decision-time rate proxy, in percentage points, for the next settlement.
+
+    Requires observed premium-index inputs. Zero means a known zero rate or a
+    known next settlement outside the horizon; unavailable inputs return None.
+    This is neither realized funding nor position-level PnL over the horizon.
+    """
     if not funding_info:
         return None
     try:
-        hours_to_next = float(funding_info.get("funding_interval_hours", float("inf")))
-    except (TypeError, ValueError):
+        raw_hours = funding_info.get("funding_interval_hours")
+        raw_rate = funding_info.get("funding_rate_pct")
+        if any(isinstance(v, (bool, np.bool_)) for v in (raw_hours, raw_rate, horizon_hours)):
+            return None
+        hours_to_next = float(raw_hours) if raw_hours is not None else float("nan")
+        funding_rate_pct = float(raw_rate) if raw_rate is not None else float("nan")
+        horizon = float(horizon_hours)
+    except (TypeError, ValueError, OverflowError):
         return None
-    try:
-        funding_rate_pct = float(funding_info.get("funding_rate_pct", 0.0))
-    except (TypeError, ValueError):
+    if not all(math.isfinite(v) for v in (hours_to_next, funding_rate_pct, horizon)):
         return None
-    if not (float("-inf") < hours_to_next < float("inf")):
+    if hours_to_next < 0 or horizon <= 0:
         return None
-    if not (float("-inf") < funding_rate_pct < float("inf")):
-        return None
-    if hours_to_next <= float(horizon_hours):
+    if hours_to_next <= horizon:
         return float(funding_rate_pct)
     return 0.0
 
@@ -54,7 +64,10 @@ def realized_funding_carry_proxy_next_hours(
     *,
     horizon_hours: float = 7.0,
 ) -> float:
-    """Historical proxy: first realized settlement in (entry, entry + horizon]."""
+    """Outcome-only proxy: first realized settlement in (entry, entry + horizon].
+
+    Never substitute this post-entry outcome for an expected funding feature.
+    """
     if not raw_records:
         return 0.0
     window_end_ms = int(entry_time_ms + horizon_hours * 3600 * 1000)
@@ -186,8 +199,11 @@ class FundingRateProvider:
             result = await self.client.get_premium_index(symbol)
 
             # Extract fields
-            funding_rate = float(result.get('lastFundingRate', 0)) * 100
-            next_funding_ms = int(result.get('nextFundingTime', 0))
+            if any(isinstance(result[key], (bool, np.bool_)) for key in ('lastFundingRate', 'nextFundingTime')):
+                logger.warning("Unavailable funding forecast for %s: boolean API fields", symbol)
+                return None
+            funding_rate = float(result['lastFundingRate']) * 100
+            next_funding_ms = int(result['nextFundingTime'])
             mark_price = float(result.get('markPrice', 0))
             index_price = float(result.get('indexPrice', 0))
 
@@ -195,6 +211,9 @@ class FundingRateProvider:
             now_ms = int(datetime.now(timezone.utc).timestamp() * 1000)
             time_until_funding_ms = next_funding_ms - now_ms
             time_until_funding_hours = time_until_funding_ms / (1000 * 3600)
+            if not math.isfinite(funding_rate) or time_until_funding_hours < 0:
+                logger.warning("Unavailable funding forecast for %s: invalid rate or stale settlement", symbol)
+                return None
 
             return {
                 'symbol': symbol,
@@ -202,7 +221,7 @@ class FundingRateProvider:
                 'next_funding_time': next_funding_ms,
                 'mark_price': mark_price,
                 'index_price': index_price,
-                'funding_interval_hours': max(0, time_until_funding_hours),
+                'funding_interval_hours': time_until_funding_hours,
                 'fetched_at': datetime.now(timezone.utc).isoformat()
             }
 

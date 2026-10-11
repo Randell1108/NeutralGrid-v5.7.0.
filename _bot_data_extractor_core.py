@@ -26,6 +26,7 @@ import pandas as pd
 # Project imports
 from neutralgrid.core.config import get_config
 from neutralgrid.api.binance_client import BinanceClient
+from neutralgrid.data.workbook_timestamps import END_TIME_NUMBER_FORMAT, normalize_end_time_utc
 from neutralgrid.indicators.technical import (
     calc_adx,
     calc_atr,
@@ -1741,6 +1742,7 @@ def prepare_entry_validation_row(
 def append_to_excel(output_path: Path, row: Dict[str, Any]):
     """Append a single row to the canonical workbook (Sheet1)."""
     import openpyxl
+    from openpyxl.utils import get_column_letter
 
     CANONICAL_COLUMNS = [
         "strategy_id", "symbol", "strategy_type", "status",
@@ -1803,6 +1805,10 @@ def append_to_excel(output_path: Path, row: Dict[str, Any]):
         val = row.get(cast(str, header))
         if header == "start_time_utc":
             val = normalize_start_time_utc(val)
+        elif header == "end_time_utc":
+            val = normalize_end_time_utc(
+                val, row.get("start_time_utc"), row.get("duration_hours"), wb.epoch
+            )
         elif isinstance(val, datetime) and val.tzinfo is not None:
             val = val.replace(tzinfo=None)
         if isinstance(val, (bool, np.bool_)):
@@ -1810,6 +1816,9 @@ def append_to_excel(output_path: Path, row: Dict[str, Any]):
         new_row_values.append(val)
 
     ws.append(new_row_values)
+    end_cell = ws.cell(ws.max_row, headers.index("end_time_utc") + 1)
+    end_cell.number_format = END_TIME_NUMBER_FORMAT
+    ws.column_dimensions[get_column_letter(headers.index("end_time_utc") + 1)].number_format = END_TIME_NUMBER_FORMAT
     wb.save(output_path)
     wb.close()
     logger.info("Appended row to %s", output_path)

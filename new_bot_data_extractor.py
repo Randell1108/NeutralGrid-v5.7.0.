@@ -21,7 +21,7 @@ import numpy as np  # pyright: ignore[reportMissingImports]
 import pandas as pd  # pyright: ignore[reportMissingImports]
 
 from neutralgrid.api.binance_client import BinanceClient
-from neutralgrid.data.funding_rate import realized_funding_carry_proxy_next_hours
+from neutralgrid.data.workbook_timestamps import END_TIME_NUMBER_FORMAT, normalize_end_time_utc
 from neutralgrid.scanner.feature_extractor import compute_profile_feature_block
 
 from neutralgrid.metrics.pnl_curve_features_v20260310 import extract_pnl_curve_features
@@ -321,6 +321,10 @@ def append_row_preserving_schema(output_path: Path, row: Dict[str, Any], columns
         row_values: List[Any] = []
         for column_name in columns:
             value = row.get(column_name)
+            if column_name == "end_time_utc":
+                value = normalize_end_time_utc(
+                    value, row.get("start_time_utc"), row.get("duration_hours"), workbook.epoch
+                )
             if isinstance(value, datetime) and value.tzinfo is not None:
                 value = value.replace(tzinfo=None)
             if isinstance(value, (bool, np.bool_)):
@@ -328,6 +332,10 @@ def append_row_preserving_schema(output_path: Path, row: Dict[str, Any], columns
             row_values.append(value)
 
         worksheet.append(row_values)
+        if "end_time_utc" in headers:
+            end_cell = worksheet.cell(worksheet.max_row, headers.index("end_time_utc") + 1)
+            end_cell.number_format = END_TIME_NUMBER_FORMAT
+            worksheet.column_dimensions[end_cell.column_letter].number_format = END_TIME_NUMBER_FORMAT
         _expand_worksheet_tables_to_data(worksheet)
         workbook.save(output_path)
         return True
@@ -396,9 +404,9 @@ def _append_pnl_curve_features(
 
 def derive_profit_factor(profits: Sequence[float]) -> Optional[float]:
     """Compute profit factor from realized matched profits."""
-    non_zero = [profit for profit in profits if abs(profit) > 0]
-    if not non_zero:
+    if len(profits) == 0 or not all(np.isfinite(profit) for profit in profits):
         return None
+    non_zero = [profit for profit in profits if abs(profit) > 0]
 
     gross_profits = sum(profit for profit in non_zero if profit > 0)
     gross_losses = abs(sum(profit for profit in non_zero if profit < 0))
@@ -616,33 +624,17 @@ async def process_manual_text(
             row["total_trades"] = bot_data.total_trades
 
         # ── Pattern-profile pre-entry features (F1/F2/F3/F4) ──────────
-        # Reuses already-fetched klines. F3 is derived from the first
-        # realized funding settlement in (start, start+7h], which is
-        # semantically equivalent to the scan-time "expected next-7h
-        # carry" since we know what actually happened.
-        realized_carry: Optional[float] = None
-        try:
-            start_ms = int(start_time_utc.timestamp() * 1000)
-            horizon_end_ms = int((start_time_utc.timestamp() + 7 * 3600) * 1000)
-            carry_records = await client.get_funding_rate(
-                symbol=symbol,
-                start_time=start_ms,
-                end_time=horizon_end_ms,
-                limit=10,
-            )
-            realized_carry = realized_funding_carry_proxy_next_hours(
-                carry_records or [],
-                entry_time_ms=start_ms,
-                horizon_hours=7.0,
-            )
-        except Exception as exc:
-            logger.warning("Realized funding carry fetch failed for %s: %s", symbol, exc)
+        # Historical settlements are outcomes, not evidence of an entry-time
+        # forecast. This input path has no original forecast capture. Leave F3
+        # missing; realized funding remains in funding_fee_usdt/accounting.
+        row["funding_carry_expected_next_7h"] = None
+        logger.info("%s: expected funding carry unavailable without an original forecast capture", symbol)
 
         try:
             profile_block = compute_profile_feature_block(
                 klines_15m=klines.get("15m", pd.DataFrame()),
                 klines_1m=klines.get("1m", pd.DataFrame()),
-                funding_carry_expected_next_7h=realized_carry,
+                funding_carry_expected_next_7h=None,
             )
             for key, value in profile_block.items():
                 if value is not None:

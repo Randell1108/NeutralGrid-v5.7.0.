@@ -2,6 +2,298 @@
 
 ## [unreleased] - Neutral Grid v5.7.0
 
+### RETRAIN-20261002 - Retrain HMM and evaluate downstream candidates
+
+**Date:** 2026-10-02 (local run; artifact timestamps use UTC).
+
+Promote `rolling_180d_20261003_024008` through the existing canonical gates
+using 50 symbols and 858,000 usable observations through October 1 at 23:45
+UTC. Refresh all 656 canonical workbook rows against this HMM, preserving
+unrelated workbook content and chronological end-time formatting. Retain
+profile/pattern and utility candidates in shadow. Fit a 20-feature historical
+meta diagnostic on 2,132 admitted rows, without replacing the deployed champion.
+
+**Files modified or created:**
+- `artifact_manifest.json`
+- `data/new_expired_bots.xlsx`
+- `artifacts/hmm/rolling_180d_20261003_024008/model.joblib`
+- `artifacts/hmm/rolling_180d_20261003_024008/metadata.json`
+- `artifacts/hmm/rolling_180d_20261003_024008/eval.json`
+- `artifacts/hmm/rolling_180d_20261003_024008/wf_stability_report.json`
+- `artifacts/utility/utility_20261003_032805_941338.json`
+- `data/profile/evaluations/profile_evaluation_20261003_023416_743134.json`
+- `reports/retrain_all_20261002/meta_diagnostic/meta_labeler.pkl`
+- `reports/retrain_all_20261002/profile_candidate/profile_model.json`
+- `reports/retrain_all_20261002/profile_candidate/pattern_profile.json`
+- `reports/retrain_all_20261002/REPORT.md`
+- `reports/retrain_all_20261002/final_validation.json`
+
+**Decision rationale:** Preserve existing training recipes and promotion gates.
+No contemporaneous candidate capture manifests were found, so production meta
+admission remains blocked. The historical diagnostic's OOF ECE is 0.081958,
+but all five gate folds fell back to unpurged training; its separate forward
+diagnostic ECE is 0.158969. Profile fails its incumbent-comparison requirement
+and performance floors. Utility fails G7 at parameter boundaries. No cohort
+approval or failed gate was waived. AFML reference context: retain the existing
+purging and lineage contracts; the observed unpurged fallback is explicitly
+reported, not presented as purged chronological evidence.
+
+**Backward compatibility:** Python interfaces and model architecture are
+unchanged. The prior deployed meta-labeler is now stale against the new HMM
+and its loader rejects that lineage mismatch. The production pipeline remains
+incomplete pending admissible downstream training and promotion evidence.
+
+**Verification:** HMM CLI completed with exit 0, converged in 229/300 iterations,
+and reported STABLE in the supplementary check. Workbook validation checked
+93,515 original cells, with 8,696 authorized HMM updates. Focused tests: 142
+passed. Full suite plus the corrected temporary-path retry: 2,388 passed and
+two skipped. Pyright with the training interpreter: zero errors and warnings.
+Source/artifact preservation and independent evaluation receipts are retained
+with the report.
+
+### CAPTURE-FUNDING-20261002 - Bind fresh pools to observed captures and isolate funding outcomes
+
+**Date:** 2026-10-02.
+
+Publish deployment CSVs with append-only completion manifests recording observed
+availability, payload hashes and candidate rosters. Verify capture evidence at
+loading, fresh-pool finalization and retraining admission. Quarantine conflicting
+candidate identities, deduplicate exact copies and select latest captures by
+verified availability. Remove post-entry realized funding from the expired-bot
+extractor's expected-carry field; missing original forecasts remain unavailable.
+Validate expected-funding inputs without changing valid rate units or sign.
+
+**Files modified:**
+- `src/neutralgrid/data/candidate_capture.py`
+- `src/neutralgrid/data/funding_rate.py`
+- `src/neutralgrid/backtest/candidate_pipeline.py`
+- `src/neutralgrid/training/meta_pool_contract.py`
+- `run_full_pipeline.py`
+- `backtest_candidates.py`
+- `new_bot_data_extractor.py`
+- `scripts/finalize_fresh_authoritative_meta_pool.py`
+- `tests/unit/test_candidate_capture.py`
+- `tests/unit/test_funding_forecast_semantics.py`
+- `tests/unit/test_meta_pool_source_contract.py`
+- `tests/unit/test_new_bot_data_extractor.py`
+- `tests/unit/test_candidate_pipeline_bypass.py`
+- `tests/unit/test_backtest_binance_alignment.py`
+- `reports/semantic_integrity_20261002/audit_contracts.py`
+- `reports/semantic_integrity_20261002/contract_audit.json`
+- `reports/semantic_integrity_20261002/REPORT.html`
+- `CHANGELOG.md`
+
+**Decision rationale:** File names and mtimes do not establish historical
+availability. Completed producer captures provide local operational evidence;
+post-entry settlements cannot substitute for decision-time forecasts. Prevent
+extra training CSVs or changed pool bytes from bypassing finalization evidence.
+**AFML / Hudson & Thames citation:** No new statistical method or performance
+claim. Evidence-admission and outcome/predictor separation are supported by the
+local executable contracts and regression fixtures linked in the report.
+**Backward compatibility:** New deployment capture paths cannot overwrite an
+existing file. Legacy exports require explicit diagnostic loading and cannot
+authorize fresh refits. Fresh pools require accessible original captures, the
+declared CSV hash and no additional builder input CSVs. Explicit historical
+diagnostic replay remains supported. Current active feature lists, labels,
+model artifacts and canonical workbook are unchanged. Expected carry in future
+expired-bot extraction is missing unless original forecast evidence is supplied
+through a future explicit reconstruction path; historical cells are not rewritten.
+**Verification:** Final full suite: 2,388 passed, 2 skipped. Type checking over
+src and modified entry scripts: 0 errors, 0 warnings. A prior test invocation
+used an overly long temporary directory and failed the Windows path-length
+fixture before the function under test; the full rerun with a short root passes.
+Full-suite and type-check receipts are retained in
+`reports/semantic_integrity_20261002/`. Positive integration exercises capture,
+real ingestion gating, finalization and refit admission; another fixture uses
+the real engine and training conversion. Negative cases cover tampering,
+timestamp errors, concurrency, duplicate/conflicting identities, malformed
+funding, stale settlement, network failure and pool contamination. The feature
+and leakage audit passes all 20 active predictors. Quote-volume and range
+semantic migrations remain proposals awaiting user approval.
+
+### WORKBOOK-SEMANTICS-20261002 - Remove unused trigger column and audit feature recovery
+
+**Date:** 2026-10-02.
+
+Remove the empty trigger_price column from General while retaining all 656
+strategies. Audit the original 229 incomplete strategies against 1,298 saved
+exports. Locate 79 micro-cost values and one OU value by existing candidate ID,
+pending provenance and geometry review. Record that the restored workbook has
+352 strategies with at least one missing active input. Document proposed
+quote-volume, range-geometry and retraining-semantic corrections without changing
+production feature code, training targets, missing observations or model artifacts.
+
+**Files modified:**
+- `data/new_expired_bots.xlsx`
+- `reports/history_review_20261002/semantic_reconstruction_audit.py`
+- `reports/meta_semantics_20261002/REPORT.html`
+- `reports/meta_semantics_20261002/audit.json`
+- `reports/meta_semantics_20261002/current_missing_features.csv`
+- `reports/meta_semantics_20261002/reconstruction_229.csv`
+- `reports/meta_semantics_20261002/matched_export_evidence.json`
+- `reports/meta_semantics_20261002/remove_trigger.py`
+- `outputs/01a0fd9f-200d-7cf2-9a13-8375317a4a9b/remove_trigger/edit.mjs`
+- `outputs/01a0fd9f-200d-7cf2-9a13-8375317a4a9b/remove_trigger/validation.json`
+- `CHANGELOG.md`
+
+**Decision rationale:** No active calculation or model consumes trigger_price;
+all current canonical values are empty. Retain optional legacy parser support.
+Found source values are not automatically accurate bot-entry reconstructions.
+**AFML / Hudson & Thames citation:** No statistical method implemented. Proposed
+purging and point-in-time requirements are described with local code and saved
+run evidence in the report, without claiming an untouched validation result.
+**Backward compatibility:** General columns after the removed field shift left;
+header-based consumers remain compatible. The current extractor preserves the
+68-column schema and filters out the optional legacy trigger field.
+**Verification:** 93,512 retained cells match their originals in value, data type
+and style; 18 package members remain byte-identical. Workbook error scan is clear.
+Actual extractor schema/filter functions accept the candidate workbook and do
+not recreate trigger_price. Source search completed with no export read failures.
+
+### WORKBOOK-RESTORE-20261002 - Restore strategies removed by duration
+
+**Date:** 2026-10-02.
+
+Restore all 154 strategies removed during WORKBOOK-REVIEW-20261002 from the
+verified pre-deletion backup, returning the canonical workbook to 656 strategies
+and the original 78-row imported cohort. Restore associated Meta Features,
+Last Features and PnL Curve Features records in their original order. Preserve
+all 685 subsequent cell changes, existing audit history and adjusted column widths.
+
+**Files modified:**
+- `data/new_expired_bots.xlsx`
+- `reports/history_review_20261002/restore_duration_rows.py`
+- `outputs/01a0fd9f-200d-7cf2-9a13-8375317a4a9b/restore_duration_rows/restore.mjs`
+- `outputs/01a0fd9f-200d-7cf2-9a13-8375317a4a9b/restore_duration_rows/validation.json`
+- `outputs/01a0fd9f-200d-7cf2-9a13-8375317a4a9b/restore_duration_rows/publication.json`
+- `CHANGELOG.md`
+
+**Decision rationale:** The operator requested reversal after reviewing the
+retraining evidence. The latest meta-labeler training log excludes live outcomes;
+total bot lifetime is distinct from time to the label target. Restore recorded
+evidence without inventing missing values or changing model eligibility rules.
+**AFML / Hudson & Thames citation:** No statistical method or label rule changes.
+**Backward compatibility:** Strategy IDs remain stable. Physical row numbers
+return to the pre-deletion order. No model retraining or production code changes.
+**Verification:** Compare 85,812 strategy-sheet cells, their types and styles
+against the appropriate source: pre-deletion backup for restored strategies and
+the current workbook for retained strategies. Verify native table ranges, column
+widths, existing audit records and backup hashes before atomic publication.
+
+### WORKBOOK-REVIEW-20261002 - Filter duration and recover deployment identities
+
+**Date:** 2026-10-02.
+
+Remove 154 strategies across the four canonical strategy sheets, leaving 502.
+This includes 153 recorded durations above seven hours and GALA 414385437,
+whose source timestamps prove seven hours and 25 seconds despite a rounded
+7.00-hour value. Retain disputed BEAT 410472444 pending verification: its
+4.92-hour field conflicts with its timestamp interval. Link all 75 retained
+members of the prior 78-row import to deployment candidates, with six manually
+changed geometries confirmed by the operator. Recover 375 blank cells from
+the saved deployment snapshots. Correct ETH 414837733's thousands-separated
+price bounds and replay their dependent features against the active HMM.
+
+**Files modified:**
+- `data/new_expired_bots.xlsx`
+- `reports/history_review_20261002/REPORT.html`
+- `reports/history_review_20261002/candidate_links.csv`
+- `reports/history_review_20261002/pnl_comparison.csv`
+- `reports/history_review_20261002/missing_training_features.csv`
+- `reports/history_review_20261002/remaining_cells.csv`
+- `reports/history_review_20261002/removed_strategies.csv`
+- `reports/history_review_20261002/validation.json`
+- `CHANGELOG.md`
+
+**Decision rationale:** Preserve verified strategy identities, source timestamps
+and deployment provenance. Forecast carry and execution-cost values retain
+their earlier candidate-snapshot meaning. A Chrome review of the ten latest
+ingested strategies confirms their displayed PnL facts, but the seven-point
+Binance charts are different from the reconstructed minute-mark JSON arrays.
+Do not certify those arrays as exact UI copies. Document the remaining 825
+imported blank cells and the 229 older rows missing active training inputs.
+**AFML / Hudson & Thames citation:** No new statistical method or trading rule
+introduced; preserve existing feature definitions and pre-entry evidence.
+**Backward compatibility:** Physical row numbers change; strategy IDs remain
+the join keys. Native tables, cell styles and existing audit rows are retained.
+No model retraining or production code changes.
+**Verification:** 143 contract tests pass; active feature coverage agrees across
+the candidate pipeline, FeatureSnapshot and unified builder. Retained cells and
+styles are compared after row mapping. Active HMM lineage and finite regime
+probabilities are verified; saved workbook error scan is clear. Full backup and
+strategy-level review evidence are retained.
+
+### WORKBOOK-ORDER-20261002 - Sort bot rows by end time and adopt ISO-style display
+
+**Date:** 2026-10-02.
+
+At the user's explicit timestamp selection, sort General and its matching Meta,
+PnL Curve and Last Features strategy rows by General.end_time_utc, oldest first.
+Keep complete rows together and retain original relative order for tied end
+times. Change end-time display to `yyyy-mm-dd hh:mm:ss` and update the shared
+future-writer constant. This supersedes the slash format requested earlier.
+
+**Files modified:**
+- `data/new_expired_bots.xlsx`
+- `src/neutralgrid/data/workbook_timestamps.py`
+- `tests/unit/test_workbook_end_time_format.py`
+- `reports/end_time_format_20261002/REPORT.md`
+- `CHANGELOG.md`
+
+**Decision rationale:** Sort by the operator-selected recorded end time, using
+exact strategy identity for sheets without an end-time column. Preserve all
+stored timestamps and observations; only row position and date display change.
+**AFML / Hudson & Thames citation:** Not applicable; no model/statistical method
+or trading rule changed.
+**Backward compatibility:** Typed dates remain typed dates. Physical row numbers
+change; retained row mappings support audit references. Future appenders use the
+new date display format; automatic chronological insertion is not introduced.
+**Verification:** 15 focused tests pass; targeted Pyright reports zero errors and
+warnings. Whole-row preservation and monotonic end-time checks cover all four
+strategy sheets; the original workbook is retained for rollback.
+
+### WORKBOOK-20261002 - Normalize end dates and complete verified workbook inputs
+
+**Date:** 2026-10-02.
+
+Normalize all 578 canonical end times to typed UTC Excel dates displayed as
+`yyyy/mm/dd hh/mm/ss`; derive 72 invalid ends from recorded start plus duration.
+Fill 480 empty cells from verified identities, execution histories, sampled PnL
+curves and completed pre-entry candles. Correct eight existing profit factors;
+two newly filled PFs are verified zero. Preserve 42 unresolved PF blanks and
+document all 5,508 remaining empty cells with specific blockers.
+
+**Files modified:**
+- `data/new_expired_bots.xlsx`
+- `new_bot_data_extractor.py`
+- `_bot_data_extractor_core.py`
+- `src/neutralgrid/data/workbook_timestamps.py`
+- `tests/unit/test_workbook_end_time_format.py`
+- `reports/workbook_completion_20261002/REPORT.md`
+- `CHANGELOG.md`
+
+**Decision rationale:** Use recorded or independently reproducible inputs only.
+Future supported workbook writers apply the same end-date format and UTC
+normalization. Missing/nonfinite realized-profit observations remain unknown;
+observed all-zero sequences produce zero. Canonical historical values remain
+static to preserve compatibility with production appenders that discard formula
+caches. Sampled curve excursions do not certify continuous drawdown limits.
+
+**AFML / Hudson & Thames citation:** No new statistical/model method introduced.
+Existing pre-entry cutoff and fail-closed input constraints are retained; no
+feature definition, label rule, promotion threshold or model artifact changed.
+
+**Backward compatibility:** End values are consistently typed Excel dates, so
+consumers must not require the old mixture of strings/numbers/datetimes. The
+manual PF helper returns zero for observed finite all-zero profits and None for
+missing/nonfinite inputs. Actual production loaders and appenders were checked.
+
+**Verification:** 216 focused tests passed; targeted Pyright reports 0 errors
+and 0 warnings. Compared 84,179 original cells, verified every planned update,
+and exercised an isolated full-workbook append. Profile complete labeled rows
+increase from 387 to 389; complete Meta rows remain 229. Publication, rollback,
+source provenance and temporary-file cleanup receipts accompany the report.
+
 ### CAPITAL-RULE-20261001 - Add fail-closed capital-preservation simulation profile
 
 **Date:** 2026-10-01.
