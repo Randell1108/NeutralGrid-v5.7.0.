@@ -2,6 +2,207 @@
 
 ## [unreleased] - Neutral Grid v5.7.0
 
+### LAST-RESTORE-20261010 - Complete auxiliary strategy coverage and trace four costs
+
+**Date:** 2026-10-10 (America/Lima).
+
+Restore ALICE 413303999, OPEN 413491078, MIRA 413490966 and FLOW 413490951
+to Last Features by strategy ID, preserving canonical values and independently
+checking their archived open-interest samples. Last Features now covers all
+745 strategies. Trace HEMI, BTW and AVAAI Meta costs to reproducible September
+15 model reconstructions; document their semantics and input ages without
+copying them into missing original-cost cells. CYBER's available depth captures
+postdate bot entry, so its cost remains blank. Update eight provenance/notes
+cells; retain every existing Meta value and all model artifacts.
+
+**Files modified or created:**
+- `data/new_expired_bots.xlsx`
+- `reports/final_last_restore_20261010/REPORT.txt`
+- `reports/final_last_restore_20261010/patch_plan.json`
+- `reports/final_last_restore_20261010/row_provenance.json`
+- `reports/final_last_restore_20261010/investigation.json`
+- `reports/final_last_restore_20261010/cost_origin_validation.json`
+- `reports/final_last_restore_20261010/validation.json`
+- `reports/final_last_restore_20261010/publication.json`
+- `reports/final_last_restore_20261010/update.py`
+- `reports/final_last_restore_20261010/investigate.py`
+- `reports/final_last_restore_20261010/verify_cost_origins.py`
+- `reports/final_last_restore_20261010/workbook.mjs`
+- `CHANGELOG.md`
+
+**Decision rationale:** Reproducible later estimates do not establish original
+historical availability. Keep unsupported original costs blank and preserve
+the recorded six-hour recipe without substituting another horizon. This is
+source reconciliation; no new AFML or Hudson & Thames methodological claim.
+
+**Backward compatibility:** No breaking changes. All five sheets, native
+objects and styles remain intact. No feature schema or training policy change.
+
+**Verification:** Four archived OI samples; three exact cost reproductions;
+51 archived XLSX files searched with no read failures; 64-cell complete diff;
+745 unique Last strategy IDs; only Last sheet/table XML changed; unchanged
+Meta matrix with 473 finite 20-feature vectors; Artifact Tool reopen, formula
+scan and visual review; targeted Pyright zero errors and warnings. Rollback
+workbook retained and source hashes guarded before atomic publication.
+
+### COST-RESTORE-20261010 - Recover 88 scanner costs and restore 126 auxiliary rows
+
+**Date:** 2026-10-10 (America/Lima).
+
+Fill 88 recorded candidate costs in Meta Features and Last Features, preserving
+original scan times, logged CSV availability, both ages at bot start, source
+hashes and temporal limitations. Restore the requested 126 missing Last Features
+rows by strategy ID: canonical ATR/volume/open-interest copies, 123 independently
+matched candidate costs and three unsupported costs left blank. Last Features
+now covers 741 of 745 strategies; four other pre-existing omissions remain.
+
+**Files modified or created:**
+- `data/new_expired_bots.xlsx`
+- `reports/cost_restore_20261010/REPORT.txt`
+- `reports/cost_restore_20261010/patch_plan.json`
+- `reports/cost_restore_20261010/new_cost_provenance.json`
+- `reports/cost_restore_20261010/new_cost_provenance.csv`
+- `reports/cost_restore_20261010/restored_row_provenance.json`
+- `reports/cost_restore_20261010/restored_rows.csv`
+- `reports/cost_restore_20261010/remaining_recent_cells.csv`
+- `reports/cost_restore_20261010/validation.json`
+- `reports/cost_restore_20261010/feature_validation.json`
+- `reports/cost_restore_20261010/publication.json`
+- `reports/cost_restore_20261010/update.py`
+- `reports/cost_restore_20261010/verify_features.py`
+- `reports/cost_restore_20261010/workbook.mjs`
+- `CHANGELOG.md`
+
+**Decision rationale:** Restore observed candidate estimates under their original
+meaning, not as newly observed entry-time quotes. Keep unknown availability and
+three unsupported older costs explicit. Preserve the existing four-finite-field
+comparison convention with explanatory provenance; it is not training admission.
+Canonical feature copies retain their existing replay/window semantics and do
+not claim a new historical 24-hour volume reconstruction.
+
+**AFML / Hudson & Thames citation:** No new statistical method or model change;
+this update preserves identity, provenance, feature time and missing-data meaning.
+
+**Backward compatibility:** No breaking changes. Existing row positions are
+preserved, 126 auxiliary rows are appended, and the native Last table/filter
+extends to A1:P742. General, PnL Curve Features and Canonical Audit are unchanged.
+
+**Verification:** Exactly 2,415 planned cell changes; all styles preserved and
+only three package members changed. All 139 supporting files rehashed. Zero
+duplicate Last strategy IDs, zero formula-error matches, staged visual review,
+atomic publication and rollback backup. All other selected model inputs are
+unchanged; the production missing-feature filter accepts all 88 recovered rows
+in isolation. Finite 20-feature vectors increase from 385 to 473. No model was
+retrained and no training-pool admission claim was made. Recent-cohort blanks
+decrease from 663 to 487. Targeted Pyright: zero errors/warnings.
+
+### LIQUIDATION-RECOVERY-20261010 - Fill verified preview estimates and trace historical costs
+
+**Date:** 2026-10-10 (America/Lima).
+
+Fill exactly 494 supported liquidation cells for 85 recently imported bots,
+leaving 663 unsupported or otherwise unresolved cohort cells blank. Preserve
+creation-preview semantics, source screenshot hashes, display precision and
+the existing grid-bound calculations. Exclude mismatched previews, including
+the operator-confirmed ETHFI preview before adjustment. Separately corroborate
+88 recorded scanner costs against exact candidate snapshots and pre-deployment
+save logs; investigate all 656 older strategies without changing their costs.
+
+**Files modified or created:**
+- `data/new_expired_bots.xlsx`
+- `reports/liquidation_cost_update_20261010/REPORT.txt`
+- `reports/liquidation_cost_update_20261010/patch_plan.json`
+- `reports/liquidation_cost_update_20261010/workbook_validation.json`
+- `reports/liquidation_cost_update_20261010/publication.json`
+- `reports/liquidation_cost_update_20261010/remaining_cells.csv`
+- `reports/liquidation_cost_update_20261010/new_cost_availability.csv`
+- `reports/liquidation_cost_update_20261010/run_evidence.json`
+- `reports/liquidation_cost_update_20261010/cost_source_manifest.json`
+- `reports/liquidation_cost_update_20261010/older_cost_origins.csv`
+- `reports/liquidation_cost_update_20261010/older_source_search.csv`
+- `reports/liquidation_cost_update_20261010/older_source_search.json`
+- `reports/liquidation_cost_update_20261010/older_search_validation.json`
+- `reports/liquidation_cost_update_20261010/workbook_update.py`
+- `reports/liquidation_cost_update_20261010/workbook.mjs`
+- `reports/liquidation_cost_update_20261010/cost_audit.py`
+- `reports/liquidation_cost_update_20261010/older_source_search.py`
+- `CHANGELOG.md`
+
+**Decision rationale:** Unique settings and sizing corroboration control the
+liquidation merge. Candidate timestamps precede output availability by 24-48
+minutes in the inspected runs, so separately retain logged save times. Local
+save logs and matching snapshots support recorded pre-deployment costs without
+claiming immutable quote capture or fresh bot-entry observations. Earlier
+costs include recorded estimates, three labeled reconstructions and three
+untraced values; 126 older Meta rows have no corresponding Last Features row.
+No cost values or training admission policies were changed by this audit.
+
+**AFML / Hudson & Thames citation:** No new statistical method or model change.
+This is a source-preserving data repair and temporal-provenance investigation.
+
+**Backward compatibility:** No breaking changes. All 745 strategies and five
+sheets remain; all workbook package members except General sheet data are
+byte-identical. Meta Features and the active model are unchanged.
+
+**Verification:** Exact 494-cell before/after diff, source hashes rechecked,
+all cell styles preserved, zero formula-error matches, modified range visually
+reviewed, atomic publication and rollback backup retained. All 88 finite new
+costs agree with matching snapshots and precede bot starts in local save logs.
+Searched 1,164 CSVs without read failures; 381 older populated costs match exact
+candidate records. Targeted audit-script Pyright: zero errors and warnings.
+
+### HISTORY-IMPORT-20261010 - Reconcile 89 completed strategies with export set 23
+
+**Date:** 2026-10-10 (America/Lima).
+
+Append 89 completed Binance History strategies from FARTCOINUSDT 414861802
+through CTSIUSDT 414995385, increasing the canonical workbook from 656 to 745
+unique strategies. Reconcile 1,367 fills and 85 funding settlements against
+export set 23. Link 86 candidates by unique deployment geometry and three by
+explicit operator confirmation of live telemetry adjustments. Apply the
+operator-approved sum of 96 contiguous completed fifteen-minute quote-volume
+bars to the new rows only. Preserve missing original forecasts, quoted costs
+and liquidation estimates as blanks with cell-level reasons.
+
+**Files modified or created:**
+- `data/new_expired_bots.xlsx`
+- `reports/history_import_20261010/REPORT.txt`
+- `reports/history_import_20261010/validation.json`
+- `reports/history_import_20261010/publication.json`
+- `reports/history_import_20261010/candidate_links.json`
+- `reports/history_import_20261010/capture_manifest.json`
+- `reports/history_import_20261010/market_capture_manifest.json`
+- `reports/history_import_20261010/quote_volume_approval.json`
+- `reports/history_import_20261010/quote_volume_validation.json`
+- `reports/history_import_20261010/remaining_cells.csv`
+- `reports/history_import_20261010/missing_model_features.csv`
+- `reports/history_import_20261010/pnl_comparison.json`
+- `CHANGELOG.md`
+
+**Decision rationale:** Strategy identity, executed geometry and export-linked
+cash flows control the append. Capture hashes establish current integrity, not
+historical availability. Pinned HMM replays are explicitly distinguished from
+original decision-time predictions, and reconstructed minute-mark PnL curves
+are distinguished from Binance chart samples. The production 48-bar volume
+fallback and scanner/replay range semantics remain outside this import fix.
+
+**AFML / Hudson & Thames citation:** No new statistical method or model change.
+The import enforces source provenance, time cutoffs and identity deduplication;
+it does not establish admission to the finalized fresh training-pool contract.
+
+**Backward compatibility:** No breaking changes. All five sheets and existing
+cell values, types, styles and package objects are preserved; native table
+ranges extend for appended rows. No production feature schema or model changed.
+
+**Verification:** 301 focused tests passed. Validated 12,404 appended cells and
+preserved 92,136 existing cells, with zero duplicate strategy IDs or formula
+errors. All 745 rows share the active HMM with finite regime probabilities.
+All 89 approved quote-volume windows are contiguous and precede entry. The
+staged workbook was reopened, inspected and visually reviewed on all five
+sheets, then atomically published after checking the unchanged source hash.
+The 1,157 new blank cells are individually documented; all 89 new strategies
+lack verified original quoted cost and remain unready for true comparison.
+
 ### DRAWERFIX-20261005 - Match the exact Working drawer row
 
 **Date:** 2026-10-05 (America/Lima).
