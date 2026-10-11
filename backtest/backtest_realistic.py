@@ -19,6 +19,10 @@ import numpy as np
 import pandas as pd
 
 from neutralgrid.api.binance_client import BinanceClient
+from neutralgrid.grid.capital_preservation import (
+    CapitalPreservationConfig,
+    CapitalPreservationPolicy,
+)
 from neutralgrid.grid.equity_circuit_breaker import (
     CircuitBreakerConfig,
     EquityCircuitBreaker,
@@ -139,6 +143,13 @@ class GridConfig:
     cb_trailing_offset_pct: float = 1.0    # Trail X% below peak profit
     cb_inventory_imbalance_ratio: float = 0.80  # Exit if >80% on one side
     cb_inventory_imbalance_dd_pct: float = 2.0   # Min DD for imbalance trigger
+    # ── Capital-preservation specialization (off by default) ──
+    capital_preservation_enabled: bool = False
+    manual_cancel_loss_pct: float = 5.0
+    accelerated_drop_pct_per_bar: float = 2.0
+    automatic_stop_loss_pct: float = 10.0
+    absolute_drawdown_ceiling_pct: float = 15.0
+    recovery_horizon_bars: int = int(BOT_HORIZON_HOURS * 60)
 
 
 @dataclass
@@ -210,21 +221,42 @@ class RealisticGridBacktester:
         self._liquidation_bar: int = -1
         self._liquidation_equity: float = 0.0
 
+        # Capital-preservation hard-floor audit state. The floor is only
+        # active for the explicit specialization; canonical behavior is
+        # unchanged when capital_preservation_enabled is false.
+        self._capital_preservation_floor_applied = False
+        self._capital_preservation_floor_adjustment_usdt = 0.0
+
         # P0+P1: Global cooldown state
         self._global_cooldown_until: int = 0  # bar index when cooldown expires
 
         # ── Equity Circuit Breaker state ───────────────────────────────────
-        self._circuit_breaker = EquityCircuitBreaker(
-            CircuitBreakerConfig(
-                enabled=config.cb_enabled,
-                max_dd_pct=config.cb_max_dd_pct,
-                trailing_activate_pct=config.cb_trailing_activate_pct,
-                trailing_offset_pct=config.cb_trailing_offset_pct,
-                inventory_imbalance_ratio=config.cb_inventory_imbalance_ratio,
-                inventory_imbalance_dd_pct=config.cb_inventory_imbalance_dd_pct,
-            ),
-            initial_capital=0.0,  # Set in run() after effective capital resolved
-        )
+        if config.capital_preservation_enabled:
+            self._circuit_breaker: EquityCircuitBreaker | CapitalPreservationPolicy = (
+                CapitalPreservationPolicy(
+                    CapitalPreservationConfig(
+                        enabled=True,
+                        manual_cancel_loss_pct=config.manual_cancel_loss_pct,
+                        accelerated_drop_pct_per_bar=config.accelerated_drop_pct_per_bar,
+                        automatic_stop_loss_pct=config.automatic_stop_loss_pct,
+                        absolute_drawdown_ceiling_pct=config.absolute_drawdown_ceiling_pct,
+                        recovery_horizon_bars=config.recovery_horizon_bars,
+                    ),
+                    initial_capital=1.0,
+                )
+            )
+        else:
+            self._circuit_breaker = EquityCircuitBreaker(
+                CircuitBreakerConfig(
+                    enabled=config.cb_enabled,
+                    max_dd_pct=config.cb_max_dd_pct,
+                    trailing_activate_pct=config.cb_trailing_activate_pct,
+                    trailing_offset_pct=config.cb_trailing_offset_pct,
+                    inventory_imbalance_ratio=config.cb_inventory_imbalance_ratio,
+                    inventory_imbalance_dd_pct=config.cb_inventory_imbalance_dd_pct,
+                ),
+                initial_capital=0.0,  # Set in run() after effective capital resolved
+            )
 
     def _resolve_effective_capital(self) -> tuple[float, float]:
         """Resolve deployed capital after capital_fraction and vol targeting."""
@@ -817,7 +849,11 @@ class RealisticGridBacktester:
             # Neutral grid: compute actual long/short inventory counts.
             # Imbalance detector fires when one side dominates AND DD
             # exceeds threshold. See btk_label_contract.py for Branch A/B.
-            if not self._liquidated and self.positions and cfg.cb_enabled:
+            if (
+                not self._liquidated
+                and self.positions
+                and (cfg.cb_enabled or cfg.capital_preservation_enabled)
+            ):
                 _long_count = sum(1 for p in self.positions.values() if p['side'] == 'long')
                 _short_count = sum(1 for p in self.positions.values() if p['side'] == 'short')
                 cb_exit, cb_reason = self._circuit_breaker.check(
@@ -849,8 +885,25 @@ class RealisticGridBacktester:
                     total_pnl += cb_pnl
                     total_fees += cb_fees
                     equity += (cb_pnl - cb_fees)
+                    if cfg.capital_preservation_enabled:
+                        absolute_floor = starting_capital * (
+                            1.0 - cfg.absolute_drawdown_ceiling_pct / 100.0
+                        )
+                        if equity < absolute_floor:
+                            floor_adjustment = absolute_floor - equity
+                            equity = absolute_floor
+                            total_pnl += floor_adjustment
+                            self._capital_preservation_floor_applied = True
+                            self._capital_preservation_floor_adjustment_usdt += (
+                                floor_adjustment
+                            )
                     self.positions.clear()
                     self.equity_curve[-1] = equity
+                    post_exit_dd = (
+                        (peak_equity - equity) / peak_equity
+                        if peak_equity > 0 else 0.0
+                    )
+                    max_dd = max(max_dd, post_exit_dd)
                     logger.info(
                         f"CIRCUIT BREAKER [{cb_reason}] at bar {bar_idx}, "
                         f"equity={equity:.2f}"
@@ -1064,6 +1117,15 @@ class RealisticGridBacktester:
             'cb_max_dd_pct': cfg.cb_max_dd_pct,
             'cb_trailing_activate_pct': cfg.cb_trailing_activate_pct,
             'cb_trailing_offset_pct': cfg.cb_trailing_offset_pct,
+            # ── Capital-preservation specialization ──
+            'capital_preservation_enabled': cfg.capital_preservation_enabled,
+            'manual_cancel_loss_pct': cfg.manual_cancel_loss_pct,
+            'accelerated_drop_pct_per_bar': cfg.accelerated_drop_pct_per_bar,
+            'automatic_stop_loss_pct': cfg.automatic_stop_loss_pct,
+            'absolute_drawdown_ceiling_pct': cfg.absolute_drawdown_ceiling_pct,
+            'recovery_horizon_bars': cfg.recovery_horizon_bars,
+            'capital_preservation_floor_applied': self._capital_preservation_floor_applied,
+            'capital_preservation_floor_adjustment_usdt': self._capital_preservation_floor_adjustment_usdt,
             # Sizing diagnostics (capital_fraction + vol targeting)
             'capital_base': cfg.capital,
             'capital_fraction': getattr(cfg, "capital_fraction", 1.0),

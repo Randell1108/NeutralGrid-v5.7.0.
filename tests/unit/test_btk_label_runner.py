@@ -291,6 +291,9 @@ class TestEngineSettingsExtraction:
             "cb_enabled", "cb_max_dd_pct", "cb_trailing_activate_pct",
             "cb_trailing_offset_pct",
             "cb_inventory_imbalance_ratio", "cb_inventory_imbalance_dd_pct",
+            "capital_preservation_enabled", "manual_cancel_loss_pct",
+            "accelerated_drop_pct_per_bar", "automatic_stop_loss_pct",
+            "absolute_drawdown_ceiling_pct", "recovery_horizon_bars",
         }
         assert expected_keys == set(settings.keys())
 

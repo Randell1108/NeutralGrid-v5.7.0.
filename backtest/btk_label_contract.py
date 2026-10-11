@@ -118,6 +118,12 @@ ENGINE_SETTINGS_FIELDS: List[str] = [
     "cb_trailing_offset_pct",
     "cb_inventory_imbalance_ratio",
     "cb_inventory_imbalance_dd_pct",
+    "capital_preservation_enabled",
+    "manual_cancel_loss_pct",
+    "accelerated_drop_pct_per_bar",
+    "automatic_stop_loss_pct",
+    "absolute_drawdown_ceiling_pct",
+    "recovery_horizon_bars",
 ]
 
 # ── Training-standard engine defaults ────────────────────────────────────────
@@ -165,6 +171,14 @@ TRAINING_ENGINE_DEFAULTS: Dict[str, Any] = {
     "cb_trailing_offset_pct": 999.0,      # DISABLED — see trailing_activate
     "cb_inventory_imbalance_ratio": 0.85, # Exit if >85% on one side + DD > 3%
     "cb_inventory_imbalance_dd_pct": 3.0, # Raised from 2.0: less sensitive
+    # Operator-specific capital-preservation profile. Disabled in canonical
+    # training; the dedicated runner enables and stamps these explicit values.
+    "capital_preservation_enabled": False,
+    "manual_cancel_loss_pct": 5.0,
+    "accelerated_drop_pct_per_bar": 2.0,
+    "automatic_stop_loss_pct": 10.0,
+    "absolute_drawdown_ceiling_pct": 15.0,
+    "recovery_horizon_bars": int(BOT_HORIZON_HOURS * 60),
 }
 
 
@@ -289,4 +303,10 @@ def extract_engine_settings(config: Any) -> Dict[str, Any]:
         "cb_trailing_offset_pct": getattr(config, "cb_trailing_offset_pct", 1.0),
         "cb_inventory_imbalance_ratio": getattr(config, "cb_inventory_imbalance_ratio", 0.85),
         "cb_inventory_imbalance_dd_pct": getattr(config, "cb_inventory_imbalance_dd_pct", 3.0),
+        "capital_preservation_enabled": getattr(config, "capital_preservation_enabled", False),
+        "manual_cancel_loss_pct": getattr(config, "manual_cancel_loss_pct", 5.0),
+        "accelerated_drop_pct_per_bar": getattr(config, "accelerated_drop_pct_per_bar", 2.0),
+        "automatic_stop_loss_pct": getattr(config, "automatic_stop_loss_pct", 10.0),
+        "absolute_drawdown_ceiling_pct": getattr(config, "absolute_drawdown_ceiling_pct", 15.0),
+        "recovery_horizon_bars": getattr(config, "recovery_horizon_bars", int(BOT_HORIZON_HOURS * 60)),
     }

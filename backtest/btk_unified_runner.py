@@ -113,6 +113,9 @@ def build_training_config(
         "cb_enabled", "cb_max_dd_pct", "cb_trailing_activate_pct",
         "cb_trailing_offset_pct", "cb_inventory_imbalance_ratio",
         "cb_inventory_imbalance_dd_pct",
+        "capital_preservation_enabled", "manual_cancel_loss_pct",
+        "accelerated_drop_pct_per_bar", "automatic_stop_loss_pct",
+        "absolute_drawdown_ceiling_pct", "recovery_horizon_bars",
     })
     _physics_overridden = False
     _overridden_fields: list[str] = []
@@ -287,6 +290,9 @@ def run_backtest(
         "cb_enabled", "cb_max_dd_pct", "cb_trailing_activate_pct",
         "cb_trailing_offset_pct", "cb_inventory_imbalance_ratio",
         "cb_inventory_imbalance_dd_pct",
+        "capital_preservation_enabled", "manual_cancel_loss_pct",
+        "accelerated_drop_pct_per_bar", "automatic_stop_loss_pct",
+        "absolute_drawdown_ceiling_pct", "recovery_horizon_bars",
     )
     _mismatched_fields: list[str] = []
     for _field in _PHYSICS_FIELDS_TO_CHECK:

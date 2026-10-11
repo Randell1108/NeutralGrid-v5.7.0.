@@ -2,6 +2,53 @@
 
 ## [unreleased] - Neutral Grid v5.7.0
 
+### CAPITAL-RULE-20261001 - Add fail-closed capital-preservation simulation profile
+
+**Date:** 2026-10-01.
+
+Added an isolated per-bot capital-preservation policy over the canonical unified
+backtest runner. The profile exits at a 10% automatic loss, manually exits at
+or below 5% after a two-percentage-point one-minute equity decline, allows a
+continuous six-hour recovery window for slower 5% breaches, and enforces a 15%
+absolute loss floor per bot. Default engine behavior remains unchanged. The
+project instructions now retain capital preservation as Rule #1.
+
+**Files modified:**
+- `AGENTS.md`
+- `src/neutralgrid/grid/capital_preservation.py`
+- `backtest/backtest_realistic.py`
+- `backtest/btk_label_contract.py`
+- `backtest/btk_unified_runner.py`
+- `backtest/btk_capital_preservation_runner.py`
+- `tests/unit/test_capital_preservation_policy.py`
+- `tests/unit/test_btk_label_runner.py`
+- `outputs/01a0a16d-66e5-7e03-8aad-eb2aa640c959/portfolio_sim_capital_preservation_20261001/simulate_capital_preservation.py`
+- `CHANGELOG.md`
+
+**Decision rationale:** Capital preservation is an operator-mandated risk
+constraint. Keeping the policy disabled by default prevents diagnostic exit
+physics from contaminating canonical labels. Explicit trigger provenance,
+per-bot absolute-loss validation, and a fail-closed ceiling audit prevent a
+close-only one-minute replay from silently reporting gap-through losses as
+policy-compliant.
+
+**AFML / Hudson & Thames citation:** AFML Chapter 3 informs explicit,
+path-dependent barrier evaluation. The numerical thresholds and recovery rule
+are operator specifications, not estimates derived from that reference.
+
+**Backward compatibility:** No breaking changes. The canonical engine and
+training defaults retain the prior behavior unless the dedicated
+`capital_preservation_v1` runner is selected. Specialized results are stamped
+non-authoritative.
+
+**Verification:** 124 focused engine, funding, mark-price, liquidation,
+rounding, contract, horizon, and policy tests passed. The new package policy
+module passed pyright with zero errors and warnings. A pre-existing pandas
+scalar-bool warning remains at `backtest/btk_unified_runner.py:214` when the
+normally excluded repository-level backtest directory is checked directly.
+The 546-run diagnostic simulation reconciled every bot to within 5.684e-14 and
+observed no per-bot absolute loss beyond 15%.
+
 ### SAR-SHADOW-20261001 - Freeze action evidence contract and isolate challenger
 
 **Date:** 2026-10-01.

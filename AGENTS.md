@@ -109,6 +109,12 @@
   2. [Step] → verify: [how]
 - After modifying files covered by the Feature Pipeline Update Rule (safety-invariants.md), verify all three files are consistent before reporting done.
 
+### Capital Preservation Rule
+- Capital preservation is Rule #1 for portfolio simulations, backtests, and live-bot decision support.
+- Keep every loss threshold, manual intervention rule, recovery definition, and drawdown ceiling explicit and reproducible; never infer an unstated risk threshold.
+- Apply capital-preservation limits per bot unless the operator explicitly specifies a portfolio-level limit.
+- Fail closed when a requested drawdown ceiling cannot be validated from the available price and execution evidence.
+
 ## Live Bot Data Storage Policy
 
 - All newly ingested live bot data must be stored under `D:\Neutral Grid v5.7.0\Live` (this repository's `Live\` folder)
