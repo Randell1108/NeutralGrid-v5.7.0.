@@ -225,7 +225,7 @@ For each bot in the latest YAML, per tick:
      matched/realized harvest, an open ladder, and an explicit Low Risk label.
    - A regime-only END remains END and gains `telemetry_no_harvest` when the
      ladder exists but matched profit evidence is non-positive.
-   - Complete Chrome drawer fields are preserved in JSONL: transaction fees,
+   - Complete Brave drawer fields are preserved in JSONL: transaction fees,
      signed position/inventory, risk/liquidation data, pending-order ladder,
      grid margins/geometry, TP/SL, and UI order-history rows.
    - State records a deployment-scoped, timestamp-deduplicated peak PnL and
@@ -302,11 +302,23 @@ python -m neutralgrid.live.decision.execution_outcome_analysis `
   --output data/live_decisions/execution_outcome_observational.json
 ```
 
-The report rejects duplicate finalized candidate or strategy identities,
+The report deduplicates exact finalized copies and rejects conflicting
+strategy/symbol identities. A reused candidate ID requires the exact
+strategy/symbol match; a candidate mismatch cannot fall back to another join.
+The report
 excludes pre-deploy/post-closure ticks, deduplicates repeated evidence rows,
 collapses ticks to one row per exact bot, and creates a bot-disjoint
 chronological description. It selects no threshold, creates no promotion gate,
 does not claim causal gain protection, and never edits scanner configuration.
+
+D5/D6 calibration additionally requires one verified HMM lineage, feature
+profile and decision contract. Fit outcomes must be finalized before the first
+OOS decision. Copied decision logs do not multiply evidence; conflicting
+decisions for the same bot and evaluation time block analysis. Probabilities
+must be finite and in [0, 1], and finalized PnL must be finite. New decision
+records carry `deploy_ts`; explicit deployment conflicts are rejected. Legacy
+unstamped records still require the existing exact identity and life-window
+checks. These checks do not enable the meta tilt.
 
 ### Persistent PnL evidence and shadow forecasting
 

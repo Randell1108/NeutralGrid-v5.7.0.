@@ -5,7 +5,6 @@ import warnings
 from pathlib import Path
 
 import pandas as pd
-import pytest
 
 from neutralgrid.live.decision.meta_shadow_analysis import (
     ShadowAnalysisConfig,
@@ -94,7 +93,7 @@ def test_join_falls_back_to_strategy_symbol_only_when_decision_candidate_missing
     assert joined.iloc[0]["candidate_id"] == "ENAUSDT_20260618_115611_25245053"
 
 
-def test_join_rejects_duplicate_finalized_outcome_identity() -> None:
+def test_join_disambiguates_reused_candidate_by_exact_bot_identity() -> None:
     decisions = pd.DataFrame(
         [
             {
@@ -122,8 +121,10 @@ def test_join_rejects_duplicate_finalized_outcome_identity() -> None:
         ]
     )
 
-    with pytest.raises(ValueError, match="duplicate candidate_id"):
-        join_shadow_to_outcomes(decisions, outcomes)
+    joined = join_shadow_to_outcomes(decisions, outcomes)
+    assert len(joined) == 1
+    assert joined.iloc[0]["strategy_id_outcome"] == "412730355"
+    assert joined.iloc[0]["pnl_pct"] == 1.0
 
 
 def test_candidate_join_rejects_conflicting_live_identity() -> None:
@@ -420,6 +421,15 @@ def test_pending_authoritative_outcomes_reports_unmatched_d7_rows() -> None:
     assert pending["pending_unique_join_keys"] == 2
     assert pending["pending_by_join_key"] == [
         {
+            "join_key": "412730355|ENAUSDT",
+            "join_method": "candidate_id",
+            "symbol": "ENAUSDT",
+            "strategy_id": "412730355",
+            "candidate_id": "ENAUSDT_20260618_115611_25245053",
+            "decision_rows": 1,
+            "first_ts_utc": "2026-06-21T00:01:00+00:00",
+        },
+        {
             "join_key": "412730999|AVAXUSDT",
             "join_method": "strategy_symbol",
             "symbol": "AVAXUSDT",
@@ -427,15 +437,6 @@ def test_pending_authoritative_outcomes_reports_unmatched_d7_rows() -> None:
             "candidate_id": "",
             "decision_rows": 1,
             "first_ts_utc": "2026-06-21T00:02:00+00:00",
-        },
-        {
-            "join_key": "ENAUSDT_20260618_115611_25245053",
-            "join_method": "candidate_id",
-            "symbol": "ENAUSDT",
-            "strategy_id": "412730355",
-            "candidate_id": "ENAUSDT_20260618_115611_25245053",
-            "decision_rows": 1,
-            "first_ts_utc": "2026-06-21T00:01:00+00:00",
         },
     ]
 
@@ -450,7 +451,9 @@ def test_analysis_split_keeps_each_join_key_on_one_side() -> None:
                     "candidate_id": f"CID_{bot_idx}",
                     "ts_utc": f"2026-06-21T00:{bot_idx}{tick_idx}:00+00:00",
                     "start_time_utc": "2026-06-20T00:00:00+00:00",
-                    "end_time_utc": "2026-06-22T00:00:00+00:00",
+                    "end_time_utc": f"2026-06-21T00:{bot_idx}2:00+00:00",
+                    "active_hmm_version": "fixture-hmm", "linked_hmm_version": "fixture-hmm",
+                    "meta_feature_profile": "fixture-profile", "contract_version": "1.1",
                     "verdict": "ADJUST",
                     "meta_proba": 0.40 if bot_idx % 2 == 0 else 0.80,
                     "meta_authoritative": True,
@@ -518,7 +521,9 @@ def _synthetic_joined_rows() -> pd.DataFrame:
                 "candidate_id": f"CID_{idx:03d}",
                 "ts_utc": f"2026-06-21T00:{idx:02d}:00+00:00",
                 "start_time_utc": "2026-06-20T00:00:00+00:00",
-                "end_time_utc": "2026-06-22T00:00:00+00:00",
+                "end_time_utc": f"2026-06-21T00:{idx:02d}:30+00:00",
+                "active_hmm_version": "fixture-hmm", "linked_hmm_version": "fixture-hmm",
+                "meta_feature_profile": "fixture-profile", "contract_version": "1.1",
                 "verdict": "ADJUST",
                 "meta_proba": 0.40 if low_confidence else 0.80,
                 "meta_authoritative": True,

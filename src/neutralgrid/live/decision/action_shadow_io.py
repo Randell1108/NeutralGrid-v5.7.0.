@@ -8,6 +8,7 @@ from decimal import Decimal
 from pathlib import Path
 from typing import Any, Mapping, Sequence, cast
 
+from neutralgrid.core.constants import STATE_ACTION_REWARD_CONTRACT_VERSION, STATE_ACTION_REWARD_SCHEMA
 from neutralgrid.live.decision.action_challenger import ActionArtifact, predict_shadow, unavailable
 from neutralgrid.live.decision.pnl_forecast import FEATURE_COLUMNS, _feature_rows
 from neutralgrid.live.decision.pnl_history import validate_pnl_observation
@@ -34,8 +35,25 @@ def _timestamp(value: Any) -> datetime:
     return utc(datetime.fromisoformat(value.replace("Z", "+00:00")))
 
 
+def _decision_time(row: Mapping[str, Any]) -> datetime:
+    """Use the per-bot as-of time; legacy rows may only have the batch time."""
+    evaluation = _mapping(row.get("evaluation"))
+    return _timestamp(evaluation.get("evaluated_at_utc", row.get("ts")))
+
+
+def _symbol_available(evaluation: Mapping[str, Any]) -> bool | None:
+    """Translate the scanner's flags without treating missing data as success."""
+    unavailable_flag = evaluation.get("symbol_unavailable")
+    transient = evaluation.get("transient_fetch_error")
+    if unavailable_flag is True:
+        return False
+    if unavailable_flag is False and transient is False:
+        return True
+    return None
+
+
 def state_from_observations(observations: Sequence[Mapping[str, Any]], row: Mapping[str, Any]) -> State:
-    asof = _timestamp(row.get("ts"))
+    asof = _decision_time(row)
     past = [o for o in observations if _timestamp(o["evaluated_at_utc"]) <= asof]
     frame, _ = _feature_rows(past)
     if frame.empty:
@@ -64,6 +82,8 @@ def state_from_observations(observations: Sequence[Mapping[str, Any]], row: Mapp
         sources[str(record_path)] = SourceRef(path=str(record_path), sha256=digest)
     if row.get("symbol") != bot.symbol or str(row.get("strategy_id")) != bot.strategy_id:
         raise ValueError("scanner/observation identity mismatch")
+    if row.get("deploy_ts") is not None and _timestamp(row["deploy_ts"]) != bot.deployed_at:
+        raise ValueError("scanner/observation deployment mismatch")
     numeric = frame.iloc[-1].to_dict()
     features = {c: float(numeric[c]) if c in numeric and math.isfinite(float(numeric[c])) else None for c in FEATURE_COLUMNS}
     grid, position = _mapping(latest["grid"]), _mapping(latest["position"])
@@ -80,7 +100,7 @@ def state_from_observations(observations: Sequence[Mapping[str, Any]], row: Mapp
                  unrealized_usdt=position.get("position_pnl_usdt"), position_quantity=position.get("size_base"),
                  entry_price=position.get("entry_price"), market_price=evaluation.get("price"),
                  market_captured_at=_timestamp(l2["captured_at_utc"]) if l2.get("captured_at_utc") else None,
-                 symbol_available=evaluation.get("symbol_available"),
+                 symbol_available=_symbol_available(evaluation),
                  liquidation_buffer_pct=risk.get("liquidation_distance_to_mark_pct"),
                  peak_equity_usdt=risk.get("peak_equity_usdt"), hmm_lineage=evaluation.get("active_hmm_version"),
                  features=features)
@@ -89,7 +109,16 @@ def state_from_observations(observations: Sequence[Mapping[str, Any]], row: Mapp
 def report_shadow_row(*, row: Mapping[str, Any], observations: Sequence[Mapping[str, Any]],
                       model_path: Path | None, limits_payload: Mapping[str, Any] | None,
                       live_root: Path | None = None) -> dict[str, Any]:
-    incumbent = Verdict(str(row.get("verdict")))
+    try:
+        incumbent = Verdict(str(row.get("verdict")))
+    except (TypeError, ValueError):
+        # An invalid proposal is neither CONTINUE nor an observed END action.
+        return {"schema_version": STATE_ACTION_REWARD_SCHEMA,
+                "contract_version": STATE_ACTION_REWARD_CONTRACT_VERSION,
+                "record_type": "shadow_action_decision", "incumbent_verdict": None,
+                "verdict": None, "available": False, "influence_enabled": False,
+                "execution_eligible": False, "observed_reward": None,
+                "diagnostics": ["invalid_incumbent_verdict"]}
     if incumbent == Verdict.END and live_root is None:
         return unavailable(incumbent, "incumbent_end_preserved")
     try:
@@ -105,10 +134,10 @@ def report_shadow_row(*, row: Mapping[str, Any], observations: Sequence[Mapping[
         precision = _mapping(row.get("evaluation")).get("price_quantum")
         quantum = Decimal(str(precision)) if precision is not None else None
         result = predict_shadow(incumbent=action, state=state, limits=limits, quantum=quantum,
-                                artifact=model, now=_timestamp(row["ts"]))
+                                artifact=model, now=state.available_at)
         if live_root is not None:
             proposal = Action.model_validate(result["proposal"]) if result.get("available") else action
-            decision = Decision(decided_at=_timestamp(row["ts"]), pre_state=state,
+            decision = Decision(decided_at=state.available_at, pre_state=state,
                                 incumbent=action, shadow=proposal, limits=limits, origin="live",
                                 config_hash=configuration_hash(limits), feature_hash=feature_definition_hash(),
                                 diagnostics=tuple(result["diagnostics"]))

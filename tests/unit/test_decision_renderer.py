@@ -178,6 +178,7 @@ def test_jsonl_includes_full_evaluation_fields(tmp_path: Path) -> None:
 
     line = writer.path_for(_T0).read_text(encoding="utf-8").strip()
     rec = json.loads(line)
+    assert rec["deploy_ts"] == "2026-05-01T00:00:00+00:00"
     e = rec["evaluation"]
     expected_keys = {
         "evaluated_at_utc", "grid_lower", "grid_upper", "price",

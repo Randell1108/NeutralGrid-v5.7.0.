@@ -46,7 +46,9 @@ def load_decision_jsonl(paths: Sequence[Path]) -> pd.DataFrame:
     """Load D7 JSONL records into one row per live decision tick."""
 
     rows: list[dict[str, Any]] = []
-    for path in paths:
+    seen: dict[tuple[str, str, str], str] = {}
+    fingerprints: set[str] = set()
+    for path in dict.fromkeys(paths):
         if not path.exists():
             continue
         for line_no, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
@@ -57,6 +59,23 @@ def load_decision_jsonl(paths: Sequence[Path]) -> pd.DataFrame:
                 record = json.loads(text)
             except json.JSONDecodeError as exc:
                 raise ValueError(f"invalid JSON in {path}:{line_no}: {exc}") from exc
+            if not isinstance(record, dict):
+                raise ValueError(f"decision is not an object in {path}:{line_no}")
+            fingerprint = json.dumps(record, sort_keys=True, separators=(",", ":"))
+            if fingerprint in fingerprints:
+                continue
+            evaluation = record.get("evaluation")
+            evaluation = evaluation if isinstance(evaluation, dict) else {}
+            key = (
+                _clean_text(record.get("strategy_id")),
+                _clean_text(record.get("symbol")),
+                _clean_text(evaluation.get("evaluated_at_utc", record.get("ts"))),
+            )
+            if all(key) and key in seen and seen[key] != fingerprint:
+                raise ValueError(f"conflicting decision identity {key} in {path}:{line_no}")
+            if all(key):
+                seen[key] = fingerprint
+            fingerprints.add(fingerprint)
             rows.append(_decision_row(record, path=path, line_no=line_no))
 
     return pd.DataFrame(rows)
@@ -83,7 +102,9 @@ def load_live_outcomes(
 def join_shadow_to_outcomes(decisions: pd.DataFrame, outcomes: pd.DataFrame) -> pd.DataFrame:
     """Inner-join live shadow decisions to outcomes by exact live-bot identity.
 
-    Preferred identity is ``candidate_id``. Legacy JSONL rows often predate D7
+    A candidate may have multiple deployments. A reused candidate requires an
+    exact strategy/symbol match; candidate identity alone cannot select a bot.
+    Legacy JSONL rows often predate D7
     candidate stamping, so rows without a candidate may fall back to the exact
     live ``strategy_id`` + ``symbol`` pair from the expired-bot outcome row. Rows
     that already claim a candidate never use the fallback; a candidate mismatch
@@ -95,6 +116,12 @@ def join_shadow_to_outcomes(decisions: pd.DataFrame, outcomes: pd.DataFrame) -> 
 
     decisions_norm = _normalise_join_identity(decisions)
     outcomes_norm = _normalise_join_identity(outcomes)
+    # Remove exact copies only. Distinct outcomes must never be selected with
+    # first/last-wins semantics, even when they share a scan candidate.
+    signatures = outcomes_norm.apply(
+        lambda row: json.dumps(_jsonable(row.to_dict()), sort_keys=True, default=str), axis=1
+    )
+    outcomes_norm = cast(pd.DataFrame, outcomes_norm.loc[~signatures.duplicated()].copy())
     _assert_unique_outcome_identities(outcomes_norm)
     joined_parts: list[pd.DataFrame] = []
 
@@ -112,6 +139,13 @@ def join_shadow_to_outcomes(decisions: pd.DataFrame, outcomes: pd.DataFrame) -> 
         )
         if not by_candidate.empty:
             conflicts = pd.Series(False, index=by_candidate.index, dtype=bool)
+            candidate_ids = cast(pd.Series, outcomes_norm.loc[outcome_candidates, "candidate_id"])
+            reused = set(candidate_ids.loc[candidate_ids.duplicated(keep=False)])
+            for field in ("strategy_id", "symbol"):
+                conflicts |= (
+                    cast(pd.Series, by_candidate["candidate_id"]).isin(reused)
+                    & cast(pd.Series, by_candidate[f"{field}_decision"]).eq("")
+                )
             for field in ("strategy_id", "symbol"):
                 decision_identity = cast(pd.Series, by_candidate[f"{field}_decision"])
                 outcome_identity = cast(pd.Series, by_candidate[f"{field}_outcome"])
@@ -129,6 +163,14 @@ def join_shadow_to_outcomes(decisions: pd.DataFrame, outcomes: pd.DataFrame) -> 
         if not by_candidate.empty:
             by_candidate["join_method"] = "candidate_id"
             by_candidate["join_key"] = cast(pd.Series, by_candidate["candidate_id"]).astype(str)
+            exact = (
+                cast(pd.Series, by_candidate["strategy_id_outcome"]).ne("")
+                & cast(pd.Series, by_candidate["symbol_outcome"]).ne("")
+            )
+            by_candidate.loc[exact, "join_key"] = (
+                cast(pd.Series, by_candidate.loc[exact, "strategy_id_outcome"])
+                + "|" + cast(pd.Series, by_candidate.loc[exact, "symbol_outcome"])
+            )
             joined_parts.append(by_candidate)
 
     fallback_required = {"strategy_id", "symbol"}
@@ -174,7 +216,17 @@ def join_shadow_to_outcomes(decisions: pd.DataFrame, outcomes: pd.DataFrame) -> 
 
     if not joined_parts:
         return pd.DataFrame()
-    return cast(pd.DataFrame, pd.concat(joined_parts, ignore_index=True, sort=False))
+    joined = cast(pd.DataFrame, pd.concat(joined_parts, ignore_index=True, sort=False))
+    if "deploy_ts_utc" in joined.columns:
+        declared = cast(pd.Series, joined["deploy_ts_utc"])
+        supplied = declared.notna() & declared.astype(str).str.strip().ne("")
+        deployed = pd.to_datetime(declared, utc=True, errors="coerce")
+        starts = _datetime_series(joined, "start_time_utc")
+        conflicts = supplied & (deployed.isna() | starts.isna() | deployed.ne(starts))
+        if bool(conflicts.any()):
+            logger.warning("Rejected %d join rows with unverified deployment times", int(conflicts.sum()))
+            joined = cast(pd.DataFrame, joined.loc[~conflicts].copy())
+    return joined
 
 
 def _assert_unique_outcome_identities(outcomes: pd.DataFrame) -> None:
@@ -185,9 +237,14 @@ def _assert_unique_outcome_identities(outcomes: pd.DataFrame) -> None:
     duplicate_candidates = sorted(
         set(candidate_ids.loc[candidate_ids.duplicated(keep=False)].astype(str))
     )
-    if duplicate_candidates:
+    # Repeated scan candidates are valid only when every deployment carries
+    # its own complete identity. The strategy uniqueness guard below remains.
+    incomplete = candidate_ids.isin(duplicate_candidates) & ~(
+        _nonempty_text_mask(outcomes, "strategy_id") & _nonempty_text_mask(outcomes, "symbol")
+    )
+    if bool(incomplete.any()):
         raise ValueError(
-            "finalized outcomes contain duplicate candidate_id values: "
+            "finalized outcomes contain duplicate candidate_id values without exact deployment identities: "
             f"{duplicate_candidates[:5]}"
         )
 
@@ -265,6 +322,18 @@ def analyze_joined_shadow(
         )
         return _finalize_payload(payload)
 
+    cohort_fields = ("active_hmm_version", "linked_hmm_version", "meta_feature_profile", "contract_version")
+    cohort_audit: dict[str, Any] = {}
+    for name in cohort_fields:
+        values = cast(pd.Series, eligible[name]).fillna("").astype(str).str.strip() if name in eligible else pd.Series("", index=eligible.index)
+        cohort_audit[name] = sorted(set(values))
+    payload["cohort_audit"] = cohort_audit
+    if (any(len(values) != 1 or not values[0] for values in cohort_audit.values())
+            or cohort_audit["active_hmm_version"] != cohort_audit["linked_hmm_version"]):
+        payload["status"] = "unverified_calibration_cohort"
+        payload["reason"] = "Calibration requires one verified HMM lineage, feature profile and decision contract"
+        return _finalize_payload(payload)
+
     eligible = cast(pd.DataFrame, eligible.sort_values("ts_utc").reset_index(drop=True))
     fit, oos = _split_fit_oos_by_join_key(eligible, fit_fraction=config.fit_fraction)
     fit_adjust = _adjust_rows(fit)
@@ -280,6 +349,7 @@ def analyze_joined_shadow(
         }
     )
     payload["split_audit"] = _split_audit(fit, oos)
+    payload["split_audit"]["purged_fit_rows"] = len(eligible) - len(fit) - len(oos)
     payload["calibration"] = _calibration_metrics(eligible, config=config)
     payload["decision_metrics_all_eligible"] = _decision_metrics(eligible)
 
@@ -463,7 +533,7 @@ def _pending_authoritative_outcomes(
     df = _decision_identity_frame(decisions)
     meta_proba = _numeric_series(df, "meta_proba")
     eligible_meta_mask = (
-        meta_proba.notna()
+        meta_proba.between(0.0, 1.0)
         & _bool_series(df, "meta_authoritative")
         & _bool_series(df, "meta_full_fidelity")
     )
@@ -512,7 +582,7 @@ def _decision_identity_frame(decisions: pd.DataFrame) -> pd.DataFrame:
     strategy_key = strategy_id + "|" + symbol
     has_strategy_key = (strategy_id != "") & (symbol != "")
     df["join_method"] = np.where(candidate_id != "", "candidate_id", "strategy_symbol")
-    df["join_key"] = np.where(candidate_id != "", candidate_id, np.where(has_strategy_key, strategy_key, ""))
+    df["join_key"] = np.where(has_strategy_key, strategy_key, candidate_id)
     return df
 
 
@@ -587,17 +657,19 @@ def _eligibility_funnel(joined: pd.DataFrame, *, config: ShadowAnalysisConfig) -
     join_key = _nonempty_text_mask(df, "join_key")
     meta_proba = _numeric_series(df, "meta_proba")
     pnl_pct = _numeric_series(df, "pnl_pct")
+    valid_probability = meta_proba.between(0.0, 1.0)
+    finite_outcome = pd.Series(np.isfinite(np.asarray(pnl_pct, dtype=float)), index=df.index)
     ts_utc = _datetime_series(df, "ts_utc")
     meta_authoritative = _bool_series(df, "meta_authoritative")
     meta_full_fidelity = _bool_series(df, "meta_full_fidelity")
     post_outcome, pre_deploy, window_missing = _life_window_outside_mask(df)
     authoritative_full_fidelity_meta = (
-        meta_proba.notna() & meta_authoritative & meta_full_fidelity
+        valid_probability & meta_authoritative & meta_full_fidelity
     )
     eligible = (
         join_key
-        & meta_proba.notna()
-        & pnl_pct.notna()
+        & valid_probability
+        & finite_outcome
         & ts_utc.notna()
         & meta_authoritative
         & meta_full_fidelity
@@ -621,6 +693,8 @@ def _eligibility_funnel(joined: pd.DataFrame, *, config: ShadowAnalysisConfig) -
             "missing_join_key": int((~join_key).sum()),
             "missing_meta_proba": int(meta_proba.isna().sum()),
             "missing_pnl_pct": int(pnl_pct.isna().sum()),
+            "invalid_meta_probability": int((meta_proba.notna() & ~valid_probability).sum()),
+            "nonfinite_outcome": int((pnl_pct.notna() & ~finite_outcome).sum()),
             "missing_ts_utc": int(ts_utc.isna().sum()),
             "not_authoritative": int((~meta_authoritative).sum()),
             "not_full_fidelity": int((~meta_full_fidelity).sum()),
@@ -696,6 +770,12 @@ def _split_fit_oos_by_join_key(
     join_keys = cast(pd.Series, df["join_key"]).fillna("").astype(str)
     fit = cast(pd.DataFrame, df.loc[join_keys.isin(fit_keys)].copy())
     oos = cast(pd.DataFrame, df.loc[~join_keys.isin(fit_keys)].copy())
+    # A finalized outcome is a forward label. It must be known before the
+    # first held-out decision, not merely belong to an earlier-starting bot.
+    if not oos.empty:
+        boundary = cast(pd.Series, oos["ts_utc"]).min()
+        ends = _datetime_series(fit, "end_time_utc")
+        fit = cast(pd.DataFrame, fit.loc[ends.notna() & ends.lt(boundary)].copy())
     return fit, oos
 
 
@@ -709,6 +789,10 @@ def _split_audit(fit: pd.DataFrame, oos: pd.DataFrame) -> dict[str, Any]:
         "oos_join_keys": len(oos_keys),
         "overlap_join_keys": overlap,
         "overlap_join_key_count": len(overlap),
+        "fit_outcomes_before_oos": (
+            bool(_datetime_series(fit, "end_time_utc").max() < _datetime_series(oos, "ts_utc").min())
+            if not fit.empty and not oos.empty else False
+        ),
     }
 
 
@@ -775,7 +859,10 @@ def _decision_row(record: dict[str, Any], *, path: Path, line_no: int) -> dict[s
     return {
         "source_path": str(path),
         "source_line": int(line_no),
-        "ts_utc": record.get("ts"),
+        "ts_utc": evaluation.get("evaluated_at_utc", record.get("ts")),
+        "batch_ts_utc": record.get("ts"),
+        "evaluated_at_utc": evaluation.get("evaluated_at_utc"),
+        "deploy_ts_utc": record.get("deploy_ts"),
         "symbol": record.get("symbol"),
         "strategy_id": _clean_text(record.get("strategy_id")),
         "candidate_id": candidate_id,
@@ -791,6 +878,9 @@ def _decision_row(record: dict[str, Any], *, path: Path, line_no: int) -> dict[s
         "meta_full_fidelity": evaluation.get("meta_full_fidelity"),
         "meta_would_tilt": record.get("meta_would_tilt"),
         "meta_influenced_verdict": record.get("meta_influenced_verdict"),
+        "active_hmm_version": evaluation.get("active_hmm_version"),
+        "linked_hmm_version": evaluation.get("linked_hmm_version"),
+        "meta_feature_profile": evaluation.get("meta_feature_profile"),
         # Verdict-inert execution evidence is flattened for exact finalized-
         # outcome linkage. Missing fields remain missing; no value is imputed.
         "execution_risk_source": execution_risk.get("source"),
@@ -926,8 +1016,8 @@ def _prepare_eligible(joined: pd.DataFrame, *, config: ShadowAnalysisConfig) -> 
     post_outcome, pre_deploy, window_missing = _life_window_outside_mask(df)
     mask = (
         (cast(pd.Series, df["join_key"]).str.strip() != "")
-        & cast(pd.Series, df["meta_proba"]).notna()
-        & cast(pd.Series, df["pnl_pct"]).notna()
+        & cast(pd.Series, df["meta_proba"]).between(0.0, 1.0)
+        & np.isfinite(np.asarray(df["pnl_pct"], dtype=float))
         & cast(pd.Series, df["ts_utc"]).notna()
         & _bool_series(df, "meta_authoritative")
         & _bool_series(df, "meta_full_fidelity")
@@ -1148,20 +1238,27 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         min_oos_rows=int(args.min_oos_rows),
         min_oos_tilt_rows=int(args.min_oos_tilt_rows),
     )
-    result = analyze_from_files(
-        decision_paths=_expand_paths(args.decisions),
-        expired_bots_path=args.expired_bots,
-        linkage_dir=args.linkage_dir,
-        scanner_results_dir=args.scanner_results_dir,
-        min_bot_date=str(args.min_bot_date),
-        config=config,
-    )
+    try:
+        result = analyze_from_files(
+            decision_paths=_expand_paths(args.decisions),
+            expired_bots_path=args.expired_bots,
+            linkage_dir=args.linkage_dir,
+            scanner_results_dir=args.scanner_results_dir,
+            min_bot_date=str(args.min_bot_date),
+            config=config,
+        )
+    except (OSError, ValueError) as exc:
+        logger.error("Shadow analysis blocked: %s", exc)
+        result = _finalize_payload({
+            "status": "analysis_blocked", "reason": str(exc),
+            "d5_calibrated": False, "d6_oos_proven": False, "ready_to_enable": False,
+        })
     text = json.dumps(_jsonable(result), indent=2, sort_keys=True)
     if args.output is not None:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(text + "\n", encoding="utf-8")
     print(text)
-    return 0
+    return 2 if result["status"] == "analysis_blocked" else 0
 
 
 if __name__ == "__main__":

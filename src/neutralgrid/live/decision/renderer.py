@@ -175,6 +175,7 @@ def _to_jsonl_record(result: ScanResult, now: datetime) -> dict[str, Any]:
         "contract_version": DECISION_CONTRACT_VERSION,
         "symbol": result.spec.symbol,
         "strategy_id": result.spec.strategy_id,
+        "deploy_ts": result.spec.deploy_ts.astimezone(timezone.utc).isoformat(),
         "candidate_id": candidate_id,
         "execution_telemetry": (
             result.spec.execution_telemetry.to_dict()
