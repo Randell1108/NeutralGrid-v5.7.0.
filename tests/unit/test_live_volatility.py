@@ -53,7 +53,7 @@ def _training_cycle_manifest(
     payload = {
         "schema_version": "neutralgrid_private_telemetry_cycle_v2",
         "status": "complete",
-        "source": "chrome_plugin",
+        "source": "brave_plugin",
         "page_identity": page_identity,
         "source_url": source_url,
         "cycle_completed_at_utc": datetime(2026, 8, 23, tzinfo=UTC).isoformat(),

@@ -1,6 +1,6 @@
 """Strict parser for Binance Futures Grid drawer telemetry.
 
-The Chrome collector stores the drawer text verbatim.  This module converts
+The Brave collector stores the drawer text verbatim.  This module converts
 that UI snapshot into the existing live-decision telemetry schema without
 silently inventing missing values.  Order-history rows remain labelled as UI
 snapshot evidence; they are not a substitute for event-complete private API

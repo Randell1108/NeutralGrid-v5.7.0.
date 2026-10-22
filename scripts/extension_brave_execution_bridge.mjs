@@ -343,7 +343,7 @@ async function submit(tab, payload) {
 async function dispatch(tab, action, payload) {
   switch (action) {
     case "hello":
-      return { provider: "chrome-extension", url: await tab.url() };
+      return { provider: "brave-extension", url: await tab.url() };
     case "read_state":
       return { raw_text: await openExactDrawer(tab, payload) };
     case "open_modify_form":
@@ -375,7 +375,7 @@ export async function startExtensionExecutionBridge({
   host = "127.0.0.1",
   port = 17731,
 } = {}) {
-  assert(tab?.playwright, "a claimed Chrome tab is required");
+  assert(tab?.playwright, "a claimed Brave tab is required");
   assert(TOKEN_RE.test(String(token || "")), "bridge token must be 64 lowercase hex characters");
   assert(host === "127.0.0.1", "bridge must bind to IPv4 loopback");
   assert(Number.isInteger(port) && port >= 1024 && port <= 65535, "invalid bridge port");

@@ -55,8 +55,8 @@ def _load_roster(path: Path) -> dict[str, str]:
         raise VolatilityTrainingError("cycle manifest must have status=complete")
     if payload.get("schema_version") != "neutralgrid_private_telemetry_cycle_v2":
         raise VolatilityTrainingError("unsupported cycle manifest schema")
-    if payload.get("source") != "chrome_plugin":
-        raise VolatilityTrainingError("cycle manifest source is not chrome_plugin")
+    if payload.get("source") != "brave_plugin":
+        raise VolatilityTrainingError("cycle manifest source is not brave_plugin")
     page_identity = payload.get("page_identity")
     if not isinstance(page_identity, str) or not page_identity.strip():
         raise VolatilityTrainingError("cycle manifest page identity is missing")

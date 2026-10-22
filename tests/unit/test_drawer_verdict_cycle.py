@@ -56,13 +56,13 @@ def admitted_cycle(tmp_path, monkeypatch):
     raw.write_text("original capture", encoding="utf-8")
     manifest = tmp_path / "cycles" / "cycle.json"
     manifest.parent.mkdir()
-    manifest.write_text(json.dumps({"source": "chrome_plugin"}), encoding="utf-8")
+    manifest.write_text(json.dumps({"source": "brave_plugin"}), encoding="utf-8")
     cycle = replace(cycle_at(10), manifest_path=manifest,
                     bots=(replace(cycle_at(10).bots[0], raw_text_path=raw),))
     args = recurring.parse_args(["--cycle-manifest", str(manifest), "--audit-dir", str(tmp_path / "audit"),
                                  "--diff-depth-manifest", str(tmp_path / "public.json")])
     monkeypatch.setattr(recurring, "_utc_now", lambda: NOW)
-    monkeypatch.setattr(controller, "acquire_cycle", lambda *a, **kw: (cycle, "chrome_plugin_manifest"))
+    monkeypatch.setattr(controller, "acquire_cycle", lambda *a, **kw: (cycle, "brave_plugin_manifest"))
     return args, cycle
 
 
@@ -108,7 +108,7 @@ def test_changed_roster_cannot_reuse_an_already_consumed_bot_observation(admitte
     # again just because another newly deployed symbol has been added.
     other = replace(cycle.bots[0], symbol="ETHUSDT", strategy_id="124")
     expanded = replace(cycle, bots=(*cycle.bots, other))
-    monkeypatch.setattr(controller, "acquire_cycle", lambda *a, **kw: (expanded, "chrome_plugin_manifest"))
+    monkeypatch.setattr(controller, "acquire_cycle", lambda *a, **kw: (expanded, "brave_plugin_manifest"))
     with pytest.raises(controller.ControllerError, match="observation already claimed"):
         recurring.consume(args)
     assert len(calls) == 1

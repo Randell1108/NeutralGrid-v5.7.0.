@@ -251,7 +251,7 @@ def test_profit_deterioration_tracks_peak_and_giveback_without_changing_verdict(
             evaluated_at_utc=at,
             deploy_ts=deploy_ts,
             execution_telemetry=LiveExecutionTelemetry(
-                source="dedicated_chrome_cdp",
+                source="dedicated_brave_cdp",
                 captured_at=at,
                 pnl=PnlTelemetry(
                     total_profit_usdt=total,

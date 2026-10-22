@@ -168,7 +168,7 @@ class FakeExtensionBridge:
         self.actions.append(action)
         if action == "hello":
             return {
-                "provider": "chrome-extension",
+                "provider": "brave-extension",
                 "url": "https://www.binance.bh/en/trading-bots/futures/grid/SKYAIUSDT",
             }
         if action == "read_state":

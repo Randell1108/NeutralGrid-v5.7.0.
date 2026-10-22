@@ -8,12 +8,57 @@ from pathlib import Path
 
 import pytest
 
-from scripts import ingest_chrome_plugin_telemetry_cycle as ingest
+from scripts import ingest_brave_plugin_telemetry_cycle as ingest
 from scripts import run_live_telemetry_controller as controller
 from scripts import run_drawer_verdict_cycle as recurring
 
 
 UTC = timezone.utc
+
+
+@pytest.mark.parametrize('mutation',['none','missing_requested','omitted_requested','changed_fence'])
+def test_explicit_symbol_scope_requires_every_request_and_full_roster_fence(tmp_path,mutation):
+    bundle,_,payload=_write_bundle(tmp_path)
+    row={'symbol':'BTCUSDT','created':'2026-08-13 10:00:00','status':'Working'}
+    other={**row,'symbol':'ETHUSDT'}
+    scope={'type':'symbols','symbols':['BTCUSDT'],'full_working_count':2,
+           'full_roster_before_rows':[row,other],'full_roster_after_rows':[dict(row),dict(other)]}
+    payload.update(capture_scope=scope,roster_before_rows=[dict(row)],roster_after_rows=[dict(row)])
+    if mutation=='missing_requested':scope['symbols'].append('SOLUSDT')
+    if mutation=='omitted_requested':scope['symbols'].append('ETHUSDT')
+    if mutation=='changed_fence':scope['full_roster_after_rows'][1]['created']='2026-08-13 11:00:00'
+    bundle.write_text(json.dumps(payload),encoding='utf-8')
+    if mutation=='none':
+        result=ingest.ingest_capture_bundle(bundle,workspace_root=tmp_path,live_root=tmp_path/'Live',audit_dir=tmp_path/'outputs/audits/plugin_cycles')
+        assert json.loads(result.read_text())['capture_scope']==scope
+    else:
+        with pytest.raises(ingest.PluginIngestError):
+            ingest.ingest_capture_bundle(bundle,workspace_root=tmp_path,live_root=tmp_path/'Live',audit_dir=tmp_path/'outputs/audits/plugin_cycles')
+
+
+@pytest.mark.parametrize('mutation', ['none','full_fence','omitted_match','drawer_margin'])
+def test_investment_scope_preserves_full_fence_and_exact_drawer_amount(tmp_path, mutation):
+    bundle, _, payload = _write_bundle(tmp_path)
+    row = {'symbol':'BTCUSDT','created':'2026-08-13 10:00:00','status':'Working','investment_text':'100.00 USDT(Isolated)'}
+    other = {**row,'symbol':'ETHUSDT','investment_text':'50.00 USDT(Isolated)'}
+    scope = {'type':'invested_margin_usdt','amounts':[100,400],'full_working_count':2,
+             'full_roster_before_rows':[row,other], 'full_roster_after_rows':[dict(row),dict(other)]}
+    payload.update(capture_scope=scope,roster_before_rows=[dict(row)],roster_after_rows=[dict(row)])
+    if mutation=='full_fence':
+        scope['full_roster_after_rows'][1]['created']='2026-08-13 11:00:00'
+    elif mutation=='omitted_match':
+        for rows in [scope['full_roster_before_rows'],scope['full_roster_after_rows']]:
+            rows[1]['investment_text']='400.00 USDT(Isolated)'
+    elif mutation=='drawer_margin':
+        for rows in [scope['full_roster_before_rows'],scope['full_roster_after_rows'],payload['roster_before_rows'],payload['roster_after_rows']]:
+            rows[0]['investment_text']='400.00 USDT(Isolated)'
+    bundle.write_text(json.dumps(payload),encoding='utf-8')
+    if mutation!='none':
+        with pytest.raises(ingest.PluginIngestError):
+            ingest.ingest_capture_bundle(bundle,workspace_root=tmp_path,live_root=tmp_path/'Live',audit_dir=tmp_path/'outputs/audits/plugin_cycles')
+    else:
+        result=ingest.ingest_capture_bundle(bundle,workspace_root=tmp_path,live_root=tmp_path/'Live',audit_dir=tmp_path/'outputs/audits/plugin_cycles')
+        assert json.loads(result.read_text())['capture_scope']==scope
 
 
 @pytest.mark.parametrize("missing_l2", [False, True])
@@ -149,7 +194,7 @@ def _write_bundle(
     strategy_id: str = "413500001",
     raw_text: str | None = None,
 ) -> tuple[Path, Path, dict[str, object]]:
-    staging = workspace / "outputs" / "runtime" / "chrome_plugin_capture" / "run-1"
+    staging = workspace / "outputs" / "runtime" / "brave_plugin_capture" / "run-1"
     staging.mkdir(parents=True)
     raw_path = staging / f"{symbol}.txt"
     text = raw_text or _drawer_text(symbol=symbol, strategy_id=strategy_id)
@@ -157,7 +202,7 @@ def _write_bundle(
     payload: dict[str, object] = {
         "schema_version": ingest.PLUGIN_CAPTURE_BUNDLE_SCHEMA,
         "status": "complete",
-        "source": "chrome_plugin",
+        "source": "brave_plugin",
         "run_id": "run-1",
         "page_identity": "Binance USD-M Futures Grid",
         "source_url": "https://www.binance.com/en/futures/grid",
@@ -201,7 +246,7 @@ def test_ingest_plugin_bundle_commits_strict_cycle_and_controller_loads_it(
 
     cycle_payload = json.loads(cycle_path.read_text(encoding="utf-8"))
     assert cycle_payload["schema_version"] == controller.PLUGIN_CYCLE_SCHEMA
-    assert cycle_payload["source"] == "chrome_plugin"
+    assert cycle_payload["source"] == "brave_plugin"
     assert cycle_payload["status"] == "complete"
     targets_path = Path(cycle_payload["collector_targets_csv"])
     assert targets_path.read_text(encoding="utf-8").splitlines() == [
@@ -212,7 +257,7 @@ def test_ingest_plugin_bundle_commits_strict_cycle_and_controller_loads_it(
     metadata_path = Path(cycle_payload["files"][0]["json_path"])
     metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
     assert metadata["schema_version"] == controller.PLUGIN_SNAPSHOT_SCHEMA
-    assert metadata["source"] == "chrome_plugin"
+    assert metadata["source"] == "brave_plugin"
     assert metadata["raw_text_sha256"] == hashlib.sha256(raw_path.read_bytes()).hexdigest()
     assert metadata["structured_telemetry"]["deploy_ts"] == (
         "2026-08-13T15:00:00+00:00"
@@ -225,7 +270,7 @@ def test_ingest_plugin_bundle_commits_strict_cycle_and_controller_loads_it(
     assert cycle.symbols == ("BTCUSDT",)
     assert cycle.strategy_ids == ("413500001",)
     assert cycle.bots[0].scanner_entry["execution_telemetry"]["source"] == (
-        "chrome_plugin"
+        "brave_plugin"
     )
 
 
@@ -397,7 +442,7 @@ def test_plugin_acquisition_never_calls_cdp_fetch(
         now=datetime(2026, 8, 13, 15, 1, tzinfo=UTC),
     )
 
-    assert source == "chrome_plugin_manifest"
+    assert source == "brave_plugin_manifest"
     assert loaded.manifest_path == cycle_path.resolve()
 
 

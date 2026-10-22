@@ -114,7 +114,7 @@ def _latest_cycle_manifest(audit_root: Path) -> Path:
     cycle_dir = audit_root.resolve() / "cycles"
     candidates = sorted(cycle_dir.glob("cycle_*.json"), key=lambda path: path.stat().st_mtime)
     if not candidates:
-        raise LiveVolatilityLoopError(f"no Chrome-plugin cycle exists under {cycle_dir}")
+        raise LiveVolatilityLoopError(f"no Brave-plugin cycle exists under {cycle_dir}")
     return candidates[-1]
 
 
@@ -131,8 +131,8 @@ def load_roster(
     payload = _strict_json(path)
     if payload.get("schema_version") != PLUGIN_CYCLE_SCHEMA:
         raise LiveVolatilityLoopError("unsupported roster manifest schema")
-    if payload.get("status") != "complete" or payload.get("source") != "chrome_plugin":
-        raise LiveVolatilityLoopError("roster is not a complete Chrome-plugin cycle")
+    if payload.get("status") != "complete" or payload.get("source") != "brave_plugin":
+        raise LiveVolatilityLoopError("roster is not a complete Brave-plugin cycle")
     page_identity = payload.get("page_identity")
     if not isinstance(page_identity, str) or not page_identity.strip():
         raise LiveVolatilityLoopError("roster page identity is missing")
@@ -740,7 +740,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "--roster-audit-root",
         type=Path,
-        default=ROOT / "outputs" / "audits" / "chrome_plugin_ingest",
+        default=ROOT / "outputs" / "audits" / "brave_plugin_ingest",
     )
     parser.add_argument("--max-roster-age-seconds", type=float, default=None)
     parser.add_argument("--max-data-age-seconds", type=float, default=None)

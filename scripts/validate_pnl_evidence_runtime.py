@@ -27,14 +27,14 @@ UTC = timezone.utc
 EVIDENCE_SCHEMA = "neutralgrid_pnl_evidence_validation_v1"
 DEFAULT_RELEVANT_FILES = (
     "scripts/validate_pnl_evidence_runtime.py",
-    "scripts/ingest_chrome_plugin_telemetry_cycle.py",
+    "scripts/ingest_brave_plugin_telemetry_cycle.py",
     "scripts/run_live_telemetry_controller.py",
     "scripts/collect_diff_depth.py",
     "scripts/supervise_diff_depth_collector.py",
     "scripts/audit_pnl_training_readiness.py",
     "src/neutralgrid/live/decision/pnl_history.py",
     "src/neutralgrid/live/decision/pnl_forecast.py",
-    "tests/unit/test_chrome_plugin_telemetry_ingest.py",
+    "tests/unit/test_brave_plugin_telemetry_ingest.py",
     "tests/unit/test_live_pnl_history.py",
     "tests/unit/test_live_pnl_forecast.py",
     "tests/unit/test_live_telemetry_controller.py",
@@ -44,7 +44,7 @@ DEFAULT_RELEVANT_FILES = (
     "tests/unit/test_diff_depth_collector_supervisor.py",
 )
 FOCUSED_TESTS = (
-    "tests/unit/test_chrome_plugin_telemetry_ingest.py",
+    "tests/unit/test_brave_plugin_telemetry_ingest.py",
     "tests/unit/test_live_pnl_history.py",
     "tests/unit/test_live_pnl_forecast.py",
     "tests/unit/test_live_telemetry_controller.py",

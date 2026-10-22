@@ -20,7 +20,7 @@ def test_private_stale_manifest_dry_run_then_apply(tmp_path: Path) -> None:
     original = {
         "status": "waiting_for_valid_browser_state",
         "pid": 101,
-        "last_error": "Chrome unavailable",
+        "last_error": "Brave unavailable",
     }
     _write_manifest(path, original)
 
@@ -45,7 +45,7 @@ def test_private_stale_manifest_dry_run_then_apply(tmp_path: Path) -> None:
     assert payload["status"] == "finished"
     assert payload["finished_at_utc"] == "2026-08-06T08:30:00+00:00"
     assert payload["status_before_cleanup"] == "waiting_for_valid_browser_state"
-    assert payload["last_error"] == "Chrome unavailable"
+    assert payload["last_error"] == "Brave unavailable"
 
 
 def test_diff_depth_stale_manifest_normalizes_to_stopped(tmp_path: Path) -> None:

@@ -19,6 +19,19 @@ from neutralgrid.live.decision.private_events import (
 UTC = timezone.utc
 
 
+@pytest.mark.parametrize("source", [None, "", "unsupported_browser_plugin"])
+def test_unsupported_browser_source_cannot_bypass_plugin_guards(
+    tmp_path: Path, source: str | None
+) -> None:
+    manifest = tmp_path / "cycle.json"
+    manifest.write_text(
+        json.dumps({"status": "complete", "source": source}),
+        encoding="utf-8",
+    )
+    with pytest.raises(controller.ControllerError, match="unsupported telemetry source"):
+        controller.load_complete_cycle(manifest)
+
+
 def _drawer_text(
     *,
     symbol: str = "BTCUSDT",
@@ -90,6 +103,7 @@ def _write_cycle(
             {
                 "symbol": symbol,
                 "strategy_id": strategy_id,
+                "source": "dedicated_brave_cdp",
                 "captured_at_utc": completed_at.isoformat(),
             }
         ),
@@ -102,6 +116,7 @@ def _write_cycle(
         json.dumps(
             {
                 "status": "complete",
+                "source": "dedicated_brave_cdp",
                 "cycle_started_at_utc": (
                     completed_at - timedelta(seconds=5)
                 ).isoformat(),
@@ -138,6 +153,17 @@ def test_load_complete_cycle_builds_exact_scanner_entry(tmp_path: Path) -> None:
     assert entry["leverage"] == 10.0
     assert entry["capital_usdt"] == 100.0
     assert entry["execution_telemetry"]["captured_at"] == completed_at.isoformat()
+
+
+def test_dedicated_cycle_rejects_mismatched_snapshot_source(tmp_path: Path) -> None:
+    manifest = _write_cycle(tmp_path, completed_at=datetime(2026, 7, 30, 17, tzinfo=UTC))
+    payload = json.loads(manifest.read_text(encoding="utf-8"))
+    metadata_path = Path(payload["files"][0]["json_path"])
+    metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+    metadata["source"] = "unsupported_browser_cdp"
+    metadata_path.write_text(json.dumps(metadata), encoding="utf-8")
+    with pytest.raises(controller.ControllerError, match="snapshot source mismatch"):
+        controller.load_complete_cycle(manifest)
 
 
 def test_attach_l2_streams_round_trips_through_scanner_registry(tmp_path: Path) -> None:
@@ -457,7 +483,7 @@ def test_acquire_cycle_uses_only_fresh_cache(
     )
 
     def fail_fetch(_args: Namespace) -> controller.TelemetryCycle:
-        raise controller.ControllerError("Chrome unavailable")
+        raise controller.ControllerError("Brave unavailable")
 
     monkeypatch.setattr(controller, "fetch_private_cycle", fail_fetch)
     loaded, source = controller.acquire_cycle(

@@ -113,15 +113,17 @@ def test_commit_cycle_routes_live_snapshot_and_manifest_by_lima_date(tmp_path) -
     assert text_path.read_text(encoding="utf-8") == "BTCUSDT\ncomplete drawer\n"
     metadata = json.loads(json_path.read_text(encoding="utf-8"))
     assert metadata["data_class"] == "live_bot_telemetry"
+    assert metadata["source"] == "dedicated_brave_cdp"
     assert metadata["raw_text"] is None
     assert json.loads(cycle_path.read_text(encoding="utf-8"))["status"] == "complete"
     assert manifest["active_bot_count"] == 1
+    assert manifest["source"] == "dedicated_brave_cdp"
 
 
 def test_mark_one_shot_finished_replaces_transient_status() -> None:
     heartbeat = {
         "status": "waiting_for_valid_browser_state",
-        "last_error": "Chrome unavailable",
+        "last_error": "Brave unavailable",
     }
 
     _mark_one_shot_finished(
@@ -135,5 +137,5 @@ def test_mark_one_shot_finished_replaces_transient_status() -> None:
         "status": "finished",
         "finished_at_utc": "2026-08-06T08:30:00+00:00",
         "finish_reason": "one_shot_failed",
-        "last_error": "Chrome unavailable",
+        "last_error": "Brave unavailable",
     }

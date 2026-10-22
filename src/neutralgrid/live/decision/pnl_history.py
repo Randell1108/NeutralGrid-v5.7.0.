@@ -3,7 +3,7 @@
 The controller's verdict state is intentionally small and mutable.  Forecast
 training needs a different contract: immutable observations that survive
 controller/runtime-directory changes, preserve the exact strategy deployment,
-and cannot silently reinterpret a repeated Chrome snapshot as a new PnL point.
+and cannot silently reinterpret a repeated Brave snapshot as a new PnL point.
 
 Each observation is one atomically committed JSON file under the repository's
 mandated live-data hierarchy::
@@ -175,7 +175,7 @@ def build_pnl_observation(
 ) -> dict[str, Any]:
     """Build one canonical observation from an exact scanner result.
 
-    ``source_snapshot_sha256`` binds the record to the verbatim Chrome drawer.
+    ``source_snapshot_sha256`` binds the record to the verbatim Brave drawer.
     L2/public/private evidence is copied only when present; missing evidence is
     represented as ``None`` and is never imputed here.
     """

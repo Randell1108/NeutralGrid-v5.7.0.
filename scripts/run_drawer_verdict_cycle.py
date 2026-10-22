@@ -1,4 +1,4 @@
-"""Consume one fresh Chrome-extension cycle once, with advisory output only.
+"""Consume one fresh Brave-extension cycle once, with advisory output only.
 
 The recurring Codex task owns browser capture. This entry point never launches
 a browser, trains a model, or dispatches an exchange action. Receipts are claimed
@@ -98,6 +98,17 @@ def controller_args(args: argparse.Namespace) -> argparse.Namespace:
     ]
     for manifest in args.diff_depth_manifest:
         command.extend(["--diff-depth-manifest", str(manifest)])
+    for manifest in getattr(args, "private_event_manifest", []):
+        command.extend(["--private-event-manifest", str(manifest)])
+    for name in (
+        "scanner_config_file", "pnl_forecast_artifact_dir", "volatility_forecast_artifact_dir",
+        "shadow_action_artifact_dir", "shadow_action_limits",
+    ):
+        value = getattr(args, name, None)
+        if value is not None:
+            command.extend(["--" + name.replace("_", "-"), str(value)])
+    if getattr(args, "record_shadow_decisions", False):
+        command.append("--record-shadow-decisions")
     return controller.parse_args(command)
 
 
@@ -107,8 +118,8 @@ def consume(args: argparse.Namespace) -> dict[str, Any]:
     if not args.diff_depth_manifest:
         raise controller.ControllerError("recurring verdict requires a P0 public L2 manifest")
     payload = controller._load_json_object(args.cycle_manifest, label="cycle manifest")
-    if payload.get("source") != "chrome_plugin":
-        raise controller.ControllerError("recurring drawer capture requires chrome_plugin source")
+    if payload.get("source") != "brave_plugin":
+        raise controller.ControllerError("recurring drawer capture requires brave_plugin source")
     cycle, _ = controller.acquire_cycle(cfg, now=_utc_now())
     key = capture_key(cycle)
     receipt_path = args.audit_dir / "receipts" / f"{key}.json"
@@ -208,6 +219,13 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--audit-dir", type=Path, default=DEFAULT_AUDIT)
     parser.add_argument("--live-root", type=Path, default=ROOT / "Live")
     parser.add_argument("--diff-depth-manifest", type=Path, action="append", default=[])
+    parser.add_argument("--private-event-manifest", type=Path, action="append", default=[])
+    parser.add_argument("--scanner-config-file", type=Path, default=None)
+    parser.add_argument("--pnl-forecast-artifact-dir", type=Path, default=None)
+    parser.add_argument("--volatility-forecast-artifact-dir", type=Path, default=None)
+    parser.add_argument("--shadow-action-artifact-dir", type=Path, default=None)
+    parser.add_argument("--shadow-action-limits", type=Path, default=None)
+    parser.add_argument("--record-shadow-decisions", action="store_true")
     return parser.parse_args(argv)
 
 

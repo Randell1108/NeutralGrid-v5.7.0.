@@ -10,7 +10,7 @@ Safety contract
 * ADJUST only; END is deliberately unsupported.
 * The scanner decision and a separate, exact approval must both be fresh.
 * Symbol, strategy ID, bounds, action, and idempotency key must all match.
-* One Chrome grid tab is required through either dedicated CDP or an
+* One Brave grid tab is required through either dedicated CDP or an
   authenticated extension bridge; the exact strategy is re-read.
 * Current positions are explicitly preserved and verified in the final form.
 * Binance price precision is handled by outward rounding only.
@@ -38,7 +38,7 @@ Approval file example::
 The approval is intentionally external to the scanner intent.  This prevents
 an unattended process from manufacturing its own action-time authority.
 
-Extension-controlled Chrome requires ``--browser-transport extension``, a
+Extension-controlled Brave requires ``--browser-transport extension``, a
 loopback bridge endpoint, and a one-run token file.  The bridge never replaces
 the scanner intent or approval; it only exposes bounded UI operations to this
 same state machine.
@@ -544,7 +544,7 @@ def _decimal_places(value: str) -> int:
 
 
 class BinanceCdpAdjustmentDriver:
-    """Bounded Binance UI driver over a dedicated Chrome CDP endpoint."""
+    """Bounded Binance UI driver over a dedicated Brave CDP endpoint."""
 
     def __init__(
         self,
@@ -580,7 +580,7 @@ class BinanceCdpAdjustmentDriver:
             timeout_seconds=timeout_seconds,
         )
         if not isinstance(pages, list):
-            raise ExecutionError("Chrome /json/list did not return a list")
+            raise ExecutionError("Brave /json/list did not return a list")
         matches = [
             page
             for page in pages
@@ -591,7 +591,7 @@ class BinanceCdpAdjustmentDriver:
         ]
         if len(matches) != 1:
             raise ExecutionError(
-                "expected exactly one Binance Futures Grid page in dedicated Chrome; "
+                "expected exactly one Binance Futures Grid page in dedicated Brave; "
                 f"found {len(matches)}"
             )
         page = matches[0]
@@ -1027,7 +1027,7 @@ class BinanceCdpAdjustmentDriver:
 
 
 class ExtensionBridgeClient:
-    """Authenticated loopback RPC client for an extension-controlled Chrome tab."""
+    """Authenticated loopback RPC client for an extension-controlled Brave tab."""
 
     def __init__(
         self,
@@ -1129,7 +1129,7 @@ class ExtensionBridgeClient:
 
 
 class BinanceExtensionAdjustmentDriver:
-    """Binance adjustment driver using a claimed Chrome extension tab."""
+    """Binance adjustment driver using a claimed Brave extension tab."""
 
     def __init__(
         self,
@@ -1157,7 +1157,7 @@ class BinanceExtensionAdjustmentDriver:
             page_url = str(hello.get("url", ""))
             parsed = urlparse(page_url)
             if (
-                hello.get("provider") != "chrome-extension"
+                hello.get("provider") != "brave-extension"
                 or parsed.scheme != "https"
                 or parsed.hostname != "www.binance.bh"
                 or "/en/trading-bots/futures/grid/" not in parsed.path
@@ -1361,13 +1361,13 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         "--browser-transport",
         choices=("cdp", "extension"),
         default="cdp",
-        help="Chrome control transport. CDP remains the backward-compatible default.",
+        help="Brave control transport. CDP remains the backward-compatible default.",
     )
     parser.add_argument("--debug-endpoint", default="http://127.0.0.1:9222")
     parser.add_argument(
         "--extension-endpoint",
         default="http://127.0.0.1:17731",
-        help="Authenticated loopback bridge for a claimed Chrome extension tab.",
+        help="Authenticated loopback bridge for a claimed Brave extension tab.",
     )
     parser.add_argument(
         "--extension-token-file",

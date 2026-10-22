@@ -6,14 +6,14 @@ verdicts, grid bounds, sizing, Kelly inputs, model lineage, or execution.
 
 ## 1. Commit a fresh authenticated Working roster
 
-Use the Chrome extension to export one complete private-telemetry bundle. The
+Use the Brave extension to export one complete private-telemetry bundle. The
 bundle must include the roster fence and every exact strategy identity. Then
 validate and commit it:
 
 ```powershell
-python scripts/ingest_chrome_plugin_telemetry_cycle.py `
-  --bundle-manifest <chrome-plugin-bundle-manifest.json> `
-  --audit-dir outputs/audits/chrome_plugin_ingest
+python scripts/ingest_brave_plugin_telemetry_cycle.py `
+  --bundle-manifest <brave-plugin-bundle-manifest.json> `
+  --audit-dir outputs/audits/brave_plugin_ingest
 ```
 
 Record the `cycle_manifest` and `collector_targets_csv` paths printed by the
@@ -96,7 +96,7 @@ python scripts/run_live_volatility_loop.py `
   --interval-seconds 180 `
   --contract config/live_volatility_forecast_v1.json `
   --artifact-dir outputs/audits/live_volatility/<run_id> `
-  --roster-audit-root outputs/audits/chrome_plugin_ingest
+  --roster-audit-root outputs/audits/brave_plugin_ingest
 ```
 
 If the smoke cycle succeeds, start the unattended loop by removing `--once`:
@@ -106,7 +106,7 @@ python scripts/run_live_volatility_loop.py `
   --interval-seconds 180 `
   --contract config/live_volatility_forecast_v1.json `
   --artifact-dir outputs/audits/live_volatility/<run_id> `
-  --roster-audit-root outputs/audits/chrome_plugin_ingest
+  --roster-audit-root outputs/audits/brave_plugin_ingest
 ```
 
 The plugin must continue committing fresh cycle manifests to the audit root.
@@ -117,7 +117,7 @@ result is written under `Live/YYYY-MM-DD/<SYMBOL>/volatility/` and retains
 
 ## Optional read-only private telemetry loop
 
-A separately launched Chrome with DevTools debugging can collect complete
+A separately launched Brave with DevTools debugging can collect complete
 visible grid-bot snapshots every 180 seconds:
 
 ```powershell

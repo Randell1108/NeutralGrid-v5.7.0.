@@ -1,6 +1,6 @@
-"""Validate and commit one Chrome-plugin private telemetry capture bundle.
+"""Validate and commit one Brave-plugin private telemetry capture bundle.
 
-The Chrome plugin owns visible-page acquisition.  This script never opens or
+The Brave plugin owns visible-page acquisition.  This script never opens or
 controls a browser.  It accepts only a complete, run-owned capture bundle,
 validates the roster fence and every exact bot identity, then commits immutable
 snapshot files under ``Live/YYYY-MM-DD/SYMBOL`` and writes the cycle manifest
@@ -42,7 +42,7 @@ from scripts.run_live_telemetry_controller import (
 
 UTC = timezone.utc
 LIMA = ZoneInfo("America/Lima")
-PLUGIN_CAPTURE_BUNDLE_SCHEMA = "neutralgrid_chrome_plugin_capture_bundle_v1"
+PLUGIN_CAPTURE_BUNDLE_SCHEMA = "neutralgrid_brave_plugin_capture_bundle_v1"
 SYMBOL_RE = re.compile(r"^[A-Z0-9]+USDT$")
 STRATEGY_RE = re.compile(r"^\d+$")
 RUN_ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$")
@@ -53,7 +53,7 @@ logger = logging.getLogger(__name__)
 
 
 class PluginIngestError(RuntimeError):
-    """Fail-closed Chrome-plugin capture ingestion error."""
+    """Fail-closed Brave-plugin capture ingestion error."""
 
 
 def _reject_nonfinite_json(value: str) -> None:
@@ -266,8 +266,8 @@ def ingest_capture_bundle(
         raise PluginIngestError("unsupported capture bundle schema_version")
     if payload.get("status") != "complete":
         raise PluginIngestError("capture bundle status must be complete")
-    if payload.get("source") != "chrome_plugin":
-        raise PluginIngestError("capture bundle source must be chrome_plugin")
+    if payload.get("source") != "brave_plugin":
+        raise PluginIngestError("capture bundle source must be brave_plugin")
     if payload.get("authenticated") is not True:
         raise PluginIngestError("capture bundle must assert authenticated=true")
 
@@ -275,7 +275,7 @@ def ingest_capture_bundle(
     if RUN_ID_RE.fullmatch(run_id) is None:
         raise PluginIngestError("run_id contains unsupported characters")
     staging_root = (
-        workspace / "outputs" / "runtime" / "chrome_plugin_capture" / run_id
+        workspace / "outputs" / "runtime" / "brave_plugin_capture" / run_id
     ).resolve()
     if bundle_path.parent != staging_root:
         raise PluginIngestError(
@@ -305,6 +305,49 @@ def ingest_capture_bundle(
         raise PluginIngestError("working_row_count must be a positive integer")
     if len(roster_before) != count:
         raise PluginIngestError("working_row_count does not match roster")
+    scope = payload.get("capture_scope")
+    scoped_amounts: list[float] | None = None
+    selected: list[dict[str, Any]] = []
+    if scope is not None:
+        if not isinstance(scope, dict) or scope.get("type") not in {"invested_margin_usdt", "symbols"}:
+            raise PluginIngestError("unsupported capture scope")
+        amounts = scope.get("amounts")
+        if scope["type"] == "invested_margin_usdt" and (not isinstance(amounts, list) or not amounts or
+            any(isinstance(x, bool) or not isinstance(x, (int, float)) or not math.isfinite(x) or x <= 0 for x in amounts)
+            or len(set(amounts)) != len(amounts)):
+            raise PluginIngestError("invalid investment scope amounts")
+        scoped_amounts = amounts if scope["type"] == "invested_margin_usdt" else None
+        requested_symbols = _validate_roster_symbols(scope.get("symbols"), field="capture_scope.symbols") if scope["type"] == "symbols" else None
+        full = scope.get("full_roster_before_rows")
+        if not isinstance(full, list) or not full or full != scope.get("full_roster_after_rows"):
+            raise PluginIngestError("full Working roster fence changed or missing")
+        if len(full) != scope.get("full_working_count"):
+            raise PluginIngestError("full Working count mismatch")
+        seen = set()
+        for row in full:
+            if not isinstance(row, dict) or row.get("status") != "Working":
+                raise PluginIngestError("invalid full Working row")
+            symbol = _require_text(row, "symbol")
+            if SYMBOL_RE.fullmatch(symbol) is None or symbol in seen:
+                raise PluginIngestError("ambiguous full Working symbol")
+            seen.add(symbol)
+            if re.fullmatch(r"\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}", _require_text(row, "created")) is None:
+                raise PluginIngestError("invalid full Working creation time")
+            if requested_symbols is not None:
+                matches = symbol in requested_symbols
+            else:
+                if scoped_amounts is None:
+                    raise PluginIngestError("invalid investment scope amounts")
+                margin = re.fullmatch(r"([0-9]+(?:,[0-9]{3})*(?:\.[0-9]+)?)\s+USDT(?:\s*\((?:Isolated|Cross)\))?", _require_text(row, "investment_text"))
+                if margin is None:
+                    raise PluginIngestError("unproven Invested Margin USDT field")
+                matches = float(margin.group(1).replace(",", "")) in scoped_amounts
+            if matches:
+                selected.append(row)
+        if requested_symbols is not None and not set(requested_symbols).issubset(seen):
+            raise PluginIngestError("requested symbol absent from complete Working roster")
+        if tuple(row["symbol"] for row in selected) != roster_before or selected != payload.get("roster_before_rows") or selected != payload.get("roster_after_rows"):
+            raise PluginIngestError("investment scope omits or substitutes a matching strategy")
     captures = payload.get("captures")
     if not isinstance(captures, list) or len(captures) != count:
         raise PluginIngestError("capture count does not match Working-row count")
@@ -366,10 +409,23 @@ def ingest_capture_bundle(
                 expected_symbol=symbol,
                 expected_strategy_id=strategy_id,
                 captured_at_utc=captured_at,
-                source="chrome_plugin",
+                source="brave_plugin",
             )
         except Exception as exc:
             raise PluginIngestError(f"{symbol}: drawer validation failed: {exc}") from exc
+        if scope is not None:
+            selected_row = next(row for row in selected if row["symbol"] == symbol)
+            if selected_row["created"] != deployment_time_lima:
+                raise PluginIngestError(f"{symbol}: drawer creation differs from scope")
+        if scoped_amounts is not None:
+            if scanner_entry["capital_usdt"] not in scoped_amounts:
+                raise PluginIngestError(f"{symbol}: drawer investment/creation differs from scope")
+            margin_match = re.match(r"[0-9,.]+", selected_row["investment_text"])
+            if margin_match is None:
+                raise PluginIngestError(f"{symbol}: unproven scope margin")
+            expected_margin = float(margin_match.group().replace(",", ""))
+            if scanner_entry["capital_usdt"] != expected_margin:
+                raise PluginIngestError(f"{symbol}: drawer investment differs from Working row")
 
         screenshot_path: Path | None = None
         screenshot_hash: str | None = None
@@ -433,7 +489,7 @@ def ingest_capture_bundle(
                     "schema_version": PLUGIN_SNAPSHOT_SCHEMA,
                     "data_class": "live_bot_telemetry",
                     "status": "active_live_snapshot",
-                    "source": "chrome_plugin",
+                    "source": "brave_plugin",
                     "run_id": run_id,
                     "page_identity": page_identity,
                     "source_url": source_url,
@@ -475,7 +531,7 @@ def ingest_capture_bundle(
             cycle_manifest: dict[str, Any] = {
                 "schema_version": PLUGIN_CYCLE_SCHEMA,
                 "status": "complete",
-                "source": "chrome_plugin",
+                "source": "brave_plugin",
                 "run_id": run_id,
                 "page_identity": page_identity,
                 "source_url": source_url,
@@ -490,6 +546,7 @@ def ingest_capture_bundle(
                 "roster_before_symbols": list(roster_before),
                 "roster_after_symbols": list(roster_after),
                 "files": files,
+                **({"capture_scope": scope} if scope is not None else {}),
             }
             csv_buffer = io.StringIO(newline="")
             writer = csv.DictWriter(
@@ -535,7 +592,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "--audit-dir",
         type=Path,
-        default=ROOT / "outputs" / "audits" / "chrome_plugin_telemetry",
+        default=ROOT / "outputs" / "audits" / "brave_plugin_telemetry",
     )
     return parser.parse_args(argv)
 
@@ -550,13 +607,13 @@ def main(argv: Sequence[str] | None = None) -> int:
             audit_dir=args.audit_dir,
         )
     except PluginIngestError as exc:
-        logger.error("Chrome-plugin telemetry bundle rejected: %s", exc)
+        logger.error("Brave-plugin telemetry bundle rejected: %s", exc)
         return 2
     print(
         json.dumps(
             {
                 "status": "complete",
-                "source": "chrome_plugin",
+                "source": "brave_plugin",
                 "cycle_manifest": str(cycle_path),
             },
             sort_keys=True,

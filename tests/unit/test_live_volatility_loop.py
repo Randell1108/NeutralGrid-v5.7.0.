@@ -18,7 +18,7 @@ def _cycle_manifest(path: Path, *, completed: datetime) -> Path:
     payload = {
         "schema_version": loop.PLUGIN_CYCLE_SCHEMA,
         "status": "complete",
-        "source": "chrome_plugin",
+        "source": "brave_plugin",
         "page_identity": (
             "Authenticated Binance Futures Grid page; UM Grid selected; "
             "Running selected"
@@ -61,8 +61,8 @@ def test_load_roster_rejects_stale_cycle(tmp_path: Path) -> None:
         )
 
 
-def test_load_roster_rejects_chrome_loss_without_manifest(tmp_path: Path) -> None:
-    with pytest.raises(loop.LiveVolatilityLoopError, match="no Chrome-plugin cycle"):
+def test_load_roster_rejects_brave_loss_without_manifest(tmp_path: Path) -> None:
+    with pytest.raises(loop.LiveVolatilityLoopError, match="no Brave-plugin cycle"):
         loop.load_roster(
             manifest_path=None,
             audit_root=tmp_path,

@@ -1,6 +1,6 @@
-"""Collect read-only Binance Futures Grid telemetry from a dedicated Chrome.
+"""Collect read-only Binance Futures Grid telemetry from a dedicated Brave.
 
-The browser must be launched with a non-default profile and a Chrome DevTools
+The browser must be launched with a non-default profile and a DevTools
 debugging endpoint.  This collector deliberately avoids cookies, undocumented
 HTTP endpoints, and every control that can modify or end a bot.  A cycle is
 committed only when all rows in the visible UM Grid Running table produce a
@@ -86,7 +86,7 @@ class DrawerSnapshot:
 
 
 class CDPConnection:
-    """Minimal synchronous Chrome DevTools Protocol client."""
+    """Minimal synchronous DevTools Protocol (CDP) client."""
 
     def __init__(self, websocket_url: str, *, timeout_seconds: float) -> None:
         self._socket = websocket_connect(
@@ -172,13 +172,13 @@ def _fetch_json(url: str, *, timeout_seconds: float) -> Any:
         with urllib.request.urlopen(request, timeout=timeout_seconds) as response:
             return json.loads(response.read().decode("utf-8"))
     except (OSError, urllib.error.URLError, json.JSONDecodeError) as exc:
-        raise TelemetryError(f"Chrome debugging endpoint unavailable: {url}: {exc}") from exc
+        raise TelemetryError(f"Brave debugging endpoint unavailable: {url}: {exc}") from exc
 
 
 def _find_grid_page(debug_endpoint: str, *, timeout_seconds: float) -> str:
     pages = _fetch_json(f"{debug_endpoint.rstrip('/')}/json/list", timeout_seconds=timeout_seconds)
     if not isinstance(pages, list):
-        raise TelemetryError("Chrome /json/list did not return a list")
+        raise TelemetryError("Brave /json/list did not return a list")
     matches = [
         page
         for page in pages
@@ -189,7 +189,7 @@ def _find_grid_page(debug_endpoint: str, *, timeout_seconds: float) -> str:
     ]
     if len(matches) != 1:
         raise TelemetryError(
-            "expected exactly one Binance Futures Grid page in dedicated Chrome; "
+            "expected exactly one Binance Futures Grid page in dedicated Brave; "
             f"found {len(matches)}"
         )
     return str(matches[0]["webSocketDebuggerUrl"])
@@ -456,7 +456,7 @@ def _commit_cycle(
             "raw_text": None,
             "data_class": "live_bot_telemetry",
             "status": "active_live_snapshot",
-            "source": "dedicated_chrome_cdp",
+            "source": "dedicated_brave_cdp",
             "required_sections": list(EXPECTED_MARKERS),
         }
         _atomic_write_json(json_path, metadata)
@@ -470,6 +470,7 @@ def _commit_cycle(
         )
     manifest = {
         "status": "complete",
+        "source": "dedicated_brave_cdp",
         "cycle_started_at_utc": _iso_seconds(cycle_started_at),
         "cycle_completed_at_utc": _iso_seconds(_utc_now()),
         "active_bot_count": len(snapshots),
@@ -542,7 +543,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "--debug-endpoint",
         default="http://127.0.0.1:9222",
-        help="Dedicated Chrome DevTools HTTP endpoint.",
+        help="Dedicated DevTools HTTP endpoint.",
     )
     parser.add_argument("--interval-seconds", type=float, default=180.0)
     parser.add_argument("--timeout-seconds", type=float, default=10.0)

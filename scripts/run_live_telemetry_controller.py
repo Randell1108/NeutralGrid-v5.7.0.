@@ -3,7 +3,7 @@
 The controller treats a freshly validated private-telemetry cycle as the
 authority for the active bot set.  Each iteration:
 
-1. loads an explicitly supplied Chrome-plugin cycle manifest, or attempts the
+1. loads an explicitly supplied Brave-plugin cycle manifest, or attempts the
    legacy dedicated-CDP collector when that acquisition mode is selected;
 2. falls back only to a still-fresh complete cycle in legacy CDP mode;
 3. builds a scanner registry from the exact symbol/strategy IDs in that cycle;
@@ -14,7 +14,7 @@ authority for the active bot set.  Each iteration:
 
 The automatic path remains fail-closed: it handles ADJUST only, discovers one
 exact unexpired external approval per intent, requires explicit executor
-transport arguments, and accepts success only after a new Chrome telemetry
+transport arguments, and accepts success only after a new Brave telemetry
 cycle proves the requested change.  The legacy reviewed-executable path remains
 available through ``--allow-actions`` and ``--action-executable``.
 """
@@ -160,7 +160,7 @@ def _scanner_entry_from_raw(
     expected_symbol: str,
     expected_strategy_id: str,
     captured_at_utc: datetime,
-    source: str = "dedicated_chrome_cdp",
+    source: str = "dedicated_brave_cdp",
 ) -> dict[str, Any]:
     parsed = parse_user_text(raw_text)
     symbol = str(parsed.get("symbol", "")).upper()
@@ -261,8 +261,10 @@ def load_complete_cycle(
     payload = _load_json_object(manifest_path, label="cycle manifest")
     if payload.get("status") != "complete":
         raise ControllerError(f"{manifest_path}: telemetry cycle is not complete")
-    source = str(payload.get("source") or "dedicated_chrome_cdp")
-    plugin_cycle = source == "chrome_plugin"
+    source = str(payload.get("source") or "")
+    if source not in {"brave_plugin", "dedicated_brave_cdp"}:
+        raise ControllerError(f"{manifest_path}: unsupported telemetry source {source!r}")
+    plugin_cycle = source == "brave_plugin"
     resolved_live_root: Path | None = None
     if plugin_cycle:
         if payload.get("schema_version") != PLUGIN_CYCLE_SCHEMA:
@@ -337,6 +339,8 @@ def load_complete_cycle(
                         f"{cycle_file}"
                     )
         metadata = _load_json_object(metadata_path, label="snapshot metadata")
+        if metadata.get("source") != source:
+            raise ControllerError(f"{metadata_path}: snapshot source mismatch")
         if str(metadata.get("symbol", "")).upper() != symbol:
             raise ControllerError(f"{metadata_path}: metadata symbol mismatch")
         if str(metadata.get("strategy_id", "")) != strategy_id:
@@ -344,7 +348,7 @@ def load_complete_cycle(
         if plugin_cycle:
             if metadata.get("schema_version") != PLUGIN_SNAPSHOT_SCHEMA:
                 raise ControllerError(f"{metadata_path}: unsupported snapshot schema")
-            if metadata.get("source") != "chrome_plugin":
+            if metadata.get("source") != "brave_plugin":
                 raise ControllerError(f"{metadata_path}: plugin source mismatch")
             if metadata.get("page_identity") != payload.get("page_identity"):
                 raise ControllerError(f"{metadata_path}: page identity mismatch")
@@ -542,7 +546,7 @@ def _run_process(
 
 
 def fetch_private_cycle(args: argparse.Namespace) -> TelemetryCycle:
-    """Run one read-only Chrome cycle and return the newly committed manifest."""
+    """Run one read-only Brave cycle and return the newly committed manifest."""
 
     started_at = _utc_now()
     command = [
@@ -597,7 +601,7 @@ def acquire_cycle(args: argparse.Namespace, *, now: datetime) -> tuple[Telemetry
         validate_cycle_freshness(
             cycle, now=now, max_age_seconds=args.max_telemetry_age_seconds
         )
-        return cycle, "chrome_plugin_manifest"
+        return cycle, "brave_plugin_manifest"
     try:
         cycle = fetch_private_cycle(args)
         validate_cycle_freshness(
