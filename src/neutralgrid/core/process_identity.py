@@ -23,7 +23,7 @@ class ProcessObservation:
 
 
 def query_process(pid: int) -> ProcessObservation:
-    """Return running/exited/unknown; query failure never establishes death."""
+    """Return running/exited/unknown; query failure alone never establishes death."""
     if not isinstance(pid, int) or isinstance(pid, bool) or pid <= 0:
         return ProcessObservation(pid, "unknown")
     if os.name == "nt":
@@ -31,6 +31,42 @@ def query_process(pid: int) -> ProcessObservation:
     if Path("/proc").is_dir():
         return _query_procfs(pid)
     return ProcessObservation(pid, "unknown")
+
+
+def _windows_pid_absent(kernel32: Any, pid: int) -> bool:
+    """Require two complete native inventories; inaccessible present PIDs stay unknown."""
+    from ctypes import wintypes
+
+    try:
+        enumerate_processes = kernel32.K32EnumProcesses
+        enumerate_processes.argtypes = (
+            ctypes.POINTER(wintypes.DWORD), wintypes.DWORD, ctypes.POINTER(wintypes.DWORD)
+        )
+        enumerate_processes.restype = wintypes.BOOL
+        for _ in range(2):
+            capacity = 1024
+            while capacity <= 65536:
+                buffer = (wintypes.DWORD * capacity)()
+                size = ctypes.sizeof(buffer)
+                returned = wintypes.DWORD()
+                if not enumerate_processes(buffer, size, ctypes.byref(returned)):
+                    return False
+                count_bytes = returned.value
+                if count_bytes > size or count_bytes % ctypes.sizeof(wintypes.DWORD):
+                    return False
+                if count_bytes == size:
+                    # EnumProcesses does not otherwise report buffer truncation.
+                    capacity *= 2
+                    continue
+                pids = buffer[:count_bytes // ctypes.sizeof(wintypes.DWORD)]
+                if os.getpid() not in pids or pid in pids:
+                    return False
+                break
+            else:
+                return False
+        return True
+    except (AttributeError, OSError, ValueError):
+        return False
 
 
 def _query_windows(pid: int) -> ProcessObservation:
@@ -51,7 +87,9 @@ def _query_windows(pid: int) -> ProcessObservation:
     kernel32.CloseHandle.restype = wintypes.BOOL
     handle = kernel32.OpenProcess(0x1000, False, pid)
     if not handle:
-        return ProcessObservation(pid, "exited" if ctypes.get_last_error() == 87 else "unknown")
+        error = ctypes.get_last_error()
+        absent = error == 87 or (error == 5 and _windows_pid_absent(kernel32, pid))
+        return ProcessObservation(pid, "exited" if absent else "unknown")
     try:
         exit_code = wintypes.DWORD()
         if not kernel32.GetExitCodeProcess(handle, ctypes.byref(exit_code)):

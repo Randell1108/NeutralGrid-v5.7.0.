@@ -236,6 +236,67 @@ def test_partial_native_identity_is_unknown(monkeypatch, stage):
     kernel.CloseHandle.assert_called_once_with(123)
 
 
+@pytest.mark.parametrize("scenario,expected", [
+    ("absent", "exited"), ("present", "unknown"),
+    ("reappeared", "unknown"), ("failed", "unknown"),
+    ("truncated", "unknown"), ("misaligned", "unknown"),
+    ("empty", "unknown"), ("oversized", "unknown"),
+])
+def test_access_denied_requires_two_complete_native_absence_proofs(monkeypatch, scenario, expected):
+    from ctypes import wintypes
+
+    calls = []
+
+    def enumerate_pids(buffer, capacity, returned):
+        calls.append(capacity)
+        if scenario == "failed":
+            return 0
+        pids = [os.getpid()]
+        if scenario == "present" or (scenario == "reappeared" and len(calls) == 2):
+            pids.append(123)
+        for index, pid in enumerate(pids):
+            buffer[index] = pid
+        returned._obj.value = {
+            "truncated": capacity, "misaligned": 1, "empty": 0,
+            "oversized": capacity + ctypes.sizeof(wintypes.DWORD),
+        }.get(scenario, len(pids) * ctypes.sizeof(wintypes.DWORD))
+        return 1
+
+    kernel = SimpleNamespace(
+        OpenProcess=Mock(return_value=0), CloseHandle=Mock(),
+        GetExitCodeProcess=Mock(), GetProcessTimes=Mock(), QueryFullProcessImageNameW=Mock(),
+        K32EnumProcesses=Mock(side_effect=enumerate_pids),
+    )
+    monkeypatch.setattr(ctypes, "WinDLL", Mock(return_value=kernel), raising=False)
+    monkeypatch.setattr(ctypes, "get_last_error", lambda: 5, raising=False)
+    monkeypatch.setattr(os, "kill", lambda *_args: pytest.fail("must not signal"))
+    assert identity_module._query_windows(123).state == expected
+    if scenario == "absent":
+        assert len(calls) == 2
+    assert len(calls) <= 14
+    kernel.CloseHandle.assert_not_called()
+
+
+def test_native_absence_retries_full_buffer_before_deciding(monkeypatch):
+    from ctypes import wintypes
+
+    calls = []
+
+    def enumerate_pids(buffer, capacity, returned):
+        calls.append(capacity)
+        if len(calls) == 1:
+            returned._obj.value = capacity
+        else:
+            buffer[0] = os.getpid()
+            returned._obj.value = ctypes.sizeof(wintypes.DWORD)
+        return 1
+
+    kernel = SimpleNamespace(K32EnumProcesses=Mock(side_effect=enumerate_pids))
+    assert identity_module._windows_pid_absent(kernel, 123)
+    assert len(calls) == 3
+    assert calls[1] > calls[0]
+
+
 def test_real_isolated_orphan_workers_exit_on_exact_markers(tmp_path, monkeypatch):
     """Three harmless marker watchers; no network access or production scripts run."""
     real_root = stopper.ROOT
