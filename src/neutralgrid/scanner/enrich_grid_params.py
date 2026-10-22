@@ -14,6 +14,7 @@ import numpy as np
 
 from neutralgrid.core.config import get_config
 from neutralgrid.api.binance_client import BinanceClient
+from neutralgrid.data.funding_observation import premium_rate_from_market_data
 from neutralgrid.indicators.technical import calc_atr
 from neutralgrid.validation.regime_validator import RegimeValidator, parse_klines
 from neutralgrid.validation.profile_gate import ProfileGate
@@ -1755,15 +1756,9 @@ async def enrich_with_grid_params(
 
         # Extract funding rate from premium_index (AFML: 14/14 feature coverage)
         # Kept in decimal form (e.g. 0.0001) to match PnLRanker expectations
-        funding_rate_decimal = None
-        try:
-            fr_data = market_data.get("funding_rate") or market_data.get("premium_index", {})
-            if isinstance(fr_data, dict):
-                funding_rate_decimal = float(fr_data.get("lastFundingRate", 0))
-            elif isinstance(fr_data, list) and len(fr_data) > 0:
-                funding_rate_decimal = float(fr_data[0].get("fundingRate", 0))
-        except Exception:
-            funding_rate_decimal = None
+        funding_rate_decimal = premium_rate_from_market_data(
+            market_data, symbol=sym, cutoff=datetime.now(timezone.utc),
+        )
 
         # --- Tier 4 context features ---
         # Long/Short ratio: last value from global L/S ratio history

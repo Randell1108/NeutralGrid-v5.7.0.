@@ -1206,10 +1206,10 @@ async def main():
 
     if FINAL_SNAPSHOT_LOGGING_AVAILABLE and build_feature_snapshot is not None and create_collector is not None:
         collector = create_collector(log_dir=str(snapshot_dir), enabled=True)
-        snapshot_ts = datetime.strptime(timestamp, "%Y%m%d_%H%M%S")
-        snapshot_ts = snapshot_ts.replace(tzinfo=timezone.utc)
+        funding_links = []
         try:
             for _, row in df_enriched.iterrows():
+                snapshot_ts = datetime.now(timezone.utc)
                 snapshot = build_feature_snapshot(
                     symbol=str(row.get("symbol", "")),
                     scanner_row=row.to_dict(),
@@ -1217,8 +1217,22 @@ async def main():
                     timestamp=snapshot_ts,
                 )
                 collector.log(snapshot)
+                funding_links.append({
+                    "candidate_id": row.get("candidate_id"),
+                    "symbol": str(row.get("symbol", "")),
+                    "pipeline_start_utc": datetime.strptime(timestamp, "%Y%m%d_%H%M%S").replace(tzinfo=timezone.utc).isoformat(),
+                    "snapshot_available_at_utc": snapshot_ts.isoformat(),
+                    "funding_observation_path": (
+                        str(row["funding_observation_path"])
+                        if isinstance(row.get("funding_observation_path"), str) else None
+                    ),
+                })
         finally:
             collector.close()
+        snapshot_dir.mkdir(parents=True, exist_ok=True)
+        (snapshot_dir / f"funding_links_{timestamp}.json").write_text(
+            json.dumps(funding_links, indent=2), encoding="utf-8",
+        )
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     potential_candidates = _build_potential_candidates(df_enriched)

@@ -15,6 +15,7 @@ logger = logging.getLogger(__name__)
 from neutralgrid.api.binance_client import BinanceClient
 
 from neutralgrid.core.candidate_id import make_candidate_id_from_row
+from neutralgrid.data.funding_observation import capture_funding_observation
 from neutralgrid.scanner.feature_extractor import klines_to_df, compute_features, SymbolFeatures
 from neutralgrid.scanner.pattern_profile import PatternProfile
 from neutralgrid.scanner.profile_model import ProfileModel
@@ -358,6 +359,13 @@ async def scan_top_symbols(
 
     async def fetch_one(symbol: str) -> Optional[ScanResult]:
         try:
+            async def funding_capture():
+                try:
+                    return await capture_funding_observation(client, symbol)
+                except Exception as exc:
+                    logger.warning("Funding capture unavailable for %s: %s", symbol, exc)
+                    return None
+
             _kl = get_config().validation.kline_limits
             # Batch all API calls concurrently through the rate gate
             (
@@ -369,7 +377,7 @@ async def scan_top_symbols(
                 _gated_call(client.get_klines(symbol, "15m", _kl["15m"])),
                 _gated_call(client.get_klines(symbol, "5m", _kl["5m"])),
                 _gated_call(client.get_klines(symbol, "1m", _kl["1m"])),
-                _gated_call(client.get_premium_index(symbol)),
+                _gated_call(funding_capture()),
                 _gated_call(client.get_open_interest(symbol)),
                 # Binance-derived context features
                 _gated_call(client.get_global_long_short_ratio(symbol, "5m", 1)),
@@ -391,26 +399,8 @@ async def scan_top_symbols(
                     "cached_at_utc": datetime.now(timezone.utc),
                 }
 
-            funding_rate = None
-            try:
-                funding_rate = float(prem["lastFundingRate"])
-            except Exception:
-                funding_rate = None
-
-            funding_info = None
-            try:
-                next_funding_ms = int(prem["nextFundingTime"])
-                hours_to_next_funding = max(
-                    0.0,
-                    (next_funding_ms - int(datetime.now(timezone.utc).timestamp() * 1000))
-                    / (1000 * 3600),
-                )
-                funding_info = {
-                    "funding_rate_pct": float(prem["lastFundingRate"]) * 100.0,
-                    "funding_interval_hours": hours_to_next_funding,
-                }
-            except Exception:
-                funding_info = None
+            funding_info, funding_path = prem if prem is not None else (None, None)
+            funding_rate = funding_info["funding_rate_pct"] / 100.0 if funding_info else None
 
             open_interest = None
             try:
@@ -433,8 +423,9 @@ async def scan_top_symbols(
             _mark_price = None
             _index_price = None
             try:
-                _mark_price = float(prem["markPrice"])
-                _index_price = float(prem["indexPrice"])
+                if funding_info is not None:
+                    _mark_price = float(funding_info["mark_price"])
+                    _index_price = float(funding_info["index_price"])
             except Exception:
                 pass
 
@@ -573,6 +564,12 @@ async def scan_top_symbols(
             )
 
             row = feats.as_dict()
+            # Provenance is metadata, not a new model feature. The original
+            # response is already immutable on disk before its value is used.
+            row["funding_observation_path"] = str(funding_path) if funding_path else None
+            row["funding_observed_at_ms"] = funding_info["observed_at_ms"] if funding_info else None
+            row["funding_received_at_utc"] = funding_info["fetched_at"] if funding_info else None
+            row["funding_next_settlement_ms"] = funding_info["next_funding_time"] if funding_info else None
             if row.get("quote_volume_24h") is None:
                 try:
                     if "quote_volume" not in df15.columns:
@@ -808,7 +805,7 @@ async def scan_top_symbols(
                     symbol=r.symbol,
                     scanner_row=d,
                     validation_result=None,
-                    timestamp=_scan_time,
+                    timestamp=datetime.now(timezone.utc),
                 )
                 feature_collector.log(snapshot)
             except Exception as log_err:

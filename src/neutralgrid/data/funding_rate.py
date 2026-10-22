@@ -196,34 +196,17 @@ class FundingRateProvider:
             print(f"Funding in {info['funding_interval_hours']:.1f} hours")
         """
         try:
+            from neutralgrid.data.funding_observation import premium_funding_info
+
             result = await self.client.get_premium_index(symbol)
-
-            # Extract fields
-            if any(isinstance(result[key], (bool, np.bool_)) for key in ('lastFundingRate', 'nextFundingTime')):
-                logger.warning("Unavailable funding forecast for %s: boolean API fields", symbol)
-                return None
-            funding_rate = float(result['lastFundingRate']) * 100
-            next_funding_ms = int(result['nextFundingTime'])
-            mark_price = float(result.get('markPrice', 0))
-            index_price = float(result.get('indexPrice', 0))
-
-            # Calculate time until next funding
-            now_ms = int(datetime.now(timezone.utc).timestamp() * 1000)
-            time_until_funding_ms = next_funding_ms - now_ms
-            time_until_funding_hours = time_until_funding_ms / (1000 * 3600)
-            if not math.isfinite(funding_rate) or time_until_funding_hours < 0:
-                logger.warning("Unavailable funding forecast for %s: invalid rate or stale settlement", symbol)
-                return None
-
-            return {
-                'symbol': symbol,
-                'funding_rate_pct': funding_rate,
-                'next_funding_time': next_funding_ms,
-                'mark_price': mark_price,
-                'index_price': index_price,
-                'funding_interval_hours': time_until_funding_hours,
-                'fetched_at': datetime.now(timezone.utc).isoformat()
-            }
+            info = premium_funding_info(
+                result, symbol=symbol, cutoff=datetime.now(timezone.utc),
+            )
+            # Preserve the provider's numeric price interface; the original
+            # response strings remain intact in persisted capture receipts.
+            info['mark_price'] = float(result.get('markPrice', 0))
+            info['index_price'] = float(result.get('indexPrice', 0))
+            return info
 
         except Exception as e:
             logger.error(f"Failed to fetch funding info for {symbol}: {e}")

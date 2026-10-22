@@ -197,6 +197,56 @@ class DummyClient:
 
 
 @pytest.mark.asyncio
+async def test_original_funding_receipt_reaches_workbook_and_separate_audit(workspace_tmp_dir, monkeypatch):
+    import json
+    from neutralgrid.data.funding_observation import persist_funding_observation
+
+    bot, _, _ = nbde.build_bot_data_from_text(SAMPLE_TEXT)
+    assert bot.start_time_utc is not None
+    entry = bot.start_time_utc
+    receipt = persist_funding_observation(
+        {"symbol": "STEEMUSDT", "time": int(entry.timestamp()*1000)-500,
+         "nextFundingTime": int((entry+timedelta(hours=1)).timestamp()*1000),
+         "lastFundingRate": "-0.0002"},
+        symbol="STEEMUSDT", received_at=entry-timedelta(milliseconds=100),
+        live_root=workspace_tmp_dir / "Live", strategy_id=str(bot.strategy_id),
+    )
+    async def history(*args, **kwargs):
+        return {key: pd.DataFrame() for key in ("1h", "15m", "5m", "1m")}
+    async def marks(*args, **kwargs):
+        return []
+    monkeypatch.setattr(nbde, "BinanceClient", DummyClient)
+    monkeypatch.setattr(nbde, "fetch_historical_klines", history)
+    monkeypatch.setattr(nbde, "fetch_session_mark_klines", marks)
+    monkeypatch.setattr(nbde, "compute_indicators", lambda *a, **kw: TechnicalIndicators())
+    monkeypatch.setattr(nbde, "search_candidate_match", lambda **kw: None)
+    output = workspace_tmp_dir / "receipt_test.xlsx"
+    row = await nbde.process_manual_text(
+        SAMPLE_TEXT, output_path=output, verify=False,
+        funding_observation=receipt, funding_max_age_seconds=1,
+    )
+    assert row["funding_carry_expected_next_7h"] == pytest.approx(-0.02)
+    frame = pd.read_excel(output, sheet_name=0)
+    assert frame.loc[0, "funding_carry_expected_next_7h"] == pytest.approx(-0.02)
+    assert "funding_observation_path" not in frame.columns
+    proof_files = list((workspace_tmp_dir / "funding_ingest_receipts").glob("*.json"))
+    assert len(proof_files) == 1
+    proof = json.loads(proof_files[0].read_text())
+    assert proof["cutoff_utc"] == entry.isoformat()
+    assert proof["observed_at_ms"] == int(entry.timestamp()*1000)-500
+
+
+@pytest.mark.asyncio
+async def test_funding_input_requires_explicit_age_before_any_client_or_write(workspace_tmp_dir, monkeypatch):
+    monkeypatch.setattr(nbde, "BinanceClient", lambda: pytest.fail("Must validate before network"))
+    output = workspace_tmp_dir / "untouched.xlsx"
+    with pytest.raises(ValueError, match="both"):
+        await nbde.process_manual_text(SAMPLE_TEXT, output_path=output, verify=False,
+                                      funding_observation=workspace_tmp_dir / "missing.json")
+    assert not output.exists()
+
+
+@pytest.mark.asyncio
 async def test_expired_ingest_never_uses_future_funding_as_forecast(workspace_tmp_dir, monkeypatch):
     calls = []
 

@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import asyncio
 import logging
+import json
 import sys
 import re
 from dataclasses import dataclass
@@ -21,6 +22,7 @@ import numpy as np  # pyright: ignore[reportMissingImports]
 import pandas as pd  # pyright: ignore[reportMissingImports]
 
 from neutralgrid.api.binance_client import BinanceClient
+from neutralgrid.data.funding_observation import replay_funding_observation
 from neutralgrid.data.workbook_timestamps import END_TIME_NUMBER_FORMAT, normalize_end_time_utc
 from neutralgrid.scanner.feature_extractor import compute_profile_feature_block
 
@@ -513,12 +515,23 @@ async def process_manual_text(
     verify: bool = True,
     allow_unresolved_coherence: bool = False,
     dry_run: bool = False,
+    funding_observation: Optional[Path] = None,
+    funding_max_age_seconds: Optional[float] = None,
 ) -> Dict[str, Any]:
     """Parse manual text, fetch market context, and write one workbook row."""
     bot_data, trade_fills, pnl_curve = build_bot_data_from_text(text)
     matched_profit_events = parse_matched_profit_events(text)
     validate_required_fields(bot_data)
     symbol, start_time_utc, end_time_utc = get_required_market_window(bot_data)
+    funding_value = None
+    funding_provenance = None
+    if (funding_observation is None) != (funding_max_age_seconds is None):
+        raise ValueError("Supply both funding observation and explicit maximum age")
+    if funding_observation is not None and funding_max_age_seconds is not None:
+        funding_value, funding_provenance = replay_funding_observation(
+            funding_observation, symbol=symbol, cutoff=start_time_utc,
+            max_age_seconds=funding_max_age_seconds, strategy_id=str(bot_data.strategy_id),
+        )
 
     if not dry_run:
         _persist_manual_input_text(text, symbol, bot_data.strategy_id)
@@ -625,16 +638,17 @@ async def process_manual_text(
 
         # ── Pattern-profile pre-entry features (F1/F2/F3/F4) ──────────
         # Historical settlements are outcomes, not evidence of an entry-time
-        # forecast. This input path has no original forecast capture. Leave F3
-        # missing; realized funding remains in funding_fee_usdt/accounting.
-        row["funding_carry_expected_next_7h"] = None
-        logger.info("%s: expected funding carry unavailable without an original forecast capture", symbol)
+        # forecast. Only an explicitly validated original receipt can fill F3;
+        # realized funding remains in funding_fee_usdt/accounting.
+        row["funding_carry_expected_next_7h"] = funding_value
+        if funding_value is None:
+            logger.info("%s: expected funding carry unavailable without an original forecast capture", symbol)
 
         try:
             profile_block = compute_profile_feature_block(
                 klines_15m=klines.get("15m", pd.DataFrame()),
                 klines_1m=klines.get("1m", pd.DataFrame()),
-                funding_carry_expected_next_7h=None,
+                funding_carry_expected_next_7h=funding_value,
             )
             for key, value in profile_block.items():
                 if value is not None:
@@ -655,6 +669,19 @@ async def process_manual_text(
 
         columns = resolve_workbook_columns(output_path, read_only=dry_run)
         filtered_row = filter_row_to_schema(row, columns)
+        if funding_provenance is not None:
+            # This audit metadata is not a workbook/model feature column.
+            if not dry_run:
+                receipt_dir = output_path.parent / "funding_ingest_receipts"
+                receipt_dir.mkdir(parents=True, exist_ok=True)
+                receipt_path = receipt_dir / f"{bot_data.strategy_id}_{funding_provenance['source_sha256']}.json"
+                receipt = {"strategy_id": bot_data.strategy_id, "symbol": symbol, **funding_provenance}
+                if receipt_path.exists():
+                    if json.loads(receipt_path.read_text(encoding="utf-8")) != receipt:
+                        raise ValueError("Conflicting funding ingestion receipt")
+                else:
+                    with receipt_path.open("x", encoding="utf-8") as stream:
+                        json.dump(receipt, stream, indent=2)
 
         if dry_run:
             return filtered_row
@@ -688,6 +715,8 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--trade-csv", type=Path, help="Optional trade-history CSV")
     parser.add_argument("--txn-csv", type=Path, help="Optional transaction-history CSV")
+    parser.add_argument("--funding-observation", type=Path, help="Original premium-index receipt; never a settlement-history file")
+    parser.add_argument("--funding-max-age-seconds", type=float, help="Explicit maximum exchange-observation age at bot entry; required with --funding-observation")
     parser.add_argument(
         "--output",
         type=Path,
@@ -743,6 +772,8 @@ def main() -> None:
                 verify=not args.no_verify,
                 allow_unresolved_coherence=args.allow_unresolved_coherence,
                 dry_run=args.dry_run,
+                funding_observation=args.funding_observation,
+                funding_max_age_seconds=args.funding_max_age_seconds,
             )
         )
     except Exception as exc:

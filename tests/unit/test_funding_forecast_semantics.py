@@ -31,7 +31,7 @@ def test_known_forecast_preserves_sign_units_and_boundary(rate, wait, expected):
 @pytest.mark.asyncio
 @pytest.mark.parametrize('failure', ['missing_rate', 'missing_time', 'nan', 'stale', 'timeout', 'not_object', 'boolean_rate'])
 async def test_provider_invalid_response_is_unavailable_without_crash(failure):
-    result = {'lastFundingRate': '0.0001', 'nextFundingTime': int(
+    result = {'symbol': 'BTCUSDT', 'time': int(datetime.now(timezone.utc).timestamp()*1000), 'lastFundingRate': '0.0001', 'nextFundingTime': int(
         (datetime.now(timezone.utc) + timedelta(hours=1)).timestamp() * 1000)}
     if failure == 'missing_rate': del result['lastFundingRate']
     if failure == 'missing_time': del result['nextFundingTime']
@@ -46,10 +46,12 @@ async def test_provider_invalid_response_is_unavailable_without_crash(failure):
 
 @pytest.mark.asyncio
 async def test_provider_observed_rate_units_reach_forecast():
-    result = {'lastFundingRate': '-0.0002', 'nextFundingTime': int(
+    result = {'symbol': 'BTCUSDT', 'time': int(datetime.now(timezone.utc).timestamp()*1000), 'markPrice': '65000.25', 'indexPrice': '64999.5', 'lastFundingRate': '-0.0002', 'nextFundingTime': int(
         (datetime.now(timezone.utc) + timedelta(hours=1)).timestamp() * 1000)}
     client = SimpleNamespace(get_premium_index=AsyncMock(return_value=result))
     info = await FundingRateProvider(client).get_funding_info('BTCUSDT')
     assert info is not None
     assert info['funding_rate_pct'] == pytest.approx(-0.02)
+    assert info['mark_price'] == 65000.25
+    assert info['index_price'] == 64999.5
     assert expected_funding_carry_next_hours(info) == pytest.approx(-0.02)
