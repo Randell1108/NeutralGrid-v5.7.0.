@@ -4,7 +4,7 @@ Copy the following paragraph into this repository's Codex task after executing
 the operational prompt's P0 start-and-verify commands.
 
 > Run the recurring live-drawer verdict workflow in `D:\Neutral Grid v5.7.0` using
-> `docs/recurring_drawer_verdict.md`. Use my authenticated Chrome extension to
+> `docs/recurring_drawer_verdict.md`. Use my authenticated Brave extension to
 > capture every currently Working UM Grid bot, prove the complete roster before
 > and after capture, save raw data under `Live/<Lima-date>/<SYMBOL>/`, ingest the
 > returned bundle, and consume the exact resulting manifest once through

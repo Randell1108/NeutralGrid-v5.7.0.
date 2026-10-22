@@ -1,0 +1,677 @@
+STANDALONE REPLACEMENT OPERATIONAL PROMPT
+CONTINUOUS COLLECTION, TEN-MINUTE STRATEGY SNAPSHOTS, ADVISORY LIVE SCANNER,
+AND RETRAINING EVIDENCE PRESERVATION
+Prepared 2026-10-19 for D:\Neutral Grid v5.7.0
+
+This document replaces both previous operational prompts in full. It includes
+the P0 start/verify instructions, all collection priorities, the scanner cycle,
+and retraining-evidence requirements. Do not execute an earlier prompt alongside
+it. Earlier prompts and their line numbers are not operational dependencies.
+Repository source code, current configuration and model/data contracts remain
+implementation authorities; this prompt does not supply missing capabilities.
+
+Execute this prompt only when the operator asks to start it. Creating or reviewing
+this document does not start collectors, change schedules, or run the scanner.
+
+MISSION AND AUTHORITY
+
+Collect a fresh snapshot of every proven active strategy every 600 seconds,
+alongside the continuous authenticated lifecycle stream and the higher-frequency
+market sources required by the existing scanner and training contracts. Preserve
+the evidence needed for later governed retraining; report every unmet dependency.
+Ten-minute bot snapshots are sampled observations. They do not establish complete
+execution history, exact intraperiod equity, or training readiness by themselves.
+
+Do not expose credentials, cookies, signatures, signed URLs, authorization headers,
+or listen keys. Do not place, amend, or cancel orders; create, change, or terminate
+bots; transfer funds; change API permissions, IP restrictions, leverage, margin,
+TP/SL, thresholds, or risk limits. Existing action approvals do not authorize
+actions under this prompt. Scanner CONTINUE/ADJUST/END results are advisory only.
+Do not send Discord messages or contact third parties. Do not modify production
+code, model artifacts, canonical training workbooks, labels, or training pools.
+Do not retrain, backfill training features, recalibrate, rotate, or promote models.
+Do not dump environment variables, process command lines, browser storage, request
+headers or unredacted log tails. Process/health diagnostics must use safe allowlisted
+fields or redact sensitive values before output or persistence. Reference the
+existing secret mechanism without inspecting or reproducing its credential values.
+
+Use supported authenticated read-only surfaces and documented read endpoints.
+Stream start/keepalive/reconnection are collector lifecycle operations only; they
+are not permission to change trading state. Keep healthy collectors running.
+Do not request or download transaction-history exports until the exact strategy
+is independently verified EXPIRED or CANCELLED. Never cancel a strategy to obtain
+data or manufacture a test event. Do not bypass browser download/security gates.
+
+1. ESTABLISH THE CONTRACTS AND RECORD READINESS
+
+Read the current AGENTS.md and .claude/rules/safety-invariants.md. Work from the
+repository root. Follow the acquisition, P0 commands, priority plan, preflight,
+scanner and reporting instructions contained here. Use the 600-second Brave-plugin
+drawer workflow only. Do not launch a dedicated debugging-profile/CDP drawer loop
+or a legacy raw telemetry controller. Do not spawn agents under this prompt.
+
+Inspect actual supported CLI options, browser APIs, schemas, active feature lists,
+label contracts, model/config manifests, and collector ownership before use.
+Record exact file/artifact hashes and the revision if available without changing
+Git configuration. Resolve paths from verified returned manifests, not filenames
+chosen because they look recent. An older audit is historical evidence only.
+
+Keep Brave drawer telemetry, public market data and authenticated account data as
+distinct authorities. An HTTP-success empty array means zero rows returned by
+that exact query in its documented account/time scope. It is not proof of zero
+Trading Bots orders, positions or activity. Failed, unavailable, truncated, stale
+or unauthenticated responses are NOT AVAILABLE/PARTIAL, never fabricated zeros.
+Do not substitute drawer pending orders for signed API open orders, account-wide
+positions for an exact bot position, or a public trade for a private execution.
+
+Build a per-model dependency register: model/component, field, unit/denominator,
+required frequency and lookback, source/account scope, event time, available-at
+time, identity linkage, lineage, label dependency, validation result, and gap.
+Cover the live telemetry scanner, active meta-labeler, HMM and associated
+calibration, pattern/profile models, utility calibrator, and any approved shadow
+forecasters actually configured. Resolve additional requirements from their
+current code/config; do not assert that this document lists every future feature.
+An absent contract or unsupported source is BLOCKED for that use, not a default.
+
+Report readiness separately for snapshot capture, continuous streams, scanner,
+and each training consumer. A failure in one source must not erase valid raw data
+from another or be hidden under a single overall success status.
+
+2. PROVE THE COMPLETE ACTIVE ROSTER EACH CYCLE
+
+Use the authenticated Brave extension positively identified as Brave. Verify the
+account context without logging account secrets. Enumerate the current UM Grid /
+Running / Working roster using the rendered count and a bounded, overlapping
+sweep of every virtualized row. Capture a roster fence before and after drawers.
+For every strategy prove symbol, exact displayed strategy ID, creation/deployment
+time with its timezone, and displayed status. Do not reuse an old roster, hard-code
+a symbol list, equate a running Brave process with a browser connection, or infer
+identity from symbol alone. Confirm whether other active strategy products/accounts
+exist; unsupported or inaccessible scope must be explicitly excluded from an
+"all strategies" claim and reported as a coverage gap.
+
+Capture each proven active strategy independently, including multiple strategies
+on one symbol if present. If a helper/schema requires unique symbols and cannot
+represent that roster, report BLOCKED; never silently omit or merge those bots.
+Reconcile the two roster fences, count, unique strategy identities, and stable
+creation times. If membership changes during capture, preserve the partial raw
+evidence but reject the incomplete cycle and acquire a fresh coherent roster.
+A disappeared row is not proof of cancellation or expiry. Seek exact terminal
+status evidence and retain unresolved disappearances as gaps.
+Strategies that start and finish entirely between snapshots can be missed by the
+Running view. Continuous lifecycle receipts and later terminal reconciliation can
+reduce that gap only where their delivery and account scope are validated; neither
+method justifies a guarantee that every short-lived strategy was observed.
+
+Run a read-only browser capture smoke test before enabling recurrence. Verify the
+current tool API against scripts/capture_recurring_drawers.mjs. The 2026-10-19 repair
+uses supported tab.scroll, tab.drag, tab.click, tab.getScreenshot and tab.getAXState
+methods. Before each drag it clicks a verified non-interactive header point,
+then rechecks that the same safe origin remains and the text selection is collapsed.
+This prevents a prior drawer's selection from suppressing the next tooltip.
+It starts pointer movement at that verified point,
+requires a fresh View Details tooltip bound to the exact document icon, rechecks
+the Working identity and rejects movement of the control before clicking. Retain
+these guards, both full-roster fences and the drawer identity checks. Use only
+documented supported APIs and the established ingestion schema. If the helper cannot run, record its
+observed failure and block that capture path; do not invent an API, use a CDP
+fallback, weaken identity checks, or edit the helper under this prompt.
+
+Use the browser runtime's documented inventory API through its persistent
+JavaScript tool. Read its current documentation, positively identify Brave, and
+claim the existing authenticated Binance UM Grid tab. Never invent a browser ID,
+use an in-app browser as a Brave substitute, extract browser credentials, or attach
+through a debugging port. Set UM Grid / Running only through observed read-only
+navigation controls. Never click End, adjustment, order, leverage or margin actions.
+
+After confirming compatibility and a claimed tab binding, the existing helper
+interface is:
+
+  const drawerCollector = await import('file:///D:/Neutral%20Grid%20v5.7.0/scripts/capture_recurring_drawers.mjs');
+  const captured = await drawerCollector.captureDrawers(gridTab, {
+    workspaceRoot: 'D:/Neutral Grid v5.7.0'
+  });
+
+Binding names are examples: use actual verified bindings and avoid redeclaration
+errors in the persistent runtime. When reusing a persistent module cache, compute
+the current helper file's SHA-256 and append that verified hash as an import URL
+query so an older cached module cannot substitute for the inspected source.
+Record the hash. Display only returned non-sensitive metadata
+through the runtime's documented output API. Require captured.status=complete and
+the exact returned bundlePath. This interface is not assurance that the current
+browser adapter supports the helper. Failure blocks the attempt as stated above.
+The helper must prove View Details before clicking its observed document icon,
+save raw text before parsing, close only the observed drawer close icon, and
+re-prove the full roster. Its acquisition deadline is one 600-second snapshot
+period, checked between drawers and again after the final roster fence. This
+execution budget does not relax the 900-second drawer or 15-second L2 source-age
+gates, the 600-second evaluation guard, or any identity check. Use a browser-tool
+timeout sufficient for that budget and bounded cleanup; report actual cadence
+and source ages rather than claiming acquisition time guarantees freshness.
+Bounded UI waits do not guarantee browser transport availability.
+
+Keep the complete capture awaited inside one active browser execution; an
+unawaited promise cannot safely continue browser calls after that execution ends.
+Before awaiting, persist a unique metadata-only attempt receipt marked started.
+After the helper returns, persist its exact return object and terminal status in
+that same receipt. A browser gateway timeout may precede backend completion: do
+not infer success, reset the runtime or start another capture. Observe only that
+attempt's known local receipt until its outcome is established. Ingest only its
+successful returned bundle after validating all usual hashes and identity gates.
+If execution termination or outcome cannot be established, report blocked and
+preserve partial evidence. A later-looking directory is never return authority.
+The October 21 27-strategy recovery took 489 seconds and encountered a 300-second
+gateway response timeout; requesting a longer tool timeout alone did not remove
+that gateway limit. Do not promise a ten-minute achieved cadence from this test.
+
+P0. START, VERIFY AND OWN THE THREE CONTINUOUS SERVICES
+
+Complete the fresh roster proof first. Preserve its raw per-strategy evidence
+under Live and a metadata-only roster manifest. Commit a freshly verified CSV
+with header symbol,strategy_id containing every exact target pair, no guessed or
+duplicate identities. Retain its SHA-256 and the roster evidence reference.
+Prefer collector_targets_csv returned by a successfully validated fresh bundle
+ingestion; independently check its exact membership before use. A stale previous
+cycle or hand-written expected symbol list does not establish the roster.
+Freshness comes from the current browser proof, not from a new CSV filename. If
+the exact target membership is unchanged, freshly compare the running owner's
+immutable CSV with that proof and use its recorded path as VERIFIED_TARGET_CSV.
+Verify its hash/identity rather than replacing it with an equivalent new file.
+The verifier checks the recorded CSV path and ordered contents as well as identity;
+a display-order change alone must not trigger a restart. Retain the existing CSV
+ordering when its membership still matches. An old target CSV may remain verified
+collector configuration; it must never substitute for fresh active-status evidence.
+
+Use scripts/supervise_binance_websocket_services.py as the single owner of:
+- /public: scripts/collect_diff_depth.py; diff-depth @depth@100ms only, including
+  bootstrap REST depth and sequence validation, with --no-agg-trades and
+  --no-mark-price-updates to prevent route crossover.
+- /market: scripts/collect_market_streams.py; @aggTrade, @markPrice@1s and
+  1m/5m/15m/1h klines. Preserve non-final candles as raw observations only.
+- /private: scripts/collect_private_user_stream.py; authenticated account events
+  delivered by the source, keepalive/rotation and reviewed exact strategy mapping.
+  It uses userDataStream.start, userDataStream.ping and userDataStream.stop at
+  wss://ws-fapi.binance.com/ws-fapi/v1 and the private receive route. These lifecycle
+  requests do not authorize trading actions. Never print a listen-key receive URL.
+
+First inspect existing ownership/health metadata without disclosing credentials.
+If the expected owner is running, verify it against the fresh target CSV:
+
+  .\.venv\Scripts\python.exe scripts\verify_binance_websocket_services.py --target-csv '<VERIFIED_TARGET_CSV>' --audit-root outputs\audits\binance_websocket_services_current --wait-seconds 30
+
+If no valid owner is running, check for a stale lock versus a live or unrelated
+process; do not delete ownership evidence or kill unrelated processes. Once safe
+exclusive ownership is established, start the services with the supported launcher:
+
+  powershell -ExecutionPolicy Bypass -File .\scripts\start_binance_websocket_services.ps1 -TargetCsv '<VERIFIED_TARGET_CSV>' -DurationSeconds 0 -FsyncEvery 100
+
+When reviewed linkage files are available, use the direct PowerShell script form
+so LinkageFiles receives a typed array rather than native-command argument strings:
+
+  & .\scripts\start_binance_websocket_services.ps1 -TargetCsv '<VERIFIED_TARGET_CSV>' -LinkageFiles @('<REVIEWED_LINKAGE_1.json>','<REVIEWED_LINKAGE_2.json>') -DurationSeconds 0 -FsyncEvery 100
+
+Use only actual files that pass the existing neutralgrid_strategy_order_linkage_v1
+loader's schema, provenance, target-membership, positive-ID and collision checks.
+Otherwise omit -LinkageFiles; keep unowned order/trade events raw and unassigned.
+If script execution is blocked, report the restriction; do not change machine/user
+execution policy. Placeholder paths must be replaced by verified paths before
+execution, never passed literally.
+
+Run the verifier command after startup. Require exit zero and a PASS report, actual
+supervisor/worker process identities, correct scripts, exact targets and symbol
+coverage, separate routes, path containment and consistent Lima session date.
+Existing verifier heartbeat maximum is 30 seconds. A launcher exit zero can mean
+an existing supervisor was found; it does not prove that it uses the new roster.
+A missing-key manifest, HTTP 401/-2015, stale heartbeat, wrong PID/owner, no private
+connection, route crossover, wrong roster, path escape or date mismatch is a real
+failure. Preserve sanitized diagnostics; do not relabel them successful. Report
+healthy public/market collection independently if the private source is blocked.
+
+The Windows launcher's FsyncEvery=100 batches fsync per append-only file; each
+append is flushed to the OS and normal shutdown performs a final fsync. Do not
+claim every append is already durable on disk. Preserve the measured configuration
+and account for the abrupt-crash durability boundary. Do not lower the batch value
+without a measured full-roster soak that keeps heartbeat age below 30 seconds.
+
+The supervisor reads targets and reviewed linkage at startup; there is no validated
+hot-reload interface in the reviewed source. For a proven roster change, or a
+reviewed linkage change that must be loaded, first suspend new scanner consumption
+and preserve old target hashes, sanitized owner/service manifests and coverage
+times in a unique audit record. Do not edit the old running CSV or claim hot reload.
+If restart is needed, use the owner-supported stop command only:
+
+  powershell -ExecutionPolicy Bypass -File .\scripts\stop_binance_websocket_services.ps1 -AuditRoot outputs\audits\binance_websocket_services_current -TimeoutSeconds 30
+
+Require successful stop and independently verify the recorded owner/workers have
+terminated before starting the same owner with a new immutable verified target
+CSV and any actually reviewed linkage files. Repeat the launcher and verifier
+commands above, record the disconnect/restart gap, and resume scanner consumption
+only after its own required evidence gates pass. A stop timeout, uncertain process
+identity or failed replacement verification blocks the transition; no overlapping
+owner or forced unrelated-process termination is permitted. Do not restart merely
+because another ten-minute tick arrived. This procedure changes collectors only.
+If the fresh roster is proven empty, report that observed state, publish no new
+bot verdict and do not start a service with an invented/nonempty target list. The
+current collector requires a nonempty CSV; report any empty-roster publication or
+retirement limitation through the supported health/failure interface, without
+replaying older bots as active. Do not stop healthy unrelated services solely to
+make the empty-roster case fit this collector.
+
+If credentials or access are missing, report the observed error and ask the operator
+to restore access through the existing secret mechanism outside this collection
+flow. Do not inspect/print secret values, change API permissions/IP rules, create a
+replacement key or infer the minimum permission checkbox combination. Resume only
+after access is independently validated. Do not alter a bot to test the connection.
+
+If the superseded dedicated-profile drawer loop is positively identified as running
+and owned by this checkout, retire only that loop through its supported stop helper:
+
+  powershell -ExecutionPolicy Bypass -File .\scripts\stop_private_telemetry_loop.ps1
+
+Validate its ownership before using the helper. Do not kill Brave, unrelated Python
+workers or the P0 market supervisor. Do not start the legacy loop as a fallback.
+
+3. USE COMPLEMENTARY COLLECTION FREQUENCIES
+
+Bot drawers and advisory scanner: one fresh full-roster cycle every 600 seconds.
+Private lifecycle/user-data stream: continuously, according to actual events.
+Public diff-depth and market-event collectors: continuously at supported rates.
+Price series: every finalized one-minute mark-price and last-price candle.
+Public market statistics: existing five-minute cadence/source observation period.
+Higher-timeframe bars/history: append on closed bar, publication, or source change.
+Read-only REST reconciliation: existing ten-minute policy, only for sources whose
+account coverage, access, request budget, and history restrictions are validated.
+Final strategy outcome/export capture: after exact verified EXPIRED or CANCELLED.
+
+P1 - CLOSED-MINUTE PRICE SERIES AND APPROVED SHADOW INFERENCE:
+Persist finalized one-minute mark-price and last-price bars, without dropping
+their native observations in favor of ten-minute samples. Resolve the actual
+price-series store/worker from neutralgrid.data.price_series and the active price
+contract. Repair only audited gaps through documented read-only REST or governed
+historical sources, with conflict/checksum and listing-boundary checks. Historical
+acquisition is data collection, not permission to train a model. Do not launch an
+additional public/market supervisor from another runbook; P0 owns those routes.
+Keep a running approved shadow volatility loop at its existing 180-second issuance
+cadence and maximum source age of 180 seconds only if its actual contract, eligible
+artifact directory and roster resolve. The supported component is
+scripts/run_live_volatility_loop.py and its contract is
+config/live_volatility_forecast_v1.json. Do not invent an artifact path or train one
+here. If unavailable, continue valid bar collection and report FORECAST UNAVAILABLE.
+Any shadow PnL/volatility output must remain isolated and cannot alter scanner
+verdicts, thresholds, exposure, sizing or model lineage.
+
+P2 - FIVE-MINUTE PUBLIC MARKET STATISTICS:
+Collect global long/short account ratio, top-trader long/short account ratio,
+top-trader long/short position ratio, taker buy/sell ratio, current premium-index
+object, current open interest and rolling 24-hour ticker. Preserve funding rate,
+next funding time, mark/index prices, estimated settlement price and interest rate
+only when returned. Retain source timestamps and source periods; report per-family,
+per-symbol observation counts and duplicate conflicts. Validate coverage of the
+actual scanner/model fields, including ratio/log/imbalance, funding/basis, OI and
+quote-volume features. Do not recalculate a nonexistent historical observation
+from current objects. Confirm actual supported read-only workers/endpoints and
+request weights before scheduling them; an unimplemented worker remains a gap.
+
+P3 - TEN-MINUTE DRAWERS, SCANNER AND SCOPED ACCOUNT RECONCILIATION:
+Capture the full proven roster, validate/ingest one bundle and consume one fresh
+scanner cycle as specified below. Independently reconcile supported account
+positions, open orders, order updates, executions, income/commission and funding
+where the documented account scope exposes them and current user history policy
+permits. Use only unseen ID/time ranges with bounded overlap, inclusive boundary
+checks, pagination, duplicate/conflict handling and explicit cursor checkpoints.
+Do not request active-strategy transaction-history exports. A documented standard
+account read query is not proof of native Trading Bots account coverage. If product
+scope or whether a request violates the history restriction is unresolved, block
+that request rather than broadening access or interpreting missing rows as bot zeros.
+Reconciliation is not a replacement for the continuous stream and cannot upgrade
+unknown event completeness. Do not increase polling frequency to bypass an outage.
+
+P4 - SOURCE CHANGE / CLOSED BAR / PUBLISHED SETTLEMENT:
+Append 5m/15m/1h closed OHLCV and mark bars; maintain one-minute bars under P1.
+Retain timestamped OI history with at least the established rolling 24-hour path,
+plus longer lookbacks when required by actual models. Append newly published
+funding settlements and required funding history; do not repeatedly download an
+unchanged full window. Fetch exchange information/filters at startup, on observed
+listing/status/configuration changes or an established refresh schedule; retain
+versions/hashes for tick, step, notional, order-count and percent-price constraints.
+Exchange filters are execution-validation metadata, not automatically learned
+features. The rolling 24-hour ticker remains under P2 rather than static history.
+Existing REST L2 depth-shadow evidence may be retained as optional point-in-time
+capacity/impact diagnostics only; it cannot replace continuous sequence-valid L2
+or establish replay completeness. Validate its Lima date and path like every source.
+
+Do not slow every source to ten minutes just because drawers use that cadence.
+Verify each existing worker/launcher/config before use. If there is no supported
+collector for a required source, list the implementation gap; do not invent
+executable commands or silently claim the data was collected. Use durable local
+services/processes for continuous roles; a chat turn is not a continuous collector.
+
+Use one owner per service and one writer per run/manifest. Prevent overlapping
+cycles. Record scheduled versus actual start/end times, missed slots, per-bot
+capture times, source lag, and coverage boundaries. Do not issue bursts of replayed
+scanner ticks after a delay. Scheduled execution requires an awake host, connected
+network, authenticated browser and available tools; it is not a timing guarantee.
+If a full cycle cannot meet current freshness gates, report the capacity blocker
+without relaxing gates or reducing the proven roster.
+
+After a successful complete smoke cycle, reuse/update the matching existing
+ten-minute recurring task through the supported automation tool if recurring
+execution is requested. Inspect it first; do not create duplicate schedules or
+change unrelated schedules. A recurring chat task does not replace durable stream
+workers. Notify only meaningful changes, failures, stale data, recovery, or action
+needed; remain quiet while evidence and verdicts are unchanged.
+
+4. PRESERVE DRAWER OBSERVATIONS AND THEIR MEANING
+
+Save raw drawer text before parsing, with a screenshot when supported and needed
+to substantiate identity/layout. Capture all read-only panels actually available:
+status; strategy/start time; grid mode/direction, bounds, count, spacing, trigger;
+leverage and margin mode; initial/current invested margin; total/grid/realized/
+unrealized PnL; fees and funding with signs and currencies; ROI denominator; runtime;
+position quantities/sides/entry/mark/liquidation values; risk ratio; TP/SL; pending
+buy/sell ladders; matched-trade totals and individual order/trade identifiers where
+explicitly exposed. Preserve displayed precision and units. Do not conflate grid
+profit, total profit, wallet balances, realized PnL or return on different capital.
+
+Distinguish currently visible rows from a complete paginated history. Capture the
+available raw curve/series only if a supported read-only surface exposes actual
+timestamped values; a chart screenshot is not an exact numeric equity path.
+Record missing fields as unavailable with reasons. A zero is valid only when the
+source explicitly supplies zero. Preserve configuration changes as observed new
+versions, with effective time unknown if it is not supplied; do not cause changes.
+
+Use the Brave bundle schema neutralgrid_brave_plugin_capture_bundle_v1 and existing
+validated snapshot/cycle schemas. Ingest only the exact returned bundle:
+
+  .\.venv\Scripts\python.exe scripts\ingest_brave_plugin_telemetry_cycle.py --bundle-manifest '<RETURNED_BUNDLE_PATH>'
+
+Require successful exit, complete validation, and the exact returned cycle_manifest.
+Preserve partial/failed raw evidence but quarantine structured failures. Never
+bypass roster, hash, parser, field-completeness or identity checks. Re-read known
+parser limitations rather than assuming an old issue has been repaired.
+
+5. KEEP THE LIVE LIFECYCLE STREAM AND VALIDATE ITS ACTUAL COVERAGE
+
+Verify existing P0 supervisor/worker ownership, PID, target coverage, private/public/
+market routing, heartbeat, current connection/session identity, keepalives, rotation,
+reconnections, parse errors and persistence lag. Use the documented service verifier
+command in P0 against the freshly proven roster. Do not restart healthy services
+every cycle. Use the controlled P0 owner stop/start procedure only when a validated
+configuration transition requires it. Never claim the old target list covers new
+bots. If restarting a failed collector is required and supported, record the
+discontinuity. Do not change API permissions or network allowlists to clear a failure.
+
+For each natural frame, retain source event type, exchange event/transaction time,
+receive time, session identity, redaction status, original-frame hash and persisted
+payload hash according to the existing schema. Redact sensitive fields before
+durable persistence; never persist secrets just to retain exact wire bytes. An
+original hash cannot be independently recomputed from a redacted payload: validate
+the persisted hash and explicitly preserve that verification boundary.
+
+Replay parsing/normalization on immutable persisted evidence and compare canonical
+records. Deduplicate account frames replicated into several target directories;
+replicas are not independent events. Keep unsupported/unowned account events raw
+and unassigned. A target directory is not strategy ownership evidence.
+
+Binance documents STRATEGY_UPDATE for lifecycle changes. Prior local evidence
+validated a native GRID cancellation on another strategy; it did not validate
+INJUSDT 415167032 fill/PnL coverage. Recheck current evidence rather than repeating
+that historical observation as current health. Treat deprecated GRID_UPDATE as
+insufficient assurance of live fill coverage. A connected socket, keepalive, quiet
+interval, or lifecycle receipt does not prove complete order/account/PnL history.
+Keep event_completeness=unknown for the live collector unless its actual governed
+contract changes; do not upgrade it because reconciliation or a socket check passed.
+Record all disconnects, expiry, rotation, parse failures, and pre-start gaps.
+
+6. REQUIRE EXACT ORDER-TO-STRATEGY OWNERSHIP
+
+For fills and orders, require an exchange order ID with source-backed ownership
+of the exact symbol/strategy. A supported UI row showing Order No and Strategy ID,
+or a documented response explicitly providing the pair, can be staged as evidence.
+Preserve the raw source, timestamps and hash; validate positive IDs, uniqueness,
+collisions, schema and target membership. Use the reviewed
+neutralgrid_strategy_order_linkage_v1 contract. Do not activate a staged mapping
+or restart a collector to load it without a supported reviewed configuration path.
+Report a missing linkage integration rather than guessing ownership.
+
+Symbol, price, quantity, time proximity, client-ID patterns, file location, account
+balance changes and public trades alone are not exact ownership. Lifecycle identity
+does not automatically identify any exchange order. Account-level funding/fees
+must not be allocated to a bot without validated attribution. A mapping cannot
+make missing wire events arrive. REST -2013 or an empty list means that query did
+not return the orders; it does not prove that the strategy never traded.
+
+7. RETAIN MARKET HISTORY AND POINT-IN-TIME SCANNER/TRAINING INPUTS
+
+Preserve continuous L2 initial snapshots plus diff updates and sequence continuity,
+public aggregate trades with IDs/timestamps, supported mark/index/last-price
+observations, and finalized one-minute mark/last candles. Retain closed 5m/15m/1h
+bars and the longer history demanded by current model contracts. Record price type,
+bar-open/close time, finality, gaps and corrections. Public trades cannot label a
+private bot fill; market prices alone cannot prove its account equity path.
+
+Retain supported funding settlements/history and current premium/funding objects,
+open interest and its timestamped history, 24-hour quote volume/ticker, global and
+top-trader account/position ratios, taker ratios, and exchange tick/step/notional
+filters as required by current features. Preserve source publication periods and
+known-at times. Polling a five-minute series faster does not create finer data.
+Do not invent 24-hour OI change from a single OI point. Respect documented weights,
+pagination, retention, throttling and backoff. Preserve 429/418 and access failures
+without bypassing them. Gap repair must remain read-only, supported and auditable;
+never fill a gap with simulated observations or overwrite original raw evidence.
+
+Preserve the original scan/candidate record at its actual decision time, exact
+candidate_id-to-strategy deployment linkage, scan timestamp, deployment time,
+configuration hash, grid parameters, capital/sizing denominator, pipeline version,
+model artifact versions/hashes, feature schema, feature availability timestamps,
+and existing scan/trial/universe records including non-selected candidates.
+Do not manufacture candidate IDs or deployment links for manually created bots.
+Active-bot-only data has selection/survivorship bias and cannot replace the full
+historical training universe or a finalized authoritative backtest pool.
+
+Resolve ACTIVE_SNAPSHOT_META_FEATURES dynamically from the current code. At
+preparation its 20 fields are:
+  ev_score, adx_1h, adx_15m, adx_5m, atr_pct_15m, ou_halflife, rsi_15m,
+  ema_slope_1h, ema_crosses_5m, vwap_crosses_5m, hurst_exponent, range_size_pct,
+  bb_width, grid_spacing_pct, profit_per_grid_pct, num_grids, quote_volume_24h,
+  open_interest, micro_round_trip_cost_pct, funding_rate.
+Keep the original ex-ante values; later drawer values cannot substitute for them.
+Preserve HMM lineage/context separately; do not insert HMM probabilities or blended
+scanner scores into an active feature profile that excludes them. Retain
+hmm_artifact_version and required probabilities wherever their actual downstream
+contract demands them. Do not mix HMM lineages in a calibration pool or run a
+backfill here. Labels, outcomes, hlabel and future information remain outside
+predictors. Use as-of availability joins, not future observations or silent forward
+fills across gaps. Repeated ten-minute rows from one bot are correlated observations,
+not independent labeled training samples. Preserve bot identity/time windows for
+later grouping, purging and embargo under the applicable training contract.
+
+8. RUN THE EXISTING LIVE TELEMETRY SCANNER SAFELY
+
+Before the first scanner cycle and after artifact changes, perform this read-only
+artifact/dependency preflight, reporting PASS/WARN/FAIL per check:
+- Read artifact_manifest.json -> hmm.active_version, its resolved artifact path
+  and metadata. Require the current naming/promotion/lineage contract, including
+  rolling_180d_YYYYMMDD_HHMMSS, recorded walk-forward mean_pass_rate >= 0.50 and no
+  1500-bar truncation flag where those existing gates apply. Do not infer metadata.
+- Resolve artifacts/utility/current.json through its actual runtime loader. Missing
+  or invalid utility evidence cannot silently use pinned defaults at decision time.
+  Offline NaN-plus-warning behavior is not permission to weaken a runtime gate.
+- Resolve pattern profile and profile model through their supported loaders,
+  including only a shipped fallback that the current code explicitly supports.
+  Check actual feature schemas against DEFAULT_FEATURES and artifact metadata.
+- Check meta-labeler metadata, active feature profile, required version/schema and
+  HMM pinning against the active manifest; missing/conflicting/stale lineage is a
+  blocker for consumers requiring it, not permission to refit here.
+- Compare the declared feature/output lists and required inference aliases across
+  src/neutralgrid/backtest/candidate_pipeline.py,
+  src/neutralgrid/training/data_generator.py,
+  src/neutralgrid/training/unified_training_builder.py and
+  src/neutralgrid/models/meta_labeler.py. Report drift; do not edit feature lists.
+- Run the read-only dependency diagnostic with the checkout interpreter:
+    .\.venv\Scripts\python.exe scripts\check_deps.py
+Apply current fail-closed runtime gates without inventing extra acceptance rules.
+Do not run run_full_pipeline.py, which includes deployment, or retrain/replace an
+artifact to make collection pass. A consumer's required artifact/dependency failure
+blocks that use; correctly captured raw evidence remains valid. Use fresh complete
+drawer telemetry and the current exact-roster P0 public diff-depth manifest.
+Existing limits are 900 seconds
+for each drawer, 15 seconds for L2, and five seconds future tolerance; verify current
+contracts before execution and do not relax them. A ten-minute cadence leaves only
+five minutes until the existing drawer expiry boundary.
+
+Consume the exact returned cycle once through the safety wrapper:
+
+  .\.venv\Scripts\python.exe scripts\run_drawer_verdict_cycle.py --cycle-manifest '<RETURNED_CYCLE_MANIFEST>' --diff-depth-manifest outputs\audits\binance_websocket_services_current\public\manifest.json
+  .\.venv\Scripts\python.exe scripts\run_drawer_verdict_cycle.py --status
+
+Verify that the current manifest path resolves to the actual validated owner/run;
+the literal name "current" alone proves nothing. Require wrapper-forced
+--observational-only, --once and --require-l2-evidence, with Discord disabled in the
+underlying scanner path. Do not invoke the raw controller as a fallback. Validate
+per-bot identity, freshness, required L2 evidence and final health publication;
+scanner exit zero alone is insufficient. Report advisory verdict, reasons, exact
+strategy, capture time, evaluation time, and evidence paths only while status is
+current. An overdue-but-still-current observation must disclose its age.
+
+Integration update 2026-10-22: run_drawer_verdict_cycle.py now accepts and forwards
+the optional --private-event-manifest argument to run_live_telemetry_controller.py.
+It does not discover or attach private evidence by default. Supply only actually
+reviewed manifests supported by the existing private-event loader, and verify
+their exact deployment linkage and availability before claiming consumption.
+Without a supplied validated manifest, report PRIVATE EVENTS NOT ATTACHED TO
+SCANNER and retain those streams alongside the scanner artifacts. Do not edit
+manifests to smuggle inputs or bypass observational safety. Snapshot/L2 advisory
+output remains subject to its existing contract and evidence limitations.
+
+Use wrapper receipts, observation hashes and the exclusive lock. An exact duplicate
+must not advance scanner persistence counters. An interrupted/claimed cycle must
+not be replayed; acquire a new full-roster capture. Supplemental captures after a
+natural lifecycle event may preserve evidence but must not create extra scanner
+ticks or accelerate persistence thresholds outside the established cadence.
+These receipts provide at-most-once consumption of claimed observations, not a
+transaction across every output file. Validate published health after interruptions
+and never claim an interrupted cycle completed merely because some files exist.
+
+On acquisition failure, record a sanitized factual reason and evidence path with:
+
+  .\.venv\Scripts\python.exe scripts\run_drawer_verdict_cycle.py --capture-failure '<SANITIZED_REASON_AND_EVIDENCE_PATH>'
+
+Use safe argument handling; never interpolate raw captured text into a shell.
+Failed, incomplete, stale, future-dated or unverifiable evidence yields no current
+verdict. Preserve valid archives separately; an archived result is not current.
+
+9. FINAL OUTCOMES AND RETRAINING ADMISSION ARE SEPARATE
+
+After exact independent EXPIRED/CANCELLED verification, preserve terminal identity,
+status, start/end times, configuration/intervention history and the final displayed
+state. Only then request/download permitted strategy history exports. Obtain all
+available pages/time ranges and retain original files under Live. Record unavailable
+orders/trades/account ledgers explicitly. Validate export scope, hashes, exchange
+order/trade IDs and exact strategy linkage; reconcile gross/net PnL, realized and
+unrealized components, commissions, funding, capital changes, counts and coverage.
+Use current outcome field contracts, including duration, total trades, maker/taker
+counts, grid parameters, margin/leverage, MAE/MFE and time_to_target_hours where
+actually evidenced. Do not double-count funding/fees already included in a total.
+Use established reconciliation tolerances; if none exists, report the discrepancy
+and missing tolerance rather than inventing one. A complete export is not proof
+of a complete continuously observed equity path.
+
+Snapshots can miss fills, brief exposures, drawdowns and target crossings between
+captures. The first observed target hit is not necessarily first passage. Do not
+substitute final duration for time_to_target_hours, infer no hit from sampled misses,
+or call sampled MAE/MFE/drawdown the true intraperiod extrema. Resolve the current
+target/capital/horizon contract from code/config, without inventing risk thresholds.
+If a crossing can only be bounded, retain the interval in sidecar evidence and
+exclude it from consumers requiring an exact endogenous label. Record cancellation,
+liquidation, manual intervention, left truncation and incomplete follow-up for
+contract-specific censoring; do not automatically label every cancellation a loss.
+Without sufficient price, position, execution, funding, fee and capital-path evidence,
+exact equity, first passage and drawdown ceilings remain unvalidated. Fail closed
+for any decision requiring an unproven drawdown ceiling.
+
+Classify live snapshots as live_bot_telemetry with training_eligible=false. Keep
+staged final-outcome evidence separate from authoritative training admission.
+The current live-outcome meta-pool loader requires direct deployment linkage
+(match_method=linkage) and a complete active feature profile; forensic, unmatched,
+conflicted and label-only rows do not qualify. Preserve geometric/arithmetic mode;
+current authoritative geometric-only pool constraints still apply. The current
+meta retraining entry point requires a finalized fresh_full_pool manifest; live
+snapshots or staged outcomes do not replace that contract. Historical replay is
+diagnostic under its explicit policy. Do not alter labels, schemas or gates to
+admit incomplete data. State readiness independently for each model/label use.
+
+10. STORAGE, VALIDATION AND REPORT
+
+All newly acquired live bot data, raw observations, streams and downloaded exports
+belong only under D:\Neutral Grid v5.7.0\Live\<YYYY-MM-DD>\<SYMBOL>\.
+Use the Lima ingestion date frozen at cycle start; preserve UTC timestamps and
+original source timezone separately. For long-running workers follow their verified
+session-date policy and report date/rollover mismatches; do not silently move files.
+Use unique run IDs and immutable raw files. Keep strategy IDs in metadata so same-
+symbol bots cannot collide. Store manifests, receipts and audit indexes in the
+existing outputs/runtime and outputs/audits locations, referencing the Live files.
+Do not ingest active data into data/manual_input or training workbooks.
+
+Validate raw SHA-256 against manifest references, persisted payloads after redaction,
+JSON/schema/finite-number parsing, identity joins, timestamp ordering/finality/age,
+deduplication, sequence continuity where provided, file routing, roster coverage,
+receipt uniqueness, scanner evidence and outcome reconciliation. A matching hash
+proves byte integrity against its reference, not exchange authenticity, ownership,
+completeness, or correctness of the reference itself. Record provenance separately.
+Never fabricate missing sequence numbers or completeness guarantees.
+
+Produce an initial readiness report and an audit record for every cycle containing:
+- Scheduled/actual times; proven roster and before/after fences; per-strategy source
+  coverage; raw/manifests/hashes; parser and lineage versions; gaps and limitations.
+- Continuous collector health versus last natural event time, unique event counts,
+  replica counts, exact lifecycle/order linkage, and all coverage boundaries.
+- Snapshot/L2 scanner status, duplicate/blocked receipts, current advisory output
+  and explicit private-event attachment status; no stale verdict presented as live.
+- Per-model/field retraining dependency matrix with observed, missing, unsupported,
+  censored and blocked evidence; training_eligible=false until separate admission.
+- Method limitation, attempted supported mitigation, residual gap, and exact evidence
+  or separately scoped repair needed. Distinguish proposed requirements from methods
+  actually validated in this environment. Never claim "all training data captured"
+  while a required feature, history, linkage, outcome or label dependency is missing.
+
+Include a data-to-model/runtime destination table and a cadence-compliance table.
+For every source/symbol/strategy distinguish COMPLETE FOR THE DECLARED SCOPE,
+PARTIAL, STALE, BLOCKED, NOT AVAILABLE and NOT RUNNING; include requested/achieved
+cadence, latest source time, source age, counts, gaps, quarantines, exact unresolved
+setup/implementation requirement and paths/hashes. "Complete" for a snapshot or
+returned page never means event-complete lifetime history. Validate non-crossed
+books, bid/ask ordering, diff-depth sequence continuity, bar finality and duplicate
+conflicts. Respect shared per-IP rate limits and current response-weight headers;
+use bounded concurrency, jitter, bounded exponential backoff and incremental
+cursors. Report retry exhaustion and missing intervals; never retry indefinitely.
+
+Report what was reviewed, what was actually executed, validation results, and what
+remains blocked. Confirm no credentials exposed, trading actions taken, bots changed,
+models modified or training admission performed. Notify only meaningful changes as
+specified above; preserve routine unchanged-cycle audit records quietly.
+
+IMPLEMENTATION REFERENCES (RECHECK WHEN EXECUTING)
+
+Local source/configuration:
+scripts/start_binance_websocket_services.ps1;
+scripts/stop_binance_websocket_services.ps1;
+scripts/supervise_binance_websocket_services.py;
+scripts/verify_binance_websocket_services.py;
+scripts/collect_diff_depth.py; scripts/collect_market_streams.py;
+scripts/capture_recurring_drawers.mjs;
+scripts/run_drawer_verdict_cycle.py; scripts/run_live_telemetry_controller.py;
+scripts/ingest_brave_plugin_telemetry_cycle.py; scripts/collect_private_user_stream.py;
+scripts/ingest_private_execution_events.py;
+src/neutralgrid/live/candidate_deploy_linker.py;
+src/neutralgrid/models/meta_labeler.py;
+src/neutralgrid/training/live_outcome_ingestor.py;
+src/neutralgrid/training/unified_training_builder.py;
+src/neutralgrid/training/meta_pool_contract.py;
+src/neutralgrid/data/price_series/;
+scripts/run_live_volatility_loop.py; config/live_volatility_forecast_v1.json;
+artifact_manifest.json; .claude/rules/safety-invariants.md.
+These are implementation dependencies; no earlier operational prompt is required.
+Binance primary documentation reviewed 2026-10-19:
+https://developers.binance.com/en/docs/products/derivatives-trading-usds-futures/user-data-streams
+https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-api/user-data-streams

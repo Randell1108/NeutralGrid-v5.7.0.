@@ -2,6 +2,729 @@
 
 ## [unreleased] - Neutral Grid v5.7.0
 
+### GIT-REVIEW-20261022 - Review and publish accumulated architectural changes
+
+**Date:** 2026-10-22.
+
+Review the accumulated browser, funding, shadow-evidence, process-identity and
+private-ledger changes and group complete changes in documented dependency order.
+Retain necessary production entry points and integrated regression coverage.
+Exclude generated model metadata, temporary workspaces, the temporary port
+scanner and superseded prompt reports from the architectural publication.
+
+**Files modified:**
+- `CHANGELOG.md`
+- `docs/git_publish_review_20261022.md`
+- `scripts/ingest_brave_plugin_telemetry_cycle.py`
+- `tests/unit/test_live_evidence_cohort.py`
+- `docs/operational_prompt_standalone_20261019.txt`
+
+**Decision rationale:** Preserve reviewable commits without fabricating historical
+commit dates or reconstructing unobserved intermediate implementations. Record
+current checks separately from earlier session evidence. AFML / Hudson & Thames
+citation: not applicable to repository publication and validation.
+
+**Backward compatibility:** Valid production behavior is unchanged. Review added
+an explicit non-None guard for an already validated investment-scope list after
+the additional script type check exposed missing Optional narrowing.
+The existing architectural entries below describe their compatibility changes.
+Excluded local files are preserved and the working tree remains intentionally dirty.
+
+**Verification:** Full Python suite: 2,468 passed, two skipped, one failed. The
+unchanged utility-pool test rejects the canonical workbook's mixed October 3/11/15
+HMM lineages; the suite is not fully green. Explicit-interpreter source Pyright:
+zero errors and warnings. Drawer Node tests: 76 passed. PowerShell endpoint
+checks: five passed. Both browser JavaScript modules passed syntax checks.
+After the ingester guard repair, its 31 regression tests passed; the full-suite
+totals precede that guard repair.
+The additional operational-script type check has zero errors and one existing
+unused-import warning. Staged whitespace checks include the new regression files.
+Publication scope, commands, limitations and local log paths are recorded in
+the review document. No production scan, exchange action or retraining was run.
+
+### LIVE-EVIDENCE-20261022 - Deployment target audit and exact-bot private ledger
+
+**Date:** 2026-10-22.
+
+Add a source-checked evidence collector for the operator-confirmed +3% reported
+total bot PnL target by seven hours from deployment. Keep sparse non-hits censored,
+quarantine conflicting records, preserve every stored verdict class, and index
+original evidence without adding canonical training observations. Capture current
+exchange PRICE_FILTER tick sizes with explicit non-historical applicability.
+Contain malformed action-adapter verdicts without inventing an action or reward.
+
+Create an immutable exact-bot private ledger with source-bound ownership, order
+updates, fills, income, equity, capital-flow, intervention and coverage records.
+Register 203 verified deployments with the operator's invested-capital reference,
+zero permitted capital loss, and an explicitly unspecified liquidation buffer.
+No private facts, ownership mappings, approvals, actions or rewards are invented.
+Atomically initialize lock files to avoid the reproduced Windows first-writer
+flush race. Coverage declarations remain unproven and all new ledger records
+remain ineligible for training or live influence.
+
+**Files modified:**
+- `src/neutralgrid/live/decision/action_shadow_io.py`
+- `src/neutralgrid/live/decision/evidence_cohort.py`
+- `src/neutralgrid/live/decision/exact_bot_ledger.py`
+- `scripts/capture_live_evidence_cohort.py`
+- `scripts/capture_exact_bot_ledger.py`
+- `tests/unit/test_live_evidence_cohort.py`
+- `tests/unit/test_exact_bot_ledger.py`
+- `docs/live_evidence_cohort.md`
+- `docs/exact_bot_evidence_ledger.md`
+- `CHANGELOG.md`
+
+**Decision rationale:** Native drawer/envelope checks establish reported
+measurements, while exact producer-record binding and ownership references prevent
+unsupported cross-bot joins. Positive-only/censored observations cannot calibrate
+a binary first-passage probability. No new AFML/Hudson & Thames implementation
+claim is made; existing chronological, bot-disjoint, purged evaluation contracts
+remain intact. Evidence and source hashes are retained under
+`reports/live_telemetry_evidence_20261022/`.
+
+**Backward compatibility:** No breaking changes to valid existing scanner calls
+or training schemas. Malformed incumbent verdicts now return an unavailable
+shadow result with null action. New commands are opt-in, use fresh report paths,
+and write live evidence only under the Live hierarchy. The existing positive
+peak-drawdown/liq-buffer action schema is not reinterpreted as a capital-floor
+policy. No runtime configuration, production model or promotion gate is changed.
+
+**Verification:** 349 selected scanner, private-ingestion, PnL, volatility,
+identity, action-accounting and ledger tests passed. Pyright returned zero errors
+and warnings for all five changed production Python files. Real evidence-index
+replays were idempotent; source/protected-artifact hashes and ledger registrations
+were audited. No target model was fitted, promoted or enabled.
+
+### WS-OWNER-20261022 - Resolve an absent access-denied supervisor safely
+
+**Date:** 2026-10-22.
+
+Resolve the stale supervisor PID 62036 blocker when Windows OpenProcess returns
+access denied even though complete native process inventories exclude that PID.
+Require two successful, complete K32EnumProcesses inventories, each containing
+the calling process, before classifying this access-denied case as exited.
+Present, reappearing, inaccessible, malformed or persistently truncated results
+remain unknown. Running owners still require their exact creation token and
+executable; stop remains marker-only and never terminates an unrelated process.
+
+**Files modified:**
+- `src/neutralgrid/core/process_identity.py`
+- `tests/unit/test_websocket_stop_ownership.py`
+- `CHANGELOG.md`
+
+**Decision rationale:** A live read-only probe reproduced error 5 for PID 62036;
+two complete native inventories and CIM excluded it. The previous probe only
+recognized error 87 as absence. Microsoft EnumProcesses documentation requires
+retrying a full buffer; this fix bounds those retries and fails closed. No AFML
+or Hudson & Thames claim applies to this Windows ownership correction. The
+reason Windows returned access denied for that absent PID is not established.
+
+**Backward compatibility:** No breaking changes. This adds native absence proof
+for error 5 without relaxing running identity, roster, freshness or trading gates.
+
+**Verification:** The absent-PID regression failed before the fix; 68 ownership,
+stop, verifier and supervision tests passed afterward. Pyright returned zero
+errors and warnings. The supported stop subsequently proved all seven recorded
+owner/launcher/worker processes exited. Recovery-cycle evidence is retained in
+`outputs/audits/supervisor_ownership_repair_20261022T140712Z/`.
+
+### LIVE-TELEMETRY-INTEGRATION-20261022 - Exact deployment joins and inert action adapter
+
+**Date:** 2026-10-22.
+
+Permit one scan candidate to identify multiple distinct bot deployments only
+when exact strategy/symbol evidence disambiguates them. Deduplicate exact
+outcome/log copies, reject conflicting identities, retain explicit deployment
+stamps, and keep one split key per bot. Require a verified calibration cohort,
+purge fit labels finalized after OOS begins, and exclude invalid probabilities
+and nonfinite outcomes. Use per-bot evaluation time and the scanner's actual
+availability flags in the action adapter. Forward explicitly supplied optional
+shadow inputs through the recurring wrapper without changing its defaults.
+
+**Files modified:**
+- `src/neutralgrid/live/decision/meta_shadow_analysis.py`
+- `src/neutralgrid/live/decision/action_shadow_io.py`
+- `src/neutralgrid/live/decision/renderer.py`
+- `scripts/run_drawer_verdict_cycle.py`
+- `tests/unit/test_meta_shadow_analysis.py`
+- `tests/unit/test_decision_renderer.py`
+- `tests/unit/test_telemetry_integration_contracts.py` (new)
+- `LIVE_DECISION.md`
+- `CHANGELOG.md`
+- `reports/live_telemetry_integration_20261022/AUDIT_REPORT.txt` (new)
+- `reports/live_telemetry_integration_20261022/audit_evidence.py` (new)
+- `reports/live_telemetry_integration_20261022/audit_runtime_inputs.py` (new)
+
+**Decision rationale:** Reproduced identity, time, flag, cohort and label-time
+defects before correcting them. Audit exports retain rejected/unfinalized
+records and distinguish repeated verdicts from independent bots. AFML / Hudson
+& Thames citation: no new external claim; the change enforces the repository's
+existing exact-identity and chronological OOS contracts without changing any
+numerical gate. No model was trained, promoted or enabled.
+
+**Backward compatibility:** Verdicts and default runtime configuration are
+unchanged. `deploy_ts` is additive. Legacy unstamped rows retain exact-identity
+and life-window checks. Offline diagnostics now use strategy/symbol split keys
+when available, reject mixed/unverified cohorts and invalid numeric evidence,
+and return exit code 2 with an `analysis_blocked` report for invalid input.
+
+**Verification:** 403 isolated telemetry/controller/model-contract tests passed;
+targeted Pyright returned 0 errors and 0 warnings. Nine real saved scanner rows
+built adapter states and preserved incumbent verdicts with no Live writes.
+Eight protected model/manifest/config hashes were unchanged. Detailed failing
+reproductions, source-level patch and evidence tables are retained in the audit
+directory. Synthetic tests establish integration mechanics, not prediction
+accuracy. Historical meta cohorts with sufficient support showed zero OOS
+precision lift; the current HMM cohort had no finalized outcomes.
+
+### DRAWER-READBUDGET-20261021 - Bound tooltip reads and retry close discovery
+
+**Date:** 2026-10-21.
+
+Use the existing 10-second DOM budget for the required View Details tooltip
+wait, and the existing bounded same-locator reader for close-control discovery.
+Retain hashed cause classifications when a capture fails, without publishing
+nested browser diagnostics. Native movements/clicks and all identity, tooltip
+binding, roster, path, source-age and evaluation guards remain unchanged.
+
+**Files modified:**
+- `scripts/capture_recurring_drawers.mjs`
+- `tests/capture_recurring_drawers.test.mjs`
+- `CHANGELOG.md`
+- `outputs/audits/observational_cycle_20261022T041044Z/blocked_capture_report.json`
+- `outputs/audits/observational_repair_20261022T041740Z/repair_validation.json`
+
+**Decision rationale:** Two regressions reproduced a short tooltip-dispatch
+budget failure and an unretried close-count timeout. The live DOTUSDT attempt
+reported a missing tooltip but discarded its nested cause, so that attempt's
+underlying transport cause is not established by these tests. AFML / Hudson &
+Thames citation: not applicable; this change concerns browser evidence capture.
+
+**Backward compatibility:** No breaking changes. Failure metadata has an additive
+bounded `failure_causes` field. The acquisition budget remains 600 seconds.
+
+**Verification:** Both regressions failed before the fix. All 68 capture tests
+and 85 existing ingestion/controller/wrapper contracts passed afterward. The
+Windows junction test required native execution because its sandbox denied test
+junction creation. Pyright with the verified project interpreter reported zero
+errors and zero warnings; its initial default-interpreter run had unresolved
+dependencies. Live recovery is recorded separately in the cycle audit and must
+not be inferred from local test success.
+
+### DRAWER-CAPACITY-20261021 - Complete a guarded 27-strategy capture
+
+**Date:** 2026-10-21.
+
+Batch fresh scoped browser proofs and remove discarded full-page exports to
+reduce capture dispatch overhead. Increase the acquisition budget from 240 to
+600 seconds and enforce it after the final roster fence. Retain every identity,
+tooltip, hit-test, pointer-origin, raw-hash and scanner freshness gate.
+
+**Files modified:**
+- `scripts/capture_recurring_drawers.mjs`
+- `tests/capture_recurring_drawers.test.mjs`
+- `docs/operational_prompt_standalone_20261019.txt`
+- `CHANGELOG.md`
+- `outputs/audits/capture_capacity_20261022T010900Z/prepare_recovery.py`
+- `outputs/audits/capture_capacity_20261022T010900Z/recover_cycle.py`
+- `outputs/audits/capture_capacity_20261022T010900Z/verify_stopped.ps1`
+- `outputs/audits/capture_capacity_20261022T010900Z/report.md`
+- `outputs/audits/capture_capacity_20261022T010900Z/evidence_hashes.json`
+
+**Decision rationale:** The one-drawer profile measured 34.638 seconds in 14
+accessibility exports and 18.912 seconds in 74 evaluate dispatches. Atomic scoped
+reads retain the proofs while reducing round trips. AFML / Hudson & Thames
+citation: not applicable; this is browser observation and evidence integrity.
+
+**Backward compatibility:** No exported API change. Callers must allow the
+600-second acquisition budget and preserve exact terminal receipts on uncertain
+browser transport outcomes. Drawer/L2 age and 600-second evaluation separation
+are unchanged. The observed 300-second gateway response timeout remains.
+
+**Verification:** 65 focused Node tests and 85 existing Python ingestion/controller/
+wrapper contracts passed. The live capture completed 27 exact strategies in
+489.302 seconds; canonical hashes, 27 PnL records and retained required L2 passed.
+One advisory evaluation completed with 21 CONTINUE, 4 ADJUST and 2 END outcomes,
+all unexecuted. Initial status was current at 842.186 seconds; final status
+correctly rejected stale evidence at 993.878 seconds. Recurring capture remains
+paused; current-roster collector ownership and private connectivity passed.
+
+### DRAWER-VISIBILITY-20261021 - Repair clipped details-control observation
+
+**Date:** 2026-10-21.
+
+Use the visible inner-table area to reveal a virtualized details control instead
+of assuming the outer page can scroll. Observe post-scroll rendering and remeasure
+after the last bounded correction. Reuse the bounded same-locator count reader
+for tooltip transport timeouts. Preserve exact row/creation-time, tooltip binding,
+hit-test, pointer-origin, raw-path and complete-roster fences.
+
+**Files modified:**
+- `scripts/capture_recurring_drawers.mjs`
+- `tests/capture_recurring_drawers.test.mjs`
+- `CHANGELOG.md`
+- `outputs/audits/near_details_repair_20261022T005835Z/verify_raw.mjs`
+- `outputs/audits/near_details_repair_20261022T005835Z/finish_repair_report.py`
+- `outputs/audits/near_details_repair_20261022T005835Z/report.md`
+
+**Decision rationale:** Four focused regressions reproduced incorrect scrolling,
+the stale final rectangle, delayed post-scroll hit testing and a tooltip-count
+dispatch timeout. Native UI inspection showed virtualized rows can be present but
+not hit-testable, with further scroll-position changes after dispatch. The exact
+geometry of the original failure was not recorded. AFML / Hudson & Thames citation:
+not applicable; this change concerns browser observation and evidence integrity.
+
+**Backward compatibility:** No breaking changes. The 240-second capture deadline,
+600-second evaluation guard, freshness limits and advisory-only behavior remain.
+
+**Verification:** All 52 focused Node tests pass. The latest live retry captured
+NEARUSDT strategy 415222127 and nine other raw drawers; their parser and hashes
+passed. The 27-strategy cycle then hit the unchanged capture deadline. No complete
+bundle was ingested, collector restarted or scanner tick produced. Scanner recovery
+remains blocked on full-roster capture capacity. Audit records preserve all retries.
+
+### BOTEXPORT27-20261021 - Complete eight October 20 execution ledgers
+
+**Date:** 2026-10-21.
+
+Reconcile batch 27 order, trade and transaction exports by strategy-linked order
+IDs and UTC-normalized bot lifetimes. Fill 80 previously blank execution and
+excursion cells across eight strategies. Preserve existing canonical values,
+five sheets, PnL curves and formatting; retain an original workbook backup.
+
+**Files modified:**
+- `data/new_expired_bots.xlsx`
+- `reports/history_import_20261021/batch27/review.py`
+- `reports/history_import_20261021/batch27/prepare.py`
+- `reports/history_import_20261021/batch27/workbook.mjs`
+- `reports/history_import_20261021/batch27/publish.py`
+- `reports/history_import_20261021/batch27/REPORT.txt`
+- `CHANGELOG.md`
+
+**Decision rationale:** All 211 new fills reconcile to the eight final UI fees,
+profits and zero closing positions, and transaction totals independently agree.
+Decimal event replay validates minute-mark MAE/MFE. Use actual fill count for
+canonical total_trades, separately from the extractor's UI matched-grid count.
+Nine October 19 closing ledgers remain incomplete. AFML / Hudson & Thames
+citation: not applicable; this is factual evidence reconciliation.
+
+**Backward compatibility:** No production code, model, schema or formula change.
+Only validated empty cells are filled; no historical forecast is inferred from
+realized funding payments.
+
+**Verification:** 17 canonical extractor dry runs succeeded. Independent numeric
+checks passed for all eight accepted ledgers. All 118,400 workbook cell positions
+were compared; only the 80 planned blank cells changed and all other workbook
+package members are preserved. Audit: `reports/history_import_20261021/batch27/`.
+
+### RETRAIN-20261021 - Restart HMM rotation and governed downstream refits
+
+**Date:** 2026-10-21.
+
+Restart the interrupted retraining in a separate audited run. Promote HMM
+`rolling_180d_20261021_161805` on 858,000 feature samples from 50 symbols over
+180 days. The fit reaches likelihood tolerance at iteration 166 of 300
+(last improvement 0.0009293891, tolerance 0.001). All three mandatory
+walk-forward splits pass the existing soft suitability gate; this is not a
+predictive-accuracy measure. Optional extra HMM CPCV was not run. Retain the
+identity temperature scaler and preserve the previous HMM for rollback.
+
+Follow the operator's October 15 pool policy: archived and current scanner
+snapshots from February 15, freshly recomputed seven-hour outcomes, no per-symbol
+cap. Validate 3,504 complete outcomes and exclude 38 incomplete windows. Reuse
+only hash-verified observed market windows, not old outcomes. Replay every
+HMM-dependent feature at scan time, preserving independent snapshot features.
+Promote meta-labeler `20261021_180826`, pinned to the new HMM, with all 20 active
+features finite. Promotion OOF AUC is 0.6951863943, 95% CI
+[0.6779543611, 0.7118505176], ECE 0.0473017834. All five promotion folds use the
+existing unpurged fallback (ERR-066). Advisory CPCV AUC is 0.5057700153 with
+2,768/3,504 rows scored across three valid folds (ERR-053). The champion
+comparison applies absolute gates only because lineage and recorded evaluation
+contracts differ; this is not evidence of paired superiority. Beta-OOS
+calibration is included in the saved model; its calibration-fit ECE is not an
+independent post-calibration holdout result.
+
+Replay a separate 857-row workbook staging table. Four invalid timestamp rows
+remain without HMM features. The governed utility loader admits 700 uniform-lineage
+rows after duration, replay-status and observed-outcome exclusions. Utility
+holdout AUC is 0.3948449510 on 175 rows; G3, G4 and G7 reject promotion. Refit the
+four-feature profile pair on 648 labeled rows. Earlier disclosed holdout IDs are
+not reused as fresh restart evidence, leaving no unused holdout rows. The
+incumbent-comparison gate rejects profile promotion (see ERR-104). Utility and
+profile remain unavailable as promoted runtime artifacts. Isolate the conformal
+diagnostic because it uses historical stored probabilities. Preserve existing
+MI generation policy, all promotion gates, production code and the canonical
+five-sheet workbook.
+
+**Files modified or created:**
+- `artifact_manifest.json`
+- `artifacts/hmm/rolling_180d_20261021_161805/model.joblib`
+- `artifacts/hmm/rolling_180d_20261021_161805/scaler.joblib`
+- `artifacts/hmm/rolling_180d_20261021_161805/metadata.json`
+- `artifacts/hmm/rolling_180d_20261021_161805/eval.json`
+- `artifacts/hmm/rolling_180d_20261021_161805/feature_schema.json`
+- `artifacts/hmm/rolling_180d_20261021_161805/state_means.npy`
+- `artifacts/hmm/rolling_180d_20261021_161805/temperature_scaler.json`
+- `models/meta_labeler.pkl`
+- `models/meta_labeler/model.joblib`
+- `models/meta_labeler/scaler.joblib`
+- `models/meta_labeler/metadata.json`
+- `models/meta_labeler_backup_20261021_180826.pkl`
+- `models/meta_labeler_promotion_decision.json`
+- `models/meta_labeler_verification.json`
+- `artifacts/utility/utility_20261021_174332_341825.json`
+- `data/profile/evaluations/profile_evaluation_20261021_161504_624986.json`
+- `data/trial_log.json`
+- `data/retrain_all_20261021_run2/profile_candidate/pattern_profile.json`
+- `data/retrain_all_20261021_run2/profile_candidate/profile_model.json`
+- `data/retrain_all_20261021_run2/workbook_active_hmm.xlsx`
+- `data/retrain_all_20261021_run2/active_hmm_training.csv`
+- `data/retrain_all_20261021_run2/finalized_fresh_pool/authoritative_pool_manifest.json`
+- `data/retrain_all_20261021_run2/finalized_fresh_pool/training_data_20261021.csv`
+- `data/retrain_all_20261021_run2/RUN_REPORT.txt`
+- `data/retrain_all_20261021_run2/RUN_REPORT.json`
+- `data/retrain_all_20261021_run2/run_file_index.json`
+- `data/retrain_all_20261021_run2/tracked_artifact_changes.json`
+- `CHANGELOG.md`
+
+The run index, stage command records, source receipts and change ledger enumerate
+retained helpers, frozen data, cache manifests and validation evidence with exact
+paths and hashes. Earlier interrupted-run evidence is retained separately.
+
+**Decision rationale:** Execute the existing training and promotion contracts
+without overrides. No new AFML or Hudson & Thames methodological claim. Expose
+unpurged evaluation, legacy file-mtime scanner availability, failed promotion
+gates and the canonical-workbook lineage failure explicitly.
+
+**Backward compatibility:** No breaking changes. Active HMM and meta-labeler
+pins match. Unavailable utility/profile artifacts retain existing fail-closed
+or missing-value behavior. No production scan or deployment was launched.
+
+**Verification:** 148 postfit contract tests passed. Full suite: 2,384 passed,
+two skipped, one failed. The failure is
+`test_canonical_workbook_exposes_governed_utility_pool`: the preserved canonical
+workbook contains mixed October 3/11/15 HMM lineages. It was not used directly
+for utility fitting. All 3,504 market windows, actual training labels/features,
+96 available Vision cache manifests, 50 saved-HMM inference cases, and saved
+meta candidate/production predictions passed validation. Promotion AUC/ECE and
+utility holdout metrics were independently recomputed. All 172 fingerprinted
+production source files, the canonical workbook and previous HMM files are
+unchanged. Pyright reports zero errors and warnings. Post-test artifact/source
+validation also passed; final review results are recorded in the run report.
+
+### FUNDINGCAPTURE-20261021 - Retain original funding evidence and recover UI PnL features
+
+**Date:** 2026-10-21.
+
+Persist original scanner premium-index responses with exchange/receipt times,
+next settlement and hashes. Reject stale settlement times, remove enrichment's
+settlement-history fallback, and let the bot extractor replay a chosen original
+receipt at entry under an explicit age limit. Record actual snapshot availability
+and separate candidate receipt links. Recover 135 supported PnL cells from 17
+Binance History curves while preserving the canonical five-sheet workbook.
+
+**Files modified:**
+- `src/neutralgrid/data/funding_observation.py`
+- `src/neutralgrid/data/funding_rate.py`
+- `src/neutralgrid/scanner/scan.py`
+- `src/neutralgrid/scanner/enrich_grid_params.py`
+- `run_full_pipeline.py`
+- `new_bot_data_extractor.py`
+- `scripts/capture_funding_observation.py`
+- `tests/unit/test_funding_observation.py`
+- `tests/unit/test_funding_forecast_semantics.py`
+- `tests/unit/test_new_bot_data_extractor.py`
+- `docs/funding_observation_capture.md`
+- `data/new_expired_bots.xlsx`
+- `reports/history_import_20261021/prepare_pnl.py`
+- `reports/history_import_20261021/workbook.mjs`
+- `reports/history_import_20261021/publish_pnl.py`
+- `reports/history_import_20261021/REPORT.txt`
+- `CHANGELOG.md`
+
+**Decision rationale:** Original observed forecasts, settled market rates and bot
+payments have different meanings and cutoffs. Preserve source evidence before
+calculation and require causal availability before entry. No historical funding
+values, freshness thresholds or monetary scales were invented. One KAVA raw
+curve remains blank because rounded labels cannot recover its USDT scale.
+AFML / Hudson & Thames citation: not applicable to this evidence-preservation
+change; no statistical estimator, trading threshold or model feature list changed.
+
+**Backward compatibility:** Existing extractor calls retain missing funding when
+no receipt is supplied. The two new funding arguments must be supplied together.
+Premium-index responses now require symbol and exchange time; stale responses
+yield unavailable data. Enrichment no longer accepts settlement history as a
+current forecast. New snapshot timestamps represent actual construction time,
+not pipeline start. Provider numeric price outputs remain compatible.
+
+**Verification:** 96 focused tests passed; final Pyright reports zero errors and
+warnings. The full suite recorded 2,382 passes, two skips and two failures: one
+temporary-path fixture passed on rerun with a shorter directory, and the existing
+mixed-HMM utility-pool contract remains unresolved. Workbook comparison covered
+118,400 cell positions; only 135 intended blank cells changed, with every other
+package member preserved byte-for-byte. Reopened publication and visual checks
+passed. Audit and remaining-cell inventory: `reports/history_import_20261021/`.
+
+### CAPTUREDISPATCH-20261019 - Bound Brave DOM reads explicitly
+
+**Date:** 2026-10-19.
+
+Give all eight DOM evaluation sites in the recurring drawer helper an explicit
+10-second supported read deadline. Historical UM Grid selection and details-icon
+reads exhausted the implicit 3-second deadline before command dispatch. Rebind
+the existing authenticated Brave tab after the prior capture tab disappeared.
+Preserve selected-tab checks, exact Working identity and creation time, unique
+bound View Details tooltips, control geometry, complete roster fences, canonical
+path containment and the existing capture deadline. No action retries were added.
+
+**Files modified:**
+- `scripts/capture_recurring_drawers.mjs`
+- `tests/capture_recurring_drawers.test.mjs`
+- `CHANGELOG.md`
+
+**Decision rationale:** The documented evaluation API supports an explicit
+timeout covering DOM scope setup. A regression reproduces pre-dispatch expiry
+with the old default and passes with the bounded allowance. Live short-budget
+probes also passed after rebinding, so the underlying intermittent transport
+latency cause remains unproven; this is no guarantee against future timeouts.
+AFML / Hudson & Thames citation: not applicable; no statistical or trading rule
+changed. Existing local edits were preserved and the session-only diff retained.
+
+**Backward compatibility:** No breaking changes to the helper, bundle or ingestion
+interfaces. DOM reads can wait up to 10 seconds instead of the implicit 3 seconds.
+
+**Verification:** All 48 Node capture tests and JavaScript syntax pass. The new
+regression fails against the pre-repair helper. Source Pyright with the checkout
+interpreter reports zero errors/warnings; the initial default-interpreter failure
+is retained. One fresh nine-strategy capture completed in 146 seconds; hashes,
+exact roster ownership, canonical ingestion, the completion-based 600-second
+guard, nine required L2 attachments and current scanner publication passed.
+Advisories were eight CONTINUE and one STXUSDT ADJUST, with no runtime effects.
+Private event completeness remains unknown and training eligibility remains false.
+Audit: `outputs/audits/brave_dispatch_repair_20261020T005200Z/`.
+
+### CAPTURETIP-20261019 - Clear selected pointer origins before details tooltips
+
+**Date:** 2026-10-19.
+
+Prevent a previous drawer's text selection from suppressing the next strategy's
+View Details tooltip. Before each drag, click the verified non-interactive header
+origin, re-prove the same safe origin and collapsed selection, and reject a moved
+or obscured details control. Preserve unique visible tooltip ownership, exact
+Working identity, drawer strategy/creation checks and complete-roster fences.
+Keep tooltip ownership, control movement and identity failures distinct instead
+of masking all of them as a missing tooltip.
+
+**Files modified:**
+- `scripts/capture_recurring_drawers.mjs`
+- `tests/capture_recurring_drawers.test.mjs`
+- `docs/operational_prompt_standalone_20261019.txt`
+- `docs/recurring_drawer_verdict.md`
+- `CHANGELOG.md`
+
+**Decision rationale:** Live comparison reproduced a missing OPGUSDT tooltip
+after dragging from selected text; clearing selection at the same verified blank
+origin restored its exact bound tooltip. The earlier generic failure log cannot
+prove the specific condition of the historical 17:41 attempt. AFML / Hudson &
+Thames citation: not applicable; no model, statistical or trading rule changed.
+
+**Backward compatibility:** No breaking changes to the helper interface, bundle
+or ingestion schemas. Native input now includes a guarded blank-origin click.
+
+**Verification:** Three new regressions fail against the previous helper. All
+47 Node capture tests and JavaScript syntax pass after repair, including selected
+origin and second-strategy recovery, failed selection reset, wrong tooltip owner,
+changed identity, moved control and junction containment. Source Pyright reports
+zero errors/warnings across 164 files. Fresh SANDUSDT and OPGUSDT captures, both
+raw hashes, canonical ingestion, P0 verification and one required-L2 observational
+scanner evaluation pass. No trading action or training admission performed.
+
+### CAPTUREAPI-20261019 - Restore supported Brave drawer capture and startup
+
+**Date:** 2026-10-19.
+
+Replace unavailable legacy `tab.cua` input calls with supported native tab APIs.
+Require a fresh View Details tooltip bound to the exact document icon, a stable
+control position and a repeated Working identity check before clicking. Preserve
+the complete-roster fences and exact drawer identity checks. Use OS-backed native
+canonicalization for the observed Windows realpath permission failure while
+retaining containment checks against junction escapes. Retry canonical ingestion,
+P0 service startup and one observational scanner cycle from the verified capture.
+
+**Files modified:**
+- `scripts/capture_recurring_drawers.mjs`
+- `tests/capture_recurring_drawers.test.mjs`
+- `docs/operational_prompt_standalone_20261019.txt`
+- `docs/recurring_drawer_verdict.md`
+- `CHANGELOG.md`
+
+**Decision rationale:** Observed browser API compatibility must preserve exact
+strategy ownership and guarded details navigation. AFML / Hudson & Thames
+citation: not applicable; no statistical, model or trading rule changed.
+
+**Backward compatibility:** Capture and ingestion schemas are unchanged. Adapters
+must provide the supported native tab methods; legacy `tab.cua` mocks must update.
+Persistent runtimes must import the inspected current helper version.
+
+**Verification:** The supported-API regression failed against the previous helper.
+All 41 Node tests now pass, including tooltip/identity failures and junction escape
+rejection. JavaScript syntax passes. Pyright with the checkout interpreter reports
+zero errors or warnings across 164 files. Fresh two-strategy capture, raw hashes,
+canonical ingestion, P0 ownership/routing/connections and required-evidence scanner
+smoke validation pass. Private natural-event delivery remains unproven while the
+stream has no events; active snapshots remain ineligible for training.
+
+### BRAVE-20261016 - Migrate browser acquisition and control to Brave
+
+**Date:** 2026-10-16.
+
+Target the observed Brave installation and migrate browser scripts, capture
+provenance, validation consumers, tests and operational prompts together.
+The launcher verifies Brave ownership of the loopback debugging port. The
+controller rejects missing, unknown or mismatched browser provenance so old
+bundles cannot bypass plugin validation or be silently relabeled as Brave.
+
+**Files modified or created:**
+- `LIVE_DECISION.md`
+- `docs/after_operational_prompt_live_verdict.md`
+- `docs/drawer_verdict_repair_20260925.md`
+- `docs/live_volatility_forecast_v1.md`
+- `docs/recurring_drawer_verdict.md`
+- `docs/brave_browser_migration_20261016.md`
+- `outputs/audits/live_data_acquisition_prompt_20260910.md`
+- `scripts/capture_recurring_drawers.mjs`
+- `scripts/collect_private_grid_telemetry.py`
+- `scripts/execute_live_telemetry_modifications.py`
+- `scripts/extension_brave_execution_bridge.mjs` (renamed from `scripts/extension_chrome_execution_bridge.mjs`)
+- `scripts/ingest_brave_plugin_telemetry_cycle.py` (renamed from `scripts/ingest_chrome_plugin_telemetry_cycle.py`)
+- `scripts/run_drawer_verdict_cycle.py`
+- `scripts/run_live_telemetry_controller.py`
+- `scripts/run_live_volatility_loop.py`
+- `scripts/start_private_telemetry_loop.ps1`
+- `scripts/train_live_volatility_forecaster.py`
+- `scripts/validate_pnl_evidence_runtime.py`
+- `src/neutralgrid/live/decision/pnl_history.py`
+- `src/neutralgrid/live/decision/private_telemetry.py`
+- `tests/capture_recurring_drawers.test.mjs`
+- `tests/start_private_telemetry_loop.test.ps1`
+- `tests/unit/test_brave_plugin_telemetry_ingest.py` (renamed from `tests/unit/test_chrome_plugin_telemetry_ingest.py`)
+- `tests/unit/test_decision_recommender.py`
+- `tests/unit/test_drawer_verdict_cycle.py`
+- `tests/unit/test_execute_live_telemetry_modifications.py`
+- `tests/unit/test_finalize_stale_telemetry_manifests.py`
+- `tests/unit/test_live_telemetry_controller.py`
+- `tests/unit/test_live_volatility.py`
+- `tests/unit/test_live_volatility_loop.py`
+- `tests/unit/test_private_grid_telemetry.py`
+- `tmp_scan_ports.py`
+- `CHANGELOG.md`
+
+**Decision rationale:** Browser identity must follow observed executable and
+connection evidence. A running Brave process does not establish an extension
+connection or authenticated tab. AFML / Hudson & Thames citation: not applicable
+to this browser transport migration; no statistical or trading rule changed.
+
+**Backward compatibility:** Breaking entry-point, bundle-schema, provenance
+and default capture/audit-path changes. External callers must use the Brave
+filenames and obtain fresh Brave captures. Dedicated cycles now require
+explicit matching source metadata. Historical records retain their original
+attribution. The new dedicated Brave profile needs its own Binance sign-in.
+
+**Verification:** 150 focused Python tests, 31 Node drawer tests and 5 PowerShell
+endpoint checks pass. JavaScript syntax checks pass. Configured source Pyright
+has zero errors/warnings; eight changed scripts have zero errors and one
+existing unused-import warning. Final full pytest: 2,371 passed, 2 skipped,
+1 failed on the unchanged canonical-workbook utility test because its HMM
+lineage is mixed. A Windows path-length setup failure in the first full run
+passes with a shorter temporary directory. Source scans find no remaining
+Chrome references in project code. Live Brave capture is unverified because
+the browser-tool inventory exposes no Brave connection. See the review report
+for exact evidence and limitations.
+
+
+
+### RETRAIN-20261015 - Rotate HMM and refit downstream artifacts
+
+**Date:** 2026-10-15.
+
+Promote HMM `rolling_180d_20261015_134647` through the canonical pipeline on
+858,000 feature samples from 50 symbols, using the frozen 180-day window ending
+2026-10-14 23:45 UTC. Three walk-forward splits pass the existing soft gate.
+The fitted model reaches the 300-iteration cap: its last likelihood improvement
+is 0.0903641172, above tolerance 0.001. The library's converged flag at the cap
+does not establish tolerance convergence. Temperature scaling remains identity.
+
+Recompute 3,148 fresh seven-hour FASTWIN outcomes and replay HMM-dependent
+features at candidate scan time. All 20 active features are finite, IDs are
+unique, and every row is pinned to the active HMM. Promote sigmoid-OOS
+meta-labeler `20261015_145217`: promotion OOF AUC 0.6847086694, 95% CI
+[0.6659697657, 0.7041994079], ECE 0.0442806316. Advisory CPCV AUC is
+0.5441264566 with 2,482/3,148 rows scored. All five promotion folds use the
+existing unpurged fallback. The challenger comparison uses absolute gates
+only because incumbent lineage and recorded evaluation contract differ.
+
+Replay a separate 779-row workbook staging table, preserving the canonical
+workbook. Of 775 successfully replayed rows, 622 satisfy the utility training
+contract. Utility holdout AUC is 0.5190178571 on 156 rows; G7 rejects
+lambda_risk=0.05 and horizon_hours=10.0 at their search boundaries. Refit the
+four-feature profile pair on 587 labeled rows. Its 34 fresh held-out bots yield
+pooled AUC 0.5449735450 and ECE 0.0967930510. Promotion rejects the missing
+incumbent comparison; mean and pooled AUC also remain below 0.55. Neither
+candidate is force-promoted. The backtest's conformal output is isolated
+because it uses historical stored probabilities, not the new model's holdout.
+
+**Files modified or created:**
+- `artifact_manifest.json`
+- `artifacts/hmm/rolling_180d_20261015_134647/model.joblib`
+- `artifacts/hmm/rolling_180d_20261015_134647/scaler.joblib`
+- `artifacts/hmm/rolling_180d_20261015_134647/metadata.json`
+- `artifacts/hmm/rolling_180d_20261015_134647/eval.json`
+- `artifacts/hmm/rolling_180d_20261015_134647/feature_schema.json`
+- `artifacts/hmm/rolling_180d_20261015_134647/state_means.npy`
+- `artifacts/hmm/rolling_180d_20261015_134647/temperature_scaler.json`
+- `models/meta_labeler.pkl`
+- `models/meta_labeler/model.joblib`
+- `models/meta_labeler/scaler.joblib`
+- `models/meta_labeler/metadata.json`
+- `models/meta_labeler_backup_20261015_145217.pkl`
+- `models/meta_labeler_promotion_decision.json`
+- `models/meta_labeler_verification.json`
+- `artifacts/utility/utility_20261015_144200_855841.json`
+- `data/profile/evaluations/profile_evaluation_20261015_133916_462630.json`
+- `data/trial_log.json`
+- `data/retrain_all_20261015/profile_candidate/pattern_profile.json`
+- `data/retrain_all_20261015/profile_candidate/profile_model.json`
+- `data/retrain_all_20261015/finalized_fresh_pool/authoritative_pool_manifest.json`
+- `data/retrain_all_20261015/finalized_fresh_pool/training_data_20261015.csv`
+- `data/retrain_all_20261015/RUN_REPORT.json`
+- `data/retrain_all_20261015/run_file_index.json`
+- `data/retrain_all_20261015/tracked_artifact_changes.json`
+- `data/retrain_all_20261015/temp_cleanup.json`
+- `CHANGELOG.md`
+
+The run index and change ledger enumerate retained evidence and cache-manifest
+changes with exact paths and hashes.
+
+**Decision rationale:** Follow existing training, admission and promotion rules.
+No architecture, feature, threshold or historical-admission changes; no new
+AFML or Hudson & Thames methodological claim. Report unpurged evaluation,
+iteration-cap termination and failed gates explicitly.
+
+**Backward compatibility:** No breaking changes. HMM and meta pins match.
+Utility and profile remain unavailable as promoted artifacts. Live-outcome
+admission and automatic runtime MI-weight generation remain off.
+
+**Verification:** 65 contract tests passed before and after retraining; 50
+isolated utility/profile tests passed. The canonical-workbook utility integration
+test was deselected because fitting uses independently validated refreshed
+staging data. Pyright with the project interpreter reports zero errors and
+warnings. All 3,148 market windows, 95 changed/new cache manifests, 50 HMM
+inference cases, and saved meta predictions passed validation. Utility/profile
+holdout metrics were independently recomputed. The canonical workbook and all
+268 checked production source files are unchanged. Temporary-file deletion
+was rejected by automatic tool policy, including a narrowed literal-path
+attempt; cleanup remains outstanding and is inventoried in temp_cleanup.json.
+
 ### PYRIGHT-20261011 - Resolve runner scalar check and executor protocol returns
 
 **Date:** 2026-10-11.

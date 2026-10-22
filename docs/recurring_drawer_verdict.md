@@ -1,7 +1,17 @@
-# Recurring Chrome drawer capture and advisory verdicts
+# Recurring Brave drawer capture and advisory verdicts
 
-Run this workflow after the P0 start-and-verify section at line 37 of
-`outputs/audits/live_data_acquisition_prompt_20260910.md`.
+The standalone startup authority is
+`docs/operational_prompt_standalone_20261019.txt`, which replaces the previous
+line-37 operational prompt. Follow its fresh-roster and P0 ownership checks.
+
+The Brave migration uses `scripts/ingest_brave_plugin_telemetry_cycle.py`,
+`brave_plugin` provenance and the `neutralgrid_brave_plugin_capture_bundle_v1`
+bundle schema. Historical browser captures are retained as recorded; obtain a
+fresh Brave capture rather than relabeling an older bundle. Dedicated CDP
+cycles must declare `dedicated_brave_cdp` in both the cycle and snapshot metadata.
+The launcher uses a separate `PrivateTelemetryBrave` profile and requires its
+own Binance sign-in; authentication in another open profile is not proof of
+authentication in that profile.
 
 ## Authority and cadence
 
@@ -9,7 +19,7 @@ Run this workflow after the P0 start-and-verify section at line 37 of
 `scripts/run_live_telemetry_controller.py` joins the drawer cycle to runtime
 evidence. `scripts/run_drawer_verdict_cycle.py` adds one-consumption receipts,
 failure reporting, and a freshness-aware health view around that controller.
-The Chrome extension owns browser acquisition; Python never obtains browser
+The Brave extension owns browser acquisition; Python never obtains browser
 credentials or falls back to the separate debugging profile.
 
 Schedule one capture-and-consume attempt every **10 minutes**, matching the
@@ -21,7 +31,7 @@ scanner. L2 retains its existing 15-second age gate. These are existing runtime
 limits, not newly calibrated trading thresholds.
 
 This is periodic observation, not an event-complete stream or a real-time
-scheduler guarantee. The computer, desktop app, Chrome extension, authenticated
+scheduler guarantee. The computer, desktop app, Brave extension, authenticated
 Binance page and network must remain available. Delays can make the last
 observation stale. Read `--status` before describing a saved verdict as current.
 See the official [scheduled-task documentation](https://learn.chatgpt.com/docs/automations?surface=app)
@@ -29,12 +39,15 @@ for local-host availability and tasks that return to an existing conversation.
 
 ## One scheduled run
 
-1. Work in `D:\Neutral Grid v5.7.0`. Read the Chrome skill and use its documented
-   browser-client interface through the persistent JavaScript tool. Reuse the
-   existing Chrome binding when available. Otherwise initialize the runtime
-   using the installed skill's absolute module path, select Chrome, and read
-   its complete documentation. List and claim the existing authenticated
-   Binance futures-grid tab. Do not use an in-app browser or a CDP fallback.
+1. Work in `D:\Neutral Grid v5.7.0`. Use the available browser runtime's
+   documented inventory API through its persistent JavaScript tool. Require
+   a connected browser positively identified as Brave, read its documentation,
+   and list and claim its existing authenticated Binance futures-grid tab.
+   Reuse a binding only after verifying it belongs to that Brave connection.
+   A running Brave process alone does not prove a browser-tool connection.
+   If Brave is absent from the inventory or its identity cannot be verified,
+   record an acquisition failure and stop the attempt. Do not invent a Brave
+   skill, browser ID or API. Do not use an in-app browser or a CDP fallback.
 2. Inspect the current page. Require UM Grid and Running to be selected and
    prove the complete Working roster from the rendered table. The table may
    virtualize rows; the helper makes a bounded top-to-bottom sweep and requires
@@ -53,6 +66,16 @@ for local-host availability and tasks that return to an existing conversation.
    ```
 
    Binding names are examples; reuse existing bindings or choose unused names.
+   In a persistent runtime, append the verified current helper file SHA-256 as
+   an import URL query to avoid executing an older cached module. Record the hash.
+   The helper requires the supported native tab `scroll`, `drag`, `click`,
+   `getScreenshot` and `getAXState` methods. Pointer movement starts at a verified
+   non-interactive header point. Before every drag, a native click at that blank origin
+   clears the previous text selection; a changed origin or uncleared selection
+   blocks the attempt. This prevents the previous drag from suppressing the next
+   strategy's tooltip. The visible tooltip must still be bound to the exact
+   document icon; the Working identity and control position are checked again
+   before clicking. Missing APIs or failed guards block capture.
    The helper verifies a fresh View Details tooltip before clicking its observed
    document icon. It closes only the observed drawer close icon. It checks the
    complete roster before and after, including deployment times, and saves raw
@@ -64,7 +87,7 @@ for local-host availability and tasks that return to an existing conversation.
 4. Ingest only the `bundlePath` returned by that successful call:
 
    ```powershell
-   .\.venv\Scripts\python.exe scripts\ingest_chrome_plugin_telemetry_cycle.py --bundle-manifest '<RETURNED_BUNDLE_PATH>'
+   .\.venv\Scripts\python.exe scripts\ingest_brave_plugin_telemetry_cycle.py --bundle-manifest '<RETURNED_BUNDLE_PATH>'
    ```
 
    Require exit code zero and a complete result. Use its exact `cycle_manifest`
@@ -125,10 +148,10 @@ automatically treated as strategy-owned fills.
 
 - Raw capture: `Live/<Lima-cycle-date>/<SYMBOL>/drawer_captures/<unique-run>/drawer.txt`.
   The ingestion date is resolved once at capture start, including across midnight.
-- Capture bundle/failure metadata: `outputs/runtime/chrome_plugin_capture/<run>/`.
+- Capture bundle/failure metadata: `outputs/runtime/brave_plugin_capture/<run>/`.
   This directory contains metadata, not newly captured bot raw text.
 - Validated snapshots and PnL observations: existing `Live` ingestion/history paths.
-- Validated cycle manifests: `outputs/audits/chrome_plugin_telemetry/cycles/`.
+- Validated cycle manifests: `outputs/audits/brave_plugin_telemetry/cycles/`.
 - Consumer receipts, health, controller reports, registry and separate scanner
   history: `outputs/audits/recurring_drawer_verdict/`.
 
