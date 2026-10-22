@@ -2,6 +2,60 @@
 
 ## [unreleased] - Neutral Grid v5.7.0
 
+### CANONICAL-HMM-20261022 - Reconcile all canonical rows to the October 21 HMM
+
+**Date:** 2026-10-22.
+
+Back up the canonical five-sheet workbook and merge 853 hash-verified October 21
+staging results plus four fresh start-time HMM replays by exact strategy ID.
+All 857 strategies now carry active lineage `rolling_180d_20261021_161805` in
+General and Meta Features with finite range, trend and persistence probabilities.
+
+The four failures were caused by the earlier `--hmm-only` flag selecting candidate
+scan time despite the supplied start-time option. Those candidate scans follow
+the recorded bot starts. Cross-check the existing starts against the workbook,
+frozen input and September audit; replay at those unchanged recorded starts using
+explicit `start_time_utc` and `hmm_lineage_only` without `--hmm-only`. Preserve the
+candidate IDs as recorded; do not invent earlier IDs or claim validated deployment
+linkage. Retain and independently replay all four 800-bar closed-candle windows.
+
+**Files modified or created:**
+- `docs/canonical_hmm_lineage_repair_20261022.md`
+- `data/new_expired_bots.xlsx`
+- `data/backups/canonical_hmm_lineage_repair_20261022T191156Z/new_expired_bots.before.xlsx`
+- `reports/canonical_hmm_lineage_repair_20261022T191156Z/REPORT.md`
+- `reports/canonical_hmm_lineage_repair_20261022T191156Z/validation.json`
+- `reports/canonical_hmm_lineage_repair_20261022T191156Z/replay_validation.json`
+- `reports/canonical_hmm_lineage_repair_20261022T191156Z/canonical_pool_validation.json`
+- `reports/canonical_hmm_lineage_repair_20261022T191156Z/full_source_comparison.json`
+- `reports/canonical_hmm_lineage_repair_20261022T191156Z/publication.json`
+- `reports/canonical_hmm_lineage_repair_20261022T191156Z/full_pytest.log`
+- `CHANGELOG.md`
+
+Only the repair documentation and this changelog entry are published to Git.
+The workbook, backup, supporting audit evidence and temporary files remain local.
+
+**Decision rationale:** Enforce the existing HMM Lineage Authority and UTILFIX-01
+contracts through actual replay and source-checked fields, preserving independent
+features and observed outcomes. AFML / Hudson & Thames citation: no new statistical
+method or performance claim; this repairs version consistency and causal cutoffs.
+
+**Backward compatibility:** No schema or risk-gate changes. Only 13,914 planned
+HMM-related cells changed across General and Meta Features. The other three
+worksheets and all other package members are byte-identical. Stored timestamps,
+candidate IDs, outcomes, styles and auxiliary data are preserved. The governed
+utility loader now admits 703 uniform-lineage rows; this does not retrain or
+promote a utility/profile model. Production code and model artifacts are unchanged.
+
+**Verification:** Full Python suite: 2,469 passed, two skipped, zero failures.
+All 118,400 cell positions were compared; all 27,424 HMM-field values exactly
+match their selected staging/replay sources. Independent four-window inference
+reproduced probabilities with zero difference. Before/after previews and reopened
+publication checks passed. Original backup SHA-256:
+`85f56530c246f5ccd7bf80819281611fd1dc34229aa175866d7fb677d6f03854`;
+published SHA-256:
+`1acf2e7a74a210b84c83085ea800fe219791b910558852490ad636ac09f7e651`.
+
 ### GIT-REVIEW-20261022 - Review and publish accumulated architectural changes
 
 **Date:** 2026-10-22.
