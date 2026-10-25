@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-10-11T03:49:48.433072+00:00",
+  "generated_at_utc": "2026-10-21T18:08:27.318515+00:00",
   "feature_profile": "snapshot_v20260530_fastwin",
   "expected_feature_count": 20,
   "selected_feature_count": 20,
@@ -25,32 +25,32 @@
     "micro_round_trip_cost_pct",
     "funding_rate"
   ],
-  "source_training_row_count": 2793,
-  "training_row_count": 2793,
+  "source_training_row_count": 3504,
+  "training_row_count": 3504,
   "training_source_manifest": {
-    "backtest_results_dir": "D:\\Neutral Grid v5.7.0\\data\\retrain_all_20261010_run2\\finalized_fresh_pool",
+    "backtest_results_dir": "D:\\Neutral Grid v5.7.0\\data\\retrain_all_20261021_run2\\finalized_fresh_pool",
     "source_file_count": 1,
     "source_files": [
       {
-        "path": "D:\\Neutral Grid v5.7.0\\data\\retrain_all_20261010_run2\\finalized_fresh_pool\\training_data_20261010.csv",
-        "size_bytes": 20722870,
-        "modified_at_utc": "2026-10-11T03:49:10.304384+00:00",
-        "sha256": "98f4746ded6ed6d9d8879b7b763c774b82f10bac3309e163549af8239e1b72c1"
+        "path": "D:\\Neutral Grid v5.7.0\\data\\retrain_all_20261021_run2\\finalized_fresh_pool\\training_data_20261021.csv",
+        "size_bytes": 26100536,
+        "modified_at_utc": "2026-10-21T18:07:30.460102+00:00",
+        "sha256": "43a7821c383f307e82eacffc0c167aefe54c4834a80f26d57ac29451f0d15758"
       }
     ],
-    "source_training_rows": 2793,
-    "unique_candidate_ids": 2793,
+    "source_training_rows": 3504,
+    "unique_candidate_ids": 3504,
     "duplicate_candidate_id_rows": 0,
     "market_event_time_utc": {
       "min": "2026-02-15T23:05:25.522527+00:00",
-      "max": "2026-10-10T06:26:23.669011+00:00"
+      "max": "2026-10-20T13:40:33.424347+00:00"
     },
     "backtest_write_time_utc": {
-      "min": "2026-10-11T02:59:57.811159+00:00",
-      "max": "2026-10-11T03:15:04.950150+00:00"
+      "min": "2026-10-21T16:19:44.968893+00:00",
+      "max": "2026-10-21T16:40:14.027098+00:00"
     },
     "pool_generation_mode": "fresh_full_pool",
-    "pool_manifest_path": "D:\\Neutral Grid v5.7.0\\data\\retrain_all_20261010_run2\\finalized_fresh_pool\\authoritative_pool_manifest.json",
+    "pool_manifest_path": "D:\\Neutral Grid v5.7.0\\data\\retrain_all_20261021_run2\\finalized_fresh_pool\\authoritative_pool_manifest.json",
     "meta_pool_max_rows_per_symbol": 0
   },
   "training_hmm_lineage": {
@@ -58,17 +58,17 @@
     "dependent_selected_features": [
       "ev_score"
     ],
-    "active_hmm_artifact_version": "rolling_180d_20261011_025309",
-    "training_row_count": 2793,
+    "active_hmm_artifact_version": "rolling_180d_20261021_161805",
+    "training_row_count": 3504,
     "lineage_column_present": true,
     "missing_lineage_count": 0,
     "mismatched_lineage_count": 0,
     "observed_versions": {
-      "rolling_180d_20261011_025309": 2793
+      "rolling_180d_20261021_161805": 3504
     },
-    "active_hmm_trained_at_utc": "2026-10-11T03:25:51.629197+00:00",
+    "active_hmm_trained_at_utc": "2026-10-21T16:48:55.555768+00:00",
     "observed_hmm_trained_at_utc": {
-      "2026-10-11T03:25:51.629197+00:00": 2793
+      "2026-10-21T16:48:55.555768+00:00": 3504
     },
     "passes": true,
     "reasons": []
@@ -81,14 +81,14 @@
     "duration_hours_max": 7.0,
     "pnl_column": "net_pnl_pct",
     "target_column": "fast_winner_target",
-    "eligible_rows": 2793,
-    "positive_count": 1505,
-    "negative_count": 1288,
+    "eligible_rows": 3504,
+    "positive_count": 1864,
+    "negative_count": 1640,
     "negative_rows_duration_gt_7h_count": 0,
     "excluded_rows_missing_duration_count": 0,
     "excluded_rows_missing_pnl_count": 0,
-    "builder_y_compared_count": 2793,
-    "builder_y_mismatch_count": 417,
+    "builder_y_compared_count": 3504,
+    "builder_y_mismatch_count": 510,
     "label_basis": "endogenous_time_to_target"
   },
   "active_training_target": {
@@ -97,19 +97,19 @@
     "duration_hours_max": 7.0,
     "pnl_column": "net_pnl_pct",
     "target_column": "fast_winner_target",
-    "eligible_rows": 2793,
-    "positive_count": 1505,
-    "negative_count": 1288,
+    "eligible_rows": 3504,
+    "positive_count": 1864,
+    "negative_count": 1640,
     "negative_rows_duration_gt_7h_count": 0,
     "excluded_rows_missing_duration_count": 0,
     "excluded_rows_missing_pnl_count": 0,
-    "builder_y_compared_count": 2793,
-    "builder_y_mismatch_count": 417,
+    "builder_y_compared_count": 3504,
+    "builder_y_mismatch_count": 510,
     "label_basis": "endogenous_time_to_target"
   },
   "modelable_feature_filter": {
-    "input_rows": 2793,
-    "modelable_rows": 2793,
+    "input_rows": 3504,
+    "modelable_rows": 3504,
     "excluded_unmodelable_count": 0,
     "excluded_unmodelable_rows": []
   },
@@ -132,117 +132,117 @@
   "feature_fill": [
     {
       "feature": "ev_score",
-      "non_null_count": 2793,
+      "non_null_count": 3504,
       "null_count": 0
     },
     {
       "feature": "adx_1h",
-      "non_null_count": 2793,
+      "non_null_count": 3504,
       "null_count": 0
     },
     {
       "feature": "adx_15m",
-      "non_null_count": 2793,
+      "non_null_count": 3504,
       "null_count": 0
     },
     {
       "feature": "adx_5m",
-      "non_null_count": 2793,
+      "non_null_count": 3504,
       "null_count": 0
     },
     {
       "feature": "atr_pct_15m",
-      "non_null_count": 2793,
+      "non_null_count": 3504,
       "null_count": 0
     },
     {
       "feature": "ou_halflife",
-      "non_null_count": 2793,
+      "non_null_count": 3504,
       "null_count": 0
     },
     {
       "feature": "rsi_15m",
-      "non_null_count": 2793,
+      "non_null_count": 3504,
       "null_count": 0
     },
     {
       "feature": "ema_slope_1h",
-      "non_null_count": 2793,
+      "non_null_count": 3504,
       "null_count": 0
     },
     {
       "feature": "ema_crosses_5m",
-      "non_null_count": 2793,
+      "non_null_count": 3504,
       "null_count": 0
     },
     {
       "feature": "vwap_crosses_5m",
-      "non_null_count": 2793,
+      "non_null_count": 3504,
       "null_count": 0
     },
     {
       "feature": "hurst_exponent",
-      "non_null_count": 2793,
+      "non_null_count": 3504,
       "null_count": 0
     },
     {
       "feature": "range_size_pct",
-      "non_null_count": 2793,
+      "non_null_count": 3504,
       "null_count": 0
     },
     {
       "feature": "bb_width",
-      "non_null_count": 2793,
+      "non_null_count": 3504,
       "null_count": 0
     },
     {
       "feature": "grid_spacing_pct",
-      "non_null_count": 2793,
+      "non_null_count": 3504,
       "null_count": 0
     },
     {
       "feature": "profit_per_grid_pct",
-      "non_null_count": 2793,
+      "non_null_count": 3504,
       "null_count": 0
     },
     {
       "feature": "num_grids",
-      "non_null_count": 2793,
+      "non_null_count": 3504,
       "null_count": 0
     },
     {
       "feature": "quote_volume_24h",
-      "non_null_count": 2793,
+      "non_null_count": 3504,
       "null_count": 0
     },
     {
       "feature": "open_interest",
-      "non_null_count": 2793,
+      "non_null_count": 3504,
       "null_count": 0
     },
     {
       "feature": "micro_round_trip_cost_pct",
-      "non_null_count": 2793,
+      "non_null_count": 3504,
       "null_count": 0
     },
     {
       "feature": "funding_rate",
-      "non_null_count": 2793,
+      "non_null_count": 3504,
       "null_count": 0
     }
   ],
-  "active_hmm_artifact_version": "rolling_180d_20261011_025309",
+  "active_hmm_artifact_version": "rolling_180d_20261021_161805",
   "artifact_lineage_before": {
     "metadata_path": "models\\meta_labeler\\metadata.json",
-    "active_hmm_artifact_version": "rolling_180d_20261011_025309",
-    "artifact_hmm_artifact_version": "rolling_180d_20261011_025309",
+    "active_hmm_artifact_version": "rolling_180d_20261021_161805",
+    "artifact_hmm_artifact_version": "rolling_180d_20261021_161805",
     "lineage_matches_active_hmm": true,
     "error": null
   },
   "artifact_lineage_after": {
     "metadata_path": "models\\meta_labeler\\metadata.json",
-    "active_hmm_artifact_version": "rolling_180d_20261011_025309",
-    "artifact_hmm_artifact_version": "rolling_180d_20261011_025309",
+    "active_hmm_artifact_version": "rolling_180d_20261021_161805",
+    "artifact_hmm_artifact_version": "rolling_180d_20261021_161805",
     "lineage_matches_active_hmm": true,
     "error": null
   },
