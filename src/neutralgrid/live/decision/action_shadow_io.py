@@ -10,6 +10,7 @@ from typing import Any, Mapping, Sequence, cast
 
 from neutralgrid.core.constants import STATE_ACTION_REWARD_CONTRACT_VERSION, STATE_ACTION_REWARD_SCHEMA
 from neutralgrid.live.decision.action_challenger import ActionArtifact, predict_shadow, unavailable
+from neutralgrid.live.decision.capital_policy import policy_summary
 from neutralgrid.live.decision.pnl_forecast import FEATURE_COLUMNS, _feature_rows
 from neutralgrid.live.decision.pnl_history import validate_pnl_observation
 from neutralgrid.live.decision.recommender import Verdict
@@ -89,20 +90,22 @@ def state_from_observations(observations: Sequence[Mapping[str, Any]], row: Mapp
     grid, position = _mapping(latest["grid"]), _mapping(latest["position"])
     evaluation = _mapping(row.get("evaluation"))
     telemetry = _mapping(row.get("execution_telemetry"))
-    pnl, risk = _mapping(telemetry.get("pnl")), _mapping(telemetry.get("risk"))
+    risk = _mapping(telemetry.get("risk"))
     l2 = _mapping(evaluation.get("l2_risk"))
     capture = _timestamp(latest["telemetry_captured_at_utc"])
     return State(bot=bot, captured_at=capture, available_at=asof,
                  feature_window_start=min(_timestamp(o["telemetry_captured_at_utc"]) for o in past),
                  sources=tuple(sources.values()), grid_lower=grid.get("price_range_lower"),
                  grid_upper=grid.get("price_range_upper"), num_grids=grid.get("num_grids"),
-                 capital_usdt=grid.get("invested_margin_usdt"), equity_usdt=pnl.get("equity_usdt"),
+                 # Row fields cannot certify exact-bot equity. The native
+                 # adapter alone admits revalidated source-bound equity facts.
+                 capital_usdt=grid.get("invested_margin_usdt"), equity_usdt=None,
                  unrealized_usdt=position.get("position_pnl_usdt"), position_quantity=position.get("size_base"),
                  entry_price=position.get("entry_price"), market_price=evaluation.get("price"),
                  market_captured_at=_timestamp(l2["captured_at_utc"]) if l2.get("captured_at_utc") else None,
                  symbol_available=_symbol_available(evaluation),
                  liquidation_buffer_pct=risk.get("liquidation_distance_to_mark_pct"),
-                 peak_equity_usdt=risk.get("peak_equity_usdt"), hmm_lineage=evaluation.get("active_hmm_version"),
+                 peak_equity_usdt=None, hmm_lineage=evaluation.get("active_hmm_version"),
                  features=features)
 
 
@@ -135,6 +138,7 @@ def report_shadow_row(*, row: Mapping[str, Any], observations: Sequence[Mapping[
         quantum = Decimal(str(precision)) if precision is not None else None
         result = predict_shadow(incumbent=action, state=state, limits=limits, quantum=quantum,
                                 artifact=model, now=state.available_at)
+        result["capital_preservation_policy"] = policy_summary()
         if live_root is not None:
             proposal = Action.model_validate(result["proposal"]) if result.get("available") else action
             decision = Decision(decided_at=state.available_at, pre_state=state,

@@ -44,6 +44,20 @@ def limits():
     return RiskLimits(min_liquidation_buffer_pct=D(10), max_drawdown_pct=D(20))
 
 
+def test_invested_capital_floor_is_independent_of_allowed_peak_drawdown(evidence):
+    # A 1% loss passes the existing 20% peak limit but violates the operator's
+    # zero invested-capital-loss objective. No new statistical threshold is fit.
+    reasons = shield_reasons(state(evidence, equity_usdt=D(99)), limits(), now=T0)
+    assert "drawdown_breached" not in reasons
+    assert "invested_capital_floor_breached" in reasons
+    assert "invested_capital_floor_breached" not in shield_reasons(state(evidence), limits(), now=T0)
+
+
+@pytest.mark.parametrize("changes", [{"capital_usdt": None}, {"equity_usdt": None}])
+def test_missing_invested_capital_evidence_cannot_pass_floor(evidence, changes):
+    assert "invested_capital_floor_unknown" in shield_reasons(state(evidence, **changes), limits(), now=T0)
+
+
 def decision(pre, **changes):
     values = dict(decided_at=T0, pre_state=pre,
                   incumbent=Action(verdict=Verdict.CONTINUE), shadow=Action(verdict=Verdict.CONTINUE),
@@ -123,6 +137,20 @@ def observed(evidence, *, adjust=False, endpoint_minutes=60, **outcome_changes):
     outcome = Outcome(**(values | outcome_changes))
     events.append(event("outcome", outcome, outcome.state.available_at))
     return events
+
+
+def test_capital_shield_does_not_delete_a_subsequent_realized_loss(evidence):
+    # Eligible pre-state is exactly at its invested-capital floor. A subsequent
+    # fully accounted loss remains a negative label, avoiding survivor bias.
+    end = state(evidence, captured_at=T0 + timedelta(minutes=60),
+                available_at=T0 + timedelta(minutes=60), equity_usdt=D(90))
+    events = observed(evidence, state=end, costs=(cost(evidence, "realized", "-10"),))
+    maintenance = Maintenance(state=end, coverage_start=T0, coverage_end=end.captured_at,
+                              intervention_coverage_complete=True, source=evidence)
+    events[1] = event("maintenance", maintenance, end.available_at)
+    projected = project_transition(events)
+    assert projected.training_eligible, projected.reasons
+    assert projected.net_usdt == D(-10)
 
 
 def test_versions_and_documentation_are_pinned():
@@ -251,7 +279,8 @@ def test_relative_sources_and_boolean_limits_are_rejected():
         RiskLimits(min_liquidation_buffer_pct=D(10), max_drawdown_pct=D(20), max_market_age_seconds=True)
 
 
-def test_parallel_writers_publish_one_event_or_report_busy(evidence, tmp_path):
+@pytest.mark.parametrize("attempt", range(8))
+def test_parallel_writers_publish_one_event_or_report_busy(evidence, tmp_path, attempt):
     from concurrent.futures import ThreadPoolExecutor
     item = event("decision", decision(state(evidence)))
     live = tmp_path / "Live"
@@ -266,6 +295,103 @@ def test_parallel_writers_publish_one_event_or_report_busy(evidence, tmp_path):
     assert any(paths) and len(set(p for p in paths if p is not None)) == 1
     loaded, rejected = load_events(live)
     assert loaded == [item] and not rejected
+
+
+def test_writer_lock_atomically_initializes_before_read_only_open(tmp_path, monkeypatch):
+    from neutralgrid.live.decision import state_action_reward as sar
+    lock = tmp_path / "nested" / "writer.lock"
+    original_open = Path.open
+    modes = []
+
+    def checked_open(path, mode="r", *args, **kwargs):
+        if path == lock:
+            modes.append(mode)
+            assert path.is_file() and path.stat().st_size > 0
+            assert mode == "rb"
+        return original_open(path, mode, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "open", checked_open)
+    with sar._writer_lock(lock):
+        pass
+    assert modes == ["rb"]
+    with original_open(lock, encoding="utf-8") as stream:
+        assert json.load(stream) == {"lock": constants.STATE_ACTION_REWARD_SCHEMA}
+
+
+def test_writer_lock_existing_empty_marker_fails_closed_unchanged(tmp_path):
+    from neutralgrid.live.decision import state_action_reward as sar
+    lock = tmp_path / "writer.lock"
+    lock.write_bytes(b"")
+    with pytest.raises(SarError, match="busy"):
+        with sar._writer_lock(lock):
+            pytest.fail("existing empty lock must not be overwritten or entered")
+    assert lock.is_file() and lock.read_bytes() == b""
+
+
+def test_writer_lock_atomic_initialization_failure_is_contained(tmp_path, monkeypatch):
+    from neutralgrid.live.decision import state_action_reward as sar
+
+    def denied(*args, **kwargs):
+        raise PermissionError("synthetic initialization failure")
+
+    monkeypatch.setattr(sar, "atomic_create_json", denied)
+    with pytest.raises(SarError, match="busy"):
+        with sar._writer_lock(tmp_path / "writer.lock"):
+            pytest.fail("failed initialization must not enter the writer")
+
+
+def test_writer_lock_handle_open_failure_is_contained(tmp_path, monkeypatch):
+    from neutralgrid.live.decision import state_action_reward as sar
+    lock = tmp_path / "writer.lock"
+    original_open = Path.open
+
+    def denied_open(path, *args, **kwargs):
+        if path == lock:
+            raise PermissionError("synthetic marker open failure")
+        return original_open(path, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "open", denied_open)
+    with pytest.raises(SarError, match="busy"):
+        with sar._writer_lock(lock):
+            pytest.fail("failed marker open must not enter the writer")
+
+
+def test_writer_lock_preserves_body_error_and_releases_lock(tmp_path):
+    from neutralgrid.live.decision import state_action_reward as sar
+    lock = tmp_path / "writer.lock"
+    with pytest.raises(PermissionError, match="body publication failure"):
+        with sar._writer_lock(lock):
+            raise PermissionError("body publication failure")
+    before = lock.read_bytes()
+    with sar._writer_lock(lock):
+        pass
+    assert lock.read_bytes() == before
+
+
+def test_writer_lock_contender_never_writes_locked_marker(tmp_path):
+    from concurrent.futures import ThreadPoolExecutor
+    from threading import Event
+    from neutralgrid.live.decision import state_action_reward as sar
+    lock = tmp_path / "writer.lock"
+    held, release = Event(), Event()
+
+    def hold():
+        with sar._writer_lock(lock):
+            held.set()
+            assert release.wait(timeout=10)
+
+    with ThreadPoolExecutor(max_workers=1) as pool:
+        holder = pool.submit(hold)
+        try:
+            assert held.wait(timeout=10)
+            with pytest.raises(SarError, match="busy"):
+                with sar._writer_lock(lock):
+                    pytest.fail("contender acquired a held lock")
+        finally:
+            release.set()
+        holder.result()
+    with sar._writer_lock(lock):
+        pass
 
 
 @pytest.mark.parametrize("change,reason", [

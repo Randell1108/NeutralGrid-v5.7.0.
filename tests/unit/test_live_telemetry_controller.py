@@ -527,6 +527,24 @@ def test_build_action_intents_requires_valid_adjust_bounds() -> None:
         controller.build_action_intents([bad_row], iteration_id="iteration")
 
 
+def test_action_intent_uses_original_per_bot_evaluation_instead_of_batch_time() -> None:
+    row = {"ts": "2026-10-22T12:00:00+00:00", "symbol": "BTCUSDT", "strategy_id": "123",
+           "verdict": "ADJUST", "suggested_grid_lower": 90.0, "suggested_grid_upper": 110.0,
+           "evaluation": {"evaluated_at_utc": "2026-10-22T12:00:17+00:00"}}
+    intent = controller.build_action_intents([row], iteration_id="fixture")[0]
+    assert intent["decision_ts"] == row["evaluation"]["evaluated_at_utc"]
+    assert row["ts"] == "2026-10-22T12:00:00+00:00"
+
+
+@pytest.mark.parametrize("timestamp", [None, "", "bad", "2026-10-22T12:00:17"])
+def test_invalid_explicit_per_bot_time_cannot_fall_back_to_batch_time(timestamp) -> None:
+    row = {"ts": "2026-10-22T12:00:00+00:00", "symbol": "BTCUSDT", "strategy_id": "123",
+           "verdict": "ADJUST", "suggested_grid_lower": 90.0, "suggested_grid_upper": 110.0,
+           "evaluation": {"evaluated_at_utc": timestamp}}
+    with pytest.raises(controller.ControllerError):
+        controller.build_action_intents([row], iteration_id="fixture")
+
+
 def test_route_actions_blocks_without_explicit_authority(tmp_path: Path) -> None:
     args = Namespace(
         controller_audit_dir=tmp_path,
@@ -870,6 +888,7 @@ def test_shadow_volatility_failure_cannot_change_action_intent(
     bad_contract.write_text("{}", encoding="utf-8")
     rows = [
         {
+            "ts": completed_at.isoformat(),
             "symbol": "BTCUSDT",
             "strategy_id": "413500001",
             "verdict": "ADJUST",

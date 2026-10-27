@@ -490,13 +490,24 @@ def _native_json(ref: SourceRef) -> dict[str, Any]:
 
 @contextmanager
 def _writer_lock(path: Path) -> Iterator[None]:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("a+b") as handle:
-        if handle.seek(0, 2) == 0:
-            handle.write(b"0")
-            handle.flush()
-        handle.seek(0)
+    # A fully written inode is published before any contender can open it.
+    # Never initialize byte zero through a shared handle: Windows may already
+    # have locked that byte between another writer's size check and flush.
+    try:
+        atomic_create_json(path, {"lock": STATE_ACTION_REWARD_SCHEMA})
+    except FileExistsError:
+        pass
+    except OSError as exc:
+        raise SarError("ledger writer busy or unavailable; no event published") from exc
+    try:
+        handle = path.open("rb")
+    except OSError as exc:
+        raise SarError("ledger writer busy or unavailable; no event published") from exc
+    with handle:
         try:
+            if os.fstat(handle.fileno()).st_size == 0:
+                raise SarError("ledger writer busy or empty lock; no event published")
+            handle.seek(0)
             if os.name == "nt":
                 import msvcrt
                 msvcrt.locking(handle.fileno(), msvcrt.LK_NBLCK, 1)
@@ -592,6 +603,13 @@ def shield_reasons(state: State, limits: RiskLimits | None, *, now: datetime) ->
         reasons.append("drawdown_unknown")
     elif (state.peak_equity_usdt - state.equity_usdt) / state.peak_equity_usdt * 100 > limits.max_drawdown_pct:
         reasons.append("drawdown_breached")
+    # Primary operator objective: preserve invested capital. Peak drawdown is a
+    # separate constraint and cannot permit consuming the invested principal.
+    # This is a pre-state shield, never a filter removing losing outcome labels.
+    if state.capital_usdt is None or state.equity_usdt is None:
+        reasons.append("invested_capital_floor_unknown")
+    elif state.equity_usdt < state.capital_usdt:
+        reasons.append("invested_capital_floor_breached")
     if not state.hmm_lineage:
         reasons.append("hmm_lineage_unknown")
     if state.capital_usdt is None or state.position_quantity is None:

@@ -169,6 +169,11 @@ def test_jsonl_appends_one_record_per_call(tmp_path: Path) -> None:
     assert rec_a["contract_version"] == DECISION_CONTRACT_VERSION
     assert rec_b["symbol"] == "ETHUSDT"
     assert rec_b["reasons"] == ["range_prob_borderline:0.40"]
+    policy = rec_b["capital_preservation_policy"]
+    assert policy["primary_objective"] == "preserve_invested_capital"
+    assert policy["maximum_capital_loss_pct"] == 0
+    assert policy["minimum_liquidation_buffer_pct"] is None
+    assert policy["execution_authorized"] is False
 
 
 def test_jsonl_includes_full_evaluation_fields(tmp_path: Path) -> None:

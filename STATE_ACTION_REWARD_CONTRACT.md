@@ -3,6 +3,24 @@
 Status: Contract 1.0 frozen for an isolated offline/shadow challenger. Live influence is disabled.
 Date: 2026-10-01
 
+### Invested-capital safety clarification (2026-10-25)
+
+The operator's primary objective for ADJUST and CONTINUE is preservation of
+invested principal. The pre-state shield now also requires known equity and
+invested capital with equity >= invested capital, independently of the existing
+peak-drawdown limit. Missing liquidation limits still block. This narrows
+admissible initial states; it does not filter negative subsequent reward labels.
+Associations from this cohort do not describe recovery actions starting below
+the invested-capital floor. A passing current observation cannot certify future
+capital preservation or authorize execution.
+
+Ledger wire fields, action semantics and the 60-65-minute reward endpoint are
+unchanged. The source-derived feature-definition hash changes with this shield
+implementation, so prior artifacts/feature cohorts cannot silently acquire the
+new safety behavior. Existing immutable source records remain readable and are
+not rewritten. Native terminal lifetime PnL has its own observational schema in
+`docs/terminal_bot_outcomes.md`; it never replaces a missing SAR endpoint.
+
 ## Version authority
 
 | Constant | Value | Meaning |

@@ -4,6 +4,33 @@ Status: Contract v1.1 implemented; PnL forecaster and state/action/reward challe
 Date: 2026-08-10
 Scope: Recurring tactical scanner that evaluates user-declared live grid bots every X minutes against current Binance market state and emits per-bot CONTINUE / ADJUST / END recommendations with reasons. Advisory only.
 
+## Capital-preservation objective (2026-10-25)
+
+Priority #1, including every ADJUST proposal, is to preserve each bot's invested
+capital. The approved loss boundary is zero loss of invested principal; this is
+distinct from peak-equity drawdown. An unspecified liquidation-buffer limit stays
+unknown. Capital protection applies throughout the bot's actual lifetime; the
+deployment-plus-seven-hour FASTWIN target is a forecast label, not an expiry for
+collecting evidence or protecting capital.
+
+The action shield independently rejects pre-states with equity below invested
+capital, or with either value missing, alongside its existing risk limits. The
+native adapter admits equity only from an exact-bot, exact-time source-bound fact.
+The shadow adapter cannot promote unverified row fields to verified equity.
+Losing outcomes after an admissible pre-state remain negative observations; the
+floor is not a retrospective filter removing unsuccessful trajectories.
+
+Console, JSONL decisions and controller intents state the objective. This
+metadata never grants execution approval. The incumbent recommender's arithmetic
+ADJUST bounds remain proposals, not a verified forecast of capital preservation.
+The executor's existing position-preservation checks are not an equity-floor
+certificate. No capital-optimal recentering model or new END threshold is enabled
+by this change. Missing interval accounting and liquidation limits remain gates.
+
+Final reported PnL is stored separately as the realized outcome of the actual bot
+trajectory. See `docs/terminal_bot_outcomes.md`; it is not automatically an
+incremental action reward or a negative first-passage label.
+
 Sibling document to `LIVE_BOT_DECISION.md` v2 (single-shot operator-side evaluator). The two share a vocabulary and several contracts but solve different problems; see Reconciliation below.
 
 ## Context

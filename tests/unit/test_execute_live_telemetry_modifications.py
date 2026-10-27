@@ -326,6 +326,18 @@ def test_execute_adjustment_submits_once_and_verifies_exact_strategy() -> None:
     assert len(fences) == 1
 
 
+def test_receipt_captures_observed_lifecycle_times_without_reconstructing_history() -> None:
+    times = iter([datetime(2026, 10, 22, 12, 0, second, tzinfo=timezone.utc) for second in (1, 2, 3)])
+    result = executor.execute_adjustment(
+        _intent(), _approval(), FakeDriver(), policy=executor.ExecutionPolicy(),
+        wall_clock=lambda: next(times),
+    )
+    assert result["pre_state_available_at_utc"] == "2026-10-22T12:00:01+00:00"
+    assert result["submitted_at_utc"] == "2026-10-22T12:00:02+00:00"
+    assert result["verified_at_utc"] == "2026-10-22T12:00:03+00:00"
+    assert result["decision_ts"] == _intent().decision_ts.isoformat()
+
+
 def test_execute_adjustment_rejects_identity_mismatch_before_prepare() -> None:
     driver = FakeDriver(
         current=executor.BotState(

@@ -1,5 +1,13 @@
 # Exact-bot private evidence ledger
 
+For the subsequent authenticated acquisition and explicit native-to-SAR adapter,
+see [authenticated telemetry evidence](authenticated_telemetry_evidence.md).
+The original bootstrap described below remains historical: its registrations did
+not establish private facts. The new authenticated run likewise returned no
+trade/income rows for the 203 registered deployment windows. Explicit conversion
+now exists; there is still no automatic promotion of producer coverage claims
+to complete SAR accounting.
+
 The ledger has been initialized for the 203 deployments verified in the
 2026-10-22 target audit. Registration records original deployment provenance;
 it does not create exchange ownership, trades, equity or completed coverage.

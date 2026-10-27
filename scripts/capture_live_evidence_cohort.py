@@ -27,6 +27,7 @@ from neutralgrid.live.decision.evidence_cohort import (
     publish_packet, read_json, target_cohort,
 )
 from neutralgrid.live.decision.exact_bot_ledger import audit_ledger
+from neutralgrid.live.decision.terminal_outcomes import audit_terminal_outcomes
 from neutralgrid.live.decision.state_action_reward import (
     LedgerEvent, append_event, atomic_create_json, contract_schema_catalog,
     file_hash, load_events, project_transition, verify_sources,
@@ -117,6 +118,7 @@ def run(*, live_root: Path, output: Path, capture: bool = False,
             rejected_events.append({"path": identity, "reason": str(exc)})
     action_report, _ = evaluate(projections)
     private_ledger = audit_ledger(live_root)
+    terminal = audit_terminal_outcomes(live_root)
     ticks, tick_failure = None, None
     if fetch_ticks:
         try:
@@ -147,11 +149,16 @@ def run(*, live_root: Path, output: Path, capture: bool = False,
               "post_target_risk_contract": "preserve invested capital; blocked pending verified capital/equity coverage and numerical liquidation buffer",
               "private_ledger_registrations": private_ledger["registrations"],
               "private_ledger_source_bound_facts": private_ledger["source_bound_facts"],
+              "terminal_trajectory_outcomes": len(terminal["scores"]),
+              "rejected_terminal_outcomes": terminal["rejected"],
               "influence_enabled": False, "promotion_eligible": False, "fitted": False,
               "capture_scope": "existing original drawers/capture envelopes plus supplied canonical SAR events; no private exchange event collector was started"}
     atomic_create_json(output / "target_cohort.json", target)
     atomic_create_json(output / "action_cohort.json", {"transitions": transitions, "evaluation": action_report})
     atomic_create_json(output / "private_ledger_cohort.json", private_ledger)
+    # Terminal lifetime outcomes remain separate from first-passage and hourly
+    # action targets. Their availability must not silently grant either label.
+    atomic_create_json(output / "terminal_outcome_cohort.json", terminal)
     atomic_create_json(output / "evidence_packets.json", {"packets": packets})
     atomic_create_json(output / "required_event_schemas.json", contract_schema_catalog())
     code_paths = [Path(__file__), ROOT / "src/neutralgrid/live/decision/evidence_cohort.py",
@@ -159,6 +166,7 @@ def run(*, live_root: Path, output: Path, capture: bool = False,
                   ROOT / "src/neutralgrid/live/decision/action_challenger.py",
                   ROOT / "src/neutralgrid/live/decision/private_telemetry.py"]
     code_paths.append(ROOT / "src/neutralgrid/live/decision/exact_bot_ledger.py")
+    code_paths.append(ROOT / "src/neutralgrid/live/decision/terminal_outcomes.py")
     atomic_create_json(output / "input_manifest.json", {"sources": sources,
                         "code": [{"path": str(p), "sha256": file_hash(p)} for p in code_paths]})
     atomic_create_json(output / "report.json", report)

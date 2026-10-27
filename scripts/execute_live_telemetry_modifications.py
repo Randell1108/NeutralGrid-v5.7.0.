@@ -414,6 +414,7 @@ def execute_adjustment(
     policy: ExecutionPolicy,
     clock: Callable[[], float] = time.monotonic,
     before_submit: Callable[[PreparedAdjustment], None] | None = None,
+    wall_clock: Callable[[], datetime] = lambda: datetime.now(UTC),
 ) -> dict[str, Any]:
     """Execute the validated state machine using an injected browser driver."""
 
@@ -421,6 +422,7 @@ def execute_adjustment(
     deadline = Deadline(policy.deadline_seconds, clock=clock)
     deadline.require("live identity read")
     current = driver.read_state(intent, deadline)
+    pre_state_available_at = wall_clock()
     _validate_state_identity(current, intent)
 
     deadline.require("form preparation", reserve_seconds=policy.min_post_submit_seconds)
@@ -446,6 +448,7 @@ def execute_adjustment(
     )
     if before_submit is not None:
         before_submit(prepared)
+    submitted_at = wall_clock()
     driver.submit_once(prepared, deadline)
 
     post: BotState | None = None
@@ -473,6 +476,7 @@ def execute_adjustment(
         break
     if post is None:
         raise ExecutionError("post-action verification produced no state")
+    verified_at = wall_clock()
 
     return {
         "schema_version": RESPONSE_SCHEMA,
@@ -481,6 +485,10 @@ def execute_adjustment(
         "symbol": intent.symbol,
         "strategy_id": intent.strategy_id,
         "action": "ADJUST",
+        "decision_ts": intent.decision_ts.isoformat(),
+        "pre_state_available_at_utc": pre_state_available_at.isoformat(),
+        "submitted_at_utc": submitted_at.isoformat(),
+        "verified_at_utc": verified_at.isoformat(),
         "requested_grid_lower": float(intent.lower),
         "requested_grid_upper": float(intent.upper),
         "executed_grid_lower": float(prepared.lower),

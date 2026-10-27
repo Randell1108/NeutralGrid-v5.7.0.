@@ -57,6 +57,7 @@ from neutralgrid.core.constants import (
     ACTION_INTENT_SCHEMA,
 )
 from neutralgrid.core.process_identity import query_process
+from neutralgrid.live.decision.capital_policy import policy_summary
 from neutralgrid.live.decision.private_telemetry import (
     PrivateTelemetryParseError,
     parse_private_telemetry_text,
@@ -1224,6 +1225,12 @@ def build_action_intents(
         else:
             lower = None
             upper = None
+        evaluation = row.get("evaluation")
+        evaluated = evaluation if isinstance(evaluation, Mapping) else {}
+        # Match the per-bot as-of time used by native SAR; a present invalid
+        # timestamp must not silently inherit the batch timestamp.
+        decision_ts = evaluated.get("evaluated_at_utc", row.get("ts"))
+        _parse_datetime(decision_ts, field="action decision timestamp")
         key_material = (
             f"{strategy_id}|{verdict}|{lower if lower is not None else ''}|"
             f"{upper if upper is not None else ''}"
@@ -1238,10 +1245,11 @@ def build_action_intents(
                 "symbol": symbol,
                 "strategy_id": strategy_id,
                 "action": verdict,
+                "capital_preservation_policy": policy_summary(),
                 "suggested_grid_lower": lower,
                 "suggested_grid_upper": upper,
                 "reasons": list(row.get("reasons") or []),
-                "decision_ts": row.get("ts"),
+                "decision_ts": decision_ts,
             }
         )
     return intents

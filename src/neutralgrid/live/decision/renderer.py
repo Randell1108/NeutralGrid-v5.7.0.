@@ -18,6 +18,7 @@ from pathlib import Path
 from typing import Any, Optional, Sequence
 
 from neutralgrid.core.constants import DECISION_CONTRACT_VERSION
+from neutralgrid.live.decision.capital_policy import policy_summary
 from neutralgrid.live.decision.loader import LiveBotSpec
 from neutralgrid.live.decision.recommender import (
     BotEvaluation,
@@ -70,6 +71,7 @@ class ConsoleRenderer:
             f"CONTINUE={n_continue} ADJUST={n_adjust} END={n_end} | "
             f"emitted={n_emit}"
         )
+        lines.append("Primary objective: preserve invested capital. ADJUST bounds alone do not certify capital safety.")
         lines.append(self.HEADER)
         lines.append("-" * len(self.HEADER))
         for r in results:
@@ -183,6 +185,7 @@ def _to_jsonl_record(result: ScanResult, now: datetime) -> dict[str, Any]:
             else None
         ),
         "verdict": rec.verdict.value,
+        "capital_preservation_policy": policy_summary(),
         "reasons": list(rec.reasons),
         "should_emit": result.should_emit,
         "consecutive_count": rec.consecutive_count,

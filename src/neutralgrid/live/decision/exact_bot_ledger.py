@@ -194,6 +194,11 @@ def verify_fact(fact: PrivateFact, *, live_root: Path) -> None:
     if (source_bot != fact.bot or source_time != fact.occurred_at or source_available != fact.available_at or
             any(raw.get(key) != value for key, value in expected.items())):
         raise ValueError("original record does not prove the supplied identity and fields")
+    if "native_provenance" in raw:
+        # Lazy import keeps the generic ledger usable independently of the
+        # authenticated producer while replaying its complete source chain.
+        from neutralgrid.live.decision.authenticated_evidence import verify_native_record
+        verify_native_record(raw, fact)
     if fact.kind == "intervention":
         receipt = SourceRef.model_validate(fact.fields["receipt"])
         if file_hash(Path(receipt.path)) != receipt.sha256:

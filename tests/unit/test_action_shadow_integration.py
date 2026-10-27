@@ -6,6 +6,7 @@ import json
 from argparse import Namespace
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from typing import Any
 
 import pytest
 
@@ -26,7 +27,7 @@ def cycle(tmp_path):
                                      started_at_utc=T0, completed_at_utc=T0, bots=(bot,))
 
 
-def row(verdict="ADJUST"):
+def row(verdict="ADJUST") -> dict[str, Any]:
     return dict(symbol="BTCUSDT", strategy_id="123", ts=T0.isoformat(), verdict=verdict,
                 suggested_grid_lower=95, suggested_grid_upper=115, reasons=["incumbent"])
 
@@ -40,6 +41,15 @@ def test_unconfigured_shadow_does_not_load_or_route(tmp_path, monkeypatch):
     monkeypatch.setattr(controller, "route_or_observe_actions", fail)
     monkeypatch.setattr(adapter, "report_shadow_row", fail)
     assert controller.build_cycle_action_shadows(Namespace(), cycle(tmp_path), [row()]) == []
+
+
+def test_action_intent_states_capital_priority_without_trusting_row_claims():
+    supplied = row()
+    supplied["capital_preservation_policy"] = {"execution_authorized": True}
+    policy = controller.build_action_intents([supplied], iteration_id="fixture")[0]["capital_preservation_policy"]
+    assert policy["primary_objective"] == "preserve_invested_capital"
+    assert policy["execution_authorized"] is False
+    assert policy["minimum_liquidation_buffer_pct"] is None
 
 
 @pytest.mark.parametrize("verdict", ["CONTINUE", "ADJUST", "END"])
@@ -148,6 +158,12 @@ def test_adapter_binds_full_history_and_ignores_future_observations(tmp_path):
     future["pnl"]["total_profit_usdt"] = 1e9
     assert state == adapter.state_from_observations(history[:2] + [future], incumbent)
     assert state.equity_usdt is None and state.peak_equity_usdt is None and state.symbol_available is None
+    # A scanner row is not a source-verified exact-bot equity fact. Even finite
+    # values must not silently bypass the native adapter's accounting boundary.
+    incumbent["execution_telemetry"] = {
+        "pnl": {"equity_usdt": 9999}, "risk": {"peak_equity_usdt": 10000}}
+    unverified = adapter.state_from_observations(history, incumbent)
+    assert unverified.equity_usdt is None and unverified.peak_equity_usdt is None
     path = Path(history[0]["_source_path"])
     path.write_text("{}")
     with pytest.raises(PnlHistoryError):

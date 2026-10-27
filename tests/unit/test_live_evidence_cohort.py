@@ -10,6 +10,7 @@ import pytest
 
 from neutralgrid.live.decision.action_shadow_io import report_shadow_row
 from neutralgrid.live.decision.pnl_history import build_pnl_observation
+from neutralgrid.live.decision.recommender import Verdict
 from neutralgrid.live.decision.state_action_reward import file_hash
 
 
@@ -245,8 +246,8 @@ def test_ingestion_batch_checks_sources_before_any_publication(tmp_path):
     bot = BotIdentity(symbol="BTCUSDT", strategy_id="123", deployed_at=T0)
     state = State(bot=bot, captured_at=T0, available_at=T0, feature_window_start=T0,
                   sources=(SourceRef(path=str(raw), sha256=file_hash(raw)),))
-    decision = Decision(decided_at=T0, pre_state=state, incumbent=Action(verdict="CONTINUE"),
-                        shadow=Action(verdict="CONTINUE"), origin="live", limits=None,
+    decision = Decision(decided_at=T0, pre_state=state, incumbent=Action(verdict=Verdict.CONTINUE),
+                        shadow=Action(verdict=Verdict.CONTINUE), origin="live", limits=None,
                         config_hash=configuration_hash(None), feature_hash=feature_definition_hash())
     event = make_event(bot=bot, decision_id="fixture", kind="decision", occurred_at=T0,
                        payload=decision.model_dump(mode="json"))
@@ -271,3 +272,20 @@ def test_public_metadata_network_failure_is_contained(monkeypatch, tmp_path):
     assert report["tick_capture_failure"] == "OSError: fixture network unavailable"
     assert report["captured_packet_paths"] == []
     assert report["fitted"] is False
+
+
+def test_terminal_cohort_cannot_supply_missing_action_or_first_passage_labels(monkeypatch, tmp_path):
+    from scripts import capture_live_evidence_cohort as collector
+    monkeypatch.setattr(collector, "research_output", lambda path, live_root: path)
+    terminal = {"scores": [{"reported_total_pnl_usdt": "-56.32", "training_eligible": False}],
+                "rejected": [{"path": "fixture", "reason": "source_changed"}]}
+    monkeypatch.setattr(collector, "audit_terminal_outcomes", lambda live_root: terminal)
+    native_observation(tmp_path / "Live")
+    output = tmp_path / "report"
+    report = collector.run(live_root=tmp_path / "Live", output=output)
+    assert report["terminal_trajectory_outcomes"] == 1
+    assert report["rejected_terminal_outcomes"] == terminal["rejected"]
+    assert report["negative_target_origins"] == 0
+    assert report["verified_action_examples"] == 0
+    assert not report["fitted"] and not report["promotion_eligible"]
+    assert json.loads((output / "terminal_outcome_cohort.json").read_text()) == terminal
