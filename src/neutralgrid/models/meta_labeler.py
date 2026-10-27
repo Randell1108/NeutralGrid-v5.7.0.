@@ -32,7 +32,7 @@ import pickle
 from pathlib import Path
 import logging
 
-from neutralgrid.core.constants import BOT_HORIZON_HOURS, MIN_POSITIVE_RATE
+from neutralgrid.core.constants import BOT_HORIZON_HOURS, DEFAULT_STOP_LOSS_PCT, MIN_POSITIVE_RATE
 
 logger = logging.getLogger(__name__)
 
@@ -165,6 +165,8 @@ SNAPSHOT_META_FEATURES_V20260530_FASTWIN: tuple[str, ...] = (
 )
 
 ACTIVE_SNAPSHOT_META_FEATURES: tuple[str, ...] = SNAPSHOT_META_FEATURES_V20260530_FASTWIN
+# Historical identifier retained on operator-requested rollback; the evaluator
+# uses shuffled symbol groups and the logged unpurged fallback, not a strict purge.
 PROMOTION_EVALUATION_CONTRACT = (
     "chronological_contiguous_group_purged_weighted_kfold_v2"
 )
@@ -236,6 +238,49 @@ ACTIVE_META_TARGET_PNL_THRESHOLD_PCT = 3.0
 # `time_to_target_hours` fall back to the duration-window AND-label. Validation
 # metrics are versioned with the model and holdout audit, not this source file.
 ACTIVE_META_TARGET_CONTRACT = "fast_winner_time_to_3pct_le_7h"
+FINAL_NET_PNL_TARGET_CONTRACT = "final_net_pnl_ge_3pct_v1"
+FINAL_NET_PNL_TARGET_LABEL_COLUMN = "final_net_pnl_target"
+
+
+def meta_target_contract_metadata(contract: str) -> Dict[str, Any]:
+    """Describe the fitted target without reinterpreting a frozen artifact."""
+    if contract == FINAL_NET_PNL_TARGET_CONTRACT:
+        return {
+            "contract_name": contract,
+            "target_column": FINAL_NET_PNL_TARGET_LABEL_COLUMN,
+            "duration_column": None,
+            "duration_hours_max": None,
+            "pnl_threshold_pct": ACTIVE_META_TARGET_PNL_THRESHOLD_PCT,
+        }
+    if contract != ACTIVE_META_TARGET_CONTRACT:
+        raise ValueError(f"Unsupported meta target contract: {contract!r}")
+    return {
+        "contract_name": contract,
+        "target_column": ACTIVE_META_TARGET_LABEL_COLUMN,
+        "duration_column": ACTIVE_META_TARGET_DURATION_COLUMN,
+        "duration_hours_max": ACTIVE_META_TARGET_DURATION_MAX_HOURS,
+        "pnl_threshold_pct": ACTIVE_META_TARGET_PNL_THRESHOLD_PCT,
+    }
+
+
+def _normalize_training_event_times(
+    frame: pd.DataFrame, timestamp_col: str, t1_col: str, *, require_complete: bool,
+) -> pd.DataFrame:
+    """Parse mixed ISO representations without losing or duplicating events."""
+    out = frame.copy()
+    for column in (timestamp_col, t1_col):
+        if column not in out:
+            if require_complete:
+                raise ValueError(f"Final-net-PnL training requires recorded event column {column!r}")
+            continue
+        parsed = pd.to_datetime(out[column], utc=True, errors="coerce", format="mixed")
+        if bool(parsed.isna().any()) and (column == timestamp_col or require_complete):
+            raise ValueError(f"Training event column {column!r} contains missing or invalid timestamps")
+        out[column] = parsed
+    if timestamp_col in out and t1_col in out:
+        if bool((out[t1_col] < out[timestamp_col]).any()):
+            raise ValueError("Training event end precedes its start")
+    return out
 
 META_FEATURE_PROFILES: dict[str, tuple[str, ...]] = {
     "snapshot_v20260407": SNAPSHOT_META_FEATURES_V20260407,
@@ -369,7 +414,8 @@ _KNOWN_LABEL_COLUMNS: frozenset[str] = frozenset({
     # columns (duration_hours <= 7h AND pnl >= 3). They are labels, never
     # features — guarded here so the AND-label retrain (Phase B) and any hybrid
     # live-outcome pool (Phase C) cannot leak the target into the feature matrix.
-    "duration_hours", "fast_winner_target",
+    "duration_hours", "reported_duration_hours", "fast_winner_target",
+    "final_net_pnl_target",
     # PIPELINE_FIX v2: endogenous time-to-target + reached flag are outcome/label
     # quantities (post-hoc, from the realized PnL curve) — NEVER ex-ante features.
     "time_to_target_hours", "target_reached",
@@ -509,7 +555,7 @@ class MetaLabelerConfig:
 
     # Label definition
     hurdle_pct: float = 3.0       # 3% PnL hurdle for "success" (percentage units)
-    sl_pct: float = -12.0         # -12% stop loss threshold (percentage units)
+    sl_pct: float = DEFAULT_STOP_LOSS_PCT  # -10% stop loss threshold (percentage units)
     horizon_hours: float = BOT_HORIZON_HOURS   # Prediction horizon (canonical H*)
 
     # Model hyperparameters
@@ -626,6 +672,7 @@ class MetaLabelerMetrics:
     n_pos: Optional[int] = None          # positive training events (gate input b)
     promotion_status: Optional[str] = None      # "pass" | "fail" | None (untrained)
     promotion_reasons: Optional[List[str]] = None
+    target_contract: str = ACTIVE_META_TARGET_CONTRACT
 
 
 class MetaLabeler:
@@ -668,6 +715,8 @@ class MetaLabeler:
         self._oos_calibration_method: str | None = None
         self._oos_calibration_report: Dict[str, Any] = {}
         self._label_pnl_col_used: str = "pnl_pct"
+        self._target_contract: str = ACTIVE_META_TARGET_CONTRACT
+        self._promotion_evaluation_contract: Optional[str] = PROMOTION_EVALUATION_CONTRACT
         # FASTWIN-01 promotion authority. None until trained/loaded; set to
         # "pass"/"fail" by the promotion gate. Decision-time consumers must treat
         # anything other than "pass" (incl. None) as NOT authoritative.
@@ -954,8 +1003,8 @@ class MetaLabeler:
         """Study-faithful promotion-gate OOF evaluation (FASTWIN-01).
 
         The promotion gate is judged with the SAME methodology that validated its
-        thresholds (``scripts/meta_labeler_feature_study.py``): a symbol-grouped,
-        time-purged K-fold that scores EVERY row, with per-fold CALIBRATED
+        thresholds (``scripts/meta_labeler_feature_study.py``): a symbol-grouped
+        K-fold that attempts to score every row, with per-fold CALIBRATED
         predictions (``CalibratedClassifierCV``, sigmoid). It therefore measures
         discrimination (AUC + bootstrap CI) and calibration (ECE) on the same
         footing the 0.50/0.10 cut-offs were derived on.
@@ -964,17 +1013,17 @@ class MetaLabeler:
         conservative scheme the deployed model + OOS calibrator are built on, but
         on small symbol-diverse pools its symbol grouping degenerates (verified:
         256 rows / 100 symbols -> 3 splits, only 135 rows scored), which is a
-        property of the CV, not the signal. This gate evaluation scores all rows
-        so promotion reflects the model's true out-of-sample quality.
+        property of the CV, not necessarily the signal. This separate gate
+        retains the historical evaluation recipe and its stated limitations.
 
-        Leakage safety is preserved: imputer / scaler / estimator are fit on the
-        train fold only. Train rows whose event window ``[start, t1]`` overlaps
-        the test window are purged before fitting WHEN the purge leaves > 15
-        train rows; with shuffled stratified folds each test fold typically
-        spans the full data time range, so the purge usually collapses and the
-        fold trains unpurged (logged at WARNING with the affected fraction —
-        symbol grouping remains the operative leakage guard; oof_auc may be
-        modestly optimistic from cross-symbol temporal concurrency). Returns
+        Imputer / scaler / estimator are fit on the train fold only. Train rows
+        whose event window ``[start, t1]`` overlaps the test window are purged
+        when more than 15 training rows survive. Otherwise the historical
+        unpurged fallback is used and logged (ERR-066). Evaluation requires
+        at least 30 scored rows and both classes; full coverage is not required.
+        Symbol grouping remains enforced, but the fallback does not establish
+        temporal independence. Invalid event intervals still fail closed.
+        Returns
         ``(oof_auc, ci_low, ci_high, oof_ece)``; all ``None`` (fail-closed) when
         the pool is too small / single-class to evaluate.  When
         ``deployable_mask`` is supplied, a decision-population AUC/ECE summary
@@ -1000,6 +1049,22 @@ class MetaLabeler:
         n = len(yv)
         if n < 30 or len(np.unique(yv)) < 2:
             return None, None, None, None
+
+        if start is None and t1 is None:
+            logger.warning("Promotion evaluation unavailable: event intervals absent")
+            return None, None, None, None
+        if start is not None or t1 is not None:
+            if start is None or t1 is None:
+                return None, None, None, None
+            parsed_start = pd.to_datetime(start, utc=True, errors="coerce", format="mixed")
+            parsed_end = pd.to_datetime(t1, utc=True, errors="coerce", format="mixed")
+            if (len(parsed_start) != n or len(parsed_end) != n
+                    or bool(pd.isna(parsed_start).any()) or bool(pd.isna(parsed_end).any())
+                    or bool((parsed_end < parsed_start).any())):
+                logger.warning("Promotion evaluation unavailable: invalid event intervals")
+                return None, None, None, None
+            start = parsed_start.to_numpy(dtype="datetime64[ns]")
+            t1 = parsed_end.to_numpy(dtype="datetime64[ns]")
 
         rs = int(self.config.random_state)
         n_splits = int(max(2, min(n_splits, int(np.bincount(yv).min()))))
@@ -1215,6 +1280,7 @@ class MetaLabeler:
         pnl_col: str = "pnl_pct",
         t1_col: str = "t1",
         y_col: Optional[str] = None,
+        target_contract: str = ACTIVE_META_TARGET_CONTRACT,
     ) -> MetaLabelerMetrics:
         """
         Train meta-labeler with purged cross-validation.
@@ -1238,6 +1304,22 @@ class MetaLabeler:
         Returns:
             Training metrics
         """
+        meta_target_contract_metadata(target_contract)
+        if target_contract == FINAL_NET_PNL_TARGET_CONTRACT:
+            if y_col != FINAL_NET_PNL_TARGET_LABEL_COLUMN or y_col not in df or pnl_col not in df:
+                raise ValueError("Final-net-PnL training requires its explicit label and PnL columns")
+            final_pnl = cast(pd.Series, pd.to_numeric(df[pnl_col], errors="coerce"))
+            supplied = cast(pd.Series, pd.to_numeric(df[y_col], errors="coerce"))
+            if not bool(np.isfinite(np.asarray(final_pnl, dtype=float)).all()) or not bool(
+                supplied.eq(final_pnl.ge(ACTIVE_META_TARGET_PNL_THRESHOLD_PCT).astype(int)).all()
+            ):
+                raise ValueError("Final-net-PnL labels must exactly match finite final net PnL >=3%")
+        self._target_contract = target_contract
+        self._promotion_evaluation_contract = PROMOTION_EVALUATION_CONTRACT
+        df = _normalize_training_event_times(
+            df, timestamp_col, t1_col,
+            require_complete=target_contract == FINAL_NET_PNL_TARGET_CONTRACT,
+        )
         # Create labels — prefer pre-computed column when available.
         if (
             y_col is not None
@@ -1553,7 +1635,9 @@ class MetaLabeler:
         # that index-based mask operations (df.index.isin) map correctly and
         # calibration holdout splits take the chronologically latest data.
         _ts_parsed = pd.to_datetime(df[timestamp_col], utc=True, errors="coerce")
-        _sort_order = _ts_parsed.argsort()
+        # Series.argsort represents NaT positions as -1 in some pandas versions.
+        # Validate timestamps above and use a stable positional permutation.
+        _sort_order = np.argsort(pd.DatetimeIndex(_ts_parsed).asi8, kind="stable")
         df = df.iloc[_sort_order].reset_index(drop=True)
         X_raw = cast(pd.DataFrame, X_raw.iloc[_sort_order].reset_index(drop=True))
         y = y.iloc[_sort_order].reset_index(drop=True)
@@ -2149,10 +2233,12 @@ class MetaLabeler:
 
         # ── FASTWIN-01 promotion gate metrics (study-faithful OOF) ───────────
         # Judged with the methodology that VALIDATED the thresholds: a
-        # symbol-grouped, time-purged K-fold scoring ALL rows with calibrated
+        # symbol-grouped K-fold attempting all rows with calibrated
         # per-fold predictions (_evaluate_promotion_oof). This is independent of
         # the model's training CPCV, which on small symbol-diverse pools
-        # degenerates and scores too few rows to judge promotion. n_pos is the
+        # degenerates and scores too few rows to judge promotion. The historical
+        # purge fallback and minimum scored-row rule are documented in the
+        # evaluator; this is not strict temporal independence. n_pos is the
         # training-frame positive count (data-sufficiency criterion). All
         # fail-closed to None when the pool is too small / single-class.
         _gate_groups = (
@@ -2236,6 +2322,7 @@ class MetaLabeler:
             calibration_oos_accepted=oos_accepted,
             calibration_oos_reject_reason=oos_reject_reason,
             label_pnl_column=self._label_pnl_col_used,
+            target_contract=self._target_contract,
             oof_auc=oof_auc,
             oof_auc_ci_low=oof_auc_ci_low,
             oof_auc_ci_high=oof_auc_ci_high,
@@ -2415,10 +2502,11 @@ class MetaLabeler:
                     "auc_cv": self._metrics.auc_cv if self._metrics else None,
                     "precision_at_5": self._metrics.precision_at_5 if self._metrics else None,
                     "positive_rate": self._metrics.positive_rate if self._metrics else None,
-                    "target_contract": ACTIVE_META_TARGET_CONTRACT,
-                    "target_label_column": ACTIVE_META_TARGET_LABEL_COLUMN,
-                    "target_duration_column": ACTIVE_META_TARGET_DURATION_COLUMN,
-                    "target_duration_hours_max": ACTIVE_META_TARGET_DURATION_MAX_HOURS,
+                    "target_contract": self._target_contract,
+                    "promotion_evaluation_contract": self._promotion_evaluation_contract,
+                    "target_label_column": meta_target_contract_metadata(self._target_contract)["target_column"],
+                    "target_duration_column": meta_target_contract_metadata(self._target_contract)["duration_column"],
+                    "target_duration_hours_max": meta_target_contract_metadata(self._target_contract)["duration_hours_max"],
                     "target_positive_pnl_threshold_pct": ACTIVE_META_TARGET_PNL_THRESHOLD_PCT,
                     "is_calibrated": self._is_calibrated,
                     "calibration_method": (
@@ -2506,6 +2594,8 @@ class MetaLabeler:
                 "oos_calibration_method": self._oos_calibration_method,
                 "oos_calibration_report": self._oos_calibration_report,
                 "label_pnl_col_used": self._label_pnl_col_used,
+                "target_contract": self._target_contract,
+                "promotion_evaluation_contract": self._promotion_evaluation_contract,
                 "config": self.config,
                 "metrics": self._metrics,
             }
@@ -2577,6 +2667,12 @@ class MetaLabeler:
                     if artifact["metadata"].eval_metrics else False
                 )
                 if artifact["metadata"].eval_metrics:
+                    labeler._target_contract = artifact["metadata"].eval_metrics.get(
+                        "target_contract", ACTIVE_META_TARGET_CONTRACT
+                    )
+                    labeler._promotion_evaluation_contract = artifact["metadata"].eval_metrics.get(
+                        "promotion_evaluation_contract"
+                    )
                     labeler._oos_calibration_method = artifact["metadata"].eval_metrics.get(
                         "calibration_method"
                     )
@@ -2619,6 +2715,8 @@ class MetaLabeler:
             "label_pnl_col_used", labeler._label_pnl_col_used
         )
         labeler._metrics = state.get("metrics")
+        labeler._target_contract = state.get("target_contract", ACTIVE_META_TARGET_CONTRACT)
+        labeler._promotion_evaluation_contract = state.get("promotion_evaluation_contract")
         # FASTWIN-01: restore promotion authority from the pickled metrics if
         # present; legacy artifacts predating the gate => None => not promoted.
         labeler.promotion_status = getattr(labeler._metrics, "promotion_status", None)
@@ -2656,7 +2754,7 @@ class MetaLabeler:
 
 def create_meta_labeler(
     hurdle_pct: float = 3.0,
-    sl_pct: float = -12.0,
+    sl_pct: float = DEFAULT_STOP_LOSS_PCT,
     horizon_hours: float = BOT_HORIZON_HOURS,
     random_state: int = 42,
 ) -> MetaLabeler:

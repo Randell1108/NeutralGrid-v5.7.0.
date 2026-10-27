@@ -19,7 +19,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional, Dict, Any
 
-from neutralgrid.core.constants import BOT_HORIZON_HOURS
+from neutralgrid.core.constants import BOT_HORIZON_HOURS, DEFAULT_STOP_LOSS_PCT
 from neutralgrid.core.exceptions import NeutralGridError
 
 logger = logging.getLogger(__name__)
@@ -41,7 +41,7 @@ FALLBACK_KAPPA_TREND = 1.5
 FALLBACK_MIN_UTILITY = 0.0
 FALLBACK_BASELINE_FILLS_PER_HOUR = 2.0
 FALLBACK_HORIZON_HOURS = BOT_HORIZON_HOURS
-FALLBACK_STOP_LOSS_PCT = -12.0
+FALLBACK_STOP_LOSS_PCT = DEFAULT_STOP_LOSS_PCT
 FALLBACK_TAKE_PROFIT_PCT = 15.0
 
 
@@ -92,7 +92,7 @@ class UtilityConfig:
     horizon_hours: float = FALLBACK_HORIZON_HOURS
 
     # Stop loss and take profit for breakout loss estimation
-    stop_loss_pct: float = FALLBACK_STOP_LOSS_PCT  # -12%
+    stop_loss_pct: float = FALLBACK_STOP_LOSS_PCT  # -10%
     take_profit_pct: float = FALLBACK_TAKE_PROFIT_PCT  # +15%
 
     @classmethod
@@ -312,7 +312,7 @@ class UtilityScorer:
         self,
         trend_prob: float,
         range_size_pct: float,
-        stop_loss_pct: float = -12.0,
+        stop_loss_pct: float = DEFAULT_STOP_LOSS_PCT,
     ) -> float:
         """
         Compute expected drawdown scaled by trend probability.
@@ -409,7 +409,7 @@ class UtilityScorer:
         profit_per_grid_pct: float,
         num_grids: int,
         range_size_pct: float,
-        stop_loss_pct: float = -12.0,
+        stop_loss_pct: float = DEFAULT_STOP_LOSS_PCT,
         fills_per_hour: Optional[float] = None,
         survival_prob: Optional[float] = None,
         hurst_exponent: Optional[float] = None,

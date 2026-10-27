@@ -12,7 +12,7 @@ import hashlib
 import json
 from typing import Optional, Dict, Any
 
-from neutralgrid.core.constants import BOT_HORIZON_HOURS
+from neutralgrid.core.constants import BOT_HORIZON_HOURS, DEFAULT_STOP_LOSS_FRACTION
 from neutralgrid.scanner.empirical_profile_v20260302 import (
     EmpiricalProfile,
     align_ev_with_profile_context,
@@ -33,7 +33,7 @@ class RankingConfig:
     horizon_hours: float = BOT_HORIZON_HOURS
 
     # Stop loss threshold (decimal)
-    sl_pct: float = -0.12
+    sl_pct: float = DEFAULT_STOP_LOSS_FRACTION
 
     # PnL hurdle for "success" definition (decimal)
     pnl_hurdle_pct: float = 0.03
@@ -358,7 +358,7 @@ class PnLRanker:
 
 def create_pnl_ranker(
     horizon_hours: float = BOT_HORIZON_HOURS,
-    sl_pct: float = -0.12,
+    sl_pct: float = DEFAULT_STOP_LOSS_FRACTION,
     pnl_hurdle_pct: float = 0.03,
     funding_extreme_threshold: float = 0.003,
 ) -> PnLRanker:

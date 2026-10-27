@@ -21,7 +21,7 @@ from dataclasses import dataclass
 from typing import Tuple, Optional
 import logging
 
-from neutralgrid.core.constants import BOT_HORIZON_HOURS
+from neutralgrid.core.constants import BOT_HORIZON_HOURS, DEFAULT_STOP_LOSS_PCT
 
 logger = logging.getLogger(__name__)
 
@@ -53,7 +53,7 @@ class UnifiedBarrierConfig:
 
     # Horizontal barriers (percentages)
     pt_pct: float = 15.0           # Profit-taking: +15%
-    sl_pct: float = -12.0          # Stop-loss: -12%
+    sl_pct: float = DEFAULT_STOP_LOSS_PCT  # Stop-loss: -10%
 
     # Vertical barrier (time)
     time_barrier_hours: float = BOT_HORIZON_HOURS
@@ -79,7 +79,7 @@ class UnifiedBarrierConfig:
 
     @property
     def sl_decimal(self) -> float:
-        """SL barrier as decimal (e.g., -0.12 for -12%)."""
+        """SL barrier as decimal (e.g., -0.10 for -10%)."""
         return self.sl_pct / 100.0
 
     @property

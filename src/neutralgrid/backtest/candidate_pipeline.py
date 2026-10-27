@@ -25,7 +25,7 @@ import numpy as np
 import pandas as pd
 
 from neutralgrid.core.config import get_config
-from neutralgrid.core.constants import BOT_HORIZON_HOURS
+from neutralgrid.core.constants import BOT_HORIZON_HOURS, DEFAULT_STOP_LOSS_PCT
 
 logger = logging.getLogger(__name__)
 
@@ -1196,7 +1196,7 @@ def convert_to_training_row(
     candidate_row: Dict[str, Any],
     hurdle_pct: Optional[float] = None,
     pt_pct: float = 15.0,
-    sl_pct: float = -12.0,
+    sl_pct: float = DEFAULT_STOP_LOSS_PCT,
     horizon_hours: float = BOT_HORIZON_HOURS,
 ) -> Dict[str, Any]:
     """Convert a backtest result + scanner row into a meta-labeler training row.

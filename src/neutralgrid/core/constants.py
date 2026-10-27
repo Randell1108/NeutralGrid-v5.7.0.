@@ -35,6 +35,11 @@ BOT_HORIZON_HOURS: float = 6.0
 BOT_HORIZON_BARS_15M: int = 24       # = int(BOT_HORIZON_HOURS * 60 / 15)
 BOT_HORIZON_SECONDS: int = 21_600    # = int(BOT_HORIZON_HOURS * 3600)
 
+# Default stop threshold shared by labeling, configuration, and EV estimates.
+# These defaults do not enable an execution stop in the canonical backtester.
+DEFAULT_STOP_LOSS_PCT: float = -10.0
+DEFAULT_STOP_LOSS_FRACTION: float = DEFAULT_STOP_LOSS_PCT / 100.0
+
 # ── Inclusion tolerance band (PROVISIONAL) ───────────────────────────────────
 # Absorbs fill/cancel/metric-flush latency so live bots closing at H*+ε are not
 # excluded from training.  PROVISIONAL: no latency distribution has been

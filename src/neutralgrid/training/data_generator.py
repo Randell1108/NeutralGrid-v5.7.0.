@@ -27,7 +27,7 @@ import logging
 from pathlib import Path
 
 from neutralgrid.core.config import get_config
-from neutralgrid.core.constants import BOT_HORIZON_HOURS
+from neutralgrid.core.constants import BOT_HORIZON_HOURS, DEFAULT_STOP_LOSS_PCT
 from neutralgrid.grid.formulas import (
     profit_per_grid_pct as _ppg_pct,
 )
@@ -368,7 +368,7 @@ class LabelConfig:
 
     # Horizontal barriers
     pt_pct: float = 15.0            # Take-profit barrier: +15% (AFML triple-barrier PT)
-    sl_pct: float = -12.0           # Stop-loss barrier: -12%
+    sl_pct: float = DEFAULT_STOP_LOSS_PCT  # Stop-loss barrier: -10%
     meta_hurdle_pct: float = 3.0    # Meta-labeling success threshold (binary y=1 if PnL >= this)
 
     # Vertical barrier
@@ -922,13 +922,14 @@ class ExistingDataMapper:
         result["net_pnl_pct"] = result["pnl_pct"]
         if "net_pnl_pct" in df.columns:
             result["net_pnl_pct"] = pd.to_numeric(df["net_pnl_pct"], errors="coerce")
-        elif all(c in df.columns for c in ["total_profit_usdt", "commission_usdt", "invested_margin_usdt"]):
-            tp = cast(pd.Series, pd.to_numeric(df["total_profit_usdt"], errors="coerce"))
-            cm = cast(pd.Series, pd.to_numeric(df["commission_usdt"], errors="coerce")).fillna(0.0)
-            mg = cast(pd.Series, pd.to_numeric(df["invested_margin_usdt"], errors="coerce"))
-            with np.errstate(divide="ignore", invalid="ignore"):
-                net_pct = ((tp - cm) / mg) * 100.0
-            result["net_pnl_pct"] = cast(pd.Series, net_pct).replace([np.inf, -np.inf], np.nan).fillna(result["pnl_pct"])
+        # Canonical pnl_pct is the reported final net ROI, also used by the live
+        # adapter. Commission has mixed signed-cashflow/positive-cost conventions
+        # in historical sources; rounded total-profit fields do not establish a
+        # different net ROI. Preserve the declared outcome rather than applying
+        # another fee or inventing an outcome when reported PnL is missing.
+        result["net_pnl_pct"] = cast(pd.Series, result["net_pnl_pct"]).replace(
+            [np.inf, -np.inf], np.nan
+        )
 
         if "duration_hours" in df.columns:
             result["duration_hours"] = pd.to_numeric(df["duration_hours"], errors="coerce")
@@ -1024,7 +1025,14 @@ class ExistingDataMapper:
 
             # Fallback: final-PnL inference
             if label is None:
-                pnl_pct = self._as_float(row.get("pnl_pct"), 0.0)
+                pnl_pct = self._as_float(row.get("net_pnl_pct"), float("nan"))
+                if not np.isfinite(pnl_pct):
+                    labels.append({
+                        "sl_hit": np.nan, "tp_hit": np.nan, "y": np.nan,
+                        "exit_reason": "missing_final_net_pnl", "t1": t_end_dt,
+                        "barrier_touched": None, "barrier_price": None,
+                    })
+                    continue
                 duration_raw = row.get("duration_hours", self.label_config.horizon_hours)
                 duration_hours: Optional[float] = None
                 if not self._is_missing_scalar(duration_raw):
@@ -1664,7 +1672,7 @@ class TrainingDataBuilder:
 def load_and_prepare_training_data(
     data_path: Path,
     hurdle_pct: float = 3.0,
-    sl_pct: float = -12.0,
+    sl_pct: float = DEFAULT_STOP_LOSS_PCT,
     horizon_hours: float = BOT_HORIZON_HOURS,
 ) -> Tuple[pd.DataFrame, Dict[str, Any]]:
     """

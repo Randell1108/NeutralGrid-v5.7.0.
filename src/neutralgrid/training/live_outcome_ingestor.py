@@ -2,9 +2,11 @@
 Live outcome ingestor — joins expired bot data with deploy linkage.
 
 Reads ``new_expired_bots.xlsx`` (or CSV) and the deploy linkage log to
-produce outcome records keyed by ``candidate_id``.  When linkage is
-unavailable, falls back to forensic timestamp matching (same logic as
-``scripts/match_candidates_to_bots.py``).
+produce outcome records keyed by execution (``strategy_id``), with a
+``candidate_id`` reference. Canonical General/Meta identities transport the
+canonical feature vector and its HMM provenance. Legacy inputs without a
+Meta Features sheet retain linkage and forensic matching; forensic matches
+remain ineligible for the governed training pool.
 
 The output is a DataFrame with:
 - candidate_id (from linkage or forensic match)
@@ -26,6 +28,7 @@ Usage::
 
 from __future__ import annotations
 
+import hashlib
 import logging
 import re
 from datetime import datetime, timezone
@@ -35,11 +38,23 @@ from typing import Any, Dict, List, Optional, Tuple, cast
 import numpy as np
 import pandas as pd
 
-from neutralgrid.models.meta_labeler import normalize_inference_feature_dict
+from neutralgrid.models.meta_labeler import (
+    ACTIVE_SNAPSHOT_META_FEATURES,
+    normalize_inference_feature_dict,
+)
 
 logger = logging.getLogger(__name__)
 
 _FILENAME_TS_RE = re.compile(r"(\d{8}_\d{6})")
+_CANONICAL_CANDIDATE_RE = re.compile(r"([^_]+)_(\d{8}_\d{6})(?:_[0-9a-fA-F]{8})?")
+_CANONICAL_TRANSPORT_FIELDS = tuple(dict.fromkeys([
+    *ACTIVE_SNAPSHOT_META_FEATURES,
+    "range_prob", "trend_prob", "persistence_prob", "survival_prob",
+    "hmm_artifact_version", "hmm_trained_at_utc", "hmm_pipeline_version",
+    "hmm_feature_semantics_version", "hmm_feature_source", "hmm_replay_scope",
+    "hmm_feature_cutoff_utc", "feature_cutoff_utc", "hmm_calibration_status",
+    "ev_contract_fingerprint",
+]))
 
 # Fields to extract from scanner CSVs as scan-time features
 _SCAN_FEATURE_FIELDS = [
@@ -169,6 +184,11 @@ class LiveOutcomeIngestor:
         pd.DataFrame
             Outcome records with candidate_id, scan features, and live results.
         """
+        workbook_sha_before = (
+            hashlib.sha256(self._bots_path.read_bytes()).hexdigest()
+            if self._bots_path.is_file() and self._bots_path.suffix.lower() in {".xlsx", ".xls"}
+            else None
+        )
         bots_df = self._load_bots()
         if bots_df.empty:
             logger.warning("No bots loaded — returning empty DataFrame")
@@ -176,10 +196,18 @@ class LiveOutcomeIngestor:
 
         # Try linkage-based join first
         linkage_df = self._load_linkage()
+        canonical, canonical_errors, canonical_sha = self._load_canonical_features(bots_df)
+        if workbook_sha_before is not None:
+            workbook_sha_after = hashlib.sha256(self._bots_path.read_bytes()).hexdigest()
+            if workbook_sha_before != workbook_sha_after or (
+                canonical_sha and canonical_sha != workbook_sha_before
+            ):
+                raise ValueError("Canonical workbook changed during identity/feature read")
         scanner_csvs = self._parse_scanner_csvs()
 
         rows: List[Dict[str, Any]] = []
         linked_count = 0
+        canonical_count = 0
         forensic_count = 0
         unmatched_count = 0
         conflict_count = 0
@@ -188,11 +216,30 @@ class LiveOutcomeIngestor:
             strategy_id = str(bot.get("strategy_id", ""))
             _symbol = str(bot["symbol"])
 
-            if strategy_id in self._linkage_conflict_strategy_ids:
+            canonical_row = canonical.get(strategy_id)
+            if strategy_id in canonical_errors:
+                candidate_id, scan_features = "", {}
+                match_method = "canonical_conflict"
+                conflict_count += 1
+            elif strategy_id in self._linkage_conflict_strategy_ids:
                 candidate_id = ""
                 scan_features = {}
                 match_method = "linkage_conflict"
                 conflict_count += 1
+            elif canonical_row is not None:
+                candidate_id = str(canonical_row["candidate_id"])
+                linked = linkage_df.loc[linkage_df["strategy_id"].astype(str).eq(strategy_id)] if not linkage_df.empty else pd.DataFrame()
+                if not linked.empty and not bool(linked["candidate_id"].astype(str).eq(candidate_id).all()):
+                    canonical_errors[strategy_id] = "canonical_ledger_candidate_disagreement"
+                    candidate_id, scan_features = "", {}
+                    match_method = "canonical_conflict"
+                    conflict_count += 1
+                    canonical_row = None
+                else:
+                    scan_features = {}
+                    match_method = "linkage" if not linked.empty else "canonical_workbook"
+                    linked_count += int(match_method == "linkage")
+                    canonical_count += int(match_method == "canonical_workbook")
             else:
                 # Method 1: Direct linkage (deploy_linkage_log.csv)
                 candidate_id, scan_features = self._match_via_linkage(
@@ -218,11 +265,18 @@ class LiveOutcomeIngestor:
             row = self._build_outcome_row(
                 bot, candidate_id, scan_features, match_method
             )
+            if canonical_row is not None and match_method in {"linkage", "canonical_workbook"}:
+                # Carry values and lineage together, with no stale scanner fallback.
+                row.update({field: canonical_row.get(field, np.nan) for field in _CANONICAL_TRANSPORT_FIELDS})
+                row["feature_binding_source"] = "canonical_meta_features"
+                row["feature_binding_sha256"] = canonical_sha
+            if strategy_id in canonical_errors:
+                row["canonical_rejection_reason"] = canonical_errors[strategy_id]
             rows.append(row)
 
         logger.info(
-            "Ingested %d bots: %d linkage, %d forensic, %d unmatched, %d linkage conflicts",
-            len(rows), linked_count, forensic_count, unmatched_count, conflict_count,
+            "Ingested %d bots: %d linkage, %d canonical, %d forensic, %d unmatched, %d identity conflicts",
+            len(rows), linked_count, canonical_count, forensic_count, unmatched_count, conflict_count,
         )
 
         out = pd.DataFrame(rows)
@@ -233,6 +287,77 @@ class LiveOutcomeIngestor:
         return out
 
     # ── Internal methods ─────────────────────────────────────────────────
+
+    def _load_canonical_features(
+        self, bots: pd.DataFrame,
+    ) -> tuple[Dict[str, Dict[str, Any]], Dict[str, str], str]:
+        """Bind the canonical General identity to Meta Features by strategy ID.
+
+        Canonical workbook provenance is distinct from authenticated receipts.
+        Conflicts cannot fall back to an older scanner vector. Legacy inputs
+        without Meta Features keep their existing linkage behavior.
+        """
+        if self._bots_path.suffix.lower() not in {".xlsx", ".xls"}:
+            return {}, {}, ""
+        before = hashlib.sha256(self._bots_path.read_bytes()).hexdigest()
+        with pd.ExcelFile(self._bots_path) as workbook:
+            if "Meta Features" not in workbook.sheet_names:
+                return {}, {}, ""
+            meta = pd.read_excel(workbook, sheet_name="Meta Features")
+        checksum = hashlib.sha256(self._bots_path.read_bytes()).hexdigest()
+        if before != checksum:
+            raise ValueError("Canonical workbook changed during feature read")
+        required = {"strategy_id", "candidate_id", "symbol"}
+        if not required.issubset(meta.columns) or not required.issubset(bots.columns):
+            ids = cast(pd.Series, bots["strategy_id"]) if "strategy_id" in bots else pd.Series(dtype=str)
+            return {}, {str(sid): "canonical_identity_schema_missing" for sid in ids}, checksum
+        meta_ids = cast(pd.Series, meta["strategy_id"]).astype(str)
+        bot_ids = cast(pd.Series, bots["strategy_id"]).astype(str)
+        duplicates = set(meta_ids[meta_ids.duplicated(keep=False)]) | set(bot_ids[bot_ids.duplicated(keep=False)])
+        meta = meta.assign(_strategy_key=meta_ids).set_index("_strategy_key")
+        rows: Dict[str, Dict[str, Any]] = {}
+        errors: Dict[str, str] = {}
+        for _, bot in bots.iterrows():
+            sid = str(bot["strategy_id"])
+            value = bot["candidate_id"]
+            cid = str(value).strip() if isinstance(value, str) else ""
+            if sid in duplicates:
+                errors[sid] = "duplicate_canonical_strategy_id"
+                continue
+            if not cid:
+                continue
+            if sid not in meta.index:
+                errors[sid] = "canonical_meta_strategy_missing"
+                continue
+            feature_row = cast(pd.Series, meta.loc[sid])
+            if str(feature_row.get("candidate_id", "")).strip() != cid or str(feature_row.get("symbol", "")) != str(bot["symbol"]):
+                errors[sid] = "canonical_candidate_or_symbol_disagreement"
+                continue
+            match = _CANONICAL_CANDIDATE_RE.fullmatch(cid)
+            if match is None or match[1] != str(bot["symbol"]):
+                errors[sid] = "invalid_canonical_candidate_id"
+                continue
+            scan = pd.to_datetime(match[2], format="%Y%m%d_%H%M%S", utc=True, errors="coerce")
+            start = pd.to_datetime(cast(Any, bot.get("start_time_utc")), utc=True, errors="coerce")
+            if pd.isna(scan) or pd.isna(start) or scan > start:
+                errors[sid] = "canonical_candidate_after_bot_start"
+                continue
+            invalid_cutoff = False
+            for field in ("feature_cutoff_utc", "hmm_feature_cutoff_utc"):
+                value = feature_row.get(field)
+                if value is None or pd.isna(value):
+                    continue
+                if not isinstance(value, (str, datetime, pd.Timestamp)):
+                    invalid_cutoff = True
+                    continue
+                cutoff = pd.to_datetime(value, utc=True, errors="coerce")
+                if pd.isna(cutoff) or cutoff > start:
+                    invalid_cutoff = True
+            if invalid_cutoff:
+                errors[sid] = "canonical_feature_cutoff_invalid_or_future"
+                continue
+            rows[sid] = cast(Dict[str, Any], feature_row.to_dict())
+        return rows, errors, checksum
 
     def _load_bots(self) -> pd.DataFrame:
         """Load expired bots from Excel or CSV."""
@@ -636,6 +761,7 @@ class LiveOutcomeIngestor:
             "match_method": match_method,
             "source": "live",
             "sample_weight_override": 1.0,
+            "training_event_id": f"live:{bot.get('strategy_id')}",
         }
 
         # Copy outcome fields from bot
@@ -651,5 +777,14 @@ class LiveOutcomeIngestor:
         # Copy scan-time features (prefixed with scan_ for clarity)
         for field, val in scan_features.items():
             row[f"scan_{field}"] = val
+
+        start = pd.to_datetime(bot.get("start_time_utc"), utc=True, errors="coerce")
+        end = pd.to_datetime(bot.get("end_time_utc"), utc=True, errors="coerce")
+        if pd.notna(start) and pd.notna(end) and end >= start:
+            row["t1"] = end.isoformat()
+            row["t1_source"] = "recorded_bot_end"
+            row["t1_is_synthetic"] = False
+            row["reported_duration_hours"] = bot.get("duration_hours", np.nan)
+            row["duration_hours"] = float((end - start).total_seconds() / 3600.0)
 
         return row

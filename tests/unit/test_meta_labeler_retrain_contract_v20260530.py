@@ -966,7 +966,9 @@ def test_promotion_oof_scores_all_rows_and_discriminates() -> None:
     z = rng.normal(size=n)
     y = (z > 0.1).astype(int)
     X = np.column_stack([z * (0.9 + 0.05 * i) + rng.normal(0, 0.9, n) for i in range(d)])
-    syms = np.array([f"S{i%40}" for i in range(n)])  # 40 symbols
+    # Five contiguous, disjoint symbol cohorts leave valid training events after
+    # time purging. Interleaving every symbol over the full time span does not.
+    syms = np.array([f"S{i//48}" for i in range(n)])
     start = np.arange(n).astype("datetime64[h]")
     t1 = start + np.timedelta64(6, "h")
 
@@ -994,7 +996,7 @@ def test_promotion_oof_reports_deployable_population_without_changing_headline()
     X = np.column_stack(
         [z * (0.8 + 0.04 * i) + rng.normal(0, 0.8, n) for i in range(d)]
     )
-    syms = np.array([f"S{i % 40}" for i in range(n)])
+    syms = np.array([f"S{i // 48}" for i in range(n)])
     start = np.arange(n).astype("datetime64[h]")
     t1 = start + np.timedelta64(6, "h")
     deployable = np.ones(n, dtype=bool)

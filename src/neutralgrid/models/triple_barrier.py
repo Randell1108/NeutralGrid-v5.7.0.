@@ -3,7 +3,7 @@ Triple Barrier Method for AFML-Compliant Labeling.
 
 Implements the triple barrier labeling from AFML Chapter 3:
 - Profit-taking barrier: +15% (PT)
-- Stop-loss barrier: -12% (SL)
+- Stop-loss barrier: -10% (SL)
 - Time barrier: 6h
 
 Labels:
@@ -24,7 +24,7 @@ AFML Compliance Updates:
 - Handles same-bar double-touch with conservative tie-break
 
 Design principles:
-- Aligned with grid bot constraints (PT=+15%, SL=-12%, Time=6h)
+- Aligned with grid bot constraints (PT=+15%, SL=-10%, Time=6h)
 - No look-ahead bias (uses future prices for labeling only during training)
 - Deterministic labeling for reproducibility
 """
@@ -38,7 +38,7 @@ import numpy as np
 import pandas as pd
 import logging
 
-from neutralgrid.core.constants import BOT_HORIZON_HOURS
+from neutralgrid.core.constants import BOT_HORIZON_HOURS, DEFAULT_STOP_LOSS_PCT
 from .barrier_config import UnifiedBarrierConfig, get_barrier_config
 
 logger = logging.getLogger(__name__)
@@ -61,7 +61,7 @@ class TripleBarrierConfig:
     pt_pct: float = 15.0  # +15%
 
     # Stop-loss barrier (negative return threshold)
-    sl_pct: float = -12.0  # -12%
+    sl_pct: float = DEFAULT_STOP_LOSS_PCT  # -10%
 
     # Time barrier (maximum holding period in hours)
     time_barrier_hours: float = BOT_HORIZON_HOURS
@@ -731,7 +731,7 @@ class TripleBarrierLabeler:
 
 def create_triple_barrier_labeler(
     pt_pct: float = 15.0,
-    sl_pct: float = -12.0,
+    sl_pct: float = DEFAULT_STOP_LOSS_PCT,
     time_barrier_hours: float = BOT_HORIZON_HOURS,
     timeframe_minutes: int = 15,
     double_touch_policy: DoubleTouchPolicy = "sl_first",

@@ -23,7 +23,13 @@ from pathlib import Path
 from typing import Optional, Dict, Any, Tuple
 import warnings
 
-from neutralgrid.core.constants import BOT_HORIZON_BARS_15M, BOT_HORIZON_HOURS, BOT_HORIZON_SECONDS
+from neutralgrid.core.constants import (
+    BOT_HORIZON_BARS_15M,
+    BOT_HORIZON_HOURS,
+    BOT_HORIZON_SECONDS,
+    DEFAULT_STOP_LOSS_FRACTION,
+    DEFAULT_STOP_LOSS_PCT,
+)
 
 _PROJECT_ROOT = Path(
     os.getenv("NEUTRALGRID_BASE_DIR", str(Path(__file__).resolve().parents[3]))
@@ -81,7 +87,7 @@ class GridConfig:
     close_fee_mode: str = "maker"  # Keep scanner profit math aligned with training/backtest defaults
 
     # Risk controls (derived from barrier in __post_init__)
-    stop_loss_pct: float = -0.12
+    stop_loss_pct: float = DEFAULT_STOP_LOSS_FRACTION
     take_profit_pct: float = 0.15
 
 
@@ -90,7 +96,7 @@ class BarrierConfig:
     """Triple-barrier labeling parameters."""
 
     pt_pct: float = 15.0
-    sl_pct: float = -12.0
+    sl_pct: float = DEFAULT_STOP_LOSS_PCT
     time_hours: float = BOT_HORIZON_HOURS
     timeframe_minutes: int = 15
     meta_hurdle_pct: float = 3.0

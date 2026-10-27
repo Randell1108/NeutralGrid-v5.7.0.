@@ -44,6 +44,7 @@ _SRC_DIR = Path(__file__).resolve().parent / "src"
 if str(_SRC_DIR) not in sys.path:
     sys.path.insert(0, str(_SRC_DIR))
 
+from neutralgrid.core.constants import DEFAULT_STOP_LOSS_PCT
 from neutralgrid.models.meta_labeler import (
     MetaLabeler,
     PROMOTION_EVALUATION_CONTRACT,
@@ -55,6 +56,9 @@ from neutralgrid.models.meta_labeler import (
     ACTIVE_META_TARGET_DURATION_MAX_HOURS,
     ACTIVE_META_TARGET_LABEL_COLUMN,
     ACTIVE_META_TARGET_PNL_THRESHOLD_PCT,
+    FINAL_NET_PNL_TARGET_CONTRACT,
+    FINAL_NET_PNL_TARGET_LABEL_COLUMN,
+    meta_target_contract_metadata,
     resolve_feature_profile,
 )
 from neutralgrid.training.data_generator import (
@@ -128,13 +132,21 @@ def parse_args() -> argparse.Namespace:
         help="Output file path for trained model (default: models/meta_labeler.pkl)",
     )
     parser.add_argument(
+        "--target-contract",
+        choices=[ACTIVE_META_TARGET_CONTRACT, FINAL_NET_PNL_TARGET_CONTRACT],
+        default=ACTIVE_META_TARGET_CONTRACT,
+        help=("Training label contract. final_net_pnl_ge_3pct_v1 uses final net PnL >=3% "
+              "without a duration or time-to-target condition. Existing artifacts retain their own target."),
+    )
+    parser.add_argument(
         "--include-live-outcomes",
         action="store_true",
         help=(
             "PIPELINE_FIX C/D: union REAL bot outcomes (live + expired, via "
             "LiveOutcomeIngestor) into the fast-winner meta pool. The union is "
-            "accepted only when live rows carry the active path-based "
-            "time_to_target_hours label; otherwise retraining fails closed. "
+            "accepted only when live rows satisfy the selected target contract. "
+            "The legacy target requires time_to_target_hours; the final-net-PnL "
+            "target requires a finite final net PnL. "
             "Scoped to the meta pool only; off by default."
         ),
     )
@@ -146,6 +158,13 @@ def parse_args() -> argparse.Namespace:
             "Directory containing the governed deploy_linkage_log.csv used by "
             "--include-live-outcomes (default: data/linkage)."
         ),
+    )
+    parser.add_argument(
+        "--use-canonical-simulation-labels",
+        action="store_true",
+        help=("Opt in to hash-validated FASTWIN Simulations workbook labels. "
+              "Requires --include-live-outcomes and the active seven-hour target. "
+              "Canonical executions receive weight 1.0; modeled labels remain explicitly simulated."),
     )
     parser.add_argument(
         "--live-scanner-results-dir",
@@ -166,8 +185,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--sl-pct",
         type=float,
-        default=-12.0,
-        help="Stop loss threshold for failure in %% (default: -12.0 = -12%%)",
+        default=DEFAULT_STOP_LOSS_PCT,
+        help="Stop loss threshold for failure in %% (default: -10.0 = -10%%)",
     )
     parser.add_argument(
         "--horizon-hours",
@@ -499,6 +518,7 @@ def evaluate_champion_challenger_gate(
         "train_samples": getattr(candidate_metrics, "train_samples", None),
         "promotion_evaluation_contract": PROMOTION_EVALUATION_CONTRACT,
         "hmm_artifact_version": _get_active_hmm_artifact_version(),
+        "target_contract": getattr(candidate_metrics, "target_contract", ACTIVE_META_TARGET_CONTRACT),
     }
     report: Dict[str, Any] = {
         "schema_version": 1,
@@ -512,6 +532,8 @@ def evaluate_champion_challenger_gate(
         "reasons": [],
     }
     reasons = cast(List[str], report["reasons"])
+    if candidate["target_contract"] not in {ACTIVE_META_TARGET_CONTRACT, FINAL_NET_PNL_TARGET_CONTRACT}:
+        reasons.append("candidate_target_contract_unsupported")
 
     if candidate["promotion_status"] != "pass":
         reasons.append(
@@ -565,6 +587,16 @@ def evaluate_champion_challenger_gate(
     report["champion"] = champion
     report["comparison_scope"] = "existing_champion"
 
+    # A changed HMM/evaluation contract must not bypass a changed prediction
+    # target. Migration requires a separate evaluation; never overwrite the
+    # current model by comparing scores that predict different outcomes.
+    if champion["target_contract"] != candidate["target_contract"]:
+        reasons.append(
+            "target_contract_mismatch"
+            f"(champion={champion['target_contract']!r},"
+            f"candidate={candidate['target_contract']!r})"
+        )
+
     incomparable_reasons: List[str] = []
     if (
         champion["promotion_evaluation_contract"]
@@ -591,12 +623,6 @@ def evaluate_champion_challenger_gate(
         reasons.append(
             "champion_promotion_status_not_pass"
             f"(status={champion['promotion_status']!r})"
-        )
-    if champion["target_contract"] != ACTIVE_META_TARGET_CONTRACT:
-        reasons.append(
-            "target_contract_mismatch"
-            f"(champion={champion['target_contract']!r},"
-            f"candidate={ACTIVE_META_TARGET_CONTRACT!r})"
         )
     if list(champion["features"] or []) != list(expected_features):
         reasons.append("feature_contract_mismatch")
@@ -1026,7 +1052,8 @@ def build_feature_verification_report(
         if artifact_health_after is not None
         else None
     )
-    fast_target_contract = _summarize_fast_target_population(source_df)
+    selected_target = (training_target_summary or {}).get("target_contract", ACTIVE_META_TARGET_CONTRACT)
+    fast_target_contract = _summarize_fast_target_population(source_df, target_contract=selected_target)
     if training_target_summary is None:
         training_target_summary = _summarize_fast_target_population(training_df)
     feature_fill: List[Dict[str, Any]] = []
@@ -1064,12 +1091,7 @@ def build_feature_verification_report(
             "excluded_unmodelable_count": 0,
             "excluded_unmodelable_rows": [],
         },
-        "meta_target_contract": {
-            "contract_name": ACTIVE_META_TARGET_CONTRACT,
-            "target_column": FAST_TARGET_LABEL_COLUMN,
-            "duration_column": FAST_TARGET_DURATION_COLUMN,
-            "duration_hours_max": FAST_TARGET_DURATION_MAX_HOURS,
-        },
+        "meta_target_contract": meta_target_contract_metadata(selected_target),
         "utility_provenance": {
             "source": utility_source,
             "artifact_path": str(DEFAULT_UTILITY_ARTIFACT_PATH),
@@ -1203,16 +1225,56 @@ def _summarize_fast_target_population(
     training_df: pd.DataFrame,
     *,
     pnl_col: str | None = None,
+    target_contract: str = ACTIVE_META_TARGET_CONTRACT,
 ) -> Dict[str, Any]:
+    if target_contract == FINAL_NET_PNL_TARGET_CONTRACT:
+        return _compute_final_net_target_population(training_df, pnl_col=pnl_col)[0]
+    meta_target_contract_metadata(target_contract)
     summary, _, _ = _compute_fast_target_population(training_df, pnl_col=pnl_col)
     return summary
+
+
+def _compute_final_net_target_population(
+    training_df: pd.DataFrame, *, pnl_col: str | None = None,
+) -> tuple[Dict[str, Any], pd.Series, pd.Series]:
+    """Use the recorded final net outcome; duration never changes this label."""
+    effective_pnl_col = pnl_col or _infer_effective_pnl_col(training_df)
+    if effective_pnl_col is None or effective_pnl_col not in training_df:
+        raise ValueError("Final-net-PnL target requires a declared PnL column")
+    pnl = cast(pd.Series, pd.to_numeric(training_df[effective_pnl_col], errors="coerce"))
+    eligible = pd.Series(np.isfinite(np.asarray(pnl, dtype=float)), index=training_df.index)
+    target = pnl.ge(FAST_TARGET_PNL_THRESHOLD_PCT).astype(int)
+    summary: Dict[str, Any] = {
+        "target_contract": FINAL_NET_PNL_TARGET_CONTRACT,
+        "target_column": FINAL_NET_PNL_TARGET_LABEL_COLUMN,
+        "pnl_column": effective_pnl_col,
+        "label_basis": "final_net_pnl",
+        "duration_column": None, "duration_hours_max": None,
+        "eligible_rows": int(eligible.sum()),
+        "positive_count": int((eligible & target.eq(1)).sum()),
+        "negative_count": int((eligible & target.eq(0)).sum()),
+        "excluded_rows_missing_or_nonfinite_pnl_count": int((~eligible).sum()),
+        "negative_rows_duration_gt_7h_count": 0,
+        "excluded_rows_missing_duration_count": 0,
+    }
+    return summary, eligible, target
 
 
 def prepare_fast_target_training_frame(
     training_df: pd.DataFrame,
     *,
     pnl_col: str,
+    target_contract: str = ACTIVE_META_TARGET_CONTRACT,
 ) -> tuple[pd.DataFrame, Dict[str, Any]]:
+    meta_target_contract_metadata(target_contract)
+    if target_contract == FINAL_NET_PNL_TARGET_CONTRACT:
+        summary, eligible, target = _compute_final_net_target_population(training_df, pnl_col=pnl_col)
+        if summary["positive_count"] <= 0 or summary["negative_count"] <= 0:
+            raise ValueError("Final-net-PnL training requires both positive and negative finite outcomes")
+        selected = cast(pd.DataFrame, training_df.loc[eligible].copy())
+        selected[FINAL_NET_PNL_TARGET_LABEL_COLUMN] = target.loc[eligible]
+        summary["trained_row_count"] = len(selected)
+        return selected, summary
     summary, labelable_mask, fast_target = _compute_fast_target_population(
         training_df,
         pnl_col=pnl_col,
@@ -1558,6 +1620,7 @@ def _build_unified_training_data(args) -> pd.DataFrame:
         )
         training_df = builder.build_meta_labeler_pool(
             include_live_outcomes=_hybrid,
+            use_canonical_simulation_labels=bool(getattr(args, "use_canonical_simulation_labels", False)),
             live_expired_bots_path=str(args.input),
             live_linkage_dir=str(args.live_linkage_dir),
             live_scanner_results_dir=str(args.live_scanner_results_dir),
@@ -1590,6 +1653,12 @@ def _build_unified_training_data(args) -> pd.DataFrame:
 def main():
     """Main training function."""
     args = parse_args()
+    if getattr(args, "use_canonical_simulation_labels", False) and (
+        not args.include_live_outcomes
+        or args.target_contract != ACTIVE_META_TARGET_CONTRACT
+        or args.feature_profile != ACTIVE_META_FEATURE_PROFILE
+    ):
+        raise ValueError("Canonical simulation labels require the active FASTWIN profile/target and --include-live-outcomes")
     try:
         enforce_requested_profile_mode(
             feature_profile=args.feature_profile,
@@ -1739,6 +1808,7 @@ def main():
         fast_training_df, training_target_summary = prepare_fast_target_training_frame(
             training_df,
             pnl_col=effective_pnl_col,
+            target_contract=args.target_contract,
         )
     except ValueError as exc:
         logger.error(str(exc))
@@ -1819,6 +1889,7 @@ def main():
     training_target_summary = _summarize_fast_target_population(
         fast_training_df,
         pnl_col=effective_pnl_col,
+        target_contract=args.target_contract,
     )
     active_hmm_artifact_version = _get_active_hmm_artifact_version()
     training_hmm_lineage = audit_training_hmm_lineage(
@@ -1937,7 +2008,8 @@ def main():
             fast_training_df,
             timestamp_col=args.timestamp_col,
             pnl_col=effective_pnl_col,
-            y_col=FAST_TARGET_LABEL_COLUMN,
+            y_col=meta_target_contract_metadata(args.target_contract)["target_column"],
+            target_contract=args.target_contract,
         )
     except Exception as e:
         logger.error(f"Training failed: {e}", exc_info=True)

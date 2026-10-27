@@ -521,6 +521,7 @@ class UnifiedTrainingBuilder:
         self,
         *,
         include_live_outcomes: bool = False,
+        use_canonical_simulation_labels: bool = False,
         live_expired_bots_path: str = "data/new_expired_bots.xlsx",
         live_linkage_dir: str = "data/linkage",
         live_scanner_results_dir: str = "results",
@@ -557,6 +558,8 @@ class UnifiedTrainingBuilder:
         does NOT modify ``build()`` or the snapshot-only provenance path other
         training consumers rely on; it is an opt-in pool for the meta retrain.
         """
+        if use_canonical_simulation_labels and not include_live_outcomes:
+            raise ValueError("Canonical simulation labels require include_live_outcomes")
         backtest = self._load_backtest_rows()
         if backtest.empty:
             logger.warning("Meta pool: no backtest rows available")
@@ -601,6 +604,7 @@ class UnifiedTrainingBuilder:
                 expired_bots_path=live_expired_bots_path,
                 linkage_dir=live_linkage_dir,
                 scanner_results_dir=live_scanner_results_dir,
+                use_canonical_simulation_labels=use_canonical_simulation_labels,
             )
             if live.empty:
                 raise ValueError(
@@ -608,7 +612,8 @@ class UnifiedTrainingBuilder:
                     "live outcomes passed the identity and feature-completeness contract"
                 )
             live = live.copy()
-            live["source"] = "live"
+            if not use_canonical_simulation_labels:
+                live["source"] = "live"
             _before_union = len(out)
             out = cast(
                 pd.DataFrame,
@@ -631,7 +636,8 @@ class UnifiedTrainingBuilder:
                 out.sort_values("start_time_utc").reset_index(drop=True),
             )
 
-        # Data-health (AFML): a candidate_id is ONE labeled event. Re-backtesting
+        # A simulated candidate is one labeled event; a live strategy_id is one
+        # execution event. Re-backtesting
         # the same candidate (e.g. a repeated backtest_candidates run, which
         # excludes only DEPLOYED candidates, not already-backtested ones) appends a
         # second row carrying the SAME ex-ante features but a possibly different
@@ -646,6 +652,14 @@ class UnifiedTrainingBuilder:
         # arbitrary duplicate. Rows without a real candidate_id are preserved as-is
         # (a missing id is not an identity and must not collapse distinct events).
         if "candidate_id" in out.columns:
+            # A scanner candidate can be executed more than once. Preserve each
+            # strategy event, while retaining live-over-simulation precedence.
+            if "source" in out.columns and "strategy_id" in out.columns:
+                source = cast(pd.Series, out["source"]).astype("string").fillna("").str.lower()
+                candidate_keys = cast(pd.Series, out["candidate_id"]).astype("string").str.strip()
+                canonical_source = source.isin(["live", "canonical_simulation"])
+                live_candidates = candidate_keys.loc[canonical_source].dropna()
+                out = cast(pd.DataFrame, out.loc[canonical_source | ~candidate_keys.isin(live_candidates)].copy())
             # Normalize the dedup KEY exactly as the presence mask does (strip
             # whitespace; an id differing only by surrounding whitespace is the
             # same event). Do NOT lowercase: candidate_ids embed the case-
@@ -666,14 +680,21 @@ class UnifiedTrainingBuilder:
             # (verified no-op for the backtest-only path).
             if "source" in out.columns:
                 _prov_rank = (
-                    cast(pd.Series, out["source"]).astype("string").str.lower().eq("live").astype(int)
+                    cast(pd.Series, out["source"]).astype("string").fillna("").str.lower().isin(["live", "canonical_simulation"]).astype(int)
                 )
             else:
                 _prov_rank = pd.Series(0, index=out.index, dtype=int)
+            _event_key = _cid.copy()
+            if "strategy_id" in out.columns:
+                strategy_keys = cast(pd.Series, out["strategy_id"]).astype("string").str.strip()
+                live_events = _prov_rank.eq(1) & strategy_keys.notna() & strategy_keys.ne("")
+                if bool(strategy_keys.loc[live_events].duplicated().any()):
+                    raise ValueError("Conflicting repeated live strategy event in meta pool")
+                _event_key.loc[live_events] = "live:" + strategy_keys.loc[live_events]
             _keyed = cast(
                 pd.DataFrame,
                 out.loc[_has_cid].assign(
-                    _cid_key=_cid.loc[_has_cid],
+                    _cid_key=_event_key.loc[_has_cid],
                     _bt_ts_key=_bt_ts.loc[_has_cid],
                     _prov_rank=_prov_rank.loc[_has_cid],
                 ),
@@ -752,16 +773,17 @@ class UnifiedTrainingBuilder:
         expired_bots_path: str,
         linkage_dir: str,
         scanner_results_dir: str,
+        use_canonical_simulation_labels: bool = False,
     ) -> pd.DataFrame:
         """Load REAL bot outcomes for the hybrid fast-winner pool (PIPELINE_FIX C).
 
         Scoped to ``build_meta_labeler_pool`` only. READ-ONLY: ingests the expired-bot
         workbook + deploy linkage via ``LiveOutcomeIngestor`` (which never mutates the
         workbook), normalizes ``scan_*`` feature aliases to canonical names using the
-        SAME shared inference normalizer (no train/serve drift), and keeps ONLY rows
-        with direct deployment linkage that are feature-complete on the ACTIVE
-        meta-feature profile (label-only and forensic rows are excluded). Returns an
-        empty frame if ingestion or direct-link provenance is unavailable.
+        SAME shared inference normalizer (no train/serve drift), and keeps rows with
+        direct deployment linkage or validated canonical workbook identity that are
+        finite on the ACTIVE meta-feature profile. Forensic and conflicting rows
+        remain excluded. Canonical inputs carry their own HMM feature provenance.
         """
         try:
             from neutralgrid.training.live_outcome_ingestor import LiveOutcomeIngestor
@@ -800,12 +822,12 @@ class UnifiedTrainingBuilder:
             .str.strip()
             .str.lower()
         )
-        direct_mask = match_method.eq("linkage").fillna(False)
+        direct_mask = match_method.isin(["linkage", "canonical_workbook"]).fillna(False)
         direct_n = int(direct_mask.sum())
         if direct_n < raw_n:
             logger.warning(
-                "Hybrid meta pool: excluded %d/%d live row(s) without governed "
-                "direct deployment linkage",
+                    "Hybrid meta pool: excluded %d/%d live row(s) without accepted "
+                    "deployment or canonical identity",
                 raw_n - direct_n,
                 raw_n,
             )
@@ -849,15 +871,23 @@ class UnifiedTrainingBuilder:
         if len(present_active) < len(active) or not present_active:
             complete_mask = pd.Series(False, index=live.index)
         else:
-            complete_mask = cast(pd.Series, live[present_active].notna().all(axis=1))
+            numeric_features = live[present_active].apply(pd.to_numeric, errors="coerce")
+            complete_mask = pd.Series(
+                np.isfinite(np.asarray(numeric_features, dtype=float)).all(axis=1),
+                index=live.index,
+            )
         complete = cast(pd.DataFrame, live.loc[complete_mask].copy())
 
         logger.info(
-            "Hybrid meta pool live ingest: raw=%d, direct_linked=%d, "
+            "Hybrid meta pool live ingest: raw=%d, accepted_identity=%d, "
             "matched_candidate_id=%d, feature_complete=%d "
             "(active_features=%d, absent=%d)",
             raw_n, direct_n, matched_n, len(complete), len(active), len(absent_active),
         )
+        if use_canonical_simulation_labels:
+            from neutralgrid.training.canonical_simulation_labels import apply_canonical_simulation_labels
+
+            return apply_canonical_simulation_labels(complete, Path(expired_bots_path))
         return complete
 
     # ── Snapshot loading ──────────────────────────────────────────────────
