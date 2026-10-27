@@ -2,6 +2,427 @@
 
 ## [unreleased] - Neutral Grid v5.7.0
 
+### ARCH-PUBLISH-20261027 - Publish governed training and native-evidence architecture
+
+**Date:** 2026-10-27 (America/Lima).
+
+Review accumulated architectural changes and publish complete dependency groups:
+training defaults/targets/canonical simulation admission; source-bound native
+evidence and invested-capital preservation; then validation and operating records.
+Include the corresponding integrated regression tests and contracts. Update the
+volatility guide to use the existing P0 collector owner and explicit historical
+symbol mode while preserving stopped collection and all acceptance gates.
+
+**Files modified or created by the publication review:**
+- `CHANGELOG.md`
+- `docs/architecture_publication_20261027.md`
+
+The report enumerates all 61 selected files and their commit groups. Existing
+dated entries below retain the source changes, decisions and historical run
+results. Model-state JSON, model binaries, workbooks, backups, temporary files,
+historical prompt reports and raw audit evidence are excluded from publication.
+
+**Decision rationale:** keep coupled ingestion/evidence contracts and their
+regression coverage reviewable without mixing model activation or generated
+data into source commits. AFML/Hudson & Thames: no new evaluation methodology or
+performance claim; the documented unpurged fallback and source/label limitations
+remain explicit. See ERR-121 for the unresolved lifecycle intervals.
+
+**Backward compatibility:** this review adds no source behavior beyond the
+pending changes described below. No models, thresholds, timestamps or artifacts
+are changed by publication. The training-default, target, canonical-admission
+and invested-capital changes retain their documented compatibility boundaries.
+No live collector, scanner, exchange action or schedule is started.
+
+**Verification:** Fresh full suite: 2,871 passed, two skipped, zero failures.
+Configured source and all nine
+operational entry points pass Pyright with zero errors/warnings. Dependency,
+feature/leakage, explicit path and whitespace checks are recorded in the report;
+before/after artifact checks and remote tree equality gate publication.
+
+### META-CANONICAL-SIM-20261026 - Verified canonical simulation admission and complete refit
+
+**Date:** 2026-10-26 (America/Lima).
+
+Add the explicit `--use-canonical-simulation-labels` option to the existing
+FASTWIN hybrid retrainer. The canonical workbook's `FASTWIN Simulations` sheet
+references hashed engine evidence and keeps modeled seven-hour outcomes separate
+from recorded live outcomes. Admission verifies execution identity, configuration,
+features, HMM lineage, event intervals, capital use, and target consistency before
+allowing verified no-hit negatives. Canonical simulations use the operator-requested
+source weight 1.0; forecast rows retain 0.5. Matching forecasts are removed while
+separate strategy executions remain distinct. Transport the recorded survival
+probability needed for EV refresh. Preserve existing default ingestion behavior.
+
+The normal retrainer promoted HMM `rolling_180d_20261026_131156` and meta-labeler
+`20261026_144534`. The latter used 3,822 rows (3,326 forecasts plus 496 canonical
+simulations), with 2,011 positives and 1,811 negatives. Promotion OOF AUC was
+0.6933420577, its row-bootstrap interval [0.6757530724, 0.7096353809], and ECE
+0.0384724215. Utility and profile candidates were refitted but rejected by their
+existing gates. A conformal diagnostic was retained without runtime activation.
+The workbook now contains 853 successful active-HMM replays and four explicitly
+failed replays. Observed outcomes and unrelated workbook cells/styles are preserved.
+
+**Files modified or added:**
+- `retrain_meta_labeler.py`
+- `src/neutralgrid/training/unified_training_builder.py`
+- `src/neutralgrid/training/live_outcome_ingestor.py`
+- `src/neutralgrid/training/canonical_simulation_labels.py`
+- `tests/unit/test_canonical_simulation_labels.py`
+- `data/new_expired_bots.xlsx`
+- `artifact_manifest.json`
+- `artifacts/hmm/rolling_180d_20261026_131156/model.joblib`
+- `artifacts/hmm/rolling_180d_20261026_131156/scaler.joblib`
+- `artifacts/hmm/rolling_180d_20261026_131156/metadata.json`
+- `artifacts/hmm/rolling_180d_20261026_131156/eval.json`
+- `artifacts/hmm/rolling_180d_20261026_131156/feature_schema.json`
+- `artifacts/hmm/rolling_180d_20261026_131156/state_means.npy`
+- `artifacts/hmm/rolling_180d_20261026_131156/temperature_scaler.json`
+- `models/meta_labeler.pkl`
+- `models/meta_labeler/model.joblib`
+- `models/meta_labeler/scaler.joblib`
+- `models/meta_labeler/metadata.json`
+- `models/meta_labeler_promotion_decision.json`
+- `data/trial_log.json`
+- `data/retrain_all_20261026/RUN_REPORT.txt`
+- `CHANGELOG.md`
+
+**Decision rationale:** implement the operator-approved provenance and weighting
+policy without changing the model target, 20-feature profile, estimator,
+calibration procedure, or promotion gates. No new AFML evaluation design was
+introduced. The existing ERR-066 unpurged fallback was exercised on all five
+promotion folds; these results do not establish independent future live accuracy
+or superiority to October 21's model. The original champion comparison used the
+existing absolute gate because its HMM/evaluation metadata were incomparable.
+
+**Backward compatibility:** default forecasting and observed-live ingestion are
+unchanged. The new simulation option is explicit and requires the active FASTWIN
+profile/target plus `--include-live-outcomes`. Its workbook evidence files are
+durable training inputs and must remain available. Source weights are inputs to
+the existing training-weight machinery, not new promotion-evaluation weights.
+
+**Verification:** 138 staged and installed contract checks passed; the final
+repository suite passed 2,871 tests with two skips. Project Pyright reported zero
+errors/warnings. All fitted features, targets, event times, and source weights
+were reconciled. Promotion metrics were independently recomputed. Candidate and
+deployed predictions match exactly. Restoring capital-use metadata changed the
+deployable diagnostic coverage from 3,326 to 3,822 without changing any model
+prediction. Workbook preservation checks found zero unrelated value/style changes.
+The report and `SOURCE_DIFF.patch` retain per-file evidence and all gate outcomes.
+
+### META-EVAL-ROLLBACK-20261026 - Restore historical promotion evaluation
+
+**Date:** 2026-10-26 (America/Lima).
+
+At the operator's explicit request, restore the historical promotion evaluator's
+unpurged fallback when at most 15 training observations survive its time purge,
+and its minimum of 30 scored observations with both classes instead of requiring
+full prediction coverage. Restore the historical evaluation-contract identifier.
+Retain invalid-timestamp rejection, label-leakage guards, feature definitions and
+target-migration checks. No crossed splitter or promotion-fit sample weights were
+introduced. No deployed model, pointer or canonical workbook was replaced.
+
+**Files modified:**
+- `src/neutralgrid/models/meta_labeler.py`
+- `tests/unit/test_final_net_pnl_target.py`
+- `CHANGELOG.md`
+- `reports/fastwin_engine_rollback_20261026/REPORT.txt`
+
+**Decision rationale:** restore the requested October 21 evaluation behavior,
+not a claim that unpurged validation is temporally independent. The existing
+ERR-066 warning remains. AFML Chapter 7's purging motivation still applies;
+this operator-selected fallback retains the historical evaluation limitation.
+The historical v2 identifier is retained for compatibility despite its
+chronological/purged/weighted wording; the source documents the actual behavior.
+
+**Backward compatibility:** future retraining again uses the historical fallback
+and partial-coverage rule. Stored promotion statuses and prediction artifacts
+remain unchanged. Canonical-configuration backtests are isolated simulated
+evidence, not newly asserted observed live outcomes.
+
+**Verification:** 71 staged checks passed before installation; 145 installed
+target/contract/leakage/curve tests passed; Pyright with the project interpreter
+reported zero errors/warnings. The installed evaluator reproduced all 3,504
+October 21 OOF probabilities within 1e-12. The isolated engine-label and retrain
+audit, complete metrics, configuration exclusions and cleanup proof are retained
+under `reports/fastwin_engine_rollback_20261026/`.
+
+### META-CANONICAL-20261025 - Canonical live evidence and explicit terminal target
+
+**Date:** 2026-10-25 (America/Lima).
+
+Accept validated canonical General/Meta Features associations as a distinct
+provenance class, transport their complete HMM lineage and recorded event ends,
+and preserve separate executions sharing a candidate. Recover 24 exact archived
+feature cells without rewriting unrelated workbook contents. Preserve reported
+final net PnL instead of deducting ambiguous signed commissions again. Add the
+explicit `final_net_pnl_ge_3pct_v1` training contract requested by the operator.
+Reject malformed event intervals, preserve row identity during mixed timestamp
+sorting, and remove the promotion evaluator's fallback to unpurged training.
+
+**Files modified or created:**
+- `retrain_meta_labeler.py`
+- `src/neutralgrid/models/meta_labeler.py`
+- `src/neutralgrid/training/live_outcome_ingestor.py`
+- `src/neutralgrid/training/unified_training_builder.py`
+- `src/neutralgrid/training/data_generator.py`
+- `tests/unit/test_canonical_live_features.py`
+- `tests/unit/test_canonical_pnl_accounting.py`
+- `tests/unit/test_final_net_pnl_target.py`
+- `tests/unit/test_meta_labeler_retrain_contract_v20260530.py`
+- `data/new_expired_bots.xlsx`
+- `ERRORS_LOG.md`
+- `CHANGELOG.md`
+- `reports/meta_training_recovery_20261025/REPORT.txt`
+
+**Decision rationale:** event-aligned end times, execution identity and strict
+purging preserve the distinctions required by AFML Chapters 3, 4 and 7. Uniform
+active-HMM lineage alone is not as-of out-of-sample validation. Exact archived
+values were preferred to a different current feature recipe. See ERR-121 for
+four unresolved lifecycle timestamps; no blanket timezone shift was applied.
+
+**Backward compatibility:** the CLI default and frozen artifacts retain the
+existing seven-hour FASTWIN target. Final-PnL training requires explicit target
+selection. A target mismatch blocks promotion. Canonical live admission is
+broader; invalid final-target event times and insufficient purged evaluation now
+fail closed. No production model or pointer was replaced.
+
+**Verification:** 259 isolated tests before installation; 259 final installed
+source tests; full configured source Pyright zero errors/warnings; native CLI
+dry-run and 857-row accounting/admission audit. All 511 previously blocked
+complete identified rows are admitted; 606 live rows are feature-complete and
+605 have finite PnL. Workbook validation checked 118400 cells and five sheets.
+The diagnostic combined fit fails strict promotion coverage. Seventy authorized
+modelled-start simulations were deterministic and remain outside live training.
+The broad protected suite was not green (2723 passed, 105 failed, 20 errors,
+2 skipped), primarily because its fixtures attempted guard-prohibited writes
+and subprocesses. Full evidence, exact patches and limitations are in REPORT.txt.
+
+### LIVE-TRAJECTORY-20261025 - Invested-capital objective and terminal reported outcomes
+
+**Date:** 2026-10-25 (America/Lima).
+
+State preservation of invested principal as the primary ADJUST objective in
+console output, decision JSONL and action-intent metadata. Add an independent
+pre-state equity-versus-invested-capital shield without removing subsequent
+negative rewards. Reject unverified scanner-row equity in the shadow adapter;
+assess exact-bot, exact-time equity facts separately in native decision diagnostics.
+Persist source-validated final reported bot PnL in an immutable terminal-outcome
+store, deduplicate exact deployments and include its scores in the evidence audit.
+Terminal lifetime outcomes do not replace hourly SAR rewards or FASTWIN labels.
+
+**Files modified or created:**
+- `src/neutralgrid/live/decision/capital_policy.py`
+- `src/neutralgrid/live/decision/capital_preservation.py`
+- `src/neutralgrid/live/decision/state_action_reward.py`
+- `src/neutralgrid/live/decision/action_shadow_io.py`
+- `src/neutralgrid/live/decision/native_sar.py`
+- `src/neutralgrid/live/decision/renderer.py`
+- `src/neutralgrid/live/decision/terminal_outcomes.py`
+- `scripts/run_live_telemetry_controller.py`
+- `scripts/capture_terminal_bot_outcomes.py`
+- `scripts/capture_live_evidence_cohort.py`
+- `tests/unit/test_capital_preservation.py`
+- `tests/unit/test_terminal_outcomes.py`
+- `tests/unit/test_state_action_reward.py`
+- `tests/unit/test_action_shadow_integration.py`
+- `tests/unit/test_native_sar.py`
+- `tests/unit/test_decision_renderer.py`
+- `tests/unit/test_live_evidence_cohort.py`
+- `docs/terminal_bot_outcomes.md`
+- `LIVE_DECISION.md`
+- `STATE_ACTION_REWARD_CONTRACT.md`
+- `CHANGELOG.md`
+
+**Decision rationale:** the operator explicitly specified zero loss of invested
+principal, distinct from peak drawdown. No liquidation limit, tuned exit rule,
+simulated fill or causal label was invented. Original terminal UI outcomes are
+valid lifetime observations, while complete action accounting and first-passage
+paths remain separate requirements. No AFML/Hudson & Thames statistical threshold
+was introduced. The isolated FARTCOIN diagnostic uses the canonical unified
+backtest runner; its execution/accounting mismatch cannot repair missing labels.
+
+**Backward compatibility:** wire schemas and incumbent verdict rules remain
+unchanged. Output policy metadata is additive. The pre-state shield is stricter:
+equity below invested capital cannot pass despite an otherwise acceptable peak
+drawdown. The source-derived feature hash changes; old immutable evidence is not
+rewritten and old artifacts cannot silently inherit the new source contract.
+Unverified equity fields no longer satisfy the shadow adapter. No models or
+execution services were enabled, and no canonical workbook was modified.
+
+**Verification:** reproduced the unverified-equity admission and three missing
+floor checks before correction. Isolated tests cover losing endpoint retention,
+source mutation, duplicate/conflicting terminal captures, bounded numeric input,
+future availability, malformed headers, storage failures and idempotent ingestion.
+Independent adversarial review retested its four findings after fixes. Actual
+FARTCOIN/ARKM terminal capture and repeat capture are documented alongside the
+full-suite results, type checks and cleanup in
+`reports/live_trajectory_integration_20261025/VALIDATION_REPORT.txt`.
+
+### LIVE-ACCOUNT-SCOPE-20261022 - Native account visibility and resilient evidence capture
+
+**Date:** 2026-10-22 (America/Lima).
+
+Separate authenticated evidence acquisition from the deployment-plus-seven-hour
+FASTWIN forecast deadline. Add a read-only dashboard/API UID comparison and an
+unfiltered account-income producer after verified symbol-filtered queries omitted
+blank-symbol transfers. Preserve originals, account-only attribution, deduplicated
+transaction identities, first admitted availability and unknown completeness.
+Correct the Windows SAR lock initialization race reproduced by the full suite.
+No model, action eligibility, risk threshold or promotion setting is enabled.
+
+**Files modified or created:**
+- `scripts/capture_authenticated_bot_evidence.py`
+- `scripts/probe_telemetry_account_scope.py`
+- `scripts/capture_account_income_evidence.py`
+- `src/neutralgrid/live/decision/account_income.py`
+- `src/neutralgrid/live/decision/state_action_reward.py`
+- `tests/unit/test_capture_authenticated_bot_evidence.py`
+- `tests/unit/test_probe_telemetry_account_scope.py`
+- `tests/unit/test_account_income.py`
+- `tests/unit/test_state_action_reward.py`
+- `docs/authenticated_telemetry_evidence.md`
+- `CHANGELOG.md`
+
+**Decision rationale:** the observed dashboard/API UIDs match, but a source-proven
+native WLD filled order is absent from the ordinary Futures order/trade routes.
+Unfiltered income yielded account transfers that per-symbol requests excluded.
+These observations require separate product/account scope, not inferred bot
+ownership. Primary contract: Binance Trading Bots Account migration FAQ
+`https://www.binance.com/en/support/faq/detail/408ab63b852e47748a9554501669bce5`.
+No AFML threshold or statistical estimator was changed. Final PnL stays an observed
+outcome until action/interval accounting establishes a valid reward; causal policy
+claims remain separately gated.
+
+**Backward compatibility:** API history collection now defaults to deployment
+through a fixed run cutoff; callers needing a shorter diagnostic window must use
+explicit aware `--start-at`/`--end-at`. Existing evidence is not rewritten. The
+lock-only SAR source edit changes its source-derived feature hash; old artifacts
+and events retain their hashes and stale-lineage rejection remains intact.
+
+**Verification:** 12 collector regressions failed before correction. Isolated UID,
+account-income, SAR, forecast and provenance tests cover malformed inputs, source
+mutation, duplicate/conflicting identities, unavailable storage and concurrent
+writers. Live archive: 1,083 account records; repeat capture: 52 rows, zero new
+identities. Full-suite, explicit-runtime Pyright, source replay and cleanup results
+are retained in `reports/live_telemetry_account_scope_20261022/VALIDATION_RESULTS.txt`.
+The initial full-suite lock failure and before-source are retained separately.
+
+### LIVE-NATIVE-EVIDENCE-20261022 - Authenticated acquisition and native SAR provenance
+
+**Date:** 2026-10-22.
+
+Add bounded read-only Binance history capture, immutable exact-deployment source
+classification, reviewed-original ownership admission and timestamped reported
+PnL paths. Export common inert forecast contracts without merging distinct PnL,
+first-passage, volatility and action-reward meanings. Convert original decisions,
+approvals, timestamped native receipts and source-bound accounting into SAR while
+preserving behavior, completeness, equity, risk and promotion gates. Prospective
+execution receipts record their actual lifecycle times; controller intents use
+the per-bot evaluation time rather than a batch timestamp.
+
+**Files modified or created:**
+- `src/neutralgrid/live/decision/authenticated_evidence.py`
+- `src/neutralgrid/live/decision/forecast_contract.py`
+- `src/neutralgrid/live/decision/native_sar.py`
+- `src/neutralgrid/live/decision/exact_bot_ledger.py`
+- `scripts/capture_authenticated_bot_evidence.py`
+- `scripts/capture_native_sar.py`
+- `scripts/execute_live_telemetry_modifications.py`
+- `scripts/run_live_telemetry_controller.py`
+- `tests/unit/test_authenticated_evidence.py`
+- `tests/unit/test_forecast_contract.py`
+- `tests/unit/test_native_sar.py`
+- `tests/unit/test_execute_live_telemetry_modifications.py`
+- `tests/unit/test_live_telemetry_controller.py`
+- `docs/authenticated_telemetry_evidence.md`
+- `docs/exact_bot_evidence_ledger.md`
+- `CHANGELOG.md`
+
+**Decision rationale:** Preserve event/availability cutoffs, original evidence,
+deduplicated native identities and explicit target semantics. Sparse nonhits do
+not become negative first-passage labels; proposals do not become observed
+actions. Account totals do not become bot equity. Primary-source research and
+adversarial review are recorded under `reports/live_telemetry_native_20261022/`.
+AFML / Hudson & Thames citation: no new statistical estimator or performance
+claim; the change preserves existing leakage and model-admission boundaries.
+
+**Backward compatibility:** Existing models, features, core SAR contract and
+risk gates are unchanged. Receipt timestamp fields are additive. Invalid
+explicit per-bot decision times now reject action-intent construction; legacy
+rows without that field retain the existing row timestamp fallback. Historical
+receipts with missing timing and nonrepresentable exchange ticks remain blocked.
+
+**Verification:** Isolated acquisition, native-source replay, controller,
+executor, forecast-contract and SAR tests; targeted Pyright; full-suite results
+and source-preservation audit in `reports/live_telemetry_native_20261022/`.
+Real acquisition queried 203 registered deployments and saved 406 empty trade
+and income responses. No private ownership/accounting fact was invented. The
+source pass retained 205 PnL paths and 194 inert forecast envelopes; a real
+SENTUSDT proposal passed SAR capture with null action/reward and false training
+eligibility. No model was fitted, promoted or enabled.
+The two additional source-verified deployments were subsequently registered and
+queried: all 410 primary responses across 205 deployments were empty. Final
+full-suite validation: 2,626 passed, two skipped; changed-file Pyright: zero
+errors and warnings.
+
+### TRAINING-SL10-20261022 - Set training stop defaults to minus ten percent
+
+**Date:** 2026-10-22.
+
+Replace the former -12% label/config defaults with shared -10% percentage and
+-0.10 decimal constants. Cover barrier labels, meta-labeler helpers and CLI,
+candidate conversion, training data generation, EV ranking and utility loss
+estimates. Keep canonical FASTWIN engine stops disabled and enforce the requested
+exit policies only in isolated historical experiments at 1,000 USDT per bot.
+
+**Files modified or created:**
+- `src/neutralgrid/core/constants.py`
+- `src/neutralgrid/core/config.py`
+- `src/neutralgrid/models/barrier_config.py`
+- `src/neutralgrid/models/triple_barrier.py`
+- `src/neutralgrid/models/meta_labeler.py`
+- `src/neutralgrid/training/data_generator.py`
+- `src/neutralgrid/backtest/candidate_pipeline.py`
+- `src/neutralgrid/scanner/pnl_ranker.py`
+- `src/neutralgrid/validation/utility.py`
+- `retrain_meta_labeler.py`
+- `tests/unit/test_training_stop_loss_defaults.py`
+- `reports/meta_architecture_fastwin_20261022/REPORT.md`
+- `reports/meta_architecture_fastwin_20261022/validation.json`
+- `reports/meta_architecture_fastwin_20261022/experiment_summary.csv`
+- `reports/meta_architecture_fastwin_20261022/paired_comparisons.csv`
+- `reports/meta_architecture_fastwin_20261022/margin_comparison.json`
+- `CHANGELOG.md`
+
+**Decision rationale:** Apply the operator's explicit default-only instruction
+without changing the authority of production labels or fitted artifacts. The
+historical exit tests expose the difference between a +3% MTM touch, a settled
++3% exit, and a positive horizon exit. At seven hours, successes are respectively
+1,864, 1,723 and 1,470 out of 3,504. A -10% bar-close trigger still overshoots,
+with worst settled loss -28.368243%; it does not validate a hard -10% live floor.
+AFML / Hudson & Thames citation: existing project label-contract, point-in-time
+and leakage invariants; no new statistical method or external performance claim.
+The review also confirms the existing ERR-066 promotion-purge limitation.
+
+**Backward compatibility:** Default behavior changes for callers that omit the
+stop parameter; explicit historical -12% overrides remain supported. New default
+EV configuration has a different fingerprint and can change `ev_score`, so an
+old model is not automatically validated for newly recomputed features. Stored
+statistics, labels, models and manifests retain their recorded values. FASTWIN's
+target, seven-hour cap, canonical physics and execution stop flags are unchanged.
+
+**Verification:** Regression first reproduced 13 old-default failures. Focused
+suite: 72 passed; contract suite: 168 passed; full suite: 2,484 passed, two
+skipped and one harness path-budget failure, whose unchanged Windows-path test
+passed under a shorter isolated directory. Combined: 2,485 passed, two skipped.
+Pyright: zero errors/warnings. Both leakage guards and all 20 active feature
+declarations are unchanged. Complete historical experiment: 42,048 treatment
+replays and 3,504 original reproductions; maximum original-result difference
+1.4210854715202004e-14. All 17 protected data/artifact hashes are unchanged.
+Final report records cleanup verification; unrelated concurrent edits are
+preserved and excluded from this change's ownership.
+
 ### CANONICAL-HMM-20261022 - Reconcile all canonical rows to the October 21 HMM
 
 **Date:** 2026-10-22.

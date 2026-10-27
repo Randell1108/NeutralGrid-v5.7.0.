@@ -308,6 +308,12 @@ passed.
 
 ---
 
+## Active Error Checks - Canonical Training Recovery (2026-10-25)
+
+| ID | Status | Area | Error Check | Evidence | Required Action | Verification |
+|---|---|---|---|---|---|---|
+| ERR-121 | BLOCKED | canonical workbook / execution timestamps | Strategies 408909947 (ARIA), 408910067 (CROSS), 409007983 (GIGGLE), and 409121038 (GUA) have 205 strategy-owned fills before their canonical starts after the operator-confirmed UTC-5 export conversion; a uniform five-hour start adjustment cannot reconcile all four. | `reports/meta_training_recovery_20261025/execution_coverage.csv` records first/last fills and per-strategy violations; `source_reconciliation.json` records zero order-ownership and trade-key conflicts. Original Time Created records were not found in the inspected manual-input text sources. Brave connection timed out; native browser access stopped because the current URL could not be verified safely. | Obtain original Binance Time Created and Time Ended records for these exact strategy IDs, confirm displayed timezone, then reconcile starts/ends against owned order and trade evidence. Per operator instruction, leave these timestamps unchanged pending reconciliation; exclude them from timestamp-dependent reconstruction. | For each strategy, retain source identity and hash, prove the local-to-UTC conversion, and reconcile every owned fill with the corrected lifecycle interval or document a separately evidenced exception. Never substitute first fill for unobserved creation time. |
+
 ## Closed Error Checks
 
 | ID | Status | Area | Error Check | Evidence | Closure Proof |
